@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class MainMapVC: UIViewController {
 
@@ -14,6 +15,24 @@ class MainMapVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func loadView() {
+        // Create a GMSCameraPosition that tells the map to display the
+        // coordinate 39.3299,76.6205 at zoom level 12.
+        let camera = GMSCameraPosition.camera(withLatitude: 39.3299, longitude: -76.6205, zoom: 12.0)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView.settings.myLocationButton = true
+        mapView.settings.scrollGestures = true
+        mapView.settings.zoomGestures = true
+        view = mapView
+        
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: 39.3299, longitude: -76.6205)
+        marker.title = "Johns Hopkins University"
+        marker.snippet = "Baltimore, MD"
+        marker.map = mapView
     }
 
     override func didReceiveMemoryWarning() {
