@@ -63,6 +63,8 @@
 		97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B18C929061458F05EFCC33FB /* Pods_WalkliveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Walklive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC8273201F8D9BBD007E045E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.27.0 /FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		BC8273211F8D9BC9007E045E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.27.0 /FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		E37A9089C70BE1D4D84EE764 /* Pods-Walklive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.debug.xcconfig"; sourceTree = "<group>"; };
 		F13E1D61C84C4B4DA5A2A2C4 /* Pods-WalkliveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,8 @@
 		4EE72B4EC4E0DF8A1D683C21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC8273211F8D9BC9007E045E /* FBSDKLoginKit.framework */,
+				BC8273201F8D9BBD007E045E /* FBSDKCoreKit.framework */,
 				BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */,
 				4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */,
 				B18C929061458F05EFCC33FB /* Pods_WalkliveUITests.framework */,
@@ -273,7 +277,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */;
+			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -746,7 +750,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */ = {
+		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9012DCC81F7C325300AFD27C /* Debug */,
