@@ -8,6 +8,10 @@ target 'Walklive' do
   # Pods for Walklive
     pod 'AFNetworking'
 
+pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
+pod 'FBSDKLoginKit'
+
   target 'WalkliveTests' do
     inherit! :search_paths
     # Pods for testing
