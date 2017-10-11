@@ -283,7 +283,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */;
+			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -676,7 +676,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.Walklive";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Walklive/VC/Walklive-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -695,7 +696,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.Walklive";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Walklive/VC/Walklive-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -770,7 +771,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */ = {
+		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9012DCC81F7C325300AFD27C /* Debug */,
