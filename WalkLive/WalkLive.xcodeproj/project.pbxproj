@@ -19,7 +19,7 @@
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
 		90F233B21F7C3D110002AF0A /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233B11F7C3D110002AF0A /* MainMapVC.swift */; };
 		930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */; };
-		BC82732A1F8DD7B3007E045E /* NSObject+test.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8273291F8DD7B3007E045E /* NSObject+test.m */; };
+		BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */ = {isa = PBXBuildFile; fileRef = BC82732C1F8DDB59007E045E /* NSObject+test.m */; };
 		F2C20AB8933BF625C0C04538 /* Pods_WalkliveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B18C929061458F05EFCC33FB /* Pods_WalkliveUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,8 +66,8 @@
 		BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Walklive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8273201F8D9BBD007E045E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.27.0 /FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		BC8273211F8D9BC9007E045E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.27.0 /FBSDKLoginKit.framework"; sourceTree = "<group>"; };
-		BC8273281F8DD7B3007E045E /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
-		BC8273291F8DD7B3007E045E /* NSObject+test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+test.m"; sourceTree = "<group>"; };
+		BC82732B1F8DDB59007E045E /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSObject+test.h"; path = "Walklive/NSObject+test.h"; sourceTree = SOURCE_ROOT; };
+		BC82732C1F8DDB59007E045E /* NSObject+test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSObject+test.m"; path = "Walklive/NSObject+test.m"; sourceTree = SOURCE_ROOT; };
 		E37A9089C70BE1D4D84EE764 /* Pods-Walklive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.debug.xcconfig"; sourceTree = "<group>"; };
 		F13E1D61C84C4B4DA5A2A2C4 /* Pods-WalkliveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,9 +142,9 @@
 				9012DCA91F7C325300AFD27C /* Main.storyboard */,
 				9012DCAC1F7C325300AFD27C /* Assets.xcassets */,
 				9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */,
+				BC82732B1F8DDB59007E045E /* NSObject+test.h */,
+				BC82732C1F8DDB59007E045E /* NSObject+test.m */,
 				9012DCB11F7C325300AFD27C /* Info.plist */,
-				BC8273281F8DD7B3007E045E /* NSObject+test.h */,
-				BC8273291F8DD7B3007E045E /* NSObject+test.m */,
 			);
 			path = Walklive;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90F233B21F7C3D110002AF0A /* MainMapVC.swift in Sources */,
-				BC82732A1F8DD7B3007E045E /* NSObject+test.m in Sources */,
+				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
 				90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */,
 				9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */,
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
