@@ -8,11 +8,12 @@
 
 import UIKit
 
-class FirstViewVC: UIViewController {
+class FirstViewVC: UIViewController, GIDSignInUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 
     override func didReceiveMemoryWarning() {
