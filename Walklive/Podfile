@@ -12,6 +12,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'GoogleMaps'
+pod 'GoogleSignIn'
 
   target 'WalkliveTests' do
     inherit! :search_paths
