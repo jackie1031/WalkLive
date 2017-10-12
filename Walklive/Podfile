@@ -7,10 +7,10 @@ target 'Walklive' do
 
   # Pods for Walklive
     pod 'AFNetworking'
-
-pod 'FBSDKCoreKit'
-pod 'FBSDKShareKit'
-pod 'FBSDKLoginKit'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKShareKit'
+    pod 'FBSDKLoginKit'
+    pod 'GoogleMaps'
 
   target 'WalkliveTests' do
     inherit! :search_paths
