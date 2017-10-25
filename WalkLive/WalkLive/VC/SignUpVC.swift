@@ -13,6 +13,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -26,7 +27,21 @@ class SignUpVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func onCancelButton(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func onSignUpButton(_ sender: Any) {
+        
+    }
+    
+    func isValidSignUp() -> Bool {
+        if (self.userNameTextField.text == "") {
+            
+        }
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 
