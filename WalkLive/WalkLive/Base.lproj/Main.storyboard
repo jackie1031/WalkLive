@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -163,46 +163,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmed Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q9A-L3-xFw">
-                                <rect key="frame" x="62" y="290" width="250" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmed Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q9A-L3-xFw">
+                                <rect key="frame" x="62" y="286" width="251" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="en0-O8-QmB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="en0-O8-QmB">
                                 <rect key="frame" x="62" y="441" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="SIGN UP"/>
+                                <state key="normal" title="SIGN UP">
+                                    <color key="titleColor" red="0.58075243229999995" green="0.81298619510000003" blue="0.78941231970000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSignUpButton:" destination="qxy-8p-pJ2" eventType="touchUpInside" id="cwZ-lH-FYz"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwt-Mv-brG">
-                                <rect key="frame" x="62" y="186" width="250" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwt-Mv-brG">
+                                <rect key="frame" x="62" y="186" width="251" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcO-aq-hbB">
-                                <rect key="frame" x="62" y="236" width="250" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcO-aq-hbB">
+                                <rect key="frame" x="62" y="236" width="251" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-nI-NFx">
-                                <rect key="frame" x="62" y="339" width="250" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-nI-NFx">
+                                <rect key="frame" x="62" y="336" width="250" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-oP-QQa">
+                                <rect key="frame" x="253" y="441" width="59" height="30"/>
+                                <state key="normal" title="CANCEL">
+                                    <color key="titleColor" red="0.58075243229999995" green="0.81298619510000003" blue="0.78941231970000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelButton:" destination="qxy-8p-pJ2" eventType="touchUpInside" id="WOO-Ie-DuI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hwt-Mv-brG" firstAttribute="top" secondItem="edk-7j-x4G" secondAttribute="top" constant="166" id="15k-75-b2v"/>
+                            <constraint firstItem="Rhw-nI-NFx" firstAttribute="centerX" secondItem="tL5-Ug-S1M" secondAttribute="centerX" id="319-NA-lWA"/>
+                            <constraint firstItem="edk-7j-x4G" firstAttribute="bottom" secondItem="en0-O8-QmB" secondAttribute="bottom" constant="196" id="3WJ-bz-wOv"/>
+                            <constraint firstItem="hwt-Mv-brG" firstAttribute="leading" secondItem="edk-7j-x4G" secondAttribute="leading" constant="62" id="4dY-6h-0Aw"/>
+                            <constraint firstItem="Rhw-nI-NFx" firstAttribute="leading" secondItem="edk-7j-x4G" secondAttribute="leading" constant="62" id="HPp-7T-Gh4"/>
+                            <constraint firstItem="cgX-oP-QQa" firstAttribute="trailing" secondItem="Rhw-nI-NFx" secondAttribute="trailing" id="OR6-HE-OqB"/>
+                            <constraint firstItem="tcO-aq-hbB" firstAttribute="centerX" secondItem="tL5-Ug-S1M" secondAttribute="centerX" id="PbA-BY-b9W"/>
+                            <constraint firstItem="tcO-aq-hbB" firstAttribute="leading" secondItem="edk-7j-x4G" secondAttribute="leading" constant="62" id="PcZ-wd-F2s"/>
+                            <constraint firstItem="Rhw-nI-NFx" firstAttribute="top" secondItem="q9A-L3-xFw" secondAttribute="bottom" constant="20" id="Qz9-gP-q94"/>
+                            <constraint firstItem="cgX-oP-QQa" firstAttribute="leading" secondItem="en0-O8-QmB" secondAttribute="trailing" constant="131" id="R26-bc-bsn"/>
+                            <constraint firstItem="edk-7j-x4G" firstAttribute="trailing" secondItem="hwt-Mv-brG" secondAttribute="trailing" constant="62" id="SCy-Yf-jSv"/>
+                            <constraint firstItem="q9A-L3-xFw" firstAttribute="top" secondItem="tcO-aq-hbB" secondAttribute="bottom" constant="20" id="TZe-5s-FxR"/>
+                            <constraint firstItem="en0-O8-QmB" firstAttribute="leading" secondItem="Rhw-nI-NFx" secondAttribute="leading" id="U0Z-CZ-lIf"/>
+                            <constraint firstItem="q9A-L3-xFw" firstAttribute="leading" secondItem="edk-7j-x4G" secondAttribute="leading" constant="62" id="YUT-s2-yuk"/>
+                            <constraint firstItem="q9A-L3-xFw" firstAttribute="centerX" secondItem="tL5-Ug-S1M" secondAttribute="centerX" id="cCY-Ow-hM1"/>
+                            <constraint firstItem="edk-7j-x4G" firstAttribute="bottom" secondItem="cgX-oP-QQa" secondAttribute="bottom" constant="196" id="kXq-j1-FkL"/>
+                            <constraint firstItem="edk-7j-x4G" firstAttribute="trailing" secondItem="tcO-aq-hbB" secondAttribute="trailing" constant="62" id="lbI-N1-64X"/>
+                            <constraint firstItem="hwt-Mv-brG" firstAttribute="centerX" secondItem="tL5-Ug-S1M" secondAttribute="centerX" id="obK-YQ-S9i"/>
+                            <constraint firstItem="tcO-aq-hbB" firstAttribute="top" secondItem="hwt-Mv-brG" secondAttribute="bottom" constant="20" id="qwU-eA-ZXZ"/>
+                            <constraint firstItem="edk-7j-x4G" firstAttribute="trailing" secondItem="q9A-L3-xFw" secondAttribute="trailing" constant="62" id="rn6-Ji-OT6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="edk-7j-x4G"/>
                     </view>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="q9A-L3-xFw" id="uzF-Cl-k7v"/>
                         <outlet property="passwordTextField" destination="tcO-aq-hbB" id="A8d-Ct-ndp"/>
+                        <outlet property="phoneNumberTextField" destination="Rhw-nI-NFx" id="CO1-bl-nLj"/>
                         <outlet property="userNameTextField" destination="hwt-Mv-brG" id="goK-pD-oGN"/>
                     </connections>
                 </viewController>
