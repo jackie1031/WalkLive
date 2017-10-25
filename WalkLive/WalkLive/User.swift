@@ -9,17 +9,21 @@
 import Foundation
 
 class User: NSObject {
-    var name: NNString?
-    var userName: NNString?
+    var userId: Int?
+    var name: String?
+    var userName: String?
+    var phoneNum: String?
+    var email: String? //how to use facebook API to get their email in AppDelegate
+    //var friendList:
     var dictionary: NSDictionary?
-    var email: NNString? //how to use facebook API to get their email
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        name = dictionary["name"] as? String as NSString?
-        userName = dictionary["user_name"] as? String as NSString?
-        
-        
+        userId = dictionary["user_id"] as? Int
+        name = dictionary["name"] as? String
+        userName = dictionary["user_name"] as? String
+        phoneNum = dictionary["phone_number"] as? String
+        //email
     }
     
     static var _currentUser: User?
@@ -34,6 +38,7 @@ class User: NSObject {
                     _currentUser = User(dictionary: dictionary)
                 }
             }
+            return _currentUser
         }
         
         set (user) {
@@ -41,7 +46,10 @@ class User: NSObject {
             let defaults = UserDefaults.standard
             print("reach set user")
             if let user = user {
-                let data = try! JSONSerialization.data(withJSONObject: user.dictionary!, options [])
+                let data = try! JSONSerialization.data(withJSONObject: user.dictionary!)//, options [])
+                defaults.set(data, forKey: "currentUserData")
+            } else {
+                defaults.removeObject(forKey: "currentUserData")
             }
         }
         
