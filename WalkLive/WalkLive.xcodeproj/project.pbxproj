@@ -150,7 +150,6 @@
 				BC82732B1F8DDB59007E045E /* NSObject+test.h */,
 				BC82732C1F8DDB59007E045E /* NSObject+test.m */,
 				9012DCB11F7C325300AFD27C /* Info.plist */,
-				8C4EAB671F92966A001E4037 /* User.swift */,
 			);
 			path = Walklive;
 			sourceTree = "<group>";
@@ -176,6 +175,7 @@
 		90A18F501F95294A006FAD99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8C4EAB671F92966A001E4037 /* User.swift */,
 				90A18F511F9529FB006FAD99 /* TimePoint.swift */,
 			);
 			path = Model;
@@ -297,7 +297,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */;
+			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -785,7 +785,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */ = {
+		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9012DCC81F7C325300AFD27C /* Debug */,
