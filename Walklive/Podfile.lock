@@ -31,6 +31,8 @@ PODS:
   - GoogleMaps/Base (2.4.0)
   - GoogleMaps/Maps (2.4.0):
     - GoogleMaps/Base
+  - GooglePlaces (2.4.0):
+    - GoogleMaps/Base (= 2.4.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -38,6 +40,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - GoogleMaps
+  - GooglePlaces
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -46,7 +49,8 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 887be4b7452e1c5a3cc4485ce152529965a0c41e
   FBSDKShareKit: 4f83956d4ca2960730fe7588a168eb8d535c06dc
   GoogleMaps: 8436ab5d1c25e36915b2f7416d0c8e3fa2e76c61
+  GooglePlaces: aafe5990fa7951e98e078761bbdaaf236d7e0c65
 
-PODFILE CHECKSUM: d4093d14592ee3e6f058c0210f835e4b006ccfb8
+PODFILE CHECKSUM: c465ee0d977b9c3e61de4a5ac798750544751ba8
 
 COCOAPODS: 1.3.1
