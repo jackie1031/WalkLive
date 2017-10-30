@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sqlite.SQLiteDataSource;
 
-//import javax.sql.DataSource;
-
 import javax.sql.DataSource;
 
 import static spark.Spark.*;
@@ -20,11 +18,12 @@ public class Bootstrap {
 
     private static final Logger logger = LoggerFactory.getLogger(Bootstrap.class);
 
+
     public static void main(String[] args) throws Exception {
         //Check if the database file exists in the current directory. Abort if not
         DataSource dataSource = configureDataSource();
         if (dataSource == null) {
-            System.out.printf("Could not find todo.db in the current directory (%s). Terminating\n",
+            System.out.printf("Could not find server.db in the current directory (%s). Terminating\n",
                     Paths.get(".").toAbsolutePath().normalize());
             System.exit(1);
         }
@@ -51,9 +50,9 @@ public class Bootstrap {
      * @return javax.sql.DataSource corresponding to the todo database
      */
     private static DataSource configureDataSource() {
-        Path todoPath = Paths.get(".", "todo.db");
-        if ( !(Files.exists(todoPath) )) {
-            try { Files.createFile(todoPath); }
+        Path serverPath = Paths.get(".", "todo.db");
+        if ( !(Files.exists(serverPath) )) {
+            try { Files.createFile(serverPath); }
             catch (java.io.IOException ex) {
                 logger.error("Failed to create todo.db file in current directory. Aborting");
             }
@@ -64,7 +63,6 @@ public class Bootstrap {
         return dataSource;
 
     }
-
 
 }
 
