@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Add any custom logic here.
         
         GMSServices.provideAPIKey("AIzaSyCjMLM98uPWo-8V1b0FggAplO3MvqaEq8Y")
+        GMSPlacesClient.provideAPIKey("AIzaSyCjMLM98uPWo-8V1b0FggAplO3MvqaEq8Y")
+
         return true
     }
 
