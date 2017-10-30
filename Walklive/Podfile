@@ -12,6 +12,8 @@ target 'Walklive' do
     pod 'FBSDKLoginKit'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    pod 'GooglePlacesAPI'
+    pod 'SwiftyJSON'
 
   target 'WalkliveTests' do
     inherit! :search_paths
