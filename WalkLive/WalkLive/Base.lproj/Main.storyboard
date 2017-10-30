@@ -318,13 +318,10 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <segue destination="kiW-Kp-XE1" kind="relationship" relationship="rootViewController" id="Rcp-tH-g5y"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMr-1k-8dp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="379.61019490254876"/>
+            <point key="canvasLocation" x="1711" y="396"/>
         </scene>
     </scenes>
 </document>
