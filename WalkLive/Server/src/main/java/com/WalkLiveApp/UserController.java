@@ -14,7 +14,7 @@ public class UserController {
 
         private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-        public UserController(UserService appService) {
+        public UserController(UserService userService) {
             this.userService = userService;
             setupEndpoints();
         }
@@ -24,8 +24,8 @@ public class UserController {
             post(API_CONTEXT + "/user", "application/json", (request, response) -> {
                 try {
                     userService.createNew(request.body());
-                    return response.status(201);
-                } catch (userService.UserServiceException e) {
+                    response.status(201);
+                } catch (UserServiceException e) {
                     logger.error("Failed to create new User");
                 }
                 return Collections.EMPTY_MAP;
@@ -35,16 +35,11 @@ public class UserController {
             get(API_CONTEXT + "/user", "application/json", (request, response) -> {
                 try {
                     return userService.login(request.body());
-                } catch (userService.AuthenticationException e) {
+                } catch (UserServiceException e) {
                     logger.error("Failed to authenticate user.");
                     response.status(404);
                     return Collections.EMPTY_MAP;
-                } //catch (HareAndHoundsService.HareAndHoundsUserExistsException e) {
-                // 	logger.error("Failed to add new user: second player already joined");
-                // 	response.status(410);
-                // }
-                //return Collections.EMPTY_MAP;
+                }
             }, new JsonTransformer());
         }
-    }
 }
