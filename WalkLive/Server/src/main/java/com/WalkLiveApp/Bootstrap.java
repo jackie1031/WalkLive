@@ -2,19 +2,6 @@ package com.WalkLiveApp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sql2o.SQLiteDataSource;
-
-import javax.sql.DataSource;
-
-import static spark.Spark.*;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sqlite.SQLiteDataSource;
 
 //import javax.sql.DataSource;
@@ -33,11 +20,6 @@ public class Bootstrap {
 
     private static final Logger logger = LoggerFactory.getLogger(Bootstrap.class);
 
-<<<<<<< Updated upstream
-=======
-
-    /** the exception should be: ServerServiceException **/
->>>>>>> Stashed changes
     public static void main(String[] args) throws Exception {
         //Check if the database file exists in the current directory. Abort if not
         DataSource dataSource = configureDataSource();
@@ -56,17 +38,10 @@ public class Bootstrap {
 
         //Create the model instance and then configure and start the web service
         try {
-<<<<<<< Updated upstream
             UserService model = new UserService(dataSource);
             new UserController(model);
         } catch (UserServiceException ex) {
             logger.error("Failed to create a UserService instance. Aborting");
-=======
-            ServerService model = new ServerService(dataSource);
-            new ServerController(model);
-        } catch (ServerService.WalkLiveServiceException ex) {
-            logger.error("Failed to create a WalkLiveService instance. Aborting");
->>>>>>> Stashed changes
         }
     }
 
