@@ -1,9 +1,8 @@
 package com.WalkLiveApp;
 
-package com.oose2016.group4.server;
-
 /**
  * Coordinate in latitude and longitude.
+ * Used by TimePoints,
  */
 public class Coordinate {
     private double latitude, longitude;

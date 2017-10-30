@@ -9,6 +9,7 @@ import org.sql2o.Sql2oException;
 
 import javax.sql.DataSource;
 
+<<<<<<< Updated upstream:WalkLive/Server/src/main/java/com/WalkLiveApp/UserService.java
 public class UserService {
     private Sql2o db;
 
@@ -34,6 +35,32 @@ public class UserService {
             logger.error("Failed to create schema at startup", ex);
             throw new UserServiceException("Failed to create schema at startup");
         }
+=======
+import java.io.IOException;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sql2o.Connection;
+import org.sql2o.Query;
+import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
+
+public class ServerService {
+    private MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017/");
+    private MongoClient mongoClient = new MongoClient(connectionString);
+
+    private MongoDatabase db;
+    private MongoCollection<Document> collection;
+
+    private final Logger logger = LoggerFactory.getLogger(TodoService.class);
+
+    public ServerService() throws UserServiceException {
+        db = mongoClient.getDatabase("walklive");
+        collection = db.getCollection("users");
+>>>>>>> Stashed changes:WalkLive/Server/src/main/java/com/WalkLiveApp/ServerService.java
     }
 
     //HELPER FUNCTIONS
@@ -59,6 +86,7 @@ public class UserService {
     * logging in, so may have to create a user simple only with the email information
     */
     public void createNew(String body) throws UserServiceException {
+<<<<<<< Updated upstream:WalkLive/Server/src/main/java/com/WalkLiveApp/UserService.java
         User user = new Gson().fromJson(body, User.class);
 //        JSONParser parser = new JSONParser();
 //        Object obj = parser.parse(body);
@@ -89,6 +117,27 @@ public class UserService {
         } catch(Sql2oException ex) {
             logger.error("UserService.createNew: Failed to create new entry", ex);
             throw new UserServiceException("UserService.createNew: Failed to create new entry");
+=======
+        //User user = new Gson().fromJson(body, User.class);
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(body);
+        JSONArray array = (JSONArray)obj;
+        String username = array.get("username");
+        //String password = array.get("password");
+
+        try (validateId(username)) {
+            //worked
+        } catch (UserServiceException e) {
+            logger.error(String.format("ServerService.createNew: username too short: %s", username), e);
+            throw new InvalidUsernameException("ServerService.createNew: username too short: %s", username), e);
+        }
+
+        try(usernameDoesNotExist(username)) {
+
+        } catch (UserServiceException e) {
+            logger.error(String.format("ServerService.createNew: username already exists: %s", username), e);
+            throw new InvalidUsernameException("ServerService.createNew: username already exists: %s", username), e);
+>>>>>>> Stashed changes:WalkLive/Server/src/main/java/com/WalkLiveApp/ServerService.java
         }
     }
 
