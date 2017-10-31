@@ -6,15 +6,15 @@ import org.slf4j.LoggerFactory;
 
 import static spark.Spark.*;
 
-public class UserController {
+public class ServerController {
 
         private static final String API_CONTEXT = "/WalkLive/api";
 
         private final UserService userService;
 
-        private final Logger logger = LoggerFactory.getLogger(UserController.class);
+        private final Logger logger = LoggerFactory.getLogger(ServerController.class);
 
-        public UserController(UserService userService) {
+        public ServerController(UserService userService) {
             this.userService = userService;
             setupEndpoints();
         }
@@ -31,8 +31,18 @@ public class UserController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            //existing user login
+            //get list of users
             get(API_CONTEXT + "/user", "application/json", (request, response) -> {
+                try {
+                    return userService.findAllUsers();
+                } catch (UserServiceException e) {
+                    logger.error("Failed to fetch user entries");
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            //existing user login
+            get(API_CONTEXT + "/user/login", "application/json", (request, response) -> {
                 try {
                     return userService.login(request.body());
                 } catch (UserServiceException e) {

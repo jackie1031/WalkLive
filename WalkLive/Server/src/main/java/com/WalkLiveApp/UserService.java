@@ -7,6 +7,13 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+
+import java.util.List;
+import java.util.ArrayList;
 import javax.sql.DataSource;
 
 public class UserService {
@@ -27,8 +34,7 @@ public class UserService {
         //program to mostly self-contained. But this is not always what you want;
         //sometimes you want to create the schema externally via a script.
         try (Connection conn = db.open()) {
-            String sql = "CREATE TABLE IF NOT EXISTS item (item_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "                                 title TEXT, done BOOLEAN, created_on TIMESTAMP)" ;
+            String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
             conn.createQuery(sql).executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
@@ -65,8 +71,8 @@ public class UserService {
 //        JSONArray array = (JSONArray)obj;
 //        String username = array.get("username");
 
-        String sql = "INSERT INTO item (username, nickname, friendId, created_on) " +
-                "             VALUES (:username, :nickname, :friendId, :createdOn)" ;
+        String sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
+                "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
 //        try (validateId(username)) {
 //            //worked
@@ -93,19 +99,46 @@ public class UserService {
     }
 
     /*
+     * Finds all users and returns all in user database
+     */
+    public List<User> findAllUsers() throws UserServiceException {
+       try (Connection conn = db.open()) {
+            List<User> users = conn.createQuery("SELECT * FROM user")
+                    .addColumnMapping("username", "username")
+                    .addColumnMapping("createdOn", "createdOn")
+                    .executeAndFetch(User.class);
+            return users;
+       } catch (Sql2oException ex) {
+            logger.error("UserService.findAllUsers: Failed to fetch user entries", ex);
+            throw new UserServiceException("UserService.findAllUsers: Failed to fetch user entries");
+       }
+    }
+
+    /*
      * returns emergencyId and emergencyNumber
      */
     public String login(String body) throws UserServiceException {
-//        //User user = new Gson().fromJson(body, User.class);
-//        JSONParser parser = new JSONParser();
-//        Object obj = parser.parse(body);
-//        JSONArray array = (JSONArray)obj;
-//        String username = array.get("username");
-        return "";
-    }
+        User user = new Gson().fromJson(body, User.class);
 
-//    public List<User> findAll() {
-//
-//    }
+        JSONParser parser = new JSONParser();
+        //Object obj = parser.parse(body);
+        //JSONArray array = (JSONArray)obj;
+        //String username = array.get("username");
+
+        //String sql = "SELECT * FROM item WHERE username = :username ";
+
+//        try (Connection conn = db.open()) {
+//            return conn.createQuery(sql)
+//                    .addParameter("username", username)
+//                    .addColumnMapping("item_id", "id")
+//                    .addColumnMapping("created_on", "createdOn")
+//                    .executeAndFetchFirst(User.class);
+//        } catch(Sql2oException ex) {
+//            logger.error(String.format("TodoService.find: Failed to query database for username: %s", username), ex);
+//            throw new UserServiceException(String.format("TodoService.find: Failed to query database for username: %s", username));
+//        }
+
+        return null;
+    }
 
 }

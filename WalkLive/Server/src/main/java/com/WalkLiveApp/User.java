@@ -31,6 +31,9 @@ public class User {
         return this.friendId;
     }
 
+    public Date getCreatedOn() {
+        return this.createdOn;
+    }
 //    public List<String> getLog() {
 //        return null;
 //    }
