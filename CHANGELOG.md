@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - FE: GoogleMaps constraints changed by @mshu1
 ### Added
-- BE: SparkJava backend database and post timepoint endpoints by @tianyi
+- BE: Trip, timePoint, and Travellog models added by @tianyi
 - BE: signUp/logIn endpoints added by @jeesoo
 - FE: Added Setting page Prototype by @yang 
 
