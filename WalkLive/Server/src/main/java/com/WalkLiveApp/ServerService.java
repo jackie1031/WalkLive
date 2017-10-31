@@ -9,11 +9,10 @@ import org.sql2o.Sql2oException;
 
 import javax.sql.DataSource;
 
-<<<<<<< Updated upstream:WalkLive/Server/src/main/java/com/WalkLiveApp/UserService.java
-public class UserService {
+public class ServerService {
     private Sql2o db;
 
-    private final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final Logger logger = LoggerFactory.getLogger(ServerService.class);
 
     /**
      * Construct the model with a pre-defined datasource. The current implementation
@@ -21,7 +20,7 @@ public class UserService {
      *
      * @param dataSource
      */
-    public UserService(DataSource dataSource) throws UserServiceException {
+    public ServerService(DataSource dataSource) throws UserServiceException {
         db = new Sql2o(dataSource);
 
         //Create the schema for the database if necessary. This allows this
@@ -33,34 +32,8 @@ public class UserService {
             conn.createQuery(sql).executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
-            throw new UserServiceException("Failed to create schema at startup");
+            throw new UserServiceException();
         }
-=======
-import java.io.IOException;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sql2o.Connection;
-import org.sql2o.Query;
-import org.sql2o.Sql2o;
-import org.sql2o.Sql2oException;
-
-public class ServerService {
-    private MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017/");
-    private MongoClient mongoClient = new MongoClient(connectionString);
-
-    private MongoDatabase db;
-    private MongoCollection<Document> collection;
-
-    private final Logger logger = LoggerFactory.getLogger(TodoService.class);
-
-    public ServerService() throws UserServiceException {
-        db = mongoClient.getDatabase("walklive");
-        collection = db.getCollection("users");
->>>>>>> Stashed changes:WalkLive/Server/src/main/java/com/WalkLiveApp/ServerService.java
     }
 
     //HELPER FUNCTIONS
@@ -86,7 +59,6 @@ public class ServerService {
     * logging in, so may have to create a user simple only with the email information
     */
     public void createNew(String body) throws UserServiceException {
-<<<<<<< Updated upstream:WalkLive/Server/src/main/java/com/WalkLiveApp/UserService.java
         User user = new Gson().fromJson(body, User.class);
 //        JSONParser parser = new JSONParser();
 //        Object obj = parser.parse(body);
@@ -116,28 +88,9 @@ public class ServerService {
                     .executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("UserService.createNew: Failed to create new entry", ex);
-            throw new UserServiceException("UserService.createNew: Failed to create new entry");
-=======
-        //User user = new Gson().fromJson(body, User.class);
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(body);
-        JSONArray array = (JSONArray)obj;
-        String username = array.get("username");
-        //String password = array.get("password");
+            throw new UserServiceException();
 
-        try (validateId(username)) {
-            //worked
-        } catch (UserServiceException e) {
-            logger.error(String.format("ServerService.createNew: username too short: %s", username), e);
-            throw new InvalidUsernameException("ServerService.createNew: username too short: %s", username), e);
-        }
-
-        try(usernameDoesNotExist(username)) {
-
-        } catch (UserServiceException e) {
-            logger.error(String.format("ServerService.createNew: username already exists: %s", username), e);
-            throw new InvalidUsernameException("ServerService.createNew: username already exists: %s", username), e);
->>>>>>> Stashed changes:WalkLive/Server/src/main/java/com/WalkLiveApp/ServerService.java
+            //throw new UserServiceException("UserService.createNew: Failed to create new entry");
         }
     }
 
@@ -156,5 +109,59 @@ public class ServerService {
 //    public List<User> findAll() {
 //
 //    }
+
+    /** For trip part -----------------------**/
+
+    public String startTrip(String body) throws UserServiceException {
+
+        return "";
+
+    }
+
+    public Trip getTrip(String body) throws UserServiceException {
+        //process body
+        Trip thisTrip = new Trip();
+
+        return thisTrip;
+
+    }
+    public Trip updateDestination(String body) throws UserServiceException {
+
+        //{ tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
+        Trip thisTrip = new Trip();
+
+        return thisTrip;
+    }
+    public String shareTrip(String body) throws UserServiceException {
+
+        // to another user
+        return "";
+
+    }
+    public String respondTripRequest(String body) throws UserServiceException {
+        return "";
+
+
+    }
+
+    //Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
+    public Trip addTimePoint(String body) throws UserServiceException {
+        Trip addToTrip = new Trip();
+        return addToTrip;
+
+    }
+
+    public String getTimePoint(String body) throws UserServiceException {
+//            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
+
+        return "";
+
+    }
+    public Trip getLatestTimePoint(String body) throws UserServiceException {
+//            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
+
+        Trip addToTrip = new Trip();
+        return addToTrip;
+    }
 
 }

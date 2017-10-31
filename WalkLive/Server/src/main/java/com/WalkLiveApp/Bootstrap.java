@@ -38,8 +38,10 @@ public class Bootstrap {
 
         //Create the model instance and then configure and start the web service
         try {
-            UserService model = new UserService(dataSource);
-            new UserController(model);
+//            ServerService model = new ServerService(dataSource);
+//            new ServerService(model);
+            new ServerController(new ServerService(dataSource));
+
         } catch (UserServiceException ex) {
             logger.error("Failed to create a UserService instance. Aborting");
         }
@@ -51,9 +53,9 @@ public class Bootstrap {
      * @return javax.sql.DataSource corresponding to the todo database
      */
     private static DataSource configureDataSource() {
-        Path todoPath = Paths.get(".", "todo.db");
-        if ( !(Files.exists(todoPath) )) {
-            try { Files.createFile(todoPath); }
+        Path ServerePath = Paths.get(".", "todo.db");
+        if ( !(Files.exists(ServerePath) )) {
+            try { Files.createFile(ServerePath); }
             catch (java.io.IOException ex) {
                 logger.error("Failed to create todo.db file in current directory. Aborting");
             }
@@ -62,7 +64,6 @@ public class Bootstrap {
         SQLiteDataSource dataSource = new SQLiteDataSource();
         dataSource.setUrl("jdbc:sqlite:todo.db");
         return dataSource;
-
     }
 
 

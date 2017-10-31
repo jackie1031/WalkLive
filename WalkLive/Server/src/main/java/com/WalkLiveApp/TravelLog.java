@@ -9,15 +9,27 @@ public class TravelLog {
     // arraylist
     private  List<Trip> tripList = new ArrayList<Trip>();
 
-    public getTrip(String user, int count, List<Trip> trip) {
+    public TravelLog(String userId, int tripCount, List<Trip> tripList) {
+        this.userId = userId;
+        this.tripCount = tripCount;
+        this.tripList = tripList;
+    }
+
+    public Trip getTrip(String user, int count, List<Trip> trip) {
+
+        //get specific trip
+        Trip temp = new Trip();
+        return temp;
+    }
+
+    public List<Trip> getTripHist() {
+        return tripList;
 
     }
 
-    public getTripHist() {
-
-    }
-
-    public getCurrTrip(){
-
+    public Trip getCurrTrip(){
+        //get trip
+        Trip temp = new Trip();
+        return tripList.get(tripList.size()-1);
     }
 }

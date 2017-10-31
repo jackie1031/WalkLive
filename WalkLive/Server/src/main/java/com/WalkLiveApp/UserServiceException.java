@@ -5,7 +5,6 @@ public class UserServiceException extends Exception {
         super();
     }
 
-    public UserServiceException(String message) {
-        super(message);
-    }
+    //public String UserServiceException(String message) {super(message);}
+
 }
