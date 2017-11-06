@@ -38,10 +38,10 @@ public class Bootstrap {
 
         //Create the model instance and then configure and start the web service
         try {
-            UserService model = new UserService(dataSource);
+            WalkLiveService model = new WalkLiveService(dataSource);
             new ServerController(model);
         } catch (UserServiceException ex) {
-            logger.error("Failed to create a UserService instance. Aborting");
+            logger.error("Failed to create a WalkLiveService instance. Aborting");
         }
     }
 
