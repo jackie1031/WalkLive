@@ -8,10 +8,11 @@
 
 import UIKit
 
-class SettingsVC: UITableViewController {
+class SettingsVC: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        phoneNumTextField.delegate = self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -36,7 +37,19 @@ class SettingsVC: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-
+    
+    //Notification and frequency settings
+    //?????weak or strong?
+    @IBOutlet weak var userNotif: UISwitch!
+    @IBOutlet weak var friendNotif: UISwitch!
+    @IBOutlet weak var emergNotif: UISwitch!
+    @IBOutlet weak var locationShareFreq: UISlider!
+    
+    @IBOutlet weak var phoneNumTextField: UITextField!
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    func textFieldDidEndEditing(_ textField: UITextField)
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
