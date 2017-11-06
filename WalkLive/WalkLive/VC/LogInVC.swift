@@ -29,7 +29,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
         print("Did log out of facebook")
     }
     
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+    func loginButton(_ facebookloginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
             return
