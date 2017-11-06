@@ -17,19 +17,10 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //new facebook login
-        let loginButton = FBSDKLoginButton()
-        view.addSubview(loginButton)
-        //frame's are obselete, please use constraints instead because its 2016 after all
-        loginButton.frame = CGRect(x: 16, y: 50, width: view.frame.width - 32, height: 50)
-        
-        loginButton.delegate = self
-        
-        
         // Do any additional setup after loading the view.
     }
 
@@ -52,6 +43,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onCancelButton(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
     
     
 

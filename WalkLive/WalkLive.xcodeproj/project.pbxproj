@@ -16,6 +16,7 @@
 		9012DCB01F7C325300AFD27C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */; };
 		9012DCBB1F7C325300AFD27C /* WalkliveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCBA1F7C325300AFD27C /* WalkliveTests.swift */; };
 		9012DCC61F7C325300AFD27C /* WalkliveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */; };
+		902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902AEF871FB0E4820043ABAC /* DefaultVC.swift */; };
 		90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A18F511F9529FB006FAD99 /* TimePoint.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
@@ -60,6 +61,7 @@
 		9012DCC11F7C325300AFD27C /* WalkliveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkliveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkliveUITests.swift; sourceTree = "<group>"; };
 		9012DCC71F7C325300AFD27C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		902AEF871FB0E4820043ABAC /* DefaultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
 		90756C8CBAFF8D3D3DD58275 /* Pods-WalkliveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.release.xcconfig"; sourceTree = "<group>"; };
 		90A18F511F9529FB006FAD99 /* TimePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				90F233AD1F7C387F0002AF0A /* SignUpVC.swift */,
 				90F233AF1F7C3BB10002AF0A /* LoginVC.swift */,
 				90F233B11F7C3D110002AF0A /* MainMapVC.swift */,
+				902AEF871FB0E4820043ABAC /* DefaultVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -297,7 +300,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */;
+			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -511,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */,
 				90F233B21F7C3D110002AF0A /* MainMapVC.swift in Sources */,
 				90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */,
 				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
@@ -786,7 +790,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "Walklive" */ = {
+		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9012DCC81F7C325300AFD27C /* Debug */,
