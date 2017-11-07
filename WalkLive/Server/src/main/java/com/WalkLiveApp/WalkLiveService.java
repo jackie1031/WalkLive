@@ -1,6 +1,7 @@
 package com.WalkLiveApp;
 
 import com.google.gson.Gson;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sql2o.Connection;
@@ -104,8 +105,8 @@ public class WalkLiveService {
     public List<User> findAllUsers() throws UserServiceException {
        try (Connection conn = db.open()) {
             List<User> users = conn.createQuery("SELECT * FROM user")
-                    .addColumnMapping("username", "username")
-                    .addColumnMapping("createdOn", "createdOn")
+//                    .addColumnMapping("username", "username")
+//                    .addColumnMapping("createdOn", "createdOn")
                     .executeAndFetch(User.class);
             return users;
        } catch (Sql2oException ex) {
@@ -117,28 +118,25 @@ public class WalkLiveService {
     /*
      * returns emergencyId and emergencyNumber
      */
-    public String login(String body) throws UserServiceException {
+    public User login(String body) throws UserServiceException, ParseException {
         User user = new Gson().fromJson(body, User.class);
 
-        JSONParser parser = new JSONParser();
-        //Object obj = parser.parse(body);
-        //JSONArray array = (JSONArray)obj;
-        //String username = array.get("username");
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        JSONObject data = (JSONObject) object.get("users");
+        String username = data.get("username").toString();
 
-        //String sql = "SELECT * FROM item WHERE username = :username ";
+        String sql = "SELECT * FROM users WHERE username = :username ";
 
-//        try (Connection conn = db.open()) {
-//            return conn.createQuery(sql)
-//                    .addParameter("username", username)
-//                    .addColumnMapping("item_id", "id")
-//                    .addColumnMapping("created_on", "createdOn")
-//                    .executeAndFetchFirst(User.class);
-//        } catch(Sql2oException ex) {
-//            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username));
-//        }
+        try (Connection conn = db.open()) {
+            return conn.createQuery(sql)
+                    .addParameter("username", username)
+                    .executeAndFetchFirst(User.class);
+        } catch(Sql2oException ex) {
+            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username));
+        }
 
-        return null;
+        //return null;
     }
 
 
