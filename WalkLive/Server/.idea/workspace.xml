@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walklive.db" afterPath="$PROJECT_DIR$/walklive.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Walklive.xcworkspace/xcuserdata/lucy.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/../Walklive.xcworkspace/xcuserdata/lucy.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" afterPath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walklive.db" afterPath="$PROJECT_DIR$/walklive.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WalkLive.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/../WalkLive.xcodeproj/project.pbxproj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../WalkLive/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/../WalkLive/Base.lproj/Main.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Podfile" afterPath="$PROJECT_DIR$/../Podfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Podfile.lock" afterPath="$PROJECT_DIR$/../Podfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pods/Manifest.lock" afterPath="$PROJECT_DIR$/../Pods/Manifest.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +27,8 @@
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-55">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="459">
+              <caret line="77" column="35" lean-forward="false" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,21 +36,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="135" column="45" lean-forward="true" selection-start-line="135" selection-start-column="45" selection-end-line="135" selection-end-column="45" />
+            <state relative-caret-position="338">
+              <caret line="109" column="49" lean-forward="true" selection-start-line="109" selection-start-column="49" selection-end-line="109" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="84" column="40" lean-forward="false" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
+            <state relative-caret-position="-2">
+              <caret line="115" column="28" lean-forward="true" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -55,13 +59,13 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="43" column="2" lean-forward="false" selection-start-line="43" selection-start-column="2" selection-end-line="43" selection-end-column="2" />
+            <state relative-caret-position="375">
+              <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
               <folding>
-                <marker date="1509995444000" expanded="true" signature="811:1264" ph="//..." />
-                <marker date="1509995444000" expanded="true" signature="1316:1711" ph="{...}" />
-                <marker date="1509995444000" expanded="false" signature="1741:1752" ph=" { " />
-                <marker date="1509995444000" expanded="false" signature="1762:1768" ph=" }" />
+                <element signature="e#901#902#0" expanded="true" />
+                <element signature="e#938#939#0" expanded="true" />
+                <marker date="1510013783000" expanded="false" signature="1800:1811" ph=" { " />
+                <marker date="1510013783000" expanded="false" signature="1821:1827" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -97,11 +101,11 @@
         <option value="$PROJECT_DIR$/src/test/java/com/todoapp/TestServer.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
       </list>
     </option>
   </component>
@@ -169,6 +173,21 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="WalkLiveApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
@@ -414,12 +433,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Tests - 2017.10.30 at 20h 14m 25s.xml">
-      <configuration name="Tests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Tests - 2017.10.30 at 23h 44m 34s.xml">
-      <configuration name="Tests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Tests - 2017.10.30 at 23h 52m 04s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
@@ -444,6 +457,12 @@
     <history-entry file="Tests - 2017.11.06 at 19h 06m 01s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Tests - 2017.11.06 at 19h 12m 31s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tests - 2017.11.06 at 19h 17m 38s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -457,7 +476,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5083333" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24352941" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24352941" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -518,23 +537,15 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Trip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
           <caret line="40" column="2" lean-forward="true" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
           <folding>
-            <marker date="1509995444000" expanded="true" signature="811:1264" ph="//..." />
-            <marker date="1509995444000" expanded="true" signature="1316:1711" ph="{...}" />
-            <marker date="1509995444000" expanded="false" signature="1741:1752" ph=" { " />
-            <marker date="1509995444000" expanded="false" signature="1762:1768" ph=" }" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <marker date="1510013783000" expanded="false" signature="1800:1811" ph=" { " />
+            <marker date="1510013783000" expanded="false" signature="1821:1827" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -577,10 +588,10 @@
         <state relative-caret-position="452">
           <caret line="40" column="2" lean-forward="false" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
           <folding>
-            <marker date="1509995444000" expanded="true" signature="811:1264" ph="//..." />
-            <marker date="1509995444000" expanded="true" signature="1316:1711" ph="{...}" />
-            <marker date="1509995444000" expanded="false" signature="1741:1752" ph=" { " />
-            <marker date="1509995444000" expanded="false" signature="1762:1768" ph=" }" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <marker date="1510013783000" expanded="false" signature="1800:1811" ph=" { " />
+            <marker date="1510013783000" expanded="false" signature="1821:1827" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -669,10 +680,10 @@
         <state relative-caret-position="60">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
-            <marker date="1509995444000" expanded="true" signature="811:1264" ph="//..." />
-            <marker date="1509995444000" expanded="true" signature="1316:1711" ph="{...}" />
-            <marker date="1509995444000" expanded="false" signature="1741:1752" ph=" { " />
-            <marker date="1509995444000" expanded="false" signature="1762:1768" ph=" }" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <marker date="1510013783000" expanded="false" signature="1800:1811" ph=" { " />
+            <marker date="1510013783000" expanded="false" signature="1821:1827" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -757,19 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="43" column="2" lean-forward="false" selection-start-line="43" selection-start-column="2" selection-end-line="43" selection-end-column="2" />
-          <folding>
-            <marker date="1509995444000" expanded="true" signature="811:1264" ph="//..." />
-            <marker date="1509995444000" expanded="true" signature="1316:1711" ph="{...}" />
-            <marker date="1509995444000" expanded="false" signature="1741:1752" ph=" { " />
-            <marker date="1509995444000" expanded="false" signature="1762:1768" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserService.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserServiceException.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -779,28 +777,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/walklive.db">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding>
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+            <marker date="1510013783000" expanded="false" signature="1800:1811" ph=" { " />
+            <marker date="1510013783000" expanded="false" signature="1821:1827" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-55">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="459">
+          <caret line="77" column="35" lean-forward="false" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="84" column="40" lean-forward="false" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
+        <state relative-caret-position="338">
+          <caret line="109" column="49" lean-forward="true" selection-start-line="109" selection-start-column="49" selection-end-line="109" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="135" column="45" lean-forward="true" selection-start-line="135" selection-start-column="45" selection-end-line="135" selection-end-column="45" />
+        <state relative-caret-position="-2">
+          <caret line="115" column="28" lean-forward="true" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
           <folding />
         </state>
       </provider>

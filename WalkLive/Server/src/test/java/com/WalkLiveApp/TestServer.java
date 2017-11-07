@@ -94,17 +94,54 @@ public class TestServer {
     }
 
     @Test
+    public void testFindAll() throws Exception {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesoo", "123456",null, null, df.parse("2015-04-23T23:10:15-0700")),
+                new User("michelle", "0123", null, null, df.parse("2015-03-07T01:10:20-0530")),
+                new User("yang", "1111","yangcao", null, df.parse("2016-04-23T23:10:15-0720")),
+        };
+
+        //Get them back
+        Response r = request("GET", "/WalkLive/api/user", null);
+        assertEquals("Failed to get user entries", 200, r.httpStatus);
+        List<User> results = getUsers(r);
+
+        //Verify that we got the right element back
+        assertEquals("Number of user entries differ", entries.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in friendId", entries[i].getFriendId(), actual.getFriendId());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+        }
+    }
+
+    @Test
     public void testLogin() throws Exception {
         //Add a single element
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User expected = new User("jeesoo", "Test-1", "jkim", null, df.parse("2015-04-23T23:10:15-0700"));
+        User expected = new User("jeesoo", "test-1", "jkim", null, df.parse("2015-04-23T23:10:15-0700"));
         Response r1 = request("POST", "/WalkLive/api/user", expected);
         assertEquals("Failed to add", 201, r1.httpStatus);
 
         //Get it back so that we know its ID
         Response r2 = request("GET", "/WalkLive/api/user/login", null);
         assertEquals("Failed to get users", 200, r2.httpStatus);
-        //User u = getUsers(r2).get(0);
+        User u = getUsers(r2).get(0);
+
+        assertEquals("Mismatch in username", u.getUsername(), expected.getUsername());
+        assertEquals("Mismatch in password", u.getPassword(), expected.getPassword());
+        assertEquals("Mismatch in creation date", u.getCreatedOn(), expected.getCreatedOn());
+        assertEquals("Mismatch in friendId", u.getFriendId(), expected.getFriendId());
+        assertEquals("Mismatch in nickname", u.getNickname(), expected.getNickname());
+
     }
 //
 //    @Test

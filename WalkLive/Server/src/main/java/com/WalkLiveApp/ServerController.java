@@ -51,7 +51,7 @@ public class ServerController {
 
 
             //add new user (signup)
-            post(API_CONTEXT + "/user", "application/json", (request, response) -> {
+            post(API_CONTEXT + "/user/signup", "application/json", (request, response) -> {
                 try {
                     walkLiveService.createNew(request.body());
                     response.status(201);
@@ -62,7 +62,7 @@ public class ServerController {
             }, new JsonTransformer());
 
             //get list of users
-            get(API_CONTEXT + "/user", "application/json", (request, response) -> {
+            get(API_CONTEXT + "/user/signup", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.findAllUsers();
                 } catch (UserServiceException e) {
