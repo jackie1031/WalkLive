@@ -251,10 +251,14 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="emergNotif" destination="4Tl-0Y-o9Q" id="8gW-hS-28o"/>
                         <outlet property="emergNotifFreq" destination="4Tl-0Y-o9Q" id="EaQ-QF-DrG"/>
+                        <outlet property="friendNotif" destination="Gby-AA-uQZ" id="trt-Oc-1If"/>
                         <outlet property="friendNotifFreq" destination="Gby-AA-uQZ" id="Hoz-Hx-8Tn"/>
                         <outlet property="locationShareFreq" destination="0wX-Xf-sn9" id="Ifj-RY-ISo"/>
                         <outlet property="phoneNum" destination="CVC-Pt-e5W" id="S0T-Gb-tuL"/>
+                        <outlet property="phoneNumTextField" destination="CVC-Pt-e5W" id="kjj-R2-jTa"/>
+                        <outlet property="userNotif" destination="hzq-lz-Xkt" id="oM0-lk-CTK"/>
                         <outlet property="userNotifFreq" destination="hzq-lz-Xkt" id="DDh-PY-ZgY"/>
                     </connections>
                 </tableViewController>

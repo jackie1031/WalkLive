@@ -47,8 +47,8 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var phoneNumTextField: UITextField!
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    func textFieldDidEndEditing(_ textField: UITextField)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {return true}
+    func textFieldDidEndEditing(_ textField: UITextField) {}
     
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
