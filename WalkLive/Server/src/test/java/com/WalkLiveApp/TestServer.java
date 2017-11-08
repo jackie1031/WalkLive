@@ -93,16 +93,23 @@ public class TestServer {
 //        }
     }
 
+    // date: df.parse("2016-04-23T23:10:15-0720")
+
     @Test
     public void testFindAll() throws Exception {
 
         //Add a few elements
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         User[] entries = new User[] {
-                new User("jeesoo", "123456",null, null, df.parse("2015-04-23T23:10:15-0700")),
-                new User("michelle", "0123", null, null, df.parse("2015-03-07T01:10:20-0530")),
-                new User("yang", "1111","yangcao", null, df.parse("2016-04-23T23:10:15-0720")),
+                new User("jeesoo", "123456", "4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yang", "1111","4405339063"),
         };
+
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/user", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
 
         //Get them back
         Response r = request("GET", "/WalkLive/api/user", null);

@@ -7,23 +7,29 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private String password;
+    private String contact;
     private String nickname;
     private List<String> friendId = new ArrayList<>();
     private Date createdOn = new Date();
 
-    public User(String username, String password, String nickname, List<String> friendId, Date createdOn) {
+    public User(String username, String password, String contact) {
         this.username = username;
         this.password = password;
-        this.nickname = nickname;
-        this.friendId = friendId;
-        this.createdOn = createdOn;
+        this.contact = contact;
+        this.nickname = null;
+        this.friendId = null;
+        this.createdOn = null;
     }
+
+    //add setters
 
     public String getUsername() {
         return this.username;
     }
 
     public String getPassword() { return this.password; }
+
+    public String getContact() { return this.contact; }
 
     public String getNickname() {
         return this.nickname;

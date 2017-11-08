@@ -65,12 +65,16 @@ public class WalkLiveService {
     * in through Facebook or Google, we should still create a new user in the case that its their first time
     * logging in, so may have to create a user simple only with the email information
     */
-    public void createNew(String body) throws UserServiceException {
+    public void createNew(String body) throws UserServiceException, ParseException {
         User user = new Gson().fromJson(body, User.class);
-//        JSONParser parser = new JSONParser();
-//        Object obj = parser.parse(body);
-//        JSONArray array = (JSONArray)obj;
-//        String username = array.get("username");
+
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        JSONObject data = (JSONObject) object.get("users");
+        String username = data.get("username").toString();
+
+        String sql = "SELECT * FROM users WHERE username = :username ";
+        //if the query == null then username already exists. - set response code to
+
 
         String sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
