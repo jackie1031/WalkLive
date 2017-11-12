@@ -7,15 +7,12 @@
 //
 
 import UIKit
-import GoogleMaps
-import GooglePlaces
 import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var googleAPIKey = "AIzaSyCjMLM98uPWo-8V1b0FggAplO3MvqaEq8Y"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Add any custom logic here.
         
-        GMSServices.provideAPIKey(googleAPIKey)
-        GMSPlacesClient.provideAPIKey(googleAPIKey)
 
         return true
     }
