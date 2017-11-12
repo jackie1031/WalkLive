@@ -45,10 +45,14 @@ class SettingsVC: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var emergNotif: UISwitch!
     @IBOutlet weak var locationShareFreq: UISlider!
     
+    @IBOutlet weak var emergPhoneTextField: UITextField!
     @IBOutlet weak var phoneNumTextField: UITextField!
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {return true}
-    func textFieldDidEndEditing(_ textField: UITextField) {}
+    func phoneNumTextFieldShouldReturn(_ phoneNumTextField: UITextField) -> Bool {return true}
+    func phoneNumTextFieldDidEndEditing(_ phoneNumTextField: UITextField) {}
+    
+    func emergPhoneTextFieldShouldReturn(_ emergPhoneTextField: UITextField) -> Bool {return true}
+    func emergPhoneTextFieldDidEndEditing(_ emergPhoneTextField: UITextField) {}
     
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -210,12 +210,22 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Emergency Contacts" id="SMX-19-PYG">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="138" id="aJN-SB-5Ob">
-                                        <rect key="frame" x="0.0" y="381.5" width="375" height="138"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="49" id="aJN-SB-5Ob">
+                                        <rect key="frame" x="0.0" y="381.5" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aJN-SB-5Ob" id="eDx-fi-LcR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="137.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="xxx-xxx-xxxx" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgp-qv-duQ">
+                                                    <rect key="frame" x="16" y="9" width="343" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.80056567649999999" green="0.89563999920000004" blue="0.90465106870000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.37165540460000002" green="0.4271047711" blue="0.43223899599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
                                             <color key="backgroundColor" red="0.80056567649999999" green="0.89563999920000004" blue="0.90465106870000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -224,14 +234,14 @@
                             <tableViewSection headerTitle="Phone Number" id="GBu-Nl-GhB">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="d3O-km-8tq">
-                                        <rect key="frame" x="0.0" y="575.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="486.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d3O-km-8tq" id="KeI-xM-jfJ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="xxx-xxx-xxxx" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CVC-Pt-e5W">
-                                                    <rect key="frame" x="8" y="8" width="359" height="30"/>
+                                                    <rect key="frame" x="16" y="8" width="343" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.80056567649999999" green="0.89563999920000004" blue="0.90465106870000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="textColor" red="0.37165540460000002" green="0.4271047711" blue="0.43223899599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -253,6 +263,7 @@
                     <connections>
                         <outlet property="emergNotif" destination="4Tl-0Y-o9Q" id="8gW-hS-28o"/>
                         <outlet property="emergNotifFreq" destination="4Tl-0Y-o9Q" id="EaQ-QF-DrG"/>
+                        <outlet property="emergPhoneTextField" destination="rgp-qv-duQ" id="JGH-ph-Lcj"/>
                         <outlet property="friendNotif" destination="Gby-AA-uQZ" id="trt-Oc-1If"/>
                         <outlet property="friendNotifFreq" destination="Gby-AA-uQZ" id="Hoz-Hx-8Tn"/>
                         <outlet property="locationShareFreq" destination="0wX-Xf-sn9" id="Ifj-RY-ISo"/>
