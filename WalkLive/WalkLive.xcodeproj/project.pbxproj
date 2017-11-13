@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3F164326CA499F761BEF7CB8 /* Pods_WalkliveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */; };
-		8C3F9F7A1FB0E58500C3D655 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F9F791FB0E58500C3D655 /* SettingsVC.swift */; };
 		8C4EAB681F92966A001E4037 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EAB671F92966A001E4037 /* User.swift */; };
 		9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA51F7C325200AFD27C /* AppDelegate.swift */; };
 		9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA71F7C325200AFD27C /* FirstViewVC.swift */; };
@@ -48,7 +47,6 @@
 		45F0A39B0E16E8F2528C5941 /* Pods-WalkliveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.release.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.release.xcconfig"; sourceTree = "<group>"; };
-		8C3F9F791FB0E58500C3D655 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		8C4EAB671F92966A001E4037 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9012DCA21F7C325200AFD27C /* Walklive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walklive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9012DCA51F7C325200AFD27C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,11 +190,7 @@
 				90F233AD1F7C387F0002AF0A /* SignUpVC.swift */,
 				90F233AF1F7C3BB10002AF0A /* LoginVC.swift */,
 				90F233B11F7C3D110002AF0A /* MainMapVC.swift */,
-<<<<<<< HEAD
 				902AEF871FB0E4820043ABAC /* DefaultVC.swift */,
-=======
-				8C3F9F791FB0E58500C3D655 /* SettingsVC.swift */,
->>>>>>> settingsLayout
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -529,7 +523,6 @@
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
 				9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */,
 				8C4EAB681F92966A001E4037 /* User.swift in Sources */,
-				8C3F9F7A1FB0E58500C3D655 /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
