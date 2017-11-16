@@ -9,7 +9,6 @@
 ## BackEnd Install:
 - run 'cd Walklive'
 - run 'cd Server'
-- run 'zip -r server.zip . -x ".*" -x "__MACOSX" -x "*.DS_Store' (???? still need to change)
 - run 'mvn package'
 - open a web browser, and type in: localhost:8080
 
