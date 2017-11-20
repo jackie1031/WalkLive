@@ -40,7 +40,7 @@ public class TimePoint {
 
     /**
      * get time points based on TimePointID
-     * what to pass in ?????
+     * what to pass in ?
      */
     public int getDangerLevel (Coordinate findDanger) {
         int a = 5;

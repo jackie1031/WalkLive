@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sql2o.Connection;
+import org.sql2o.Query;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 import org.sqlite.SQLiteDataSource;
 import spark.Spark;
 import spark.utils.IOUtils;
@@ -22,7 +26,19 @@ import java.util.stream.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+
 public class TestServer {
+
+    SQLiteDataSource dSource;
+    private final String TESTCRIMES = "TestCrimes";
+    private final Logger logger = LoggerFactory.getLogger(TestServer.class);
+
+
 
     //------------------------------------------------------------------------//
     // Setup
@@ -32,6 +48,7 @@ public class TestServer {
     public static void setupBeforeClass() throws Exception {
         //Set up the database
         setupDB();
+
 
         //Start the main server
         Bootstrap.main(null);
@@ -68,8 +85,8 @@ public class TestServer {
         //Add a few elements
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         User[] entries = new User[] {
-          new User("jeesoo", "123456",null, null, df.parse("2015-04-23T23:10:15-0700")),
-          new User("michelle", "0123", null, null, df.parse("2015-03-07T01:10:20-0530"))
+                new User("jeesoo", "123456",null, null, df.parse("2015-04-23T23:10:15-0700")),
+                new User("michelle", "0123", null, null, df.parse("2015-03-07T01:10:20-0530"))
         };
 
         for (User t : entries) {
@@ -190,40 +207,15 @@ public class TestServer {
 //        }
 //    }
 
-    @Test
-    public void testStartTRIP() throws Exception {
-        //Add a single element
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User expected = new User("jeesoo", "Test-1", "jkim", null, df.parse("2015-04-23T23:10:15-0700"));
-        Response r1 = request("POST", "/WalkLive/api/user", expected);
-        assertEquals("Failed to add", 201, r1.httpStatus);
-
-        //Get it back so that we know its ID
-        Response r2 = request("GET", "/WalkLive/api/user/login", null);
-        assertEquals("Failed to get users", 200, r2.httpStatus);
-        //User u = getUsers(r2).get(0);
-    }
-
-    /**
-     * Tests the getters in the Coordinate class.
-     * @throws Exception when the coordinates are invalid
-     */
-    @Test
-    public void testGetLatLong() throws Exception {
-        Coordinate c = new Coordinate(0.5, 0.7);
-        assertEquals(0.5, c.getLatitude(), 0);
-        assertEquals(0.7, c.getLongitude(), 0);
-    }
-
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//
 
     private Response request(String method, String path, Object content) {
         try {
-			URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
+            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
             System.out.println(url);
-			HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(method);
             http.setDoInput(true);
             if (content != null) {
@@ -237,30 +229,30 @@ public class TestServer {
             }
 
             String responseBody = IOUtils.toString(http.getInputStream());
-			return new Response(http.getResponseCode(), responseBody);
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail("Sending request failed: " + e.getMessage());
-			return null;
-		}
+            return new Response(http.getResponseCode(), responseBody);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("Sending request failed: " + e.getMessage());
+            return null;
+        }
     }
 
 
     private static class Response {
 
-		public String content;
+        public String content;
 
-		public int httpStatus;
+        public int httpStatus;
 
-		public Response(int httpStatus, String content) {
-			this.content = content;
+        public Response(int httpStatus, String content) {
+            this.content = content;
             this.httpStatus = httpStatus;
-		}
+        }
 
         public <T> T getContentAsObject(Type type) {
             return new Gson().fromJson(content, type);
         }
-	}
+    }
 
     //------------------------------------------------------------------------//
     // TodoApp Specific Helper Methods and classes
@@ -272,29 +264,197 @@ public class TestServer {
         SQLiteDataSource dataSource = new SQLiteDataSource();
         dataSource.setUrl("jdbc:sqlite:walklive.db");
 
-         db = new Sql2o(dataSource);
+        db = new Sql2o(dataSource);
 
         try (Connection conn = db.open()) {
             String sql = "CREATE TABLE IF NOT EXISTS user (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
             conn.createQuery(sql).executeUpdate();
         }
     }
-    private  void clearDB() {
-        SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:walklive.db");
 
-        try (Connection conn = db.open()) {
-            String sql = "DROP TABLE IF EXISTS user" ;
-            conn.createQuery(sql).executeUpdate();
-            sql = "CREATE TABLE IF NOT EXISTS user (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
-            conn.createQuery(sql).executeUpdate();
-        }
-    }
 
     private List<User> getUsers(Response r) {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
         Type type = (new TypeToken<ArrayList<User>>() { }).getType();
         return r.getContentAsObject(type);
+    }
+    @Test
+    public void testCoordinate() throws Exception {
+        Coordinate c = new Coordinate(0.6, 0.7);
+        assertEquals(0.3, c.getLatitude(), 0);
+        assertEquals(0.7, c.getLongitude(), 0);
+    }
+
+
+    @Test
+    public void testSortAndExpand() throws Exception {
+        //c1 < c2
+        Coordinate c1 = new Coordinate(0.5, 0.7);
+        Coordinate c2 = new Coordinate(0.9, 1.1);
+        Coordinate.sortAndExpand(c1, c2);
+        assertEquals(0.49, c1.getLatitude(), 0);
+        assertEquals(0.6886, c1.getLongitude(), 0.01);
+        assertEquals(0.91, c2.getLatitude(), 0);
+        assertEquals(1.11608, c2.getLongitude(), 0.01);
+
+        //c3 > c4
+        Coordinate c3 = new Coordinate(0.9, 1.1);
+        Coordinate c4 = new Coordinate(0.5, 0.7);
+        Coordinate.sortAndExpand(c3, c4);
+        assertEquals(0.49, c3.getLatitude(), 0);
+        assertEquals(0.6886, c3.getLongitude(), 0.01);
+        assertEquals(0.91, c4.getLatitude(), 0);
+        assertEquals(1.11608, c4.getLongitude(), 0.01);
+
+    }
+
+
+    @Test
+    public void testGetDangerZone() throws Exception {
+        WalkLiveService s = new WalkLiveService(dSource);
+
+        try (Connection conn = s.getDb().open()){
+            String sql1 = "CREATE TABLE IF NOT EXISTS " + TESTCRIMES
+                    + " (date INTEGER NOT NULL, linkId INTEGER NOT NULL, address TEXT NOT NULL, "
+                    + "latitude REAL NOT NULL, longitude REAL NOT NULL, "
+                    + "type TEXT, PRIMARY KEY (date, linkId, type));";
+            conn.createQuery(sql1).executeUpdate();
+
+            int date = 0, linkid = 0, time = 0;
+            String address = "", type = "";
+            double latitude = 0, longitude = 0;
+
+            String sql2 = " INSERT INTO " + TESTCRIMES
+                    + " VALUES(:date, :linkid, :address, :latitude, :longitude, :type); ";
+
+            for (int i = 0; i < 60; i++) {
+                Crime c = new Crime(date, time, address, type, latitude, longitude, linkid);
+                    conn.createQuery(sql2).bind(c).executeUpdate();
+
+                latitude++;
+                longitude++;
+            }
+
+            linkid = 1;
+
+            for (int i = 0; i < 40; i++) {
+                Crime c = new Crime(date, time, address, type, latitude, longitude, linkid);
+                conn.createQuery(sql2).bind(c).executeUpdate();
+
+                latitude++;
+                longitude++;
+            }
+
+            linkid = 2;
+
+            for (int i = 0; i < 20; i++) {
+                Crime c = new Crime(date, time, address, type, latitude, longitude, linkid);
+                conn.createQuery(sql2).bind(c).executeUpdate();
+
+                latitude++;
+                longitude++;
+            }
+
+            Coordinate from = new Coordinate(0, 0);
+            Coordinate to = new Coordinate(120, 120);
+
+            int[] red = s.getDangerZone(from, to, TESTCRIMES).getRed();
+            int[] yellow = s.getDangerZone(from, to, TESTCRIMES).getYellow();
+
+            int[] redTarget = {0};
+            int[] yellowTarget = {1};
+
+            assertTrue(Arrays.equals(red, redTarget));
+            assertTrue(Arrays.equals(yellow, yellowTarget));
+
+            Coordinate from1 = null;
+            Coordinate to1 = null;
+            assertEquals(s.getDangerZone(from1, to1, TESTCRIMES), null);
+        } catch (Sql2oException e) {
+            logger.error("Failed to get avoid linkIds in ServerTest", e);
+        } catch (Exception e) {
+            logger.error("Failed to create Coordinate", e);
+        }
+    }
+
+    /**
+     * Test getting getCrimes method within a specific range of coordinates from the
+     * database.
+     */
+    @Test
+    public void testGetCrimes() {
+        SurvivalService s = new SurvivalService(dSource);
+
+        try (Connection conn = s.getDb().open()){
+            String sql1 = "CREATE TABLE IF NOT EXISTS TestCrimes "
+                    + "(date INTEGER NOT NULL, linkId INTEGER NOT NULL, address TEXT NOT NULL, "
+                    + "latitude REAL NOT NULL, longitude REAL NOT NULL, "
+                    + "type TEXT, PRIMARY KEY (date, linkId, type));";
+            conn.createQuery(sql1).executeUpdate();
+
+            List<Crime> crimeList = new LinkedList<>();
+
+            crimeList.add(new Crime(20, 1,"a2", "type2", 200, 200, 1));
+            crimeList.add(new Crime(30,1, "a3", "type3", 300, 300, 2));
+            crimeList.add(new Crime(40,1, "a4", "type4", 400, 400, 3));
+
+            for (Crime c : crimeList) {
+                String sql = "insert into TestCrimes(date, linkId, address, latitude, longitude, type) "
+                        + "values (:dateParam, :linkIdParam, :addressParam, :latitudeParam, :longitudeParam, :typeParam)";
+
+                Query query = conn.createQuery(sql);
+                query.addParameter("dateParam", c.getDate()).addParameter("linkIdParam", c.getLinkId())
+                        .addParameter("addressParam", c.getAddress()).addParameter("latitudeParam", c.getLat())
+                        .addParameter("longitudeParam", c.getLng()).addParameter("typeParam", c.getType())
+                        .executeUpdate();
+            }
+
+            double fromLng = 200;
+            double toLng = 400;
+            double fromLat = 200;
+            double toLat = 400;
+            int fromDate = 20;
+            int toDate = 40;
+            int timeOfDay = 1000;
+
+            Crime from = new Crime(fromDate, fromLat, fromLng);
+            Crime to = new Crime(toDate, toLat, toLng);
+            //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
+
+//            crimes.forEach(crime -> {
+//                assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
+//                        && crime.getLng() >= fromLng && crime.getLng() <= toLng
+//                        && crime.getDate() >= fromDate && crime.getDate() <= toDate);
+//            });
+        } catch (Sql2oException e) {
+            logger.error("Failed to get crimes in ServerTest", e);
+        }
+    }
+
+
+
+    // ------------------------------------------------------------------------//
+    // Survival Maps Specific Helper Methods and classes
+    // ------------------------------------------------------------------------//
+
+    /**
+     * Clears the database of all test tables.
+     * @return the clean database source
+     */
+    private SQLiteDataSource clearDB() {
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+        dataSource.setUrl("jdbc:sqlite:server.db");
+
+        Sql2o db = new Sql2o(dataSource);
+
+        try (Connection conn = db.open()) {
+            String sql = "DROP TABLE IF EXISTS TestCrimes";
+            conn.createQuery(sql).executeUpdate();
+            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
+            conn.createQuery(sql2).executeUpdate();
+        }
+
+        return dataSource;
     }
 }

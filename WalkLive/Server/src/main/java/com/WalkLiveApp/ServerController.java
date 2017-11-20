@@ -27,28 +27,6 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
-//            /**
-//             * Retrieve avoidID
-//             */
-//            get(API_CONTEXT + "/avoidLinkIds", "application/json", (request, response) -> {
-//                try {
-//                    double fromLat = Double.parseDouble(request.queryParams("fromLat"));
-//                    double fromLng = Double.parseDouble(request.queryParams("fromLng"));
-//                    double toLat = Double.parseDouble(request.queryParams("toLat"));
-//                    double toLng = Double.parseDouble(request.queryParams("toLng"));
-//                    //int timeOfDay = Integer.parseInt(request.queryParams("timeOfDay"));
-//                    Coordinate from = new Coordinate(fromLat, fromLng);
-//                    Coordinate to = new Coordinate(toLat, toLng);
-//                    Coordinate.sortAndExpand(from, to);
-//                    response.status(200);
-//                    return ServerService.getAvoidLinkIds(from, to, "grids");
-//                } catch (Exception e) {
-//                    logger.info("Invalid request", e);
-//                    response.status(400);
-//                    return Collections.EMPTY_MAP;
-//                }
-//            }, new JsonTransformer());
-
 
             //add new user (signup)
             post(API_CONTEXT + "/user", "application/json", (request, response) -> {
@@ -84,7 +62,7 @@ public class ServerController {
 
 
             /**
-             * Start the trip part
+             * Trip part
              * ----------------------------------------------------------------------
              * */
             //Start Trip
@@ -161,8 +139,6 @@ public class ServerController {
                     return Collections.EMPTY_MAP;
                 }
             }, new JsonTransformer());
-
-
 
 
 //            respondTripRequest:
@@ -282,6 +258,26 @@ public class ServerController {
 //                    response.status(415);
 //                    return Collections.EMPTY_MAP;
 //                }
+            }, new JsonTransformer());
+
+             // get linkIDs to Avoid
+            get(API_CONTEXT + "/getdangerzone", "application/json", (request, response) -> {
+                try {
+                    double fromLat = Double.parseDouble(request.queryParams("fromLat"));
+                    double fromLng = Double.parseDouble(request.queryParams("fromLng"));
+                    double toLat = Double.parseDouble(request.queryParams("toLat"));
+                    double toLng = Double.parseDouble(request.queryParams("toLng"));
+                    int timeOfDay = Integer.parseInt(request.queryParams("timeOfDay"));
+                    Coordinate from = new Coordinate(fromLat, fromLng);
+                    Coordinate to = new Coordinate(toLat, toLng);
+                    Coordinate.sortAndExpand(from, to);
+                    response.status(200);
+                    return walkLiveService.getDangerZone(from, to, "Table");
+                } catch (Exception e) {
+                    logger.info("Invalid request", e);
+                    response.status(400);
+                    return Collections.EMPTY_MAP;
+                }
             }, new JsonTransformer());
 
         }
