@@ -2,39 +2,92 @@
 //  MainMapVC.swift
 //  Walklive
 //
-//  Created by Michelle Shu on 9/27/17.
+//  Created by Michelle Shu on 11/13/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
+import CoreLocation
 
-class MainMapVC: UIViewController {
+class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startTripButton: UIButton!
+    @IBOutlet weak var startTripPanelView: UIView!
+    @IBOutlet weak var startTripDestinationTextLabel: UITextField!
+    @IBOutlet weak var contactMessagePanel: UIView!
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        mapView.delegate = self
+        locationManager.delegate = self
         // Do any additional setup after loading the view.
+        startTripPanelView.isHidden = true
+        contactMessagePanel.isHidden = true
+        //setCurrentLocation()
+        let roadRequester = RoadRequester(mapView: mapView)
+        roadRequester.setCurrentLocation()
     }
     
-    override func loadView() {
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate 39.3299,76.6205 at zoom level 12.
-        let camera = GMSCameraPosition.camera(withLatitude: 39.3299, longitude: -76.6205, zoom: 12.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        mapView.settings.myLocationButton = true
-        mapView.settings.scrollGestures = true
-        mapView.settings.zoomGestures = true
-        view = mapView
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 39.3299, longitude: -76.6205)
-        marker.title = "Johns Hopkins University"
-        marker.snippet = "Baltimore, MD"
-        marker.map = mapView
-    }
 
+    
+    /// Check authrization status and start update locations
+    private func authorizeLocationUpdate() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            break
+        }
+    }
+    
+    /// Start update location if authorized
+    ///
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - status: new authorization status
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    
+    @IBAction func onStartTripBottomButton(_ sender: Any) {
+        startTripPanelView.isHidden = false
+        UIView.animate(withDuration: 0.6) {
+            self.startTripPanelView.alpha = 0.8
+        }
+    }
+    
+    @IBAction func onContactBottomButton(_ sender: Any) {
+        self.contactMessagePanel.isHidden = false
+    }
+    
+    @IBAction func onPoliceBottomButton(_ sender: Any) {
+    }
+    @IBAction func onContactPanelSendButton(_ sender: Any) {
+        self.contactMessagePanel.isHidden = true
+    }
+    
+    
+    @IBAction func onStartTripTopButton(_ sender: Any) {
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.red
+        renderer.lineWidth = 4.0
+        
+        return renderer
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,3 +105,4 @@ class MainMapVC: UIViewController {
     */
 
 }
+
