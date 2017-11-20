@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MainMapVC: UIViewController, MKMapViewDelegate {
+class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startTripButton: UIButton!
@@ -18,33 +18,46 @@ class MainMapVC: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var startTripDestinationTextLabel: UITextField!
     @IBOutlet weak var contactMessagePanel: UIView!
     var locationManager = CLLocationManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        locationManager.delegate = self
         // Do any additional setup after loading the view.
         startTripPanelView.isHidden = true
         contactMessagePanel.isHidden = true
-        
-        // One degree of latitude is approximately 111 kilometers (69 miles) at all times.
-        // San Francisco Lat, Long = latitude: 37.783333, longitude: -122.416667
-        let mapCenter = CLLocationCoordinate2D(latitude: 39.783333, longitude: 76.6205)
-        let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: mapCenter, span: mapSpan)
-        // Set animated property to true to animate the transition to the region
-        mapView.setRegion(region, animated: false)
-        
-        let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
-        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
-        let sourceAnnotation = MKPointAnnotation()
-        if let location = sourcePlacemark.location {
-            sourceAnnotation.coordinate = location.coordinate
-        }
-        sourceAnnotation.title = "Times Square"
-        self.mapView.showAnnotations([sourceAnnotation], animated: true )
-
+        //setCurrentLocation()
+        let roadRequester = RoadRequester(mapView: mapView)
+        roadRequester.setCurrentLocation()
     }
+    
 
+    
+    /// Check authrization status and start update locations
+    private func authorizeLocationUpdate() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            break
+        }
+    }
+    
+    /// Start update location if authorized
+    ///
+    /// - Parameters:
+    ///   - manager: location manager
+    ///   - status: new authorization status
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            manager.startUpdatingLocation()
+        }
+    }
+    
+    
     @IBAction func onStartTripBottomButton(_ sender: Any) {
         startTripPanelView.isHidden = false
         UIView.animate(withDuration: 0.6) {
@@ -64,67 +77,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func onStartTripTopButton(_ sender: Any) {
-        if (startTripDestinationTextLabel.text == "Empire State Building"){
-            // 2.
-            let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
-            let destinationLocation = CLLocationCoordinate2D(latitude: 40.748441, longitude: -73.985564)
-            
-            // 3.
-            let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
-            let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-            
-            // 4.
-            let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-            let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-            
-            // 5.
-            let sourceAnnotation = MKPointAnnotation()
-            sourceAnnotation.title = "Times Square"
-            
-            if let location = sourcePlacemark.location {
-                sourceAnnotation.coordinate = location.coordinate
-            }
-            
-            
-            let destinationAnnotation = MKPointAnnotation()
-            destinationAnnotation.title = "Empire State Building"
-            
-            if let location = destinationPlacemark.location {
-                destinationAnnotation.coordinate = location.coordinate
-            }
-            
-            // 6.
-            self.mapView.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
-            
-            // 7.
-            let directionRequest = MKDirectionsRequest()
-            directionRequest.source = sourceMapItem
-            directionRequest.destination = destinationMapItem
-            directionRequest.transportType = .automobile
-            
-            // Calculate the direction
-            let directions = MKDirections(request: directionRequest)
-            
-            // 8.
-            directions.calculate {
-                (response, error) -> Void in
-                
-                guard let response = response else {
-                    if let error = error {
-                        print("Error: \(error)")
-                    }
-                    return
-                }
-                print("enters here")
-                let route = response.routes[0]
-                print(route)
-                self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
-                
-                let rect = route.polyline.boundingMapRect
-                self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
-            }
-            self.startTripPanelView.isHidden = true
-        }
+        
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -152,3 +105,4 @@ class MainMapVC: UIViewController, MKMapViewDelegate {
     */
 
 }
+
