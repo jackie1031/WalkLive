@@ -20,6 +20,7 @@
 		902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902842FE1FB9694200EAA2AF /* MainMapVC.swift */; };
 		902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902AEF871FB0E4820043ABAC /* DefaultVC.swift */; };
 		9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AF6A1FC2794100363D4B /* RoadRequester.swift */; };
+		9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5111FC2880E00E8F47E /* SearchVC.swift */; };
 		90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A18F511F9529FB006FAD99 /* TimePoint.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
@@ -68,6 +69,7 @@
 		902AEF871FB0E4820043ABAC /* DefaultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
 		9040AF6A1FC2794100363D4B /* RoadRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadRequester.swift; sourceTree = "<group>"; };
 		90756C8CBAFF8D3D3DD58275 /* Pods-WalkliveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.release.xcconfig"; sourceTree = "<group>"; };
+		9077A5111FC2880E00E8F47E /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		90A18F511F9529FB006FAD99 /* TimePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				90F233AF1F7C3BB10002AF0A /* LoginVC.swift */,
 				902AEF871FB0E4820043ABAC /* DefaultVC.swift */,
 				902842FE1FB9694200EAA2AF /* MainMapVC.swift */,
+				9077A5111FC2880E00E8F47E /* SearchVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */,
+				9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */,
 				902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */,
 				90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */,
 				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
