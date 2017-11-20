@@ -4,22 +4,26 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sql2o.Connection;
+import org.sql2o.Query;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.json.simple.parser.JSONParser;
 
-import java.util.List;
-import java.util.ArrayList;
-import javax.sql.DataSource;
 
 public class WalkLiveService {
     private Sql2o db;
 
+
     private final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
+
+    public Sql2o getDb() {
+        return db;
+    }
 
     /**
      * Construct the model with a pre-defined datasource. The current implementation
@@ -36,7 +40,7 @@ public class WalkLiveService {
         try (Connection conn = db.open()) {
             String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
             conn.createQuery(sql).executeUpdate();
-        } catch(Sql2oException ex) {
+        } catch (Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
             throw new UserServiceException("Failed to create schema at startup");
         }
@@ -72,7 +76,7 @@ public class WalkLiveService {
 //        String username = array.get("username");
 
         String sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
-                "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
+                "             VALUES (:username, :password, :nickname, :friendId, :createdOn)";
 
 //        try (validateId(username)) {
 //            //worked
@@ -92,7 +96,7 @@ public class WalkLiveService {
             conn.createQuery(sql)
                     .bind(user)
                     .executeUpdate();
-        } catch(Sql2oException ex) {
+        } catch (Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry");
         }
@@ -102,16 +106,16 @@ public class WalkLiveService {
      * Finds all users and returns all in user database
      */
     public List<User> findAllUsers() throws UserServiceException {
-       try (Connection conn = db.open()) {
+        try (Connection conn = db.open()) {
             List<User> users = conn.createQuery("SELECT * FROM user")
                     .addColumnMapping("username", "username")
                     .addColumnMapping("createdOn", "createdOn")
                     .executeAndFetch(User.class);
             return users;
-       } catch (Sql2oException ex) {
+        } catch (Sql2oException ex) {
             logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
             throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries");
-       }
+        }
     }
 
     /*
@@ -142,7 +146,9 @@ public class WalkLiveService {
     }
 
 
-    /** For trip part -----------------------**/
+    /**
+     * For trip part -----------------------
+     **/
 
     public String startTrip(String body) throws UserServiceException {
 
@@ -157,6 +163,7 @@ public class WalkLiveService {
         return thisTrip;
 
     }
+
     public Trip updateDestination(String body) throws UserServiceException {
 
         //{ tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
@@ -164,12 +171,14 @@ public class WalkLiveService {
 
         return thisTrip;
     }
+
     public String shareTrip(String body) throws UserServiceException {
 
         // to another user
         return "";
 
     }
+
     public String respondTripRequest(String body) throws UserServiceException {
         return "";
 
@@ -189,6 +198,7 @@ public class WalkLiveService {
         return "";
 
     }
+
     public Trip getLatestTimePoint(String body) throws UserServiceException {
 //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
 
@@ -196,4 +206,69 @@ public class WalkLiveService {
         return addToTrip;
     }
 
+    public List<Crime> getCrimes(Crime from, Crime to, int timeOfDay, String table) {
+        try (Connection conn = db.open()) {
+            String sql = "SELECT date, address, latitude, longitude, type FROM " + table + " WHERE "
+                    + "latitude >= :fromLat AND latitude <= :toLat AND date >= :fromDate AND "
+                    + "longitude >= :fromLng AND longitude <= :toLng AND date <= :toDate;";
+
+            Query query = conn.createQuery(sql);
+            query.addParameter("fromLat", from.getLat())
+                    .addParameter("toLat", to.getLat())
+                    .addParameter("fromLng", from.getLng())
+                    .addParameter("toLng", to.getLng())
+                    .addParameter("fromDate", from.getDate())
+                    .addParameter("toDate", to.getDate());
+
+            List<Crime> results = query.executeAndFetch(Crime.class);
+            return results;
+        } catch (Sql2oException e) {
+            logger.error("Failed to get crimes", e);
+            return null;
+        }
+    }
+
+    public DangerZone getDangerZone(Coordinate from, Coordinate to, String table) throws UserServiceException {
+//            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
+        try (Connection conn = db.open()) {
+            int[] red = getLinkIds(conn, from, to, "alarm > 2000", table);
+            int[] yellow = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
+            return new DangerZone(red, yellow);
+        } catch (Sql2oException e) {
+            logger.error("Failed to fetch linkIds", e);
+            return null;
+        } catch (NullPointerException e) {
+            logger.error("Null pointer, failed to fetch linkIds", e);
+            return null;
+        }
+    }
+
+    private int[] getLinkIds(Connection conn, Coordinate from, Coordinate to, String predicate, String table)
+            throws Sql2oException, NullPointerException {
+        Table fromGrid = new Table(from.getLatitude(), from.getLongitude());
+        Table toGrid = new Table(to.getLatitude(), to.getLongitude());
+
+        String sqlGetAvoidLindIds = "SELECT DISTINCT linkId FROM "
+                + table
+                + " WHERE "
+                + "x >= :fromX AND x <= :toX AND "
+                + "y <= :fromY AND y >= :toY AND "
+                + predicate + " ORDER BY alarm DESC LIMIT 20";
+        Query queryGetAvoidLindIds = conn.createQuery(sqlGetAvoidLindIds);
+
+        List<Integer> avoidLindIds = queryGetAvoidLindIds
+                .addParameter("fromX", fromGrid.getX())
+                .addParameter("toX", toGrid.getX())
+                .addParameter("fromY", fromGrid.getY())
+                .addParameter("toY", toGrid.getY())
+                .executeAndFetch(Integer.class);
+
+        int size = avoidLindIds.size();
+        int[] linkIds = new int[size];
+        for (int i = 0; i < size; i++) {
+            linkIds[i] = avoidLindIds.get(i);
+        }
+        return linkIds;
+
+    }
 }
