@@ -83,7 +83,10 @@ public class ServerController {
             }, new JsonTransformer());
 
 
-            /** Start the trip part -------------------------------**/
+            /**
+             * Start the trip part
+             * ----------------------------------------------------------------------
+             * */
             //Start Trip
             post(API_CONTEXT+"/user", "application/json", (request, response) -> {
                 try {

@@ -190,6 +190,31 @@ public class TestServer {
 //        }
 //    }
 
+    @Test
+    public void testStartTRIP() throws Exception {
+        //Add a single element
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User expected = new User("jeesoo", "Test-1", "jkim", null, df.parse("2015-04-23T23:10:15-0700"));
+        Response r1 = request("POST", "/WalkLive/api/user", expected);
+        assertEquals("Failed to add", 201, r1.httpStatus);
+
+        //Get it back so that we know its ID
+        Response r2 = request("GET", "/WalkLive/api/user/login", null);
+        assertEquals("Failed to get users", 200, r2.httpStatus);
+        //User u = getUsers(r2).get(0);
+    }
+
+    /**
+     * Tests the getters in the Coordinate class.
+     * @throws Exception when the coordinates are invalid
+     */
+    @Test
+    public void testGetLatLong() throws Exception {
+        Coordinate c = new Coordinate(0.5, 0.7);
+        assertEquals(0.5, c.getLatitude(), 0);
+        assertEquals(0.7, c.getLongitude(), 0);
+    }
+
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//

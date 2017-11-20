@@ -2,7 +2,7 @@ package com.WalkLiveApp;
 
 /**
  * Coordinate in latitude and longitude.
- * Used by TimePoints,
+ * Used by TimePoints.
  */
 public class Coordinate {
     private double latitude, longitude;
