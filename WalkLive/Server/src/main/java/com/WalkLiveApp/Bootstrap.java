@@ -40,7 +40,7 @@ public class Bootstrap {
         try {
             WalkLiveService model = new WalkLiveService(dataSource);
             new ServerController(model);
-        } catch (UserServiceException ex) {
+        } catch (WalkLiveService.UserServiceException ex) {
             logger.error("Failed to create a WalkLiveService instance. Aborting");
         }
     }

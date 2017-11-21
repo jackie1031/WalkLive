@@ -118,36 +118,28 @@ public class TestServer {
         //check if duplications are caught
         User u = new User("jeesookim", "1234567", "4405339063");
 
-        try {
-            Response rCreateDuplicate = request("POST", "/WalkLive/api/user", u);
-            fail("UserServiceException did not occur");
-        } catch (UserServiceException e) {
+        Response rCreateDuplicate = request("POST", "/WalkLive/api/user", u);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
 
-        }
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus); //this should be 401
-//
-//        System.out.println("GETS HERE");
-//
-//        //try another user duplication
-//        User u2 = new User("michelle", "123456", "4405339063");
-//        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/user", u2);
-//        //assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus); //this should be 401
-//
-//        //Get them back
-//        Response s = request("GET", "/WalkLive/api/user", null);
-//        assertEquals("Failed to get user entries", 200, s.httpStatus);
-//        List<User> results = getUsers(s);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-//        assertEquals("Number of user entries differ", entries.length, results.size());
+        //try another user duplication
+        User u2 = new User("michelle", "123456", "4405339063");
+        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/user", u2);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
 
+        //Get them back
+        Response s = request("GET", "/WalkLive/api/user", null);
+        assertEquals("Failed to get user entries", 200, s.httpStatus);
+        List<User> results = getUsers(s);
+
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
     }
 
-    @Test
-    public void testShortUsername() {
-        User u = new User("jeesoo", "123456", "4405339063");
-        Response rCreateNew = request("POST", "/WalkLive/api/user", u);
-    }
+//    @Test
+//    public void testShortUsername() {
+//        User u = new User("jeesoo", "123456", "4405339063");
+//        Response rCreateNew = request("POST", "/WalkLive/api/user", u);
+//    }
 
     // date: df.parse("2016-04-23T23:10:15-0720")
 
@@ -192,11 +184,11 @@ public class TestServer {
 
         //add single element
         User expected = new User("jeesoo", "test-1", "4405339063");
-        Response r1 = request("POST", "/WalkLive/api/user/login", expected);
-        assertEquals("Failed to add", 201, r1.httpStatus);
+        Response r1 = request("POST", "/WalkLive/api/user", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
 
         //Get it back so that we know its ID
-        Response r2 = request("GET", "/WalkLive/api/login", null);
+        Response r2 = request("GET", "/WalkLive/api/user/login", null);
         assertEquals("Failed to get users", 200, r2.httpStatus);
         User u = getUsers(r2).get(0);
 
@@ -297,9 +289,9 @@ public class TestServer {
 
     private Response request(String method, String path, Object content) {
         try {
-			URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
+            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
             System.out.println(url);
-			HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(method);
             http.setDoInput(true);
             if (content != null) {
@@ -311,10 +303,13 @@ public class TestServer {
                 output.flush();
                 output.close();
             }
-
-            String responseBody = IOUtils.toString(http.getInputStream());
-			return new Response(http.getResponseCode(), responseBody);
-		} catch (IOException e) {
+            try {
+                String responseBody = IOUtils.toString(http.getInputStream());
+                return new Response(http.getResponseCode(), responseBody);
+            } catch (IOException e) {
+                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
+            }
+        } catch (IOException e) {
 			e.printStackTrace();
 			fail("Sending request failed: " + e.getMessage());
 			return null;

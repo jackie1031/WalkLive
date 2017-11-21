@@ -57,7 +57,7 @@ public class ServerController {
                     response.status(201);
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
-                    //response.status(401);
+                    response.status(401);
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
@@ -73,9 +73,10 @@ public class ServerController {
             }, new JsonTransformer());
 
             //existing user login
-            get(API_CONTEXT + "/user/login", "application/json", (request, response) -> {
+            post(API_CONTEXT + "/user/login", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.login(request.body());
+                    walkLiveService.login(request.body());
+                    response.status(201);
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to authenticate user.");
                     response.status(404);
@@ -177,7 +178,7 @@ public class ServerController {
                 try {
                     response.status(200);
                     return walkLiveService.respondTripRequest(request.body());
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Invalid target id.");
                     response.status(402);
                     return Collections.EMPTY_MAP;
@@ -211,7 +212,7 @@ public class ServerController {
                     response.status(200);
                     return walkLiveService.addTimePoint(request.body());
                 } // InvalidDestination     Code 409
-                catch (UserServiceException e) {
+                catch (WalkLiveService.UserServiceException e) {
                     logger.error("Invalid trip id.");
                     response.status(412);
                     return Collections.EMPTY_MAP;
@@ -243,7 +244,7 @@ public class ServerController {
                     response.status(200);
                     return walkLiveService.getTimePoint(request.body());
                 } // InvalidDestination     Code 409
-                catch (UserServiceException e) {
+                catch (WalkLiveService.UserServiceException e) {
                     logger.error("Invalid trip id.");
                     response.status(412);
                     return Collections.EMPTY_MAP;
@@ -270,7 +271,7 @@ public class ServerController {
                     response.status(200);
                     return walkLiveService.getLatestTimePoint(request.body());
                 } // InvalidDestination     Code 409
-                catch (UserServiceException e) {
+                catch (WalkLiveService.UserServiceException e) {
                     logger.error("No trip found.");
                     response.status(414);
                     return Collections.EMPTY_MAP;

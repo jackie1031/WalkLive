@@ -39,16 +39,16 @@ public class WalkLiveService {
             conn.createQuery(sql).executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
-            throw new UserServiceException("Failed to create schema at startup");
+            throw new UserServiceException("Failed to create schema at startup", ex);
         }
     }
 
-    //HELPER FUNCTIONS
-    public void validateId(String id) throws UserServiceException {
-        if (id.length() < 8) {
-            throw new UserServiceException();
-        }
-    }
+//    //HELPER FUNCTIONS
+//    public void validateId(String id) throws UserServiceException {
+//        if (id.length() < 8) {
+//            throw new UserServiceException();
+//        }
+//    }
 //
 //    private void usernameDoesNotExist(String id) throws UserServiceException {
 //        if (collection.find({ "username": id })){
@@ -84,14 +84,13 @@ public class WalkLiveService {
 
             if (!found.isEmpty()) { //the fact that something exists here means that the username exists
                 //which means that we should stop the process and throw an error
-                System.out.println("=======FOUND IS NOT EMPTY!!========");
                 logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
                 throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
             }
 
         } catch (Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry - query error", ex);
-            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error");
+            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }
 //        catch (UserServiceException e) {
 //            logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username, return 401 error", e);
@@ -102,14 +101,17 @@ public class WalkLiveService {
         sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
-        try {
-            if (username.length() < 8) {
-                throw new UserServiceException();
-            }
-        } catch (UserServiceException e) {
-            logger.error(String.format("WalkLiveService.createNew: username too short: %s", username), e);
-            throw new UserServiceException("WalkLiveService.createNew: username too short: " + username); //call it this for now
-        }
+//NEED TO DO THIS===================================================
+//        try {
+//            if (username.length() < 8) {
+//                throw new UserServiceException();
+//            }
+//        } catch (UserServiceException e) {
+//            logger.error(String.format("WalkLiveService.createNew: username too short: %s", username), e);
+//            throw new UserServiceException("WalkLiveService.createNew: username too short: " + username, e); //call it this for now
+//        }
+
+
 //
 //        try(usernameDoesNotExist(username)) {
 //            //worked
@@ -126,7 +128,7 @@ public class WalkLiveService {
             System.out.println("SUCCESSFULLY ADDED.");
         } catch(Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
-            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry");
+            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
         }
     }
 
@@ -140,7 +142,7 @@ public class WalkLiveService {
             return users;
        } catch (Sql2oException ex) {
             logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-            throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries");
+            throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
        }
     }
 
@@ -151,10 +153,9 @@ public class WalkLiveService {
         User user = new Gson().fromJson(body, User.class);
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
-        JSONObject data = (JSONObject) object.get("users");
-        String username = data.get("username").toString();
+        String username = object.get("username").toString();
 
-        String sql = "SELECT * FROM users WHERE username = :username ";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) {
             return conn.createQuery(sql)
@@ -162,10 +163,9 @@ public class WalkLiveService {
                     .executeAndFetchFirst(User.class);
         } catch(Sql2oException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username));
+            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
         }
 
-        //return null;
     }
 
 
@@ -226,6 +226,10 @@ public class WalkLiveService {
     public static class UserServiceException extends Exception {
         public UserServiceException(String message, Throwable cause) {
             super(message, cause);
+        }
+
+        public UserServiceException(String message) {
+            super(message);
         }
     }
 
