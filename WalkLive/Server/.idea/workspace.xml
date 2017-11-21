@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" afterPath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walklive.db" afterPath="$PROJECT_DIR$/walklive.db" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+            <state relative-caret-position="422">
+              <caret line="211" column="32" lean-forward="true" selection-start-line="211" selection-start-column="32" selection-end-line="211" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,22 +82,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="74" column="5" lean-forward="false" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
+            <state relative-caret-position="417">
+              <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
               <folding>
-                <element signature="e#624#625#0" expanded="true" />
-                <element signature="e#660#661#0" expanded="true" />
-                <element signature="e#695#696#0" expanded="true" />
-                <element signature="e#731#732#0" expanded="true" />
-                <element signature="e#772#773#0" expanded="true" />
-                <element signature="e#808#809#0" expanded="true" />
-                <element signature="e#842#843#0" expanded="true" />
-                <element signature="e#879#880#0" expanded="true" />
-                <element signature="e#1742#1743#0" expanded="true" />
-                <element signature="e#1767#1768#0" expanded="true" />
+                <element signature="e#650#651#0" expanded="true" />
+                <element signature="e#686#687#0" expanded="true" />
+                <element signature="e#837#838#0" expanded="true" />
+                <element signature="e#873#874#0" expanded="true" />
+                <element signature="e#914#915#0" expanded="true" />
+                <element signature="e#950#951#0" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
+                <element signature="e#1021#1022#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,7 +139,6 @@
         <option value="$PROJECT_DIR$/src/test/java/com/todoapp/TestTodoServer.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/todoapp/TestServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/TimePoints.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java" />
@@ -154,6 +152,7 @@
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
       </list>
     </option>
   </component>
@@ -512,9 +511,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Tests - 2017.11.20 at 10h 05m 51s.xml">
-      <configuration name="Tests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Tests - 2017.11.20 at 10h 10m 46s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
@@ -542,6 +538,9 @@
     <history-entry file="Tests - 2017.11.21 at 12h 19m 25s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Tests - 2017.11.21 at 12h 23m 22s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -555,7 +554,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5083333" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2917647" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2917647" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -678,16 +677,14 @@
         <state relative-caret-position="452">
           <caret line="40" column="2" lean-forward="false" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
           <folding>
-            <element signature="e#624#625#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#772#773#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#842#843#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#1742#1743#0" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#837#838#0" expanded="true" />
+            <element signature="e#873#874#0" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#950#951#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1021#1022#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -773,16 +770,14 @@
         <state relative-caret-position="60">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
-            <element signature="e#624#625#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#772#773#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#842#843#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#1742#1743#0" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#837#838#0" expanded="true" />
+            <element signature="e#873#874#0" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#950#951#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1021#1022#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -850,25 +845,6 @@
         <state relative-caret-position="255">
           <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="74" column="5" lean-forward="false" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-          <folding>
-            <element signature="e#624#625#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#772#773#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#842#843#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#1742#1743#0" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -981,10 +957,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+        <state relative-caret-position="422">
+          <caret line="211" column="32" lean-forward="true" selection-start-line="211" selection-start-column="32" selection-end-line="211" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
+          <folding>
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#837#838#0" expanded="true" />
+            <element signature="e#873#874#0" expanded="true" />
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#950#951#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1021#1022#0" expanded="true" />
           </folding>
         </state>
       </provider>
