@@ -2,6 +2,7 @@ package com.WalkLiveApp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
@@ -282,7 +283,7 @@ public class TestServer {
     @Test
     public void testCoordinate() throws Exception {
         Coordinate c = new Coordinate(0.6, 0.7);
-        assertEquals(0.3, c.getLatitude(), 0);
+        assertEquals(0.6, c.getLatitude(), 0);
         assertEquals(0.7, c.getLongitude(), 0);
     }
 
@@ -384,51 +385,56 @@ public class TestServer {
      */
     @Test
     public void testGetCrimes() {
-        SurvivalService s = new SurvivalService(dSource);
+        try {
+            WalkLiveService s = new WalkLiveService(dSource);
 
-        try (Connection conn = s.getDb().open()){
-            String sql1 = "CREATE TABLE IF NOT EXISTS TestCrimes "
-                    + "(date INTEGER NOT NULL, linkId INTEGER NOT NULL, address TEXT NOT NULL, "
-                    + "latitude REAL NOT NULL, longitude REAL NOT NULL, "
-                    + "type TEXT, PRIMARY KEY (date, linkId, type));";
-            conn.createQuery(sql1).executeUpdate();
 
-            List<Crime> crimeList = new LinkedList<>();
+            try (Connection conn = s.getDb().open()) {
+                String sql1 = "CREATE TABLE IF NOT EXISTS TestCrimes "
+                        + "(date INTEGER NOT NULL, linkId INTEGER NOT NULL, address TEXT NOT NULL, "
+                        + "latitude REAL NOT NULL, longitude REAL NOT NULL, "
+                        + "type TEXT, PRIMARY KEY (date, linkId, type));";
+                conn.createQuery(sql1).executeUpdate();
 
-            crimeList.add(new Crime(20, 1,"a2", "type2", 200, 200, 1));
-            crimeList.add(new Crime(30,1, "a3", "type3", 300, 300, 2));
-            crimeList.add(new Crime(40,1, "a4", "type4", 400, 400, 3));
+                List<Crime> crimeList = new LinkedList<>();
 
-            for (Crime c : crimeList) {
-                String sql = "insert into TestCrimes(date, linkId, address, latitude, longitude, type) "
-                        + "values (:dateParam, :linkIdParam, :addressParam, :latitudeParam, :longitudeParam, :typeParam)";
+                crimeList.add(new Crime(20, 1, "a2", "type2", 200, 200, 1));
+                crimeList.add(new Crime(30, 1, "a3", "type3", 300, 300, 2));
+                crimeList.add(new Crime(40, 1, "a4", "type4", 400, 400, 3));
 
-                Query query = conn.createQuery(sql);
-                query.addParameter("dateParam", c.getDate()).addParameter("linkIdParam", c.getLinkId())
-                        .addParameter("addressParam", c.getAddress()).addParameter("latitudeParam", c.getLat())
-                        .addParameter("longitudeParam", c.getLng()).addParameter("typeParam", c.getType())
-                        .executeUpdate();
-            }
+                for (Crime c : crimeList) {
+                    String sql = "insert into TestCrimes(date, linkId, address, latitude, longitude, type) "
+                            + "values (:dateParam, :linkIdParam, :addressParam, :latitudeParam, :longitudeParam, :typeParam)";
 
-            double fromLng = 200;
-            double toLng = 400;
-            double fromLat = 200;
-            double toLat = 400;
-            int fromDate = 20;
-            int toDate = 40;
-            int timeOfDay = 1000;
+                    Query query = conn.createQuery(sql);
+                    query.addParameter("dateParam", c.getDate()).addParameter("linkIdParam", c.getLinkId())
+                            .addParameter("addressParam", c.getAddress()).addParameter("latitudeParam", c.getLat())
+                            .addParameter("longitudeParam", c.getLng()).addParameter("typeParam", c.getType())
+                            .executeUpdate();
+                }
 
-            Crime from = new Crime(fromDate, fromLat, fromLng);
-            Crime to = new Crime(toDate, toLat, toLng);
-            //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
+                double fromLng = 200;
+                double toLng = 400;
+                double fromLat = 200;
+                double toLat = 400;
+                int fromDate = 20;
+                int toDate = 40;
+                int timeOfDay = 1000;
 
-//            crimes.forEach(crime -> {
-//                assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
+                Crime from = new Crime(fromDate, fromLat, fromLng);
+                Crime to = new Crime(toDate, toLat, toLng);
+                //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
+
+//              crimes.forEach(crime -> {
+//                  assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
 //                        && crime.getLng() >= fromLng && crime.getLng() <= toLng
 //                        && crime.getDate() >= fromDate && crime.getDate() <= toDate);
-//            });
-        } catch (Sql2oException e) {
-            logger.error("Failed to get crimes in ServerTest", e);
+//              });
+            } catch (Sql2oException e) {
+                logger.error("Failed to get crimes in ServerTest", e);
+            }
+        } catch (UserServiceException e) {
+        logger.error("User Service Exception.");
         }
     }
 
