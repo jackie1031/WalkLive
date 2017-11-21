@@ -149,23 +149,34 @@ public class WalkLiveService {
     /*
      * returns emergencyId and emergencyNumber
      */
-    public User login(String body) throws UserServiceException, ParseException {
+    public String login(String body) throws UserServiceException, ParseException {
         User user = new Gson().fromJson(body, User.class);
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
+        String password = object.get("password").toString();
 
-        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) {
-            return conn.createQuery(sql)
+            User u = conn.createQuery(sql)
                     .addParameter("username", username)
                     .executeAndFetchFirst(User.class);
+            String targetName = u.getUsername();
+            String targetPassword = u.getPassword();
+
+            //simple authentication
+            if (username.equals(targetName) && password.equals(targetPassword)) {
+                //then allow access, and create login instance
+
+                return ""; //return uri for this user aka uri: WalkLive/api/users/:username
+                //return session token
+            }
         } catch(Sql2oException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
             throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
         }
-
+        return "";
     }
 
 

@@ -73,13 +73,13 @@ public class TestServer {
         };
 
         for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/user", t);
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
             System.out.println("USER: " + t.toString());
             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
 
         //Get them back
-        Response r = request("GET", "/WalkLive/api/user", null);
+        Response r = request("GET", "/WalkLive/api/users", null);
         assertEquals("Failed to get user entries", 200, r.httpStatus);
         List<User> results = getUsers(r);
 
@@ -110,7 +110,7 @@ public class TestServer {
 
         //add to database
         for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/user", t);
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
             System.out.println("USER: " + t.toString());
             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
@@ -118,16 +118,16 @@ public class TestServer {
         //check if duplications are caught
         User u = new User("jeesookim", "1234567", "4405339063");
 
-        Response rCreateDuplicate = request("POST", "/WalkLive/api/user", u);
+        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
         assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
 
         //try another user duplication
         User u2 = new User("michelle", "123456", "4405339063");
-        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/user", u2);
+        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
         assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
 
         //Get them back
-        Response s = request("GET", "/WalkLive/api/user", null);
+        Response s = request("GET", "/WalkLive/api/users", null);
         assertEquals("Failed to get user entries", 200, s.httpStatus);
         List<User> results = getUsers(s);
 
@@ -155,12 +155,12 @@ public class TestServer {
         };
 
         for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/user", t);
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
 
         //Get them back
-        Response r = request("GET", "/WalkLive/api/user", null);
+        Response r = request("GET", "/WalkLive/api/users", null);
         assertEquals("Failed to get user entries", 200, r.httpStatus);
         List<User> results = getUsers(r);
 
@@ -184,19 +184,14 @@ public class TestServer {
 
         //add single element
         User expected = new User("jeesoo", "test-1", "4405339063");
-        Response r1 = request("POST", "/WalkLive/api/user", expected);
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
         assertEquals("Failed to add new user", 201, r1.httpStatus);
 
         //Get it back so that we know its ID
-        Response r2 = request("GET", "/WalkLive/api/user/login", null);
-        assertEquals("Failed to get users", 200, r2.httpStatus);
-        User u = getUsers(r2).get(0);
+        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
+        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
 
-        assertEquals("Mismatch in username", u.getUsername(), expected.getUsername());
-        assertEquals("Mismatch in password", u.getPassword(), expected.getPassword());
-        assertEquals("Mismatch in creation date", u.getCreatedOn(), expected.getCreatedOn());
-        assertEquals("Mismatch in friendId", u.getFriendId(), expected.getFriendId());
-        assertEquals("Mismatch in nickname", u.getNickname(), expected.getNickname());
+        //assert to check for return string uri
 
     }
 //
@@ -307,6 +302,8 @@ public class TestServer {
                 String responseBody = IOUtils.toString(http.getInputStream());
                 return new Response(http.getResponseCode(), responseBody);
             } catch (IOException e) {
+//                e.printStackTrace();
+//                fail("Sending request failed: " + e.getMessage());
                 return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
             }
         } catch (IOException e) {

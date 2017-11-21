@@ -51,7 +51,7 @@ public class ServerController {
 
 
             //add new user (signup)
-            post(API_CONTEXT + "/user", "application/json", (request, response) -> {
+            post(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
                     walkLiveService.createNew(request.body());
                     response.status(201);
@@ -63,7 +63,7 @@ public class ServerController {
             }, new JsonTransformer());
 
             //get list of users
-            get(API_CONTEXT + "/user", "application/json", (request, response) -> {
+            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.findAllUsers();
                 } catch (WalkLiveService.UserServiceException e) {
@@ -73,15 +73,14 @@ public class ServerController {
             }, new JsonTransformer());
 
             //existing user login
-            post(API_CONTEXT + "/user/login", "application/json", (request, response) -> {
+            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
                 try {
-                    walkLiveService.login(request.body());
-                    response.status(201);
+                    return walkLiveService.login(request.body());
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to authenticate user.");
                     response.status(404);
-                    return Collections.EMPTY_MAP;
                 }
+                return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
 
