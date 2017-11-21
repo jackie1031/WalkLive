@@ -92,7 +92,7 @@ public class TestServer {
 
         for (User t : entries) {
             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            System.out.println("USER: " + t.toString());
+            //System.out.println("USER: " + t.toString());
             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
 
@@ -164,7 +164,7 @@ public class TestServer {
         //add to database
         for (User t : entries) {
             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            System.out.println("USER: " + t.toString());
+            //System.out.println("USER: " + t.toString());
             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
 
@@ -467,9 +467,14 @@ public class TestServer {
                 output.flush();
                 output.close();
             }
-
-            String responseBody = IOUtils.toString(http.getInputStream());
-            return new Response(http.getResponseCode(), responseBody);
+            try {
+                String responseBody = IOUtils.toString(http.getInputStream());
+                return new Response(http.getResponseCode(), responseBody);
+            } catch (IOException e) {
+//                e.printStackTrace();
+//                fail("Sending request failed: " + e.getMessage());
+                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
+            }
         } catch (IOException e) {
             e.printStackTrace();
             fail("Sending request failed: " + e.getMessage());
@@ -513,7 +518,6 @@ public class TestServer {
         }
     }
 
-
     private List<User> getUsers(Response r) {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
@@ -527,7 +531,7 @@ public class TestServer {
      */
     private SQLiteDataSource clearDB() {
         SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:server.db");
+        dataSource.setUrl("jdbc:sqlite:walklive.db");
 
         Sql2o db = new Sql2o(dataSource);
 
@@ -536,6 +540,10 @@ public class TestServer {
             conn.createQuery(sql).executeUpdate();
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
             conn.createQuery(sql2).executeUpdate();
+            String sql3 = "DROP TABLE IF EXISTS user" ;
+            conn.createQuery(sql3).executeUpdate();
+            sql3 = "CREATE TABLE IF NOT EXISTS user (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
+            conn.createQuery(sql3).executeUpdate();
         }
 
         return dataSource;

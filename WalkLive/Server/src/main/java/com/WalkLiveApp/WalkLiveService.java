@@ -101,11 +101,6 @@ public class WalkLiveService {
             logger.error("WalkLiveService.createNew: Failed to create new entry - query error", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }
-//        catch (UserServiceException e) {
-//            logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username, return 401 error", e);
-//            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username, return 401 error");
-//        }
-
 
         sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
@@ -134,7 +129,7 @@ public class WalkLiveService {
                     .bind(user)
                     .executeUpdate();
 
-            System.out.println("SUCCESSFULLY ADDED.");
+            //System.out.println("SUCCESSFULLY ADDED.");
         } catch(Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
