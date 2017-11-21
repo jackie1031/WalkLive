@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - FE: add friend request page, trip request page, trip search page for front end by @mshu1
 - BE: add deployment on Heroku by @jackie, trip tests for backend by @jackie
+- BE: add more endpoints and testing for user database by @jeesoo
 
 ## [4.0.1] - 2017-11-12
 ### Changed
