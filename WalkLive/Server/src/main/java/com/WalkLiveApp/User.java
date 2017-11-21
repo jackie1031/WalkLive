@@ -79,6 +79,9 @@ public class User {
     }
 
     public String toString() {
-        return "";
+
+        String str = this.username + " " + this.password;
+
+        return str;
     }
 }

@@ -56,6 +56,7 @@ public class TestServer {
 
     @After
     public void tearDown() {
+        //clearDB();
     }
 
     //------------------------------------------------------------------------//
@@ -64,33 +65,88 @@ public class TestServer {
 
     @Test
     public void testCreateNew() throws Exception {
-
         //Add a few elements
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         User[] entries = new User[] {
-          new User("jeesoo", "123456",null, null, df.parse("2015-04-23T23:10:15-0700")),
-          new User("michelle", "0123", null, null, df.parse("2015-03-07T01:10:20-0530"))
+          new User("jeesookim", "123456","4405339063"),
+          new User("michelle", "0123", "4405339063")
         };
 
         for (User t : entries) {
             Response rCreateNew = request("POST", "/WalkLive/api/user", t);
+            System.out.println("USER: " + t.toString());
             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
 
         //Get them back
         Response r = request("GET", "/WalkLive/api/user", null);
         assertEquals("Failed to get user entries", 200, r.httpStatus);
-        //List<User> results = getUsers(r);
+        List<User> results = getUsers(r);
 
-        //Verify that we got the right element back
-        //assertEquals("Number of user entries differ", entries.length, results.size());
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
 
-//        for (int i = 0; i < results.size(); i++) {
-//            Todo actual = results.get(i);
-//            assertEquals(String.format("Index %d: Mismatch in title", i), entries[i].getTitle(), actual.getTitle());
-//            assertEquals(String.format("Index %d: Mismatch in creation date", i), entries[i].getCreatedOn(), actual.getCreatedOn());
-//            assertEquals(String.format("Index %d: Mismatch in done state", i), entries[i].isDone(), actual.isDone());
-//        }
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in friendId", entries[i].getFriendId(), actual.getFriendId());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+        }
+
+    }
+
+    @Test
+    public void testDuplicateCreation() {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/user", t);
+            System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //check if duplications are caught
+        User u = new User("jeesookim", "1234567", "4405339063");
+
+        try {
+            Response rCreateDuplicate = request("POST", "/WalkLive/api/user", u);
+            fail("UserServiceException did not occur");
+        } catch (UserServiceException e) {
+
+        }
+//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus); //this should be 401
+//
+//        System.out.println("GETS HERE");
+//
+//        //try another user duplication
+//        User u2 = new User("michelle", "123456", "4405339063");
+//        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/user", u2);
+//        //assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus); //this should be 401
+//
+//        //Get them back
+//        Response s = request("GET", "/WalkLive/api/user", null);
+//        assertEquals("Failed to get user entries", 200, s.httpStatus);
+//        List<User> results = getUsers(s);
+//
+//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+//        assertEquals("Number of user entries differ", entries.length, results.size());
+
+    }
+
+    @Test
+    public void testShortUsername() {
+        User u = new User("jeesoo", "123456", "4405339063");
+        Response rCreateNew = request("POST", "/WalkLive/api/user", u);
     }
 
     // date: df.parse("2016-04-23T23:10:15-0720")
@@ -101,9 +157,9 @@ public class TestServer {
         //Add a few elements
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         User[] entries = new User[] {
-                new User("jeesoo", "123456", "4405339063"),
+                new User("jeesookim", "123456", "4405339063"),
                 new User("michelle", "0123", "4405339063"),
-                new User("yang", "1111","4405339063"),
+                new User("yangcao1", "1111","4405339063"),
         };
 
         for (User t : entries) {
@@ -132,14 +188,15 @@ public class TestServer {
 
     @Test
     public void testLogin() throws Exception {
-        //Add a single element
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User expected = new User("jeesoo", "test-1", "jkim", null, df.parse("2015-04-23T23:10:15-0700"));
-        Response r1 = request("POST", "/WalkLive/api/user", expected);
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/user/login", expected);
         assertEquals("Failed to add", 201, r1.httpStatus);
 
         //Get it back so that we know its ID
-        Response r2 = request("GET", "/WalkLive/api/user/login", null);
+        Response r2 = request("GET", "/WalkLive/api/login", null);
         assertEquals("Failed to get users", 200, r2.httpStatus);
         User u = getUsers(r2).get(0);
 

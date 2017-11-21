@@ -55,8 +55,9 @@ public class ServerController {
                 try {
                     walkLiveService.createNew(request.body());
                     response.status(201);
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
+                    //response.status(401);
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
@@ -65,7 +66,7 @@ public class ServerController {
             get(API_CONTEXT + "/user", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.findAllUsers();
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to fetch user entries");
                 }
                 return Collections.EMPTY_MAP;
@@ -75,7 +76,7 @@ public class ServerController {
             get(API_CONTEXT + "/user/login", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.login(request.body());
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to authenticate user.");
                     response.status(404);
                     return Collections.EMPTY_MAP;
@@ -90,7 +91,7 @@ public class ServerController {
                     response.status(201);
                     return walkLiveService.startTrip(request.body());
                 } // InvalidDestination     Code 409
-                catch (UserServiceException e) {
+                catch (WalkLiveService.UserServiceException e) {
                     response.status(409);
                 }
 
@@ -111,7 +112,7 @@ public class ServerController {
                 try {
                     response.status(200);
                     return walkLiveService.getTrip(request.params(":destination"));
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Invalid user id.");
                     response.status(404);
                     return Collections.EMPTY_MAP;
@@ -133,7 +134,7 @@ public class ServerController {
                 try {
                     response.status(200);
                     return walkLiveService.updateDestination(request.params(":destination"));
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                 logger.error("Invalid destination.");
                 response.status(409);
                 return Collections.EMPTY_MAP;
@@ -152,7 +153,7 @@ public class ServerController {
                 try {
                     response.status(200);
                     return walkLiveService.shareTrip(request.body());
-                } catch (UserServiceException e) {
+                } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Invalid target id.");
                     response.status(402);
                     return Collections.EMPTY_MAP;

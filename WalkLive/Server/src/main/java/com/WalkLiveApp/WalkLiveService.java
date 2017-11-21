@@ -35,7 +35,7 @@ public class WalkLiveService {
         //program to mostly self-contained. But this is not always what you want;
         //sometimes you want to create the schema externally via a script.
         try (Connection conn = db.open()) {
-            String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
+            String sql = "CREATE TABLE IF NOT EXISTS user (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
             conn.createQuery(sql).executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
@@ -44,11 +44,11 @@ public class WalkLiveService {
     }
 
     //HELPER FUNCTIONS
-//    private void validateId(String id) throws UserServiceException {
-//        if (id.length() < 8) {
-//            throw new UserServiceException();
-//        }
-//    }
+    public void validateId(String id) throws UserServiceException {
+        if (id.length() < 8) {
+            throw new UserServiceException();
+        }
+    }
 //
 //    private void usernameDoesNotExist(String id) throws UserServiceException {
 //        if (collection.find({ "username": id })){
@@ -65,26 +65,51 @@ public class WalkLiveService {
     * in through Facebook or Google, we should still create a new user in the case that its their first time
     * logging in, so may have to create a user simple only with the email information
     */
-    public void createNew(String body) throws UserServiceException, ParseException {
+    public void createNew(String body) throws UserServiceException, ParseException, Sql2oException {
         User user = new Gson().fromJson(body, User.class);
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
-        JSONObject data = (JSONObject) object.get("users");
-        String username = data.get("username").toString();
+        String username = object.get("username").toString();
 
-        String sql = "SELECT * FROM users WHERE username = :username ";
-        //if the query == null then username already exists. - set response code to
+        System.out.println("USERNAME:" + username);
+
+        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        //if the query != null then username already exists. - set response code to 401 (invalid UserId)
+
+        try (Connection conn = db.open()) {
+
+            List<User> found = conn.createQuery(sql)
+                    .addParameter("username", username)
+                    .executeAndFetch(User.class);
+
+            if (!found.isEmpty()) { //the fact that something exists here means that the username exists
+                //which means that we should stop the process and throw an error
+                System.out.println("=======FOUND IS NOT EMPTY!!========");
+                logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
+                throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
+            }
+
+        } catch (Sql2oException ex) {
+            logger.error("WalkLiveService.createNew: Failed to create new entry - query error", ex);
+            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error");
+        }
+//        catch (UserServiceException e) {
+//            logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username, return 401 error", e);
+//            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username, return 401 error");
+//        }
 
 
-        String sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
+        sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
-//        try (validateId(username)) {
-//            //worked
-//        } catch (UserServiceException e) {
-//            logger.error(String.format("WalkLiveService.createNew: username too short: %s", username), e);
-//            throw new InvalidUsernameException("WalkLiveService.createNew: username too short: %s", username), e);
-//        }
+        try {
+            if (username.length() < 8) {
+                throw new UserServiceException();
+            }
+        } catch (UserServiceException e) {
+            logger.error(String.format("WalkLiveService.createNew: username too short: %s", username), e);
+            throw new UserServiceException("WalkLiveService.createNew: username too short: " + username); //call it this for now
+        }
 //
 //        try(usernameDoesNotExist(username)) {
 //            //worked
@@ -97,6 +122,8 @@ public class WalkLiveService {
             conn.createQuery(sql)
                     .bind(user)
                     .executeUpdate();
+
+            System.out.println("SUCCESSFULLY ADDED.");
         } catch(Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry");
@@ -109,8 +136,6 @@ public class WalkLiveService {
     public List<User> findAllUsers() throws UserServiceException {
        try (Connection conn = db.open()) {
             List<User> users = conn.createQuery("SELECT * FROM user")
-//                    .addColumnMapping("username", "username")
-//                    .addColumnMapping("createdOn", "createdOn")
                     .executeAndFetch(User.class);
             return users;
        } catch (Sql2oException ex) {
@@ -196,6 +221,12 @@ public class WalkLiveService {
 
         Trip addToTrip = new Trip();
         return addToTrip;
+    }
+
+    public static class UserServiceException extends Exception {
+        public UserServiceException(String message, Throwable cause) {
+            super(message, cause);
+        }
     }
 
 }
