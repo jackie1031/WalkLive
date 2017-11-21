@@ -9,8 +9,12 @@
 ## BackEnd Install:
 - run 'cd Walklive'
 - run 'cd Server'
-- run 'zip -r server.zip . -x ".*" -x "__MACOSX" -x "*.DS_Store' (???? still need to change)
 - run 'mvn package'
+- run 'java -jar target/OOSE-group14-1.0-SNAPSHOT.jar' 
 - open a web browser, and type in: localhost:8080
 
 *assume maven is already installed on the computer.If not, please set up maven following this tutorial: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+
+## Deploy App
+- run 'cd Walklive/Server'
+- run'heroku open'

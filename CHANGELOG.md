@@ -1,6 +1,27 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [4.0.1] - 2017-11-19
+### Added
+- FE: add friend request page, trip request page, trip search page for front end by @mshu1
+- BE: add deployment on Heroku by @jackie, trip tests for backend by @jackie
+
+## [4.0.1] - 2017-11-12
+### Changed
+- FE: Migrate frontend from Google Maps to MapKit by @mshu1
+- FE: Fix map routing and now it is fully functioning @mshu1
+- FE: Add first version of feature demo @mshu1
+### Added
+- General: Official logo by @jeesoo
+- BE: added sign up, login tests by @jeesoo
+
+## [4.0.1] - 2017-11-06
+### Changed
+- FE: Login UI by @mshu1
+- FE: Connect Settings to Settings VC by @yang
+### Added
+- BE: local host for backend by @jackie
+
 ## [3.0.2] - 2017-10-30
 ### Changed
 - FE: GoogleMaps constraints changed by @mshu1
