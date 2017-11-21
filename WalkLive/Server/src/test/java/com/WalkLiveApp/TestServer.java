@@ -433,7 +433,7 @@ public class TestServer {
             } catch (Sql2oException e) {
                 logger.error("Failed to get crimes in ServerTest", e);
             }
-        } catch (UserServiceException e) {
+        } catch (WalkLiveService.UserServiceException e) {
         logger.error("User Service Exception.");
         }
     }
