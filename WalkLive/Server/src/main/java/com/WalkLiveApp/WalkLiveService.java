@@ -27,7 +27,7 @@ public class WalkLiveService {
      *
      * @param dataSource
      */
-    public WalkLiveService(DataSource dataSource) throws UserServiceException {
+    public WalkLiveService(DataSource dataSource) throws WalkLiveService.UserServiceException {
         db = new Sql2o(dataSource);
 
         //Create the schema for the database if necessary. This allows this
@@ -38,7 +38,7 @@ public class WalkLiveService {
             conn.createQuery(sql).executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
-            throw new UserServiceException("Failed to create schema at startup");
+            throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
         }
     }
 
@@ -64,7 +64,7 @@ public class WalkLiveService {
     * in through Facebook or Google, we should still create a new user in the case that its their first time
     * logging in, so may have to create a user simple only with the email information
     */
-    public void createNew(String body) throws UserServiceException {
+    public void createNew(String body) throws WalkLiveService.UserServiceException {
         User user = new Gson().fromJson(body, User.class);
 //        JSONParser parser = new JSONParser();
 //        Object obj = parser.parse(body);
@@ -94,14 +94,14 @@ public class WalkLiveService {
                     .executeUpdate();
         } catch(Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
-            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry");
+            throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry");
         }
     }
 
     /*
      * Finds all users and returns all in user database
      */
-    public List<User> findAllUsers() throws UserServiceException {
+    public List<User> findAllUsers() throws WalkLiveService.UserServiceException {
        try (Connection conn = db.open()) {
             List<User> users = conn.createQuery("SELECT * FROM user")
                     .addColumnMapping("username", "username")
@@ -110,14 +110,14 @@ public class WalkLiveService {
             return users;
        } catch (Sql2oException ex) {
             logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-            throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries");
+            throw new WalkLiveService.UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries");
        }
     }
 
     /*
      * returns emergencyId and emergencyNumber
      */
-    public String login(String body) throws UserServiceException {
+    public String login(String body) throws WalkLiveService.UserServiceException {
         User user = new Gson().fromJson(body, User.class);
 
         JSONParser parser = new JSONParser();
@@ -144,56 +144,76 @@ public class WalkLiveService {
 
     /** For trip part -----------------------**/
 
-    public String startTrip(String body) throws UserServiceException {
+    public String startTrip(String body) throws WalkLiveService.UserServiceException {
 
         return "";
 
     }
 
-    public Trip getTrip(String body) throws UserServiceException {
+    public Trip getTrip(String body) throws WalkLiveService.UserServiceException {
         //process body
         Trip thisTrip = new Trip();
 
         return thisTrip;
 
     }
-    public Trip updateDestination(String body) throws UserServiceException {
+    public Trip updateDestination(String body) throws WalkLiveService.UserServiceException {
 
         //{ tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
         Trip thisTrip = new Trip();
 
         return thisTrip;
     }
-    public String shareTrip(String body) throws UserServiceException {
+    public String shareTrip(String body) throws WalkLiveService.UserServiceException {
 
         // to another user
         return "";
 
     }
-    public String respondTripRequest(String body) throws UserServiceException {
+    public String respondTripRequest(String body) throws WalkLiveService.UserServiceException {
         return "";
 
 
     }
 
     //Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
-    public Trip addTimePoint(String body) throws UserServiceException {
+    public Trip addTimePoint(String body) throws WalkLiveService.UserServiceException {
         Trip addToTrip = new Trip();
         return addToTrip;
 
     }
 
-    public String getTimePoint(String body) throws UserServiceException {
+    public String getTimePoint(String body) throws WalkLiveService.UserServiceException {
 //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
 
         return "";
 
     }
-    public Trip getLatestTimePoint(String body) throws UserServiceException {
+    public Trip getLatestTimePoint(String body) throws WalkLiveService.UserServiceException {
 //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
 
         Trip addToTrip = new Trip();
         return addToTrip;
     }
 
+    //=====================EXCEPTIONS============================
+    public static class UserServiceException extends Exception {
+        public UserServiceException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public UserServiceException(String message) {
+            super(message);
+        }
+    }
+
+    public static class TripServiceException extends Exception {
+        public TripServiceException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public TripServiceException(String message) {
+            super(message);
+        }
+    }
 }
