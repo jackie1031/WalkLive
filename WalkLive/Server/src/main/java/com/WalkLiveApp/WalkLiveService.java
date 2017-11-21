@@ -52,19 +52,6 @@ public class WalkLiveService {
         }
     }
 
-    //HELPER FUNCTIONS
-//    private void validateId(String id) throws UserServiceException {
-//        if (id.length() < 8) {
-//            throw new UserServiceException();
-//        }
-//    }
-//
-//    private void usernameDoesNotExist(String id) throws UserServiceException {
-//        if (collection.find({ "username": id })){
-//            throw new UserServiceException();
-//        }
-//    }
-
     /*
     * Create a new User and add to database.
     * Should check database if already exists or not, and then if it doesnt exist then create and push into
@@ -80,6 +67,7 @@ public class WalkLiveService {
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
 
+        //debugging
         System.out.println("USERNAME:" + username);
 
         String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
@@ -104,25 +92,6 @@ public class WalkLiveService {
 
         sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
-
-//NEED TO DO THIS===================================================
-//        try {
-//            if (username.length() < 8) {
-//                throw new UserServiceException();
-//            }
-//        } catch (UserServiceException e) {
-//            logger.error(String.format("WalkLiveService.createNew: username too short: %s", username), e);
-//            throw new UserServiceException("WalkLiveService.createNew: username too short: " + username, e); //call it this for now
-//        }
-
-
-//
-//        try(usernameDoesNotExist(username)) {
-//            //worked
-//        } catch (UserServiceException e) {
-//            logger.error(String.format("WalkLiveService.createNew: username already exists: %s", username), e);
-//            throw new InvalidUsernameException("WalkLiveService.createNew: username already exists: %s", username), e);
-//        }
 
         try (Connection conn = db.open()) {
             conn.createQuery(sql)

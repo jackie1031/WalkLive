@@ -27,6 +27,15 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
+            //get list of users
+            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.findAllUsers();
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to fetch user entries");
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
@@ -36,16 +45,6 @@ public class ServerController {
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
                     response.status(401);
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
-            //get list of users
-            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
-                try {
-                    return walkLiveService.findAllUsers();
-                } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to fetch user entries");
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
@@ -60,6 +59,16 @@ public class ServerController {
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
+
+//            //get user information
+//            get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
+//                try {
+//                    return walkLiveService.getUser(request.params());
+//                } catch (WalkLiveService.UserServiceException e) {
+//                    logger.error("Failed to return user information.");
+//                    response.status(404);
+//                }
+//            }, new JsonTransformer());
 
 
             /**
