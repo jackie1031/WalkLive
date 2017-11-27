@@ -205,7 +205,6 @@ public class TestServer {
 
     }
 
-//
 //    @Test
 //    public void testUpdate() throws Exception {
 //
@@ -396,7 +395,6 @@ public class TestServer {
     public void testGetCrimes() {
         try {
             WalkLiveService s = new WalkLiveService(dSource);
-
 
             try (Connection conn = s.getDb().open()) {
                 String sql1 = "CREATE TABLE IF NOT EXISTS TestCrimes "
