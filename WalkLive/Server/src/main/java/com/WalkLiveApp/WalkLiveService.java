@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -45,12 +46,20 @@ public class WalkLiveService {
         //sometimes you want to create the schema externally via a script.
         try (Connection conn = db.open()) {
             String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
+            String sql2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sentOn TIMESTAMP)";
             conn.createQuery(sql).executeUpdate();
+            conn.createQuery(sql2).executeUpdate();
         } catch (Sql2oException ex) {
             logger.error("Failed to create schema at startup", ex);
             throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
         }
     }
+
+    /**
+     * ================================================================
+     * User SignUp/Login/Query
+     * ================================================================
+     */
 
     /*
     * Create a new User and add to database.
@@ -120,7 +129,7 @@ public class WalkLiveService {
     }
 
     /*
-     * returns emergencyId and emergencyNumber
+     * Returns a URI to access the specific users profile info - FIND OUT DETAILS
      */
     public String login(String body) throws UserServiceException, ParseException {
         User user = new Gson().fromJson(body, User.class);
@@ -152,6 +161,9 @@ public class WalkLiveService {
         return "";
     }
 
+    /*
+     * Returns a single User being queried
+    */
     public User getUser(String body) throws UserServiceException {
         String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
 
@@ -167,10 +179,36 @@ public class WalkLiveService {
         }
     }
 
+    /**
+     * ================================================================
+     * Friend Request Handling
+     * ================================================================
+     */
+
+    //create a new FriendRequest and store in database
+    public void createFriendRequest(String body) throws WalkLiveService.FriendRequestServiceException {
+        FriendRequest fr = new Gson().fromJson(body, FriendRequest.class);
+
+        String sql = "INSERT INTO friendRequest (sender, recipient, sent_on) VALUES (:from, :to, :time)";
+
+        try (Connection conn = db.open()) {
+            conn.createQuery(sql)
+                    .bind(fr)
+                    .executeUpdate();
+
+            System.out.println("FRIEND REQUEST SUCCESSFULLY ADDED TO DATABASE.");
+        } catch(Sql2oException ex) {
+            logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+            throw new FriendRequestServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+        }
+    }
+
 
     /**
-     * For trip part -----------------------
-     **/
+     * ================================================================
+     * Trip Handling
+     * ================================================================
+     * */
 
     public String startTrip(String body) throws WalkLiveService.UserServiceException {
 
@@ -300,6 +338,16 @@ public class WalkLiveService {
         }
 
         public UserServiceException(String message) {
+            super(message);
+        }
+    }
+
+    public static class FriendRequestServiceException extends Exception {
+        public FriendRequestServiceException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public FriendRequestServiceException(String message) {
             super(message);
         }
     }

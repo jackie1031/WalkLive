@@ -27,6 +27,12 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
+            /**
+             * ================================================================
+             * User SignUp/Login/Query
+             * ================================================================
+             */
+
             //get list of users
             get(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
@@ -76,9 +82,40 @@ public class ServerController {
 
 
             /**
-             * Trip part
-             * ----------------------------------------------------------------------
+             * ================================================================
+             * Friend Request Handling
+             * ================================================================
+             */
+
+            //Make a friend request - receives sender username (from) and recipient username (to) and sent time in request body
+            //returns 201 at successful creation
+            post(API_CONTEXT + "/friends/requests", "application/json", (request, response) -> {
+                try {
+                    walkLiveService.createFriendRequest(request.body());
+                    response.status(201);
+                } catch (WalkLiveService.FriendRequestServiceException e) {
+                    logger.error("Failed to create friend request.");
+                    response.status(404);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            //get my sent friend requests
+
+            //delete sent friend request
+
+            //get my received friend requests
+
+            //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
+            //if accept, then add to friends list for both - FIGURE OUT DETAILS
+            //either way, dealt with friend requests should be deleted
+
+            /**
+             * ================================================================
+             * Trip Handling
+             * ================================================================
              * */
+
             //Start Trip
             post(API_CONTEXT+"/user", "application/json", (request, response) -> {
                 try {
