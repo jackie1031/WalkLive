@@ -343,70 +343,42 @@ public class TestServer {
 
     @Test
     public void testGetDangerZone() throws Exception {
-        WalkLiveService s = new WalkLiveService(dSource);
 
-        try (Connection conn = s.getDb().open()){
-            String sql1 = "CREATE TABLE IF NOT EXISTS " + TESTCRIMES
-                    + " (date INTEGER NOT NULL, linkId INTEGER NOT NULL, address TEXT NOT NULL, "
-                    + "latitude REAL NOT NULL, longitude REAL NOT NULL, "
-                    + "type TEXT, PRIMARY KEY (date, linkId, type));";
-            conn.createQuery(sql1).executeUpdate();
 
-            int date = 0, linkid = 0, time = 0;
-            String address = "", type = "";
-            double latitude = 0, longitude = 0;
+        double lat = 3.454;
+        double lng = 6.929;
+        Coordinate c = new Coordinate(lat, lng);
 
-            String sql2 = " INSERT INTO " + TESTCRIMES
-                    + " VALUES(:date, :linkid, :address, :latitude, :longitude, :type); ";
+        Crime[] z1 = new Crime[]{
+                new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523),
+                new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339),
+        };
+        Crime[] z2 = new Crime[]{
 
-            for (int i = 0; i < 60; i++) {
-                Crime c = new Crime(date, time, address, type, latitude, longitude, linkid);
-                    conn.createQuery(sql2).bind(c).executeUpdate();
+                new Crime(1126, 18, "JHU brody", "Sexual", c, 24124124),
+                new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
+        };
 
-                latitude++;
-                longitude++;
-            }
+        DangerZone testDanger = new DangerZone(z1,z2);
 
-            linkid = 1;
+        Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
+        Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime[] testForZone1 = {testZ1,testZ2};
 
-            for (int i = 0; i < 40; i++) {
-                Crime c = new Crime(date, time, address, type, latitude, longitude, linkid);
-                conn.createQuery(sql2).bind(c).executeUpdate();
+        assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
 
-                latitude++;
-                longitude++;
-            }
 
-            linkid = 2;
+        //assertEquals();
 
-            for (int i = 0; i < 20; i++) {
-                Crime c = new Crime(date, time, address, type, latitude, longitude, linkid);
-                conn.createQuery(sql2).bind(c).executeUpdate();
 
-                latitude++;
-                longitude++;
-            }
-
-            Coordinate from = new Coordinate(0, 0);
-            Coordinate to = new Coordinate(120, 120);
-
-            int[] red = s.getDangerZone(from, to, TESTCRIMES).getRed();
-            int[] yellow = s.getDangerZone(from, to, TESTCRIMES).getYellow();
-
-            int[] redTarget = {0};
-            int[] yellowTarget = {1};
-
-            assertTrue(Arrays.equals(red, redTarget));
-            assertTrue(Arrays.equals(yellow, yellowTarget));
-
-            Coordinate from1 = null;
-            Coordinate to1 = null;
-            assertEquals(s.getDangerZone(from1, to1, TESTCRIMES), null);
-        } catch (Sql2oException e) {
-            logger.error("Failed to get avoid linkIds in ServerTest", e);
-        } catch (Exception e) {
-            logger.error("Failed to create Coordinate", e);
+        for (Crime t : z1) {
+            Response rCreateNew = request("GET", "/WalkLive/api/getdangerzone", t);
+            //System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
         }
+
+
+
     }
 
     /**
@@ -414,59 +386,51 @@ public class TestServer {
      * database.
      */
     @Test
-    public void testGetCrimes() {
-        try {
-            WalkLiveService s = new WalkLiveService(dSource);
+    public void testGetCrimes() throws Exception {
 
-            try (Connection conn = s.getDb().open()) {
-                String sql1 = "CREATE TABLE IF NOT EXISTS TestCrimes "
-                        + "(date INTEGER NOT NULL, linkId INTEGER NOT NULL, address TEXT NOT NULL, "
-                        + "latitude REAL NOT NULL, longitude REAL NOT NULL, "
-                        + "type TEXT, PRIMARY KEY (date, linkId, type));";
-                conn.createQuery(sql1).executeUpdate();
+        List<Crime> crimeList = new LinkedList<>();
 
-                List<Crime> crimeList = new LinkedList<>();
+        double lat = 3.454;
+        double lng = 6.929;
+        Coordinate c = new Coordinate(lat, lng);
 
-                crimeList.add(new Crime(20, 1, "a2", "type2", 200, 200, 1));
-                crimeList.add(new Crime(30, 1, "a3", "type3", 300, 300, 2));
-                crimeList.add(new Crime(40, 1, "a4", "type4", 400, 400, 3));
+        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 1));
+        crimeList.add(new Crime(1026, 12, "brody", "theft", c, 2));
+        crimeList.add(new Crime(1027, 13, "", "Robbery", c, 3));
+        crimeList.add(new Crime(1028, 5, "", "theft", c, 4));
 
-                for (Crime c : crimeList) {
-                    String sql = "insert into TestCrimes(date, linkId, address, latitude, longitude, type) "
-                            + "values (:dateParam, :linkIdParam, :addressParam, :latitudeParam, :longitudeParam, :typeParam)";
+        double fromLng = 200;
+        double toLng = 400;
 
-                    Query query = conn.createQuery(sql);
-                    query.addParameter("dateParam", c.getDate()).addParameter("linkIdParam", c.getLinkId())
-                            .addParameter("addressParam", c.getAddress()).addParameter("latitudeParam", c.getLat())
-                            .addParameter("longitudeParam", c.getLng()).addParameter("typeParam", c.getType())
-                            .executeUpdate();
-                }
+        double fromLat = 200;
+        double toLat = 400;
 
-                double fromLng = 200;
-                double toLng = 400;
-                double fromLat = 200;
-                double toLat = 400;
-                int fromDate = 20;
-                int toDate = 40;
-                int timeOfDay = 1000;
+        Coordinate c1 = new Coordinate(fromLat, fromLng);
+        Coordinate c2 = new Coordinate(toLat, toLng);
 
-                Crime from = new Crime(fromDate, fromLat, fromLng);
-                Crime to = new Crime(toDate, toLat, toLng);
-                //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
+        int fromDate = 20;
+        int toDate = 40;
+        int timeOfDay = 18;
 
-//              crimes.forEach(crime -> {
-//                  assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
-//                        && crime.getLng() >= fromLng && crime.getLng() <= toLng
-//                        && crime.getDate() >= fromDate && crime.getDate() <= toDate);
-//              });
-            } catch (Sql2oException e) {
-                logger.error("Failed to get crimes in ServerTest", e);
-            }
-        } catch (WalkLiveService.UserServiceException e) {
-        logger.error("User Service Exception.");
+        Crime from = new Crime(fromDate, c1);
+        Crime to = new Crime(toDate, c2);
+        int count = 0;
+        for(Crime t: crimeList){
+            assertEquals(count, t.getLinkId());
+
         }
+
     }
 
+    @Test
+    public void testAddTimePoints() throws Exception {
+        double lat = 3.454;
+        double lng = 6.929;
+        Coordinate c = new Coordinate(lat, lng);
+
+        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
+        TimePoint temp = new TimePoint(12,13,c,1);
+    }
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//

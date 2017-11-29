@@ -6,7 +6,7 @@ public class TimePoint {
 
     //add trip id ?
     private int TimePointID;
-    private String time;
+    private int time;
     private Coordinate thisCoordinate;
     private int dangerLevel;
 
@@ -14,7 +14,7 @@ public class TimePoint {
     /**
      * Constructor
      */
-    public TimePoint(int TimePointID, String time, Coordinate thisCoordinate, int dangerLevel) {
+    public TimePoint(int TimePointID, int time, Coordinate thisCoordinate, int dangerLevel) {
         this.TimePointID = TimePointID;
         this.time = time;
         this.thisCoordinate = thisCoordinate;
@@ -29,11 +29,11 @@ public class TimePoint {
     public TimePoint getTimePoint(int TimePointID) {
         //find the timePoint among the array or table?
 
-        String time = "a"; //find in table
+        //String time = "a"; //find in table
         //Coordinate thisCoordinate = new Coordinate(1.2,1.2);
         int dangerLevel = 4;
 
-        TimePoint temp = new TimePoint( TimePointID, time, thisCoordinate, dangerLevel);
+        TimePoint temp = new TimePoint(12, time, thisCoordinate, dangerLevel);
         return temp;
     }
 

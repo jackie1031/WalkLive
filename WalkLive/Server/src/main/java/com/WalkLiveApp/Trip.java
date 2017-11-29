@@ -4,12 +4,12 @@ import java.util.*;
 
 public class Trip {
 
-    private int tripId,timePointId, dangerlevel;
-    private String userId, startTime, endTime;
+    private int tripId,timePointId, dangerlevel, startTime, endTime;
+    private String userId;
     private boolean complete;
     private Coordinate currCoordinate;
     private  List<TimePoint> allTimePoints = new ArrayList<TimePoint>();
-
+    public Trip (){};
 
     // test whether is in danger zone
     public List<TimePoint> getTimepoint (int trip,String user){
@@ -17,7 +17,7 @@ public class Trip {
         complete = false;
         while(!complete){
             timePointId = 0;
-            String timeNow = startTime + 0.05;
+            int timeNow = startTime + 5;
             ////////
             TimePoint current = new TimePoint(timePointId, timeNow, currCoordinate, dangerlevel);
             // parameters for TimePoints int TimePointID, String time, double latiture, double longiture;
@@ -43,8 +43,8 @@ public class Trip {
 
     public int getTripId(){ return tripId;}
     public String getuserId(){ return userId;}
-    public String getstartTime(){ return startTime;}
-    public String getendTime(){ return endTime;}
+    public int getstartTime(){ return startTime;}
+    public int getendTime(){ return endTime;}
     public boolean getcomplete(){ return complete;}
     public Coordinate getCoordinate(){return currCoordinate;}
 
