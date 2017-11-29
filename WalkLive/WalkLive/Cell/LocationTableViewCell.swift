@@ -10,12 +10,6 @@ import UIKit
 
 class LocationTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var destinationLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var acceptButton: UIButton!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -205,28 +205,6 @@ public class TestServer {
 
     }
 
-    @Test
-    public void testGetUser() throws Exception {
-        //add a single element
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063")
-        };
-
-        //add to database
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            //System.out.println("USER: " + t.toString());
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-
-        Response r1 = request("GET", "/WalkLive/api/users/jeesookim", null);
-        assertEquals("Failed to get user", 200, r1.httpStatus);
-
-        Response r2 = request("GET", "/WalkLive/api/users/michelle", null);
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-    }
-
 //    @Test
 //    public void testUpdate() throws Exception {
 //

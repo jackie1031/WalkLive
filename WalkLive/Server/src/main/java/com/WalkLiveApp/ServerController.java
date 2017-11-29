@@ -63,13 +63,9 @@ public class ServerController {
             //get user information
             get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
                 try {
-                    User u = walkLiveService.getUser(request.params(":username"));
-                    if (u != null) {
-                        return u;
-                    }
-                    response.status(404);
+                    return walkLiveService.getUser(request.params(":username"));
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to find user.");
+                    logger.error("Failed find user.");
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());

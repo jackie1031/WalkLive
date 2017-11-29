@@ -15,11 +15,8 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startTripButton: UIButton!
     @IBOutlet weak var startTripPanelView: UIView!
-    
-    @IBOutlet weak var contactMessagePanelTextView: UITextView!
     @IBOutlet weak var startTripDestinationTextLabel: UITextField!
     @IBOutlet weak var contactMessagePanel: UIView!
-    
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -69,35 +66,12 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     }
     
     @IBAction func onContactBottomButton(_ sender: Any) {
-        let roadRequester = RoadRequester(mapView: self.mapView)
-        let message = buildMessage(location: roadRequester.getSourceLocation())
-        
-        self.contactMessagePanelTextView.text = message
         self.contactMessagePanel.isHidden = false
     }
     
-    
-    
-    func buildMessage(location: CLLocation) -> String {
-        return "I am currently at Time Square(latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + "), and heading to Empire State Building(). Need ~15 minutes, I have walked 0 minutes, 5 seconds. From Admin."
-    }
-    
     @IBAction func onPoliceBottomButton(_ sender: Any) {
-        let busPhone = "911"
-        //Does not work in Simulator
-        if let url = URL(string: "tel://\(busPhone)"), UIApplication.shared.canOpenURL(url) {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(url)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
     }
-    
     @IBAction func onContactPanelSendButton(_ sender: Any) {
-        self.contactMessagePanel.isHidden = true
-    }
-    @IBAction func onContactPanelCancelButton(_ sender: Any) {
         self.contactMessagePanel.isHidden = true
     }
     

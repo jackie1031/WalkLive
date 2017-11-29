@@ -28,7 +28,6 @@
 		9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */; };
 		9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */; };
 		90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A18F511F9529FB006FAD99 /* TimePoint.swift */; };
-		90EBA16D1FCF59A500800A08 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA16C1FCF59A500800A08 /* FriendTripTableViewCell.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
 		930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */; };
@@ -84,7 +83,6 @@
 		9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripRequestTableViewCell.swift; path = "/Users/michelleshu/Documents/JHU Junior/OOSE/WalkAlive/WalkLive/Walklive/Cell/TripRequestTableViewCell.swift"; sourceTree = "<absolute>"; };
 		9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		90A18F511F9529FB006FAD99 /* TimePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
-		90EBA16C1FCF59A500800A08 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 				9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */,
 				9077A51A1FC294FE00E8F47E /* FriendRequestTableViewCell.swift */,
 				9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */,
-				90EBA16C1FCF59A500800A08 /* FriendTripTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -565,7 +562,6 @@
 				9077A5181FC293F900E8F47E /* UserVC.swift in Sources */,
 				9077A5141FC2932F00E8F47E /* FriendRequestVC.swift in Sources */,
 				9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */,
-				90EBA16D1FCF59A500800A08 /* FriendTripTableViewCell.swift in Sources */,
 				9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */,
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
 				9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */,
