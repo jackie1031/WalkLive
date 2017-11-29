@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<<<<<<< HEAD
-<testsuite tests="2" failures="0" name="com.WalkLiveApp.TestServer" time="0.357" errors="0" skipped="0">
-=======
-<testsuite tests="4" failures="0" name="com.WalkLiveApp.TestServer" time="0.493" errors="0" skipped="0">
->>>>>>> 40ec913bc01bbf7c7cd202454b98fe0dd95c1b73
+<testsuite tests="9" failures="0" name="com.WalkLiveApp.TestServer" time="0.383" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib"/>
@@ -30,22 +26,22 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/lintianyi/Desktop/apache-maven-3.5.0/bin/m2.conf"/>
+    <property name="classworlds.conf" value="/Users/lintianyi/Documents/apache-maven-3.5.0/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/lintianyi/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
-    <property name="maven.conf" value="/Users/lintianyi/Desktop/apache-maven-3.5.0/conf"/>
+    <property name="maven.conf" value="/Users/lintianyi/Documents/apache-maven-3.5.0/conf"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.12.6"/>
-    <property name="library.jansi.path" value="/Users/lintianyi/Desktop/apache-maven-3.5.0/lib/jansi-native/osx64"/>
+    <property name="library.jansi.path" value="/Users/lintianyi/Documents/apache-maven-3.5.0/lib/jansi-native/osx64"/>
     <property name="user.home" value="/Users/lintianyi"/>
     <property name="user.timezone" value="America/New_York"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="lintianyi"/>
-    <property name="java.class.path" value="/Users/lintianyi/Desktop/apache-maven-3.5.0/boot/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.class.path" value="/Users/lintianyi/Documents/apache-maven-3.5.0/boot/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre"/>
@@ -58,20 +54,20 @@
     <property name="java.ext.dirs" value="/Users/lintianyi/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="/Users/lintianyi/Desktop/apache-maven-3.5.0"/>
+    <property name="maven.home" value="/Users/lintianyi/Documents/apache-maven-3.5.0"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-<<<<<<< HEAD
-  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="0.313"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="0.044"/>
-=======
-  <testcase classname="com.WalkLiveApp.TestServer" name="testStartTRIP" time="0.385"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="0.029"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testGetLatLong" time="0.007"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="0.072"/>
->>>>>>> 40ec913bc01bbf7c7cd202454b98fe0dd95c1b73
+  <testcase classname="com.WalkLiveApp.TestServer" name="testDuplicateCreation" time="0.248"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testGetDangerZone" time="0.029"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testAddTimePoints" time="0.005"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testFindAll" time="0.039"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="0.021"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testCoordinate" time="0.008"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testGetCrimes" time="0.005"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="0.026"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testSortAndExpand" time="0.002"/>
 </testsuite>

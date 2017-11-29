@@ -21,9 +21,9 @@ public class Coordinate {
 
     public Coordinate(double latitude, double longitude) throws Exception {
 		//check whether the coordinate is valid
-        if (longitude < -180 || longitude > 180 || latitude < -90 || latitude > 90 ) {
-            throw new Exception("Not valid coordinate");
-        }
+//        if (longitude < -180 || longitude > 180 || latitude < -90 || latitude > 90 ) {
+//            throw new Exception("Not valid coordinate");
+//        }
 
         this.latitude = latitude;
         this.longitude = longitude;
