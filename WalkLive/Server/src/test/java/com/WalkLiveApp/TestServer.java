@@ -322,27 +322,11 @@ public class TestServer {
     @Test
     public void testGetDangerZone() throws Exception {
 
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063")
-//        };
-//
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //Get them back
-//        Response r = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, r.httpStatus);
-//        List<User> results = getUsers(r);
-
 
         double lat = 3.454;
         double lng = 6.929;
         Coordinate c = new Coordinate(lat, lng);
+
         Crime[] z1 = new Crime[]{
                 new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523),
                 new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339),
@@ -354,6 +338,16 @@ public class TestServer {
         };
 
         DangerZone testDanger = new DangerZone(z1,z2);
+
+        Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
+        Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime[] testForZone1 = {testZ1,testZ2};
+
+        assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
+
+
+        //assertEquals();
+
 
         for (Crime t : z1) {
             Response rCreateNew = request("GET", "/WalkLive/api/getdangerzone", t);
@@ -369,36 +363,38 @@ public class TestServer {
      * Test getting getCrimes method within a specific range of coordinates from the
      * database.
      */
-//    @Test
-//    public void testGetCrimes() {
-//
-//
-//                List<Crime> crimeList = new LinkedList<>();
-//
-//                crimeList.add(new Crime(20, 1, "a2", "type2", 200, 200, 1));
-//                crimeList.add(new Crime(30, 1, "a3", "type3", 300, 300, 2));
-//                crimeList.add(new Crime(40, 1, "a4", "type4", 400, 400, 3));
-//
-//
-//                double fromLng = 200;
-//                double toLng = 400;
-//                double fromLat = 200;
-//                double toLat = 400;
-//                int fromDate = 20;
-//                int toDate = 40;
-//                int timeOfDay = 1000;
-//
-//                Crime from = new Crime(fromDate, fromLat, fromLng);
-//                Crime to = new Crime(toDate, toLat, toLng);
-//                //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
-//
-////              crimes.forEach(crime -> {
-////                  assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
-////                        && crime.getLng() >= fromLng && crime.getLng() <= toLng
-////                        && crime.getDate() >= fromDate && crime.getDate() <= toDate);
-////              });
-//
-//    }
+    @Test
+    public void testGetCrimes() {
+
+        List<Crime> crimeList = new LinkedList<>();
+        double lat = 3.454;
+        double lng = 6.929;
+        Coordinate c = new Coordinate(lat, lng);
+
+        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523));
+        crimeList.add(new Crime(30, 1, "a3", "type3", 300, 300, 2));
+        crimeList.add(new Crime(40, 1, "a4", "type4", 400, 400, 3));
+
+
+                double fromLng = 200;
+                double toLng = 400;
+                double fromLat = 200;
+                double toLat = 400;
+                int fromDate = 20;
+                int toDate = 40;
+                int timeOfDay = 1000;
+
+                Crime from = new Crime(fromDate, fromLat, fromLng);
+                Crime to = new Crime(toDate, toLat, toLng);
+                //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
+
+//              crimes.forEach(crime -> {
+//                  assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
+//                        && crime.getLng() >= fromLng && crime.getLng() <= toLng
+//                        && crime.getDate() >= fromDate && crime.getDate() <= toDate);
+//              });
+
+    }
 
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes

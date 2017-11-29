@@ -29,4 +29,6 @@ public class DangerZone {
     public Crime[] getZ2() {
         return this.z2;
     }
+
+    public int size(){return z1.length +z2.length;}
 }
