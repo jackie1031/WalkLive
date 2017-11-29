@@ -2,7 +2,6 @@ package com.WalkLiveApp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
@@ -341,7 +340,9 @@ public class TestServer {
 
         Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
         Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime[] testForZone1 = {testZ1,testZ2};
+        Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4};
 
         assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
 
@@ -352,7 +353,7 @@ public class TestServer {
         for (Crime t : z1) {
             Response rCreateNew = request("GET", "/WalkLive/api/getdangerzone", t);
             //System.out.println("USER: " + t.toString());
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+            assertEquals("Failed to create new User", 404, rCreateNew.httpStatus);
         }
 
 
@@ -392,9 +393,10 @@ public class TestServer {
 
         Crime from = new Crime(fromDate, c1);
         Crime to = new Crime(toDate, c2);
-        int count = 0;
+        int count = 1;
         for(Crime t: crimeList){
             assertEquals(count, t.getLinkId());
+            count++;
 
         }
 
