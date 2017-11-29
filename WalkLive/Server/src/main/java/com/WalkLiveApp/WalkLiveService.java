@@ -175,17 +175,30 @@ public class WalkLiveService {
      * For trip part -----------------------
      **/
 
-    public String startTrip(String body) throws WalkLiveService.UserServiceException {
-
-        return "";
+    public Trip startTrip(String body) throws  UserServiceException, ParseException {
+        Trip temp = new Trip();
+        return temp;
 
     }
 
-    public Trip getTrip(String body) throws WalkLiveService.UserServiceException {
-        //process body
-        Trip thisTrip = new Trip();
+    public Trip getTrip(String body) throws UserServiceException, ParseException {
 
-        return thisTrip;
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String tripID = object.get("tripID").toString();
+
+        String sql = "SELECT * FROM trip WHERE tripID = :tripID LIMIT 1";
+
+        try (Connection conn = db.open()) { //find user by username
+            Trip u = conn.createQuery(sql)
+                    .addParameter("tripID", tripID)
+                    .executeAndFetchFirst(Trip.class);
+            return u;
+
+        } catch(Sql2oException ex) {
+            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", tripID), ex);
+            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", tripID), ex);
+        }
+
 
     }
 

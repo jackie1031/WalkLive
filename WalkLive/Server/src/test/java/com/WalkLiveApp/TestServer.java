@@ -400,6 +400,15 @@ public class TestServer {
 
     }
 
+    @Test
+    public void testAddTimePoints() throws Exception {
+        double lat = 3.454;
+        double lng = 6.929;
+        Coordinate c = new Coordinate(lat, lng);
+
+        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
+        TimePoint temp = new TimePoint(12,13,c,1);
+    }
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//
