@@ -1,6 +1,8 @@
 package com.WalkLiveApp;
 
 
+import sun.jvm.hotspot.code.ConstantOopReadValue;
+
 public class Crime {
     private int date, timeOfDay,linkID;
     private String address, type;
@@ -16,14 +18,13 @@ public class Crime {
         this.linkID = linkID;
     }
 
-//    public Crime(int date, double latitude, double longitude) {
-//        this.date = date;
-//        this.address = "";
-//        this.type = "";
-//        this.latitude = latitude;
-//        this.longitude = longitude;
-//        this.linkID = 0;
-//    }
+    public Crime(int date, Coordinate coordinate) {
+        this.date = date;
+        this.address = "";
+        this.type = "";
+        this.coordinate = coordinate;
+        this.linkID = 0;
+    }
 
     /**
      * Get the date

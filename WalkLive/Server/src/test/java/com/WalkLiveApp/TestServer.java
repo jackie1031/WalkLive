@@ -364,35 +364,39 @@ public class TestServer {
      * database.
      */
     @Test
-    public void testGetCrimes() {
+    public void testGetCrimes() throws Exception {
 
         List<Crime> crimeList = new LinkedList<>();
+
         double lat = 3.454;
         double lng = 6.929;
         Coordinate c = new Coordinate(lat, lng);
 
-        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523));
-        crimeList.add(new Crime(30, 1, "a3", "type3", 300, 300, 2));
-        crimeList.add(new Crime(40, 1, "a4", "type4", 400, 400, 3));
+        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 1));
+        crimeList.add(new Crime(1026, 12, "brody", "theft", c, 2));
+        crimeList.add(new Crime(1027, 13, "", "Robbery", c, 3));
+        crimeList.add(new Crime(1028, 5, "", "theft", c, 4));
 
+        double fromLng = 200;
+        double toLng = 400;
 
-                double fromLng = 200;
-                double toLng = 400;
-                double fromLat = 200;
-                double toLat = 400;
-                int fromDate = 20;
-                int toDate = 40;
-                int timeOfDay = 1000;
+        double fromLat = 200;
+        double toLat = 400;
 
-                Crime from = new Crime(fromDate, fromLat, fromLng);
-                Crime to = new Crime(toDate, toLat, toLng);
-                //List<Crime> crimes = s.getCrimes(from, to, timeOfDay, "TestCrimes");
+        Coordinate c1 = new Coordinate(fromLat, fromLng);
+        Coordinate c2 = new Coordinate(toLat, toLng);
 
-//              crimes.forEach(crime -> {
-//                  assertTrue(crime.getLat() >= fromLat && crime.getLat() <= toLat
-//                        && crime.getLng() >= fromLng && crime.getLng() <= toLng
-//                        && crime.getDate() >= fromDate && crime.getDate() <= toDate);
-//              });
+        int fromDate = 20;
+        int toDate = 40;
+        int timeOfDay = 18;
+
+        Crime from = new Crime(fromDate, c1);
+        Crime to = new Crime(toDate, c2);
+        int count = 0;
+        for(Crime t: crimeList){
+            assertEquals(count, t.getLinkId());
+
+        }
 
     }
 
