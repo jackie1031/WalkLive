@@ -46,7 +46,7 @@ public class WalkLiveService {
         //sometimes you want to create the schema externally via a script.
         try (Connection conn = db.open()) {
             String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
-            String sql2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sentOn TIMESTAMP)";
+            String sql2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)";
             conn.createQuery(sql).executeUpdate();
             conn.createQuery(sql2).executeUpdate();
         } catch (Sql2oException ex) {
@@ -79,7 +79,7 @@ public class WalkLiveService {
         //debugging
         System.out.println("USERNAME:" + username);
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
         //if the query != null then username already exists. - set response code to 401 (invalid UserId)
 
         try (Connection conn = db.open()) {
@@ -99,7 +99,7 @@ public class WalkLiveService {
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }
 
-        sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
+        sql = "INSERT INTO users (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
         try (Connection conn = db.open()) {
@@ -119,7 +119,7 @@ public class WalkLiveService {
      */
     public List<User> findAllUsers() throws UserServiceException {
         try (Connection conn = db.open()) {
-            List<User> users = conn.createQuery("SELECT * FROM user")
+            List<User> users = conn.createQuery("SELECT * FROM users")
                     .executeAndFetch(User.class);
             return users;
         } catch (Sql2oException ex) {
@@ -138,7 +138,7 @@ public class WalkLiveService {
         String username = object.get("username").toString();
         String password = object.get("password").toString();
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) {
             User u = conn.createQuery(sql)
@@ -165,7 +165,7 @@ public class WalkLiveService {
      * Returns a single User being queried
     */
     public User getUser(String body) throws UserServiceException {
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) { //find user by username
             User u = conn.createQuery(sql)
@@ -188,8 +188,10 @@ public class WalkLiveService {
     //create a new FriendRequest and store in database
     public void createFriendRequest(String body) throws WalkLiveService.FriendRequestServiceException {
         FriendRequest fr = new Gson().fromJson(body, FriendRequest.class);
+        System.out.println(fr.toString());
 
-        String sql = "INSERT INTO friendRequest (sender, recipient, sent_on) VALUES (:from, :to, :time)";
+        String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) " +
+                "             VALUES (:sender, :recipient, :sent_on)" ;
 
         try (Connection conn = db.open()) {
             conn.createQuery(sql)

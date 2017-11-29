@@ -80,6 +80,11 @@ public class TestServer {
     // Tests
     //------------------------------------------------------------------------//
 
+    /**
+     * ================================================================
+     * User SignUp/Login/Query
+     * ================================================================
+     */
 
     @Test
     public void testCreateNew() throws Exception {
@@ -226,6 +231,30 @@ public class TestServer {
         Response r2 = request("GET", "/WalkLive/api/users/michelle", null);
         assertEquals("Failed to get user", 200, r2.httpStatus);
     }
+
+
+    /**
+     * ================================================================
+     * Friend Request Handling
+     * ================================================================
+     */
+
+    @Test
+    public void testCreateFriendRequest() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add a few elements
+        FriendRequest[] frs = new FriendRequest[] {
+                new FriendRequest("jeesookim", "michelle", df.parse("2017-08-22T14:32:03-0700")),
+                new FriendRequest("michelle", "yangcao1", df.parse("2017-08-22T14:32:03-0700"))
+        };
+
+        for (FriendRequest f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/friends/requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+    }
+
 
 //    @Test
 //    public void testUpdate() throws Exception {
@@ -533,16 +562,15 @@ public class TestServer {
         db = new Sql2o(dataSource);
 
         try (Connection conn = db.open()) {
-            String sql = "CREATE TABLE IF NOT EXISTS user (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
+            String sql = "DROP TABLE IF EXISTS TestCrimes";
             conn.createQuery(sql).executeUpdate();
+            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
+            conn.createQuery(sql2).executeUpdate();
+            String sql3 = "DROP TABLE IF EXISTS users" ;
+            conn.createQuery(sql3).executeUpdate();
+            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
+            conn.createQuery(sql4).executeUpdate();
         }
-    }
-
-    private List<User> getUsers(Response r) {
-        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
-        return r.getContentAsObject(type);
     }
 
     /**
@@ -560,12 +588,24 @@ public class TestServer {
             conn.createQuery(sql).executeUpdate();
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
             conn.createQuery(sql2).executeUpdate();
-            String sql3 = "DROP TABLE IF EXISTS user" ;
+            String sql3 = "DROP TABLE IF EXISTS users" ;
             conn.createQuery(sql3).executeUpdate();
-            sql3 = "CREATE TABLE IF NOT EXISTS user (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
-            conn.createQuery(sql3).executeUpdate();
+            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
+            conn.createQuery(sql4).executeUpdate();
+
+            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            conn.createQuery(sqlNew).executeUpdate();
+            conn.createQuery(sqlNew2).executeUpdate();
         }
 
         return dataSource;
+    }
+
+    private List<User> getUsers(Response r) {
+        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
+        return r.getContentAsObject(type);
     }
 }

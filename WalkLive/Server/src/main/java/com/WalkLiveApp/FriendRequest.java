@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class FriendRequest {
-    private Date time;
+    private Date time = new Date();
     private String from; //User? or String?
     private String to;
 
@@ -42,7 +42,7 @@ public class FriendRequest {
     }
 
     public String toString() {
-        String str = "FROM: " + this.from + " TO:  " + this.to + " SENT AT: " + this.time;
+        String str = "FROM: " + this.from + " TO: " + this.to + " SENT AT: " + this.time;
 
         return str;
     }
