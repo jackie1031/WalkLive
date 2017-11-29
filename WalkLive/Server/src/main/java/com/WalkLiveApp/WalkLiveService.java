@@ -224,15 +224,15 @@ public class WalkLiveService {
 
             public List<Crime> getCrimes(Crime from, Crime to, int timeOfDay, String table) {
                 try (Connection conn = db.open()) {
-                    String sql = "SELECT date, address, latitude, longitude, type FROM " + table + " WHERE "
+                    String sql = "SELECT date, address, coordinate, type FROM " + table + " WHERE "
                             + "latitude >= :fromLat AND latitude <= :toLat AND date >= :fromDate AND "
                             + "longitude >= :fromLng AND longitude <= :toLng AND date <= :toDate;";
 
                     Query query = conn.createQuery(sql);
-                    query.addParameter("fromLat", from.getLat())
-                            .addParameter("toLat", to.getLat())
-                            .addParameter("fromLng", from.getLng())
-                            .addParameter("toLng", to.getLng())
+                    query.addParameter("fromLat", from.getCoordinate())
+                            //.addParameter("toLat", to.getLat())
+                            //.addParameter("fromLng", from.getLng())
+                            .addParameter("toLng", to.getCoordinate())
                             .addParameter("fromDate", from.getDate())
                             .addParameter("toDate", to.getDate());
 
@@ -247,8 +247,8 @@ public class WalkLiveService {
             public DangerZone getDangerZone(Coordinate from, Coordinate to, String table) throws UserServiceException {
 //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
                 try (Connection conn = db.open()) {
-                    int[] red = getLinkIds(conn, from, to, "alarm > 2000", table);
-                    int[] yellow = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
+                    Crime[] red = getLinkIds(conn, from, to, "alarm > 2000", table);
+                    Crime[] yellow = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
                     return new DangerZone(red, yellow);
                 } catch (Sql2oException e) {
                     logger.error("Failed to fetch linkIds", e);
@@ -259,7 +259,7 @@ public class WalkLiveService {
                 }
             }
 
-            private int[] getLinkIds(Connection conn, Coordinate from, Coordinate to, String predicate, String table)
+            private Crime[] getLinkIds(Connection conn, Coordinate from, Coordinate to, String predicate, String table)
             throws Sql2oException, NullPointerException {
                 Table fromGrid = new Table(from.getLatitude(), from.getLongitude());
                 Table toGrid = new Table(to.getLatitude(), to.getLongitude());
@@ -280,9 +280,9 @@ public class WalkLiveService {
                         .executeAndFetch(Integer.class);
 
                 int size = avoidLindIds.size();
-                int[] linkIds = new int[size];
+                Crime[] linkIds = new Crime[size];
                 for (int i = 0; i < size; i++) {
-                    linkIds[i] = avoidLindIds.get(i);
+                    //linkIds[i] = avoidLindIds.get(i);
                 }
                 return linkIds;
 

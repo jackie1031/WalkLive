@@ -15,18 +15,18 @@ public class DangerZone {
     }
 
     @SuppressWarnings("unused")
-    private int[] red, yellow;
+    private Crime[] z1, z2;
 
-    public DangerZone(int[] red, int[] yellow) {
-        this.red = red;
-        this.yellow = yellow;
+    public DangerZone(Crime[] z1, Crime[] z2) {
+        this.z1 = z1;
+        this.z2 = z2;
     }
 
-    public int[] getRed() {
-        return this.red;
+    public Crime[] getZ1() {
+        return this.z1;
     }
 
-    public int[] getYellow() {
-        return this.yellow;
+    public Crime[] getZ2() {
+        return this.z2;
     }
 }

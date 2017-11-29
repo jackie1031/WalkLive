@@ -1,29 +1,29 @@
 package com.WalkLiveApp;
 
+
 public class Crime {
-    private int date, time,linkid;
+    private int date, timeOfDay,linkID;
     private String address, type;
-    private double latitude, longitude;
+    private Coordinate coordinate;
 
 
-    public Crime(int date, int time, String address, String type, double latitude, double longitude, int linkid) {
+    public Crime(int date, int timeOfDay, String address, String type, Coordinate coordinate, int linkID) {
         this.date = date;
-        this.time = time;
+        this.timeOfDay = timeOfDay;
         this.address = address;
         this.type = type;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.linkid = linkid;
+        this.coordinate = coordinate;
+        this.linkID = linkID;
     }
 
-    public Crime(int date, double latitude, double longitude) {
-        this.date = date;
-        this.address = "";
-        this.type = "";
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.linkid = 0;
-    }
+//    public Crime(int date, double latitude, double longitude) {
+//        this.date = date;
+//        this.address = "";
+//        this.type = "";
+//        this.latitude = latitude;
+//        this.longitude = longitude;
+//        this.linkID = 0;
+//    }
 
     /**
      * Get the date
@@ -32,7 +32,9 @@ public class Crime {
     public int getDate() {
         return date;
     }
-
+    public int getTimeOfDay() {
+        return timeOfDay;
+    }
     /**
      * Get the address
      * @return address
@@ -45,17 +47,7 @@ public class Crime {
      * Get the latitude
      * @return latitude
      */
-    public double getLat() {
-        return latitude;
-    }
-
-    /**
-     * Get the longitude
-     * @return longitude
-     */
-    public double getLng() {
-        return longitude;
-    }
+    public Coordinate getCoordinate(){return coordinate;}
 
     /**
      * Get the type
@@ -70,7 +62,7 @@ public class Crime {
      * @return linkId
      */
     public int getLinkId() {
-        return linkid;
+        return linkID;
     }
 
     /**
@@ -79,10 +71,10 @@ public class Crime {
      */
     public String toString() {
         return "date: " + date
+                + "time of the day: "+ timeOfDay
                 + " address: " + address
-                + " latitude: " + latitude
-                + " longitutude: " + longitude
+                + " Coordinate: "+coordinate
                 + " type: " + type
-                + " linkId: " + linkid;
+                + " linkId: " + linkID;
     }
 }
