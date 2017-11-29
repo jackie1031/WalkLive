@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Walklive.xcworkspace/xcuserdata/lucy.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/../Walklive.xcworkspace/xcuserdata/lucy.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" afterPath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walklive.db" afterPath="$PROJECT_DIR$/walklive.db" />
-    </list>
+    <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,25 +12,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FriendRequest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="106" column="34" lean-forward="false" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+            <state relative-caret-position="535">
+              <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
+                <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
+                <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -46,10 +47,22 @@
       <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="196" column="33" lean-forward="true" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+            <state relative-caret-position="240">
+              <caret line="16" column="33" lean-forward="false" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#711#712#0" expanded="true" />
+                <element signature="e#736#737#0" expanded="true" />
+                <element signature="e#14364#14365#0" expanded="true" />
+                <element signature="e#14409#14410#0" expanded="true" />
+                <element signature="e#14464#14465#0" expanded="true" />
+                <element signature="e#14502#14503#0" expanded="true" />
+                <element signature="e#14663#14664#0" expanded="true" />
+                <element signature="e#14708#14709#0" expanded="true" />
+                <marker date="1511993708000" expanded="false" signature="14801:14811" ph=" }" />
+                <marker date="1511993708000" expanded="false" signature="14952:14967" ph=" { " />
+                <marker date="1511993708000" expanded="false" signature="14989:14999" ph=" }" />
+                <marker date="1511993708000" expanded="false" signature="15052:15067" ph=" { " />
+                <marker date="1511993708000" expanded="false" signature="15082:15092" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -58,10 +71,11 @@
       <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="598" column="54" lean-forward="true" selection-start-line="598" selection-start-column="54" selection-end-line="598" selection-end-column="54" />
+            <state relative-caret-position="1193">
+              <caret line="599" column="9" lean-forward="false" selection-start-line="599" selection-start-column="9" selection-end-line="599" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1511993708000" expanded="true" signature="24187:24194" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -547,7 +561,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -562,7 +575,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19513889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19513889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -570,11 +583,31 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5083333" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3082353" sideWeight="0.49166667" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40705884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19513889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38351822" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -618,14 +651,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources.properties" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -710,6 +735,26 @@
           <caret line="89" column="26" lean-forward="false" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -747,6 +792,26 @@
           <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -880,10 +945,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="106" column="34" lean-forward="false" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+        <state relative-caret-position="535">
+          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
+            <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
+            <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -900,10 +985,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="598" column="54" lean-forward="true" selection-start-line="598" selection-start-column="54" selection-end-line="598" selection-end-column="54" />
+        <state relative-caret-position="1193">
+          <caret line="599" column="9" lean-forward="false" selection-start-line="599" selection-start-column="9" selection-end-line="599" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1511993708000" expanded="true" signature="24187:24194" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -912,18 +998,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="635">
           <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml.orig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="196" column="33" lean-forward="true" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+        <state relative-caret-position="240">
+          <caret line="16" column="33" lean-forward="false" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#711#712#0" expanded="true" />
+            <element signature="e#736#737#0" expanded="true" />
+            <element signature="e#14364#14365#0" expanded="true" />
+            <element signature="e#14409#14410#0" expanded="true" />
+            <element signature="e#14464#14465#0" expanded="true" />
+            <element signature="e#14502#14503#0" expanded="true" />
+            <element signature="e#14663#14664#0" expanded="true" />
+            <element signature="e#14708#14709#0" expanded="true" />
+            <marker date="1511993708000" expanded="false" signature="14801:14811" ph=" }" />
+            <marker date="1511993708000" expanded="false" signature="14952:14967" ph=" { " />
+            <marker date="1511993708000" expanded="false" signature="14989:14999" ph=" }" />
+            <marker date="1511993708000" expanded="false" signature="15052:15067" ph=" { " />
+            <marker date="1511993708000" expanded="false" signature="15082:15092" ph=" }" />
           </folding>
         </state>
       </provider>
