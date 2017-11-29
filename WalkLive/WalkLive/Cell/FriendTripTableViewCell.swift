@@ -1,20 +1,19 @@
 //
-//  LocationTableViewCell.swift
+//  FriendTripTableViewCell.swift
 //  Walklive
 //
-//  Created by Michelle Shu on 11/19/17.
+//  Created by Michelle Shu on 11/29/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
 
 import UIKit
 
-class LocationTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var destinationLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var acceptButton: UIButton!
+class FriendTripTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var friendNameLabel: UILabel!
+    @IBOutlet weak var sourceLabel: UILabel!
+    @IBOutlet weak var destinationLabel: UILabel!
+    @IBOutlet weak var timeSpentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
