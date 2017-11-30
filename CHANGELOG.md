@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [5.0.1] - 2017-11-29
+### Added
+- BE： pass all tests on travis by @jackie
+
 ## [4.0.1] - 2017-11-19
 ### Added
 - FE: add friend request page, trip request page, trip search page for front end by @mshu1
