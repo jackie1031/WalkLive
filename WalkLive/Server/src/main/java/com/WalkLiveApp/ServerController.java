@@ -91,7 +91,7 @@ public class ServerController {
             //returns 201 at successful creation
             post(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
                 try {
-                    walkLiveService.createFriendRequest(request.params(":username"));
+                    walkLiveService.createFriendRequest(request.params(":username"), request.body());
                     response.status(201);
                 } catch (WalkLiveService.FriendRequestServiceException e) {
                     logger.error("Failed to create friend request.");
@@ -103,7 +103,7 @@ public class ServerController {
             //get my sent friend requests
             get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.getAllFriendRequests(request.params(":username"));
+                    return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
                 } catch (WalkLiveService.FriendRequestServiceException e) {
                     logger.error("Failed to find list of sent friend requests.");
                 }
@@ -125,7 +125,7 @@ public class ServerController {
             //get my received friend requests
             get(API_CONTEXT + "/users/:username/my_requests","application/json", (request, response) -> {
                 try {
-                    return walkLiveService.getMyFriendRequests(request.params(":username"));
+                    return walkLiveService.getIncomingFriendRequests(request.params(":username"));
                 } catch (WalkLiveService.FriendRequestServiceException e) {
                     logger.error("Failed to find list of incoming friend requests.");
                 }

@@ -250,7 +250,7 @@ public class TestServer {
         };
 
         for (FriendRequest f : frs) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friends/requests", f);
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
         }
     }
