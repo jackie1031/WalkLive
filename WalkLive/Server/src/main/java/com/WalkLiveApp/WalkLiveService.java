@@ -205,6 +205,21 @@ public class WalkLiveService {
         }
     }
 
+    public List<FriendRequest> getAllFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
+        return null;
+    }
+
+    public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
+
+    }
+
+    public List<FriendRequest> getMyFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
+        return null;
+    }
+
+    public FriendRequest respondToFriendRequest(String username, String requestId, String body) throws WalkLiveService.FriendRequestServiceException {
+        return null;
+    }
 
     /**
      * ================================================================

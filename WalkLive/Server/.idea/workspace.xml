@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="" />
+    <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/ServerController.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/ServerController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$FriendRequestServiceException.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$FriendRequestServiceException.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$TripServiceException.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$TripServiceException.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$UserServiceException.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$UserServiceException.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" afterPath="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.WalkLiveApp.TestServer.xml" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.WalkLiveApp.TestServer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/com.WalkLiveApp.TestServer.txt" afterPath="$PROJECT_DIR$/target/surefire-reports/com.WalkLiveApp.TestServer.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walklive.db" afterPath="$PROJECT_DIR$/walklive.db" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,30 +30,10 @@
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+            <state relative-caret-position="179">
+              <caret line="140" column="42" lean-forward="false" selection-start-line="140" selection-start-column="42" selection-end-line="140" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
-                <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
-                <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -47,22 +42,23 @@
       <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="33" lean-forward="false" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+            <state relative-caret-position="334">
+              <caret line="219" column="71" lean-forward="true" selection-start-line="219" selection-start-column="71" selection-end-line="219" selection-end-column="71" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#711#712#0" expanded="true" />
                 <element signature="e#736#737#0" expanded="true" />
-                <element signature="e#14364#14365#0" expanded="true" />
-                <element signature="e#14409#14410#0" expanded="true" />
-                <element signature="e#14464#14465#0" expanded="true" />
-                <element signature="e#14502#14503#0" expanded="true" />
-                <element signature="e#14663#14664#0" expanded="true" />
-                <element signature="e#14708#14709#0" expanded="true" />
-                <marker date="1511993708000" expanded="false" signature="14801:14811" ph=" }" />
-                <marker date="1511993708000" expanded="false" signature="14952:14967" ph=" { " />
-                <marker date="1511993708000" expanded="false" signature="14989:14999" ph=" }" />
-                <marker date="1511993708000" expanded="false" signature="15052:15067" ph=" { " />
-                <marker date="1511993708000" expanded="false" signature="15082:15092" ph=" }" />
+                <element signature="e#14971#14972#0" expanded="true" />
+                <element signature="e#15016#15017#0" expanded="true" />
+                <element signature="e#15071#15072#0" expanded="true" />
+                <element signature="e#15109#15110#0" expanded="true" />
+                <element signature="e#15270#15271#0" expanded="true" />
+                <element signature="e#15315#15316#0" expanded="true" />
+                <marker date="1512001463000" expanded="false" signature="15408:15418" ph=" }" />
+                <marker date="1512001463000" expanded="false" signature="15559:15574" ph=" { " />
+                <marker date="1512001463000" expanded="false" signature="15596:15606" ph=" }" />
+                <marker date="1512001463000" expanded="false" signature="15659:15674" ph=" { " />
+                <marker date="1512001463000" expanded="false" signature="15689:15699" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -71,11 +67,12 @@
       <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1193">
-              <caret line="599" column="9" lean-forward="false" selection-start-line="599" selection-start-column="9" selection-end-line="599" selection-end-column="9" />
+            <state relative-caret-position="366">
+              <caret line="249" column="10" lean-forward="true" selection-start-line="249" selection-start-column="10" selection-end-line="249" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1511993708000" expanded="true" signature="24187:24194" ph="{...}" />
+                <element signature="e#21572#21573#0" expanded="true" />
+                <element signature="e#21637#21638#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -167,9 +164,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Trip.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
       </list>
     </option>
@@ -528,12 +525,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Tests - 2017.11.29 at 16h 06m 26s.xml">
-      <configuration name="Tests" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Tests - 2017.11.29 at 16h 21m 19s.xml">
-      <configuration name="Tests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Tests - 2017.11.29 at 16h 28m 07s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
@@ -558,9 +549,16 @@
     <history-entry file="Tests - 2017.11.29 at 16h 59m 17s.xml">
       <configuration name="Tests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Tests - 2017.11.29 at 17h 28m 22s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Tests - 2017.11.29 at 18h 39m 08s.xml">
+      <configuration name="Tests" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -570,12 +568,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5083333" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40705884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2764706" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19513889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19513889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -735,26 +733,6 @@
           <caret line="89" column="26" lean-forward="false" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -792,26 +770,6 @@
           <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -943,36 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1511993708000" expanded="true" signature="4706:5080" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="5107:5556" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="5651:6045" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="6073:6522" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="6603:6995" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="7022:7337" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="7418:7800" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="7828:8248" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="8329:9203" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="8707:9189" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="9231:9863" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="9956:10857" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="10377:10842" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="10884:11395" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="11487:12150" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="11908:12136" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="12177:12667" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="12760:13425" ph="{...}" />
-            <marker date="1511993708000" expanded="true" signature="13185:13411" ph="//..." />
-            <marker date="1511993708000" expanded="true" signature="13580:14571" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="658">
@@ -983,21 +911,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1193">
-          <caret line="599" column="9" lean-forward="false" selection-start-line="599" selection-start-column="9" selection-end-line="599" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1511993708000" expanded="true" signature="24187:24194" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="635">
           <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,24 +937,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="249" column="10" lean-forward="true" selection-start-line="249" selection-start-column="10" selection-end-line="249" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#21572#21573#0" expanded="true" />
+            <element signature="e#21637#21638#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="140" column="42" lean-forward="false" selection-start-line="140" selection-start-column="42" selection-end-line="140" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="33" lean-forward="false" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        <state relative-caret-position="334">
+          <caret line="219" column="71" lean-forward="true" selection-start-line="219" selection-start-column="71" selection-end-line="219" selection-end-column="71" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#711#712#0" expanded="true" />
             <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#14364#14365#0" expanded="true" />
-            <element signature="e#14409#14410#0" expanded="true" />
-            <element signature="e#14464#14465#0" expanded="true" />
-            <element signature="e#14502#14503#0" expanded="true" />
-            <element signature="e#14663#14664#0" expanded="true" />
-            <element signature="e#14708#14709#0" expanded="true" />
-            <marker date="1511993708000" expanded="false" signature="14801:14811" ph=" }" />
-            <marker date="1511993708000" expanded="false" signature="14952:14967" ph=" { " />
-            <marker date="1511993708000" expanded="false" signature="14989:14999" ph=" }" />
-            <marker date="1511993708000" expanded="false" signature="15052:15067" ph=" { " />
-            <marker date="1511993708000" expanded="false" signature="15082:15092" ph=" }" />
+            <element signature="e#14971#14972#0" expanded="true" />
+            <element signature="e#15016#15017#0" expanded="true" />
+            <element signature="e#15071#15072#0" expanded="true" />
+            <element signature="e#15109#15110#0" expanded="true" />
+            <element signature="e#15270#15271#0" expanded="true" />
+            <element signature="e#15315#15316#0" expanded="true" />
+            <marker date="1512001463000" expanded="false" signature="15408:15418" ph=" }" />
+            <marker date="1512001463000" expanded="false" signature="15559:15574" ph=" { " />
+            <marker date="1512001463000" expanded="false" signature="15596:15606" ph=" }" />
+            <marker date="1512001463000" expanded="false" signature="15659:15674" ph=" { " />
+            <marker date="1512001463000" expanded="false" signature="15689:15699" ph=" }" />
           </folding>
         </state>
       </provider>

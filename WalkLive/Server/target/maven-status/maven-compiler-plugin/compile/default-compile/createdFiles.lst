@@ -1,7 +1,7 @@
-com/WalkLiveApp/JsonTransformer.class
 com/WalkLiveApp/WalkLiveService.class
 com/WalkLiveApp/TravelLog.class
 com/WalkLiveApp/ServerController.class
+com/WalkLiveApp/JsonTransformer.class
 com/WalkLiveApp/Bootstrap.class
 com/WalkLiveApp/User.class
 com/WalkLiveApp/Coordinate.class
