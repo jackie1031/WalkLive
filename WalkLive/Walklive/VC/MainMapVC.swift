@@ -21,7 +21,8 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     @IBOutlet weak var contactMessagePanelTextView: UITextView!
     
     var locationManager = CLLocationManager()
-    
+    var roadRequester = RoadRequester()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -30,7 +31,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
         startTripPanelView.isHidden = true
         contactMessagePanel.isHidden = true
         //setCurrentLocation()
-        let roadRequester = RoadRequester(mapView: mapView)
+        roadRequester.setMapView(mapView: self.mapView)
         roadRequester.setCurrentLocation()
     }
     
@@ -69,7 +70,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     }
     
     @IBAction func onContactBottomButton(_ sender: Any) {
-        let roadRequester = RoadRequester(mapView: self.mapView)
         let message = buildMessage(location: roadRequester.getSourceLocation())
         
         self.contactMessagePanelTextView.text = message
@@ -97,7 +97,16 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     }
     
     @IBAction func onStartTripTopButton(_ sender: Any) {
-        
+        //check destination emptiness
+        if (self.startTripDestinationTextLabel.text == "") {
+            return
+        }
+        print(startTripDestinationTextLabel.text!)
+        roadRequester.getSearchResults(success: { (matchings) in
+            //print(matchings[0].name)
+        }, failure: { (error) in
+            print(error)
+        }, query: startTripDestinationTextLabel.text!)
     }
     
     @IBAction func onContactPanelCancelButton(_ sender: Any) {

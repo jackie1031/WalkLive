@@ -234,9 +234,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="onStartTripTopButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="saM-y2-2Cw"/>
-                                                    <segue destination="CCG-MD-SfV" kind="popoverPresentation" popoverAnchorView="YZb-gS-rh0" id="8nD-Ch-ynQ">
-                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                    </segue>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -384,13 +381,14 @@
                         <outlet property="startTripButton" destination="YZb-gS-rh0" id="2OG-Us-5f9"/>
                         <outlet property="startTripDestinationTextLabel" destination="iif-Ti-KoA" id="aFx-aF-Caz"/>
                         <outlet property="startTripPanelView" destination="5Ol-uI-drD" id="0Oa-R5-MG6"/>
+                        <segue destination="CCG-MD-SfV" kind="show" identifier="routeChoiceSegue" id="hsM-78-LnO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paT-Dn-Ru6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2717.5999999999999" y="-167.76611694152925"/>
         </scene>
-        <!--SearchVC-->
+        <!--Choose Your Road-->
         <scene sceneID="6hk-UX-DFq">
             <objects>
                 <viewController id="CCG-MD-SfV" customClass="SearchVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
@@ -403,7 +401,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="106" id="LgF-kK-RdV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="106" id="LgF-kK-RdV" customClass="LocationTableViewCell" customModule="Walklive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="106"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LgF-kK-RdV" id="Och-j1-O83">
@@ -429,15 +427,8 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="✅"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxn-RX-dmR">
-                                                    <rect key="frame" x="15" y="76" width="64" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3.2 mil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1a-G9-Ph3">
-                                                    <rect key="frame" x="80" y="76" width="64" height="20"/>
+                                                    <rect key="frame" x="15" y="71" width="43" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -445,6 +436,11 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addressLabel" destination="2vC-L2-RRP" id="1WO-jK-OZ6"/>
+                                            <outlet property="destinationNameLabel" destination="k3S-BX-zf5" id="29I-Ij-TQl"/>
+                                            <outlet property="distanceLabel" destination="C1a-G9-Ph3" id="qie-Oy-nAm"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -456,6 +452,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="Lpo-5B-nSx"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Choose Your Road" id="OLi-t4-bFO">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="gSv-oM-qQm">
+                            <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F1D-M5-oOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -659,7 +660,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="amU-He-28c">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="amU-He-28c" customClass="FriendTripTableViewCell" customModule="Walklive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="amU-He-28c" id="2gG-RK-oyu">
@@ -674,21 +675,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To: Boston" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mz9-Mq-cUC">
-                                                    <rect key="frame" x="164" y="31" width="82" height="21"/>
+                                                    <rect key="frame" x="164" y="31" width="61" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time Spent: 3 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWK-19-pND">
-                                                    <rect key="frame" x="164" y="49" width="139" height="21"/>
+                                                    <rect key="frame" x="164" y="49" width="103" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="At: New York" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ivx-YI-aNv">
-                                                    <rect key="frame" x="164" y="11" width="99" height="21"/>
+                                                    <rect key="frame" x="164" y="11" width="73" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -711,6 +712,12 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="destinationLabel" destination="mz9-Mq-cUC" id="Vod-1O-mgF"/>
+                                            <outlet property="friendNameLabel" destination="yCW-px-Cuj" id="knE-1N-sMf"/>
+                                            <outlet property="sourceLabel" destination="Ivx-YI-aNv" id="99R-db-KaA"/>
+                                            <outlet property="timeSpentLabel" destination="MWK-19-pND" id="Ylx-I6-KZk"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -783,7 +790,7 @@
                         <viewLayoutGuide key="safeArea" id="NZ7-qD-rSD"/>
                     </view>
                     <navigationItem key="navigationItem" id="mgv-Hp-Elp">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="d60-rg-u33">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="d60-rg-u33">
                             <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="onCancelButton:" destination="wOZ-ms-Ev5" id="77E-3A-0Md"/>

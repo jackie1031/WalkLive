@@ -14,7 +14,8 @@ class RoadRequester: NSObject {
     var locationManager = CLLocationManager()
     var mapView: MKMapView!
     var matchingItems = [MKMapItem]()
-    init(mapView: MKMapView) {
+    
+    func setMapView(mapView: MKMapView){
         self.mapView = mapView
     }
     
@@ -32,17 +33,22 @@ class RoadRequester: NSObject {
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func updateSearchResultsForSearchController(query: String){
+    func getSearchResults(success: @escaping ([MKMapItem]) -> (), failure: @escaping (Error) -> (), query: String){
         let request = MKLocalSearchRequest()
+        print(query)
         request.naturalLanguageQuery = query
         request.region = mapView.region
         let search = MKLocalSearch(request: request)
-        search.start { response, _ in
-            guard let response = response else {
-                return
+        search.start { (response, error) in
+            if (error != nil) {
+                failure(error!)
             }
-            self.matchingItems = response.mapItems
+            success((response?.mapItems)!)
         }
+    }
+    
+    func getMatchingItems() -> [MKMapItem] {
+        return self.matchingItems
     }
     
     func drawRoute() {
