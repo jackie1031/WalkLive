@@ -114,6 +114,17 @@ public class WalkLiveService {
         }
     }
 
+    //authentication
+    public boolean checkPassword(String input, String target) {
+        String encrypted = "";
+
+        if (encrypted != target) {
+            return false;
+        }
+
+        return true;
+    }
+
     /*
      * Finds all users and returns all in user database
      */
