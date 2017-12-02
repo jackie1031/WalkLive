@@ -44,53 +44,55 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     }
     
     @IBAction func onLoginButton(_ sender: Any) {
-        let endpoint = ""
+        if (self.userNameTextField.text == "") {
+            return
+        }
+        loginAttempt(success: {
+            // self.performSegue(withIdentifier: "loginSegue", sender: nil) //?
+        }, failure: { (error) in
+            print(error)
+        })
+    }
+    
+    func loginAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+        let endpoint = "."
         guard let url = URL(string: endpoint) else {
             print("Error: cannot create URL")
             let error = BackendError.urlError(reason: "Could not construct URL")
-            completionHandler(nil, error)
-            return
+            failure(error!)
         }
         var userLoginUrlRequest = URLRequest(url: url)
         url.httpMethod = "POST"
         
-        let userLogin = UserLogin(username: userNameTextField, password: passwordTextField)
+        let userLogin = UserLogin(username: userNameTextField.text, password: passwordTextField.text)
         let encoder = JSONEncoder()
         do {
             let newUserLoginAsJSON = try encoder.encode(userLogin)
             url.httpBody = newUserLoginAsJSON
         } catch {
-            print(error)
-            completionHandler(error) //?
-            return //?
+            failure(error!)
         }
         
-        // ...
         
-        URLSession.shared.dataTask(with: url, completionHandler: {
+        URLSession.shared.dataTask(with: url, completionHandler: { //?
             (data, response, error) in
             // check for errors
             if error != nil {
-                print(error!.localizedDescription)
-                return
+                failure(error!)
             }
-            if let httpResponse = response as? HTTPURRLResponse {
+            if let httpResponse = response as? HTTPURRLResponse { //?
                 print("status code: \(httpResponse.statusCode)")
-                return
+                failure(error!)
             }
             // if success, log in
-            
+            success()
         }).resume()
     }
-    
     
     @IBAction func onCancelButton(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
     
-    func tryLogin(success: (() -> void), failure:(() -> void), ) {
-        
-    }
     
     
 
