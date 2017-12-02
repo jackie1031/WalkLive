@@ -9,7 +9,11 @@
 import UIKit
 
 class LocationTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var destinationNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

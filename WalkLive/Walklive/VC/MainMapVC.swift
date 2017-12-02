@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startTripButton: UIButton!
@@ -22,6 +22,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     
     var locationManager = CLLocationManager()
     var roadRequester = RoadRequester()
+    var mapItems: [MKMapItem]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,8 +103,9 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
             return
         }
         print(startTripDestinationTextLabel.text!)
-        roadRequester.getSearchResults(success: { (matchings) in
-            //print(matchings[0].name)
+        roadRequester.getSearchResults(success: { (mapItems) in
+            self.mapItems = mapItems
+            self.performSegue(withIdentifier: "routeChoiceSegue", sender: nil)
         }, failure: { (error) in
             print(error)
         }, query: startTripDestinationTextLabel.text!)
@@ -127,15 +129,29 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate 
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "routeChoiceSegue"){
+            let vc = segue.destination as! SearchVC
+            vc.routeDelegate = self
+            vc.mapItems = self.mapItems
+            let backItem = UIBarButtonItem()
+            backItem.title = "Cancel"
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
+
+extension MainMapVC: RouteDelegate{
+    func updateRoute() {
+        
+    }
+}
+
 

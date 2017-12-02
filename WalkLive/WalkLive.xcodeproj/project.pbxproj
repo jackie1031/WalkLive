@@ -19,6 +19,7 @@
 		902842FD1FB9686E00EAA2AF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902842FC1FB9686E00EAA2AF /* MapKit.framework */; };
 		902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902842FE1FB9694200EAA2AF /* MainMapVC.swift */; };
 		902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902AEF871FB0E4820043ABAC /* DefaultVC.swift */; };
+		902C961C1FD13A9B00900398 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C961B1FD13A9B00900398 /* Route.swift */; };
 		9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AF6A1FC2794100363D4B /* RoadRequester.swift */; };
 		9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5111FC2880E00E8F47E /* SearchVC.swift */; };
 		9077A5141FC2932F00E8F47E /* FriendRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5131FC2932F00E8F47E /* FriendRequestVC.swift */; };
@@ -28,6 +29,9 @@
 		9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */; };
 		9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */; };
 		90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A18F511F9529FB006FAD99 /* TimePoint.swift */; };
+		90D670DF1FD24D0800D6DAF2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670DE1FD24D0800D6DAF2 /* Location.swift */; };
+		90D670E41FD25F4D00D6DAF2 /* RouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */; };
+		90D670E61FD26EA300D6DAF2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670E51FD26EA300D6DAF2 /* Service.swift */; };
 		90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA16E1FCFD90B00800A08 /* SettingVC.swift */; };
 		90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
@@ -75,6 +79,7 @@
 		902842FC1FB9686E00EAA2AF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		902842FE1FB9694200EAA2AF /* MainMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapVC.swift; sourceTree = "<group>"; };
 		902AEF871FB0E4820043ABAC /* DefaultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
+		902C961B1FD13A9B00900398 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		9040AF6A1FC2794100363D4B /* RoadRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadRequester.swift; sourceTree = "<group>"; };
 		90756C8CBAFF8D3D3DD58275 /* Pods-WalkliveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.release.xcconfig"; sourceTree = "<group>"; };
 		9077A5111FC2880E00E8F47E /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
@@ -85,6 +90,9 @@
 		9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripRequestTableViewCell.swift; path = "/Users/michelleshu/Documents/JHU Junior/OOSE/WalkAlive/WalkLive/Walklive/Cell/TripRequestTableViewCell.swift"; sourceTree = "<absolute>"; };
 		9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		90A18F511F9529FB006FAD99 /* TimePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
+		90D670DE1FD24D0800D6DAF2 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDelegate.swift; sourceTree = "<group>"; };
+		90D670E51FD26EA300D6DAF2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		90EBA16E1FCFD90B00800A08 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -167,10 +175,12 @@
 		9012DCA41F7C325200AFD27C /* Walklive */ = {
 			isa = PBXGroup;
 			children = (
+				90D670E01FD25DC900D6DAF2 /* Delegates */,
 				9077A5191FC2947C00E8F47E /* Cell */,
 				90A18F501F95294A006FAD99 /* Model */,
 				90F233AA1F7C37B60002AF0A /* VC */,
 				9012DCA51F7C325200AFD27C /* AppDelegate.swift */,
+				90D670E51FD26EA300D6DAF2 /* Service.swift */,
 				9012DCA91F7C325300AFD27C /* Main.storyboard */,
 				9012DCAC1F7C325300AFD27C /* Assets.xcassets */,
 				9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */,
@@ -216,8 +226,18 @@
 				8C4EAB671F92966A001E4037 /* User.swift */,
 				90A18F511F9529FB006FAD99 /* TimePoint.swift */,
 				9040AF6A1FC2794100363D4B /* RoadRequester.swift */,
+				902C961B1FD13A9B00900398 /* Route.swift */,
+				90D670DE1FD24D0800D6DAF2 /* Location.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		90D670E01FD25DC900D6DAF2 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		90F233AA1F7C37B60002AF0A /* VC */ = {
@@ -557,6 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */,
+				90D670E61FD26EA300D6DAF2 /* Service.swift in Sources */,
 				90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */,
 				9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */,
 				90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */,
@@ -566,9 +587,12 @@
 				90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */,
 				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
 				90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */,
+				90D670E41FD25F4D00D6DAF2 /* RouteDelegate.swift in Sources */,
 				9077A5161FC293BA00E8F47E /* TripRequestVC.swift in Sources */,
 				9077A5181FC293F900E8F47E /* UserVC.swift in Sources */,
 				9077A5141FC2932F00E8F47E /* FriendRequestVC.swift in Sources */,
+				90D670DF1FD24D0800D6DAF2 /* Location.swift in Sources */,
+				902C961C1FD13A9B00900398 /* Route.swift in Sources */,
 				9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */,
 				9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */,
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
