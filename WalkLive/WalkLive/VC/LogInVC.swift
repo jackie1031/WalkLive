@@ -48,7 +48,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             return
         }
         loginAttempt(success: {
-            // self.performSegue(withIdentifier: "loginSegue", sender: nil) //?
+            self.performSegue(withIdentifier: "mainMapSegue", sender: nil) //?
         }, failure: { (error) in
             print(error)
         })
