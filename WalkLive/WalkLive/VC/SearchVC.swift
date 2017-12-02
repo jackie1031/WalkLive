@@ -42,6 +42,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if (location.phoneNumber != nil) {
             cell.phoneNumberLabel.text = location.phoneNumber
         }
+        cell.selectionStyle = .none
         return cell
     }
     

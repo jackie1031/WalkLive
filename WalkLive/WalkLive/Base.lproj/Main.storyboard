@@ -195,7 +195,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1T3-Db-Rpa">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="scF-un-XBL">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scF-un-XBL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <connections>
                                             <outlet property="delegate" destination="9FO-DO-Aih" id="Td2-0a-JQK"/>
@@ -259,7 +259,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="🌟"/>
                                                 <connections>
-                                                    <action selector="onPoliceBottomButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="Gb3-fr-eNT"/>
                                                     <segue destination="AZZ-mi-YjQ" kind="show" id="LyJ-eO-0Xs"/>
                                                 </connections>
                                             </button>
@@ -267,9 +266,6 @@
                                                 <rect key="frame" x="53" y="0.0" width="43" height="58"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="⚙️"/>
-                                                <connections>
-                                                    <action selector="onPoliceBottomButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="TXY-JQ-tgF"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmf-Ia-BIJ">
                                                 <rect key="frame" x="106" y="0.0" width="43" height="58"/>
@@ -456,7 +452,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-ln-IQo">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-ln-IQo">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="395"/>
                             </mapView>
                         </subviews>

@@ -26,17 +26,40 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
-        locationManager.delegate = self
-        // Do any additional setup after loading the view.
-        startTripPanelView.isHidden = true
-        contactMessagePanel.isHidden = true
-        //setCurrentLocation()
-        roadRequester.setMapView(mapView: self.mapView)
-        roadRequester.setCurrentLocation()
+        self.authorizeLocationUpdate()
+        
+        self.setDelegate()
+        self.setKeyboard()
+        self.setupRoadRequester()
+        
+        self.hidePanels()
     }
     
-
+    private func setDelegate() {
+        self.mapView.delegate = self
+        self.locationManager.delegate = self
+    }
+    
+    private func hidePanels(){
+        self.startTripPanelView.isHidden = true
+        self.contactMessagePanel.isHidden = true
+    }
+    
+    private func setupRoadRequester(){
+        self.roadRequester.setMapView(mapView: self.mapView)
+        self.roadRequester.setCurrentLocation()
+    }
+    
+    private func setKeyboard(){
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+    }
+    
+    @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     /// Check authrization status and start update locations
     private func authorizeLocationUpdate() {
@@ -50,6 +73,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
             break
         }
     }
+    
     
     /// Start update location if authorized
     ///
@@ -122,6 +146,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         
         return renderer
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
