@@ -58,7 +58,7 @@
                                 <connections>
                                     <action selector="onLoginButton:" destination="Bve-na-hFT" eventType="touchUpInside" id="WTS-bD-xHF"/>
                                     <action selector="onSignUpButton:" destination="qxy-8p-pJ2" eventType="touchUpInside" id="dbG-xM-qxc"/>
-                                    <segue destination="9FO-DO-Aih" kind="show" identifier="mainMapSegue" id="fZu-AS-ym8"/>
+                                    <segue destination="9FO-DO-Aih" kind="show" identifier="loginToMainMapSegue" id="fZu-AS-ym8"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="t5h-RL-dxX">
@@ -515,6 +515,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onSignUpButton:" destination="qxy-8p-pJ2" eventType="touchUpInside" id="VMg-xf-erN"/>
+                                    <segue destination="9FO-DO-Aih" kind="show" identifier="signUpToMainMapSegue" id="2eJ-wQ-hTG"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="rzQ-fr-o6Y">
