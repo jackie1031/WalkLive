@@ -44,20 +44,52 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     }
     
     @IBAction func onLoginButton(_ sender: Any) {
-        let userLogin : NSDictionary = [
-            "username": userNameTextField
-            "password": passwordTextField
-        ]
-        let encodedData = try? JSONEncoder().encode(userLogin)
-        var json: Any?
-//        if let data = encodedData {
-//            json = try? JSONSerialization.jsonObject(with:data, options: [])
-//        }
+        let endpoint = ""
+        guard let url = URL(string: endpoint) else {
+            print("Error: cannot create URL")
+            let error = BackendError.urlError(reason: "Could not construct URL")
+            completionHandler(nil, error)
+            return
+        }
+        var userLoginUrlRequest = URLRequest(url: url)
+        url.httpMethod = "POST"
+        
+        let userLogin = UserLogin(username: userNameTextField, password: passwordTextField)
+        let encoder = JSONEncoder()
+        do {
+            let newUserLoginAsJSON = try encoder.encode(userLogin)
+            url.httpBody = newUserLoginAsJSON
+        } catch {
+            print(error)
+            completionHandler(error) //?
+            return //?
+        }
+        
+        // ...
+        
+        URLSession.shared.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            if let httpResponse = response as? HTTPURRLResponse {
+                print("status code: \(httpResponse.statusCode)")
+                return
+            }
+            // if success, log in
+            
+        }).resume()
     }
     
     
     @IBAction func onCancelButton(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    func tryLogin(success: (() -> void), failure:(() -> void), ) {
+        
     }
     
     
