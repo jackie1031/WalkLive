@@ -56,6 +56,7 @@
                                     <color key="titleColor" red="0.025648478620000002" green="0.028694464480000001" blue="0.02898316062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="onLoginButton:" destination="Bve-na-hFT" eventType="touchUpInside" id="WTS-bD-xHF"/>
                                     <action selector="onSignUpButton:" destination="qxy-8p-pJ2" eventType="touchUpInside" id="dbG-xM-qxc"/>
                                     <segue destination="VUm-xm-Aye" kind="show" id="M1b-JE-IfV"/>
                                 </connections>

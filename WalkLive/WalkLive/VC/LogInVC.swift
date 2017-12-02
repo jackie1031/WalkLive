@@ -43,6 +43,19 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onLoginButton(_ sender: Any) {
+        let userLogin : NSDictionary = [
+            "username": userNameTextField
+            "password": passwordTextField
+        ]
+        let encodedData = try? JSONEncoder().encode(userLogin)
+        var json: Any?
+//        if let data = encodedData {
+//            json = try? JSONSerialization.jsonObject(with:data, options: [])
+//        }
+    }
+    
+    
     @IBAction func onCancelButton(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
