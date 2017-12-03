@@ -1,8 +1,8 @@
 //
-//  Route.swift
+//  Trip.swift
 //  Walklive
 //
-//  Created by Michelle Shu on 12/1/17.
+//  Created by Michelle Shu on 12/3/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 import CoreLocation
 
-class Route: NSObject {
+class Trip: NSObject {
     var destinationName: String?
     var address: String?
     var phoneNumber: String?

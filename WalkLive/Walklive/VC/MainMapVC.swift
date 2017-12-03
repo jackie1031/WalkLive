@@ -174,8 +174,28 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 }
 
 extension MainMapVC: RouteDelegate{
-    func updateRoute() {
-        
+    func updateRoute(index: Int) {
+        let targetItem = self.mapItems[index]
+        self.roadRequester.drawRouteFromCurrentLocation(success: { (trip) in
+            self.startTrip(trip: trip)
+        }, failure: { (error) in
+            
+        }, destinationMapItem: targetItem)
+    }
+    
+    func startTrip(trip: Trip){
+        let tv = OnGoingTripView()
+        let tripView = tv.loadNib()
+//        self.startTripPanelView.addSubview(tripView)
+        tripView.destinationLabel.text = trip.destinationName
+        tripView.addressLabel.text = trip.address
+        tripView.estimatedTimeLabel.text = trip.timeInterval?.description
+        tripView.routeDelegate = self
+        self.startTripPanelView.addSubview(tripView)
+    }
+    
+    func cancelTrip(){
+        self.roadRequester.removeRoute()
     }
 }
 

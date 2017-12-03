@@ -8,5 +8,6 @@
 
 import Foundation
 protocol RouteDelegate: class {
-    func updateRoute()
+    func updateRoute(index: Int)
+    func cancelTrip()
 }

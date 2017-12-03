@@ -14,7 +14,9 @@ class RoadRequester: NSObject {
     var locationManager = CLLocationManager()
     var mapView: MKMapView!
     var matchingItems = [MKMapItem]()
-    
+    var overlay: MKOverlay!
+    var destinationAnnotation: MKAnnotation!
+
     func setMapView(mapView: MKMapView){
         self.mapView = mapView
     }
@@ -51,7 +53,7 @@ class RoadRequester: NSObject {
         return self.matchingItems
     }
     
-    func drawRoute() {
+    func drawSampleRoute() {
             // 2.
             let sourceLocation = CLLocationCoordinate2D(latitude: 40.759011, longitude: -73.984472)
             let destinationLocation = CLLocationCoordinate2D(latitude: 40.748441, longitude: -73.985564)
@@ -110,6 +112,83 @@ class RoadRequester: NSObject {
                 let rect = route.polyline.boundingMapRect
                 self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
             }
+    }
+    
+    
+//    func drawRouteFromCurrentLocation(destinationMapItem: MKMapItem){
+//        self.setDestinationLocation(destinationMapItem: destinationMapItem)
+//        self.getRouteFromCurrentLocation(success: { (route) in
+//            self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+//            let rect = route.polyline.boundingMapRect
+//            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+//        }, failure: { (error) in
+//                print("Error: \(error)")
+//        }, destinationMapItem: destinationMapItem)
+//    }
+    func drawRouteFromCurrentLocation(success: @escaping (Trip) -> (), failure: @escaping (Error) -> (), destinationMapItem: MKMapItem) {
+        self.setDestinationLocation(destinationMapItem: destinationMapItem)
+        self.getRouteFromCurrentLocation(success: { (route) in
+            self.overlay = route.polyline
+            self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            success(Trip(mapItem: destinationMapItem, route: route))
+        }, failure: { (error) in
+            failure(error)
+        }, destinationMapItem: destinationMapItem)
+    }
+    
+//    func drawRouteFromCurrentLocation(destinationMapItem: MKMapItem) -> TimeInterval{
+//        var requiredTime = Double(0)
+//        self.setDestinationLocation(destinationMapItem: destinationMapItem)
+//        self.getRouteFromCurrentLocation(success: { (route) in
+//            self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+//            let rect = route.polyline.boundingMapRect
+//            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+//            requiredTime = route.expectedTravelTime
+//        }, failure: { (error) in
+//            print("Error: \(error)")
+//        }, destinationMapItem: destinationMapItem)
+//        return requiredTime
+//    }
+    
+    func getRouteFromCurrentLocation(success: @escaping (MKRoute) -> (), failure: @escaping(Error) -> (), destinationMapItem: MKMapItem) {
+        let sourceMapItem = convertCLLocationToMapItem(cllocation: self.getSourceLocation())
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { (response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            success((response?.routes[0])!)
+            }
+        }
+    
+    func setDestinationLocation(destinationMapItem: MKMapItem){
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.title = destinationMapItem.name
+        destinationAnnotation.coordinate = destinationMapItem.placemark.coordinate
+    self.mapView.showAnnotations([destinationAnnotation], animated: true )
+        self.destinationAnnotation = destinationAnnotation
+    }
+    
+
+    
+    func convertCLLocationToMapItem(cllocation: CLLocation) -> MKMapItem {
+        let placemark = MKPlacemark(coordinate: cllocation.coordinate, addressDictionary: nil)
+        return MKMapItem(placemark: placemark)
+    }
+    
+    func removeRoute(){
+        if (self.overlay != nil) {
+            self.mapView.remove(self.overlay)}
+        if (self.destinationAnnotation != nil) {
+            self.mapView.removeAnnotation(self.destinationAnnotation)
+        }
     }
     
 }
