@@ -19,10 +19,11 @@ class User: NSObject {
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        userId = dictionary["user_id"] as? Int
-        name = dictionary["name"] as? String
-        userName = dictionary["user_name"] as? String
-        phoneNum = dictionary["phone_number"] as? String
+        username = dictionary["username"] as? Int
+        //name = dictionary["name"] as? String
+        nickname = dictionary["nickname"] as? String
+        contact = dictionary["contact"] as? String
+        emergencyContact = dictionary["emergency_contact"] as? String
         //email
     }
     
