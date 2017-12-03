@@ -67,7 +67,11 @@ class SettingVC: UIViewController {
     }
     
     func validPhone() -> Bool {
-        return true
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let userPhoneResult =  phoneTest.evaluateWithObject(self.userPhone.text)
+        let emergencyPhoneResult = phoneTest.evaluateWithObject(self.emergencyContactPhone.text)
+        return (userPhoneResult && emergencyPhoneResult)
     }
     
     @IBAction func onCancelButton(_ sender: Any) {

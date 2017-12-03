@@ -75,12 +75,18 @@ class SignUpVC: UIViewController {
         }).resume()
     }
     
-//    func isValidSignUp() -> Bool {
-//        if (self.userNameTextField.text == "") {
-//            
-//        }
-//        return true
-//    }
+    func isValidSignUp() -> Bool {
+        if (self.userNameTextField.text == "") {
+            return false
+        }
+        if (self.passwordTextField.text != self.confirmPasswordTextField) {
+            return false
+        }
+        if (self.passwordTextField.text.characters.count <= 7) {
+            return false
+        }
+        return true
+    }
     
     /*
     // MARK: - Navigation
