@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F164326CA499F761BEF7CB8 /* Pods_WalkliveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */; };
+		8C49FB301FD36D8D008BC302 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C49FB2F1FD36D8D008BC302 /* SettingVC.swift */; };
 		8C4EAB681F92966A001E4037 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EAB671F92966A001E4037 /* User.swift */; };
 		8CBFF3511FD0EAE900410751 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBFF3501FD0EAE900410751 /* UserLogin.swift */; };
 		9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA51F7C325200AFD27C /* AppDelegate.swift */; };
@@ -29,7 +30,6 @@
 		9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */; };
 		9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */; };
 		90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A18F511F9529FB006FAD99 /* TimePoint.swift */; };
-		90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA16E1FCFD90B00800A08 /* SettingVC.swift */; };
 		90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
@@ -59,6 +59,7 @@
 		45F0A39B0E16E8F2528C5941 /* Pods-WalkliveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.release.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.release.xcconfig"; sourceTree = "<group>"; };
+		8C49FB2F1FD36D8D008BC302 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		8C4EAB671F92966A001E4037 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8CBFF3501FD0EAE900410751 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLogin.swift; path = WalkLive/Model/UserLogin.swift; sourceTree = SOURCE_ROOT; };
 		9012DCA21F7C325200AFD27C /* Walklive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walklive.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +88,6 @@
 		9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripRequestTableViewCell.swift; path = "/Users/michelleshu/Documents/JHU Junior/OOSE/WalkAlive/WalkLive/Walklive/Cell/TripRequestTableViewCell.swift"; sourceTree = "<absolute>"; };
 		9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		90A18F511F9529FB006FAD99 /* TimePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
-		90EBA16E1FCFD90B00800A08 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				9077A5131FC2932F00E8F47E /* FriendRequestVC.swift */,
 				9077A5151FC293BA00E8F47E /* TripRequestVC.swift */,
 				9077A5171FC293F900E8F47E /* UserVC.swift */,
-				90EBA16E1FCFD90B00800A08 /* SettingVC.swift */,
+				8C49FB2F1FD36D8D008BC302 /* SettingVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -560,7 +560,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */,
-				90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */,
 				9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */,
 				90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */,
 				902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */,
@@ -577,6 +576,7 @@
 				9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */,
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
 				9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */,
+				8C49FB301FD36D8D008BC302 /* SettingVC.swift in Sources */,
 				9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */,
 				8C4EAB681F92966A001E4037 /* User.swift in Sources */,
 			);

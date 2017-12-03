@@ -15,7 +15,6 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,12 +75,12 @@ class SignUpVC: UIViewController {
         }).resume()
     }
     
-    func isValidSignUp() -> Bool {
-        if (self.userNameTextField.text == "") {
-            
-        }
-        return true
-    }
+//    func isValidSignUp() -> Bool {
+//        if (self.userNameTextField.text == "") {
+//            
+//        }
+//        return true
+//    }
     
     /*
     // MARK: - Navigation
