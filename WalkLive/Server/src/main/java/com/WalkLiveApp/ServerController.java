@@ -35,7 +35,20 @@ public class ServerController {
                     logger.error("Failed to fetch user entries");
                 }
                 return Collections.EMPTY_MAP;
+            }, new JsonTransformer()); //get list of users
+
+            /** lallaallala
+             * tests
+             */
+            get(API_CONTEXT + "/tests", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.findAllUsers();
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to fetch user entries");
+                }
+                return Collections.EMPTY_MAP;
             }, new JsonTransformer());
+
 
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {

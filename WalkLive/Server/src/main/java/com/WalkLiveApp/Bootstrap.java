@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
 public class Bootstrap {
     public static final String IP_ADDRESS = "localhost";
     public static final int PORT = 8080;
@@ -33,6 +34,8 @@ public class Bootstrap {
         ipAddress(IP_ADDRESS);
         port(PORT);
 
+        port(getPort());
+
         //Specify the sub-directory from which to serve static resources (like html and css)
         staticFileLocation("/public");
 
@@ -43,6 +46,19 @@ public class Bootstrap {
         } catch (WalkLiveService.UserServiceException ex) {
             logger.error("Failed to create a WalkLiveService instance. Aborting");
         }
+    }
+
+//    public static void main(String[] args) {
+//        port(getHerokuAssignedPort());
+//        get("/hello", (req, res) -> "Hello Heroku World");
+//    }
+
+    static int getPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 8080; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
     /**
