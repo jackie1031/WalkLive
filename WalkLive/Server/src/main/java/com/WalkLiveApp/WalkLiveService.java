@@ -20,6 +20,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.json.simple.parser.JSONParser;
+import sun.security.util.Password;
 
 
 public class WalkLiveService {
@@ -75,6 +76,9 @@ public class WalkLiveService {
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
+        String password = object.get("password").toString();
+
+        //check length of password and other security measures
 
         //debugging
         System.out.println("USERNAME:" + username);
@@ -99,6 +103,10 @@ public class WalkLiveService {
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }
 
+        PasswordEncryptor enc = new PasswordEncryptor();
+        int salt = enc.getNewSalt();
+        String hashed = enc.encryptPassword(password, salt);
+
         sql = "INSERT INTO users (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
@@ -106,7 +114,21 @@ public class WalkLiveService {
             conn.createQuery(sql)
                     .bind(user)
                     .executeUpdate();
+            //System.out.println("SUCCESSFULLY ADDED.");
+        } catch(Sql2oException ex) {
+            logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
+            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
+        }
 
+        sql = "INSERT INTO tokens (username, hash, salt) " +
+                "             VALUES (:username, :hash, :salt)" ;
+
+        try (Connection conn = db.open()) {
+            conn.createQuery(sql)
+                    .addParameter("username", username)
+                    .addParameter("hash", hashed)
+                    .addParameter("salt", salt)
+                    .executeUpdate();
             //System.out.println("SUCCESSFULLY ADDED.");
         } catch(Sql2oException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
@@ -140,7 +162,7 @@ public class WalkLiveService {
     }
 
     /*
-     * Returns a URI to access the specific users profile info - FIND OUT DETAILS
+     * Returns a URI to access the specific users profile info
      */
     public String login(String body) throws UserServiceException, ParseException {
         User user = new Gson().fromJson(body, User.class);

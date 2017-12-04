@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51fa6c5d-8650-48e1-b9aa-6a5f91239374" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/PasswordEncryptor.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserServiceException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/UserServiceException.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$FriendRequestServiceException.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$FriendRequestServiceException.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$TripServiceException.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$TripServiceException.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$UserServiceException.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService$UserServiceException.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService.class" afterPath="$PROJECT_DIR$/target/classes/com/WalkLiveApp/WalkLiveService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walklive.db" afterPath="$PROJECT_DIR$/walklive.db" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
+      <file leaf-file-name="PasswordEncryptor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/PasswordEncryptor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PasswordEncryptor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/PasswordEncryptor.java">
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="37" />
+            <state relative-caret-position="897">
+              <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,29 +41,29 @@
       <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="73" column="58" lean-forward="false" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
+            <state relative-caret-position="899">
+              <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#711#712#0" expanded="true" />
-                <element signature="e#736#737#0" expanded="true" />
-                <element signature="e#17311#17312#0" expanded="true" />
-                <element signature="e#17356#17357#0" expanded="true" />
-                <element signature="e#17411#17412#0" expanded="true" />
-                <element signature="e#17449#17450#0" expanded="true" />
-                <element signature="e#17610#17611#0" expanded="true" />
-                <element signature="e#17655#17656#0" expanded="true" />
-                <marker date="1512087435000" expanded="false" signature="17748:17758" ph=" }" />
-                <marker date="1512087435000" expanded="false" signature="17899:17914" ph=" { " />
-                <marker date="1512087435000" expanded="false" signature="17936:17946" ph=" }" />
-                <marker date="1512087435000" expanded="false" signature="17999:18014" ph=" { " />
-                <marker date="1512087435000" expanded="false" signature="18029:18039" ph=" }" />
+                <element signature="e#746#747#0" expanded="true" />
+                <element signature="e#771#772#0" expanded="true" />
+                <element signature="e#18302#18303#0" expanded="true" />
+                <element signature="e#18347#18348#0" expanded="true" />
+                <element signature="e#18402#18403#0" expanded="true" />
+                <element signature="e#18440#18441#0" expanded="true" />
+                <element signature="e#18601#18602#0" expanded="true" />
+                <element signature="e#18646#18647#0" expanded="true" />
+                <marker date="1512093448000" expanded="false" signature="18739:18749" ph=" }" />
+                <marker date="1512093448000" expanded="false" signature="18890:18905" ph=" { " />
+                <marker date="1512093448000" expanded="false" signature="18927:18937" ph=" }" />
+                <marker date="1512093448000" expanded="false" signature="18990:19005" ph=" { " />
+                <marker date="1512093448000" expanded="false" signature="19020:19030" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="413">
@@ -153,8 +144,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/PasswordEncryptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
       </list>
     </option>
   </component>
@@ -666,7 +657,7 @@
         <state relative-caret-position="240">
           <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -721,7 +712,7 @@
         <state relative-caret-position="60">
           <caret line="16" column="24" lean-forward="false" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -859,7 +850,7 @@
         <state relative-caret-position="375">
           <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -916,21 +907,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/PasswordEncryptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="252" column="86" lean-forward="true" selection-start-line="252" selection-start-column="86" selection-end-line="252" selection-end-column="86" />
+        <state relative-caret-position="225">
+          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#21571#21572#0" expanded="true" />
-            <element signature="e#21636#21637#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
+        <state relative-caret-position="897">
           <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -940,33 +929,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="73" column="58" lean-forward="false" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
+        <state relative-caret-position="899">
+          <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#711#712#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#17311#17312#0" expanded="true" />
-            <element signature="e#17356#17357#0" expanded="true" />
-            <element signature="e#17411#17412#0" expanded="true" />
-            <element signature="e#17449#17450#0" expanded="true" />
-            <element signature="e#17610#17611#0" expanded="true" />
-            <element signature="e#17655#17656#0" expanded="true" />
-            <marker date="1512087435000" expanded="false" signature="17748:17758" ph=" }" />
-            <marker date="1512087435000" expanded="false" signature="17899:17914" ph=" { " />
-            <marker date="1512087435000" expanded="false" signature="17936:17946" ph=" }" />
-            <marker date="1512087435000" expanded="false" signature="17999:18014" ph=" { " />
-            <marker date="1512087435000" expanded="false" signature="18029:18039" ph=" }" />
+            <element signature="e#746#747#0" expanded="true" />
+            <element signature="e#771#772#0" expanded="true" />
+            <element signature="e#18302#18303#0" expanded="true" />
+            <element signature="e#18347#18348#0" expanded="true" />
+            <element signature="e#18402#18403#0" expanded="true" />
+            <element signature="e#18440#18441#0" expanded="true" />
+            <element signature="e#18601#18602#0" expanded="true" />
+            <element signature="e#18646#18647#0" expanded="true" />
+            <marker date="1512093448000" expanded="false" signature="18739:18749" ph=" }" />
+            <marker date="1512093448000" expanded="false" signature="18890:18905" ph=" { " />
+            <marker date="1512093448000" expanded="false" signature="18927:18937" ph=" }" />
+            <marker date="1512093448000" expanded="false" signature="18990:19005" ph=" { " />
+            <marker date="1512093448000" expanded="false" signature="19020:19030" ph=" }" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/PasswordEncryptor.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="37" />
+        <state relative-caret-position="413">
+          <caret line="252" column="86" lean-forward="true" selection-start-line="252" selection-start-column="86" selection-end-line="252" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#21571#21572#0" expanded="true" />
+            <element signature="e#21636#21637#0" expanded="true" />
           </folding>
         </state>
       </provider>
