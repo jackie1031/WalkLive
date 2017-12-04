@@ -259,6 +259,9 @@ extension MainMapVC: RouteDelegate{
         self.timeManager = nil
         self.tripView = nil
     }
+    
+    func completeTrip(){
+    }
 }
 
 extension MainMapVC: TripPanelDelegate{

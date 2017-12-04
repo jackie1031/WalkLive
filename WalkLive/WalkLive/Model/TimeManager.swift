@@ -55,4 +55,5 @@ class TimeManager: NSObject {
         }
         return 0
     }
+    
 }
