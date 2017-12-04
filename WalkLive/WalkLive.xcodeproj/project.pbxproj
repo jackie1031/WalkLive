@@ -37,6 +37,7 @@
 		90F10A021FD493080085AB15 /* OnGoingTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90F10A011FD493080085AB15 /* OnGoingTripView.xib */; };
 		90F10A041FD4931F0085AB15 /* OnGoingTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */; };
 		90F10A061FD499A40085AB15 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A051FD499A40085AB15 /* Trip.swift */; };
+		90F10A081FD525240085AB15 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A071FD525240085AB15 /* TimeManager.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
 		930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */; };
@@ -101,6 +102,7 @@
 		90F10A011FD493080085AB15 /* OnGoingTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnGoingTripView.xib; sourceTree = "<group>"; };
 		90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGoingTripView.swift; sourceTree = "<group>"; };
 		90F10A051FD499A40085AB15 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		90F10A071FD525240085AB15 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				902C961B1FD13A9B00900398 /* Route.swift */,
 				90D670DE1FD24D0800D6DAF2 /* Location.swift */,
 				90F10A051FD499A40085AB15 /* Trip.swift */,
+				90F10A071FD525240085AB15 /* TimeManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				902C961C1FD13A9B00900398 /* Route.swift in Sources */,
 				9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */,
 				9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */,
+				90F10A081FD525240085AB15 /* TimeManager.swift in Sources */,
 				90F10A041FD4931F0085AB15 /* OnGoingTripView.swift in Sources */,
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
 				9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */,

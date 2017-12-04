@@ -189,10 +189,14 @@ extension MainMapVC: RouteDelegate{
 //        self.startTripPanelView.addSubview(tripView)
         tripView.destinationLabel.text = trip.destinationName
         tripView.addressLabel.text = trip.address
-        tripView.estimatedTimeLabel.text = trip.timeInterval?.description
+        tripView.estimatedTimeLabel.text = "Estimated Time: " + (trip.timeInterval?.description)!
+        
+        tripView.center = self.startTripPanelView.center
+        
         tripView.routeDelegate = self
         self.startTripPanelView.addSubview(tripView)
     }
+    
     
     func cancelTrip(){
         self.roadRequester.removeRoute()
