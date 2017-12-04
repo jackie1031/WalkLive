@@ -102,6 +102,10 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     /// - Parameters:
     ///  Sender: the button which receives this action
     @IBAction func onStartTripBottomButton(_ sender: Any) {
+        if (startTripPanelView.isHidden == false) {
+            startTripPanelView.isHidden = true
+            return
+        }
         startTripPanelView.isHidden = false
         UIView.animate(withDuration: 0.6) {
             self.startTripPanelView.alpha = 0.8
@@ -113,8 +117,12 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     /// - Parameters:
     ///  Sender: the button which receives this action
     @IBAction func onContactBottomButton(_ sender: Any) {
-        let message = buildMessage(location: roadRequester.getSourceLocation())
+        if (contactMessagePanel.isHidden == false) {
+            contactMessagePanel.isHidden = true
+            return
+        }
         
+        let message = buildMessage(location: roadRequester.getSourceLocation())
         self.contactMessagePanelTextView.text = message
         self.contactMessagePanel.isHidden = false
     }
@@ -148,6 +156,9 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     /// - Parameters:
     ///  location: location needed to form this message
     func buildMessage(location: CLLocation) -> String {
+        if (self.tripView == nil) {
+            return "I am currently at Time Square(latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + "From Admin."
+        }
         return "I am currently at Time Square(latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + "), and heading to Empire State Building(). Need ~15 minutes, I have walked 0 minutes, 5 seconds. From Admin."
     }
     
@@ -245,6 +256,8 @@ extension MainMapVC: RouteDelegate{
     func cancelTrip(){
         self.roadRequester.removeRoute()
         self.timeManager.endTimer()
+        self.timeManager = nil
+        self.tripView = nil
     }
 }
 
