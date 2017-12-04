@@ -70,7 +70,7 @@ public class WalkLiveService {
         //debugging
         System.out.println("USERNAME:" + username);
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
         //if the query != null then username already exists. - set response code to 401 (invalid UserId)
 
         try (Connection conn = db.open()) {
@@ -90,7 +90,7 @@ public class WalkLiveService {
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }
 
-        sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
+        sql = "INSERT INTO users (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
         try (Connection conn = db.open()) {
@@ -110,7 +110,7 @@ public class WalkLiveService {
      */
     public List<User> findAllUsers() throws UserServiceException {
         try (Connection conn = db.open()) {
-            List<User> users = conn.createQuery("SELECT * FROM user")
+            List<User> users = conn.createQuery("SELECT * FROM users")
                     .executeAndFetch(User.class);
             return users;
         } catch (Sql2oException ex) {
@@ -129,7 +129,7 @@ public class WalkLiveService {
         String username = object.get("username").toString();
         String password = object.get("password").toString();
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) {
             User u = conn.createQuery(sql)
@@ -156,7 +156,7 @@ public class WalkLiveService {
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) { //find user by username
             User u = conn.createQuery(sql)
