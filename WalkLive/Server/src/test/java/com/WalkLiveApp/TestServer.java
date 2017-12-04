@@ -71,9 +71,11 @@ public class TestServer {
 
     }
 
-    @After
-    public void tearDown() {
-    }
+//    @After
+//    public void tearDown() {
+//        clearDB();
+//        //Spark.stop();
+//    }
 
     //------------------------------------------------------------------------//
     // Tests

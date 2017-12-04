@@ -175,6 +175,11 @@ public class WalkLiveService {
      * For trip part -----------------------
      **/
 
+    public String test() throws UserServiceException {
+        String temp = "success";
+        return temp;
+    }
+
     public Trip startTrip(String body) throws  UserServiceException, ParseException {
         Trip temp = new Trip();
         return temp;
@@ -234,6 +239,8 @@ public class WalkLiveService {
         return "";
 
     }
+
+
 
             public List<Crime> getCrimes(Crime from, Crime to, int timeOfDay, String table) {
                 try (Connection conn = db.open()) {

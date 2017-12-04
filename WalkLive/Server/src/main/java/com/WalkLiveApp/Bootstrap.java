@@ -17,9 +17,11 @@ import java.nio.file.Paths;
 
 public class Bootstrap {
     public static final String IP_ADDRESS = "localhost";
-    public static final int PORT = 8080;
+    public static final int PORT = 5000;
 
     private static final Logger logger = LoggerFactory.getLogger(Bootstrap.class);
+
+    private static ServerController controller = null;
 
     public static void main(String[] args) throws Exception {
         //Check if the database file exists in the current directory. Abort if not
@@ -31,21 +33,31 @@ public class Bootstrap {
         }
 
         //Specify the IP address and Port at which the server should be run
-        ipAddress(IP_ADDRESS);
-        port(PORT);
+        //ipAddress(IP_ADDRESS);
+
+        //port(PORT);
 
         port(getPort());
 
         //Specify the sub-directory from which to serve static resources (like html and css)
         staticFileLocation("/public");
 
+
         //Create the model instance and then configure and start the web service
+
         try {
             WalkLiveService model = new WalkLiveService(dataSource);
-            new ServerController(model);
+            controller = new ServerController(model);
+            //model.test();
+
         } catch (WalkLiveService.UserServiceException ex) {
             logger.error("Failed to create a WalkLiveService instance. Aborting");
         }
+
+
+        //get("/hello", (req, res) -> "Hello Heroku World");
+
+
     }
 
 //    public static void main(String[] args) {
@@ -56,9 +68,12 @@ public class Bootstrap {
     static int getPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
+            logger.info("GOT PORT: " + processBuilder.environment().get("PORT"));
+
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
-        return 8080; //return default port if heroku-port isn't set (i.e. on localhost)
+        logger.info("FAILED TO GET PORT FROM HEROKU");
+        return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
     /**

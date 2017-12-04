@@ -19,6 +19,8 @@ public class ServerController {
         public ServerController(WalkLiveService walkLiveService) {
             this.walkLiveService = walkLiveService;
             setupEndpoints();
+            logger.info("finished  set up endpoints");
+
         }
 
         private void setupEndpoints() {
@@ -42,7 +44,7 @@ public class ServerController {
              */
             get(API_CONTEXT + "/tests", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.findAllUsers();
+                    return walkLiveService.test();
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to fetch user entries");
                 }
@@ -195,7 +197,7 @@ public class ServerController {
 //                }
             }, new JsonTransformer());
 
-
+                /**
 //            addTimePoint:
 //            Method: POST
 //            URL: /WalkLive/api/<userId>/timepoints
@@ -229,6 +231,7 @@ public class ServerController {
 //                }
 
             }, new JsonTransformer());
+            **/
 
 //            getTimePoint:
 //            Method: GET
@@ -285,6 +288,27 @@ public class ServerController {
 
              // get linkIDs to Avoid
             get(API_CONTEXT + "/getdangerzone", "application/json", (request, response) -> {
+                try {
+                    double fromLat = Double.parseDouble(request.queryParams("fromLat"));
+                    double fromLng = Double.parseDouble(request.queryParams("fromLng"));
+                    double toLat = Double.parseDouble(request.queryParams("toLat"));
+                    double toLng = Double.parseDouble(request.queryParams("toLng"));
+                    int timeOfDay = Integer.parseInt(request.queryParams("timeOfDay"));
+                    Coordinate from = new Coordinate(fromLat, fromLng);
+                    Coordinate to = new Coordinate(toLat, toLng);
+                    Coordinate.sortAndExpand(from, to);
+                    response.status(200);
+                    return walkLiveService.getDangerZone(from, to, "Table");
+                } catch (Exception e) {
+                    logger.info("Invalid request", e);
+                    response.status(400);
+                    return Collections.EMPTY_MAP;
+                }
+            }, new JsonTransformer());
+
+
+            //CANCEL TRIP
+            get(API_CONTEXT + "/cancel", "application/json", (request, response) -> {
                 try {
                     double fromLat = Double.parseDouble(request.queryParams("fromLat"));
                     double fromLng = Double.parseDouble(request.queryParams("fromLng"));
