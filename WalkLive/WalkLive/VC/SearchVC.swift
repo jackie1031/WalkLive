@@ -37,6 +37,7 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = searchLocationTable.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationTableViewCell
         let mapItem = self.mapItems[indexPath.row]
         let location = Location(mapItem: mapItem)
+        cell.goButton.tag = indexPath.row
         cell.destinationNameLabel.text = location.destinationName
         cell.addressLabel.text = location.address
         if (location.phoneNumber != nil) {
@@ -57,6 +58,12 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             listAnnotation.append(sourceAnnotation)
         }
         self.mapView.showAnnotations(listAnnotation, animated: true)
+    }
+    
+    @IBAction func onGoButton(_ sender: Any) {
+        let button = sender as! UIButton
+        self.routeDelegate?.updateRoute(index: button.tag)
+        self.navigationController?.popViewController(animated: true)
     }
     
 

@@ -70,7 +70,7 @@ public class WalkLiveService {
         //debugging
         System.out.println("USERNAME:" + username);
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
         //if the query != null then username already exists. - set response code to 401 (invalid UserId)
 
         try (Connection conn = db.open()) {
@@ -90,7 +90,7 @@ public class WalkLiveService {
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }
 
-        sql = "INSERT INTO user (username, password, nickname, friendId, createdOn) " +
+        sql = "INSERT INTO users (username, password, nickname, friendId, createdOn) " +
                 "             VALUES (:username, :password, :nickname, :friendId, :createdOn)" ;
 
         try (Connection conn = db.open()) {
@@ -110,7 +110,7 @@ public class WalkLiveService {
      */
     public List<User> findAllUsers() throws UserServiceException {
         try (Connection conn = db.open()) {
-            List<User> users = conn.createQuery("SELECT * FROM user")
+            List<User> users = conn.createQuery("SELECT * FROM users")
                     .executeAndFetch(User.class);
             return users;
         } catch (Sql2oException ex) {
@@ -129,7 +129,7 @@ public class WalkLiveService {
         String username = object.get("username").toString();
         String password = object.get("password").toString();
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) {
             User u = conn.createQuery(sql)
@@ -156,7 +156,7 @@ public class WalkLiveService {
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
 
-        String sql = "SELECT * FROM user WHERE username = :username LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
 
         try (Connection conn = db.open()) { //find user by username
             User u = conn.createQuery(sql)
@@ -168,6 +168,85 @@ public class WalkLiveService {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
             throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
         }
+    }
+
+
+    /**
+     * ================================================================
+     * Friend Request Handling
+     * ================================================================
+     */
+
+    //create a new FriendRequest and store in database
+    public void createFriendRequest(String username, String body) throws WalkLiveService.FriendRequestServiceException {
+        FriendRequest fr = new Gson().fromJson(body, FriendRequest.class);
+        System.out.println(fr.toString());
+
+        String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) " +
+                "             VALUES (:sender, :recipient, :sent_on)" ;
+
+        try (Connection conn = db.open()) {
+            conn.createQuery(sql)
+                    .bind(fr)
+                    .executeUpdate();
+        } catch(Sql2oException ex) {
+            logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+            throw new FriendRequestServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+        }
+    }
+
+    //get my sent friend requests
+    public List<FriendRequest> getOutgoingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
+        //checks needed
+
+        try (Connection conn = db.open()) {
+            List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE sender = :sender")
+                    .addParameter("sender", body)
+                    .executeAndFetch(FriendRequest.class);
+            return requests;
+        } catch (Sql2oException ex) {
+            logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+            throw new FriendRequestServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+        }
+    }
+
+    //delete select sent friend request (cancel request) - extended feature
+    public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
+        //checks needed
+
+        String sql = "DELETE FROM friendRequests WHERE requestId = :requestId" ;
+
+        try (Connection conn = db.open()) {
+            conn.createQuery(sql)
+                    .addParameter("requestId", requestId)
+                    .executeUpdate();
+        } catch(Sql2oException ex) {
+            logger.error("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
+            throw new FriendRequestServiceException("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
+        }
+    }
+
+    //get my received friend requests
+    public List<FriendRequest> getIncomingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
+        //checks needed
+
+        try (Connection conn = db.open()) {
+            List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE recipient = :recipient")
+                    .addParameter("recipient", body)
+                    .executeAndFetch(FriendRequest.class);
+            return requests;
+        } catch (Sql2oException ex) {
+            logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+            throw new FriendRequestServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+        }
+    }
+
+    //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
+    //if accept, then add to friends list for both - FIGURE OUT DETAILS
+    //either way, dealt with friend requests should be deleted
+    //delete select sent friend request
+    public FriendRequest respondToFriendRequest(String username, String requestId, String body) throws WalkLiveService.FriendRequestServiceException {
+        return null;
     }
 
 
@@ -323,6 +402,16 @@ public class WalkLiveService {
         }
 
         public UserServiceException(String message) {
+            super(message);
+        }
+    }
+
+    public static class FriendRequestServiceException extends Exception {
+        public FriendRequestServiceException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public FriendRequestServiceException(String message) {
             super(message);
         }
     }

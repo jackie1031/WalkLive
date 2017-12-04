@@ -13,6 +13,8 @@ class LocationTableViewCell: UITableViewCell {
     @IBOutlet weak var destinationNameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var goButton: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

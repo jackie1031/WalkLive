@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F164326CA499F761BEF7CB8 /* Pods_WalkliveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */; };
 		8C4EAB681F92966A001E4037 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EAB671F92966A001E4037 /* User.swift */; };
+		8C55E85C1FD5CFE60052E129 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E85B1FD5CFE60052E129 /* UserLogin.swift */; };
 		9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA51F7C325200AFD27C /* AppDelegate.swift */; };
 		9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA71F7C325200AFD27C /* FirstViewVC.swift */; };
 		9012DCAB1F7C325300AFD27C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCA91F7C325300AFD27C /* Main.storyboard */; };
@@ -34,6 +35,11 @@
 		90D670E61FD26EA300D6DAF2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670E51FD26EA300D6DAF2 /* Service.swift */; };
 		90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA16E1FCFD90B00800A08 /* SettingVC.swift */; };
 		90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */; };
+		90F10A021FD493080085AB15 /* OnGoingTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90F10A011FD493080085AB15 /* OnGoingTripView.xib */; };
+		90F10A041FD4931F0085AB15 /* OnGoingTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */; };
+		90F10A061FD499A40085AB15 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A051FD499A40085AB15 /* Trip.swift */; };
+		90F10A081FD525240085AB15 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A071FD525240085AB15 /* TimeManager.swift */; };
+		90F10A0A1FD5AC610085AB15 /* TripPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
 		930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */; };
@@ -63,6 +69,7 @@
 		4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.release.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.release.xcconfig"; sourceTree = "<group>"; };
 		8C4EAB671F92966A001E4037 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8C55E85B1FD5CFE60052E129 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLogin.swift; path = WalkLive/Model/UserLogin.swift; sourceTree = SOURCE_ROOT; };
 		9012DCA21F7C325200AFD27C /* Walklive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walklive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9012DCA51F7C325200AFD27C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9012DCA71F7C325200AFD27C /* FirstViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
@@ -95,6 +102,11 @@
 		90D670E51FD26EA300D6DAF2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		90EBA16E1FCFD90B00800A08 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
+		90F10A011FD493080085AB15 /* OnGoingTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnGoingTripView.xib; sourceTree = "<group>"; };
+		90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGoingTripView.swift; sourceTree = "<group>"; };
+		90F10A051FD499A40085AB15 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		90F10A071FD525240085AB15 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPanelDelegate.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +187,7 @@
 		9012DCA41F7C325200AFD27C /* Walklive */ = {
 			isa = PBXGroup;
 			children = (
+				90F109FC1FD492490085AB15 /* Xibs */,
 				90D670E01FD25DC900D6DAF2 /* Delegates */,
 				9077A5191FC2947C00E8F47E /* Cell */,
 				90A18F501F95294A006FAD99 /* Model */,
@@ -228,6 +241,9 @@
 				9040AF6A1FC2794100363D4B /* RoadRequester.swift */,
 				902C961B1FD13A9B00900398 /* Route.swift */,
 				90D670DE1FD24D0800D6DAF2 /* Location.swift */,
+				90F10A051FD499A40085AB15 /* Trip.swift */,
+				90F10A071FD525240085AB15 /* TimeManager.swift */,
+				8C55E85B1FD5CFE60052E129 /* UserLogin.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,8 +252,18 @@
 			isa = PBXGroup;
 			children = (
 				90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */,
+				90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		90F109FC1FD492490085AB15 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				90F10A011FD493080085AB15 /* OnGoingTripView.xib */,
+				90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */,
+			);
+			path = Xibs;
 			sourceTree = "<group>";
 		};
 		90F233AA1F7C37B60002AF0A /* VC */ = {
@@ -390,6 +416,7 @@
 				9012DCB01F7C325300AFD27C /* LaunchScreen.storyboard in Resources */,
 				9012DCAD1F7C325300AFD27C /* Assets.xcassets in Resources */,
 				9012DCAB1F7C325300AFD27C /* Main.storyboard in Resources */,
+				90F10A021FD493080085AB15 /* OnGoingTripView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,11 +608,13 @@
 				90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */,
 				9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */,
 				90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */,
+				90F10A061FD499A40085AB15 /* Trip.swift in Sources */,
 				902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */,
 				9077A51B1FC294FE00E8F47E /* FriendRequestTableViewCell.swift in Sources */,
 				9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */,
 				90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */,
 				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
+				90F10A0A1FD5AC610085AB15 /* TripPanelDelegate.swift in Sources */,
 				90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */,
 				90D670E41FD25F4D00D6DAF2 /* RouteDelegate.swift in Sources */,
 				9077A5161FC293BA00E8F47E /* TripRequestVC.swift in Sources */,
@@ -595,9 +624,12 @@
 				902C961C1FD13A9B00900398 /* Route.swift in Sources */,
 				9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */,
 				9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */,
+				90F10A081FD525240085AB15 /* TimeManager.swift in Sources */,
+				90F10A041FD4931F0085AB15 /* OnGoingTripView.swift in Sources */,
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
 				9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */,
 				9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */,
+				8C55E85C1FD5CFE60052E129 /* UserLogin.swift in Sources */,
 				8C4EAB681F92966A001E4037 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

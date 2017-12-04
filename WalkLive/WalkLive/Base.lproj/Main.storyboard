@@ -430,6 +430,9 @@
                                                     <state key="normal" title="GO">
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onGoButton:" destination="CCG-MD-SfV" eventType="touchUpInside" id="isM-4K-pye"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -447,6 +450,7 @@
                                         <connections>
                                             <outlet property="addressLabel" destination="2vC-L2-RRP" id="1WO-jK-OZ6"/>
                                             <outlet property="destinationNameLabel" destination="k3S-BX-zf5" id="29I-Ij-TQl"/>
+                                            <outlet property="goButton" destination="46y-eG-0tj" id="y0j-2f-rod"/>
                                             <outlet property="phoneNumberLabel" destination="N74-4m-nqt" id="cw4-Iv-8et"/>
                                         </connections>
                                     </tableViewCell>
@@ -804,6 +808,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7lF-9n-Kh9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="NZ7-qD-rSD"/>
@@ -825,7 +835,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJI-m5-gFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1571" y="1630"/>
+            <point key="canvasLocation" x="1570.4000000000001" y="1629.5352323838083"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="dFv-He-xJ4">
