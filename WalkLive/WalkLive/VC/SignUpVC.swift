@@ -18,10 +18,10 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,12 +32,59 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func onSignUpButton(_ sender: Any) {
+        if (self.userNameTextField.text == "") {
+            return
+        }
+        signUpAttempt(success: {
+            self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
+        }, failure: { (error) in
+            print(error)
+        })
+    }
+    
+    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+        let endpoint = "."
+        guard let url = URL(string: endpoint) else {
+            print("Error: cannot create URL")
+            let error = BackendError.urlError(reason: "Could not construct URL")
+            failure(error!)
+        }
+        var userLoginUrlRequest = URLRequest(url: url)
+        url.httpMethod = "POST"
         
+        let userLogin = UserLogin(username: userNameTextField.text, password: passwordTextField.text)
+        let encoder = JSONEncoder()
+        do {
+            let newUserLoginAsJSON = try encoder.encode(userLogin)
+            url.httpBody = newUserLoginAsJSON
+        } catch {
+            failure(error!)
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            if let httpResponse = response as? HTTPURRLResponse { //?
+                print("status code: \(httpResponse.statusCode)")
+                failure(error!)
+            }
+            // if success, log in
+            success()
+        }).resume()
     }
     
     func isValidSignUp() -> Bool {
         if (self.userNameTextField.text == "") {
-            
+            return false
+        }
+        if (self.passwordTextField.text != self.confirmPasswordTextField) {
+            return false
+        }
+        if (self.passwordTextField.text.characters.count <= 7) {
+            return false
         }
         return true
     }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3F164326CA499F761BEF7CB8 /* Pods_WalkliveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */; };
 		8C4EAB681F92966A001E4037 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EAB671F92966A001E4037 /* User.swift */; };
+		8C55E85C1FD5CFE60052E129 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E85B1FD5CFE60052E129 /* UserLogin.swift */; };
 		9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA51F7C325200AFD27C /* AppDelegate.swift */; };
 		9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA71F7C325200AFD27C /* FirstViewVC.swift */; };
 		9012DCAB1F7C325300AFD27C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCA91F7C325300AFD27C /* Main.storyboard */; };
@@ -68,6 +69,7 @@
 		4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.release.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.release.xcconfig"; sourceTree = "<group>"; };
 		8C4EAB671F92966A001E4037 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8C55E85B1FD5CFE60052E129 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLogin.swift; path = WalkLive/Model/UserLogin.swift; sourceTree = SOURCE_ROOT; };
 		9012DCA21F7C325200AFD27C /* Walklive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walklive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9012DCA51F7C325200AFD27C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9012DCA71F7C325200AFD27C /* FirstViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				90D670DE1FD24D0800D6DAF2 /* Location.swift */,
 				90F10A051FD499A40085AB15 /* Trip.swift */,
 				90F10A071FD525240085AB15 /* TimeManager.swift */,
+				8C55E85B1FD5CFE60052E129 /* UserLogin.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
 				9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */,
 				9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */,
+				8C55E85C1FD5CFE60052E129 /* UserLogin.swift in Sources */,
 				8C4EAB681F92966A001E4037 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
