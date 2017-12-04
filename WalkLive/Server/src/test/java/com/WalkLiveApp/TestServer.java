@@ -38,8 +38,6 @@ public class TestServer {
     private final String TESTCRIMES = "TestCrimes";
     private final Logger logger = LoggerFactory.getLogger(TestServer.class);
 
-
-
     //------------------------------------------------------------------------//
     // Setup
     //------------------------------------------------------------------------//

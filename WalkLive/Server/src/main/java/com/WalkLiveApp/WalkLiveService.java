@@ -172,6 +172,85 @@ public class WalkLiveService {
 
 
     /**
+     * ================================================================
+     * Friend Request Handling
+     * ================================================================
+     */
+
+    //create a new FriendRequest and store in database
+    public void createFriendRequest(String username, String body) throws WalkLiveService.FriendRequestServiceException {
+        FriendRequest fr = new Gson().fromJson(body, FriendRequest.class);
+        System.out.println(fr.toString());
+
+        String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) " +
+                "             VALUES (:sender, :recipient, :sent_on)" ;
+
+        try (Connection conn = db.open()) {
+            conn.createQuery(sql)
+                    .bind(fr)
+                    .executeUpdate();
+        } catch(Sql2oException ex) {
+            logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+            throw new FriendRequestServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+        }
+    }
+
+    //get my sent friend requests
+    public List<FriendRequest> getOutgoingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
+        //checks needed
+
+        try (Connection conn = db.open()) {
+            List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE sender = :sender")
+                    .addParameter("sender", body)
+                    .executeAndFetch(FriendRequest.class);
+            return requests;
+        } catch (Sql2oException ex) {
+            logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+            throw new FriendRequestServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+        }
+    }
+
+    //delete select sent friend request (cancel request) - extended feature
+    public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
+        //checks needed
+
+        String sql = "DELETE FROM friendRequests WHERE requestId = :requestId" ;
+
+        try (Connection conn = db.open()) {
+            conn.createQuery(sql)
+                    .addParameter("requestId", requestId)
+                    .executeUpdate();
+        } catch(Sql2oException ex) {
+            logger.error("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
+            throw new FriendRequestServiceException("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
+        }
+    }
+
+    //get my received friend requests
+    public List<FriendRequest> getIncomingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
+        //checks needed
+
+        try (Connection conn = db.open()) {
+            List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE recipient = :recipient")
+                    .addParameter("recipient", body)
+                    .executeAndFetch(FriendRequest.class);
+            return requests;
+        } catch (Sql2oException ex) {
+            logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+            throw new FriendRequestServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+        }
+    }
+
+    //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
+    //if accept, then add to friends list for both - FIGURE OUT DETAILS
+    //either way, dealt with friend requests should be deleted
+    //delete select sent friend request
+    public FriendRequest respondToFriendRequest(String username, String requestId, String body) throws WalkLiveService.FriendRequestServiceException {
+        return null;
+    }
+
+
+    /**
      * For trip part -----------------------
      **/
 
@@ -316,6 +395,16 @@ public class WalkLiveService {
         }
 
         public UserServiceException(String message) {
+            super(message);
+        }
+    }
+
+    public static class FriendRequestServiceException extends Exception {
+        public FriendRequestServiceException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public FriendRequestServiceException(String message) {
             super(message);
         }
     }
