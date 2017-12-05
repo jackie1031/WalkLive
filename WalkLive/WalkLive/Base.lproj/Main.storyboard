@@ -612,7 +612,7 @@
                                             <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="xMF-8H-6rL" kind="show" id="jM0-De-8ma"/>
+                                            <segue destination="xMF-8H-6rL" kind="show" identifier="friendRequestSegue" id="jM0-De-8ma"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BA-5w-6NK">
@@ -623,7 +623,7 @@
                                             <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="tep-Kh-oq8" kind="show" id="aVD-pD-h77"/>
+                                            <segue destination="tep-Kh-oq8" kind="show" identifier="tripRequestSegue" id="aVD-pD-h77"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWp-EJ-ubB">

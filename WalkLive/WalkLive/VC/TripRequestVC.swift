@@ -12,9 +12,18 @@ class TripRequestVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.setBackButtons()
+//    }
+//    
+//    func setBackButtons(){
+//        let backItem = UIBarButtonItem()
+//        backItem.tintColor = primaryColor
+//        self.navigationItem.backBarButtonItem = backItem
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

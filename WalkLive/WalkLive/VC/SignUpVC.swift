@@ -18,6 +18,7 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setKeyboard()
         
         // Do any additional setup after loading the view.
     }

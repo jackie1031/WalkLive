@@ -21,6 +21,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setKeyboard()
         // Do any additional setup after loading the view.
     }
     
@@ -91,6 +92,23 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     
     @IBAction func onCancelButton(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    private func setKeyboard(){
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+    }
+    
+    //Public functions
+    
+    /// hides keyboard when user finish editing and tap on other places on the screen
+    ///
+    /// - Parameters:
+    ///   - recoginizer: object to recognize motion when user tap on the screen
+    @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     
