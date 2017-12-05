@@ -33,6 +33,8 @@ public class Bootstrap {
         }
 
         //Specify the IP address and Port at which the server should be run
+        /** comment out this line, and then HEROKU works!**/
+
         //ipAddress(IP_ADDRESS);
 
         //port(PORT);
