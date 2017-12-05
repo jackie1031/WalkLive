@@ -154,6 +154,8 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
             controller.body = buildMessage(location: roadRequester.getSourceLocation())
+            
+            //FTOB needed here.
             controller.recipients = ["123-456-789"]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
@@ -172,6 +174,8 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         if (self.tripView == nil) {
             return "I am currently at (latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + " From Admin."
         }
+        
+        // Need to split to multiple strings because the logic will be too compicated for xcode to handle. Also, the only way to concatenate strings is "a + b" in Swift. :)
         var message =  "I am currently at (latitude:" +  String(location.coordinate.latitude) +
             ", longitude: " + String(location.coordinate.longitude)
         
@@ -182,7 +186,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         message = message + ". " + self.tripView.timeUsedLabel.text! + ". From Admin."
        
         return message
-        
     }
     
     /// request route + location when start button is clicked on start trip panel
@@ -259,6 +262,7 @@ extension MainMapVC: RouteDelegate{
     }
     
     private func startTrip(trip: Trip){
+        //FTOB needed here.
         self.createTripView(trip: trip)
         self.createTimeManager(trip: trip)
     }
@@ -284,6 +288,7 @@ extension MainMapVC: RouteDelegate{
     
     
     func cancelTrip(){
+        //FTOB needed here.
         self.roadRequester.removeRoute()
         self.timeManager.endTimer()
         self.timeManager = nil
@@ -291,11 +296,17 @@ extension MainMapVC: RouteDelegate{
     }
     
     func completeTrip(){
+        //FTOB needed here.
+        self.roadRequester.removeRoute()
+        self.timeManager.endTimer()
+        self.timeManager = nil
+        self.tripView = nil
     }
     
 }
 
 extension MainMapVC: TripPanelDelegate{
+    //FTOB needed here.
     func updateTripPanel(timeInfo: String) {
         self.tripView.timeUsedLabel.text = timeInfo
     }
