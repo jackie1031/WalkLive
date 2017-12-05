@@ -41,6 +41,7 @@
 		90F10A081FD525240085AB15 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A071FD525240085AB15 /* TimeManager.swift */; };
 		90F10A0A1FD5AC610085AB15 /* TripPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */; };
 		90F10A0C1FD631520085AB15 /* BackEndClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A0B1FD631520085AB15 /* BackEndClient.swift */; };
+		90F10A0E1FD640120085AB15 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A0D1FD640120085AB15 /* ContactManager.swift */; };
 		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
 		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
 		930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */; };
@@ -109,6 +110,7 @@
 		90F10A071FD525240085AB15 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPanelDelegate.swift; sourceTree = "<group>"; };
 		90F10A0B1FD631520085AB15 /* BackEndClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndClient.swift; sourceTree = "<group>"; };
+		90F10A0D1FD640120085AB15 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				90F10A071FD525240085AB15 /* TimeManager.swift */,
 				8C55E85B1FD5CFE60052E129 /* UserLogin.swift */,
 				90F10A0B1FD631520085AB15 /* BackEndClient.swift */,
+				90F10A0D1FD640120085AB15 /* ContactManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				9077A51B1FC294FE00E8F47E /* FriendRequestTableViewCell.swift in Sources */,
 				9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */,
 				90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */,
+				90F10A0E1FD640120085AB15 /* ContactManager.swift in Sources */,
 				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
 				90F10A0A1FD5AC610085AB15 /* TripPanelDelegate.swift in Sources */,
 				90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */,

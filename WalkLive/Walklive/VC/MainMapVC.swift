@@ -9,8 +9,10 @@
 import UIKit
 import MapKit
 import CoreLocation
+import MessageUI
 
-class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
+
+class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,  MFMessageComposeViewControllerDelegate{
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startTripButton: UIButton!
@@ -149,6 +151,17 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     ///  Sender: the button which receives this action
     @IBAction func onContactPanelSendButton(_ sender: Any) {
         self.contactMessagePanel.isHidden = true
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = buildMessage(location: roadRequester.getSourceLocation())
+            controller.recipients = ["123-456-789"]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     /// build messages based on user location
@@ -157,9 +170,19 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     ///  location: location needed to form this message
     func buildMessage(location: CLLocation) -> String {
         if (self.tripView == nil) {
-            return "I am currently at Time Square(latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + "From Admin."
+            return "I am currently at (latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + " From Admin."
         }
-        return "I am currently at Time Square(latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + "), and heading to Empire State Building(). Need ~15 minutes, I have walked 0 minutes, 5 seconds. From Admin."
+        var message =  "I am currently at (latitude:" +  String(location.coordinate.latitude) +
+            ", longitude: " + String(location.coordinate.longitude)
+        
+        message = message + "), and heading to " + self.tripView.addressLabel.text!
+        
+        message = message + ". " + self.tripView.estimatedTimeLabel.text!
+        
+        message = message + ". " + self.tripView.timeUsedLabel.text! + ". From Admin."
+       
+        return message
+        
     }
     
     /// request route + location when start button is clicked on start trip panel
@@ -197,6 +220,12 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
+    }
+
     
 
     // MARK: - Navigation

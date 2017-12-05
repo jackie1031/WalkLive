@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="com.WalkLiveApp.TestServer" time="0.45" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="com.WalkLiveApp.TestServer" time="0.427" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre/lib"/>
@@ -64,14 +64,14 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testDuplicateCreation" time="0.274"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testGetDangerZone" time="0.029"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testAddTimePoints" time="0.009"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testFindAll" time="0.049"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="0.02"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateFriendRequest" time="0.03"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testCoordinate" time="0.007"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testGetCrimes" time="0.006"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="0.021"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testDuplicateCreation" time="0.265"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testGetDangerZone" time="0.03"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testAddTimePoints" time="0.005"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testFindAll" time="0.032"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="0.031"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateFriendRequest" time="0.023"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testCoordinate" time="0.006"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testGetCrimes" time="0.005"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="0.025"/>
   <testcase classname="com.WalkLiveApp.TestServer" name="testSortAndExpand" time="0.005"/>
 </testsuite>

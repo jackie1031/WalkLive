@@ -35,6 +35,10 @@ class RoadRequester: NSObject {
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    func getCurrentDefinedRegion() -> MKCoordinateRegion {
+        return MKCoordinateRegionMakeWithDistance(getSourceLocation().coordinate, 50, 50)
+    }
+    
     func getSearchResults(success: @escaping ([MKMapItem]) -> (), failure: @escaping (Error) -> (), query: String){
         let request = MKLocalSearchRequest()
         print(query)
@@ -104,6 +108,22 @@ class RoadRequester: NSObject {
             self.mapView.removeAnnotation(self.destinationAnnotation)
         }
     }
+
+    //  Inefficient algorithm; will not consider to use until talk to the TA.
+//    func searchLandmarkNearCoordiantes(){
+//        let request = MKLocalSearchRequest()
+//        request.region = self.getCurrentDefinedRegion()
+//        request.naturalLanguageQuery = "Forever 21"
+//
+//        let search = MKLocalSearch(request: request)
+//        search.start { (response, error) in
+//            if (error != nil) {
+//                print(error!)
+//                return
+//            }
+//            print(response!)
+//        }
+//    }
     
 }
 
