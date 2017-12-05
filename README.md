@@ -1,13 +1,13 @@
 # 2017-group-14
 ## FrontEnd Install:
 - Install the latest version of Xcode (9.0.1)
-- run 'cd Walklive'
+- run 'cd WalkLive'
 - run 'pod install'
-- run 'open Walklive.xcworkspace'
+- run 'open WalkLive.xcworkspace'
 - click 'Build' button in Xcode to run the APP
 
 ## BackEnd Install:
-- run 'cd Walklive'
+- run 'cd WalkLive'
 - run 'cd Server'
 - run 'mvn package'
 - run 'java -jar target/OOSE-group14-1.0-SNAPSHOT.jar' 
@@ -16,5 +16,5 @@
 *assume maven is already installed on the computer.If not, please set up maven following this tutorial: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
 ## Deploy App
-- run 'cd Walklive/Server'
+- run 'cd WalkLive/Server'
 - run'heroku open'

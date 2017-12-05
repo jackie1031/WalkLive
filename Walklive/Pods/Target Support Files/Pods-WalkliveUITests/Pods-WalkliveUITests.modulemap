@@ -1,6 +1,0 @@
-framework module Pods_WalkliveUITests {
-  umbrella header "Pods-WalkliveUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
