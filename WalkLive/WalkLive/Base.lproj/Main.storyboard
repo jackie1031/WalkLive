@@ -436,15 +436,19 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="46y-eG-0tj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Och-j1-O83" secondAttribute="leadingMargin" id="4fg-yU-QfX"/>
                                                 <constraint firstItem="46y-eG-0tj" firstAttribute="centerY" secondItem="N74-4m-nqt" secondAttribute="centerY" id="9Jd-aP-w1H"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="N74-4m-nqt" secondAttribute="trailing" constant="20" symbolic="YES" id="F3O-Rb-zqw"/>
                                                 <constraint firstItem="2vC-L2-RRP" firstAttribute="top" secondItem="k3S-BX-zf5" secondAttribute="bottom" constant="6" id="QC6-Rs-hgg"/>
                                                 <constraint firstItem="N74-4m-nqt" firstAttribute="leading" secondItem="k3S-BX-zf5" secondAttribute="leading" id="QEA-1f-208"/>
                                                 <constraint firstItem="2vC-L2-RRP" firstAttribute="leading" secondItem="k3S-BX-zf5" secondAttribute="leading" id="XFe-Ox-3Q6"/>
                                                 <constraint firstItem="46y-eG-0tj" firstAttribute="trailing" secondItem="Och-j1-O83" secondAttribute="trailingMargin" id="YNd-YB-9UU"/>
                                                 <constraint firstItem="k3S-BX-zf5" firstAttribute="top" secondItem="Och-j1-O83" secondAttribute="topMargin" id="ZjW-Js-08S"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2vC-L2-RRP" secondAttribute="trailing" constant="20" symbolic="YES" id="kx9-6E-WoF"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="N74-4m-nqt" secondAttribute="bottom" constant="5" id="pT2-eD-Y2b"/>
                                                 <constraint firstItem="k3S-BX-zf5" firstAttribute="leading" secondItem="Och-j1-O83" secondAttribute="leadingMargin" id="pgD-YI-nvr"/>
                                                 <constraint firstItem="N74-4m-nqt" firstAttribute="top" secondItem="2vC-L2-RRP" secondAttribute="bottom" constant="8" id="s36-uQ-LJS"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k3S-BX-zf5" secondAttribute="trailing" constant="20" symbolic="YES" id="tFJ-OR-eBW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -808,7 +812,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7lF-9n-Kh9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7lF-9n-Kh9">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
