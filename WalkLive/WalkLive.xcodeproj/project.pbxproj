@@ -7,394 +7,393 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F164326CA499F761BEF7CB8 /* Pods_WalkliveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */; };
-		8C4EAB681F92966A001E4037 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EAB671F92966A001E4037 /* User.swift */; };
-		8C55E85C1FD5CFE60052E129 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55E85B1FD5CFE60052E129 /* UserLogin.swift */; };
-		9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA51F7C325200AFD27C /* AppDelegate.swift */; };
-		9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCA71F7C325200AFD27C /* FirstViewVC.swift */; };
-		9012DCAB1F7C325300AFD27C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCA91F7C325300AFD27C /* Main.storyboard */; };
-		9012DCAD1F7C325300AFD27C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCAC1F7C325300AFD27C /* Assets.xcassets */; };
-		9012DCB01F7C325300AFD27C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */; };
-		9012DCBB1F7C325300AFD27C /* WalkLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCBA1F7C325300AFD27C /* WalkLiveTests.swift */; };
-		9012DCC61F7C325300AFD27C /* WalkliveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */; };
-		902842FD1FB9686E00EAA2AF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902842FC1FB9686E00EAA2AF /* MapKit.framework */; };
-		902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902842FE1FB9694200EAA2AF /* MainMapVC.swift */; };
-		902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902AEF871FB0E4820043ABAC /* DefaultVC.swift */; };
-		902C961C1FD13A9B00900398 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C961B1FD13A9B00900398 /* Route.swift */; };
-		9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AF6A1FC2794100363D4B /* RoadRequester.swift */; };
-		9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5111FC2880E00E8F47E /* SearchVC.swift */; };
-		9077A5141FC2932F00E8F47E /* FriendRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5131FC2932F00E8F47E /* FriendRequestVC.swift */; };
-		9077A5161FC293BA00E8F47E /* TripRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5151FC293BA00E8F47E /* TripRequestVC.swift */; };
-		9077A5181FC293F900E8F47E /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A5171FC293F900E8F47E /* UserVC.swift */; };
-		9077A51B1FC294FE00E8F47E /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51A1FC294FE00E8F47E /* FriendRequestTableViewCell.swift */; };
-		9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */; };
-		9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */; };
-		90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A18F511F9529FB006FAD99 /* TimePoint.swift */; };
-		90D670DF1FD24D0800D6DAF2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670DE1FD24D0800D6DAF2 /* Location.swift */; };
-		90D670E41FD25F4D00D6DAF2 /* RouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */; };
-		90D670E61FD26EA300D6DAF2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D670E51FD26EA300D6DAF2 /* Service.swift */; };
-		90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA16E1FCFD90B00800A08 /* SettingVC.swift */; };
-		90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */; };
-		90F10A021FD493080085AB15 /* OnGoingTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90F10A011FD493080085AB15 /* OnGoingTripView.xib */; };
-		90F10A041FD4931F0085AB15 /* OnGoingTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */; };
-		90F10A061FD499A40085AB15 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A051FD499A40085AB15 /* Trip.swift */; };
-		90F10A081FD525240085AB15 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A071FD525240085AB15 /* TimeManager.swift */; };
-		90F10A0A1FD5AC610085AB15 /* TripPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */; };
-		90F10A0C1FD631520085AB15 /* BackEndClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A0B1FD631520085AB15 /* BackEndClient.swift */; };
-		90F10A0E1FD640120085AB15 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F10A0D1FD640120085AB15 /* ContactManager.swift */; };
-		90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AD1F7C387F0002AF0A /* SignUpVC.swift */; };
-		90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F233AF1F7C3BB10002AF0A /* LoginVC.swift */; };
-		930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */; };
-		BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */ = {isa = PBXBuildFile; fileRef = BC82732C1F8DDB59007E045E /* NSObject+test.m */; };
-		F2C20AB8933BF625C0C04538 /* Pods_WalkliveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B18C929061458F05EFCC33FB /* Pods_WalkliveUITests.framework */; };
+		42C0F6617C948D8FCD4A0A63 /* Pods_WalkLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */; };
+		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
+		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
+		904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904B04CA1FD688D700EEB523 /* Assets.xcassets */; };
+		904B04CE1FD688D700EEB523 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04CC1FD688D700EEB523 /* LaunchScreen.storyboard */; };
+		904B04D91FD688D700EEB523 /* WalkLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04D81FD688D700EEB523 /* WalkLiveTests.swift */; };
+		904B04E41FD688D700EEB523 /* WalkLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04E31FD688D700EEB523 /* WalkLiveUITests.swift */; };
+		904B05011FD689A300EEB523 /* BackEndClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F61FD689A300EEB523 /* BackEndClient.swift */; };
+		904B05021FD689A300EEB523 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F71FD689A300EEB523 /* ContactManager.swift */; };
+		904B05031FD689A300EEB523 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F81FD689A300EEB523 /* Location.swift */; };
+		904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F91FD689A300EEB523 /* RoadRequester.swift */; };
+		904B05051FD689A300EEB523 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FA1FD689A300EEB523 /* Route.swift */; };
+		904B05061FD689A300EEB523 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FB1FD689A300EEB523 /* TimeManager.swift */; };
+		904B05071FD689A300EEB523 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FC1FD689A300EEB523 /* TimePoint.swift */; };
+		904B05081FD689A300EEB523 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FD1FD689A300EEB523 /* Trip.swift */; };
+		904B05091FD689A300EEB523 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FE1FD689A300EEB523 /* User.swift */; };
+		904B050A1FD689A300EEB523 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FF1FD689A300EEB523 /* UserLogin.swift */; };
+		904B050B1FD689A300EEB523 /* warningSign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05001FD689A300EEB523 /* warningSign.xib */; };
+		904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050D1FD689B300EEB523 /* DefaultVC.swift */; };
+		904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050E1FD689B300EEB523 /* FirstViewVC.swift */; };
+		904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050F1FD689B300EEB523 /* FriendRequestVC.swift */; };
+		904B051B1FD689B300EEB523 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05101FD689B300EEB523 /* LoginVC.swift */; };
+		904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05111FD689B300EEB523 /* MainMapVC.swift */; };
+		904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05121FD689B300EEB523 /* SearchVC.swift */; };
+		904B051E1FD689B300EEB523 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05131FD689B300EEB523 /* SettingVC.swift */; };
+		904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05141FD689B300EEB523 /* SignUpVC.swift */; };
+		904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05151FD689B300EEB523 /* TripRequestVC.swift */; };
+		904B05211FD689B300EEB523 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05161FD689B300EEB523 /* UserVC.swift */; };
+		904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05231FD689BA00EEB523 /* OnGoingTripView.swift */; };
+		904B05261FD689BA00EEB523 /* OnGoingTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05241FD689BA00EEB523 /* OnGoingTripView.xib */; };
+		904B052A1FD689D000EEB523 /* RouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05281FD689D000EEB523 /* RouteDelegate.swift */; };
+		904B052B1FD689D000EEB523 /* TripPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05291FD689D000EEB523 /* TripPanelDelegate.swift */; };
+		904B052F1FD689F500EEB523 /* NSObject+test.m in Sources */ = {isa = PBXBuildFile; fileRef = 904B052E1FD689F500EEB523 /* NSObject+test.m */; };
+		904B05351FD68D1D00EEB523 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */; };
+		904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05321FD68D1C00EEB523 /* FriendTripTableViewCell.swift */; };
+		904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */; };
+		904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */; };
+		904B053A1FD68D3400EEB523 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05391FD68D3400EEB523 /* Service.swift */; };
+		D2528FA348AAC2A6FFFEEC94 /* Pods_WalkLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */; };
+		FE9DB838C7A82F05EE530D5D /* Pods_WalkLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4C28FF63A53A082F32C325 /* Pods_WalkLive.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9012DCB71F7C325300AFD27C /* PBXContainerItemProxy */ = {
+		904B04D51FD688D700EEB523 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9012DC9A1F7C325200AFD27C /* Project object */;
+			containerPortal = 904B04B81FD688D700EEB523 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9012DCA11F7C325200AFD27C;
-			remoteInfo = Walklive;
+			remoteGlobalIDString = 904B04BF1FD688D700EEB523;
+			remoteInfo = WalkLive;
 		};
-		9012DCC21F7C325300AFD27C /* PBXContainerItemProxy */ = {
+		904B04E01FD688D700EEB523 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9012DC9A1F7C325200AFD27C /* Project object */;
+			containerPortal = 904B04B81FD688D700EEB523 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9012DCA11F7C325200AFD27C;
-			remoteInfo = Walklive;
+			remoteGlobalIDString = 904B04BF1FD688D700EEB523;
+			remoteInfo = WalkLive;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		45F0A39B0E16E8F2528C5941 /* Pods-WalkliveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.release.xcconfig"; sourceTree = "<group>"; };
-		4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.release.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.release.xcconfig"; sourceTree = "<group>"; };
-		8C4EAB671F92966A001E4037 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		8C55E85B1FD5CFE60052E129 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserLogin.swift; path = WalkLive/Model/UserLogin.swift; sourceTree = SOURCE_ROOT; };
-		9012DCA21F7C325200AFD27C /* Walklive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walklive.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9012DCA51F7C325200AFD27C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9012DCA71F7C325200AFD27C /* FirstViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
-		9012DCAA1F7C325300AFD27C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9012DCAC1F7C325300AFD27C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9012DCAF1F7C325300AFD27C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9012DCB11F7C325300AFD27C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9012DCB61F7C325300AFD27C /* WalkliveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkliveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9012DCBA1F7C325300AFD27C /* WalkLiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLiveTests.swift; sourceTree = "<group>"; };
-		9012DCBC1F7C325300AFD27C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9012DCC11F7C325300AFD27C /* WalkliveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkliveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkliveUITests.swift; sourceTree = "<group>"; };
-		9012DCC71F7C325300AFD27C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		902842FC1FB9686E00EAA2AF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		902842FE1FB9694200EAA2AF /* MainMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapVC.swift; sourceTree = "<group>"; };
-		902AEF871FB0E4820043ABAC /* DefaultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
-		902C961B1FD13A9B00900398 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		9040AF6A1FC2794100363D4B /* RoadRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadRequester.swift; sourceTree = "<group>"; };
-		90756C8CBAFF8D3D3DD58275 /* Pods-WalkliveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.release.xcconfig"; sourceTree = "<group>"; };
-		9077A5111FC2880E00E8F47E /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
-		9077A5131FC2932F00E8F47E /* FriendRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestVC.swift; sourceTree = "<group>"; };
-		9077A5151FC293BA00E8F47E /* TripRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRequestVC.swift; sourceTree = "<group>"; };
-		9077A5171FC293F900E8F47E /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
-		9077A51A1FC294FE00E8F47E /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
-		9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripRequestTableViewCell.swift; path = "/Users/michelleshu/Documents/JHU Junior/OOSE/WalkAlive/WalkLive/Walklive/Cell/TripRequestTableViewCell.swift"; sourceTree = "<absolute>"; };
-		9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
-		90A18F511F9529FB006FAD99 /* TimePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
-		90D670DE1FD24D0800D6DAF2 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDelegate.swift; sourceTree = "<group>"; };
-		90D670E51FD26EA300D6DAF2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		90EBA16E1FCFD90B00800A08 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
-		90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
-		90F10A011FD493080085AB15 /* OnGoingTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnGoingTripView.xib; sourceTree = "<group>"; };
-		90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGoingTripView.swift; sourceTree = "<group>"; };
-		90F10A051FD499A40085AB15 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		90F10A071FD525240085AB15 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
-		90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPanelDelegate.swift; sourceTree = "<group>"; };
-		90F10A0B1FD631520085AB15 /* BackEndClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEndClient.swift; sourceTree = "<group>"; };
-		90F10A0D1FD640120085AB15 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
-		90F233AD1F7C387F0002AF0A /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		90F233AF1F7C3BB10002AF0A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		B18C929061458F05EFCC33FB /* Pods_WalkliveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkliveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Walklive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC8273201F8D9BBD007E045E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.27.0 /FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		BC8273211F8D9BC9007E045E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.27.0 /FBSDKLoginKit.framework"; sourceTree = "<group>"; };
-		BC82732B1F8DDB59007E045E /* NSObject+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSObject+test.h"; path = "Walklive/NSObject+test.h"; sourceTree = SOURCE_ROOT; };
-		BC82732C1F8DDB59007E045E /* NSObject+test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSObject+test.m"; path = "Walklive/NSObject+test.m"; sourceTree = SOURCE_ROOT; };
-		E37A9089C70BE1D4D84EE764 /* Pods-Walklive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Walklive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Walklive/Pods-Walklive.debug.xcconfig"; sourceTree = "<group>"; };
-		F13E1D61C84C4B4DA5A2A2C4 /* Pods-WalkliveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkliveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkLiveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A467C921A08E9F56C416776 /* Pods-WalkLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.debug.xcconfig"; sourceTree = "<group>"; };
+		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		904B04C81FD688D700EEB523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		904B04CA1FD688D700EEB523 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		904B04CD1FD688D700EEB523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		904B04CF1FD688D700EEB523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		904B04D41FD688D700EEB523 /* WalkLiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkLiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		904B04D81FD688D700EEB523 /* WalkLiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLiveTests.swift; sourceTree = "<group>"; };
+		904B04DA1FD688D700EEB523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		904B04DF1FD688D700EEB523 /* WalkLiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkLiveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		904B04E31FD688D700EEB523 /* WalkLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLiveUITests.swift; sourceTree = "<group>"; };
+		904B04E51FD688D700EEB523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		904B04F61FD689A300EEB523 /* BackEndClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackEndClient.swift; sourceTree = "<group>"; };
+		904B04F71FD689A300EEB523 /* ContactManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
+		904B04F81FD689A300EEB523 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		904B04F91FD689A300EEB523 /* RoadRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoadRequester.swift; sourceTree = "<group>"; };
+		904B04FA1FD689A300EEB523 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		904B04FB1FD689A300EEB523 /* TimeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		904B04FC1FD689A300EEB523 /* TimePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
+		904B04FD1FD689A300EEB523 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		904B04FE1FD689A300EEB523 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		904B04FF1FD689A300EEB523 /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		904B05001FD689A300EEB523 /* warningSign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = warningSign.xib; sourceTree = "<group>"; };
+		904B050D1FD689B300EEB523 /* DefaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
+		904B050E1FD689B300EEB523 /* FirstViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
+		904B050F1FD689B300EEB523 /* FriendRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestVC.swift; sourceTree = "<group>"; };
+		904B05101FD689B300EEB523 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		904B05111FD689B300EEB523 /* MainMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMapVC.swift; sourceTree = "<group>"; };
+		904B05121FD689B300EEB523 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		904B05131FD689B300EEB523 /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		904B05141FD689B300EEB523 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		904B05151FD689B300EEB523 /* TripRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestVC.swift; sourceTree = "<group>"; };
+		904B05161FD689B300EEB523 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
+		904B05171FD689B300EEB523 /* Walklive-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Walklive-Bridging-Header.h"; sourceTree = "<group>"; };
+		904B05231FD689BA00EEB523 /* OnGoingTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnGoingTripView.swift; sourceTree = "<group>"; };
+		904B05241FD689BA00EEB523 /* OnGoingTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnGoingTripView.xib; sourceTree = "<group>"; };
+		904B05281FD689D000EEB523 /* RouteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDelegate.swift; sourceTree = "<group>"; };
+		904B05291FD689D000EEB523 /* TripPanelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripPanelDelegate.swift; sourceTree = "<group>"; };
+		904B052C1FD689F400EEB523 /* WalkLive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalkLive-Bridging-Header.h"; sourceTree = "<group>"; };
+		904B052D1FD689F500EEB523 /* NSObject+test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
+		904B052E1FD689F500EEB523 /* NSObject+test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+test.m"; sourceTree = "<group>"; };
+		904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
+		904B05321FD68D1C00EEB523 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
+		904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestTableViewCell.swift; sourceTree = "<group>"; };
+		904B05391FD68D3400EEB523 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		9127724929693C9E22230147 /* Pods-WalkLiveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.release.xcconfig"; sourceTree = "<group>"; };
+		C5D768EC243DDAC103DFBE8B /* Pods-WalkLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D1266AF0EC7612F7AB7C0271 /* Pods-WalkLiveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests.release.xcconfig"; sourceTree = "<group>"; };
+		F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkLiveUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA4C28FF63A53A082F32C325 /* Pods_WalkLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9012DC9F1F7C325200AFD27C /* Frameworks */ = {
+		904B04BD1FD688D700EEB523 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				902842FD1FB9686E00EAA2AF /* MapKit.framework in Frameworks */,
-				930646B7B5347DCAD59B3A42 /* Pods_Walklive.framework in Frameworks */,
+				FE9DB838C7A82F05EE530D5D /* Pods_WalkLive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9012DCB31F7C325300AFD27C /* Frameworks */ = {
+		904B04D11FD688D700EEB523 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F164326CA499F761BEF7CB8 /* Pods_WalkliveTests.framework in Frameworks */,
+				D2528FA348AAC2A6FFFEEC94 /* Pods_WalkLiveTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9012DCBE1F7C325300AFD27C /* Frameworks */ = {
+		904B04DC1FD688D700EEB523 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2C20AB8933BF625C0C04538 /* Pods_WalkliveUITests.framework in Frameworks */,
+				42C0F6617C948D8FCD4A0A63 /* Pods_WalkLiveUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4EE72B4EC4E0DF8A1D683C21 /* Frameworks */ = {
+		73999BABE920E24091B38658 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				902842FC1FB9686E00EAA2AF /* MapKit.framework */,
-				BC8273211F8D9BC9007E045E /* FBSDKLoginKit.framework */,
-				BC8273201F8D9BBD007E045E /* FBSDKCoreKit.framework */,
-				BADF6A2C6C8E547AA392C0B0 /* Pods_Walklive.framework */,
-				4F4F003EFEF7FF94D40BEFD9 /* Pods_WalkliveTests.framework */,
-				B18C929061458F05EFCC33FB /* Pods_WalkliveUITests.framework */,
+				61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */,
+				C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */,
+				C5D768EC243DDAC103DFBE8B /* Pods-WalkLiveTests.debug.xcconfig */,
+				D1266AF0EC7612F7AB7C0271 /* Pods-WalkLiveTests.release.xcconfig */,
+				4A467C921A08E9F56C416776 /* Pods-WalkLiveUITests.debug.xcconfig */,
+				9127724929693C9E22230147 /* Pods-WalkLiveUITests.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		9012DC991F7C325200AFD27C = {
+		904B04B71FD688D700EEB523 = {
 			isa = PBXGroup;
 			children = (
-				9012DCA41F7C325200AFD27C /* WalkLive */,
-				9012DCB91F7C325300AFD27C /* WalkLiveTests */,
-				9012DCC41F7C325300AFD27C /* WalkLiveUITests */,
-				9012DCA31F7C325200AFD27C /* Products */,
-				BE86F5A6E09193BEF940743F /* Pods */,
-				4EE72B4EC4E0DF8A1D683C21 /* Frameworks */,
+				904B04C21FD688D700EEB523 /* WalkLive */,
+				904B04D71FD688D700EEB523 /* WalkLiveTests */,
+				904B04E21FD688D700EEB523 /* WalkLiveUITests */,
+				904B04C11FD688D700EEB523 /* Products */,
+				73999BABE920E24091B38658 /* Pods */,
+				A23776061BC8A4301AF5A54D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		9012DCA31F7C325200AFD27C /* Products */ = {
+		904B04C11FD688D700EEB523 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9012DCA21F7C325200AFD27C /* Walklive.app */,
-				9012DCB61F7C325300AFD27C /* WalkliveTests.xctest */,
-				9012DCC11F7C325300AFD27C /* WalkliveUITests.xctest */,
+				904B04C01FD688D700EEB523 /* WalkLive.app */,
+				904B04D41FD688D700EEB523 /* WalkLiveTests.xctest */,
+				904B04DF1FD688D700EEB523 /* WalkLiveUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9012DCA41F7C325200AFD27C /* WalkLive */ = {
+		904B04C21FD688D700EEB523 /* WalkLive */ = {
 			isa = PBXGroup;
 			children = (
-				90F109FC1FD492490085AB15 /* Xibs */,
-				90D670E01FD25DC900D6DAF2 /* Delegates */,
-				9077A5191FC2947C00E8F47E /* Cell */,
-				90A18F501F95294A006FAD99 /* Model */,
-				90F233AA1F7C37B60002AF0A /* VC */,
-				9012DCA51F7C325200AFD27C /* AppDelegate.swift */,
-				90D670E51FD26EA300D6DAF2 /* Service.swift */,
-				9012DCA91F7C325300AFD27C /* Main.storyboard */,
-				9012DCAC1F7C325300AFD27C /* Assets.xcassets */,
-				9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */,
-				BC82732B1F8DDB59007E045E /* NSObject+test.h */,
-				BC82732C1F8DDB59007E045E /* NSObject+test.m */,
-				9012DCB11F7C325300AFD27C /* Info.plist */,
+				904B05301FD68D1C00EEB523 /* Cell */,
+				904B05271FD689D000EEB523 /* Delegates */,
+				904B05221FD689BA00EEB523 /* Xibs */,
+				904B050C1FD689B300EEB523 /* VC */,
+				904B04F51FD689A300EEB523 /* Model */,
+				904B04C31FD688D700EEB523 /* AppDelegate.swift */,
+				904B04C71FD688D700EEB523 /* Main.storyboard */,
+				904B04CA1FD688D700EEB523 /* Assets.xcassets */,
+				904B04CC1FD688D700EEB523 /* LaunchScreen.storyboard */,
+				904B04CF1FD688D700EEB523 /* Info.plist */,
+				904B052D1FD689F500EEB523 /* NSObject+test.h */,
+				904B052E1FD689F500EEB523 /* NSObject+test.m */,
+				904B052C1FD689F400EEB523 /* WalkLive-Bridging-Header.h */,
+				904B05391FD68D3400EEB523 /* Service.swift */,
 			);
 			path = WalkLive;
 			sourceTree = "<group>";
 		};
-		9012DCB91F7C325300AFD27C /* WalkLiveTests */ = {
+		904B04D71FD688D700EEB523 /* WalkLiveTests */ = {
 			isa = PBXGroup;
 			children = (
-				9012DCBA1F7C325300AFD27C /* WalkLiveTests.swift */,
-				9012DCBC1F7C325300AFD27C /* Info.plist */,
+				904B04D81FD688D700EEB523 /* WalkLiveTests.swift */,
+				904B04DA1FD688D700EEB523 /* Info.plist */,
 			);
 			path = WalkLiveTests;
 			sourceTree = "<group>";
 		};
-		9012DCC41F7C325300AFD27C /* WalkLiveUITests */ = {
+		904B04E21FD688D700EEB523 /* WalkLiveUITests */ = {
 			isa = PBXGroup;
 			children = (
-				9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */,
-				9012DCC71F7C325300AFD27C /* Info.plist */,
+				904B04E31FD688D700EEB523 /* WalkLiveUITests.swift */,
+				904B04E51FD688D700EEB523 /* Info.plist */,
 			);
 			path = WalkLiveUITests;
 			sourceTree = "<group>";
 		};
-		9077A5191FC2947C00E8F47E /* Cell */ = {
+		904B04F51FD689A300EEB523 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9077A51C1FC2952500E8F47E /* TripRequestTableViewCell.swift */,
-				9077A51A1FC294FE00E8F47E /* FriendRequestTableViewCell.swift */,
-				9077A51E1FC2957800E8F47E /* LocationTableViewCell.swift */,
-				90EBA1701FCFDA1800800A08 /* FriendTripTableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		90A18F501F95294A006FAD99 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8C4EAB671F92966A001E4037 /* User.swift */,
-				90A18F511F9529FB006FAD99 /* TimePoint.swift */,
-				9040AF6A1FC2794100363D4B /* RoadRequester.swift */,
-				902C961B1FD13A9B00900398 /* Route.swift */,
-				90D670DE1FD24D0800D6DAF2 /* Location.swift */,
-				90F10A051FD499A40085AB15 /* Trip.swift */,
-				90F10A071FD525240085AB15 /* TimeManager.swift */,
-				8C55E85B1FD5CFE60052E129 /* UserLogin.swift */,
-				90F10A0B1FD631520085AB15 /* BackEndClient.swift */,
-				90F10A0D1FD640120085AB15 /* ContactManager.swift */,
+				904B04F61FD689A300EEB523 /* BackEndClient.swift */,
+				904B04F71FD689A300EEB523 /* ContactManager.swift */,
+				904B04F81FD689A300EEB523 /* Location.swift */,
+				904B04F91FD689A300EEB523 /* RoadRequester.swift */,
+				904B04FA1FD689A300EEB523 /* Route.swift */,
+				904B04FB1FD689A300EEB523 /* TimeManager.swift */,
+				904B04FC1FD689A300EEB523 /* TimePoint.swift */,
+				904B04FD1FD689A300EEB523 /* Trip.swift */,
+				904B04FE1FD689A300EEB523 /* User.swift */,
+				904B04FF1FD689A300EEB523 /* UserLogin.swift */,
+				904B05001FD689A300EEB523 /* warningSign.xib */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		90D670E01FD25DC900D6DAF2 /* Delegates */ = {
+		904B050C1FD689B300EEB523 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				90D670E31FD25F4D00D6DAF2 /* RouteDelegate.swift */,
-				90F10A091FD5AC610085AB15 /* TripPanelDelegate.swift */,
-			);
-			path = Delegates;
-			sourceTree = "<group>";
-		};
-		90F109FC1FD492490085AB15 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				90F10A011FD493080085AB15 /* OnGoingTripView.xib */,
-				90F10A031FD4931F0085AB15 /* OnGoingTripView.swift */,
-			);
-			path = Xibs;
-			sourceTree = "<group>";
-		};
-		90F233AA1F7C37B60002AF0A /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				9012DCA71F7C325200AFD27C /* FirstViewVC.swift */,
-				90F233AD1F7C387F0002AF0A /* SignUpVC.swift */,
-				90F233AF1F7C3BB10002AF0A /* LoginVC.swift */,
-				902AEF871FB0E4820043ABAC /* DefaultVC.swift */,
-				902842FE1FB9694200EAA2AF /* MainMapVC.swift */,
-				9077A5111FC2880E00E8F47E /* SearchVC.swift */,
-				9077A5131FC2932F00E8F47E /* FriendRequestVC.swift */,
-				9077A5151FC293BA00E8F47E /* TripRequestVC.swift */,
-				9077A5171FC293F900E8F47E /* UserVC.swift */,
-				90EBA16E1FCFD90B00800A08 /* SettingVC.swift */,
+				904B050D1FD689B300EEB523 /* DefaultVC.swift */,
+				904B050E1FD689B300EEB523 /* FirstViewVC.swift */,
+				904B050F1FD689B300EEB523 /* FriendRequestVC.swift */,
+				904B05101FD689B300EEB523 /* LoginVC.swift */,
+				904B05111FD689B300EEB523 /* MainMapVC.swift */,
+				904B05121FD689B300EEB523 /* SearchVC.swift */,
+				904B05131FD689B300EEB523 /* SettingVC.swift */,
+				904B05141FD689B300EEB523 /* SignUpVC.swift */,
+				904B05151FD689B300EEB523 /* TripRequestVC.swift */,
+				904B05161FD689B300EEB523 /* UserVC.swift */,
+				904B05171FD689B300EEB523 /* Walklive-Bridging-Header.h */,
 			);
 			path = VC;
 			sourceTree = "<group>";
 		};
-		BE86F5A6E09193BEF940743F /* Pods */ = {
+		904B05221FD689BA00EEB523 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				E37A9089C70BE1D4D84EE764 /* Pods-Walklive.debug.xcconfig */,
-				7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */,
-				F13E1D61C84C4B4DA5A2A2C4 /* Pods-WalkliveTests.debug.xcconfig */,
-				90756C8CBAFF8D3D3DD58275 /* Pods-WalkliveTests.release.xcconfig */,
-				97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */,
-				45F0A39B0E16E8F2528C5941 /* Pods-WalkliveUITests.release.xcconfig */,
+				904B05231FD689BA00EEB523 /* OnGoingTripView.swift */,
+				904B05241FD689BA00EEB523 /* OnGoingTripView.xib */,
 			);
-			name = Pods;
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		904B05271FD689D000EEB523 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				904B05281FD689D000EEB523 /* RouteDelegate.swift */,
+				904B05291FD689D000EEB523 /* TripPanelDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		904B05301FD68D1C00EEB523 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */,
+				904B05321FD68D1C00EEB523 /* FriendTripTableViewCell.swift */,
+				904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */,
+				904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A23776061BC8A4301AF5A54D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA4C28FF63A53A082F32C325 /* Pods_WalkLive.framework */,
+				1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */,
+				F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9012DCA11F7C325200AFD27C /* Walklive */ = {
+		904B04BF1FD688D700EEB523 /* WalkLive */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9012DCCA1F7C325300AFD27C /* Build configuration list for PBXNativeTarget "Walklive" */;
+			buildConfigurationList = 904B04E81FD688D700EEB523 /* Build configuration list for PBXNativeTarget "WalkLive" */;
 			buildPhases = (
-				BB579F2CCA70784492D1A2E6 /* [CP] Check Pods Manifest.lock */,
-				9012DC9E1F7C325200AFD27C /* Sources */,
-				9012DC9F1F7C325200AFD27C /* Frameworks */,
-				9012DCA01F7C325200AFD27C /* Resources */,
-				87F51A067A587B65E32C857B /* [CP] Embed Pods Frameworks */,
-				72A98395A5A72441158DE89B /* [CP] Copy Pods Resources */,
+				A29A4D81D0898BADCB571FB4 /* [CP] Check Pods Manifest.lock */,
+				904B04BC1FD688D700EEB523 /* Sources */,
+				904B04BD1FD688D700EEB523 /* Frameworks */,
+				904B04BE1FD688D700EEB523 /* Resources */,
+				CC68F5628A5F96C8DFFC2E73 /* [CP] Embed Pods Frameworks */,
+				27A76B2E0BAA0B0A1DEF0E8C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Walklive;
-			productName = Walklive;
-			productReference = 9012DCA21F7C325200AFD27C /* Walklive.app */;
+			name = WalkLive;
+			productName = WalkLive;
+			productReference = 904B04C01FD688D700EEB523 /* WalkLive.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9012DCB51F7C325300AFD27C /* WalkliveTests */ = {
+		904B04D31FD688D700EEB523 /* WalkLiveTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9012DCCD1F7C325300AFD27C /* Build configuration list for PBXNativeTarget "WalkliveTests" */;
+			buildConfigurationList = 904B04EB1FD688D700EEB523 /* Build configuration list for PBXNativeTarget "WalkLiveTests" */;
 			buildPhases = (
-				48314B0ACBC4D27964AFC3FB /* [CP] Check Pods Manifest.lock */,
-				9012DCB21F7C325300AFD27C /* Sources */,
-				9012DCB31F7C325300AFD27C /* Frameworks */,
-				9012DCB41F7C325300AFD27C /* Resources */,
-				F61A8168C35263A98CF6E96C /* [CP] Embed Pods Frameworks */,
-				7A05B92172D024A50477FDAD /* [CP] Copy Pods Resources */,
+				6ED228AABABCE12FA30E9C81 /* [CP] Check Pods Manifest.lock */,
+				904B04D01FD688D700EEB523 /* Sources */,
+				904B04D11FD688D700EEB523 /* Frameworks */,
+				904B04D21FD688D700EEB523 /* Resources */,
+				F95D838F8941ADB767660011 /* [CP] Embed Pods Frameworks */,
+				DBDCDA99E2F003653378E3E0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9012DCB81F7C325300AFD27C /* PBXTargetDependency */,
+				904B04D61FD688D700EEB523 /* PBXTargetDependency */,
 			);
-			name = WalkliveTests;
-			productName = WalkliveTests;
-			productReference = 9012DCB61F7C325300AFD27C /* WalkliveTests.xctest */;
+			name = WalkLiveTests;
+			productName = WalkLiveTests;
+			productReference = 904B04D41FD688D700EEB523 /* WalkLiveTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9012DCC01F7C325300AFD27C /* WalkliveUITests */ = {
+		904B04DE1FD688D700EEB523 /* WalkLiveUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9012DCD01F7C325300AFD27C /* Build configuration list for PBXNativeTarget "WalkliveUITests" */;
+			buildConfigurationList = 904B04EE1FD688D700EEB523 /* Build configuration list for PBXNativeTarget "WalkLiveUITests" */;
 			buildPhases = (
-				DECCDA2E4C291BCC47FB413C /* [CP] Check Pods Manifest.lock */,
-				9012DCBD1F7C325300AFD27C /* Sources */,
-				9012DCBE1F7C325300AFD27C /* Frameworks */,
-				9012DCBF1F7C325300AFD27C /* Resources */,
-				F0DCEF2A16AF75A54D136402 /* [CP] Embed Pods Frameworks */,
-				36E38E04A4FEDABFC30D3BD2 /* [CP] Copy Pods Resources */,
+				2EEEC69ABED80D9ED2C413A1 /* [CP] Check Pods Manifest.lock */,
+				904B04DB1FD688D700EEB523 /* Sources */,
+				904B04DC1FD688D700EEB523 /* Frameworks */,
+				904B04DD1FD688D700EEB523 /* Resources */,
+				919AC52EE5C8DAA9B0EC9D03 /* [CP] Embed Pods Frameworks */,
+				C39000B1CB33C99BBE68DBC9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9012DCC31F7C325300AFD27C /* PBXTargetDependency */,
+				904B04E11FD688D700EEB523 /* PBXTargetDependency */,
 			);
-			name = WalkliveUITests;
-			productName = WalkliveUITests;
-			productReference = 9012DCC11F7C325300AFD27C /* WalkliveUITests.xctest */;
+			name = WalkLiveUITests;
+			productName = WalkLiveUITests;
+			productReference = 904B04DF1FD688D700EEB523 /* WalkLiveUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9012DC9A1F7C325200AFD27C /* Project object */ = {
+		904B04B81FD688D700EEB523 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "OOSE-TEAM14";
 				TargetAttributes = {
-					9012DCA11F7C325200AFD27C = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+					904B04BF1FD688D700EEB523 = {
+						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
-					9012DCB51F7C325300AFD27C = {
-						CreatedOnToolsVersion = 9.0;
+					904B04D31FD688D700EEB523 = {
+						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 9012DCA11F7C325200AFD27C;
+						TestTargetID = 904B04BF1FD688D700EEB523;
 					};
-					9012DCC01F7C325300AFD27C = {
-						CreatedOnToolsVersion = 9.0;
+					904B04DE1FD688D700EEB523 = {
+						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 9012DCA11F7C325200AFD27C;
+						TestTargetID = 904B04BF1FD688D700EEB523;
 					};
 				};
 			};
-			buildConfigurationList = 9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */;
+			buildConfigurationList = 904B04BB1FD688D700EEB523 /* Build configuration list for PBXProject "WalkLive" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -402,38 +401,39 @@
 				en,
 				Base,
 			);
-			mainGroup = 9012DC991F7C325200AFD27C;
-			productRefGroup = 9012DCA31F7C325200AFD27C /* Products */;
+			mainGroup = 904B04B71FD688D700EEB523;
+			productRefGroup = 904B04C11FD688D700EEB523 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9012DCA11F7C325200AFD27C /* Walklive */,
-				9012DCB51F7C325300AFD27C /* WalkliveTests */,
-				9012DCC01F7C325300AFD27C /* WalkliveUITests */,
+				904B04BF1FD688D700EEB523 /* WalkLive */,
+				904B04D31FD688D700EEB523 /* WalkLiveTests */,
+				904B04DE1FD688D700EEB523 /* WalkLiveUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9012DCA01F7C325200AFD27C /* Resources */ = {
+		904B04BE1FD688D700EEB523 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9012DCB01F7C325300AFD27C /* LaunchScreen.storyboard in Resources */,
-				9012DCAD1F7C325300AFD27C /* Assets.xcassets in Resources */,
-				9012DCAB1F7C325300AFD27C /* Main.storyboard in Resources */,
-				90F10A021FD493080085AB15 /* OnGoingTripView.xib in Resources */,
+				904B04CE1FD688D700EEB523 /* LaunchScreen.storyboard in Resources */,
+				904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */,
+				904B04C91FD688D700EEB523 /* Main.storyboard in Resources */,
+				904B05261FD689BA00EEB523 /* OnGoingTripView.xib in Resources */,
+				904B050B1FD689A300EEB523 /* warningSign.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9012DCB41F7C325300AFD27C /* Resources */ = {
+		904B04D21FD688D700EEB523 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9012DCBF1F7C325300AFD27C /* Resources */ = {
+		904B04DD1FD688D700EEB523 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -443,7 +443,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36E38E04A4FEDABFC30D3BD2 /* [CP] Copy Pods Resources */ = {
+		27A76B2E0BAA0B0A1DEF0E8C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -455,47 +455,100 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		48314B0ACBC4D27964AFC3FB /* [CP] Check Pods Manifest.lock */ = {
+		2EEEC69ABED80D9ED2C413A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WalkliveTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		72A98395A5A72441158DE89B /* [CP] Copy Pods Resources */ = {
+		6ED228AABABCE12FA30E9C81 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Walklive/Pods-Walklive-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		919AC52EE5C8DAA9B0EC9D03 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A29A4D81D0898BADCB571FB4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C39000B1CB33C99BBE68DBC9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Walklive/Pods-Walklive-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7A05B92172D024A50477FDAD /* [CP] Copy Pods Resources */ = {
+		CC68F5628A5F96C8DFFC2E73 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBDCDA99E2F003653378E3E0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,72 +560,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		87F51A067A587B65E32C857B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Walklive/Pods-Walklive-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Walklive/Pods-Walklive-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BB579F2CCA70784492D1A2E6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Walklive-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DECCDA2E4C291BCC47FB413C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WalkliveUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F0DCEF2A16AF75A54D136402 /* [CP] Embed Pods Frameworks */ = {
+		F95D838F8941ADB767660011 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -584,108 +575,93 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkliveUITests/Pods-WalkliveUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F61A8168C35263A98CF6E96C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkliveTests/Pods-WalkliveTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9012DC9E1F7C325200AFD27C /* Sources */ = {
+		904B04BC1FD688D700EEB523 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				902AEF881FB0E4820043ABAC /* DefaultVC.swift in Sources */,
-				90D670E61FD26EA300D6DAF2 /* Service.swift in Sources */,
-				90EBA16F1FCFD90B00800A08 /* SettingVC.swift in Sources */,
-				9077A5121FC2880E00E8F47E /* SearchVC.swift in Sources */,
-				90EBA1711FCFDA1800800A08 /* FriendTripTableViewCell.swift in Sources */,
-				90F10A061FD499A40085AB15 /* Trip.swift in Sources */,
-				902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */,
-				9077A51B1FC294FE00E8F47E /* FriendRequestTableViewCell.swift in Sources */,
-				9077A51D1FC2952600E8F47E /* TripRequestTableViewCell.swift in Sources */,
-				90A18F521F9529FB006FAD99 /* TimePoint.swift in Sources */,
-				90F10A0E1FD640120085AB15 /* ContactManager.swift in Sources */,
-				BC82732D1F8DDB59007E045E /* NSObject+test.m in Sources */,
-				90F10A0A1FD5AC610085AB15 /* TripPanelDelegate.swift in Sources */,
-				90F233AE1F7C387F0002AF0A /* SignUpVC.swift in Sources */,
-				90D670E41FD25F4D00D6DAF2 /* RouteDelegate.swift in Sources */,
-				9077A5161FC293BA00E8F47E /* TripRequestVC.swift in Sources */,
-				9077A5181FC293F900E8F47E /* UserVC.swift in Sources */,
-				9077A5141FC2932F00E8F47E /* FriendRequestVC.swift in Sources */,
-				90D670DF1FD24D0800D6DAF2 /* Location.swift in Sources */,
-				902C961C1FD13A9B00900398 /* Route.swift in Sources */,
-				9012DCA81F7C325200AFD27C /* FirstViewVC.swift in Sources */,
-				9040AF6B1FC2794100363D4B /* RoadRequester.swift in Sources */,
-				90F10A081FD525240085AB15 /* TimeManager.swift in Sources */,
-				90F10A041FD4931F0085AB15 /* OnGoingTripView.swift in Sources */,
-				90F233B01F7C3BB10002AF0A /* LoginVC.swift in Sources */,
-				9077A51F1FC2957800E8F47E /* LocationTableViewCell.swift in Sources */,
-				9012DCA61F7C325200AFD27C /* AppDelegate.swift in Sources */,
-				8C55E85C1FD5CFE60052E129 /* UserLogin.swift in Sources */,
-				8C4EAB681F92966A001E4037 /* User.swift in Sources */,
-				90F10A0C1FD631520085AB15 /* BackEndClient.swift in Sources */,
+				904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */,
+				904B051E1FD689B300EEB523 /* SettingVC.swift in Sources */,
+				904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */,
+				904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */,
+				904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */,
+				904B05061FD689A300EEB523 /* TimeManager.swift in Sources */,
+				904B05081FD689A300EEB523 /* Trip.swift in Sources */,
+				904B05351FD68D1D00EEB523 /* FriendRequestTableViewCell.swift in Sources */,
+				904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */,
+				904B050A1FD689A300EEB523 /* UserLogin.swift in Sources */,
+				904B05211FD689B300EEB523 /* UserVC.swift in Sources */,
+				904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */,
+				904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */,
+				904B052A1FD689D000EEB523 /* RouteDelegate.swift in Sources */,
+				904B05071FD689A300EEB523 /* TimePoint.swift in Sources */,
+				904B05021FD689A300EEB523 /* ContactManager.swift in Sources */,
+				904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */,
+				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
+				904B05051FD689A300EEB523 /* Route.swift in Sources */,
+				904B05031FD689A300EEB523 /* Location.swift in Sources */,
+				904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */,
+				904B05091FD689A300EEB523 /* User.swift in Sources */,
+				904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */,
+				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
+				904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */,
+				904B052B1FD689D000EEB523 /* TripPanelDelegate.swift in Sources */,
+				904B052F1FD689F500EEB523 /* NSObject+test.m in Sources */,
+				904B05011FD689A300EEB523 /* BackEndClient.swift in Sources */,
+				904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */,
+				904B051B1FD689B300EEB523 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9012DCB21F7C325300AFD27C /* Sources */ = {
+		904B04D01FD688D700EEB523 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9012DCBB1F7C325300AFD27C /* WalkLiveTests.swift in Sources */,
+				904B04D91FD688D700EEB523 /* WalkLiveTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9012DCBD1F7C325300AFD27C /* Sources */ = {
+		904B04DB1FD688D700EEB523 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9012DCC61F7C325300AFD27C /* WalkliveUITests.swift in Sources */,
+				904B04E41FD688D700EEB523 /* WalkLiveUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9012DCB81F7C325300AFD27C /* PBXTargetDependency */ = {
+		904B04D61FD688D700EEB523 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9012DCA11F7C325200AFD27C /* Walklive */;
-			targetProxy = 9012DCB71F7C325300AFD27C /* PBXContainerItemProxy */;
+			target = 904B04BF1FD688D700EEB523 /* WalkLive */;
+			targetProxy = 904B04D51FD688D700EEB523 /* PBXContainerItemProxy */;
 		};
-		9012DCC31F7C325300AFD27C /* PBXTargetDependency */ = {
+		904B04E11FD688D700EEB523 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9012DCA11F7C325200AFD27C /* Walklive */;
-			targetProxy = 9012DCC21F7C325300AFD27C /* PBXContainerItemProxy */;
+			target = 904B04BF1FD688D700EEB523 /* WalkLive */;
+			targetProxy = 904B04E01FD688D700EEB523 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9012DCA91F7C325300AFD27C /* Main.storyboard */ = {
+		904B04C71FD688D700EEB523 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9012DCAA1F7C325300AFD27C /* Base */,
+				904B04C81FD688D700EEB523 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */ = {
+		904B04CC1FD688D700EEB523 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				9012DCAF1F7C325300AFD27C /* Base */,
+				904B04CD1FD688D700EEB523 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -693,7 +669,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		9012DCC81F7C325300AFD27C /* Debug */ = {
+		904B04E61FD688D700EEB523 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -741,7 +717,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -750,7 +726,7 @@
 			};
 			name = Debug;
 		};
-		9012DCC91F7C325300AFD27C /* Release */ = {
+		904B04E71FD688D700EEB523 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -792,7 +768,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -800,151 +776,153 @@
 			};
 			name = Release;
 		};
-		9012DCCB1F7C325300AFD27C /* Debug */ = {
+		904B04E91FD688D700EEB523 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E37A9089C70BE1D4D84EE764 /* Pods-Walklive.debug.xcconfig */;
+			baseConfigurationReference = 61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4KDNX7UPEV;
-				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Walklive/Info.plist;
+				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
+				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLive";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Walklive/VC/Walklive-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		9012DCCC1F7C325300AFD27C /* Release */ = {
+		904B04EA1FD688D700EEB523 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E21168E741EFF74BA27698F /* Pods-Walklive.release.xcconfig */;
+			baseConfigurationReference = C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4KDNX7UPEV;
-				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Walklive/Info.plist;
+				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
+				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLive";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Walklive/VC/Walklive-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		9012DCCE1F7C325300AFD27C /* Debug */ = {
+		904B04EC1FD688D700EEB523 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F13E1D61C84C4B4DA5A2A2C4 /* Pods-WalkliveTests.debug.xcconfig */;
+			baseConfigurationReference = C5D768EC243DDAC103DFBE8B /* Pods-WalkLiveTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = WalkliveTests/Info.plist;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
+				INFOPLIST_FILE = WalkLiveTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkliveTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLiveTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Walklive.app/Walklive";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkLive.app/WalkLive";
 			};
 			name = Debug;
 		};
-		9012DCCF1F7C325300AFD27C /* Release */ = {
+		904B04ED1FD688D700EEB523 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90756C8CBAFF8D3D3DD58275 /* Pods-WalkliveTests.release.xcconfig */;
+			baseConfigurationReference = D1266AF0EC7612F7AB7C0271 /* Pods-WalkLiveTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = WalkliveTests/Info.plist;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
+				INFOPLIST_FILE = WalkLiveTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkliveTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLiveTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Walklive.app/Walklive";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalkLive.app/WalkLive";
 			};
 			name = Release;
 		};
-		9012DCD11F7C325300AFD27C /* Debug */ = {
+		904B04EF1FD688D700EEB523 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97A9656B73A76BF6A9FBFC74 /* Pods-WalkliveUITests.debug.xcconfig */;
+			baseConfigurationReference = 4A467C921A08E9F56C416776 /* Pods-WalkLiveUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = WalkliveUITests/Info.plist;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
+				INFOPLIST_FILE = WalkLiveUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkliveUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLiveUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Walklive;
+				TEST_TARGET_NAME = WalkLive;
 			};
 			name = Debug;
 		};
-		9012DCD21F7C325300AFD27C /* Release */ = {
+		904B04F01FD688D700EEB523 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45F0A39B0E16E8F2528C5941 /* Pods-WalkliveUITests.release.xcconfig */;
+			baseConfigurationReference = 9127724929693C9E22230147 /* Pods-WalkLiveUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = WalkliveUITests/Info.plist;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
+				INFOPLIST_FILE = WalkLiveUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkliveUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLiveUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Walklive;
+				TEST_TARGET_NAME = WalkLive;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9012DC9D1F7C325200AFD27C /* Build configuration list for PBXProject "WalkLive" */ = {
+		904B04BB1FD688D700EEB523 /* Build configuration list for PBXProject "WalkLive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9012DCC81F7C325300AFD27C /* Debug */,
-				9012DCC91F7C325300AFD27C /* Release */,
+				904B04E61FD688D700EEB523 /* Debug */,
+				904B04E71FD688D700EEB523 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9012DCCA1F7C325300AFD27C /* Build configuration list for PBXNativeTarget "Walklive" */ = {
+		904B04E81FD688D700EEB523 /* Build configuration list for PBXNativeTarget "WalkLive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9012DCCB1F7C325300AFD27C /* Debug */,
-				9012DCCC1F7C325300AFD27C /* Release */,
+				904B04E91FD688D700EEB523 /* Debug */,
+				904B04EA1FD688D700EEB523 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9012DCCD1F7C325300AFD27C /* Build configuration list for PBXNativeTarget "WalkliveTests" */ = {
+		904B04EB1FD688D700EEB523 /* Build configuration list for PBXNativeTarget "WalkLiveTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9012DCCE1F7C325300AFD27C /* Debug */,
-				9012DCCF1F7C325300AFD27C /* Release */,
+				904B04EC1FD688D700EEB523 /* Debug */,
+				904B04ED1FD688D700EEB523 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9012DCD01F7C325300AFD27C /* Build configuration list for PBXNativeTarget "WalkliveUITests" */ = {
+		904B04EE1FD688D700EEB523 /* Build configuration list for PBXNativeTarget "WalkLiveUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9012DCD11F7C325300AFD27C /* Debug */,
-				9012DCD21F7C325300AFD27C /* Release */,
+				904B04EF1FD688D700EEB523 /* Debug */,
+				904B04F01FD688D700EEB523 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9012DC9A1F7C325200AFD27C /* Project object */;
+	rootObject = 904B04B81FD688D700EEB523 /* Project object */;
 }

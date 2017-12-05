@@ -1,13 +1,13 @@
 //
-//  WalkliveTests.swift
-//  WalkliveTests
+//  WalkLiveTests.swift
+//  WalkLiveTests
 //
-//  Created by Michelle Shu on 9/27/17.
+//  Created by Michelle Shu on 12/5/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
 
 import XCTest
-@testable import Walklive
+@testable import WalkLive
 
 class WalkLiveTests: XCTestCase {
     
