@@ -8,7 +8,7 @@
 
 import XCTest
 
-class WalkliveUITests: XCTestCase {
+class WalkLiveUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

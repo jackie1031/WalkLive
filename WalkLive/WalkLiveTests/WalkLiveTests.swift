@@ -9,7 +9,7 @@
 import XCTest
 @testable import Walklive
 
-class WalkliveTests: XCTestCase {
+class WalkLiveTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

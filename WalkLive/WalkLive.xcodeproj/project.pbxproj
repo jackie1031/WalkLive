@@ -15,7 +15,7 @@
 		9012DCAB1F7C325300AFD27C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCA91F7C325300AFD27C /* Main.storyboard */; };
 		9012DCAD1F7C325300AFD27C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCAC1F7C325300AFD27C /* Assets.xcassets */; };
 		9012DCB01F7C325300AFD27C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9012DCAE1F7C325300AFD27C /* LaunchScreen.storyboard */; };
-		9012DCBB1F7C325300AFD27C /* WalkliveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCBA1F7C325300AFD27C /* WalkliveTests.swift */; };
+		9012DCBB1F7C325300AFD27C /* WalkLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCBA1F7C325300AFD27C /* WalkLiveTests.swift */; };
 		9012DCC61F7C325300AFD27C /* WalkliveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */; };
 		902842FD1FB9686E00EAA2AF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902842FC1FB9686E00EAA2AF /* MapKit.framework */; };
 		902842FF1FB9694200EAA2AF /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902842FE1FB9694200EAA2AF /* MainMapVC.swift */; };
@@ -80,7 +80,7 @@
 		9012DCAF1F7C325300AFD27C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9012DCB11F7C325300AFD27C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9012DCB61F7C325300AFD27C /* WalkliveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkliveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9012DCBA1F7C325300AFD27C /* WalkliveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkliveTests.swift; sourceTree = "<group>"; };
+		9012DCBA1F7C325300AFD27C /* WalkLiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLiveTests.swift; sourceTree = "<group>"; };
 		9012DCBC1F7C325300AFD27C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9012DCC11F7C325300AFD27C /* WalkliveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalkliveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkliveUITests.swift; sourceTree = "<group>"; };
@@ -169,9 +169,9 @@
 		9012DC991F7C325200AFD27C = {
 			isa = PBXGroup;
 			children = (
-				9012DCA41F7C325200AFD27C /* Walklive */,
-				9012DCB91F7C325300AFD27C /* WalkliveTests */,
-				9012DCC41F7C325300AFD27C /* WalkliveUITests */,
+				9012DCA41F7C325200AFD27C /* WalkLive */,
+				9012DCB91F7C325300AFD27C /* WalkLiveTests */,
+				9012DCC41F7C325300AFD27C /* WalkLiveUITests */,
 				9012DCA31F7C325200AFD27C /* Products */,
 				BE86F5A6E09193BEF940743F /* Pods */,
 				4EE72B4EC4E0DF8A1D683C21 /* Frameworks */,
@@ -188,7 +188,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9012DCA41F7C325200AFD27C /* Walklive */ = {
+		9012DCA41F7C325200AFD27C /* WalkLive */ = {
 			isa = PBXGroup;
 			children = (
 				90F109FC1FD492490085AB15 /* Xibs */,
@@ -205,25 +205,25 @@
 				BC82732C1F8DDB59007E045E /* NSObject+test.m */,
 				9012DCB11F7C325300AFD27C /* Info.plist */,
 			);
-			path = Walklive;
+			path = WalkLive;
 			sourceTree = "<group>";
 		};
-		9012DCB91F7C325300AFD27C /* WalkliveTests */ = {
+		9012DCB91F7C325300AFD27C /* WalkLiveTests */ = {
 			isa = PBXGroup;
 			children = (
-				9012DCBA1F7C325300AFD27C /* WalkliveTests.swift */,
+				9012DCBA1F7C325300AFD27C /* WalkLiveTests.swift */,
 				9012DCBC1F7C325300AFD27C /* Info.plist */,
 			);
-			path = WalkliveTests;
+			path = WalkLiveTests;
 			sourceTree = "<group>";
 		};
-		9012DCC41F7C325300AFD27C /* WalkliveUITests */ = {
+		9012DCC41F7C325300AFD27C /* WalkLiveUITests */ = {
 			isa = PBXGroup;
 			children = (
 				9012DCC51F7C325300AFD27C /* WalkliveUITests.swift */,
 				9012DCC71F7C325300AFD27C /* Info.plist */,
 			);
-			path = WalkliveUITests;
+			path = WalkLiveUITests;
 			sourceTree = "<group>";
 		};
 		9077A5191FC2947C00E8F47E /* Cell */ = {
@@ -646,7 +646,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9012DCBB1F7C325300AFD27C /* WalkliveTests.swift in Sources */,
+				9012DCBB1F7C325300AFD27C /* WalkLiveTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
