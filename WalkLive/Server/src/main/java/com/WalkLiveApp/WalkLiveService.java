@@ -39,7 +39,10 @@ public class WalkLiveService {
      */
     public WalkLiveService(DataSource dataSource) throws WalkLiveService.UserServiceException {
         db = new Sql2o(dataSource);
-
+        /**
+        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+    */
         //Create the schema for the database if necessary. This allows this
         //program to mostly self-contained. But this is not always what you want;
         //sometimes you want to create the schema externally via a script.
