@@ -798,8 +798,7 @@
                                                         <color key="titleColor" red="0.74367599342745194" green="0.77177784974093266" blue="0.74938622337635197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onDeclineButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="Wa5-Jc-XGV"/>
-                                                        <action selector="onDeclineButton:" destination="MuJ-5X-ZkZ" eventType="touchUpInside" id="kY6-zt-m1P"/>
+                                                        <action selector="onDeclineButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="taM-8f-ZoD"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-02-14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kut-bZ-gmX">
@@ -820,8 +819,7 @@
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onAcceptButton:" destination="MuJ-5X-ZkZ" eventType="touchUpInside" id="S6M-Qd-PXK"/>
-                                                        <action selector="onAcceptButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="fFp-EI-tiC"/>
+                                                        <action selector="onAcceptButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="XTn-Pk-bqy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

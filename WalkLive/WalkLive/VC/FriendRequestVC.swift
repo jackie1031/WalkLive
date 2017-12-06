@@ -24,6 +24,17 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         requestTable.dataSource = self
         backEndClient.encoderDecoderTest()
         // Do any additional setup after loading the view.
+        self.testFriendRequestTable()
+    }
+    
+    private func testFriendRequestTable(){
+        var list = [FriendRequest]()
+        let fr1 = FriendRequest()
+        let fr2 = FriendRequest()
+        list.append(fr1)
+        list.append(fr2)
+        self.receivedFriendRequests = list
+        self.sentFriendRequests = list
     }
     
     @IBAction func switchSegmentControl(_ sender: Any) {
@@ -61,6 +72,8 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.declineButton.isHidden = false
         }
         else {
+            let friendRequest = self.sentFriendRequests[indexPath.row]
+            cell.usernameLabel.text = friendRequest.sender
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }
@@ -71,11 +84,13 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBAction func onAcceptButton(_ sender: Any) {
         let button = sender as! UIButton
         self.receivedFriendRequests.remove(at: button.tag)
+        self.requestTable.reloadData()
     }
     
     @IBAction func onDeclineButton(_ sender: Any) {
         let button = sender as! UIButton
         self.receivedFriendRequests.remove(at: button.tag)
+        self.requestTable.reloadData()
     }
     
     
