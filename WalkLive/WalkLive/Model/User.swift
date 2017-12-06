@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: NSObject {
+class User: NSObject, Codable {
     var userId: Int?
     var name: String?
     var userName: String?
