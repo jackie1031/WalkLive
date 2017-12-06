@@ -164,8 +164,7 @@ class BackEndClient: NSObject {
     
     func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String, phoneNum: String) {
         var urlComponents = self.buildURLComponents()
-        //CHANGE ENDPOINT
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users"
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         //
@@ -206,12 +205,11 @@ class BackEndClient: NSObject {
 //        }
         
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        //CHANGE ENDPOINT URL
+        urlComponents.path = self.APICONTEXT + "/users/update"
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         
-        
-        // need
         let keys = ["phoneNum", "emergencyContact"]
         let values = [phoneNum, emergencyContact]
         var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
