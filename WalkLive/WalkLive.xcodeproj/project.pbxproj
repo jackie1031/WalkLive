@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		42C0F6617C948D8FCD4A0A63 /* Pods_WalkLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */; };
+		8C56F6811FD795D600D1017F /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C56F6801FD795D600D1017F /* BackendError.swift */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
 		904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904B04CA1FD688D700EEB523 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalkLiveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A467C921A08E9F56C416776 /* Pods-WalkLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.debug.xcconfig"; sourceTree = "<group>"; };
+		8C56F6801FD795D600D1017F /* BackendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendError.swift; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904B04C81FD688D700EEB523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -165,6 +167,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8C56F67F1FD795AB00D1017F /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				8C56F6801FD795D600D1017F /* BackendError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		904B04B71FD688D700EEB523 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +200,7 @@
 		904B04C21FD688D700EEB523 /* WalkLive */ = {
 			isa = PBXGroup;
 			children = (
+				8C56F67F1FD795AB00D1017F /* Error */,
 				904B05301FD68D1C00EEB523 /* Cell */,
 				904B05271FD689D000EEB523 /* Delegates */,
 				904B05221FD689BA00EEB523 /* Xibs */,
@@ -593,6 +604,7 @@
 				904B05061FD689A300EEB523 /* TimeManager.swift in Sources */,
 				904B05081FD689A300EEB523 /* Trip.swift in Sources */,
 				904B05351FD68D1D00EEB523 /* FriendRequestTableViewCell.swift in Sources */,
+				8C56F6811FD795D600D1017F /* BackendError.swift in Sources */,
 				904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */,
 				904B050A1FD689A300EEB523 /* UserLogin.swift in Sources */,
 				904B05211FD689B300EEB523 /* UserVC.swift in Sources */,

@@ -9,7 +9,7 @@
 import Foundation
 
 struct UserLogin: Codable {
-    var username: String
+    var userId: String
     var password: String
     static func endpointForUserLogin() -> String {
         return "https://localhost:8080/users/login"
