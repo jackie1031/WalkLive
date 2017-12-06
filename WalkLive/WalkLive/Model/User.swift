@@ -9,7 +9,7 @@
 import Foundation
 
 class User: NSObject {
-    var userId: Int?
+    var userId: String?
     var name: String?
     var userName: String?
     var phoneNum: String?
@@ -19,7 +19,7 @@ class User: NSObject {
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        userId = dictionary["user_id"] as? Int
+        userId = dictionary["user_id"] as? String
         name = dictionary["name"] as? String
         userName = dictionary["user_name"] as? String
         phoneNum = dictionary["phone_number"] as? String

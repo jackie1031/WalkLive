@@ -45,6 +45,9 @@
 		904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */; };
 		904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */; };
 		904B053A1FD68D3400EEB523 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05391FD68D3400EEB523 /* Service.swift */; };
+		904B053C1FD77A5A00EEB523 /* RequestUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053B1FD77A5A00EEB523 /* RequestUpdater.swift */; };
+		904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053D1FD77A7B00EEB523 /* FriendRequest.swift */; };
+		904B05401FD77A8D00EEB523 /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053F1FD77A8D00EEB523 /* TripRequest.swift */; };
 		D2528FA348AAC2A6FFFEEC94 /* Pods_WalkLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */; };
 		FE9DB838C7A82F05EE530D5D /* Pods_WalkLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4C28FF63A53A082F32C325 /* Pods_WalkLive.framework */; };
 /* End PBXBuildFile section */
@@ -108,7 +111,6 @@
 		904B05241FD689BA00EEB523 /* OnGoingTripView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnGoingTripView.xib; sourceTree = "<group>"; };
 		904B05281FD689D000EEB523 /* RouteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDelegate.swift; sourceTree = "<group>"; };
 		904B05291FD689D000EEB523 /* TripPanelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripPanelDelegate.swift; sourceTree = "<group>"; };
-		904B052C1FD689F400EEB523 /* WalkLive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WalkLive-Bridging-Header.h"; sourceTree = "<group>"; };
 		904B052D1FD689F500EEB523 /* NSObject+test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+test.h"; sourceTree = "<group>"; };
 		904B052E1FD689F500EEB523 /* NSObject+test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+test.m"; sourceTree = "<group>"; };
 		904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +118,9 @@
 		904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestTableViewCell.swift; sourceTree = "<group>"; };
 		904B05391FD68D3400EEB523 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		904B053B1FD77A5A00EEB523 /* RequestUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUpdater.swift; sourceTree = "<group>"; };
+		904B053D1FD77A7B00EEB523 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
+		904B053F1FD77A8D00EEB523 /* TripRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		9127724929693C9E22230147 /* Pods-WalkLiveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.release.xcconfig"; sourceTree = "<group>"; };
 		C5D768EC243DDAC103DFBE8B /* Pods-WalkLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,11 +195,11 @@
 		904B04C21FD688D700EEB523 /* WalkLive */ = {
 			isa = PBXGroup;
 			children = (
-				904B05301FD68D1C00EEB523 /* Cell */,
 				904B05271FD689D000EEB523 /* Delegates */,
 				904B05221FD689BA00EEB523 /* Xibs */,
-				904B050C1FD689B300EEB523 /* VC */,
+				904B05301FD68D1C00EEB523 /* Cell */,
 				904B04F51FD689A300EEB523 /* Model */,
+				904B050C1FD689B300EEB523 /* VC */,
 				904B04C31FD688D700EEB523 /* AppDelegate.swift */,
 				904B04C71FD688D700EEB523 /* Main.storyboard */,
 				904B04CA1FD688D700EEB523 /* Assets.xcassets */,
@@ -202,8 +207,8 @@
 				904B04CF1FD688D700EEB523 /* Info.plist */,
 				904B052D1FD689F500EEB523 /* NSObject+test.h */,
 				904B052E1FD689F500EEB523 /* NSObject+test.m */,
-				904B052C1FD689F400EEB523 /* WalkLive-Bridging-Header.h */,
 				904B05391FD68D3400EEB523 /* Service.swift */,
+				904B05171FD689B300EEB523 /* Walklive-Bridging-Header.h */,
 			);
 			path = WalkLive;
 			sourceTree = "<group>";
@@ -239,7 +244,9 @@
 				904B04FD1FD689A300EEB523 /* Trip.swift */,
 				904B04FE1FD689A300EEB523 /* User.swift */,
 				904B04FF1FD689A300EEB523 /* UserLogin.swift */,
-				904B05001FD689A300EEB523 /* warningSign.xib */,
+				904B053B1FD77A5A00EEB523 /* RequestUpdater.swift */,
+				904B053D1FD77A7B00EEB523 /* FriendRequest.swift */,
+				904B053F1FD77A8D00EEB523 /* TripRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,7 +264,6 @@
 				904B05141FD689B300EEB523 /* SignUpVC.swift */,
 				904B05151FD689B300EEB523 /* TripRequestVC.swift */,
 				904B05161FD689B300EEB523 /* UserVC.swift */,
-				904B05171FD689B300EEB523 /* Walklive-Bridging-Header.h */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 			children = (
 				904B05231FD689BA00EEB523 /* OnGoingTripView.swift */,
 				904B05241FD689BA00EEB523 /* OnGoingTripView.xib */,
+				904B05001FD689A300EEB523 /* warningSign.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -598,8 +605,10 @@
 				904B05211FD689B300EEB523 /* UserVC.swift in Sources */,
 				904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */,
 				904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */,
+				904B05401FD77A8D00EEB523 /* TripRequest.swift in Sources */,
 				904B052A1FD689D000EEB523 /* RouteDelegate.swift in Sources */,
 				904B05071FD689A300EEB523 /* TimePoint.swift in Sources */,
+				904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */,
 				904B05021FD689A300EEB523 /* ContactManager.swift in Sources */,
 				904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */,
 				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
@@ -611,6 +620,7 @@
 				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
 				904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */,
 				904B052B1FD689D000EEB523 /* TripPanelDelegate.swift in Sources */,
+				904B053C1FD77A5A00EEB523 /* RequestUpdater.swift in Sources */,
 				904B052F1FD689F500EEB523 /* NSObject+test.m in Sources */,
 				904B05011FD689A300EEB523 /* BackEndClient.swift in Sources */,
 				904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */,
