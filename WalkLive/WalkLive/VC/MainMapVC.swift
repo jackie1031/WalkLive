@@ -76,6 +76,10 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         }
     }
     
+    private func hideKeyboard(){
+        self.view.endEditing(true)
+    }
+    
     //Public functions
 
     /// hides keyboard when user finish editing and tap on other places on the screen
@@ -83,7 +87,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     /// - Parameters:
     ///   - recoginizer: object to recognize motion when user tap on the screen
     @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
-        self.view.endEditing(true)
+        self.hideKeyboard()
     }
     
     
@@ -151,6 +155,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     ///  Sender: the button which receives this action
     @IBAction func onContactPanelSendButton(_ sender: Any) {
         self.contactMessagePanel.isHidden = true
+        self.hideKeyboard()
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
             controller.body = buildMessage(location: roadRequester.getSourceLocation())
@@ -207,13 +212,20 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     }
     
     @IBAction func onContactPanelCancelButton(_ sender: Any) {
+        self.hideKeyboard()
         self.contactMessagePanel.isHidden = true
     }
     
+    @IBAction func onContactPanelRefreshButton(_ sender: Any) {
+        self.contactMessagePanelTextView.text = self.buildMessage(location: roadRequester.getSourceLocation())
+    }
+    
+    
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.red
-        renderer.lineWidth = 4.0
+        renderer.strokeColor = primaryColor
+        renderer.lineWidth = 3.0
         
         return renderer
     }
@@ -239,11 +251,12 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             let vc = segue.destination as! SearchVC
             vc.routeDelegate = self
             vc.mapItems = self.mapItems
-            let backItem = UIBarButtonItem()
-            backItem.title = "Cancel"
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
         }
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        backItem.tintColor = primaryColor
+        navigationItem.backBarButtonItem = backItem
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
