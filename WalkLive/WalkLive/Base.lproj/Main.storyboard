@@ -246,7 +246,6 @@
                                             <constraint firstItem="iif-Ti-KoA" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="topMargin" id="SOv-ov-DS1"/>
                                             <constraint firstItem="iif-Ti-KoA" firstAttribute="centerX" secondItem="YZb-gS-rh0" secondAttribute="centerX" id="V2U-sk-Kof"/>
                                             <constraint firstItem="mP7-nI-dUw" firstAttribute="top" secondItem="iif-Ti-KoA" secondAttribute="bottom" constant="6" id="bHr-7t-IGu"/>
-                                            <constraint firstItem="YZb-gS-rh0" firstAttribute="top" secondItem="mP7-nI-dUw" secondAttribute="bottom" constant="8" id="caM-nQ-4x3"/>
                                             <constraint firstAttribute="trailing" secondItem="iif-Ti-KoA" secondAttribute="trailing" constant="20" id="fNN-I1-gMf"/>
                                             <constraint firstItem="YZb-gS-rh0" firstAttribute="top" secondItem="mP7-nI-dUw" secondAttribute="bottom" constant="8" symbolic="YES" id="kLb-bY-W2w"/>
                                             <constraint firstItem="YZb-gS-rh0" firstAttribute="centerX" secondItem="5Ol-uI-drD" secondAttribute="centerX" id="pVe-6y-MP6"/>
@@ -295,7 +294,7 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-RS-el0">
-                                        <rect key="frame" x="67" y="456" width="240" height="96"/>
+                                        <rect key="frame" x="67" y="197" width="240" height="96"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2s-FT-nJU">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="96"/>
@@ -304,36 +303,48 @@
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-PU-K9s">
-                                                <rect key="frame" x="139" y="71" width="30" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <state key="normal" title="Send">
-                                                    <color key="titleColor" red="0.025648478620000002" green="0.028694464480000001" blue="0.02898316062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onContactPanelSendButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="DAw-cf-JUp"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-TZ-6ut">
-                                                <rect key="frame" x="191" y="71" width="34" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onContactPanelCancelButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="vBA-v9-NmF"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lel-w1-IkW">
+                                                <rect key="frame" x="130" y="72" width="102" height="24"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Io1-cQ-6S9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Refresh">
+                                                            <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onContactPanelRefreshButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="3HX-8D-0uD"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-PU-K9s">
+                                                        <rect key="frame" x="38" y="0.0" width="30" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Send">
+                                                            <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onContactPanelSendButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="DAw-cf-JUp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-TZ-6ut">
+                                                        <rect key="frame" x="68" y="0.0" width="34" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" red="0.74367599340000001" green="0.77177784969999996" blue="0.74938622340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onContactPanelCancelButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="vBA-v9-NmF"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="9qs-TZ-6ut" secondAttribute="trailing" constant="15" id="384-3K-VB9"/>
                                             <constraint firstItem="L2s-FT-nJU" firstAttribute="top" secondItem="a8T-RS-el0" secondAttribute="top" id="4CA-kc-nPx"/>
                                             <constraint firstAttribute="bottom" secondItem="L2s-FT-nJU" secondAttribute="bottom" id="8Ap-ab-mq4"/>
-                                            <constraint firstItem="9qs-TZ-6ut" firstAttribute="bottom" secondItem="vt2-PU-K9s" secondAttribute="bottom" id="9hV-HJ-AyG"/>
-                                            <constraint firstItem="vt2-PU-K9s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a8T-RS-el0" secondAttribute="leading" constant="20" symbolic="YES" id="JCk-UN-gtE"/>
-                                            <constraint firstAttribute="bottom" secondItem="9qs-TZ-6ut" secondAttribute="bottom" constant="1" id="MC8-qV-NsW"/>
-                                            <constraint firstItem="9qs-TZ-6ut" firstAttribute="leading" secondItem="vt2-PU-K9s" secondAttribute="trailing" constant="22" id="RG1-ms-bL9"/>
+                                            <constraint firstAttribute="trailing" secondItem="lel-w1-IkW" secondAttribute="trailing" constant="8" id="ThW-xR-zOf"/>
+                                            <constraint firstAttribute="bottom" secondItem="lel-w1-IkW" secondAttribute="bottom" id="VZZ-QW-evE"/>
                                             <constraint firstAttribute="trailing" secondItem="L2s-FT-nJU" secondAttribute="trailing" id="WCs-d2-i0s"/>
                                             <constraint firstItem="L2s-FT-nJU" firstAttribute="leading" secondItem="a8T-RS-el0" secondAttribute="leading" id="fEr-Ga-9Qd"/>
                                         </constraints>
@@ -349,12 +360,12 @@
                                     <constraint firstAttribute="trailing" secondItem="5Ol-uI-drD" secondAttribute="trailing" id="PAR-Bf-ikT"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="leading" secondItem="1T3-Db-Rpa" secondAttribute="leading" id="UVE-Zs-5HA"/>
                                     <constraint firstItem="5Ol-uI-drD" firstAttribute="top" secondItem="1T3-Db-Rpa" secondAttribute="top" id="Y3y-pX-SG3"/>
-                                    <constraint firstItem="a8T-RS-el0" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="bottom" constant="345" id="aGk-cr-N4S"/>
+                                    <constraint firstItem="a8T-RS-el0" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="bottom" constant="86" id="aGk-cr-N4S"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="trailing" secondItem="5Ol-uI-drD" secondAttribute="trailing" id="bKE-Wp-e0T"/>
                                     <constraint firstAttribute="bottom" secondItem="3a5-Bg-zFz" secondAttribute="bottom" id="cgm-ZS-xAw"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="top" id="i7I-uI-7MH"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="centerX" secondItem="1T3-Db-Rpa" secondAttribute="centerX" id="qV0-k0-CL2"/>
-                                    <constraint firstAttribute="bottom" secondItem="a8T-RS-el0" secondAttribute="bottom" constant="51" id="qhs-lp-pcq"/>
+                                    <constraint firstAttribute="bottom" secondItem="a8T-RS-el0" secondAttribute="bottom" constant="310" id="qhs-lp-pcq"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="top" secondItem="1T3-Db-Rpa" secondAttribute="top" id="r75-ZK-tln"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="centerY" secondItem="1T3-Db-Rpa" secondAttribute="centerY" id="tSo-rE-ciZ"/>
                                     <constraint firstAttribute="trailing" secondItem="3a5-Bg-zFz" secondAttribute="trailing" id="wel-oX-VGK"/>

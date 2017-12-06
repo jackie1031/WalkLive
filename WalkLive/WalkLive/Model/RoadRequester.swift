@@ -82,6 +82,9 @@ class RoadRequester: NSObject {
             if (error != nil) {
                 failure(error!)
             }
+            if (response == nil) {
+                failure(error!)
+            }
             success((response?.routes[0])!)
             }
         }

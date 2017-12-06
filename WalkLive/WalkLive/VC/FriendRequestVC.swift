@@ -61,6 +61,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = requestTable.dequeueReusableCell(withIdentifier: "FriendRequestCell", for: indexPath) as! FriendRequestTableViewCell
         //mark buttons
+        cell.selectionStyle = .none
         cell.acceptButton.tag = indexPath.row
         cell.declineButton.tag = indexPath.row
         

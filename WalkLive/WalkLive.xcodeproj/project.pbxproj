@@ -802,7 +802,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4KDNX7UPEV;
@@ -821,7 +820,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4KDNX7UPEV;
