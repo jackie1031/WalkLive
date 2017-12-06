@@ -27,46 +27,45 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func onSaveButton(_ sender: Any) { //How to get current user?
-        if (!validPhone()){
-            return
-            }
-            saveAttempt(success: {
-                self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil) //?
-            }, failure: { (error) in
-                print(error)
-            })
+//        if (!validPhone()){
+//            return
+//            }
+//            saveAttempt(success: {
+//                self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil) //?
+//            }, failure: { (error) in
+//                print(error)
+//            })
     }
     
-    func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-        
-        // need
-        let keys = ["phoneNum", "emergencyContact"]
-        let values = [userPhone, emergencyContactPhone]
-        var userDict = NSDictionary.init(objects: keys, forKeys: values)
-        self.user = User(userDict)
-
-        let encoder = JSONEncoder()
-        do {
-            let newUserLoginAsJSON = try encoder.encode(userLogin)
-            url.httpBody = newUserLoginAsJSON
-        } catch {
-            failure(error!)
-        }
-
-        URLSession.shared.dataTask(with: url, completionHandler: { //?
-            (data, response, error) in
-            // check for errors
-            if error != nil {
-                failure(error!)
-            }
-            if let httpResponse = response as? HTTPURRLResponse { //?
-                print("status code: \(httpResponse.statusCode)")
-                failure(error!)
-            }
-            // if success, log in
-            success()
-        }).resume()
-    }
+//    func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+//
+//        // need
+//        let keys = ["phoneNum", "emergencyContact"]
+//        let values = [userPhone, emergencyContactPhone]
+//        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
+//        self.user = User(dictionary: userDict)
+//        let encoder = JSONEncoder()
+//        do {
+//            let newUserLoginAsJSON = try encoder.encode(setlogin)
+//            url.httpBody = newUserLoginAsJSON
+//        } catch {
+//            failure(error)
+//        }
+//
+//        URLSession.shared.dataTask(with: url, completionHandler: { //?
+//            (data, response, error) in
+//            // check for errors
+//            if error != nil {
+//                failure(error!)
+//            }
+//            if let httpResponse = response as? HTTPURRLResponse { //?
+//                print("status code: \(httpResponse.statusCode)")
+//                failure(error!)
+//            }
+//            // if success, log in
+//            success()
+//        }).resume()
+//    }
     
     func validPhone() -> Bool {
         let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
