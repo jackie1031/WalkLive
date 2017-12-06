@@ -358,13 +358,17 @@ public class TestServer {
                 new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
         };
 
-        DangerZone testDanger = new DangerZone(z1,z2);
+        Crime[] z3 = z2;
+
+        DangerZone testDanger = new DangerZone(z1,z2,z3);
 
         Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
         Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
         Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
         Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4};
+        Crime testZ5 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime testZ6 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4,testZ5,testZ6};
 
         assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
 

@@ -349,9 +349,10 @@ public class WalkLiveService {
             public DangerZone getDangerZone(Coordinate from, Coordinate to, String table) throws UserServiceException {
 //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
                 try (Connection conn = db.open()) {
-                    Crime[] red = getLinkIds(conn, from, to, "alarm > 2000", table);
-                    Crime[] yellow = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
-                    return new DangerZone(red, yellow);
+                    Crime[] z3 = getLinkIds(conn, from, to, "alarm > 2000", table);
+                    Crime[] z2 = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
+                    Crime[] z1 = getLinkIds(conn, from, to, "alarm < 1000", table);
+                    return new DangerZone(z1, z2,z3);
                 } catch (Sql2oException e) {
                     logger.error("Failed to fetch linkIds", e);
                     return null;
