@@ -29,15 +29,6 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
-            //get list of users
-            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
-                try {
-                    return walkLiveService.findAllUsers();
-                } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to fetch user entries");
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer()); //get list of users
 
             /** lallaallala
              * tests
@@ -51,6 +42,21 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
+            /**
+             * ================================================================
+             * User Setup Handling
+             * ================================================================
+             */
+
+            //get list of users
+            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.findAllUsers();
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to fetch user entries");
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer()); //get list of users
 
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
@@ -80,7 +86,7 @@ public class ServerController {
                 try {
                     return walkLiveService.getUser(request.params(":username"));
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed find user.");
+                    logger.error("Failed to find user.");
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
@@ -92,7 +98,7 @@ public class ServerController {
              * ================================================================
              */
 
-            //Make a friend request - receives sender username (from) and recipient username (to) and sent time in request body
+            //Make a friend request - receives recipient username and sent time in request body
             //returns 201 at successful creation
             post(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
                 try {
@@ -105,30 +111,8 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            //get my sent friend requests
-            get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
-                try {
-                    return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
-                } catch (WalkLiveService.FriendRequestServiceException e) {
-                    logger.error("Failed to find list of sent friend requests.");
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
-            //delete select sent friend request
-            delete(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
-                try {
-                    walkLiveService.deleteFriendRequest(request.params(":username"), request.params(":requestid"));
-                    response.status(200);
-                } catch (WalkLiveService.FriendRequestServiceException e) {
-                    logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
-                    response.status(500);
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
             //get my received friend requests
-            get(API_CONTEXT + "/users/:username/my_requests","application/json", (request, response) -> {
+            get(API_CONTEXT + "/users/:username/friend_requests","application/json", (request, response) -> {
                 try {
                     return walkLiveService.getIncomingFriendRequests(request.params(":username"));
                 } catch (WalkLiveService.FriendRequestServiceException e) {
@@ -137,18 +121,50 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
-            //if accept, then add to friends list for both - FIGURE OUT DETAILS
-            //either way, dealt with friend requests should be deleted
-            //delete select sent friend request
-            put(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
+            //get my sent friend requests
+            get(API_CONTEXT + "/users/:username/sent_friend_requests", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.body());
+                    return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
                 } catch (WalkLiveService.FriendRequestServiceException e) {
-                    logger.error("Failed to respond to friendRequest with id: %s", request.params(":requestid"));
-                    response.status(500);
-                    return Collections.EMPTY_MAP;
+                    logger.error("Failed to find list of sent friend requests.");
                 }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            //accept select friend request (and consequently delete)
+            delete(API_CONTEXT + "/users/:username/friend_requests/:requestid/accept", "application/json", (request, response) -> {
+                try {
+                    walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), "accept");
+                    response.status(200);
+                } catch (WalkLiveService.FriendRequestServiceException e) {
+                    logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
+                    response.status(500);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            //reject select friend request (and consequently delete)
+            delete(API_CONTEXT + "/users/:username/friend_requests/:requestid/reject", "application/json", (request, response) -> {
+                try {
+                    walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), "reject");
+                    response.status(200);
+                } catch (WalkLiveService.FriendRequestServiceException e) {
+                    logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
+                    response.status(500);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            //cancel select friend request (and consequently delete)
+            delete(API_CONTEXT + "/users/:username/friend_requests/:requestid/cancel", "application/json", (request, response) -> {
+                try {
+                    walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), "cancel");
+                    response.status(200);
+                } catch (WalkLiveService.FriendRequestServiceException e) {
+                    logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
+                    response.status(500);
+                }
+                return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
             /**

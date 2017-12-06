@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sql2o.Connection;
-import org.sql2o.Query;
-import org.sql2o.Sql2o;
-import org.sql2o.Sql2oException;
+//import org.sql2o.Connection;
+//import org.sql2o.Query;
+//import org.sql2o.Sql2o;
+//import org.sql2o.Sql2oException;
+import java.sql.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,7 +25,7 @@ import org.json.simple.parser.JSONParser;
 
 
 public class WalkLiveService {
-    private Sql2o db;
+    //private Sql2o db;
 
 
     private final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
@@ -38,12 +41,12 @@ public class WalkLiveService {
      * @param dataSource
      */
     public WalkLiveService(DataSource dataSource) throws WalkLiveService.UserServiceException {
-        db = new Sql2o(dataSource);
+        //db = new Sql2o(dataSource);
 
         //Create the schema for the database if necessary. This allows this
         //program to mostly self-contained. But this is not always what you want;
         //sometimes you want to create the schema externally via a script.
-        try (Connection conn = db.open()) {
+        try (Connection conn = getConnection()) {
             String sql = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )";
             conn.createQuery(sql).executeUpdate();
         } catch (Sql2oException ex) {
@@ -392,6 +395,16 @@ public class WalkLiveService {
 
         Trip addToTrip = new Trip();
         return addToTrip;
+    }
+
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+
+        return DriverManager.getConnection(dbUrl, username, password);
     }
 
 
