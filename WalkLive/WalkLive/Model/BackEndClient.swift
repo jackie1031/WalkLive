@@ -50,9 +50,9 @@ class BackEndClient: NSObject {
     }
     
     func makeFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
-        let urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser.id)/friend_requests"
-        let makeFriendRequest = URLRequest(url: urlComponents.url)
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.userId))/friend_requests"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
         makeFriendRequest.httpMethod = "POST"
         
         let encoder = JSONEncoder()
@@ -65,16 +65,16 @@ class BackEndClient: NSObject {
         
         URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
             if (error != nil) {
-                failure(error)
+                failure(error!)
             }
             success()
         }
     }
     
     func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
-        let urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser.id)/friend_requests"
-        let makeFriendRequest = URLRequest(url: urlComponents.url)
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
         makeFriendRequest.httpMethod = "POST"
         
         let encoder = JSONEncoder()
@@ -87,7 +87,7 @@ class BackEndClient: NSObject {
         
         URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
             if (error != nil) {
-                failure(error)
+                failure(error!)
             }
             success()
         }

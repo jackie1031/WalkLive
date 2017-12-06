@@ -8,16 +8,19 @@
 
 import Foundation
 
-class FriendRequest: NSObject {
-    var targetId: String!
+class FriendRequest: NSObject, Codable {
+    var sender: String!
+    var recipient: String!
     var requestId: String!
     init(dictionary: NSDictionary) {
-        self.targetId = dictionary["targetId"] as? String
+        self.sender = dictionary["targetId"] as? String
     }
     
-    func submitRequest(){
-        if (User.currentUser != nil){
-        }
+    func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+        backEndClient.makeFriendRequest(success: {
+            success()
+        }, failure: { (error) in
+            failure(error)
+        }, friendRequest: self)
     }
-    
 }
