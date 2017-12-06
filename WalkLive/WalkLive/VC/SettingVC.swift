@@ -27,45 +27,52 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func onSaveButton(_ sender: Any) { //How to get current user?
-//        if (!validPhone()){
-//            return
-//            }
-//            saveAttempt(success: {
-//                self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil) //?
-//            }, failure: { (error) in
-//                print(error)
-//            })
+        if (!validPhone()){
+            return
+            }
+            saveAttempt(success: {
+                self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil) //?
+            }, failure: { (error) in
+                print(error)
+            })
     }
     
-//    func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-//
-//        // need
-//        let keys = ["phoneNum", "emergencyContact"]
-//        let values = [userPhone, emergencyContactPhone]
-//        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
-//        self.user = User(dictionary: userDict)
-//        let encoder = JSONEncoder()
-//        do {
-//            let newUserLoginAsJSON = try encoder.encode(setlogin)
-//            url.httpBody = newUserLoginAsJSON
-//        } catch {
-//            failure(error)
-//        }
-//
-//        URLSession.shared.dataTask(with: url, completionHandler: { //?
-//            (data, response, error) in
-//            // check for errors
-//            if error != nil {
-//                failure(error!)
-//            }
-//            if let httpResponse = response as? HTTPURRLResponse { //?
-//                print("status code: \(httpResponse.statusCode)")
-//                failure(error!)
-//            }
-//            // if success, log in
-//            success()
-//        }).resume()
-//    }
+    func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+        let endpoint = "."
+        guard let url = URL(string: endpoint) else {
+            print("Error: cannot create URL")
+            let error = BackendError.urlError("Could not construct URL")
+            failure(error)
+        }
+        var userLoginUrlRequest = URLRequest(url: url)
+        userLoginUrlRequest.httpMethod = "POST"
+        // need
+        let keys = ["phoneNum", "emergencyContact"]
+        let values = [userPhone.text, emergencyContactPhone.text]
+        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
+        self.user = User(dictionary: userDict)
+        let encoder = JSONEncoder()
+        do {
+            let newUserLoginAsJSON = try encoder.encode(setlogin)
+            url.httpBody = newUserLoginAsJSON
+        } catch {
+            failure(error)
+        }
+
+        URLSession.shared.dataTask(with: url, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            if let httpResponse = response as? HTTPURRLResponse { //?
+                print("status code: \(httpResponse.statusCode)")
+                failure(error!)
+            }
+            // if success, log in
+            success()
+        }).resume()
+    }
     
     func validPhone() -> Bool {
         let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
