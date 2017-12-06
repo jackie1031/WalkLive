@@ -52,7 +52,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             self.performSegue(withIdentifier: "loginToMainMapSegue", sender: nil) //?
         }, failure: { (error) in
             print(error)
-        }, username: userNameTextField.text, password: passwordTextField.text)
+        }, username: userNameTextField.text!, password: passwordTextField.text!)
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

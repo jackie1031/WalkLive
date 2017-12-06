@@ -10,6 +10,8 @@ import Foundation
 
 class BackEndClient: NSObject {
     let APICONTEXT = "/WalkLive/api"
+    var user: User!
+    
     private func buildURLComponents() -> URLComponents{
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -129,7 +131,7 @@ class BackEndClient: NSObject {
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/login"
         var makeFriendRequest = URLRequest(url: urlComponents.url!)
-        userLoginUrlRequest.httpMethod = "POST"
+        makeFriendRequest.httpMethod = "POST"
         
         //        let keys = ["userId", "password"] //userId?
         //        let values = [userNameTextField.text, passwordTextField.text]
@@ -140,12 +142,12 @@ class BackEndClient: NSObject {
         let encoder = JSONEncoder()
         do {
             let newUserLoginAsJSON = try encoder.encode(userLogin)
-            userLoginUrlRequest.httpBody = newUserLoginAsJSON
+            makeFriendRequest.httpBody = newUserLoginAsJSON
         } catch {
             failure(error)
         }
         
-        URLSession.shared.dataTask(with: url, completionHandler: {
+        URLSession.shared.dataTask(with: makeFriendRequest, completionHandler: {
             (data, response, error) in
             // check for errors
             if error != nil {
@@ -161,13 +163,10 @@ class BackEndClient: NSObject {
     }
     
     func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String, phoneNum: String) {
-        let endpoint = "."
-        guard let url = URL(string: endpoint) else {
-            print("Error: cannot create URL")
-            let error = BackendError.urlError("Could not construct URL")
-            failure(error)
-        }
-        var userLoginUrlRequest = URLRequest(url: url)
+        var urlComponents = self.buildURLComponents()
+        //CHANGE ENDPOINT
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         //
         //        let keys = ["userId", "password", "selfContact"]
@@ -183,7 +182,7 @@ class BackEndClient: NSObject {
             failure(error)
         }
         
-        URLSession.shared.dataTask(with: url, completionHandler: { //?
+        URLSession.shared.dataTask(with: userLoginUrlRequest, completionHandler: { //?
             (data, response, error) in
             // check for errors
             if error != nil {
@@ -199,14 +198,19 @@ class BackEndClient: NSObject {
     }
     
     func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), phoneNum: String, emergencyContact: String) {
-        let endpoint = "."
-        guard let url = URL(string: endpoint) else {
-            print("Error: cannot create URL")
-            let error = BackendError.urlError("Could not construct URL")
-            failure(error)
-        }
-        var userLoginUrlRequest = URLRequest(url: url)
+//        let endpoint = "."
+//        guard let url = URL(string: endpoint) else {
+//            print("Error: cannot create URL")
+//            let error = BackendError.urlError("Could not construct URL")
+//            failure(error)
+//        }
+        
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
+        
+        
         // need
         let keys = ["phoneNum", "emergencyContact"]
         let values = [phoneNum, emergencyContact]
@@ -215,18 +219,18 @@ class BackEndClient: NSObject {
         let encoder = JSONEncoder()
         do {
             let newUserLoginAsJSON = try encoder.encode(user)
-            url.httpBody = newUserLoginAsJSON
+            userLoginUrlRequest.httpBody = newUserLoginAsJSON
         } catch {
             failure(error)
         }
       
-        URLSession.shared.dataTask(with: url, completionHandler: { //?
+        URLSession.shared.dataTask(with: userLoginUrlRequest, completionHandler: { //?
             (data, response, error) in
             // check for errors
             if error != nil {
                 failure(error!)
             }
-            if let httpResponse = response as? HTTPURRLResponse { //?
+            if let httpResponse = response as? HTTPURLResponse { //?
                 print("status code: \(httpResponse.statusCode)")
                 failure(error!)
             }

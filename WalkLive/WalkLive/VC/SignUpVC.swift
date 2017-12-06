@@ -40,7 +40,7 @@ class SignUpVC: UIViewController {
             self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
         }, failure: { (error) in
             print(error)
-        }, username: userNameTextField.text, password: passwordTextField.text, phoneNum: phoneNumberTextField.text)
+        }, username: userNameTextField.text!, password: passwordTextField.text!, phoneNum: phoneNumberTextField.text!)
     }
     
     func isValidSignUp() -> Bool {

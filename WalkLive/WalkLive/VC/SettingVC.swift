@@ -34,7 +34,7 @@ class SettingVC: UIViewController {
             self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil) //?
         }, failure: { (error) in
             print(error)
-        }, phoneNum: userPhone.text, emergencyContact: emergencyContactPhone.text)
+        }, phoneNum: userPhone.text!, emergencyContact: emergencyContactPhone.text!)
     }
     
     func validPhone() -> Bool {
