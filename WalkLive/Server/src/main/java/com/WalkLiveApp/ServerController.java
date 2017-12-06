@@ -152,19 +152,19 @@ public class ServerController {
             }, new JsonTransformer());
 
             /**
+             *
              * Trip part
              * ----------------------------------------------------------------------
              * */
             //Start Trip
             post(API_CONTEXT+"/user", "application/json", (request, response) -> {
                 try {
-                    response.status(201);
+                    response.status(200);
                     return walkLiveService.startTrip(request.body());
                 } // InvalidDestination     Code 409
-                catch (WalkLiveService.UserServiceException e) {
+                catch (WalkLiveService.InvalidDestination e) {
                     response.status(409);
                 }
-
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
@@ -182,9 +182,9 @@ public class ServerController {
                 try {
                     response.status(200);
                     return walkLiveService.getTrip(request.params(":destination"));
-                } catch (WalkLiveService.UserServiceException e) {
+                } catch (WalkLiveService.InvalidTargetID e) {
                     logger.error("Invalid user id.");
-                    response.status(404);
+                    response.status(402);
                     return Collections.EMPTY_MAP;
                 }
             }, new JsonTransformer());

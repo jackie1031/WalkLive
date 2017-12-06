@@ -20,6 +20,8 @@ import javax.sql.DataSource;
 
 import org.json.simple.parser.JSONParser;
 
+import java.sql.*;
+
 
 public class WalkLiveService {
     private Sql2o db;
@@ -262,13 +264,17 @@ public class WalkLiveService {
         return temp;
     }
 
-    public Trip startTrip(String body) throws  UserServiceException, ParseException {
+    //* **URL:** /WalkLive/api/[userId]
+    //        * **Content:** `{ startTime: [string], destination: [string] }`
+    public Trip startTrip(String body) throws  InvalidDestination, ParseException {
         Trip temp = new Trip();
         return temp;
 
     }
 
-    public Trip getTrip(String body) throws UserServiceException, ParseException {
+
+	//Content:  `{ tripId: [int], dangerLevel: [int], startTime: [string], endTime: [string], destination: [string], coordinateLongtitude:[double],coordniteLatiture complete: [boolean] }`
+    public Trip getTrip(String body) throws UserServiceException,InvalidTargetID, ParseException {
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String tripID = object.get("tripID").toString();
@@ -420,14 +426,25 @@ public class WalkLiveService {
         }
     }
 
-    public static class TripServiceException extends Exception {
-        public TripServiceException(String message, Throwable cause) {
+    public static class InvalidDestination extends Exception {
+        public InvalidDestination(String message, Throwable cause) {
             super(message, cause);
         }
 
-        public TripServiceException(String message) {
+        public InvalidDestination(String message) {
             super(message);
         }
     }
+
+    public static class InvalidTargetID extends Exception {
+        public InvalidTargetID(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public InvalidTargetID(String message) {
+            super(message);
+        }
+    }
+
 
 }
