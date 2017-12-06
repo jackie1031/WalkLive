@@ -33,50 +33,54 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func onSignUpButton(_ sender: Any) {
-        if (self.userNameTextField.text == "") {
+        if (!isValidSignUp()) {
             return
         }
-//        signUpAttempt(success: {
-//            self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
-//        }, failure: { (error) in
-//            print(error)
-//        })
+
+        signUpAttempt(success: {
+            self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
+        }, failure: { (error) in
+            print(error)
+        })
     }
     
-//    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-//        let endpoint = "."
-//        guard let url = URL(string: endpoint) else {
-//            print("Error: cannot create URL")
-//            let error = BackendError.urlError(reason: "Could not construct URL")
-//            failure(error!)
-//            failure()
-//        }
-//        var userLoginUrlRequest = URLRequest(url: url)
-//
-//        userLoginUrlRequest.httpMethod = "POST"
-//        let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
-//        let encoder = JSONEncoder()
-//        do {
-//            let newUserLoginAsJSON = try encoder.encode(userLogin)
-//            userLoginUrlRequest.httpBody = newUserLoginAsJSON
-//        } catch {
-//            failure(error)
-//        }
+    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+        let endpoint = "."
+        guard let url = URL(string: endpoint) else {
+            print("Error: cannot create URL")
+            let error = BackendError.urlError(reason: "Could not construct URL")
+            failure(error!)
+        }
+        var userLoginUrlRequest = URLRequest(url: url)
+        userLoginUrlRequest.httpMethod = "POST"
+        
+        let keys = ["userId", "password", "selfContact"]
+        let values = [userNameTextField.text, passwordTextField.text, phoneNumberTextField.text]
+        var userDict = NSDictionary.init(objects: keys, forKeys: values)
+        let user = User(userDict)
+        
+        let encoder = JSONEncoder()
+        do {
+            let newUserSignUpAsJSON = try encoder.encode(user)
+            userUrlRequest.httpBody = newUserSignUpAsJSON
+        } catch {
+            failure(error)
+        }
     
-//        URLSession.shared.dataTask(with: url, completionHandler: { //?
-//            (data, response, error) in
-//            // check for errors
-//            if error != nil {
-//                failure(error!)
-//            }
-//            if let httpResponse = response as? HTTPURLResponse { //?
-//                print("status code: \(httpResponse.statusCode)")
-//                failure(error!)
-//            }
-//            // if success, log in
-//            success()
-//        }).resume()
-//    }
+        URLSession.shared.dataTask(with: url, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            if let httpResponse = response as? HTTPURLResponse { //?
+                print("status code: \(httpResponse.statusCode)")
+                failure(error!)
+            }
+            // if success, log in
+            success()
+        }).resume()
+    }
     
     func isValidSignUp() -> Bool {
         if (self.userNameTextField.text == "") {
@@ -88,7 +92,16 @@ class SignUpVC: UIViewController {
         if (self.passwordTextField.text!.count <= 7) {
             return false
         }
+        if (!validPhone()) {
+            return false
+        }
         return true
+    }
+    
+    func validPhone() -> Bool {
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        return phoneTest.evaluate(with: self.phoneNumberTextField.text)
     }
     
     private func setKeyboard(){
