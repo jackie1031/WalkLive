@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -20,7 +21,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,7 +36,7 @@
         <!--LoginVC-->
         <scene sceneID="KBU-Ue-2CV">
             <objects>
-                <viewController id="Bve-na-hFT" customClass="LoginVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Bve-na-hFT" customClass="LoginVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CkL-nE-GoL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +124,7 @@
         <!--First ViewVC-->
         <scene sceneID="Yns-dX-4Ht">
             <objects>
-                <viewController id="5iP-3G-EIX" customClass="FirstViewVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5iP-3G-EIX" customClass="FirstViewVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gw-3e-C9m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,7 +188,7 @@
         <!--Main MapVC-->
         <scene sceneID="ydR-4b-k7Q">
             <objects>
-                <viewController id="9FO-DO-Aih" customClass="MainMapVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9FO-DO-Aih" customClass="MainMapVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3De-lg-xRP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -387,7 +388,7 @@
         <!--Choose Your Destination-->
         <scene sceneID="6hk-UX-DFq">
             <objects>
-                <viewController id="CCG-MD-SfV" customClass="SearchVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CCG-MD-SfV" customClass="SearchVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MwX-XC-HQv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -399,7 +400,7 @@
                                     <constraint firstAttribute="height" constant="264" id="H7P-4E-K6U"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="106" id="LgF-kK-RdV" customClass="LocationTableViewCell" customModule="Walklive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="106" id="LgF-kK-RdV" customClass="LocationTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="106"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LgF-kK-RdV" id="Och-j1-O83">
@@ -492,7 +493,7 @@
         <!--Sign UpVC-->
         <scene sceneID="mlj-lI-bCJ">
             <objects>
-                <viewController id="qxy-8p-pJ2" customClass="SignUpVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qxy-8p-pJ2" customClass="SignUpVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tL5-Ug-S1M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -584,7 +585,7 @@
         <!--UserVC-->
         <scene sceneID="Hxu-Ue-ewY">
             <objects>
-                <viewController id="AZZ-mi-YjQ" customClass="UserVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AZZ-mi-YjQ" customClass="UserVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eC9-y1-4VO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -687,7 +688,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="amU-He-28c" customClass="FriendTripTableViewCell" customModule="Walklive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="amU-He-28c" customClass="FriendTripTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="amU-He-28c" id="2gG-RK-oyu">
@@ -765,33 +766,114 @@
             </objects>
             <point key="canvasLocation" x="1573.5999999999999" y="880.20989505247383"/>
         </scene>
-        <!--View Controller-->
+        <!--Friend RequestVC-->
         <scene sceneID="g7c-JZ-xa8">
             <objects>
-                <viewController id="xMF-8H-6rL" sceneMemberID="viewController">
+                <viewController id="xMF-8H-6rL" customClass="FriendRequestVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zBj-LA-85h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="meZ-PF-ZHq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="meZ-PF-ZHq">
+                                <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MuJ-5X-ZkZ">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="MuJ-5X-ZkZ" customClass="FriendRequestTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MuJ-5X-ZkZ" id="XMJ-Dx-Djq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU3-cu-iMp">
+                                                    <rect key="frame" x="15" y="40" width="0.0" height="0.0"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4n-JL-EZV">
+                                                    <rect key="frame" x="330" y="40" width="30" height="30"/>
+                                                    <state key="normal" title="Nuh">
+                                                        <color key="titleColor" red="0.74367599342745194" green="0.77177784974093266" blue="0.74938622337635197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onDeclineButton:" destination="MuJ-5X-ZkZ" eventType="touchUpInside" id="kY6-zt-m1P"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-02-14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kut-bZ-gmX">
+                                                    <rect key="frame" x="298" y="14.5" width="62" height="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00z-D1-vH0">
+                                                    <rect key="frame" x="15" y="11" width="82" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jW-Ep-VJc">
+                                                    <rect key="frame" x="292" y="40" width="30" height="30"/>
+                                                    <state key="normal" title="Yes">
+                                                        <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onAcceptButton:" destination="MuJ-5X-ZkZ" eventType="touchUpInside" id="S6M-Qd-PXK"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kut-bZ-gmX" firstAttribute="trailing" secondItem="XMJ-Dx-Djq" secondAttribute="trailingMargin" id="1e7-J1-ZgI"/>
+                                                <constraint firstItem="B4n-JL-EZV" firstAttribute="leading" secondItem="2jW-Ep-VJc" secondAttribute="trailing" constant="8" id="4ih-fA-FLE"/>
+                                                <constraint firstItem="kut-bZ-gmX" firstAttribute="centerY" secondItem="00z-D1-vH0" secondAttribute="centerY" id="Mct-lp-VuN"/>
+                                                <constraint firstItem="00z-D1-vH0" firstAttribute="leading" secondItem="XMJ-Dx-Djq" secondAttribute="leadingMargin" id="O8U-yo-aT0"/>
+                                                <constraint firstItem="B4n-JL-EZV" firstAttribute="trailing" secondItem="kut-bZ-gmX" secondAttribute="trailing" id="XfJ-OA-9zs"/>
+                                                <constraint firstAttribute="bottom" secondItem="B4n-JL-EZV" secondAttribute="bottom" constant="1.5" id="ZSf-2h-1Me"/>
+                                                <constraint firstItem="00z-D1-vH0" firstAttribute="top" secondItem="XMJ-Dx-Djq" secondAttribute="topMargin" id="gy3-SI-UZF"/>
+                                                <constraint firstItem="B4n-JL-EZV" firstAttribute="centerY" secondItem="2jW-Ep-VJc" secondAttribute="centerY" id="k0G-Dg-PFx"/>
+                                                <constraint firstItem="B4n-JL-EZV" firstAttribute="top" secondItem="kut-bZ-gmX" secondAttribute="bottom" constant="11.5" id="ryP-t4-iR7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="2jW-Ep-VJc" id="e3N-7c-8Qg"/>
+                                            <outlet property="dateLabel" destination="kut-bZ-gmX" id="iks-N5-Y5P"/>
+                                            <outlet property="declineButton" destination="B4n-JL-EZV" id="p9O-BP-E1x"/>
+                                            <outlet property="usernameLabel" destination="00z-D1-vH0" id="sOY-hI-JbD"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-1O-dLe">
+                                <rect key="frame" x="16" y="75" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Received"/>
+                                    <segment title="Sent"/>
+                                </segments>
+                                <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="switchSegmentControl:" destination="xMF-8H-6rL" eventType="valueChanged" id="U9h-A9-Jaw"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="meZ-PF-ZHq" firstAttribute="leading" secondItem="02y-JL-M4f" secondAttribute="leading" id="6zU-f8-OPo"/>
+                            <constraint firstItem="meZ-PF-ZHq" firstAttribute="top" secondItem="fUi-1O-dLe" secondAttribute="bottom" constant="8" id="IjB-Kp-vbJ"/>
+                            <constraint firstItem="02y-JL-M4f" firstAttribute="trailing" secondItem="fUi-1O-dLe" secondAttribute="trailing" constant="16" id="ZT6-VO-A8w"/>
+                            <constraint firstItem="fUi-1O-dLe" firstAttribute="top" secondItem="02y-JL-M4f" secondAttribute="top" constant="11" id="eNz-ei-T5H"/>
+                            <constraint firstItem="meZ-PF-ZHq" firstAttribute="bottom" secondItem="02y-JL-M4f" secondAttribute="bottom" id="hD1-CS-LYF"/>
+                            <constraint firstItem="meZ-PF-ZHq" firstAttribute="trailing" secondItem="02y-JL-M4f" secondAttribute="trailing" id="lxZ-gg-Qwv"/>
+                            <constraint firstItem="fUi-1O-dLe" firstAttribute="leading" secondItem="02y-JL-M4f" secondAttribute="leading" constant="16" id="oau-zv-sNK"/>
+                            <constraint firstItem="fUi-1O-dLe" firstAttribute="centerX" secondItem="zBj-LA-85h" secondAttribute="centerX" id="uJF-wW-CrU"/>
+                            <constraint firstItem="meZ-PF-ZHq" firstAttribute="centerX" secondItem="zBj-LA-85h" secondAttribute="centerX" id="wZU-gl-7YQ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="02y-JL-M4f"/>
                     </view>
+                    <connections>
+                        <outlet property="requestTable" destination="meZ-PF-ZHq" id="tgn-Yz-Mg9"/>
+                        <outlet property="segmentControl" destination="fUi-1O-dLe" id="mXu-XL-GUn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfL-om-0ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -800,7 +882,7 @@
         <!--SettingVC-->
         <scene sceneID="dGK-cc-jDw">
             <objects>
-                <viewController id="wOZ-ms-Ev5" customClass="SettingVC" customModule="Walklive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wOZ-ms-Ev5" customClass="SettingVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f2K-ID-M7f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

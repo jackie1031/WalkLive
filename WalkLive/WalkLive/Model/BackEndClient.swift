@@ -9,7 +9,13 @@
 import Foundation
 
 class BackEndClient: NSObject {
-    
+    let APICONTEXT = "/WalkLive/api"
+    private func buildURLComponents() -> URLComponents{
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "walklive.herokuapp.com"
+        return urlComponents
+    }
     
     // A testing function to check deployment of Heroku, connecting backend to frontend,
     // Also serves as a gerneral model right now.
@@ -41,5 +47,49 @@ class BackEndClient: NSObject {
             }
             // if success, log in
         }).resume()
+    }
+    
+    func makeFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.userId))/friend_requests"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
+        makeFriendRequest.httpMethod = "POST"
+        
+        let encoder = JSONEncoder()
+        do {
+            let encodedJSON = try encoder.encode(friendRequest)
+            makeFriendRequest.httpBody = encodedJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            success()
+        }
+    }
+    
+    func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
+        makeFriendRequest.httpMethod = "POST"
+        
+        let encoder = JSONEncoder()
+        do {
+            let encodedJSON = try encoder.encode(friendRequest)
+            makeFriendRequest.httpBody = encodedJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            success()
+        }
     }
 }

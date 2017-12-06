@@ -8,8 +8,8 @@
 
 import Foundation
 
-class User: NSObject, Codable {
-    var userId: Int?
+class User: NSObject {
+    var userId: String?
     var name: String?
     var userName: String?
     var selfContact: String?
@@ -21,7 +21,7 @@ class User: NSObject, Codable {
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        userId = dictionary["userId"] as? Int
+        userId = dictionary["user_id"] as? String
         name = dictionary["name"] as? String
         password = dictionary["password"] as? String
         userName = dictionary["user_name"] as? String
