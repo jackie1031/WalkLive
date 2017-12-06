@@ -12,17 +12,20 @@ class User: NSObject {
     var userId: Int?
     var name: String?
     var userName: String?
-    var phoneNum: String?
+    var selfContact: String?
+    var emergencyNumber: String?
+    var password: String?
     var email: String? //how to use facebook API to get their email in AppDelegate
     //var friendList:
     var dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        userId = dictionary["user_id"] as? Int
+        userId = dictionary["userId"] as? Int
         name = dictionary["name"] as? String
+        password = dictionary["password"] as? String
         userName = dictionary["user_name"] as? String
-        phoneNum = dictionary["phone_number"] as? String
+        selfContact = dictionary["phone_number"] as? String
         //email
     }
     

@@ -33,13 +33,10 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func onSignUpButton(_ sender: Any) {
-        if (self.userNameTextField.text == "") {
+        if (!isValidSignUp()) {
             return
         }
-        if (!validPhone()) {
-            return
-        }
-        
+
         signUpAttempt(success: {
             self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
         }, failure: { (error) in
@@ -93,6 +90,9 @@ class SignUpVC: UIViewController {
             return false
         }
         if (self.passwordTextField.text!.count <= 7) {
+            return false
+        }
+        if (!validPhone()) {
             return false
         }
         return true

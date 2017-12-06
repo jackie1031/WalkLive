@@ -24,7 +24,6 @@
 		904B05071FD689A300EEB523 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FC1FD689A300EEB523 /* TimePoint.swift */; };
 		904B05081FD689A300EEB523 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FD1FD689A300EEB523 /* Trip.swift */; };
 		904B05091FD689A300EEB523 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FE1FD689A300EEB523 /* User.swift */; };
-		904B050A1FD689A300EEB523 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FF1FD689A300EEB523 /* UserLogin.swift */; };
 		904B050B1FD689A300EEB523 /* warningSign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05001FD689A300EEB523 /* warningSign.xib */; };
 		904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050D1FD689B300EEB523 /* DefaultVC.swift */; };
 		904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050E1FD689B300EEB523 /* FirstViewVC.swift */; };
@@ -93,7 +92,6 @@
 		904B04FC1FD689A300EEB523 /* TimePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
 		904B04FD1FD689A300EEB523 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		904B04FE1FD689A300EEB523 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		904B04FF1FD689A300EEB523 /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		904B05001FD689A300EEB523 /* warningSign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = warningSign.xib; sourceTree = "<group>"; };
 		904B050D1FD689B300EEB523 /* DefaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
 		904B050E1FD689B300EEB523 /* FirstViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				904B04FC1FD689A300EEB523 /* TimePoint.swift */,
 				904B04FD1FD689A300EEB523 /* Trip.swift */,
 				904B04FE1FD689A300EEB523 /* User.swift */,
-				904B04FF1FD689A300EEB523 /* UserLogin.swift */,
 				904B05001FD689A300EEB523 /* warningSign.xib */,
 			);
 			path = Model;
@@ -606,7 +603,6 @@
 				904B05351FD68D1D00EEB523 /* FriendRequestTableViewCell.swift in Sources */,
 				8C56F6811FD795D600D1017F /* BackendError.swift in Sources */,
 				904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */,
-				904B050A1FD689A300EEB523 /* UserLogin.swift in Sources */,
 				904B05211FD689B300EEB523 /* UserVC.swift in Sources */,
 				904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */,
 				904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */,
