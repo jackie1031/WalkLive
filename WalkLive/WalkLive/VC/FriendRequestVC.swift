@@ -22,6 +22,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         requestTable.delegate = self
         requestTable.dataSource = self
+        backEndClient.encoderDecoderTest()
         // Do any additional setup after loading the view.
     }
     

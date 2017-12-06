@@ -19,11 +19,23 @@ class BackEndClient: NSObject {
     
     func encoderDecoderTest(){
         let requestTest = FriendRequest()
+        let requestTestTwo = FriendRequest()
         let encoder = JSONEncoder()
         let decoder = JSONDecoder()
         do {
             let encodedJSON = try encoder.encode(requestTest)
             _ = try? decoder.decode(FriendRequest.self, from: encodedJSON) as FriendRequest
+            print(encodedJSON)
+        } catch {
+            print("error")
+        }
+        
+        var requestList = [FriendRequest]()
+        requestList.append(requestTest)
+        requestList.append(requestTestTwo)
+        do {
+            let encodedJSON = try encoder.encode(requestList)
+            let decodedList = try? decoder.decode([FriendRequest].self, from: encodedJSON) as [FriendRequest]
             print(encodedJSON)
         } catch {
             print("error")
@@ -156,6 +168,7 @@ class BackEndClient: NSObject {
             success(updatedEmergencyContact!)
         }
     }
+    
 //
 //    let requestTest = FriendRequest()
 //    let encoder = JSONEncoder()
