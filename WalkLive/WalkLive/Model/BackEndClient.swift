@@ -172,4 +172,41 @@ class BackEndClient: NSObject {
             success()
         }).resume()
     }
+    
+    func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), phoneNum: String, emergencyContact: String) {
+        let endpoint = "."
+        guard let url = URL(string: endpoint) else {
+            print("Error: cannot create URL")
+            let error = BackendError.urlError("Could not construct URL")
+            failure(error)
+        }
+        var userLoginUrlRequest = URLRequest(url: url)
+        userLoginUrlRequest.httpMethod = "POST"
+        // need
+        let keys = ["phoneNum", "emergencyContact"]
+        let values = [phoneNum, emergencyContact]
+        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
+        self.user = User(dictionary: userDict)
+        let encoder = JSONEncoder()
+        do {
+            let newUserLoginAsJSON = try encoder.encode(user)
+            url.httpBody = newUserLoginAsJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            if let httpResponse = response as? HTTPURRLResponse { //?
+                print("status code: \(httpResponse.statusCode)")
+                failure(error!)
+            }
+            // if success, log in
+            success()
+        }).resume()
+    }
 }
