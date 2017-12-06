@@ -9,7 +9,7 @@
 import Foundation
 
 class User: NSObject {
-    var userId: Int?
+    var userId: String?
     var name: String?
     var userName: String?
     var phoneNum: String?

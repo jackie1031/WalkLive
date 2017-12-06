@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+class FriendRequest: NSObject {
+    var targetId: String!
+    var requestId: String!
+    init(dictionary: NSDictionary) {
+        self.targetId = dictionary["targetId"] as? String
+    }
+    
+    func submitRequest(){
+        if (User.currentUser != nil){
+        }
+    }
+    
+}
