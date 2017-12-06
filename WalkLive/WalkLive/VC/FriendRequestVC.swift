@@ -12,9 +12,11 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var requestTable: UITableView!
-    var receivedfriendRequests: [FriendRequest]!
+    var receivedFriendRequests: [FriendRequest]!
     var sentFriendRequests: [FriendRequest]!
     
+    let RECEIVED = 0
+    let SENT = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +25,21 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func switchSegmentControl(_ sender: Any) {
+        self.requestTable.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.receivedfriendRequests != nil {
-            return self.receivedfriendRequests.count
+        if (segmentControl.selectedSegmentIndex == RECEIVED){
+            if self.receivedFriendRequests != nil {
+                return self.receivedFriendRequests.count
+            }
         } else {
-            return 0
+            if self.sentFriendRequests != nil {
+                return self.sentFriendRequests.count
+            }
         }
+        return 0
     }
     
     private func numCount(){

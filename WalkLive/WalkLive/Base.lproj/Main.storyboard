@@ -853,6 +853,9 @@
                                     <segment title="Sent"/>
                                 </segments>
                                 <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="switchSegmentControl:" destination="xMF-8H-6rL" eventType="valueChanged" id="U9h-A9-Jaw"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
