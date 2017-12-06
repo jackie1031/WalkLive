@@ -246,7 +246,6 @@
                                             <constraint firstItem="iif-Ti-KoA" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="topMargin" id="SOv-ov-DS1"/>
                                             <constraint firstItem="iif-Ti-KoA" firstAttribute="centerX" secondItem="YZb-gS-rh0" secondAttribute="centerX" id="V2U-sk-Kof"/>
                                             <constraint firstItem="mP7-nI-dUw" firstAttribute="top" secondItem="iif-Ti-KoA" secondAttribute="bottom" constant="6" id="bHr-7t-IGu"/>
-                                            <constraint firstItem="YZb-gS-rh0" firstAttribute="top" secondItem="mP7-nI-dUw" secondAttribute="bottom" constant="8" id="caM-nQ-4x3"/>
                                             <constraint firstAttribute="trailing" secondItem="iif-Ti-KoA" secondAttribute="trailing" constant="20" id="fNN-I1-gMf"/>
                                             <constraint firstItem="YZb-gS-rh0" firstAttribute="top" secondItem="mP7-nI-dUw" secondAttribute="bottom" constant="8" symbolic="YES" id="kLb-bY-W2w"/>
                                             <constraint firstItem="YZb-gS-rh0" firstAttribute="centerX" secondItem="5Ol-uI-drD" secondAttribute="centerX" id="pVe-6y-MP6"/>
@@ -295,7 +294,7 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-RS-el0">
-                                        <rect key="frame" x="67" y="456" width="240" height="96"/>
+                                        <rect key="frame" x="67" y="197" width="240" height="96"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2s-FT-nJU">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="96"/>
@@ -304,36 +303,48 @@
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-PU-K9s">
-                                                <rect key="frame" x="139" y="71" width="30" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <state key="normal" title="Send">
-                                                    <color key="titleColor" red="0.025648478620000002" green="0.028694464480000001" blue="0.02898316062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onContactPanelSendButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="DAw-cf-JUp"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-TZ-6ut">
-                                                <rect key="frame" x="191" y="71" width="34" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onContactPanelCancelButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="vBA-v9-NmF"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lel-w1-IkW">
+                                                <rect key="frame" x="130" y="72" width="102" height="24"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Io1-cQ-6S9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Refresh">
+                                                            <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onContactPanelRefreshButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="3HX-8D-0uD"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-PU-K9s">
+                                                        <rect key="frame" x="38" y="0.0" width="30" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Send">
+                                                            <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onContactPanelSendButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="DAw-cf-JUp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-TZ-6ut">
+                                                        <rect key="frame" x="68" y="0.0" width="34" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" red="0.74367599340000001" green="0.77177784969999996" blue="0.74938622340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onContactPanelCancelButton:" destination="9FO-DO-Aih" eventType="touchUpInside" id="vBA-v9-NmF"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="9qs-TZ-6ut" secondAttribute="trailing" constant="15" id="384-3K-VB9"/>
                                             <constraint firstItem="L2s-FT-nJU" firstAttribute="top" secondItem="a8T-RS-el0" secondAttribute="top" id="4CA-kc-nPx"/>
                                             <constraint firstAttribute="bottom" secondItem="L2s-FT-nJU" secondAttribute="bottom" id="8Ap-ab-mq4"/>
-                                            <constraint firstItem="9qs-TZ-6ut" firstAttribute="bottom" secondItem="vt2-PU-K9s" secondAttribute="bottom" id="9hV-HJ-AyG"/>
-                                            <constraint firstItem="vt2-PU-K9s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a8T-RS-el0" secondAttribute="leading" constant="20" symbolic="YES" id="JCk-UN-gtE"/>
-                                            <constraint firstAttribute="bottom" secondItem="9qs-TZ-6ut" secondAttribute="bottom" constant="1" id="MC8-qV-NsW"/>
-                                            <constraint firstItem="9qs-TZ-6ut" firstAttribute="leading" secondItem="vt2-PU-K9s" secondAttribute="trailing" constant="22" id="RG1-ms-bL9"/>
+                                            <constraint firstAttribute="trailing" secondItem="lel-w1-IkW" secondAttribute="trailing" constant="8" id="ThW-xR-zOf"/>
+                                            <constraint firstAttribute="bottom" secondItem="lel-w1-IkW" secondAttribute="bottom" id="VZZ-QW-evE"/>
                                             <constraint firstAttribute="trailing" secondItem="L2s-FT-nJU" secondAttribute="trailing" id="WCs-d2-i0s"/>
                                             <constraint firstItem="L2s-FT-nJU" firstAttribute="leading" secondItem="a8T-RS-el0" secondAttribute="leading" id="fEr-Ga-9Qd"/>
                                         </constraints>
@@ -349,12 +360,12 @@
                                     <constraint firstAttribute="trailing" secondItem="5Ol-uI-drD" secondAttribute="trailing" id="PAR-Bf-ikT"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="leading" secondItem="1T3-Db-Rpa" secondAttribute="leading" id="UVE-Zs-5HA"/>
                                     <constraint firstItem="5Ol-uI-drD" firstAttribute="top" secondItem="1T3-Db-Rpa" secondAttribute="top" id="Y3y-pX-SG3"/>
-                                    <constraint firstItem="a8T-RS-el0" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="bottom" constant="345" id="aGk-cr-N4S"/>
+                                    <constraint firstItem="a8T-RS-el0" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="bottom" constant="86" id="aGk-cr-N4S"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="trailing" secondItem="5Ol-uI-drD" secondAttribute="trailing" id="bKE-Wp-e0T"/>
                                     <constraint firstAttribute="bottom" secondItem="3a5-Bg-zFz" secondAttribute="bottom" id="cgm-ZS-xAw"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="top" secondItem="5Ol-uI-drD" secondAttribute="top" id="i7I-uI-7MH"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="centerX" secondItem="1T3-Db-Rpa" secondAttribute="centerX" id="qV0-k0-CL2"/>
-                                    <constraint firstAttribute="bottom" secondItem="a8T-RS-el0" secondAttribute="bottom" constant="51" id="qhs-lp-pcq"/>
+                                    <constraint firstAttribute="bottom" secondItem="a8T-RS-el0" secondAttribute="bottom" constant="310" id="qhs-lp-pcq"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="top" secondItem="1T3-Db-Rpa" secondAttribute="top" id="r75-ZK-tln"/>
                                     <constraint firstItem="scF-un-XBL" firstAttribute="centerY" secondItem="1T3-Db-Rpa" secondAttribute="centerY" id="tSo-rE-ciZ"/>
                                     <constraint firstAttribute="trailing" secondItem="3a5-Bg-zFz" secondAttribute="trailing" id="wel-oX-VGK"/>
@@ -766,7 +777,7 @@
             </objects>
             <point key="canvasLocation" x="1573.5999999999999" y="880.20989505247383"/>
         </scene>
-        <!--Friend RequestVC-->
+        <!--Friend Requests-->
         <scene sceneID="g7c-JZ-xa8">
             <objects>
                 <viewController id="xMF-8H-6rL" customClass="FriendRequestVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
@@ -778,7 +789,7 @@
                                 <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="MuJ-5X-ZkZ" customClass="FriendRequestTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendRequestCell" rowHeight="72" id="MuJ-5X-ZkZ" customClass="FriendRequestTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MuJ-5X-ZkZ" id="XMJ-Dx-Djq">
@@ -798,7 +809,7 @@
                                                         <color key="titleColor" red="0.74367599342745194" green="0.77177784974093266" blue="0.74938622337635197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onDeclineButton:" destination="MuJ-5X-ZkZ" eventType="touchUpInside" id="kY6-zt-m1P"/>
+                                                        <action selector="onDeclineButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="taM-8f-ZoD"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-02-14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kut-bZ-gmX">
@@ -819,7 +830,7 @@
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onAcceptButton:" destination="MuJ-5X-ZkZ" eventType="touchUpInside" id="S6M-Qd-PXK"/>
+                                                        <action selector="onAcceptButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="XTn-Pk-bqy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -870,6 +881,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="02y-JL-M4f"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Friend Requests" id="UDY-54-Sbc">
+                        <barButtonItem key="rightBarButtonItem" title="Add+" id="2gu-br-ho1">
+                            <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="requestTable" destination="meZ-PF-ZHq" id="tgn-Yz-Mg9"/>
                         <outlet property="segmentControl" destination="fUi-1O-dLe" id="mXu-XL-GUn"/>
@@ -923,10 +939,10 @@
             </objects>
             <point key="canvasLocation" x="1570.4000000000001" y="1629.5352323838083"/>
         </scene>
-        <!--View Controller-->
+        <!--Trip RequestVC-->
         <scene sceneID="dFv-He-xJ4">
             <objects>
-                <viewController id="tep-Kh-oq8" sceneMemberID="viewController">
+                <viewController id="tep-Kh-oq8" customClass="TripRequestVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mrc-p8-nxT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -936,13 +952,63 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="EWi-ab-rTb">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripRequestCell" rowHeight="81" id="EWi-ab-rTb" customClass="TripRequestTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EWi-ab-rTb" id="cQQ-an-MdN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3D-zY-8OH">
+                                                    <rect key="frame" x="15" y="0.0" width="82" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yI-mW-s2x">
+                                                    <rect key="frame" x="294" y="40" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Yes">
+                                                        <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onAcceptButton:" destination="tep-Kh-oq8" eventType="touchUpInside" id="ef0-JG-D49"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yj3-gF-VvQ">
+                                                    <rect key="frame" x="332" y="40" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Nuh">
+                                                        <color key="titleColor" red="0.74367599340000001" green="0.77177784969999996" blue="0.74938622340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onDeclineButton:" destination="tep-Kh-oq8" eventType="touchUpInside" id="f4h-2j-3ZW"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2017-02-14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exd-w1-tW1">
+                                                    <rect key="frame" x="300" y="3" width="62" height="14"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gph-Z1-Phe">
+                                                    <rect key="frame" x="15" y="29" width="68" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="4yI-mW-s2x" id="RBH-h2-A6Z"/>
+                                            <outlet property="dataLabel" destination="exd-w1-tW1" id="5RU-Ma-80N"/>
+                                            <outlet property="declineButton" destination="Yj3-gF-VvQ" id="Ha4-Tj-jEd"/>
+                                            <outlet property="destinationLabel" destination="Gph-Z1-Phe" id="1Lh-jl-143"/>
+                                            <outlet property="usernameLabel" destination="k3D-zY-8OH" id="PkQ-vI-uns"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -950,6 +1016,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="fOd-cQ-iTw"/>
                     </view>
+                    <connections>
+                        <outlet property="requestTable" destination="DjS-zz-laC" id="I80-2z-EwM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rp4-4p-KeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

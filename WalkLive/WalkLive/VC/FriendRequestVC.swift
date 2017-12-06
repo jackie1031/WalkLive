@@ -22,7 +22,19 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         requestTable.delegate = self
         requestTable.dataSource = self
+        backEndClient.encoderDecoderTest()
         // Do any additional setup after loading the view.
+        self.testFriendRequestTable()
+    }
+    
+    private func testFriendRequestTable(){
+        var list = [FriendRequest]()
+        let fr1 = FriendRequest()
+        let fr2 = FriendRequest()
+        list.append(fr1)
+        list.append(fr2)
+        self.receivedFriendRequests = list
+        self.sentFriendRequests = list
     }
     
     @IBAction func switchSegmentControl(_ sender: Any) {
@@ -30,6 +42,10 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.numCount()
+    }
+    
+    private func numCount() -> Int{
         if (segmentControl.selectedSegmentIndex == RECEIVED){
             if self.receivedFriendRequests != nil {
                 return self.receivedFriendRequests.count
@@ -42,24 +58,45 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         return 0
     }
     
-    private func numCount(){
-        
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = requestTable.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationTableViewCell
-//        let mapItem = self.mapItems[indexPath.row]
-//        let location = Location(mapItem: mapItem)
-//        cell.goButton.tag = indexPath.row
-//        cell.destinationNameLabel.text = location.destinationName
-//        cell.addressLabel.text = location.address
-//        if (location.phoneNumber != nil) {
-//            cell.phoneNumberLabel.text = location.phoneNumber
-//        }
-//        cell.selectionStyle = .none
+        let cell = requestTable.dequeueReusableCell(withIdentifier: "FriendRequestCell", for: indexPath) as! FriendRequestTableViewCell
+        //mark buttons
+        cell.selectionStyle = .none
+        cell.acceptButton.tag = indexPath.row
+        cell.declineButton.tag = indexPath.row
+        
+        if (segmentControl.selectedSegmentIndex == RECEIVED) {
+            let friendRequest = self.receivedFriendRequests[indexPath.row]
+            cell.usernameLabel.text = friendRequest.sender
+            
+            cell.acceptButton.isHidden = false
+            cell.declineButton.isHidden = false
+        }
+        else {
+            let friendRequest = self.sentFriendRequests[indexPath.row]
+            cell.usernameLabel.text = friendRequest.sender
+            cell.acceptButton.isHidden = true
+            cell.declineButton.isHidden = true
+        }
         return cell
     }
+
     
+    @IBAction func onAcceptButton(_ sender: Any) {
+        let button = sender as! UIButton
+        self.receivedFriendRequests.remove(at: button.tag)
+        self.requestTable.reloadData()
+    }
+    
+    @IBAction func onDeclineButton(_ sender: Any) {
+        let button = sender as! UIButton
+        self.receivedFriendRequests.remove(at: button.tag)
+        self.requestTable.reloadData()
+    }
+    
+    private func getRequests(){
+        self.requestTable.reloadData()
+    }
     
     
 //    override func viewWillAppear(_ animated: Bool) {
