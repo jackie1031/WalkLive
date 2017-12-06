@@ -152,7 +152,7 @@ public class ServerController {
             }, new JsonTransformer());
 
             /**
-             *
+             * ----------------------------------------------------------------------
              * Trip part
              * ----------------------------------------------------------------------
              * */
@@ -164,6 +164,10 @@ public class ServerController {
                 } // InvalidDestination     Code 409
                 catch (WalkLiveService.InvalidDestination e) {
                     response.status(409);
+                }
+                catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to create new User");
+                    response.status(401);
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());

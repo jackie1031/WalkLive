@@ -266,7 +266,7 @@ public class WalkLiveService {
 
     //* **URL:** /WalkLive/api/[userId]
     //        * **Content:** `{ startTime: [string], destination: [string] }`
-    public Trip startTrip(String body) throws  InvalidDestination, ParseException {
+    public Trip startTrip(String body) throws  InvalidDestination,UserServiceException, ParseException {
         Trip temp = new Trip();
         return temp;
 

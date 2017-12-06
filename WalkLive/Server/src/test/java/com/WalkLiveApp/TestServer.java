@@ -544,8 +544,17 @@ public class TestServer {
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             conn.createQuery(sql4).executeUpdate();
 
+
+            // test for new
+            String sql5 = "DROP TABLE IF EXISTS Trips" ;
+            conn.createQuery(sql5).executeUpdate();
+
+
+
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            //newly added?
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             conn.createQuery(sqlNew).executeUpdate();
             conn.createQuery(sqlNew2).executeUpdate();
         }

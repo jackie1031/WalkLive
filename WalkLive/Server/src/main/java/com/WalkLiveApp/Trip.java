@@ -6,12 +6,11 @@ public class Trip {
 
 
     // still needs timepoint ID?
+
     private int tripId, timePointId, dangerLevel;
-    private String userId, destination,startTime,endTime;
+    private String userName, destination,startTime,endTime;
     private boolean complete;
     private Coordinate currCoordinate;
-    private List<TimePoint> allTimePoints = new ArrayList<TimePoint>();
-
 
     //constructor
     public Trip (){};
@@ -39,23 +38,93 @@ public class Trip {
         return allTimePoints;
 
     }
-    public TimePoint getLastTimepoint(){
+    public TimePoint getLastTimepoint() {
 
-        TimePoint last = allTimePoints.get(allTimePoints.size()-1);
+        TimePoint last = allTimePoints.get(allTimePoints.size() - 1);
         return last;
-
     }
 
-    public int getTripId(){ return tripId;}
-    public String getuserId(){ return userId;}
-    public String setstartTime(){ return startTime;}
-    public String  getendTime(){ return endTime;}
-    public boolean getcomplete(){ return complete;}
-    public Coordinate getCoordinate(){return currCoordinate;}
-    public double getCoordLong(){return currCoordinate.getLongitude();}
-    public double getCoordLatit(){return currCoordinate.getLatitude();}
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
+    }
 
-    //content:  `{ tripId: [int], dangerLevel: [int], startTime: [string], endTime: [string], destination: [string], coordinateLongtitude:[double],coordniteLatiture complete: [boolean] }`
+    public int getTimePointId() {
+        return timePointId;
+    }
+
+    public void setTimePointId(int timePointId) {
+        this.timePointId = timePointId;
+    }
+
+    public int getDangerLevel() {
+        return dangerLevel;
+    }
+
+    public void setDangerLevel(int dangerLevel) {
+        this.dangerLevel = dangerLevel;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    public Coordinate getCurrCoordinate() {
+        return currCoordinate;
+    }
+
+    public void setCurrCoordinate(Coordinate currCoordinate) {
+        this.currCoordinate = currCoordinate;
+    }
+
+    public List<TimePoint> getAllTimePoints() {
+        return allTimePoints;
+    }
+
+    public void setAllTimePoints(List<TimePoint> allTimePoints) {
+        this.allTimePoints = allTimePoints;
+    }
+
+    private List<TimePoint> allTimePoints = new ArrayList<TimePoint>();
+
+
+
+    //content:  `{ tripId: [int], userName:[string], dangerLevel: [int], startTime: [string], endTime: [string], destination: [string], coordinateLongtitude:[double],coordniteLatiture complete: [boolean] }`
 
 
 

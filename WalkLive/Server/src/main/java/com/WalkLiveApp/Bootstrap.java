@@ -1,5 +1,8 @@
 package com.WalkLiveApp;
 
+import java.util.*;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sqlite.SQLiteDataSource;
@@ -14,6 +17,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+import java.io.*;
+import java.util.Properties;
+
 import java.sql.*;
 
 
@@ -26,11 +35,24 @@ public class Bootstrap {
 
     private static ServerController controller = null;
 
-    public static void main(String[] args) throws Exception {
+
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+
+    static final Connection con = null;
+    //static final String DB_URL = "jdbc:mysql://localhost:3306/RUNOOB";
+
+
+    /** now use the db.properties file*/
+    //static String url = "jdbc:mysql://localhost:3306/testdb";
+    //static final String USER = "root";
+    //static final String PASS = "123456";
+
+
+    public static void main(String[] args) throws  IOException, SQLException {
         //Check if the database file exists in the current directory. Abort if not
         DataSource dataSource = configureDataSource();
         if (dataSource == null) {
-            System.out.printf("Could not find todo.db in the current directory (%s). Terminating\n",
+            System.out.printf("Could not find testdb.db in the current directory (%s). Terminating\n",
                     Paths.get(".").toAbsolutePath().normalize());
             System.exit(1);
         }
@@ -70,14 +92,15 @@ public class Bootstrap {
 //        get("/hello", (req, res) -> "Hello Heroku World");
 //    }
 
-    static int getPort() {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        if (processBuilder.environment().get("PORT") != null) {
-            logger.info("GOT PORT: " + processBuilder.environment().get("PORT"));
 
-            return Integer.parseInt(processBuilder.environment().get("PORT"));
-        }
-        logger.info("FAILED TO GET PORT FROM HEROKU");
+    static int getPort() {
+//        ProcessBuilder processBuilder = new ProcessBuilder();
+//        if (processBuilder.environment().get("PORT") != null) {
+//            logger.info("GOT PORT: " + processBuilder.environment().get("PORT"));
+//
+//            return Integer.parseInt(processBuilder.environment().get("PORT"));
+//        }
+//        logger.info("FAILED TO GET PORT FROM HEROKU");
         return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
@@ -87,6 +110,10 @@ public class Bootstrap {
      * @return javax.sql.DataSource corresponding to the todo database
      */
     private static DataSource configureDataSource() {
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
         Path walkLivePath = Paths.get(".", "walklive.db");
         if ( !(Files.exists(walkLivePath) )) {
             try { Files.createFile(walkLivePath); }
@@ -95,10 +122,53 @@ public class Bootstrap {
             }
         }
 
-        SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:walklive.db");
-        return dataSource;
+        try {
+            MysqlDataSource ds = getMySQLDataSource();
+            con = ds.getConnection();
 
+            pst = con.prepareStatement("SELECT * FROM Trips");
+            rs = pst.executeQuery();
+
+//            while (rs.next()) {
+//
+////                System.out.print(rs.getInt(1));
+//                System.out.print(": ");
+////                System.out.println(rs.getString(2));
+//            }
+
+            return ds;
+        } catch (FileNotFoundException fnf ) {
+            logger.error("Failed to found file");
+        }catch (IOException e ) {
+            logger.error("IO exception");
+        }catch (SQLException e ) {
+            logger.error("SQL exception");
+        }
+
+
+        //SQLiteDataSource dataSource = new SQLiteDataSource();
+        //dataSource.setUrl("jdbc:sqlite:walklive.db");
+
+
+        return null;
+
+    }
+
+    private static MysqlDataSource getMySQLDataSource() throws FileNotFoundException, IOException {
+
+        Properties props = new Properties();
+        FileInputStream fis = null;
+        MysqlDataSource ds = null;
+
+        fis = new FileInputStream("src/main/resources/db.properties");
+        props.load(fis);
+
+        ds = new MysqlConnectionPoolDataSource();
+        ds.setURL(props.getProperty("mysql.url"));
+        ds.setUser(props.getProperty("mysql.username"));
+        ds.setPassword(props.getProperty("mysql.password"));
+
+        return ds;
     }
 
 
