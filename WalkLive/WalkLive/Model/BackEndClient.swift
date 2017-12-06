@@ -17,6 +17,19 @@ class BackEndClient: NSObject {
         return urlComponents
     }
     
+    func encoderDecoderTest(){
+        let requestTest = FriendRequest()
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+        do {
+            let encodedJSON = try encoder.encode(requestTest)
+            _ = try? decoder.decode(FriendRequest.self, from: encodedJSON) as FriendRequest
+            print(encodedJSON)
+        } catch {
+            print("error")
+        }
+    }
+    
     // A testing function to check deployment of Heroku, connecting backend to frontend,
     // Also serves as a gerneral model right now.
     func testEndPoint(success: @escaping () -> (), failure: @escaping () -> ()) {

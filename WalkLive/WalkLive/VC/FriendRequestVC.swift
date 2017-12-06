@@ -30,6 +30,10 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.numCount()
+    }
+    
+    private func numCount() -> Int{
         if (segmentControl.selectedSegmentIndex == RECEIVED){
             if self.receivedFriendRequests != nil {
                 return self.receivedFriendRequests.count
@@ -40,10 +44,6 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         return 0
-    }
-    
-    private func numCount(){
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

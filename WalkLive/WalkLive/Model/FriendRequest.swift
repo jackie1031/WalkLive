@@ -12,10 +12,16 @@ class FriendRequest: NSObject, Codable {
     var sender: String!
     var recipient: String!
     var requestId: String!
+    
     init(dictionary: NSDictionary) {
         self.sender = dictionary["targetId"] as? String
     }
     
+    override init(){
+        self.sender = "admin"
+        self.recipient = "teacher"
+        self.requestId = "admin"
+    }
     func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
         backEndClient.makeFriendRequest(success: {
             success()
@@ -23,4 +29,5 @@ class FriendRequest: NSObject, Codable {
             failure(error)
         }, friendRequest: self)
     }
+    
 }
