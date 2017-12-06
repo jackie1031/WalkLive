@@ -8,26 +8,43 @@
 
 import UIKit
 
-class TripRequestVC: UIViewController {
+class TripRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
 
+    @IBOutlet weak var requestTable: UITableView!
+    var tripRequests: [TripRequest]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestTable.delegate = self
+        requestTable.dataSource = self
         // Do any additional setup after loading the view.
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.setBackButtons()
-//    }
-//    
-//    func setBackButtons(){
-//        let backItem = UIBarButtonItem()
-//        backItem.tintColor = primaryColor
-//        self.navigationItem.backBarButtonItem = backItem
-//    }
+    
+    @IBAction func onAcceptButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func onDeclineButton(_ sender: UIButton) {
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.tripRequests != nil {
+            return self.tripRequests.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = requestTable.dequeueReusableCell(withIdentifier: "TripRequestCell", for: indexPath) as! TripRequestTableViewCell
+        return cell
+    }
+
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources th can be recreated.
     }
     
 

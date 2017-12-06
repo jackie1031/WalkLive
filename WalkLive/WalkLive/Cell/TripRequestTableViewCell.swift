@@ -9,6 +9,14 @@ import UIKit
 
 class TripRequestTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var destinationLabel: UILabel!
+    @IBOutlet weak var dataLabel: UILabel!
+    
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var declineButton: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

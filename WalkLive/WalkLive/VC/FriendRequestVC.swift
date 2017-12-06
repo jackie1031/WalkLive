@@ -93,6 +93,9 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.requestTable.reloadData()
     }
     
+    private func getRequests(){
+        self.requestTable.reloadData()
+    }
     
     
 //    override func viewWillAppear(_ animated: Bool) {
