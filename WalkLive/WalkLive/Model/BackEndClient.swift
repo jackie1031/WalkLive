@@ -92,4 +92,84 @@ class BackEndClient: NSObject {
             success()
         }
     }
+    
+    func loginAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String) {
+//        let endpoint = "."
+//        guard let url = URL(string: endpoint) else {
+//            print("Error: cannot create URL")
+//            let error = BackendError.urlError("Could not construct URL")
+//            failure(error)
+//        }
+//        var userLoginUrlRequest = URLRequest(url: url)
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/login"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
+        userLoginUrlRequest.httpMethod = "POST"
+        
+        //        let keys = ["userId", "password"] //userId?
+        //        let values = [userNameTextField.text, passwordTextField.text]
+        //        var userLoginDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
+        //        let userLogin = User(dictionary: userLoginDict)
+        let userLogin = UserLogin(username: username, password: password)
+        
+        let encoder = JSONEncoder()
+        do {
+            let newUserLoginAsJSON = try encoder.encode(userLogin)
+            userLoginUrlRequest.httpBody = newUserLoginAsJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                print("status code: \(httpResponse.statusCode)")
+                failure(error!)
+            }
+            // if success, log in
+            success()
+        }).resume()
+    }
+    
+    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String, phoneNum: String) {
+        let endpoint = "."
+        guard let url = URL(string: endpoint) else {
+            print("Error: cannot create URL")
+            let error = BackendError.urlError("Could not construct URL")
+            failure(error)
+        }
+        var userLoginUrlRequest = URLRequest(url: url)
+        userLoginUrlRequest.httpMethod = "POST"
+        //
+        //        let keys = ["userId", "password", "selfContact"]
+        //        let values = [userNameTextField.text, passwordTextField.text, phoneNumberTextField.text]
+        //        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
+        //        let user = User(dictionary: userDict)
+        let userLogin = UserLogin(username: username, password: password, phoneNum: phoneNum)
+        let encoder = JSONEncoder()
+        do {
+            let newUserSignUpAsJSON = try encoder.encode(userLogin)
+            userLoginUrlRequest.httpBody = newUserSignUpAsJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            if let httpResponse = response as? HTTPURLResponse { //?
+                print("status code: \(httpResponse.statusCode)")
+                failure(error!)
+            }
+            // if success, log in
+            success()
+        }).resume()
+    }
 }

@@ -48,50 +48,11 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
         if (self.userNameTextField.text == "") {
             return
         }
-        loginAttempt(success: {
+        backEndClient.loginAttempt(success: {
             self.performSegue(withIdentifier: "loginToMainMapSegue", sender: nil) //?
         }, failure: { (error) in
             print(error)
-        })
-    }
-    
-    func loginAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-        let endpoint = "."
-        guard let url = URL(string: endpoint) else {
-            print("Error: cannot create URL")
-            let error = BackendError.urlError("Could not construct URL")
-            failure(error)
-        }
-        var userLoginUrlRequest = URLRequest(url: url)
-        userLoginUrlRequest.httpMethod = "GET"
-
-//        let keys = ["userId", "password"] //userId?
-//        let values = [userNameTextField.text, passwordTextField.text]
-//        var userLoginDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
-//        let userLogin = User(dictionary: userLoginDict)
-        let userLogin = UserLogin(userId: userNameTextField.text, password: passwordTextField.text)
-        
-        let encoder = JSONEncoder()
-        do {
-            let newUserLoginAsJSON = try encoder.encode(userLogin)
-            userLoginUrlRequest.httpBody = newUserLoginAsJSON
-        } catch {
-            failure(error)
-        }
-
-        URLSession.shared.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            // check for errors
-            if error != nil {
-                failure(error!)
-            }
-            if let httpResponse = response as? HTTPURLResponse {
-                print("status code: \(httpResponse.statusCode)")
-                failure(error!)
-            }
-            // if success, log in
-            success()
-        }).resume()
+        }, username: userNameTextField.text, password: passwordTextField.text)
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

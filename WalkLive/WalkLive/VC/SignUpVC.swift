@@ -36,50 +36,11 @@ class SignUpVC: UIViewController {
         if (!isValidSignUp()) {
             return
         }
-
-        signUpAttempt(success: {
+        backEndClient.signUpAttempt(success: {
             self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
         }, failure: { (error) in
             print(error)
-        })
-    }
-    
-    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-        let endpoint = "."
-        guard let url = URL(string: endpoint) else {
-            print("Error: cannot create URL")
-            let error = BackendError.urlError("Could not construct URL")
-            failure(error)
-        }
-        var userLoginUrlRequest = URLRequest(url: url)
-        userLoginUrlRequest.httpMethod = "POST"
-//
-//        let keys = ["userId", "password", "selfContact"]
-//        let values = [userNameTextField.text, passwordTextField.text, phoneNumberTextField.text]
-//        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
-//        let user = User(dictionary: userDict)
-        let userLogin = UserLogin(userId: userNameTextField.text, password: passwordTextField.text, phoneNum: phoneNumberTextField.text)
-        let encoder = JSONEncoder()
-        do {
-            let newUserSignUpAsJSON = try encoder.encode(userLogin)
-            userLoginUrlRequest.httpBody = newUserSignUpAsJSON
-        } catch {
-            failure(error)
-        }
-
-        URLSession.shared.dataTask(with: url, completionHandler: { //?
-            (data, response, error) in
-            // check for errors
-            if error != nil {
-                failure(error!)
-            }
-            if let httpResponse = response as? HTTPURLResponse { //?
-                print("status code: \(httpResponse.statusCode)")
-                failure(error!)
-            }
-            // if success, log in
-            success()
-        }).resume()
+        }, username: userNameTextField.text, password: passwordTextField.text, phoneNum: phoneNumberTextField.text)
     }
     
     func isValidSignUp() -> Bool {
