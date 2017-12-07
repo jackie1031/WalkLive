@@ -6,11 +6,11 @@ import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sql2o.Connection;
-import org.sql2o.Query;
-import org.sql2o.Sql2o;
-import org.sql2o.Sql2oException;
-import org.sqlite.SQLiteDataSource;
+//import org.sql2o.Connection;
+//import org.sql2o.Query;
+//import org.sql2o.Sql2o;
+//import org.sql2o.Sql2oException;
+//import org.sqlite.SQLiteDataSource;
 import spark.Spark;
 import spark.utils.IOUtils;
 
@@ -19,6 +19,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.HttpURLConnection;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.*;
@@ -34,9 +35,13 @@ import java.util.List;
 
 public class TestServer {
 
-    SQLiteDataSource dSource;
+    //SQLiteDataSource dSource;
     private final String TESTCRIMES = "TestCrimes";
     private final Logger logger = LoggerFactory.getLogger(TestServer.class);
+
+    private final String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
+    private final String user = "b0a1d19d87f384";
+    private final String password = "6d11c74b";
 
     //------------------------------------------------------------------------//
     // Setup
@@ -69,11 +74,10 @@ public class TestServer {
 
     }
 
-//    @After
-//    public void tearDown() {
-//        clearDB();
-//        //Spark.stop();
-//    }
+    @After
+    public void tearDown() {
+        //Spark.stop();
+    }
 
     //------------------------------------------------------------------------//
     // Tests
@@ -149,290 +153,290 @@ public class TestServer {
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
         }
     }
-
-    @Test
-    public void testDuplicateCreation() {
-
-        //Add a few elements
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063")
-        };
-
-        //add to database
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            //System.out.println("USER: " + t.toString());
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-
-        //check if duplications are caught
-        User u = new User("jeesookim", "1234567", "4405339063");
-
-        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
-        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
-
-        //try another user duplication
-        User u2 = new User("michelle", "123456", "4405339063");
-        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
-        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
-
-        //Get them back
-        Response s = request("GET", "/WalkLive/api/users", null);
-        assertEquals("Failed to get user entries", 200, s.httpStatus);
-        List<User> results = getUsers(s);
-
-        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-        assertEquals("Number of user entries differ", entries.length, results.size());
-    }
-
-    @Test
-    public void testLogin() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
-        //add single element
-        User expected = new User("jeesoo", "test-1", "4405339063");
-        Response r1 = request("POST", "/WalkLive/api/users", expected);
-        assertEquals("Failed to add new user", 201, r1.httpStatus);
-
-        //Get it back so that we know its ID
-        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
-        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
-
-        //assert to check for return string uri
-
-    }
-
-    /**
-     * ================================================================
-     * Friend Request Handling
-     * ================================================================
-     */
-
-    @Test
-    public void testCreateFriendRequest() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
-        //add a few elements
-        FriendRequest[] frs = new FriendRequest[] {
-                new FriendRequest("jeesookim", "michelle", df.parse("2017-08-22T14:32:03-0700")),
-                new FriendRequest("michelle", "yangcao1", df.parse("2017-08-22T14:32:03-0700"))
-        };
-
-        for (FriendRequest f : frs) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-    }
-
-//    @Test
-//    public void testUpdate() throws Exception {
-//
-//        //Add a single element
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        Todo expected = new Todo(null, "Test-1", false, df.parse("2015-04-23T23:10:15-0700"));
-//        Response r1 = request("POST", "/api/v1/todos", expected);
-//        assertEquals("Failed to add", 201, r1.httpStatus);
-//
-//        //Get it back so that we know its ID
-//        Response r2 = request("GET", "/api/v1/todos", null);
-//        assertEquals("Failed to get todos", 200, r2.httpStatus);
-//        Todo t = getTodos(r2).get(0);
-//
-//        //Send out an update with a changed title and state
-//        Todo updated = new Todo(t.getId(), t.getTitle(), !t.isDone(), t.getCreatedOn());
-//        Response r3 = request("PUT", "/api/v1/todos/" + t.getId(), updated);
-//        assertEquals("Failed to update", 200, r3.httpStatus);
-//
-//        //Get stuff back again
-//        Response r4 = request("GET", "/api/v1/todos", null);
-//        assertEquals("Failed to get todos", 200, r4.httpStatus);
-//        List<Todo> results = getTodos(r4);
-//
-//        //Verify that we got the right element back
-//        assertEquals(1, results.size());
-//
-//        Todo actual = results.get(0);
-//        assertEquals("Mismatch in Id", updated.getId(), actual.getId());
-//        assertEquals("Mismatch in title", updated.getTitle(), actual.getTitle());
-//        assertEquals("Mismatch in creation date", updated.getCreatedOn(), actual.getCreatedOn());
-//        assertEquals("Mismatch in done state", updated.isDone(), actual.isDone());
-//    }
 //
 //    @Test
-//    public void testDelete() throws Exception {
+//    public void testDuplicateCreation() {
 //
 //        //Add a few elements
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        Todo[] entries = new Todo[] {
-//          new Todo(null, "Test-1", false, df.parse("2015-04-23T23:10:15-0700")),
-//          new Todo(null, "Test-2", true, df.parse("2015-03-07T01:10:20-0530")),
-//          new Todo(null, "Test-3", false, df.parse("2010-02-19T13:25:43-0530"))
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456","4405339063"),
+//                new User("michelle", "0123", "4405339063")
 //        };
 //
-//        for (Todo t : entries) {
-//            Response radd = request("POST", "/api/v1/todos", t);
-//            assertEquals("Failed to add", 201, radd.httpStatus);
+//        //add to database
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            //System.out.println("USER: " + t.toString());
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
 //        }
 //
-//        //Get them back so that we know our ids
-//        Response r1 = request("GET", "/api/v1/todos", null);
-//        assertEquals("Failed to get todos", 200, r1.httpStatus);
-//        List<Todo> data = getTodos(r1);
+//        //check if duplications are caught
+//        User u = new User("jeesookim", "1234567", "4405339063");
 //
-//        //Delete an entry
-//        int indexToDelete = 1;
-//        Response r2 = request("DELETE", "/api/v1/todos/" + data.get(indexToDelete).getId(), null);
-//        assertEquals("Failed to delete todo", 200, r2.httpStatus);
+//        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
+//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
 //
-//        //Get it back again
-//        Response r3 = request("GET", "/api/v1/todos", null);
-//        assertEquals("Failed to get todos", 200, r3.httpStatus);
-//        List<Todo> results = getTodos(r3);
+//        //try another user duplication
+//        User u2 = new User("michelle", "123456", "4405339063");
+//        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
+//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
 //
-//        //Verify that we got the right element back
-//        assertEquals("Number of todo entries differ", entries.length - 1, results.size());
+//        //Get them back
+//        Response s = request("GET", "/WalkLive/api/users", null);
+//        assertEquals("Failed to get user entries", 200, s.httpStatus);
+//        List<User> results = getUsers(s);
 //
-//        //Make a new list of expected Todos with some Java 8 functional foo :)
-//        List<Todo> expected = IntStream.range(0, entries.length)
-//            .filter(i -> i != indexToDelete)
-//            .mapToObj(i -> entries[i])
-//            .collect(Collectors.toList());
+//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+//        assertEquals("Number of user entries differ", entries.length, results.size());
+//    }
 //
-//        //And check
-//        for (int i = 0; i < results.size(); i++) {
-//            Todo actual = results.get(i);
-//            assertEquals(String.format("Index %d: Mismatch in title", i), expected.get(i).getTitle(), actual.getTitle());
-//            assertEquals(String.format("Index %d: Mismatch in creation date", i), expected.get(i).getCreatedOn(), actual.getCreatedOn());
-//            assertEquals(String.format("Index %d: Mismatch in done state", i), expected.get(i).isDone(), actual.isDone());
+//    @Test
+//    public void testLogin() throws Exception {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//
+//        //add single element
+//        User expected = new User("jeesoo", "test-1", "4405339063");
+//        Response r1 = request("POST", "/WalkLive/api/users", expected);
+//        assertEquals("Failed to add new user", 201, r1.httpStatus);
+//
+//        //Get it back so that we know its ID
+//        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
+//        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
+//
+//        //assert to check for return string uri
+//
+//    }
+//
+//    /**
+//     * ================================================================
+//     * Friend Request Handling
+//     * ================================================================
+//     */
+//
+//    @Test
+//    public void testCreateFriendRequest() throws Exception {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//
+//        //add a few elements
+//        FriendRequest[] frs = new FriendRequest[] {
+//                new FriendRequest("jeesookim", "michelle", df.parse("2017-08-22T14:32:03-0700")),
+//                new FriendRequest("michelle", "yangcao1", df.parse("2017-08-22T14:32:03-0700"))
+//        };
+//
+//        for (FriendRequest f : frs) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
 //        }
 //    }
-
-    @Test
-    public void testCoordinate() throws Exception {
-        Coordinate c = new Coordinate(0.6, 0.7);
-        assertEquals(0.6, c.getLatitude(), 0);
-        assertEquals(0.7, c.getLongitude(), 0);
-    }
-
-
-    @Test
-    public void testSortAndExpand() throws Exception {
-        //c1 < c2
-        Coordinate c1 = new Coordinate(0.5, 0.7);
-        Coordinate c2 = new Coordinate(0.9, 1.1);
-        Coordinate.sortAndExpand(c1, c2);
-        assertEquals(0.49, c1.getLatitude(), 0);
-        assertEquals(0.6886, c1.getLongitude(), 0.01);
-        assertEquals(0.91, c2.getLatitude(), 0);
-        assertEquals(1.11608, c2.getLongitude(), 0.01);
-
-        //c3 > c4
-        Coordinate c3 = new Coordinate(0.9, 1.1);
-        Coordinate c4 = new Coordinate(0.5, 0.7);
-        Coordinate.sortAndExpand(c3, c4);
-        assertEquals(0.49, c3.getLatitude(), 0);
-        assertEquals(0.6886, c3.getLongitude(), 0.01);
-        assertEquals(0.91, c4.getLatitude(), 0);
-        assertEquals(1.11608, c4.getLongitude(), 0.01);
-
-    }
-
-
-    @Test
-    public void testGetDangerZone() throws Exception {
-
-
-        double lat = 3.454;
-        double lng = 6.929;
-        Coordinate c = new Coordinate(lat, lng);
-
-        Crime[] z1 = new Crime[]{
-                new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523),
-                new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339),
-        };
-        Crime[] z2 = new Crime[]{
-
-                new Crime(1126, 18, "JHU brody", "Sexual", c, 24124124),
-                new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
-        };
-
-        DangerZone testDanger = new DangerZone(z1,z2);
-
-        Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
-        Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4};
-
-        assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
-
-
-        //assertEquals();
-
-
-        for (Crime t : z1) {
-            Response rCreateNew = request("GET", "/WalkLive/api/getdangerzone", t);
-            //System.out.println("USER: " + t.toString());
-            assertEquals("Failed to create new User", 404, rCreateNew.httpStatus);
-        }
-
-
-
-    }
-
-    /**
-     * Test getting getCrimes method within a specific range of coordinates from the
-     * database.
-     */
-    @Test
-    public void testGetCrimes() throws Exception {
-
-        List<Crime> crimeList = new LinkedList<>();
-
-        double lat = 3.454;
-        double lng = 6.929;
-        Coordinate c = new Coordinate(lat, lng);
-
-        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 1));
-        crimeList.add(new Crime(1026, 12, "brody", "theft", c, 2));
-        crimeList.add(new Crime(1027, 13, "", "Robbery", c, 3));
-        crimeList.add(new Crime(1028, 5, "", "theft", c, 4));
-
-        double fromLng = 200;
-        double toLng = 400;
-
-        double fromLat = 200;
-        double toLat = 400;
-
-        Coordinate c1 = new Coordinate(fromLat, fromLng);
-        Coordinate c2 = new Coordinate(toLat, toLng);
-
-        int fromDate = 20;
-        int toDate = 40;
-        int timeOfDay = 18;
-
-        Crime from = new Crime(fromDate, c1);
-        Crime to = new Crime(toDate, c2);
-        int count = 1;
-        for(Crime t: crimeList){
-            assertEquals(count, t.getLinkId());
-            count++;
-
-        }
-
-    }
-
-    @Test
-    public void testAddTimePoints() throws Exception {
-        double lat = 3.454;
-        double lng = 6.929;
-        Coordinate c = new Coordinate(lat, lng);
-
-        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
-        TimePoint temp = new TimePoint(12,13,c,1);
-    }
+//
+////    @Test
+////    public void testUpdate() throws Exception {
+////
+////        //Add a single element
+////        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+////        Todo expected = new Todo(null, "Test-1", false, df.parse("2015-04-23T23:10:15-0700"));
+////        Response r1 = request("POST", "/api/v1/todos", expected);
+////        assertEquals("Failed to add", 201, r1.httpStatus);
+////
+////        //Get it back so that we know its ID
+////        Response r2 = request("GET", "/api/v1/todos", null);
+////        assertEquals("Failed to get todos", 200, r2.httpStatus);
+////        Todo t = getTodos(r2).get(0);
+////
+////        //Send out an update with a changed title and state
+////        Todo updated = new Todo(t.getId(), t.getTitle(), !t.isDone(), t.getCreatedOn());
+////        Response r3 = request("PUT", "/api/v1/todos/" + t.getId(), updated);
+////        assertEquals("Failed to update", 200, r3.httpStatus);
+////
+////        //Get stuff back again
+////        Response r4 = request("GET", "/api/v1/todos", null);
+////        assertEquals("Failed to get todos", 200, r4.httpStatus);
+////        List<Todo> results = getTodos(r4);
+////
+////        //Verify that we got the right element back
+////        assertEquals(1, results.size());
+////
+////        Todo actual = results.get(0);
+////        assertEquals("Mismatch in Id", updated.getId(), actual.getId());
+////        assertEquals("Mismatch in title", updated.getTitle(), actual.getTitle());
+////        assertEquals("Mismatch in creation date", updated.getCreatedOn(), actual.getCreatedOn());
+////        assertEquals("Mismatch in done state", updated.isDone(), actual.isDone());
+////    }
+////
+////    @Test
+////    public void testDelete() throws Exception {
+////
+////        //Add a few elements
+////        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+////        Todo[] entries = new Todo[] {
+////          new Todo(null, "Test-1", false, df.parse("2015-04-23T23:10:15-0700")),
+////          new Todo(null, "Test-2", true, df.parse("2015-03-07T01:10:20-0530")),
+////          new Todo(null, "Test-3", false, df.parse("2010-02-19T13:25:43-0530"))
+////        };
+////
+////        for (Todo t : entries) {
+////            Response radd = request("POST", "/api/v1/todos", t);
+////            assertEquals("Failed to add", 201, radd.httpStatus);
+////        }
+////
+////        //Get them back so that we know our ids
+////        Response r1 = request("GET", "/api/v1/todos", null);
+////        assertEquals("Failed to get todos", 200, r1.httpStatus);
+////        List<Todo> data = getTodos(r1);
+////
+////        //Delete an entry
+////        int indexToDelete = 1;
+////        Response r2 = request("DELETE", "/api/v1/todos/" + data.get(indexToDelete).getId(), null);
+////        assertEquals("Failed to delete todo", 200, r2.httpStatus);
+////
+////        //Get it back again
+////        Response r3 = request("GET", "/api/v1/todos", null);
+////        assertEquals("Failed to get todos", 200, r3.httpStatus);
+////        List<Todo> results = getTodos(r3);
+////
+////        //Verify that we got the right element back
+////        assertEquals("Number of todo entries differ", entries.length - 1, results.size());
+////
+////        //Make a new list of expected Todos with some Java 8 functional foo :)
+////        List<Todo> expected = IntStream.range(0, entries.length)
+////            .filter(i -> i != indexToDelete)
+////            .mapToObj(i -> entries[i])
+////            .collect(Collectors.toList());
+////
+////        //And check
+////        for (int i = 0; i < results.size(); i++) {
+////            Todo actual = results.get(i);
+////            assertEquals(String.format("Index %d: Mismatch in title", i), expected.get(i).getTitle(), actual.getTitle());
+////            assertEquals(String.format("Index %d: Mismatch in creation date", i), expected.get(i).getCreatedOn(), actual.getCreatedOn());
+////            assertEquals(String.format("Index %d: Mismatch in done state", i), expected.get(i).isDone(), actual.isDone());
+////        }
+////    }
+//
+//    @Test
+//    public void testCoordinate() throws Exception {
+//        Coordinate c = new Coordinate(0.6, 0.7);
+//        assertEquals(0.6, c.getLatitude(), 0);
+//        assertEquals(0.7, c.getLongitude(), 0);
+//    }
+//
+//
+//    @Test
+//    public void testSortAndExpand() throws Exception {
+//        //c1 < c2
+//        Coordinate c1 = new Coordinate(0.5, 0.7);
+//        Coordinate c2 = new Coordinate(0.9, 1.1);
+//        Coordinate.sortAndExpand(c1, c2);
+//        assertEquals(0.49, c1.getLatitude(), 0);
+//        assertEquals(0.6886, c1.getLongitude(), 0.01);
+//        assertEquals(0.91, c2.getLatitude(), 0);
+//        assertEquals(1.11608, c2.getLongitude(), 0.01);
+//
+//        //c3 > c4
+//        Coordinate c3 = new Coordinate(0.9, 1.1);
+//        Coordinate c4 = new Coordinate(0.5, 0.7);
+//        Coordinate.sortAndExpand(c3, c4);
+//        assertEquals(0.49, c3.getLatitude(), 0);
+//        assertEquals(0.6886, c3.getLongitude(), 0.01);
+//        assertEquals(0.91, c4.getLatitude(), 0);
+//        assertEquals(1.11608, c4.getLongitude(), 0.01);
+//
+//    }
+//
+//
+//    @Test
+//    public void testGetDangerZone() throws Exception {
+//
+//
+//        double lat = 3.454;
+//        double lng = 6.929;
+//        Coordinate c = new Coordinate(lat, lng);
+//
+//        Crime[] z1 = new Crime[]{
+//                new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523),
+//                new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339),
+//        };
+//        Crime[] z2 = new Crime[]{
+//
+//                new Crime(1126, 18, "JHU brody", "Sexual", c, 24124124),
+//                new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
+//        };
+//
+//        DangerZone testDanger = new DangerZone(z1,z2);
+//
+//        Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
+//        Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+//        Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+//        Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+//        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4};
+//
+//        assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
+//
+//
+//        //assertEquals();
+//
+//
+//        for (Crime t : z1) {
+//            Response rCreateNew = request("GET", "/WalkLive/api/getdangerzone", t);
+//            //System.out.println("USER: " + t.toString());
+//            assertEquals("Failed to create new User", 404, rCreateNew.httpStatus);
+//        }
+//
+//
+//
+//    }
+//
+//    /**
+//     * Test getting getCrimes method within a specific range of coordinates from the
+//     * database.
+//     */
+//    @Test
+//    public void testGetCrimes() throws Exception {
+//
+//        List<Crime> crimeList = new LinkedList<>();
+//
+//        double lat = 3.454;
+//        double lng = 6.929;
+//        Coordinate c = new Coordinate(lat, lng);
+//
+//        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 1));
+//        crimeList.add(new Crime(1026, 12, "brody", "theft", c, 2));
+//        crimeList.add(new Crime(1027, 13, "", "Robbery", c, 3));
+//        crimeList.add(new Crime(1028, 5, "", "theft", c, 4));
+//
+//        double fromLng = 200;
+//        double toLng = 400;
+//
+//        double fromLat = 200;
+//        double toLat = 400;
+//
+//        Coordinate c1 = new Coordinate(fromLat, fromLng);
+//        Coordinate c2 = new Coordinate(toLat, toLng);
+//
+//        int fromDate = 20;
+//        int toDate = 40;
+//        int timeOfDay = 18;
+//
+//        Crime from = new Crime(fromDate, c1);
+//        Crime to = new Crime(toDate, c2);
+//        int count = 1;
+//        for(Crime t: crimeList){
+//            assertEquals(count, t.getLinkId());
+//            count++;
+//
+//        }
+//
+//    }
+//
+//    @Test
+//    public void testAddTimePoints() throws Exception {
+//        double lat = 3.454;
+//        double lng = 6.929;
+//        Coordinate c = new Coordinate(lat, lng);
+//
+//        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
+//        TimePoint temp = new TimePoint(12,13,c,1);
+//    }
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//
@@ -490,25 +494,43 @@ public class TestServer {
     // Survival Maps Specific Helper Methods and classes
     // ------------------------------------------------------------------------//
 
-    private static Sql2o db;
+    //private static Sql2o db;
 
     private static void setupDB() {
-        SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:walklive.db");
+        String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
+        String user = "b0a1d19d87f384";
+        String password = "6d11c74b";
 
-        db = new Sql2o(dataSource);
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
 
-        try (Connection conn = db.open()) {
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
+            res = stm.executeQuery("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )");
+
             String sql = "DROP TABLE IF EXISTS TestCrimes";
-            conn.createQuery(sql).executeUpdate();
+            stm.executeUpdate(sql);
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-            conn.createQuery(sql2).executeUpdate();
+            stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
-            conn.createQuery(sql3).executeUpdate();
+            stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
-            conn.createQuery(sql4).executeUpdate();
+            stm.executeUpdate(sql4);
+
+            if (res.next()) {
+
+                System.out.println(res.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            //logger.error("Failed to create schema at startup", ex);
+            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+
         }
     }
+
 
     private List<User> getUsers(Response r) {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
@@ -521,28 +543,60 @@ public class TestServer {
      * Clears the database of all test tables.
      * @return the clean database source
      */
-    private SQLiteDataSource clearDB() {
-        SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:walklive.db");
+    private void clearDB() {
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
 
-        Sql2o db = new Sql2o(dataSource);
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
 
-        try (Connection conn = db.open()) {
             String sql = "DROP TABLE IF EXISTS TestCrimes";
-            conn.createQuery(sql).executeUpdate();
+            stm.executeUpdate(sql);
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-            conn.createQuery(sql2).executeUpdate();
+            stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
-            conn.createQuery(sql3).executeUpdate();
+            stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
-            conn.createQuery(sql4).executeUpdate();
+            stm.executeUpdate(sql4);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
-            conn.createQuery(sqlNew).executeUpdate();
-            conn.createQuery(sqlNew2).executeUpdate();
-        }
+            stm.executeUpdate(sqlNew);
+            stm.executeUpdate(sqlNew2);
 
-        return dataSource;
+//            if (res.next()) {
+//
+//                System.out.println(res.getString(1));
+//            }
+
+        } catch (SQLException ex) {
+            logger.error("Failed to create schema at startup", ex);
+            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+
+        }
+//        SQLiteDataSource dataSource = new SQLiteDataSource();
+//        dataSource.setUrl("jdbc:sqlite:walklive.db");
+//
+//        Sql2o db = new Sql2o(dataSource);
+
+//        try (Connection conn = db.open()) {
+//            String sql = "DROP TABLE IF EXISTS TestCrimes";
+//            conn.createQuery(sql).executeUpdate();
+//            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
+//            conn.createQuery(sql2).executeUpdate();
+//            String sql3 = "DROP TABLE IF EXISTS users" ;
+//            conn.createQuery(sql3).executeUpdate();
+//            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
+//            conn.createQuery(sql4).executeUpdate();
+//
+//            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
+//            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+//            conn.createQuery(sqlNew).executeUpdate();
+//            conn.createQuery(sqlNew2).executeUpdate();
+//        }
+//
+//        return dataSource;
     }
 }
