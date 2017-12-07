@@ -1,12 +1,12 @@
 USE walklive;
 
-DROP TABLE IF EXISTS Trips, users, friendrequests;
+DROP TABLE IF EXISTS Trips, users, friend_requests;
 
 
 
-CREATE TABLE Trips (TRIP_ID INT PRIMARY KEY, STARTTIME VARCHAR);
-CREATE TABLE users(Id TEXT PRIMARY KEY URER_NAME, PASSWORD TEXT);
+CREATE TABLE Trips (tripId INT PRIMARY KEY, start_time VARCHAR(25));
+CREATE TABLE users (username VARCHAR(25) PRIMARY KEY, password VARCHAR(25));
 
-CREATE TABLE friendrequests(Id TEXT RIMARY KEY USER_NAME);
+CREATE TABLE friend_requests(username VARCHAR(25) PRIMARY KEY);
 
-INSERT INTO Trips(Id, STARTTIME) VALUES(1, 'Jack London');
+INSERT INTO Trips(tripId, start_time) VALUES (1, 'Jack London');
