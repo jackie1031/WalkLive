@@ -82,7 +82,7 @@ public class TestServer {
     // Tests
     //------------------------------------------------------------------------//
 
-
+/** wait to change to mysql database
     @Test
     public void testCreateNew() throws Exception {
         //Add a few elements
@@ -206,12 +206,12 @@ public class TestServer {
         //assert to check for return string uri
 
     }
-
+**/
     /**
      * ================================================================
      * Friend Request Handling
      * ================================================================
-     */
+
 
     @Test
     public void testCreateFriendRequest() throws Exception {
@@ -229,6 +229,7 @@ public class TestServer {
         }
     }
 
+    */
 //    @Test
 //    public void testUpdate() throws Exception {
 //

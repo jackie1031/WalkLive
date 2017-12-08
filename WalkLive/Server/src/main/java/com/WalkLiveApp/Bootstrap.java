@@ -48,11 +48,15 @@ public class Bootstrap {
     //static final String PASS = "123456";
 
 
+
+
     public static void main(String[] args) throws  IOException, SQLException {
         //Check if the database file exists in the current directory. Abort if not
         DataSource dataSource = configureDataSource();
+        //System.out.println(dataSource);
+
         if (dataSource == null) {
-            System.out.printf("Could not find testdb.db in the current directory (%s). Terminating\n",
+            System.out.printf("Could not find walklive.db in the current directory (%s). Terminating\n",
                     Paths.get(".").toAbsolutePath().normalize());
             System.exit(1);
         }
@@ -115,19 +119,25 @@ public class Bootstrap {
         ResultSet rs = null;
 
         Path walkLivePath = Paths.get(".", "walklive.db");
+        //Path walkLivePath = Paths.get("2017-group-14/Walklive/Server/walklive.db");
+
+        System.out.println(walkLivePath);
+
+
         if ( !(Files.exists(walkLivePath) )) {
             try { Files.createFile(walkLivePath); }
             catch (java.io.IOException ex) {
-                logger.error("Failed to create walklive.db file in current directory. Aborting");
+                logger.error("config data source error: Failed to create walklive.db file in current directory. Aborting");
             }
         }
-
         try {
             MysqlDataSource ds = getMySQLDataSource();
             con = ds.getConnection();
+            logger.error("checkpoint 1");
 
-            pst = con.prepareStatement("SELECT * FROM Trips");
+            pst = con.prepareStatement("SELECT * FROM users");
             rs = pst.executeQuery();
+            logger.error("checkpoint 2");
 
 //            while (rs.next()) {
 //
