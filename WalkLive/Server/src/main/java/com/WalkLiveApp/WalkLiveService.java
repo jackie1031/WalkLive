@@ -277,13 +277,13 @@ public class WalkLiveService {
     public Trip getTrip(String body) throws UserServiceException,InvalidTargetID, ParseException {
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String tripID = object.get("tripID").toString();
+        String tripID = object.get("tripId").toString();
 
-        String sql = "SELECT * FROM trip WHERE tripID = :tripID LIMIT 1";
+        String sql = "SELECT * FROM trip WHERE tripId = :tripId LIMIT 1";
 
         try (Connection conn = db.open()) { //find user by username
             Trip u = conn.createQuery(sql)
-                    .addParameter("tripID", tripID)
+                    .addParameter("tripId", tripID)
                     .executeAndFetchFirst(Trip.class);
             return u;
 
