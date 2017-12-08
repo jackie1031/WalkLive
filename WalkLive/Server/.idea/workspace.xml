@@ -74,11 +74,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="309">
               <caret line="194" column="38" lean-forward="true" selection-start-line="194" selection-start-column="38" selection-end-line="194" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="65" lean-forward="true" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -97,6 +107,7 @@
         <option value="$PROJECT_DIR$/tables.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -127,6 +138,11 @@
             <path>
               <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
               <item name="Server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
@@ -403,6 +419,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
           <caret line="194" column="38" lean-forward="true" selection-start-line="194" selection-start-column="38" selection-end-line="194" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="65" lean-forward="true" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
           <folding />
         </state>
       </provider>
