@@ -20,6 +20,8 @@ import javax.sql.DataSource;
 
 import org.json.simple.parser.JSONParser;
 
+import java.sql.*;
+
 
 public class WalkLiveService {
     private Sql2o db;
@@ -39,7 +41,10 @@ public class WalkLiveService {
      */
     public WalkLiveService(DataSource dataSource) throws WalkLiveService.UserServiceException {
         db = new Sql2o(dataSource);
-
+        /**
+        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+    */
         //Create the schema for the database if necessary. This allows this
         //program to mostly self-contained. But this is not always what you want;
         //sometimes you want to create the schema externally via a script.
@@ -259,22 +264,26 @@ public class WalkLiveService {
         return temp;
     }
 
-    public Trip startTrip(String body) throws  UserServiceException, ParseException {
+    //* **URL:** /WalkLive/api/[userId]
+    //        * **Content:** `{ startTime: [string], destination: [string] }`
+    public Trip startTrip(String body) throws  InvalidDestination,UserServiceException, ParseException {
         Trip temp = new Trip();
         return temp;
 
     }
 
-    public Trip getTrip(String body) throws UserServiceException, ParseException {
+
+	//Content:  `{ tripId: [int], dangerLevel: [int], startTime: [string], endTime: [string], destination: [string], coordinateLongtitude:[double],coordniteLatiture complete: [boolean] }`
+    public Trip getTrip(String body) throws UserServiceException,InvalidTargetID, ParseException {
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String tripID = object.get("tripID").toString();
+        String tripID = object.get("tripId").toString();
 
-        String sql = "SELECT * FROM trip WHERE tripID = :tripID LIMIT 1";
+        String sql = "SELECT * FROM trip WHERE tripId = :tripId LIMIT 1";
 
         try (Connection conn = db.open()) { //find user by username
             Trip u = conn.createQuery(sql)
-                    .addParameter("tripID", tripID)
+                    .addParameter("tripId", tripID)
                     .executeAndFetchFirst(Trip.class);
             return u;
 
@@ -346,9 +355,10 @@ public class WalkLiveService {
             public DangerZone getDangerZone(Coordinate from, Coordinate to, String table) throws UserServiceException {
 //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
                 try (Connection conn = db.open()) {
-                    Crime[] red = getLinkIds(conn, from, to, "alarm > 2000", table);
-                    Crime[] yellow = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
-                    return new DangerZone(red, yellow);
+                    Crime[] z3 = getLinkIds(conn, from, to, "alarm > 2000", table);
+                    Crime[] z2 = getLinkIds(conn, from, to, "alarm <= 2000 AND alarm >1000 ", table);
+                    Crime[] z1 = getLinkIds(conn, from, to, "alarm < 1000", table);
+                    return new DangerZone(z1, z2,z3);
                 } catch (Sql2oException e) {
                     logger.error("Failed to fetch linkIds", e);
                     return null;
@@ -416,14 +426,25 @@ public class WalkLiveService {
         }
     }
 
-    public static class TripServiceException extends Exception {
-        public TripServiceException(String message, Throwable cause) {
+    public static class InvalidDestination extends Exception {
+        public InvalidDestination(String message, Throwable cause) {
             super(message, cause);
         }
 
-        public TripServiceException(String message) {
+        public InvalidDestination(String message) {
             super(message);
         }
     }
+
+    public static class InvalidTargetID extends Exception {
+        public InvalidTargetID(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public InvalidTargetID(String message) {
+            super(message);
+        }
+    }
+
 
 }

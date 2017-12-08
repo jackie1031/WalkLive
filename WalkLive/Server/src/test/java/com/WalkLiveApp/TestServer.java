@@ -31,6 +31,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import java.sql.*;
+
+
 
 public class TestServer {
 
@@ -358,13 +361,17 @@ public class TestServer {
                 new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
         };
 
-        DangerZone testDanger = new DangerZone(z1,z2);
+        Crime[] z3 = z2;
+
+        DangerZone testDanger = new DangerZone(z1,z2,z3);
 
         Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
         Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
         Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
         Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4};
+        Crime testZ5 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime testZ6 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4,testZ5,testZ6};
 
         assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
 
@@ -431,7 +438,7 @@ public class TestServer {
         Coordinate c = new Coordinate(lat, lng);
 
         //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
-        TimePoint temp = new TimePoint(12,13,c,1);
+        TimePoint temp = new TimePoint(12,"13",c,1);
     }
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
@@ -537,8 +544,17 @@ public class TestServer {
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             conn.createQuery(sql4).executeUpdate();
 
+
+            // test for new
+            String sql5 = "DROP TABLE IF EXISTS Trips" ;
+            conn.createQuery(sql5).executeUpdate();
+
+
+
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            //newly added?
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             conn.createQuery(sqlNew).executeUpdate();
             conn.createQuery(sqlNew2).executeUpdate();
         }
