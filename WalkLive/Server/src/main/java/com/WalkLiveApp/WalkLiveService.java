@@ -90,10 +90,11 @@ public class WalkLiveService {
             ps.setString(1, username);
             res = ps.executeQuery();
 
-            if (res.getFetchSize() != 0) { //the fact that something exists here means that the username exists
+            while (res.next()) { //if there is something in the response
                 //which means that we should stop the process and throw an error
                 logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
                 throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
+
             }
 
         } catch (SQLException ex) {
@@ -193,19 +194,22 @@ public class WalkLiveService {
     /*
      * returns emergencyId and emergencyNumber
      */
-//    public String login(String body) throws UserServiceException, ParseException {
-//        User user = new Gson().fromJson(body, User.class);
-//
-//        JSONObject object = (JSONObject) new JSONParser().parse(body);
-//        String username = object.get("username").toString();
-//        String password = object.get("password").toString();
-//
-//        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
-//
-//        try (Connection conn = db.open()) {
-//            User u = conn.createQuery(sql)
-//                    .addParameter("username", username)
-//                    .executeAndFetchFirst(User.class);
+    public String login(String body) throws UserServiceException, ParseException {
+        ResultSet res = null;
+        PreparedStatement ps = null;
+
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String username = object.get("username").toString();
+        String pw = object.get("password").toString();
+
+        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
 //            String targetName = u.getUsername();
 //            String targetPassword = u.getPassword();
 //
@@ -216,13 +220,24 @@ public class WalkLiveService {
 //                return ""; //return uri for this user aka uri: WalkLive/api/users/:username
 //                //return session token
 //            }
-//        } catch(Sql2oException ex) {
-//            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//        }
-//        return "";
-//    }
-//
+            return "";
+        } catch(SQLException ex) {
+            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 //    public User getUser(String body) throws UserServiceException, ParseException {
 //        JSONObject object = (JSONObject) new JSONParser().parse(body);
 //        String username = object.get("username").toString();

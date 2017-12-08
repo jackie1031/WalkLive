@@ -70,17 +70,17 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-//            //existing user login
-//            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
-//                try {
-//                    return walkLiveService.login(request.body());
-//                } catch (WalkLiveService.UserServiceException e) {
-//                    logger.error("Failed to authenticate user.");
-//                    response.status(404);
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
-//
+            //existing user login
+            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.login(request.body());
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to authenticate user.");
+                    response.status(404);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
 //            //get user information
 //            get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
 //                try {

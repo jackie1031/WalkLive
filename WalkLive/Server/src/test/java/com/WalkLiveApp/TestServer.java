@@ -153,60 +153,60 @@ public class TestServer {
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
         }
     }
-//
-//    @Test
-//    public void testDuplicateCreation() {
-//
-//        //Add a few elements
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063")
-//        };
-//
-//        //add to database
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //check if duplications are caught
-//        User u = new User("jeesookim", "1234567", "4405339063");
-//
-//        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
-//
-//        //try another user duplication
-//        User u2 = new User("michelle", "123456", "4405339063");
-//        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
-//
-//        //Get them back
-//        Response s = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, s.httpStatus);
-//        List<User> results = getUsers(s);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-//        assertEquals("Number of user entries differ", entries.length, results.size());
-//    }
-//
-//    @Test
-//    public void testLogin() throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//
-//        //add single element
-//        User expected = new User("jeesoo", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/users", expected);
-//        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//
-//        //Get it back so that we know its ID
-//        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
-//        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
-//
-//        //assert to check for return string uri
-//
-//    }
+
+    @Test
+    public void testDuplicateCreation() {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            //System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //check if duplications are caught
+        User u = new User("jeesookim", "1234567", "4405339063");
+
+        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
+
+        //try another user duplication
+        User u2 = new User("michelle", "123456", "4405339063");
+        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
+
+        //Get them back
+        Response s = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, s.httpStatus);
+        List<User> results = getUsers(s);
+
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //Get it back so that we know its ID
+        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
+        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
+
+        //assert to check for return string uri
+
+    }
 //
 //    /**
 //     * ================================================================
