@@ -22,6 +22,8 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     @IBOutlet weak var contactMessagePanelTextView: UITextView!
     
+    
+    
     var locationManager = CLLocationManager()
     var roadRequester = RoadRequester()
     var timeManager: TimeManager!
@@ -240,7 +242,11 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         //... handle sms screen actions
         self.dismiss(animated: true, completion: nil)
     }
-
+    
+    
+    @IBAction func onLogoutButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 
     // MARK: - Navigation
@@ -251,16 +257,22 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             let vc = segue.destination as! SearchVC
             vc.routeDelegate = self
             vc.mapItems = self.mapItems
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "userSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
         }
+//        } else if (segue.identifier == "logoutSegue"){
+//            User.currentUser = nil
+//        }
         
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        backItem.tintColor = primaryColor
-        navigationItem.backBarButtonItem = backItem
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    
 
 }
 
