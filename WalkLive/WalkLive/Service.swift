@@ -26,3 +26,4 @@ let primaryColor = UIColor(netHex: 0x94CFC9)
 let backEndClient = BackEndClient()
 let jsonEncoder = JSONEncoder()
 let jsonDecoder = JSONDecoder()
+var currentUserInfo: UserLogin!

@@ -22,7 +22,9 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     @IBOutlet weak var contactMessagePanelTextView: UITextView!
     
-    var locationManager = CLLocationManager()
+    
+    
+    var locationManager =  CLLocationManager()
     var roadRequester = RoadRequester()
     var timeManager: TimeManager!
     var tripView: OnGoingTripView!
@@ -30,19 +32,18 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(currentUserInfo)
         self.authorizeLocationUpdate()
-        
         self.setDelegate()
-        self.setKeyboard()
         self.setupRoadRequester()
-        
+        self.setKeyboard()
         self.hidePanels()
     }
     
     /// Private functiosn for general logistics
     private func setDelegate() {
-        self.mapView.delegate = self
         self.locationManager.delegate = self
+        self.mapView.delegate = self
     }
     
 
@@ -240,8 +241,13 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         //... handle sms screen actions
         self.dismiss(animated: true, completion: nil)
     }
-
     
+    
+    @IBAction func onLogoutButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+
 
     // MARK: - Navigation
 
@@ -251,16 +257,16 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             let vc = segue.destination as! SearchVC
             vc.routeDelegate = self
             vc.mapItems = self.mapItems
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "userSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
         }
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        backItem.tintColor = primaryColor
-        navigationItem.backBarButtonItem = backItem
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    
 
 }
 

@@ -6,7 +6,7 @@ public class TimePoint {
 
     //add trip id ?
     private int TimePointID;
-    private int time;
+    private String startTime, endTime, currTime;
     private Coordinate thisCoordinate;
     private int dangerLevel;
 
@@ -14,9 +14,18 @@ public class TimePoint {
     /**
      * Constructor
      */
-    public TimePoint(int TimePointID, int time, Coordinate thisCoordinate, int dangerLevel) {
+    public TimePoint(int TimePointID, String startTime, String endTime, Coordinate thisCoordinate, int dangerLevel) {
         this.TimePointID = TimePointID;
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.thisCoordinate = thisCoordinate;
+        this.dangerLevel = dangerLevel;
+
+    }
+
+    public TimePoint(int TimePointID, String currTime, Coordinate thisCoordinate, int dangerLevel) {
+        this.TimePointID = TimePointID;
+        this.currTime = currTime;
         this.thisCoordinate = thisCoordinate;
         this.dangerLevel = dangerLevel;
 
@@ -33,7 +42,7 @@ public class TimePoint {
         //Coordinate thisCoordinate = new Coordinate(1.2,1.2);
         int dangerLevel = 4;
 
-        TimePoint temp = new TimePoint(12, time, thisCoordinate, dangerLevel);
+        TimePoint temp = new TimePoint(12, startTime, endTime, thisCoordinate, dangerLevel);
         return temp;
     }
 

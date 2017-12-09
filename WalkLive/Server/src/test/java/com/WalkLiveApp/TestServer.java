@@ -6,11 +6,6 @@ import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sql2o.Connection;
-import org.sql2o.Query;
-import org.sql2o.Sql2o;
-import org.sql2o.Sql2oException;
-import org.sqlite.SQLiteDataSource;
 import spark.Spark;
 import spark.utils.IOUtils;
 
@@ -26,17 +21,20 @@ import java.util.stream.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import java.sql.*;
 
 public class TestServer {
 
-    SQLiteDataSource dSource;
     private final String TESTCRIMES = "TestCrimes";
     private final Logger logger = LoggerFactory.getLogger(TestServer.class);
+
+    private final String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
+    private final String user = "b0a1d19d87f384";
+    private final String password = "6d11c74b";
 
     //------------------------------------------------------------------------//
     // Setup
@@ -69,16 +67,15 @@ public class TestServer {
 
     }
 
-//    @After
-//    public void tearDown() {
-//        clearDB();
-//        //Spark.stop();
-//    }
+   @After
+   public void tearDown() {
+       //clearDB();
+       //Spark.stop();
+   }
 
     //------------------------------------------------------------------------//
     // Tests
     //------------------------------------------------------------------------//
-
 
     @Test
     public void testCreateNew() throws Exception {
@@ -109,7 +106,6 @@ public class TestServer {
             assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
             assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
             assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in friendId", entries[i].getFriendId(), actual.getFriendId());
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
         }
 
@@ -145,7 +141,6 @@ public class TestServer {
             assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
             assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
             assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in friendId", entries[i].getFriendId(), actual.getFriendId());
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
         }
     }
@@ -204,28 +199,43 @@ public class TestServer {
 
     }
 
+    @Test
+    public void testGetUser() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //Get it back so that we know its ID
+        Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+    }
+
     /**
      * ================================================================
      * Friend Request Handling
      * ================================================================
      */
+    // @Test
+    // public void testCreateFriendRequest() throws Exception {
+    //     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
-    @Test
-    public void testCreateFriendRequest() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+    //     //add a few elements
+    //     FriendRequest[] frs = new FriendRequest[] {
+    //             new FriendRequest("jeesookim", "michelle", df.parse("2017-08-22T14:32:03-0700")),
+    //             new FriendRequest("michelle", "yangcao1", df.parse("2017-08-22T14:32:03-0700"))
+    //     };
 
-        //add a few elements
-        FriendRequest[] frs = new FriendRequest[] {
-                new FriendRequest("jeesookim", "michelle", df.parse("2017-08-22T14:32:03-0700")),
-                new FriendRequest("michelle", "yangcao1", df.parse("2017-08-22T14:32:03-0700"))
-        };
+    //     for (FriendRequest f : frs) {
+    //         Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+    //         assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+    //     }
+    // }
 
-        for (FriendRequest f : frs) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-    }
-
+//DELETE LATER
 //    @Test
 //    public void testUpdate() throws Exception {
 //
@@ -309,6 +319,7 @@ public class TestServer {
 //        }
 //    }
 
+/*
     @Test
     public void testCoordinate() throws Exception {
         Coordinate c = new Coordinate(0.6, 0.7);
@@ -358,13 +369,17 @@ public class TestServer {
                 new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
         };
 
-        DangerZone testDanger = new DangerZone(z1,z2);
+        Crime[] z3 = z2;
+
+        DangerZone testDanger = new DangerZone(z1,z2,z3);
 
         Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
         Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
         Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
         Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4};
+        Crime testZ5 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime testZ6 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
+        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4,testZ5,testZ6};
 
         assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
 
@@ -381,11 +396,12 @@ public class TestServer {
 
 
     }
+    */
 
     /**
      * Test getting getCrimes method within a specific range of coordinates from the
      * database.
-     */
+     */ /*
     @Test
     public void testGetCrimes() throws Exception {
 
@@ -423,7 +439,9 @@ public class TestServer {
         }
 
     }
+*/
 
+/*
     @Test
     public void testAddTimePoints() throws Exception {
         double lat = 3.454;
@@ -431,8 +449,10 @@ public class TestServer {
         Coordinate c = new Coordinate(lat, lng);
 
         //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
-        TimePoint temp = new TimePoint(12,13,c,1);
+        TimePoint temp = new TimePoint(12,"13",c,1);
     }
+*/
+
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//
@@ -485,28 +505,44 @@ public class TestServer {
         }
     }
 
-
     // ------------------------------------------------------------------------//
     // Survival Maps Specific Helper Methods and classes
     // ------------------------------------------------------------------------//
 
-    private static Sql2o db;
-
     private static void setupDB() {
-        SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:walklive.db");
 
-        db = new Sql2o(dataSource);
+        String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
+        String user = "b0a1d19d87f384";
+        String password = "6d11c74b";
 
-        try (Connection conn = db.open()) {
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
+
+            String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+            res = stm.executeQuery(setup);
+
             String sql = "DROP TABLE IF EXISTS TestCrimes";
-            conn.createQuery(sql).executeUpdate();
+            stm.executeUpdate(sql);
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-            conn.createQuery(sql2).executeUpdate();
+            stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
-            conn.createQuery(sql3).executeUpdate();
+            stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
-            conn.createQuery(sql4).executeUpdate();
+            stm.executeUpdate(sql4);
+
+            if (res.next()) {
+
+                System.out.println(res.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            //logger.error("Failed to create schema at startup", ex);
+            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
         }
     }
 
@@ -521,28 +557,47 @@ public class TestServer {
      * Clears the database of all test tables.
      * @return the clean database source
      */
-    private SQLiteDataSource clearDB() {
-        SQLiteDataSource dataSource = new SQLiteDataSource();
-        dataSource.setUrl("jdbc:sqlite:walklive.db");
+    private void clearDB() {
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
 
-        Sql2o db = new Sql2o(dataSource);
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
 
-        try (Connection conn = db.open()) {
             String sql = "DROP TABLE IF EXISTS TestCrimes";
-            conn.createQuery(sql).executeUpdate();
+            stm.executeUpdate(sql);
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-            conn.createQuery(sql2).executeUpdate();
+            stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
-            conn.createQuery(sql3).executeUpdate();
+            stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
-            conn.createQuery(sql4).executeUpdate();
+            stm.executeUpdate(sql4);
+            String sql5 = "DROP TABLE IF EXISTS Trips" ;
+            stm.executeUpdate(sql5);
 
-            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
+            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
-            conn.createQuery(sqlNew).executeUpdate();
-            conn.createQuery(sqlNew2).executeUpdate();
-        }
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            stm.executeUpdate(sqlNew);
+            stm.executeUpdate(sqlNew2);
+            stm.executeUpdate(sqlNew3);
+        } catch (SQLException ex) {
+            logger.error("Failed to create schema at startup", ex);
+            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
 
-        return dataSource;
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
     }
 }

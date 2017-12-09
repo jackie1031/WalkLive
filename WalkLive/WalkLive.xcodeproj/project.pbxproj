@@ -13,6 +13,7 @@
 		8CB2D94C1FD87D3100E659FD /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2D94B1FD87D3100E659FD /* UserLogin.swift */; };
 		8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299111FDA244900C9F2A5 /* MessageVC.swift */; };
 		8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299131FDA273C00C9F2A5 /* Message.swift */; };
+		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
 		904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904B04CA1FD688D700EEB523 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		8CB2D94B1FD87D3100E659FD /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		8CC299111FDA244900C9F2A5 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
 		8CC299131FDA273C00C9F2A5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904B04C81FD688D700EEB523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				904B05231FD689BA00EEB523 /* OnGoingTripView.swift */,
 				904B05241FD689BA00EEB523 /* OnGoingTripView.xib */,
 				904B05001FD689A300EEB523 /* warningSign.xib */,
+				901C95E61FDA278F0067A346 /* AddFriendView.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 			files = (
 				904B04CE1FD688D700EEB523 /* LaunchScreen.storyboard in Resources */,
 				904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */,
+				901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */,
 				904B04C91FD688D700EEB523 /* Main.storyboard in Resources */,
 				904B05261FD689BA00EEB523 /* OnGoingTripView.xib in Resources */,
 				904B050B1FD689A300EEB523 /* warningSign.xib in Resources */,

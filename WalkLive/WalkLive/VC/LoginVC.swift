@@ -22,7 +22,21 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboard()
-        // Do any additional setup after loading the view.
+        
+//        backEndClient.getUser(success: {
+//
+//        }, failure: { (error) in
+//
+//        }, username: "michelle")
+//        // Do any additional setup after loading the view.
+        
+        backEndClient.getUser(success: { (userlogin) in
+            print(userlogin)
+        }, failure: { (error) in
+            
+        }, username: "jeesookim")
+        
+        
     }
     
     // these 2 functions are new!!!
@@ -48,11 +62,14 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
         if (self.userNameTextField.text == "") {
             return
         }
-        backEndClient.loginAttempt(success: {
-            self.performSegue(withIdentifier: "loginToMainMapSegue", sender: nil) //?
+        let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
+        backEndClient.loginAttempt(success: { (userInfo) in
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
         }, failure: { (error) in
             print(error)
-        }, username: userNameTextField.text!, password: passwordTextField.text!)
+        }, userLogin: userLogin)
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

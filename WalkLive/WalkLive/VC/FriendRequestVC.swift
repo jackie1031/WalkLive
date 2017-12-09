@@ -14,9 +14,12 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var requestTable: UITableView!
     var receivedFriendRequests: [FriendRequest]!
     var sentFriendRequests: [FriendRequest]!
+    var friends: [FriendRequest]!
+
     
     let RECEIVED = 0
     let SENT = 1
+    let FRIENDS = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         list.append(fr2)
         self.receivedFriendRequests = list
         self.sentFriendRequests = list
+        self.friends = list
     }
     
     @IBAction func switchSegmentControl(_ sender: Any) {
@@ -50,9 +54,14 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if self.receivedFriendRequests != nil {
                 return self.receivedFriendRequests.count
             }
-        } else {
+        } else if (segmentControl.selectedSegmentIndex == SENT){
             if self.sentFriendRequests != nil {
                 return self.sentFriendRequests.count
+            }
+        }
+        else {
+            if self.friends != nil {
+                return self.friends.count
             }
         }
         return 0
@@ -72,9 +81,15 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.acceptButton.isHidden = false
             cell.declineButton.isHidden = false
         }
-        else {
+        else if (segmentControl.selectedSegmentIndex == SENT){
             let friendRequest = self.sentFriendRequests[indexPath.row]
             cell.usernameLabel.text = friendRequest.sender
+            cell.acceptButton.isHidden = true
+            cell.declineButton.isHidden = true
+        }
+        else {
+            let friend = self.friends[indexPath.row]
+            cell.usernameLabel.text = friend.sender
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }
