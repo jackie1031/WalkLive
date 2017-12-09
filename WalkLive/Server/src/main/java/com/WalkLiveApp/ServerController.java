@@ -29,18 +29,6 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
-//            /** lallaallala
-//             * tests
-//             */
-//            get(API_CONTEXT + "/tests", "application/json", (request, response) -> {
-//                try {
-//                    return walkLiveService.test();
-//                } catch (WalkLiveService.UserServiceException e) {
-//                    logger.error("Failed to fetch user entries");
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
-//
             /**
              * ================================================================
              * User Setup Handling
@@ -61,7 +49,7 @@ public class ServerController {
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
                     User u = walkLiveService.createNew(request.body());
-                    response.status(201);
+                    response.status(201); //fic response
                     return u;
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
@@ -87,6 +75,35 @@ public class ServerController {
                     return walkLiveService.getUser(request.params(":username"));
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed find user.");
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            /**
+             * ================================================================
+             * Emergency Contact PUT
+             * ================================================================
+             */
+
+            /*
+            Method: PUT
+            URL: /WalkLive/api/users/[username]
+            Content: { emergencyId: [string], emergencyNumber: [string] }
+            Failure Response:
+            InvalidEmergencyId	Code 406
+            InvalidEmergencyNumber	Code 407
+            Success Response:	Code 200
+            Content: { emergencyId: [string], emergencyNumber: [string] }
+            */
+
+            //update emergency contact information
+            put(API_CONTEXT + "/users/:username/emergency_info", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.updateEmergencyContact(request.params(":username"), request.body());
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to update emergency info for user:" + request.params(":username"));
+                    response.status(406);
+                    //add 407 response.
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());

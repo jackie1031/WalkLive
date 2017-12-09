@@ -9,32 +9,32 @@ public class User {
     private String password;
     private String contact;
     private String nickname;
-    private Date createdOn = new Date();
-    private String emergencyId;
-    private String emergencyContact;
+    private Date created_on = new Date();
+    private String emergency_id;
+    private String emergency_number;
 
     public User(String username, String password, String contact) {
         this.username = username;
         this.password = password;
         this.contact = contact;
         this.nickname = null;
-        this.createdOn = null;
-        this.emergencyId = null;
-        this.emergencyContact = null;
+        this.created_on = null;
+        this.emergency_id = null;
+        this.emergency_number = null;
     }
 
 
-    public User(String username, String password, String contact, String nickname, Date createdOn, String emergencyId, String emergencyContact) {
+    public User(String username, String password, String contact, String nickname, Date createdOn, String emergencyId, String emergencyNumber) {
         this.username = username;
         this.password = password;
         this.contact = contact;
         this.nickname = nickname;
-        this.createdOn = createdOn;
-        this.emergencyId = emergencyId;
-        this.emergencyContact = emergencyContact;
+        this.created_on = createdOn;
+        this.emergency_id = emergencyId;
+        this.emergency_number = emergencyNumber;
     }
 
-    //add setters
+    //add getters
 
     public String getUsername() {
         return this.username;
@@ -49,7 +49,15 @@ public class User {
     }
 
     public Date getCreatedOn() {
-        return this.createdOn;
+        return this.created_on;
+    }
+
+    public String getEmergencyId() {
+        return this.emergency_id;
+    }
+
+    public String getEmergencyNumber() {
+        return this.emergency_number;
     }
 
 //    public List<String> getLog() {
@@ -85,7 +93,7 @@ public class User {
 
         if (username != user.username) return false;
         if (nickname != null ? !nickname.equals(user.nickname) : user.nickname != null) return false;
-        return !(createdOn != null ? !createdOn.equals(user.createdOn) : user.createdOn != null);
+        return !(created_on != null ? !created_on.equals(user.created_on) : user.created_on != null);
     }
 
     public String toString() {

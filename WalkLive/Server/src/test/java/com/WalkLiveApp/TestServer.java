@@ -522,7 +522,9 @@ public class TestServer {
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
-            res = stm.executeQuery("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )");
+
+            String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+            res = stm.executeQuery(setup);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
@@ -575,7 +577,7 @@ public class TestServer {
             String sql5 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql5);
 
-            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
+            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             stm.executeUpdate(sqlNew);
