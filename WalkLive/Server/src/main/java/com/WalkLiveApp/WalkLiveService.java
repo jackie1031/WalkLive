@@ -238,23 +238,49 @@ public class WalkLiveService {
         }
     }
 
-//    public User getUser(String body) throws UserServiceException, ParseException {
-//        JSONObject object = (JSONObject) new JSONParser().parse(body);
-//        String username = object.get("username").toString();
-//
-//        String sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
-//
-//        try (Connection conn = db.open()) { //find user by username
-//            User u = conn.createQuery(sql)
-//                    .addParameter("username", username)
-//                    .executeAndFetchFirst(User.class);
-//
-//            return u;
-//        } catch(Sql2oException ex) {
-//            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//        }
-//    }
+    public User getUser(String username) throws UserServiceException, ParseException {
+        ResultSet res = null;
+        PreparedStatement ps = null;
+
+        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
+
+        try { //find user by username
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            String pw;
+            String contact;
+            String friendId;
+            String createdOn;
+
+            if (res.next()) {
+                pw = res.getString(2);
+                contact = res.getString(3);
+                friendId = res.getString(4);
+                createdOn = res.getString(5);
+
+                return new User(username, pw, contact);
+            }
+        } catch(SQLException ex) {
+            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        return null;
+    }
 
 
     /**

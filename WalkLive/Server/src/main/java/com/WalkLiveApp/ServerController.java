@@ -81,15 +81,15 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-//            //get user information
-//            get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
-//                try {
-//                    return walkLiveService.getUser(request.params(":username"));
-//                } catch (WalkLiveService.UserServiceException e) {
-//                    logger.error("Failed to find user.");
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
+            //get user information
+            get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.getUser(request.params(":username"));
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to find user.");
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 //
 //
 //            /**

@@ -207,7 +207,22 @@ public class TestServer {
         //assert to check for return string uri
 
     }
-//
+
+    @Test
+    public void testGetUser() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //Get it back so that we know its ID
+        Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+    }
+
 //    /**
 //     * ================================================================
 //     * Friend Request Handling
@@ -437,6 +452,7 @@ public class TestServer {
 //        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
 //        TimePoint temp = new TimePoint(12,13,c,1);
 //    }
+
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//
@@ -527,7 +543,6 @@ public class TestServer {
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
-
         }
     }
 
@@ -566,37 +581,10 @@ public class TestServer {
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
 
-//            if (res.next()) {
-//
-//                System.out.println(res.getString(1));
-//            }
-
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
 
         }
-//        SQLiteDataSource dataSource = new SQLiteDataSource();
-//        dataSource.setUrl("jdbc:sqlite:walklive.db");
-//
-//        Sql2o db = new Sql2o(dataSource);
-
-//        try (Connection conn = db.open()) {
-//            String sql = "DROP TABLE IF EXISTS TestCrimes";
-//            conn.createQuery(sql).executeUpdate();
-//            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-//            conn.createQuery(sql2).executeUpdate();
-//            String sql3 = "DROP TABLE IF EXISTS users" ;
-//            conn.createQuery(sql3).executeUpdate();
-//            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
-//            conn.createQuery(sql4).executeUpdate();
-//
-//            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP)" ;
-//            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
-//            conn.createQuery(sqlNew).executeUpdate();
-//            conn.createQuery(sqlNew2).executeUpdate();
-//        }
-//
-//        return dataSource;
     }
 }
