@@ -22,7 +22,21 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboard()
-        // Do any additional setup after loading the view.
+        
+//        backEndClient.getUser(success: {
+//
+//        }, failure: { (error) in
+//
+//        }, username: "michelle")
+//        // Do any additional setup after loading the view.
+        
+        backEndClient.getUser(success: { (userlogin) in
+            print(userlogin)
+        }, failure: { (error) in
+            
+        }, username: "michelle")
+        
+        
     }
     
     // these 2 functions are new!!!
@@ -56,7 +70,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
 //        }, userLogin: userLogin)
         
         backEndClient.loginAttempt(success: {
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
         }, failure: { (error) in
             print(error)
         }, userLogin: userLogin)

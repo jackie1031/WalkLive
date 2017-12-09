@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.WalkLiveApp.TestServer" time="10.721" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="com.WalkLiveApp.TestServer" time="13.21" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre/lib"/>
@@ -64,9 +64,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testDuplicateCreation" time="2.985"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testFindAll" time="2.68"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="1.629"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testGetUser" time="1.434"/>
-  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="1.993"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testDuplicateCreation" time="3.243"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testFindAll" time="4.218"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testLogin" time="1.69"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testGetUser" time="1.702"/>
+  <testcase classname="com.WalkLiveApp.TestServer" name="testCreateNew" time="2.357"/>
 </testsuite>

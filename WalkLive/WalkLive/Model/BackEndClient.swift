@@ -157,8 +157,11 @@ class BackEndClient: NSObject {
 //            }
             // if success, log in
 //            let dict2 = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String: Any]
+//            if (dict2 == nil) {
+//                print("it's nil")
+//            }
 //            let dict = try? JSONSerialization.jsonObject(with: data!) as! NSDictionary
-//            let userinfo = UserLogin(dictionary: dict!)
+////            let userinfo = UserLogin(dictionary: dict!)
             success()
         }).resume()
     }
@@ -246,12 +249,12 @@ class BackEndClient: NSObject {
         var acceptFriendRequest = URLRequest(url: urlComponents.url!)
         acceptFriendRequest.httpMethod = "DELETE"
         
-        URLSession.shared.dataTask(with: acceptFriendRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: acceptFriendRequest, completionHandler: { (data, response, error) in
             if (error != nil) {
                 failure(error!)
             }
             success()
-        }
+        }).resume()
     }
     
     func declineFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
@@ -260,12 +263,12 @@ class BackEndClient: NSObject {
         var rejectFriendRequest = URLRequest(url: urlComponents.url!)
         rejectFriendRequest.httpMethod = "DELETE"
         
-        URLSession.shared.dataTask(with: rejectFriendRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: rejectFriendRequest, completionHandler: { (data, response, error) in
             if (error != nil) {
                 failure(error!)
             }
             success()
-        }
+        }).resume()
     }
     
     func updateEmergencyContact(success: @escaping (EmergencyContact) -> (), failure: @escaping (Error) -> (), emergencyContact: EmergencyContact){
@@ -282,13 +285,43 @@ class BackEndClient: NSObject {
             failure(error)
         }
 
-        URLSession.shared.dataTask(with: updateEmergencyContactRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: updateEmergencyContactRequest, completionHandler: { (data, response, error) in
             if (error != nil) {
                 failure(error!)
             }
             let updatedEmergencyContact = try? jsonDecoder.decode(EmergencyContact.self, from: data!) as EmergencyContact
             success(updatedEmergencyContact!)
-        }
+        }).resume()
+    }
+    
+    func getUser(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), username: String){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(username)"
+        var getUserRequest = URLRequest(url: urlComponents.url!)
+        getUserRequest.httpMethod = "GET"
+
+        print("got here")
+        
+        URLSession.shared.dataTask(with: getUserRequest, completionHandler: { (data, response, error) in
+            print("got here task share")
+            if (error != nil) {
+                print("got here error")
+                
+                failure(error!)
+            }
+            let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
+            success(userContact!)
+        }).resume()
+//        URLSession.shared.dataTask(with: getUserRequest) { (data, response, error) in
+//            print("got here task share")
+//            if (error != nil) {
+//                print("got here error")
+//
+//                failure(error!)
+//            }
+//            let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
+//            success(userContact!)
+//        }
     }
     
 //
