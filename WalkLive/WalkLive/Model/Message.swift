@@ -8,20 +8,23 @@
 
 import Foundation
 
-class Message NSObject {
+class Message: NSObject {
     var messages : Array<String>
-    var lastYCoor : Int
     
-    init() {
-        messages = Array()
+    override init() {
+        self.messages = Array()
     }
     
     func addMessage(m : String) {
-        messages.append(m)
-        lastYCoor += 40
+        self.messages.append(m)
     }
     
-    func getLastYCoor() -> Int {
-        return lastYCoor
+    func deleteLastMessage() {
+        self.messages.popLast()
     }
+    
+    func updateMessages(updatedMessages : Array<String>) {
+        self.messages = updatedMessages
+    }
+    
 }
