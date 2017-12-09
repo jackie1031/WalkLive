@@ -120,7 +120,7 @@ class BackEndClient: NSObject {
         }
     }
     
-    func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
+    func loginAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
 //        let endpoint = "."
 //        guard let url = URL(string: endpoint) else {
 //            print("Error: cannot create URL")
@@ -151,14 +151,15 @@ class BackEndClient: NSObject {
             if error != nil {
                 failure(error!)
             }
-            if let httpResponse = response as? HTTPURLResponse {
-                print("status code: \(httpResponse.statusCode)")
-                failure(error!)
-            }
+//            if let httpResponse = response as? HTTPURLResponse {
+//                print("status code: \(httpResponse.statusCode)")
+//                failure(error!)
+//            }
             // if success, log in
-            let dict = try? JSONSerialization.jsonObject(with: data!) as! NSDictionary
-            let userinfo = UserLogin(dictionary: dict!)
-            success(userinfo)
+//            let dict2 = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String: Any]
+//            let dict = try? JSONSerialization.jsonObject(with: data!) as! NSDictionary
+//            let userinfo = UserLogin(dictionary: dict!)
+            success()
         }).resume()
     }
     

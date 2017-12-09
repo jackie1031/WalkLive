@@ -24,7 +24,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     
     
-    var locationManager = CLLocationManager()
+    var locationManager: CLLocationManager!
     var roadRequester = RoadRequester()
     var timeManager: TimeManager!
     var tripView: OnGoingTripView!
@@ -32,6 +32,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        OperationQueue.main.addOperation{self.locationManager = CLLocationManager()}
         self.authorizeLocationUpdate()
         
         self.setDelegate()
