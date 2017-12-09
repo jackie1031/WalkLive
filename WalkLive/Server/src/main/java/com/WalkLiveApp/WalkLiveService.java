@@ -42,7 +42,9 @@ public class WalkLiveService {
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
-            stm.executeUpdate("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )");
+
+            String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+            stm.executeUpdate(setup);
 
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
@@ -116,8 +118,8 @@ public class WalkLiveService {
             }
         }
 
-        sql = "INSERT INTO users (username, password, nickname, friendId, createdOn) " +
-                "             VALUES (?, ?, ?, NULL, NULL)" ;
+        sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
+                "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
 
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -288,6 +290,50 @@ public class WalkLiveService {
 
         return null;
     }
+
+    /**
+     * ================================================================
+     * Emergency Contact PUT
+     * ================================================================
+     */
+
+    public User updateEmergencyContact(String username, String body) throws UserServiceException, ParseException, SQLException {
+//        PreparedStatement ps = null;
+//        ResultSet res = null;
+//
+//        JSONObject object = (JSONObject) new JSONParser().parse(body);
+//        String id = object.get("emergency_id").toString();
+//        String contact = object.get("emergency_contact").toString();
+//
+//        String sql = "INSERT INTO users (sender, recipient, sent_on) VALUES (?, ?, ?)" ;
+//
+//        try {
+//            conn = DriverManager.getConnection(url, user, password);
+//            ps = conn.prepareStatement(sql);
+//            ps.setString(1, username);
+//            ps.setString(2, id);
+//            ps.setString(3, contact);
+//            ps.executeUpdate();
+//
+//            System.out.println("SUCCESSFULLY UPDATED.");
+//        } catch(SQLException ex) {
+//            logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+//            throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+//        }  finally {
+//            if (ps != null) {
+//                try {
+//                    ps.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//        }
+        return null;
+    }
+
 
     /**
      * ================================================================
