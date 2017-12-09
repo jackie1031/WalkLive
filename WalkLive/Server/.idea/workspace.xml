@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac1f4b7e-be7c-4148-a94b-61d7ed02d151" name="Default" comment="" />
+    <list default="true" id="c439ec3e-c7dd-412a-9056-92f543b71ab4" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -11,157 +11,25 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-<<<<<<< Updated upstream
-    <splitter split-orientation="horizontal" split-proportion="0.50703126">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="704">
-                  <caret line="229" column="13" lean-forward="true" selection-start-line="229" selection-start-column="13" selection-end-line="229" selection-end-column="13" />
-                  <folding>
-                    <marker date="1512790243000" expanded="true" signature="19571:19603" ph=" CREATE statement" />
-                    <marker date="1512790243000" expanded="true" signature="19717:19730" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="19814:19827" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="19918:19931" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="20012:20025" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="21163:21176" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="21260:21273" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="21364:21377" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="21458:21471" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="21561:21574" ph=" DROP TABLE statement (IF)" />
-                    <marker date="1512790243000" expanded="true" signature="21658:21690" ph=" CREATE statement" />
-                    <marker date="1512790243000" expanded="true" signature="21806:21847" ph=" CREATE statement" />
-                    <marker date="1512790243000" expanded="true" signature="21930:21962" ph=" CREATE statement" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-308">
-                  <caret line="80" column="40" lean-forward="false" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
-                  <folding>
-                    <marker date="1512848854000" expanded="true" signature="1574:1606" ph=" CREATE statement" />
-                    <marker date="1512848854000" expanded="true" signature="3448:3486" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="4832:4964" ph=" INSERT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="6118:6137" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="7906:7944" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="9425:9463" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="11435:11507" ph=" INSERT statement (FRIENDREQUESTS)" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="243">
-                  <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="770">
-                  <caret line="74" column="21" lean-forward="true" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Coordinate.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tables.sql" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tables.sql">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Bootstrap.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-142">
-                  <caret line="63" column="28" lean-forward="false" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="547">
-                  <caret line="136" column="21" lean-forward="true" selection-start-line="136" selection-start-column="21" selection-end-line="136" selection-end-column="21" />
-                  <folding>
-                    <marker date="1512848854000" expanded="true" signature="1574:1606" ph=" CREATE statement" />
-                    <marker date="1512848854000" expanded="true" signature="3448:3486" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="4832:4964" ph=" INSERT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="6118:6137" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="7906:7944" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="9425:9463" ph=" SELECT statement (USERS)" />
-                    <marker date="1512848854000" expanded="true" signature="11435:11507" ph=" INSERT statement (FRIENDREQUESTS)" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
-=======
     <leaf>
-      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="233" column="22" lean-forward="false" selection-start-line="233" selection-start-column="22" selection-end-line="233" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Coordinate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="249">
+              <caret line="396" column="0" lean-forward="true" selection-start-line="396" selection-start-column="0" selection-end-line="396" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1512852390000" expanded="true" signature="1574:1606" ph=" CREATE statement" />
+                <marker date="1512852390000" expanded="true" signature="1724:1756" ph=" CREATE statement" />
+                <marker date="1512852390000" expanded="true" signature="3946:3984" ph=" SELECT statement (USERS)" />
+                <marker date="1512852390000" expanded="true" signature="5330:5462" ph=" INSERT statement (USERS)" />
+                <marker date="1512852390000" expanded="true" signature="6616:6635" ph=" SELECT statement (USERS)" />
+                <marker date="1512852390000" expanded="true" signature="8404:8442" ph=" SELECT statement (USERS)" />
+                <marker date="1512852390000" expanded="true" signature="9923:9961" ph=" SELECT statement (USERS)" />
+                <marker date="1512852390000" expanded="true" signature="11933:12005" ph=" INSERT statement (FRIENDREQUESTS)" />
+                <marker date="1512852390000" expanded="true" signature="16633:16671" ph=" SELECT statement (USERS)" />
+                <marker date="1512852390000" expanded="true" signature="18083:18217" ph=" INSERT statement (USERS)" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,32 +37,78 @@
       <file leaf-file-name="tables.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tables.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="6" column="21" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bootstrap.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java">
+      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state relative-caret-position="-3349">
+              <caret line="170" column="38" lean-forward="true" selection-start-line="170" selection-start-column="38" selection-end-line="170" selection-end-column="38" />
               <folding>
-                <marker date="1512700936000" expanded="true" signature="4182:4201" ph=" SELECT statement (USERS)" />
+                <marker date="1512849524000" expanded="true" signature="19571:19603" ph=" CREATE statement" />
+                <marker date="1512849524000" expanded="true" signature="19717:19730" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="19814:19827" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="19918:19931" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="20012:20025" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="21163:21176" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="21260:21273" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="21364:21377" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="21458:21471" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="21561:21574" ph=" DROP TABLE statement (IF)" />
+                <marker date="1512849524000" expanded="true" signature="21658:21690" ph=" CREATE statement" />
+                <marker date="1512849524000" expanded="true" signature="21806:21847" ph=" CREATE statement" />
+                <marker date="1512849524000" expanded="true" signature="21930:21962" ph=" CREATE statement" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2685">
+              <caret line="185" column="6" lean-forward="false" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DangerZone.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DangerZone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsonTransformer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/JsonTransformer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
->>>>>>> Stashed changes
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>tes</find>
-    </findStrings>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -204,18 +118,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="2" />
     <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="825" />
+    <option name="width" value="1275" />
+    <option name="height" value="724" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -232,7 +145,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,12 +180,32 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="WalkLiveApp" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OOSE-group14" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="WalkLiveApp" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -429,86 +363,49 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ac1f4b7e-be7c-4148-a94b-61d7ed02d151" name="Default" comment="" />
-      <created>1512695539367</created>
+      <changelist id="c439ec3e-c7dd-412a-9056-92f543b71ab4" name="Default" comment="" />
+      <created>1512850486645</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1512695539367</updated>
+      <updated>1512850486645</updated>
     </task>
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="TestServer - 2017.12.07 at 20h 16m 01s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.07 at 20h 18m 18s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.08 at 22h 40m 24s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.09 at 14h 49m 25s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.09 at 14h 51m 29s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.09 at 14h 53m 51s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="825" extended-state="0" />
-    <editor active="true" />
+    <frame x="2" y="23" width="1275" height="724" extended-state="0" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-<<<<<<< Updated upstream
-      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32669324" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11111111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-=======
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838285" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19966997" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33663365" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24979724" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24979724" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
->>>>>>> Stashed changes
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -519,79 +416,47 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server.db">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/sparkjava/spark-core/2.6.0/spark-core-2.6.0.jar!/spark/ResponseTransformer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3525">
-          <caret line="241" column="22" lean-forward="false" selection-start-line="241" selection-start-column="22" selection-end-line="241" selection-end-column="22" />
-          <folding>
-            <marker date="1512790243000" expanded="true" signature="19571:19603" ph=" CREATE statement" />
-            <marker date="1512790243000" expanded="true" signature="19717:19730" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="19814:19827" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="19918:19931" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="20012:20025" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21163:21176" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21260:21273" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21364:21377" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21458:21471" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21561:21574" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21658:21690" ph=" CREATE statement" />
-            <marker date="1512790243000" expanded="true" signature="21806:21847" ph=" CREATE statement" />
-            <marker date="1512790243000" expanded="true" signature="21930:21962" ph=" CREATE statement" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-          <folding>
-            <marker date="1512848854000" expanded="true" signature="1574:1606" ph=" CREATE statement" />
-            <marker date="1512848854000" expanded="true" signature="3448:3486" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="4832:4964" ph=" INSERT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="6118:6137" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="7906:7944" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="9425:9463" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="11435:11507" ph=" INSERT statement (FRIENDREQUESTS)" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="120">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tables.sql">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/JsonTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DangerZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="49" column="57" lean-forward="false" selection-start-line="49" selection-start-column="57" selection-end-line="49" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="2445">
+          <caret line="174" column="1" lean-forward="true" selection-start-line="174" selection-start-column="1" selection-end-line="174" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.db" />
-    <entry file="file://$PROJECT_DIR$/tables.sql">
+    <entry file="file://$PROJECT_DIR$/walklive.db">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -599,79 +464,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Bootstrap.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="63" column="28" lean-forward="false" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+        <state relative-caret-position="249">
+          <caret line="396" column="0" lean-forward="true" selection-start-line="396" selection-start-column="0" selection-end-line="396" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1512852390000" expanded="true" signature="1574:1606" ph=" CREATE statement" />
+            <marker date="1512852390000" expanded="true" signature="1724:1756" ph=" CREATE statement" />
+            <marker date="1512852390000" expanded="true" signature="3946:3984" ph=" SELECT statement (USERS)" />
+            <marker date="1512852390000" expanded="true" signature="5330:5462" ph=" INSERT statement (USERS)" />
+            <marker date="1512852390000" expanded="true" signature="6616:6635" ph=" SELECT statement (USERS)" />
+            <marker date="1512852390000" expanded="true" signature="8404:8442" ph=" SELECT statement (USERS)" />
+            <marker date="1512852390000" expanded="true" signature="9923:9961" ph=" SELECT statement (USERS)" />
+            <marker date="1512852390000" expanded="true" signature="11933:12005" ph=" INSERT statement (FRIENDREQUESTS)" />
+            <marker date="1512852390000" expanded="true" signature="16633:16671" ph=" SELECT statement (USERS)" />
+            <marker date="1512852390000" expanded="true" signature="18083:18217" ph=" INSERT statement (USERS)" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="229" column="13" lean-forward="true" selection-start-line="229" selection-start-column="13" selection-end-line="229" selection-end-column="13" />
+        <state relative-caret-position="-3349">
+          <caret line="170" column="38" lean-forward="true" selection-start-line="170" selection-start-column="38" selection-end-line="170" selection-end-column="38" />
           <folding>
-            <marker date="1512790243000" expanded="true" signature="19571:19603" ph=" CREATE statement" />
-            <marker date="1512790243000" expanded="true" signature="19717:19730" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="19814:19827" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="19918:19931" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="20012:20025" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21163:21176" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21260:21273" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21364:21377" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21458:21471" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21561:21574" ph=" DROP TABLE statement (IF)" />
-            <marker date="1512790243000" expanded="true" signature="21658:21690" ph=" CREATE statement" />
-            <marker date="1512790243000" expanded="true" signature="21806:21847" ph=" CREATE statement" />
-            <marker date="1512790243000" expanded="true" signature="21930:21962" ph=" CREATE statement" />
+            <marker date="1512849524000" expanded="true" signature="19571:19603" ph=" CREATE statement" />
+            <marker date="1512849524000" expanded="true" signature="19717:19730" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="19814:19827" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="19918:19931" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="20012:20025" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="21163:21176" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="21260:21273" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="21364:21377" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="21458:21471" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="21561:21574" ph=" DROP TABLE statement (IF)" />
+            <marker date="1512849524000" expanded="true" signature="21658:21690" ph=" CREATE statement" />
+            <marker date="1512849524000" expanded="true" signature="21806:21847" ph=" CREATE statement" />
+            <marker date="1512849524000" expanded="true" signature="21930:21962" ph=" CREATE statement" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
+    <entry file="file://$PROJECT_DIR$/tables.sql">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
-        <state relative-caret-position="-308">
-          <caret line="80" column="40" lean-forward="false" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
-=======
-        <state relative-caret-position="107">
-          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
->>>>>>> Stashed changes
-          <folding>
-            <marker date="1512848854000" expanded="true" signature="1574:1606" ph=" CREATE statement" />
-            <marker date="1512848854000" expanded="true" signature="3448:3486" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="4832:4964" ph=" INSERT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="6118:6137" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="7906:7944" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="9425:9463" ph=" SELECT statement (USERS)" />
-            <marker date="1512848854000" expanded="true" signature="11435:11507" ph=" INSERT statement (FRIENDREQUESTS)" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="6" column="21" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="74" column="21" lean-forward="true" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
+        <state relative-caret-position="2685">
+          <caret line="185" column="6" lean-forward="false" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
           <folding />
         </state>
       </provider>

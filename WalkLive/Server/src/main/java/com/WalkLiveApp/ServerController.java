@@ -157,6 +157,18 @@ public class ServerController {
 //                 }
 //             }, new JsonTransformer());
 
+            //add new user (signup)
+            post(API_CONTEXT + "/users", "application/json", (request, response) -> {
+                try {
+                    User u = walkLiveService.createNew(request.body());
+                    response.status(201);
+                    return u;
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to create new User");
+                    response.status(401);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
 //             /**
 //              * ----------------------------------------------------------------------
