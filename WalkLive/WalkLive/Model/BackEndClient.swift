@@ -120,7 +120,7 @@ class BackEndClient: NSObject {
         }
     }
     
-    func loginAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
+    func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
 //        let endpoint = "."
 //        guard let url = URL(string: endpoint) else {
 //            print("Error: cannot create URL")
@@ -162,14 +162,17 @@ class BackEndClient: NSObject {
 //            }
 //            let dict = try? JSONSerialization.jsonObject(with: data!) as! NSDictionary
 ////            let userinfo = UserLogin(dictionary: dict!)
-            success()
+            
+            let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
+            currentUserInfo = userContact
+            success(userContact!)
         }).resume()
     }
     
-    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String, phoneNum: String) {
+    func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
         //CHANGE ENDPOINT
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "default")/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/"
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         //
@@ -177,7 +180,6 @@ class BackEndClient: NSObject {
         //        let values = [userNameTextField.text, passwordTextField.text, phoneNumberTextField.text]
         //        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
         //        let user = User(dictionary: userDict)
-        let userLogin = UserLogin(username: username, password: password, contact: phoneNum)
         let encoder = JSONEncoder()
         do {
             let newUserSignUpAsJSON = try encoder.encode(userLogin)
@@ -190,13 +192,13 @@ class BackEndClient: NSObject {
             (data, response, error) in
             // check for errors
             if error != nil {
+                if let httpResponse = response as? HTTPURLResponse { //?
+                    print("status code: \(httpResponse.statusCode)")
+                }
                 failure(error!)
             }
-            if let httpResponse = response as? HTTPURLResponse { //?
-                print("status code: \(httpResponse.statusCode)")
-                failure(error!)
-            }
-            // if success, log in
+            
+            let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
             success()
         }).resume()
     }

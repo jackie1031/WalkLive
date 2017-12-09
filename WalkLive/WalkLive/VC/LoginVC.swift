@@ -34,7 +34,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             print(userlogin)
         }, failure: { (error) in
             
-        }, username: "michelle")
+        }, username: "jeesookim")
         
         
     }
@@ -63,20 +63,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             return
         }
         let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
-//        backEndClient.loginAttempt(success: { (userInfo) in
-//            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-//        }, failure: { (error) in
-//            print(error)
-//        }, userLogin: userLogin)
-        
-        backEndClient.loginAttempt(success: {
+        backEndClient.loginAttempt(success: { (userInfo) in
             OperationQueue.main.addOperation {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }, failure: { (error) in
             print(error)
         }, userLogin: userLogin)
-        //self.performSegue(withIdentifier: "loginSegue", sender: nil)
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

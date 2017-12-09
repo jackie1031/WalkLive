@@ -25,6 +25,21 @@ class UserVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.setUserVCInfo()
+    }
+    
+    
+    private func setUserVCInfo() {
+        self.usernameLabel.text = currentUserInfo?.username
+        self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
+        if (currentUserInfo?.emergencyNumber == nil) {
+            self.emergencyContactLabel.text = "Emer. Contact: None"
+        } else {
+            self.emergencyContactLabel.text = "Emer. Contact: " + (currentUserInfo?.emergencyNumber)!
+        }
+    }
+    
     @IBAction func onMyContactPencilButton(_ sender: Any) {
         segueToSettingVC()
     }
