@@ -71,7 +71,7 @@ public class WalkLiveService {
     * in through Facebook or Google, we should still create a new user in the case that its their first time
     * logging in, so may have to create a user simple only with the email information
     */
-    public void createNew(String body) throws UserServiceException, ParseException, SQLException {
+    public User createNew(String body) throws UserServiceException, ParseException, SQLException {
         PreparedStatement ps = null;
         ResultSet res = null;
 
@@ -127,7 +127,8 @@ public class WalkLiveService {
             ps.setString(3, contact);
             ps.executeUpdate();
 
-            System.out.println("SUCCESSFULLY ADDED.");
+            return new User(username, pw, contact, null, null, null, null);
+
         } catch(SQLException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
@@ -294,23 +295,42 @@ public class WalkLiveService {
      * ================================================================
      */
 
-//     //create a new FriendRequest and store in database
-//     public void createFriendRequest(String username, String body) throws WalkLiveService.FriendRequestServiceException {
-//         FriendRequest fr = new Gson().fromJson(body, FriendRequest.class);
-//         System.out.println(fr.toString());
+     //create a new FriendRequest and store in database
+     public void createFriendRequest(String sender, String body) throws FriendRequestServiceException, ParseException, SQLException {
+         PreparedStatement ps = null;
+         ResultSet res = null;
 
-//         String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) " +
-//                 "             VALUES (:sender, :recipient, :sent_on)" ;
+         JSONObject object = (JSONObject) new JSONParser().parse(body);
+         String recipient = object.get("recipient").toString();
+         String sent_on = object.get("sent_on").toString();
 
-//         try (Connection conn = db.open()) {
-//             conn.createQuery(sql)
-//                     .bind(fr)
-//                     .executeUpdate();
-//         } catch(Sql2oException ex) {
-//             logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-//         }
-//     }
+         String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) VALUES (?, ?, ?)" ;
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, sender);
+             ps.setString(2, recipient);
+             ps.setString(3, sent_on);
+             ps.executeUpdate();
+
+             System.out.println("SUCCESSFULLY ADDED.");
+         } catch(SQLException ex) {
+             logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+             throw new FriendRequestServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+         }  finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
 
 //     //get my sent friend requests
 //     public List<FriendRequest> getOutgoingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {

@@ -60,8 +60,9 @@ public class ServerController {
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
-                    walkLiveService.createNew(request.body());
+                    User u = walkLiveService.createNew(request.body());
                     response.status(201);
+                    return u;
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
                     response.status(401);
@@ -97,18 +98,18 @@ public class ServerController {
              * ================================================================
              */
 
-//             //Make a friend request - receives sender username (from) and recipient username (to) and sent time in request body
-//             //returns 201 at successful creation
-//             post(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
-//                 try {
-//                     walkLiveService.createFriendRequest(request.params(":username"), request.body());
-//                     response.status(201);
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to create friend request.");
-//                     response.status(404);
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //Make a friend request - receives sender username (from) and recipient username (to) and sent time in request body
+             //returns 201 at successful creation
+             post(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
+                 try {
+                     walkLiveService.createFriendRequest(request.params(":username"), request.body());
+                     response.status(201);
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to create friend request.");
+                     response.status(404);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
 //             //get my sent friend requests
 //             get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
