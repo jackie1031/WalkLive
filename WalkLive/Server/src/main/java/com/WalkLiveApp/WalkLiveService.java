@@ -298,40 +298,41 @@ public class WalkLiveService {
      */
 
     public User updateEmergencyContact(String username, String body) throws UserServiceException, ParseException, SQLException {
-//        PreparedStatement ps = null;
-//        ResultSet res = null;
-//
-//        JSONObject object = (JSONObject) new JSONParser().parse(body);
-//        String id = object.get("emergency_id").toString();
-//        String contact = object.get("emergency_contact").toString();
-//
-//        String sql = "INSERT INTO users (sender, recipient, sent_on) VALUES (?, ?, ?)" ;
-//
-//        try {
-//            conn = DriverManager.getConnection(url, user, password);
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, username);
-//            ps.setString(2, id);
-//            ps.setString(3, contact);
-//            ps.executeUpdate();
-//
-//            System.out.println("SUCCESSFULLY UPDATED.");
-//        } catch(SQLException ex) {
-//            logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
-//            throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
-//        }  finally {
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-        return null;
+        PreparedStatement ps = null;
+        ResultSet res = null;
+
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String id = object.get("emergency_id").toString();
+        String number = object.get("emergency_number").toString();
+
+        String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? " ;
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(2, number);
+            ps.setString(3, username);
+            ps.executeUpdate();
+
+            System.out.println("SUCCESSFULLY UPDATED.");
+            return new User(null, null, null, null, null, id, number);
+
+        } catch(SQLException ex) {
+            logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+            throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
     }
 
 
