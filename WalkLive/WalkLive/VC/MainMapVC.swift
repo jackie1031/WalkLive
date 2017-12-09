@@ -32,7 +32,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(currentUserInfo)
         self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
@@ -248,6 +248,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     }
     
 
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -265,12 +266,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             backItem.title = "Back"
             backItem.tintColor = primaryColor
         }
-//        } else if (segue.identifier == "logoutSegue"){
-//            User.currentUser = nil
-//        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
 
 }

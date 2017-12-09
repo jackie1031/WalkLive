@@ -259,7 +259,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="🌟"/>
                                                 <connections>
-                                                    <segue destination="AZZ-mi-YjQ" kind="show" id="LyJ-eO-0Xs"/>
+                                                    <segue destination="AZZ-mi-YjQ" kind="show" identifier="userSegue" id="LyJ-eO-0Xs"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCD-Wq-E3X">
