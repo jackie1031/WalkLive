@@ -9,9 +9,7 @@
 import Foundation
 
 class User: NSObject{
-    var userId: String?
-    var name: String?
-    var userName: String?
+    var username: String?
     var selfContact: String?
     var emergencyNumber: String?
     var password: String?
@@ -21,10 +19,8 @@ class User: NSObject{
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        userId = dictionary["user_id"] as? String
-        name = dictionary["name"] as? String
         password = dictionary["password"] as? String
-        userName = dictionary["user_name"] as? String
+        username = dictionary["username"] as? String
         selfContact = dictionary["phone_number"] as? String
         //email
     }

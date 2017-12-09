@@ -48,11 +48,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
         if (self.userNameTextField.text == "") {
             return
         }
-        backEndClient.loginAttempt(success: {
-            self.performSegue(withIdentifier: "loginToMainMapSegue", sender: nil) //?
+        let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
+        backEndClient.loginAttempt(success: { (userInfo) in
+            
         }, failure: { (error) in
             print(error)
-        }, username: userNameTextField.text!, password: passwordTextField.text!)
+        }, userLogin: userLogin)
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

@@ -11,18 +11,26 @@ import Foundation
 struct UserLogin: Codable {
     var username: String?
     var password: String?
-    var phoneNum: String?
+    var contact: String?
+    var emergencyId: String?
+    var emergencyNumber: String?
+    
     init(username : String, password : String) {
         self.username = username
         self.password = password
     }
     
-    init(username : String, password : String, phoneNum : String) {
+    init(username : String, password : String, contact : String) {
         self.username = username
         self.password = password
-        self.phoneNum = phoneNum
+        self.contact = contact
     }
-//    static func endpointForUserLogin() -> String {
-//        return "https://localhost:8080/users/login"
-//    }
+    
+    init(dictionary: NSDictionary) {
+        self.username = dictionary["username"] as? String
+        self.contact = dictionary["contact"] as? String
+        self.emergencyId = dictionary["emergencyId"] as? String
+        self.emergencyNumber = dictionary["emergencyNumber"] as? String
+    }
+
 }

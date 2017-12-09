@@ -78,7 +78,7 @@ class BackEndClient: NSObject {
     
     func makeFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.userId))/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.username))/friend_requests"
         var makeFriendRequest = URLRequest(url: urlComponents.url!)
         makeFriendRequest.httpMethod = "POST"
         
@@ -100,7 +100,7 @@ class BackEndClient: NSObject {
     
     func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.username))/friend_requests"
         var makeFriendRequest = URLRequest(url: urlComponents.url!)
         makeFriendRequest.httpMethod = "POST"
         
@@ -120,7 +120,7 @@ class BackEndClient: NSObject {
         }
     }
     
-    func loginAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String) {
+    func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
 //        let endpoint = "."
 //        guard let url = URL(string: endpoint) else {
 //            print("Error: cannot create URL")
@@ -130,24 +130,22 @@ class BackEndClient: NSObject {
 //        var userLoginUrlRequest = URLRequest(url: url)
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/login"
-        var makeFriendRequest = URLRequest(url: urlComponents.url!)
-        makeFriendRequest.httpMethod = "POST"
+        var loginAttemptRequest = URLRequest(url: urlComponents.url!)
+        loginAttemptRequest.httpMethod = "POST"
         
         //        let keys = ["userId", "password"] //userId?
         //        let values = [userNameTextField.text, passwordTextField.text]
         //        var userLoginDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
         //        let userLogin = User(dictionary: userLoginDict)
-        let userLogin = UserLogin(username: username, password: password)
-        
         let encoder = JSONEncoder()
         do {
             let newUserLoginAsJSON = try encoder.encode(userLogin)
-            makeFriendRequest.httpBody = newUserLoginAsJSON
+            loginAttemptRequest.httpBody = newUserLoginAsJSON
         } catch {
             failure(error)
         }
         
-        URLSession.shared.dataTask(with: makeFriendRequest, completionHandler: {
+        URLSession.shared.dataTask(with: loginAttemptRequest, completionHandler: {
             (data, response, error) in
             // check for errors
             if error != nil {
@@ -158,14 +156,16 @@ class BackEndClient: NSObject {
                 failure(error!)
             }
             // if success, log in
-            success()
+            let dict = try? JSONSerialization.jsonObject(with: data!) as! NSDictionary
+            let userinfo = UserLogin(dictionary: dict!)
+            success(userinfo)
         }).resume()
     }
     
     func signUpAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), username: String, password: String, phoneNum: String) {
         var urlComponents = self.buildURLComponents()
         //CHANGE ENDPOINT
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "default")/friend_requests"
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         //
@@ -173,7 +173,7 @@ class BackEndClient: NSObject {
         //        let values = [userNameTextField.text, passwordTextField.text, phoneNumberTextField.text]
         //        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
         //        let user = User(dictionary: userDict)
-        let userLogin = UserLogin(username: username, password: password, phoneNum: phoneNum)
+        let userLogin = UserLogin(username: username, password: password, contact: phoneNum)
         let encoder = JSONEncoder()
         do {
             let newUserSignUpAsJSON = try encoder.encode(userLogin)
@@ -206,7 +206,7 @@ class BackEndClient: NSObject {
 //        }
         
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.name))/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody")/friend_requests"
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         
@@ -214,7 +214,7 @@ class BackEndClient: NSObject {
         // need
         let keys = ["phoneNum", "emergencyContact"]
         let values = [phoneNum, emergencyContact]
-        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
+        let userDict = NSDictionary.init(objects: keys, forKeys: values as [NSCopying])
         self.user = User(dictionary: userDict)
         let encoder = JSONEncoder()
         do {
@@ -241,7 +241,7 @@ class BackEndClient: NSObject {
 
     func acceptFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.userName ?? "admin")/friend_requests/\(friendRequest.recipient)/accept"
+        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "default")/friend_requests/\(friendRequest.recipient)/accept"
         var acceptFriendRequest = URLRequest(url: urlComponents.url!)
         acceptFriendRequest.httpMethod = "DELETE"
         
@@ -255,7 +255,7 @@ class BackEndClient: NSObject {
     
     func declineFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.userName ?? "nobody" )/friend_requests/\(friendRequest.recipient)/reject"
+        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody" )/friend_requests/\(friendRequest.recipient)/reject"
         var rejectFriendRequest = URLRequest(url: urlComponents.url!)
         rejectFriendRequest.httpMethod = "DELETE"
         

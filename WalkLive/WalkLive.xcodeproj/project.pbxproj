@@ -10,6 +10,7 @@
 		42C0F6617C948D8FCD4A0A63 /* Pods_WalkLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */; };
 		8C56F6811FD795D600D1017F /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C56F6801FD795D600D1017F /* BackendError.swift */; };
 		8CB2D94C1FD87D3100E659FD /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2D94B1FD87D3100E659FD /* UserLogin.swift */; };
+		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
 		904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904B04CA1FD688D700EEB523 /* Assets.xcassets */; };
@@ -77,6 +78,7 @@
 		61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.debug.xcconfig"; sourceTree = "<group>"; };
 		8C56F6801FD795D600D1017F /* BackendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendError.swift; sourceTree = "<group>"; };
 		8CB2D94B1FD87D3100E659FD /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904B04C81FD688D700EEB523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				904B05231FD689BA00EEB523 /* OnGoingTripView.swift */,
 				904B05241FD689BA00EEB523 /* OnGoingTripView.xib */,
 				904B05001FD689A300EEB523 /* warningSign.xib */,
+				901C95E61FDA278F0067A346 /* AddFriendView.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 			files = (
 				904B04CE1FD688D700EEB523 /* LaunchScreen.storyboard in Resources */,
 				904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */,
+				901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */,
 				904B04C91FD688D700EEB523 /* Main.storyboard in Resources */,
 				904B05261FD689BA00EEB523 /* OnGoingTripView.xib in Resources */,
 				904B050B1FD689A300EEB523 /* warningSign.xib in Resources */,
