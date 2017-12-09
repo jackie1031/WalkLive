@@ -9,16 +9,29 @@ public class User {
     private String password;
     private String contact;
     private String nickname;
-    private List<String> friendId = new ArrayList<>();
     private Date createdOn = new Date();
+    private String emergencyId;
+    private String emergencyContact;
 
     public User(String username, String password, String contact) {
         this.username = username;
         this.password = password;
         this.contact = contact;
         this.nickname = null;
-        this.friendId = null;
         this.createdOn = null;
+        this.emergencyId = null;
+        this.emergencyContact = null;
+    }
+
+
+    public User(String username, String password, String contact, String nickname, Date createdOn, String emergencyId, String emergencyContact) {
+        this.username = username;
+        this.password = password;
+        this.contact = contact;
+        this.nickname = nickname;
+        this.createdOn = createdOn;
+        this.emergencyId = emergencyId;
+        this.emergencyContact = emergencyContact;
     }
 
     //add setters
@@ -35,13 +48,10 @@ public class User {
         return this.nickname;
     }
 
-    public List<String> getFriendId() {
-        return this.friendId;
-    }
-
     public Date getCreatedOn() {
         return this.createdOn;
     }
+
 //    public List<String> getLog() {
 //        return null;
 //    }

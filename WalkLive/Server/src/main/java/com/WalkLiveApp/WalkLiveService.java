@@ -197,7 +197,7 @@ public class WalkLiveService {
     /*
      * returns emergencyId and emergencyNumber
      */
-    public String login(String body) throws UserServiceException, ParseException {
+    public User login(String body) throws UserServiceException, ParseException {
         ResultSet res = null;
         PreparedStatement ps = null;
 
@@ -213,18 +213,19 @@ public class WalkLiveService {
             ps.setString(1, username);
             res = ps.executeQuery();
 
-//            String targetName = u.getUsername();
-//            String targetPassword = u.getPassword();
-//
-//            //simple authentication
-//            if (username.equals(targetName) && password.equals(targetPassword)) {
-//                //then allow access, and create login instance
-//
-//                return ""; //return uri for this user aka uri: WalkLive/api/users/:username
-//                //return session token
-//            }
+            String contact;
+            String friendId;
+            String createdOn;
 
-            return "";
+            if (res.next()) {
+                //TO CHANGE
+                pw = res.getString(2);
+                contact = res.getString(3);
+                friendId = res.getString(4);
+                createdOn = res.getString(5);
+
+                return new User(username, pw, contact, null, null, null, null);
+            }
         } catch(SQLException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
             throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
@@ -240,6 +241,7 @@ public class WalkLiveService {
                 } catch (SQLException e) { /* ignored */}
             }
         }
+        return null;
     }
 
     public User getUser(String username) throws UserServiceException, ParseException {

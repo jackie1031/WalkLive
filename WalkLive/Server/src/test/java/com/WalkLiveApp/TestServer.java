@@ -106,7 +106,6 @@ public class TestServer {
             assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
             assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
             assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in friendId", entries[i].getFriendId(), actual.getFriendId());
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
         }
 
@@ -142,7 +141,6 @@ public class TestServer {
             assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
             assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
             assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in friendId", entries[i].getFriendId(), actual.getFriendId());
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
         }
     }
