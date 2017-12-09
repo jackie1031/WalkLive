@@ -88,14 +88,14 @@ public class Bootstrap {
 
 
     static int getPort() {
-//        ProcessBuilder processBuilder = new ProcessBuilder();
-//        if (processBuilder.environment().get("PORT") != null) {
-//            logger.info("GOT PORT: " + processBuilder.environment().get("PORT"));
-//
-//            return Integer.parseInt(processBuilder.environment().get("PORT"));
-//        }
-//        logger.info("FAILED TO GET PORT FROM HEROKU");
-        return PORT; //return default port if heroku-port isn't set (i.e. on localhost)
+       ProcessBuilder processBuilder = new ProcessBuilder();
+       if (processBuilder.environment().get("PORT") != null) {
+           logger.info("GOT PORT: " + processBuilder.environment().get("PORT"));
+
+           return Integer.parseInt(processBuilder.environment().get("PORT"));
+       }
+        logger.info("listening on: " + PORT);
+        return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 //     /**
