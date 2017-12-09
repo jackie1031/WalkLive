@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+class Message NSObject {
+    var messages : Array<String>
+    var lastYCoor : Int
+    
+    init() {
+        messages = Array()
+    }
+    
+    func addMessage(m : String) {
+        messages.append(m)
+        lastYCoor += 40
+    }
+    
+    func getLastYCoor() -> Int {
+        return lastYCoor
+    }
+}

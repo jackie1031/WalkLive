@@ -10,10 +10,12 @@ import UIKit
 
 class MessageVC: UIViewController {
 
+    var message : Message
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        // Need to get message from local!!!
+        message = Message()
     }
     
     override func didReceiveMemoryWarning() {
@@ -23,13 +25,17 @@ class MessageVC: UIViewController {
     
     @IBAction func onAddTextButton(_ sender: Any) {
         // need to get the coordinates of the last textfield
-    
-        var frame = CGRect(x: xCoor, y: yCoor, width: w, height: h)
+        message.getLastYcoor()
+        var frame = CGRect.init(x: xCoor, y: yCoor, width: w, height: h)
         let text = UITextField(frame: frame)
         let view = UIView(frame: frame)
         view.addSubview(text)
+        
     }
 
+    @IBAction func onDeleteLastTextButton(_ sender: Any) {
+        
+    }
     
 
     /*
