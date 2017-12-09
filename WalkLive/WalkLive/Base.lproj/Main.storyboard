@@ -57,8 +57,7 @@
                                     <color key="titleColor" red="0.025648478620000002" green="0.028694464480000001" blue="0.02898316062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onSignUpButton:" destination="qxy-8p-pJ2" eventType="touchUpInside" id="dbG-xM-qxc"/>
-                                    <segue destination="VUm-xm-Aye" kind="show" id="M1b-JE-IfV"/>
+                                    <action selector="onLoginButton:" destination="Bve-na-hFT" eventType="touchUpInside" id="cm4-Hy-ogf"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="t5h-RL-dxX">
@@ -115,6 +114,7 @@
                         <outlet property="loginButton" destination="va8-Y9-4qO" id="uFz-Y4-iyP"/>
                         <outlet property="passwordTextField" destination="Lfv-Lm-gz2" id="J6l-aX-y3Y"/>
                         <outlet property="userNameTextField" destination="ak4-U9-afi" id="AKt-vl-VHC"/>
+                        <segue destination="VUm-xm-Aye" kind="presentation" identifier="loginSegue" id="CWQ-0c-P3r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HZc-Br-cjw" userLabel="First Responder" sceneMemberID="firstResponder"/>

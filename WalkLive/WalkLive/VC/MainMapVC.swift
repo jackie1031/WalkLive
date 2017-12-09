@@ -24,7 +24,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     
     
-    var locationManager = CLLocationManager()
+    var locationManager =  CLLocationManager()
     var roadRequester = RoadRequester()
     var timeManager: TimeManager!
     var tripView: OnGoingTripView!
@@ -32,19 +32,18 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.authorizeLocationUpdate()
-        
         self.setDelegate()
-        self.setKeyboard()
         self.setupRoadRequester()
-        
+        self.setKeyboard()
         self.hidePanels()
     }
     
     /// Private functiosn for general logistics
     private func setDelegate() {
-        self.mapView.delegate = self
         self.locationManager.delegate = self
+        self.mapView.delegate = self
     }
     
 
