@@ -73,6 +73,11 @@ class UserVC: UIViewController {
             backItem.title = "Back"
             backItem.tintColor = primaryColor
             navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "tripRequestSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
         }
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
