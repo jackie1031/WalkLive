@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		42C0F6617C948D8FCD4A0A63 /* Pods_WalkLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */; };
 		8C56F6811FD795D600D1017F /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C56F6801FD795D600D1017F /* BackendError.swift */; };
+		8C7637011FDC88DD00276DEE /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7637001FDC88DD00276DEE /* SettingsVC.swift */; };
 		8CB2D94C1FD87D3100E659FD /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2D94B1FD87D3100E659FD /* UserLogin.swift */; };
+		8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299111FDA244900C9F2A5 /* MessageVC.swift */; };
+		8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299131FDA273C00C9F2A5 /* Message.swift */; };
 		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
@@ -33,7 +36,6 @@
 		904B051B1FD689B300EEB523 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05101FD689B300EEB523 /* LoginVC.swift */; };
 		904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05111FD689B300EEB523 /* MainMapVC.swift */; };
 		904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05121FD689B300EEB523 /* SearchVC.swift */; };
-		904B051E1FD689B300EEB523 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05131FD689B300EEB523 /* SettingVC.swift */; };
 		904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05141FD689B300EEB523 /* SignUpVC.swift */; };
 		904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05151FD689B300EEB523 /* TripRequestVC.swift */; };
 		904B05211FD689B300EEB523 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05161FD689B300EEB523 /* UserVC.swift */; };
@@ -77,7 +79,10 @@
 		4A467C921A08E9F56C416776 /* Pods-WalkLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.debug.xcconfig"; sourceTree = "<group>"; };
 		8C56F6801FD795D600D1017F /* BackendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendError.swift; sourceTree = "<group>"; };
+		8C7637001FDC88DD00276DEE /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		8CB2D94B1FD87D3100E659FD /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		8CC299111FDA244900C9F2A5 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
+		8CC299131FDA273C00C9F2A5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +112,6 @@
 		904B05101FD689B300EEB523 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		904B05111FD689B300EEB523 /* MainMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMapVC.swift; sourceTree = "<group>"; };
 		904B05121FD689B300EEB523 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
-		904B05131FD689B300EEB523 /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		904B05141FD689B300EEB523 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		904B05151FD689B300EEB523 /* TripRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestVC.swift; sourceTree = "<group>"; };
 		904B05161FD689B300EEB523 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 				904B053F1FD77A8D00EEB523 /* TripRequest.swift */,
 				8CB2D94B1FD87D3100E659FD /* UserLogin.swift */,
 				904B05411FD8916900EEB523 /* EmergencyContact.swift */,
+				8CC299131FDA273C00C9F2A5 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,10 +281,11 @@
 				904B05101FD689B300EEB523 /* LoginVC.swift */,
 				904B05111FD689B300EEB523 /* MainMapVC.swift */,
 				904B05121FD689B300EEB523 /* SearchVC.swift */,
-				904B05131FD689B300EEB523 /* SettingVC.swift */,
 				904B05141FD689B300EEB523 /* SignUpVC.swift */,
 				904B05151FD689B300EEB523 /* TripRequestVC.swift */,
 				904B05161FD689B300EEB523 /* UserVC.swift */,
+				8CC299111FDA244900C9F2A5 /* MessageVC.swift */,
+				8C7637001FDC88DD00276DEE /* SettingsVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -611,7 +617,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */,
-				904B051E1FD689B300EEB523 /* SettingVC.swift in Sources */,
 				904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */,
 				904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */,
 				904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */,
@@ -629,6 +634,7 @@
 				904B05071FD689A300EEB523 /* TimePoint.swift in Sources */,
 				904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */,
 				904B05021FD689A300EEB523 /* ContactManager.swift in Sources */,
+				8C7637011FDC88DD00276DEE /* SettingsVC.swift in Sources */,
 				904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */,
 				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
 				904B05421FD8916900EEB523 /* EmergencyContact.swift in Sources */,
@@ -638,6 +644,8 @@
 				904B05091FD689A300EEB523 /* User.swift in Sources */,
 				904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */,
 				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
+				8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */,
+				8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */,
 				904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */,
 				904B052B1FD689D000EEB523 /* TripPanelDelegate.swift in Sources */,
 				904B053C1FD77A5A00EEB523 /* RequestUpdater.swift in Sources */,

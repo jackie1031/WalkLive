@@ -1,15 +1,15 @@
 //
-//  SettingVC.swift
-//  Walklive
+//  SettingsVC.swift
+//  WalkLive
 //
-//  Created by Michelle Shu on 11/30/17.
+//  Created by Yang Cao on 12/9/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
 
 import UIKit
 
-class SettingVC: UIViewController {
-    
+class SettingsVC: UITableViewController {
+
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
     
@@ -45,10 +45,9 @@ class SettingVC: UIViewController {
         return (userPhoneResult && emergencyPhoneResult)
     }
     
-    @IBAction func onCancelButton(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
+//    @IBAction func onCancelButton(_ sender: Any) {
+//        self.dismiss(animated: false, completion: nil)
+//    }
 
     /*
     // MARK: - Navigation

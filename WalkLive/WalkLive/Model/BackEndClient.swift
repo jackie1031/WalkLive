@@ -206,8 +206,6 @@ class BackEndClient: NSObject {
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
         
-        
-        // need
         let keys = ["phoneNum", "emergencyContact"]
         let values = [phoneNum, emergencyContact]
         let userDict = NSDictionary.init(objects: keys, forKeys: values as [NSCopying])
