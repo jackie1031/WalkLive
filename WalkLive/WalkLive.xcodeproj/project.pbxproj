@@ -13,6 +13,8 @@
 		8CB2D94C1FD87D3100E659FD /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2D94B1FD87D3100E659FD /* UserLogin.swift */; };
 		8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299111FDA244900C9F2A5 /* MessageVC.swift */; };
 		8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299131FDA273C00C9F2A5 /* Message.swift */; };
+		9015A2AF1FDCB88D0080B4D3 /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */; };
+		9015A2B11FDCC35A0080B4D3 /* WarningSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */; };
 		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
@@ -29,7 +31,7 @@
 		904B05071FD689A300EEB523 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FC1FD689A300EEB523 /* TimePoint.swift */; };
 		904B05081FD689A300EEB523 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FD1FD689A300EEB523 /* Trip.swift */; };
 		904B05091FD689A300EEB523 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FE1FD689A300EEB523 /* User.swift */; };
-		904B050B1FD689A300EEB523 /* warningSign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05001FD689A300EEB523 /* warningSign.xib */; };
+		904B050B1FD689A300EEB523 /* WarningSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05001FD689A300EEB523 /* WarningSignView.xib */; };
 		904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050D1FD689B300EEB523 /* DefaultVC.swift */; };
 		904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050E1FD689B300EEB523 /* FirstViewVC.swift */; };
 		904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050F1FD689B300EEB523 /* FriendRequestVC.swift */; };
@@ -83,6 +85,8 @@
 		8CB2D94B1FD87D3100E659FD /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		8CC299111FDA244900C9F2A5 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
 		8CC299131FDA273C00C9F2A5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
+		9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSignView.swift; sourceTree = "<group>"; };
 		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +109,7 @@
 		904B04FC1FD689A300EEB523 /* TimePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
 		904B04FD1FD689A300EEB523 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		904B04FE1FD689A300EEB523 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		904B05001FD689A300EEB523 /* warningSign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = warningSign.xib; sourceTree = "<group>"; };
+		904B05001FD689A300EEB523 /* WarningSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningSignView.xib; sourceTree = "<group>"; };
 		904B050D1FD689B300EEB523 /* DefaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
 		904B050E1FD689B300EEB523 /* FirstViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
 		904B050F1FD689B300EEB523 /* FriendRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestVC.swift; sourceTree = "<group>"; };
@@ -295,8 +299,10 @@
 			children = (
 				904B05231FD689BA00EEB523 /* OnGoingTripView.swift */,
 				904B05241FD689BA00EEB523 /* OnGoingTripView.xib */,
-				904B05001FD689A300EEB523 /* warningSign.xib */,
+				904B05001FD689A300EEB523 /* WarningSignView.xib */,
 				901C95E61FDA278F0067A346 /* AddFriendView.xib */,
+				9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */,
+				9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -453,7 +459,7 @@
 				901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */,
 				904B04C91FD688D700EEB523 /* Main.storyboard in Resources */,
 				904B05261FD689BA00EEB523 /* OnGoingTripView.xib in Resources */,
-				904B050B1FD689A300EEB523 /* warningSign.xib in Resources */,
+				904B050B1FD689A300EEB523 /* WarningSignView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9015A2AF1FDCB88D0080B4D3 /* AddFriendView.swift in Sources */,
 				904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */,
 				904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */,
 				904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */,
@@ -631,6 +638,7 @@
 				904B05401FD77A8D00EEB523 /* TripRequest.swift in Sources */,
 				8CB2D94C1FD87D3100E659FD /* UserLogin.swift in Sources */,
 				904B052A1FD689D000EEB523 /* RouteDelegate.swift in Sources */,
+				9015A2B11FDCC35A0080B4D3 /* WarningSignView.swift in Sources */,
 				904B05071FD689A300EEB523 /* TimePoint.swift in Sources */,
 				904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */,
 				904B05021FD689A300EEB523 /* ContactManager.swift in Sources */,
@@ -823,7 +831,7 @@
 				DEVELOPMENT_TEAM = 4KDNX7UPEV;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLive";
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -841,7 +849,7 @@
 				DEVELOPMENT_TEAM = 4KDNX7UPEV;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "OOSE-TEAM14.WalkLive";
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
