@@ -193,7 +193,7 @@ public class TestServer {
 
         //Get it back so that we know its ID
         Response r2 = request("POST", "/WalkLive/api/users/login", expected);
-        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
+        assertEquals("Failed to post and authenticate login request", 201, r2.httpStatus);
 
         //assert to check for return string uri
 

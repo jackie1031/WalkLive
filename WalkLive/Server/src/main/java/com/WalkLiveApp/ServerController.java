@@ -61,9 +61,7 @@ public class ServerController {
             //existing user login
             post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
                 try {
-                    User u = walkLiveService.login(request.body());
-                    response.status(201);
-                    return u;
+                    return walkLiveService.login(request.body());
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to authenticate user.");
                     response.status(404);
