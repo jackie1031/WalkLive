@@ -240,21 +240,21 @@ public class TestServer {
      * Friend Request Handling
      * ================================================================
      */
-    // @Test
-    // public void testCreateFriendRequest() throws Exception {
-    //     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+     @Test
+     public void testCreateFriendRequest() throws Exception {
+         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    //     //add a few elements
-    //     FriendRequest[] frs = new FriendRequest[] {
-    //             new FriendRequest("jeesookim", "michelle", df.parse("2017-08-22T14:32:03-0700")),
-    //             new FriendRequest("michelle", "yangcao1", df.parse("2017-08-22T14:32:03-0700"))
-    //     };
+         //add a few elements
+         FriendRequest[] frs = new FriendRequest[] {
+                 new FriendRequest("jeesookim", "michelle", null),
+                 new FriendRequest("michelle", "yangcao1", null)
+         };
 
-    //     for (FriendRequest f : frs) {
-    //         Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-    //         assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-    //     }
-    // }
+         for (FriendRequest f : frs) {
+             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+         }
+     }
 
     @Test
     public void testUpdateEmergencyInfo() throws Exception {

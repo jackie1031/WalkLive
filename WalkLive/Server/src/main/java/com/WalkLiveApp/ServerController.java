@@ -134,37 +134,39 @@ public class ServerController {
                  return Collections.EMPTY_MAP;
              }, new JsonTransformer());
 
-//             //get my sent friend requests
-//             get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
-//                 try {
-//                     return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to find list of sent friend requests.");
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //get my sent friend requests
+             get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
+                 try {
+                     return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to find list of sent friend requests.");
+                     response.status(401);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
-//             //delete select sent friend request
-//             delete(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
-//                 try {
-//                     walkLiveService.deleteFriendRequest(request.params(":username"), request.params(":requestid"));
-//                     response.status(200);
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
-//                     response.status(500);
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //delete select sent friend request
+             delete(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
+                 try {
+                     walkLiveService.deleteFriendRequest(request.params(":username"), request.params(":requestid"));
+                     response.status(200);
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
+                     response.status(404);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
-//             //get my received friend requests
-//             get(API_CONTEXT + "/users/:username/my_requests","application/json", (request, response) -> {
-//                 try {
-//                     return walkLiveService.getIncomingFriendRequests(request.params(":username"));
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to find list of incoming friend requests.");
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //get my received friend requests
+             get(API_CONTEXT + "/users/:username/my_requests","application/json", (request, response) -> {
+                 try {
+                     return walkLiveService.getIncomingFriendRequests(request.params(":username"));
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to find list of incoming friend requests.");
+                     response.status(401);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
 //             //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
 //             //if accept, then add to friends list for both - FIGURE OUT DETAILS

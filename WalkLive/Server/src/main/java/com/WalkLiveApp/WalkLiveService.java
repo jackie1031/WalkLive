@@ -366,16 +366,14 @@ public class WalkLiveService {
 
          JSONObject object = (JSONObject) new JSONParser().parse(body);
          String recipient = object.get("recipient").toString();
-         String sent_on = object.get("sent_on").toString();
 
-         String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) VALUES (?, ?, ?)" ;
+         String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) VALUES (?, ?, null)" ;
 
          try {
              conn = DriverManager.getConnection(url, user, password);
              ps = conn.prepareStatement(sql);
              ps.setString(1, sender);
              ps.setString(2, recipient);
-             ps.setString(3, sent_on);
              ps.executeUpdate();
 
              System.out.println("SUCCESSFULLY ADDED.");
@@ -396,51 +394,122 @@ public class WalkLiveService {
          }
      }
 
-//     //get my sent friend requests
-//     public List<FriendRequest> getOutgoingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
-//         //checks needed
+     //get my sent friend requests
+     public List<FriendRequest> getOutgoingFriendRequests(String sender) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+         PreparedStatement ps = null;
+         ResultSet res = null;
 
-//         try (Connection conn = db.open()) {
-//             List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE sender = :sender")
-//                     .addParameter("sender", body)
-//                     .executeAndFetch(FriendRequest.class);
-//             return requests;
-//         } catch (Sql2oException ex) {
-//             logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-//         }
-//     }
+         String sql = "SELECT * FROM friendRequests WHERE sender = ?";
 
-//     //delete select sent friend request (cancel request) - extended feature
-//     public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
-//         //checks needed
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, sender);
+             res = ps.executeQuery();
 
-//         String sql = "DELETE FROM friendRequests WHERE requestId = :requestId" ;
+             String recipient;
+             Date sent_on;
 
-//         try (Connection conn = db.open()) {
-//             conn.createQuery(sql)
-//                     .addParameter("requestId", requestId)
-//                     .executeUpdate();
-//         } catch(Sql2oException ex) {
-//             logger.error("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
-//         }
-//     }
+             ArrayList<FriendRequest> frs = new ArrayList<>();
+             while (res.next()) {
+                 recipient = res.getString(2);
+                 sent_on = (Date) res.getObject(3);
 
-//     //get my received friend requests
-//     public List<FriendRequest> getIncomingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
-//         //checks needed
+                 FriendRequest fr = new FriendRequest(sender, recipient, sent_on);
+                 frs.add(fr);
+             }
+             return frs;
+         } catch (SQLException ex) {
+             logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+             throw new FriendRequestServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+         } finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
 
-//         try (Connection conn = db.open()) {
-//             List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE recipient = :recipient")
-//                     .addParameter("recipient", body)
-//                     .executeAndFetch(FriendRequest.class);
-//             return requests;
-//         } catch (Sql2oException ex) {
-//             logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-//         }
-//     }
+     //delete select sent friend request (cancel request) - extended feature
+     public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+
+         PreparedStatement ps = null;
+
+         String sql = "DELETE FROM friendRequests WHERE requestId = ?" ;
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, requestId);
+             ps.executeUpdate();
+
+         } catch (SQLException ex) {
+             logger.error("WalkLiveService.deleteFriendRequest: Failed to delete request", ex);
+             throw new FriendRequestServiceException("WalkLiveService.deleteFriendRequest: Failed to delete request", ex);
+         } finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
+
+     //get my received friend requests
+     public List<FriendRequest> getIncomingFriendRequests(String recipient) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+         PreparedStatement ps = null;
+         ResultSet res = null;
+
+         String sql = "SELECT * FROM friendRequests WHERE recipient = ?";
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, recipient);
+             res = ps.executeQuery();
+
+             String sender;
+             Date sent_on;
+
+             ArrayList<FriendRequest> frs = new ArrayList<>();
+             while (res.next()) {
+                 sender = res.getString(1);
+                 sent_on = (Date) res.getObject(3);
+
+                 FriendRequest fr = new FriendRequest(sender, recipient, sent_on);
+                 frs.add(fr);
+             }
+             return frs;
+         } catch (SQLException ex) {
+             logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+             throw new FriendRequestServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+         } finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
 
 //     //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
 //     //if accept, then add to friends list for both - FIGURE OUT DETAILS

@@ -5,26 +5,26 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class FriendRequest {
-    private Date time = new Date();
-    private String from; //User? or String?
-    private String to;
+    private Date sent_on = new Date();
+    private String sender; //User? or String?
+    private String recipient;
 
     public FriendRequest(String sender, String recipient, Date requestTime) {
-        this.time = requestTime;
-        this.from = sender;
-        this.to = recipient;
+        this.sent_on = requestTime;
+        this.sender = sender;
+        this.recipient = recipient;
     }
 
     public Date getRequestTime() {
-        return this.time;
+        return this.sent_on;
     }
 
     public String getSender() {
-        return this.from;
+        return this.sender;
     }
 
     public String getRecipient() {
-        return this.to;
+        return this.recipient;
     }
 
     @Override
@@ -34,15 +34,15 @@ public class FriendRequest {
 
         FriendRequest fr = (FriendRequest) o;
 
-        if (time != null ? !time.equals(fr.time) : fr.time != null) return false;
-        if (from != null ? !from.equals(fr.from) : fr.from != null) return false;
-        if (to != null ? !to.equals(fr.to) : fr.to != null) return false;
+        if (sent_on != null ? !sent_on.equals(fr.sent_on) : fr.sent_on != null) return false;
+        if (sender != null ? !sender.equals(fr.sender) : fr.sender != null) return false;
+        if (recipient != null ? !recipient.equals(fr.recipient) : fr.recipient != null) return false;
 
         return true;
     }
 
     public String toString() {
-        String str = "FROM: " + this.from + " TO: " + this.to + " SENT AT: " + this.time;
+        String str = "FROM: " + this.sender + " TO: " + this.recipient + " SENT AT: " + this.sent_on;
 
         return str;
     }
