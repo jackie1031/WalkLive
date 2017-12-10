@@ -828,10 +828,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SN2DVCT4SM;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -846,10 +846,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SN2DVCT4SM;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
