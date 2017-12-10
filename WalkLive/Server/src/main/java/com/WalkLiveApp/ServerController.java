@@ -49,7 +49,7 @@ public class ServerController {
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
                     User u = walkLiveService.createNew(request.body());
-                    response.status(201); //fic response
+                    response.status(201);
                     return u;
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
@@ -74,7 +74,9 @@ public class ServerController {
                 try {
                     return walkLiveService.getUser(request.params(":username"));
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed find user.");
+                    logger.error("Failed to find user.");
+                    response.status(404);
+                    response.body("{ reason: NONEXISTENT_USER }");
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());

@@ -273,6 +273,9 @@ public class WalkLiveService {
                 createdOn = res.getString(5);
 
                 return new User(username, pw, contact);
+            } else {
+                logger.error(String.format("WalkLiveService.find: Failed to find username: %s", username));
+                throw new UserServiceException(String.format("WalkLiveService.find: Failed to find username: %s", username));
             }
         } catch(SQLException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
@@ -289,8 +292,6 @@ public class WalkLiveService {
                 } catch (SQLException e) { /* ignored */}
             }
         }
-
-        return null;
     }
 
     /**
