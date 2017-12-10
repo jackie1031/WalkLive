@@ -932,6 +932,9 @@
                     <navigationItem key="navigationItem" title="Friend Requests" id="UDY-54-Sbc">
                         <barButtonItem key="rightBarButtonItem" title="Add+" id="2gu-br-ho1">
                             <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="onAddButton:" destination="xMF-8H-6rL" id="Zf2-o4-taD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
