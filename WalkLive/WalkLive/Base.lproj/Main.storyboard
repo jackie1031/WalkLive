@@ -994,6 +994,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3M-xa-d0x">
                                                     <rect key="frame" x="329" y="120" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <segue destination="MJu-oG-pf4" kind="show" identifier="messageSegue" id="owi-wt-YfO"/>
+                                                    </connections>
                                                     <state key="normal" title="Edit">
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -1032,7 +1035,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Gs-Wg-qDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1502" y="1646"/>
+            <point key="canvasLocation" x="1502" y="1669"/>
         </scene>
         <!--Trip RequestVC-->
         <scene sceneID="dFv-He-xJ4">
@@ -1145,14 +1148,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9h-4w-xRw">
-                                        <rect key="frame" x="80" y="190" width="61" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Add Text"/>
-                                        <connections>
-                                            <action selector="onAddTextButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="G6U-EQ-6P0"/>
-                                        </connections>
-                                    </button>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Call me at:" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Llz-50-YjR">
                                         <rect key="frame" x="10" y="110" width="357" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1175,11 +1170,27 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQY-Y6-452">
-                                        <rect key="frame" x="200" y="190" width="111" height="30"/>
+                                        <rect key="frame" x="135" y="190" width="111" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Delete Last Text"/>
                                         <connections>
                                             <action selector="onDeleteLastTextButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="erG-pK-TOe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jk-SG-2Bv">
+                                        <rect key="frame" x="285" y="190" width="34" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="onSaveButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="cba-7d-zMJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9h-4w-xRw">
+                                        <rect key="frame" x="35" y="190" width="61" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Add Text"/>
+                                        <connections>
+                                            <action selector="onAddTextButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="G6U-EQ-6P0"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1195,11 +1206,12 @@
                         <outlet property="message2" destination="Oww-Fg-eg7" id="Hfs-7w-jNe"/>
                         <outlet property="message3" destination="Llz-50-YjR" id="ayu-Bt-rf4"/>
                         <outlet property="message4" destination="OLr-TS-HMs" id="3gl-MT-6HY"/>
+                        <outlet property="onSaveButton" destination="8Jk-SG-2Bv" id="kR6-Ys-OOM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qek-hv-B0K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3165.5999999999999" y="1642.128935532234"/>
+            <point key="canvasLocation" x="680.79999999999995" y="1668.2158920539732"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TBM-Vu-2yJ">
