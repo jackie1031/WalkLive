@@ -335,7 +335,7 @@ public class WalkLiveService {
             System.out.println("SUCCESSFULLY UPDATED.");
             return new User(null, null, null, null, null, id, number);
 
-        } catch(SQLException ex) {w
+        } catch(SQLException ex) {
             logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
             throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
         }  finally {

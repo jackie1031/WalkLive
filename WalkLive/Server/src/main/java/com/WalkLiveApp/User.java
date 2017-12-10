@@ -23,7 +23,6 @@ public class User {
         this.emergency_number = null;
     }
 
-
     public User(String username, String password, String contact, String nickname, Date createdOn, String emergencyId, String emergencyNumber) {
         this.username = username;
         this.password = password;
