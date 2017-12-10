@@ -74,6 +74,7 @@ class TimeManager: NSObject {
         timePoint.endLong = Double((destinationAnnotation?.coordinate.longitude)!)
         
         timePoint.destination = (destinationAnnotation?.title)!
+        timePoint.startTime = getTodayString()
         
         return timePoint
     }
