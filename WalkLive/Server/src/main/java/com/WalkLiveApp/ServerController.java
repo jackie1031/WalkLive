@@ -35,15 +35,18 @@ public class ServerController {
              * ================================================================
              */
 
-            //get list of users
-            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
+            //existing user login
+            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.findAllUsers();
+                    return walkLiveService.login(request.body());
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to fetch user entries");
+                    logger.error("Failed to authenticate user.");
+                    response.status(401);
+                    //e.getMessage()
+                    return "{ reason: NONEXISTENT_USER }";
                 }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer()); //get list of users
+                //return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
@@ -53,21 +56,22 @@ public class ServerController {
                     return u;
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
-                    response.status(401);
+                    response.status(401); //multiple error codes
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            //existing user login
-            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
+            //get users
+            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.login(request.body());
+                    return walkLiveService.findAllUsers();
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to authenticate user.");
-                    response.status(404);
+                    logger.error("Failed to fetch user entries");
+                    response.status(410);
                 }
                 return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
+            }, new JsonTransformer()); //get list of users
+
 
             //get user information
             get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
@@ -76,9 +80,9 @@ public class ServerController {
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to find user.");
                     response.status(404);
-                    response.body("{ reason: NONEXISTENT_USER }");
+                    return "NONEXISTENT_USER";
                 }
-                return Collections.EMPTY_MAP;
+                //return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
             /**

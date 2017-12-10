@@ -105,44 +105,13 @@ public class TestServer {
 
             assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
             assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
         }
 
-    }
-
-    @Test
-    public void testFindAll() throws Exception {
-
-        //Add a few elements
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User[] entries = new User[] {
-                new User("jeesookim", "123456", "4405339063"),
-                new User("michelle", "0123", "4405339063"),
-                new User("yangcao1", "1111","4405339063"),
-        };
-
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-
-        //Get them back
-        Response r = request("GET", "/WalkLive/api/users", null);
-        assertEquals("Failed to get user entries", 200, r.httpStatus);
-        List<User> results = getUsers(r);
-
-        //Verify that we got the right element back
-        assertEquals("Number of user entries differ", entries.length, results.size());
-
-        for (int i = 0; i < results.size(); i++) {
-            User actual = results.get(i);
-
-            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-        }
     }
 
     @Test
@@ -183,6 +152,43 @@ public class TestServer {
     }
 
     @Test
+    public void testFindAll() throws Exception {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456", "4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "1111","4405339063"),
+        };
+
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //Get them back
+        Response r = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, r.httpStatus);
+        List<User> results = getUsers(r);
+
+        //Verify that we got the right element back
+        assertEquals("Number of user entries differ", entries.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
+        }
+    }
+
+    @Test
     public void testLogin() throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
@@ -195,8 +201,13 @@ public class TestServer {
         Response r2 = request("POST", "/WalkLive/api/users/login", expected);
         assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
 
-        //assert to check for return string uri
+        User fake = new User("fakenews", "test-1", null);
+        Response r3 = request("POST", "/WalkLive/api/users/login", fake);
+        assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
 
+//        User incorrect = new User("jeesoo", "incorrectpassword"), null;
+//        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
+//        assertEquals("Failed to detect incorrect password", 401, r3.httpStatus);
     }
 
     @Test
@@ -211,6 +222,16 @@ public class TestServer {
         //Get it back so that we know its ID
         Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
         assertEquals("Failed to get user", 200, r2.httpStatus);
+
+//        User actual = getUser(r2);
+//
+//            assertEquals("Mismatch in username", expected.getUsername(), actual.getUsername());
+//            assertEquals("Mismatch in password", expected.getPassword(), actual.getPassword());
+//            assertEquals("Mismatch in contact", expected.getContact(), actual.getContact());
+//            assertEquals("Mismatch in nickname", expected.getNickname(), actual.getNickname());
+//            assertEquals("Mismatch in creation date", expected.getCreatedOn(), actual.getCreatedOn());
+//            assertEquals("Mismatch in emergency id", expected.getEmergencyId(), actual.getEmergencyId());
+//            assertEquals("Mismatch in emergency number", expected.getEmergencyNumber(), actual.getEmergencyNumber());
 
     }
 
@@ -234,6 +255,22 @@ public class TestServer {
     //         assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
     //     }
     // }
+
+    @Test
+    public void testUpdateEmergencyInfo() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //update emergency contact info
+        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
+        Response r2 = request("PUT", "/WalkLive/api/users/jeesoo/emergency_info", contactInfo);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+    }
 
 //DELETE LATER
 //    @Test
@@ -488,6 +525,36 @@ public class TestServer {
         }
     }
 
+    private Response request(String method, String path, String content) {
+        try {
+            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
+            System.out.println(url);
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            http.setRequestMethod(method);
+            http.setDoInput(true);
+            if (content != null) {
+                http.setDoOutput(true);
+                http.setRequestProperty("Content-Type", "application/json");
+                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
+                output.write(content);
+                output.flush();
+                output.close();
+            }
+            try {
+                String responseBody = IOUtils.toString(http.getInputStream());
+                return new Response(http.getResponseCode(), responseBody);
+            } catch (IOException e) {
+//                e.printStackTrace();
+//                fail("Sending request failed: " + e.getMessage());
+                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("Sending request failed: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     private static class Response {
 
@@ -552,6 +619,11 @@ public class TestServer {
         Type type = (new TypeToken<ArrayList<User>>() { }).getType();
         return r.getContentAsObject(type);
     }
+
+//    private User getUser(Response r) {
+//        Type type = (new TypeToken<User>() { }).getType();
+//        return r.getContentAsObject();
+//    }
 
     /**
      * Clears the database of all test tables.

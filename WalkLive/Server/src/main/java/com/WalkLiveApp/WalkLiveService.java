@@ -13,8 +13,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.sql.DataSource;
 import org.json.simple.parser.JSONParser;
@@ -27,6 +29,7 @@ public class WalkLiveService {
     private Connection conn = null;
 
     private final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
+    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Construct the model with a pre-defined datasource. The current implementation
@@ -151,7 +154,7 @@ public class WalkLiveService {
     /*
      * Finds all users and returns all in user database
      */
-    public List<User> findAllUsers() throws UserServiceException {
+    public List<User> findAllUsers() throws UserServiceException, java.text.ParseException {
         Statement stm = null;
         ResultSet res = null;
         String sql = "SELECT * FROM users";
@@ -164,19 +167,23 @@ public class WalkLiveService {
             String username;
             String pw;
             String contact;
-            String friendId;
-            String createdOn;
+            String nickname;
+            Date createdOn;
+            String emergencyId;
+            String emergencyNumber;
 
             ArrayList<User> users = new ArrayList<>();
             while (res.next()) {
-                 username = res.getString(1);
-                 pw = res.getString(2);
-                 contact = res.getString(3);
-                 friendId = res.getString(4);
-                 createdOn = res.getString(5);
+                username = res.getString(1);
+                pw = res.getString(2);
+                contact = res.getString(3);
+                nickname = res.getString(4);
+                createdOn = df.parse(res.getString(5));
+                emergencyId = res.getString(6);
+                emergencyNumber = res.getString(7);
 
-                 User u = new User(username, pw, contact);
-                 users.add(u);
+                User u = new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
+                users.add(u);
             }
             return users;
 
@@ -229,12 +236,12 @@ public class WalkLiveService {
 
                 return new User(username, pw, contact, null, null, null, null);
             } else {
-                logger.error(String.format("WalkLiveService.find: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.find: Failed to find username: %s", username));
+                logger.error(String.format("WalkLiveService.login: Failed to find username: %s", username));
+                throw new UserServiceException(String.format("WalkLiveService.login: Failed to find username: %s", username));
             }
-        } catch(SQLException ex) {
-            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+        } catch (SQLException ex) {
+            logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
+            throw new UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
         }  finally {
             if (ps != null) {
                 try {
@@ -249,7 +256,7 @@ public class WalkLiveService {
         }
     }
 
-    public User getUser(String username) throws UserServiceException, ParseException {
+    public User getUser(String username) throws UserServiceException, ParseException, java.text.ParseException {
         ResultSet res = null;
         PreparedStatement ps = null;
 
@@ -263,24 +270,31 @@ public class WalkLiveService {
 
             String pw;
             String contact;
-            String friendId;
-            String createdOn;
+            String nickname;
+            Date createdOn;
+            String emergencyId;
+            String emergencyNumber;
 
             if (res.next()) {
                 pw = res.getString(2);
                 contact = res.getString(3);
-                friendId = res.getString(4);
-                createdOn = res.getString(5);
+                nickname = res.getString(4);
+                createdOn = df.parse(res.getString(5));
+                emergencyId = res.getString(6);
+                emergencyNumber = res.getString(7);
 
-                return new User(username, pw, contact);
+                return new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
             } else {
-                logger.error(String.format("WalkLiveService.find: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.find: Failed to find username: %s", username));
+                logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
+                throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
             }
         } catch(SQLException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-        }  finally {
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
+        } catch (java.text.ParseException ex) {
+            logger.error(String.format("WalkLiveService.find: Failed to properly parse date"), ex);
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to properly parse date"), ex);
+        } finally {
             if (ps != null) {
                 try {
                     ps.close();
@@ -308,7 +322,7 @@ public class WalkLiveService {
         String id = object.get("emergency_id").toString();
         String number = object.get("emergency_number").toString();
 
-        String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? " ;
+        String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? LIMIT 1" ;
 
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -321,7 +335,7 @@ public class WalkLiveService {
             System.out.println("SUCCESSFULLY UPDATED.");
             return new User(null, null, null, null, null, id, number);
 
-        } catch(SQLException ex) {
+        } catch(SQLException ex) {w
             logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
             throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
         }  finally {
