@@ -111,39 +111,39 @@ public class TestServer {
 
     }
 
-    @Test
-    public void testFindAll() throws Exception {
-
-        //Add a few elements
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User[] entries = new User[] {
-                new User("jeesookim", "123456", "4405339063"),
-                new User("michelle", "0123", "4405339063"),
-                new User("yangcao1", "1111","4405339063"),
-        };
-
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-
-        //Get them back
-        Response r = request("GET", "/WalkLive/api/users", null);
-        assertEquals("Failed to get user entries", 200, r.httpStatus);
-        List<User> results = getUsers(r);
-
-        //Verify that we got the right element back
-        assertEquals("Number of user entries differ", entries.length, results.size());
-
-        for (int i = 0; i < results.size(); i++) {
-            User actual = results.get(i);
-
-            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-        }
-    }
+//    @Test
+//    public void testFindAll() throws Exception {
+//
+//        //Add a few elements
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456", "4405339063"),
+//                new User("michelle", "0123", "4405339063"),
+//                new User("yangcao1", "1111","4405339063"),
+//        };
+//
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//        }
+//
+//        //Get them back
+//        Response r = request("GET", "/WalkLive/api/users", null);
+//        assertEquals("Failed to get user entries", 200, r.httpStatus);
+//        List<User> results = getUsers(r);
+//
+//        //Verify that we got the right element back
+//        assertEquals("Number of user entries differ", entries.length, results.size());
+//
+//        for (int i = 0; i < results.size(); i++) {
+//            User actual = results.get(i);
+//
+//            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+//            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+//            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+//            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+//        }
+//    }
 
     @Test
     public void testDuplicateCreation() {

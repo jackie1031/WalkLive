@@ -15,21 +15,21 @@ public class TravelLog {
         this.tripList = tripList;
     }
 
-    public Trip getTrip(String user, int count, List<Trip> trip) {
-
-        //get specific trip
-        Trip temp = new Trip(count, user);
-        return temp;
-    }
+//    public Trip getTrip(String user, int count, List<Trip> trip) {
+//
+//        //get specific trip
+//        Trip temp = new Trip(count, user);
+//        return temp;
+//    }
 
     public List<Trip> getTripHist() {
         return tripList;
 
     }
 
-    public Trip getCurrTrip(){
-        //get trip
-        Trip temp = new Trip(1,"kasfa");
-        return tripList.get(tripList.size()-1);
-    }
+//    public Trip getCurrTrip(){
+//        //get trip
+//        Trip temp = new Trip(1,"kasfa");
+//        return tripList.get(tripList.size()-1);
+//    }
 }

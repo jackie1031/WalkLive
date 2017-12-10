@@ -29,34 +29,36 @@ public class Trip {
     }
 
 
-    // test whether is in danger zone
-    public List<TimePoint> getTimepoint (String trip,String user){
-        TimePoint now = new TimePoint(timePointId,startTime, endTime, currCoordinate, dangerLevel);
-        complete = false;
-        while(!complete){
-            timePointId = 0;
-            String timeNow = startTime + 5;
-            ////////
-            TimePoint current = new TimePoint(timePointId, timeNow, currCoordinate, dangerLevel);
-            // parameters for TimePoints int TimePointID, String time, double latiture, double longiture;
-            //add timepoints
-            allTimePoints.add(current);
-            timePointId++;
-            timeNow = startTime;
 
-//            if() {
-//                complete = true;
-//            }
-        }
 
-        return allTimePoints;
-
-    }
-    public TimePoint getLastTimepoint() {
-
-        TimePoint last = allTimePoints.get(allTimePoints.size() - 1);
-        return last;
-    }
+//    // test whether is in danger zone
+//    public List<TimePoint> getTimepoint (String trip,String user){
+//        TimePoint now = new TimePoint(timePointId,startTime, endTime, currCoordinate, dangerLevel);
+//        complete = false;
+//        while(!complete){
+//            timePointId = 0;
+//            String timeNow = startTime + 5;
+//            ////////
+//            TimePoint current = new TimePoint(timePointId, timeNow, currCoordinate, dangerLevel);
+//            // parameters for TimePoints int TimePointID, String time, double latiture, double longiture;
+//            //add timepoints
+//            allTimePoints.add(current);
+//            timePointId++;
+//            timeNow = startTime;
+//
+////            if() {
+////                complete = true;
+////            }
+//        }
+//
+//        return allTimePoints;
+//
+//    }
+//    public TimePoint getLastTimepoint() {
+//
+//        TimePoint last = allTimePoints.get(allTimePoints.size() - 1);
+//        return last;
+//    }
 
     public void setTripId(String tripId) {
         this.tripId = tripId;
@@ -126,15 +128,15 @@ public class Trip {
         this.currCoordinate = currCoordinate;
     }
 
-    public List<TimePoint> getAllTimePoints() {
-        return allTimePoints;
-    }
-
-    public void setAllTimePoints(List<TimePoint> allTimePoints) {
-        this.allTimePoints = allTimePoints;
-    }
-
-    private List<TimePoint> allTimePoints = new ArrayList<TimePoint>();
+//    public List<TimePoint> getAllTimePoints() {
+//        return allTimePoints;
+//    }
+//
+//    public void setAllTimePoints(List<TimePoint> allTimePoints) {
+//        this.allTimePoints = allTimePoints;
+//    }
+//
+//    private List<TimePoint> allTimePoints = new ArrayList<TimePoint>();
 
 
 

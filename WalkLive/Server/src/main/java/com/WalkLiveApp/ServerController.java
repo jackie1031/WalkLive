@@ -29,18 +29,18 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
-//            /** lallaallala
-//             * tests
-//             */
-//            get(API_CONTEXT + "/tests", "application/json", (request, response) -> {
-//                try {
-//                    return walkLiveService.test();
-//                } catch (WalkLiveService.UserServiceException e) {
-//                    logger.error("Failed to fetch user entries");
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
-//
+            /** lallaallala
+             * tests
+             */
+            get(API_CONTEXT + "/tests", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.test();
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to fetch user entries");
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
             /**
              * ================================================================
              * User Setup Handling
@@ -175,25 +175,39 @@ public class ServerController {
               * Trip part
               * ----------------------------------------------------------------------
               * */
-             //Start Trip
-            post(API_CONTEXT+"/users/:username", "application/json", (request, response) -> {
+
+            post(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
                 try {
+                    walkLiveService.createFriendRequest(request.params(":username"), request.body());
+                    response.status(201);
+                } catch (WalkLiveService.FriendRequestServiceException e) {
+                    logger.error("Failed to create friend request.");
+                    response.status(404);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+             //Start Trip
+            post(API_CONTEXT+"/trips/startTrip", "application/json", (request, response) -> {
+                try {
+
+                    walkLiveService.startTrip( request.body());
                     response.status(200);
-                    return walkLiveService.startTrip(request.body());
+                    //return walkLiveService.startTrip(request.body());
                 } // InvalidDestination     Code 409
                 catch (WalkLiveService.InvalidDestination e) {
+                    logger.error("Failed to create friend request.");
                     response.status(409);
                 }
-
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
 
             // end a trip
-            put(API_CONTEXT+"/users/:username/finishTrip", "application/json", (request, response) -> {
+            put(API_CONTEXT+"/users/:username/endTrip", "application/json", (request, response) -> {
                 try {
                     response.status(200);
-                    return walkLiveService.endTrip(request.body());
+                    walkLiveService.endTrip(request.body());
                 } // InvalidDestination     Code 409
                 catch (WalkLiveService.InvalidDestination e) {
                     response.status(409);
@@ -202,25 +216,26 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-// //            getTrip:
-// //            Method: GET
-// //            URL: /WalkLive/api/<userId>/friendTrips
-// //            Content: { targetId: <string> } //find by friend’s username
-// //            Failure Response:
-// //            InvalidTargetId           Code 402
-// //            Success Response:         Code 200
-// //            { tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
+ //            getTrip:
+ //            Method: GET
+ //            URL: /WalkLive/api/<userId>/friendTrips
+ //            Content: { targetId: <string> } //find by friend’s username
+ //            Failure Response:
+ //            InvalidTargetId           Code 402
+ //            Success Response:         Code 200
+ //            { tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
 
 //             //get Trip
 //             get(API_CONTEXT + "/user/friendTrips", "application/json", (request, response) -> {
 //                 try {
 //                     response.status(200);
-//                     return walkLiveService.getTrip(request.params(":destination"));
+//                     walkLiveService.getTrip(request.body());
 //                 } catch (WalkLiveService.InvalidTargetID e) {
 //                     logger.error("Invalid user id.");
 //                     response.status(402);
-//                     return Collections.EMPTY_MAP;
 //                 }
+//                 return Collections.EMPTY_MAP;
+//
 //             }, new JsonTransformer());
 
 
