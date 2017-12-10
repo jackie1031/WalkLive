@@ -48,10 +48,10 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     }
     
     private func emerStringBuilder() -> String{
-        if (currentUserInfo?.emergencyNumber == nil) {
+        if (currentUserInfo?.emergency_number == nil) {
              return "Emer. Contact: None"
         }
-            return "Emer. Contact: " + (currentUserInfo?.emergencyNumber)!
+            return "Emer. Contact: " + (currentUserInfo?.emergency_number)!
     }
     
     private func setDelegate() {
@@ -258,6 +258,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     @IBAction func onLogoutButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        currentUserInfo = nil
     }
     
 

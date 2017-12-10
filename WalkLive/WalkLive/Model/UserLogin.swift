@@ -12,8 +12,8 @@ struct UserLogin: Codable {
     var username: String?
     var password: String?
     var contact: String?
-    var emergencyId: String?
-    var emergencyNumber: String?
+    var emergency_id: String?
+    var emergency_number: String?
     
     init(username : String, password : String) {
         self.username = username
@@ -29,8 +29,8 @@ struct UserLogin: Codable {
     init(dictionary: NSDictionary) {
         self.username = dictionary["username"] as? String
         self.contact = dictionary["contact"] as? String
-        self.emergencyId = dictionary["emergencyId"] as? String
-        self.emergencyNumber = dictionary["emergencyNumber"] as? String
+        self.emergency_id = dictionary["emergencyId"] as? String
+        self.emergency_number = dictionary["emergencyNumber"] as? String
     }
 
 }

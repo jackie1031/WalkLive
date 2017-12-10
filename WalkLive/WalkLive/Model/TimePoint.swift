@@ -8,24 +8,16 @@
 
 import UIKit
 
-class TimePoint: NSObject {
-    var dictionary: NSDictionary?
-    var tripId: String?
-    var userId: String?
-    var timePointId: String?
-    var location: String?
-    var latitude: Float = 0
-    var longitude: Float = 0
-    
-    init(dictionary: NSDictionary) {
-        //deserialization code
-        self.dictionary = dictionary
-        tripId = dictionary["tripId"] as? String
-        userId = dictionary["userId"] as? String
-        timePointId = dictionary["timePointId"] as? String
-        location = dictionary["location"] as? String
-        latitude = (dictionary["latitude"] as? Float) ?? 0
-        longitude = (dictionary["longitude"] as? Float) ?? 0
-    }
-    
+class TimePoint: NSObject, Codable {
+//    { username:[String], startTime: [string], destination: [string],startLong:[double,],startLat:[double],curLong:[double],curLat:[double],endLat:[double],timeSpent[String] }
+    var username: String?
+    var startTime: String?
+    var destination: String?
+    var startLong: Double?
+    var startLat: Double?
+    var curLong: Double?
+    var curLat: Double?
+    var endLong: Double?
+    var endLat: Double?
+    var timeSpent: String?
 }

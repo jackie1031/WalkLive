@@ -14,6 +14,7 @@ class TimeManager: NSObject {
     private var timer = Timer()
     private var timeInterval: TimeInterval!
     private var usedTimeInterval = 0
+    private var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
     
     init(timeInterval: TimeInterval) {
@@ -54,6 +55,28 @@ class TimeManager: NSObject {
             return (self.usedTimeInterval - Int(self.timeInterval/60))
         }
         return 0
+    }
+    
+    func buildTimePoint() -> TimePoint?{
+        if (self.roadRequester == nil) {
+            return nil
+        }
+        let sourceAnnotation = self.roadRequester?.sourceAnnotation
+        let destinationAnnotation = self.roadRequester?.destinationAnnotation
+        let currentAnnotation = self.roadRequester?.getcurrentLocationInAnnotation()
+        let timePoint = TimePoint()
+        
+        timePoint.curLat = Double((currentAnnotation?.coordinate.latitude)!)
+        timePoint.curLong = Double((currentAnnotation?.coordinate.longitude)!)
+        timePoint.startLat = Double((sourceAnnotation?.coordinate.latitude)!)
+        timePoint.startLong = Double((sourceAnnotation?.coordinate.longitude)!)
+        timePoint.endLat = Double((destinationAnnotation?.coordinate.latitude)!)
+        timePoint.endLong = Double((destinationAnnotation?.coordinate.longitude)!)
+        
+        timePoint.destination = (destinationAnnotation?.title)!
+        timePoint.startTime = getTodayString()
+        
+        return timePoint
     }
     
 }

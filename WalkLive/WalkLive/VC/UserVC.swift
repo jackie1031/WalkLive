@@ -33,10 +33,10 @@ class UserVC: UIViewController {
     private func setUserVCInfo() {
         self.usernameLabel.text = currentUserInfo?.username
         self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
-        if (currentUserInfo?.emergencyNumber == nil) {
+        if (currentUserInfo?.emergency_number == nil) {
             self.emergencyContactLabel.text = "Emer. Contact: None"
         } else {
-            self.emergencyContactLabel.text = "Emer. Contact: " + (currentUserInfo?.emergencyNumber)!
+            self.emergencyContactLabel.text = "Emer. Contact: " + (currentUserInfo?.emergency_number)!
         }
     }
     
@@ -69,6 +69,11 @@ class UserVC: UIViewController {
             backItem.tintColor = primaryColor
             navigationItem.backBarButtonItem = backItem
         } else if (segue.identifier == "settingSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "tripRequestSegue"){
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             backItem.tintColor = primaryColor

@@ -51,16 +51,7 @@ class BackEndClient: NSObject {
         let url = URL(string: endpoint)
         var userLoginUrlRequest = URLRequest(url: url!)
         userLoginUrlRequest.httpMethod = "GET"
-        
-        //            let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
-        //            let encoder = JSONEncoder()
-        //            do {
-        //                let newUserLoginAsJSON = try encoder.encode(userLogin)
-        //                userLoginUrlRequest.httpBody = newUserLoginAsJSON
-        //            } catch {
-        //                failure(error)
-        //            }
-        
+
         
         URLSession.shared.dataTask(with: userLoginUrlRequest, completionHandler: { //?
             (data, response, error) in
@@ -121,21 +112,13 @@ class BackEndClient: NSObject {
     }
     
     func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
-//        let endpoint = "."
-//        guard let url = URL(string: endpoint) else {
-//            print("Error: cannot create URL")
-//            let error = BackendError.urlError("Could not construct URL")
-//            failure(error)
-//        }
-//        var userLoginUrlRequest = URLRequest(url: url)
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/login"
         var loginAttemptRequest = URLRequest(url: urlComponents.url!)
         loginAttemptRequest.httpMethod = "POST"
 
-        let encoder = JSONEncoder()
         do {
-            let newUserLoginAsJSON = try encoder.encode(userLogin)
+            let newUserLoginAsJSON = try jsonEncoder.encode(userLogin)
             loginAttemptRequest.httpBody = newUserLoginAsJSON
         } catch {
             failure(error)
@@ -150,8 +133,10 @@ class BackEndClient: NSObject {
             
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 200) {
+                print(status)
                 failure(LoginError(status: status))
             } else {
+                print(status)
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
             currentUserInfo = userContact
                 success(userContact!)}
@@ -162,17 +147,16 @@ class BackEndClient: NSObject {
         var urlComponents = self.buildURLComponents()
         //CHANGE ENDPOINT
         urlComponents.path = self.APICONTEXT + "/users"
-        var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
-        userLoginUrlRequest.httpMethod = "POST"
+        var signUpRequest = URLRequest(url: urlComponents.url!)
+        signUpRequest.httpMethod = "POST"
         
-        let encoder = JSONEncoder()
         do {
-            let newUserSignUpAsJSON = try encoder.encode(userLogin)
-            userLoginUrlRequest.httpBody = newUserSignUpAsJSON
+            let newUserSignUpAsJSON = try jsonEncoder.encode(userLogin)
+            signUpRequest.httpBody = newUserSignUpAsJSON
         } catch {
             failure(error)
         }
-        URLSession.shared.dataTask(with: userLoginUrlRequest, completionHandler: { //?
+        URLSession.shared.dataTask(with: signUpRequest, completionHandler: { //?
             (data, response, error) in
             // check for errors
             if error != nil {
@@ -224,7 +208,12 @@ class BackEndClient: NSObject {
                 failure(error!)
             }
             // if success, log in
-            success()
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                failure(LoginError(status: status))
+            } else {
+                success()
+            }
         }).resume()
     }
 
@@ -238,7 +227,12 @@ class BackEndClient: NSObject {
             if (error != nil) {
                 failure(error!)
             }
-            success()
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                failure(LoginError(status: status))
+            } else {
+                success()
+            }
         }).resume()
     }
     
@@ -252,19 +246,25 @@ class BackEndClient: NSObject {
             if (error != nil) {
                 failure(error!)
             }
-            success()
+            
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                failure(LoginError(status: status))
+            } else {
+                success()
+            }
         }).resume()
     }
     
     func updateEmergencyContact(success: @escaping (EmergencyContact) -> (), failure: @escaping (Error) -> (), emergencyContact: EmergencyContact){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/emergency_info"
         var updateEmergencyContactRequest = URLRequest(url: urlComponents.url!)
         updateEmergencyContactRequest.httpMethod = "PUT"
         
-        let encoder = JSONEncoder()
         do {
-            let encodedJSON = try encoder.encode(emergencyContact)
+            let encodedJSON = try jsonEncoder.encode(emergencyContact)
             updateEmergencyContactRequest.httpBody = encodedJSON
         } catch {
             failure(error)
@@ -274,8 +274,16 @@ class BackEndClient: NSObject {
             if (error != nil) {
                 failure(error!)
             }
-            let updatedEmergencyContact = try? jsonDecoder.decode(EmergencyContact.self, from: data!) as EmergencyContact
-            success(updatedEmergencyContact!)
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(LoginError(status: status))
+            } else {
+                print(status)
+                let returnEmergencyContact = try? jsonDecoder.decode(EmergencyContact.self, from: data!) as EmergencyContact
+                currentUserInfo.emergency_id = returnEmergencyContact?.emergency_id
+                currentUserInfo.emergency_number = returnEmergencyContact?.emergency_number
+                success(returnEmergencyContact!)}
         }).resume()
     }
     
@@ -284,13 +292,9 @@ class BackEndClient: NSObject {
         urlComponents.path = self.APICONTEXT + "/users/\(username)"
         var getUserRequest = URLRequest(url: urlComponents.url!)
         getUserRequest.httpMethod = "GET"
-
-        print("got here")
         
         URLSession.shared.dataTask(with: getUserRequest, completionHandler: { (data, response, error) in
-            print("got here task share")
             if (error != nil) {
-                print("got here error")
                 
                 failure(error!)
             }
@@ -302,33 +306,40 @@ class BackEndClient: NSObject {
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
                 success(userContact!)}
         }).resume()
-//        URLSession.shared.dataTask(with: getUserRequest) { (data, response, error) in
-//            print("got here task share")
-//            if (error != nil) {
-//                print("got here error")
-//
-//                failure(error!)
-//            }
-//            let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-//            success(userContact!)
-//        }
     }
     
-//
-//    let requestTest = FriendRequest()
-//    let encoder = JSONEncoder()
-//    let decoder = JSONDecoder()
-//    do {
-//    let encodedJSON = try encoder.encode(requestTest)
-//    _ = try? decoder.decode(FriendRequest.self, from: encodedJSON) as FriendRequest
-//    print(encodedJSON)
-//    } catch {
-//    print("error")
-//    }
+
     
+    func startTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/start_trip"
+        var startTripRequest = URLRequest(url: urlComponents.url!)
+        startTripRequest.httpMethod = "POST"
+        
+        do {
+            let startTripJSON = try jsonEncoder.encode(timePoint)
+            startTripRequest.httpBody = startTripJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: startTripRequest, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(LoginError(status: status))
+            } else {
+                print(status)
+                    success()
+            }
+        }).resume()
+    }
     
-//    func startTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), trip: Trip){
-//        success()
-//    }
 
 }
