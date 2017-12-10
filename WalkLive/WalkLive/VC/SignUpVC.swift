@@ -34,14 +34,15 @@ class SignUpVC: UIViewController {
     
     @IBAction func onSignUpButton(_ sender: Any) {
         if (!isValidSignUp()) {
-            print("reachedhere")
             return
         }
-        print("reachedhere2")
         let userSignUp = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!, contact: phoneNumberTextField.text!)
-        backEndClient.signUpAttempt(success: {
+        backEndClient.signUpAttempt(success: {(userinfo) in
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "signupSegue", sender: nil)
+            }
         }, failure: { (error) in
-            
+            print(error)
         }, userLogin: userSignUp)
     }
     

@@ -26,7 +26,7 @@ class TimeManager: NSObject {
     
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
     }
     
     @objc func updateTimeLabel(){

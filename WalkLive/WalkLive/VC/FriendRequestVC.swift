@@ -113,6 +113,14 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.requestTable.reloadData()
     }
     
+    @IBAction func onAddButton(_ sender: Any) {
+        var fv = AddFriendView()
+        fv = fv.loadNib()
+        self.view.addSubview(fv)
+        fv.center = self.view.center
+    }
+    
+    
     
 //    override func viewWillAppear(_ animated: Bool) {
 //        self.setBackButtons()
