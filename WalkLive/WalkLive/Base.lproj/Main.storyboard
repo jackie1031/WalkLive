@@ -601,6 +601,7 @@
                         <outlet property="passwordTextField" destination="tcO-aq-hbB" id="A8d-Ct-ndp"/>
                         <outlet property="phoneNumberTextField" destination="oxn-DE-96b" id="I7Y-jo-Ck2"/>
                         <outlet property="userNameTextField" destination="hwt-Mv-brG" id="goK-pD-oGN"/>
+                        <segue destination="VUm-xm-Aye" kind="presentation" identifier="signupSegue" id="u5s-Dw-nrg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UK9-LT-Rgp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1108,4 +1109,7 @@
     <resources>
         <image name="Image" width="283" height="258"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="u5s-Dw-nrg"/>
+    </inferredMetricsTieBreakers>
 </document>
