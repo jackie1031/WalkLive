@@ -21,6 +21,10 @@ class Message: NSObject, NSCoding {
         self.messages = Array<String>()
     }
     
+    init(messageSegments: Array<String>) {
+        self.messages = messageSegments
+    }
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(_name, forKey: Keys.name)
     }
