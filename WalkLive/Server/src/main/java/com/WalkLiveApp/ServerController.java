@@ -168,19 +168,20 @@ public class ServerController {
                  return Collections.EMPTY_MAP;
              }, new JsonTransformer());
 
-//             //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
-//             //if accept, then add to friends list for both - FIGURE OUT DETAILS
-//             //either way, dealt with friend requests should be deleted
-//             //delete select sent friend request
-//             put(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
-//                 try {
-//                     return walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.body());
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to respond to friendRequest with id: %s", request.params(":requestid"));
-//                     response.status(500);
-//                     return Collections.EMPTY_MAP;
-//                 }
-//             }, new JsonTransformer());
+             //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
+             //if accept, then add to friends list for both - FIGURE OUT DETAILS
+             //either way, dealt with friend requests should be deleted
+             //delete select sent friend request
+             delete(API_CONTEXT + "/users/:username/friend_requests/:requestid/:response", "application/json", (request, response) -> {
+                 try {
+                     walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.params(":response"));
+                     response.status(200);
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to respond to friendRequest with id: %s", request.params(":requestid"));
+                     response.status(404);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
 
 //             /**

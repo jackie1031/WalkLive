@@ -515,9 +515,28 @@ public class WalkLiveService {
 //     //if accept, then add to friends list for both - FIGURE OUT DETAILS
 //     //either way, dealt with friend requests should be deleted
 //     //delete select sent friend request
-//     public FriendRequest respondToFriendRequest(String username, String requestId, String body) throws WalkLiveService.FriendRequestServiceException {
-//         return null;
-//     }
+     public void respondToFriendRequest(String responder, String requestId, String response) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+
+         if (response.equals("accept")) {
+             //update friends list
+
+         } else if (response.equals("reject")) {
+             //check to see if youre the recipient of the requestId
+
+             //if not, throw error
+
+         } else if (response.equals("cancel")) {
+             //check to see if you're sender of that requestId
+
+             //if not, throw error
+
+         } else {
+             //invalid response message. hoping that we can assume that we always get the correct response types
+         }
+
+         deleteFriendRequest(responder, requestId);
+     }
 
 
 //     /**
