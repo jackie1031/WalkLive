@@ -11,7 +11,7 @@ import UIKit
 class MessageVC: UIViewController {
 
     var message : Message!
-    var textFields : Array<UITextField>
+    var textFields : Array<UITextField>!
     var lastYCoor : Int!
     
     @IBOutlet weak var addTextButton: UIButton!

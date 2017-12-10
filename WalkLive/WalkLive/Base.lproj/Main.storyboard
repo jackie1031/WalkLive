@@ -18,21 +18,6 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.58075243234634399" green="0.81298619508743286" blue="0.78941231966018677" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="117.39130434782609"/>
-        </scene>
         <!--LoginVC-->
         <scene sceneID="KBU-Ue-2CV">
             <objects>
@@ -77,10 +62,6 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdO-p9-UJh" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="60" y="595" width="255" height="30"/>
-                                <state key="normal" title="Facebook login"/>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="prv-Qv-k0q">
                                 <rect key="frame" x="101" y="46" width="174" height="162"/>
                                 <constraints>
@@ -95,14 +76,11 @@
                             <constraint firstItem="t5h-RL-dxX" firstAttribute="top" secondItem="N6B-ke-qQS" secondAttribute="top" constant="206" id="2dz-XY-MfR"/>
                             <constraint firstItem="va8-Y9-4qO" firstAttribute="leading" secondItem="t5h-RL-dxX" secondAttribute="leading" id="2uM-Tx-peW"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CkL-nE-GoL" secondAttribute="leading" constant="20" symbolic="YES" id="GNa-Yn-uqq"/>
-                            <constraint firstItem="N6B-ke-qQS" firstAttribute="trailing" secondItem="TdO-p9-UJh" secondAttribute="trailing" constant="60" id="GW3-Dc-Toz"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="top" secondItem="t5h-RL-dxX" secondAttribute="bottom" constant="97" id="IiA-qQ-zFQ"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="trailing" secondItem="t5h-RL-dxX" secondAttribute="trailing" id="JcI-cm-BZH"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="va8-Y9-4qO" secondAttribute="trailing" constant="20" symbolic="YES" id="MXt-2v-GiD"/>
-                            <constraint firstItem="TdO-p9-UJh" firstAttribute="top" secondItem="Hso-TJ-w8h" secondAttribute="bottom" constant="157" id="P4e-hl-APQ"/>
                             <constraint firstItem="N6B-ke-qQS" firstAttribute="trailing" secondItem="t5h-RL-dxX" secondAttribute="trailing" constant="60" id="SeR-Lr-D6a"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="centerY" secondItem="va8-Y9-4qO" secondAttribute="centerY" id="fKi-Jp-RuV"/>
-                            <constraint firstItem="TdO-p9-UJh" firstAttribute="leading" secondItem="N6B-ke-qQS" secondAttribute="leading" constant="60" id="inT-kN-4eY"/>
                             <constraint firstItem="prv-Qv-k0q" firstAttribute="centerX" secondItem="CkL-nE-GoL" secondAttribute="centerX" id="kQl-h9-aYd"/>
                             <constraint firstItem="t5h-RL-dxX" firstAttribute="centerX" secondItem="CkL-nE-GoL" secondAttribute="centerX" id="neb-rh-wWZ"/>
                             <constraint firstItem="prv-Qv-k0q" firstAttribute="top" secondItem="N6B-ke-qQS" secondAttribute="top" constant="26" id="tCB-gt-N6V"/>
@@ -110,7 +88,6 @@
                         <viewLayoutGuide key="safeArea" id="N6B-ke-qQS"/>
                     </view>
                     <connections>
-                        <outlet property="facebookLoginButton" destination="TdO-p9-UJh" id="i4T-IA-vB5"/>
                         <outlet property="loginButton" destination="va8-Y9-4qO" id="uFz-Y4-iyP"/>
                         <outlet property="passwordTextField" destination="Lfv-Lm-gz2" id="J6l-aX-y3Y"/>
                         <outlet property="userNameTextField" destination="ak4-U9-afi" id="AKt-vl-VHC"/>
@@ -399,6 +376,7 @@
                     <connections>
                         <outlet property="contactMessagePanel" destination="a8T-RS-el0" id="ZD7-xi-2E7"/>
                         <outlet property="contactMessagePanelTextView" destination="L2s-FT-nJU" id="fSp-gz-ULd"/>
+                        <outlet property="emergencyContactLabel" destination="mP7-nI-dUw" id="3ra-0c-6yj"/>
                         <outlet property="mapView" destination="scF-un-XBL" id="6eg-Ng-hge"/>
                         <outlet property="startTripButton" destination="YZb-gS-rh0" id="2OG-Us-5f9"/>
                         <outlet property="startTripDestinationTextLabel" destination="iif-Ti-KoA" id="aFx-aF-Caz"/>
@@ -817,7 +795,7 @@
                         <outlet property="tripRequestButton" destination="6BA-5w-6NK" id="ati-vW-anE"/>
                         <outlet property="userContactLabel" destination="Yr3-nM-foV" id="clI-OF-Buf"/>
                         <outlet property="usernameLabel" destination="eHJ-3O-Xau" id="HHC-Cw-6EY"/>
-                        <segue destination="mhm-es-34Q" kind="show" id="cR3-Ay-sw1"/>
+                        <segue destination="mhm-es-34Q" kind="show" identifier="settingSegue" id="cR3-Ay-sw1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Su-28-Rsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -932,6 +910,9 @@
                     <navigationItem key="navigationItem" title="Friend Requests" id="UDY-54-Sbc">
                         <barButtonItem key="rightBarButtonItem" title="Add+" id="2gu-br-ho1">
                             <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="onAddButton:" destination="xMF-8H-6rL" id="Zf2-o4-taD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -943,7 +924,7 @@
             </objects>
             <point key="canvasLocation" x="2392.8000000000002" y="879.31034482758628"/>
         </scene>
-        <!--SettingsVC-->
+        <!--Settings-->
         <scene sceneID="mMH-bt-que">
             <objects>
                 <tableViewController id="mhm-es-34Q" customClass="SettingsVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
@@ -1013,7 +994,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3M-xa-d0x">
                                                     <rect key="frame" x="329" y="120" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Edit"/>
+                                                    <state key="normal" title="Edit">
+                                                        <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1026,6 +1009,22 @@
                             <outlet property="delegate" destination="mhm-es-34Q" id="gji-r4-ihc"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="W2m-YJ-vdQ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="7bQ-cL-T9B">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WyF-K4-F4T">
+                                <rect key="frame" x="276" y="5" width="83" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSaveButton:" destination="mhm-es-34Q" eventType="touchUpInside" id="Kga-ib-ffS"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emergencyContactPhone" destination="GGy-eb-dbe" id="4kw-qN-FgA"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>
@@ -1225,6 +1224,6 @@
         <image name="Image" width="283" height="258"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u5s-Dw-nrg"/>
+        <segue reference="CWQ-0c-P3r"/>
     </inferredMetricsTieBreakers>
 </document>
