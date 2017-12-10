@@ -35,7 +35,7 @@ public class WalkLiveService {
      * Construct the model with a pre-defined datasource. The current implementation
      * also ensures that the DB schema is created if necessary.
      */
-    public WalkLiveService() throws WalkLiveService.UserServiceException {
+    public WalkLiveService() throws UserServiceException {
         /**
         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
@@ -208,7 +208,7 @@ public class WalkLiveService {
     /*
      * returns emergencyId and emergencyNumber
      */
-    public User login(String body) throws UserServiceException, ParseException {
+    public User login(String body) throws UserServiceException, ParseException, java.text.ParseException {
         ResultSet res;
         PreparedStatement ps = null;
 
