@@ -151,11 +151,16 @@ class BackEndClient: NSObject {
             if error != nil {
                 failure(error!)
             }
+            
             print(response)
             
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                failure(LoginError(status: status))
+            } else {
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
             currentUserInfo = userContact
-            success(userContact!)
+                success(userContact!)}
         }).resume()
     }
     
@@ -165,11 +170,7 @@ class BackEndClient: NSObject {
         urlComponents.path = self.APICONTEXT + "/users"
         var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
         userLoginUrlRequest.httpMethod = "POST"
-        //
-        //        let keys = ["userId", "password", "selfContact"]
-        //        let values = [userNameTextField.text, passwordTextField.text, phoneNumberTextField.text]
-        //        var userDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
-        //        let user = User(dictionary: userDict)
+        
         let encoder = JSONEncoder()
         do {
             let newUserSignUpAsJSON = try encoder.encode(userLogin)
@@ -186,10 +187,10 @@ class BackEndClient: NSObject {
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 201) {
                 failure(SignUpError(status: status))
-            }
+            } else {
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
             currentUserInfo = userContact
-            success(userContact!)
+                success(userContact!)}
         }).resume()
     }
     
@@ -299,9 +300,13 @@ class BackEndClient: NSObject {
                 
                 failure(error!)
             }
-            print(response)
+            let status = (response as! HTTPURLResponse).statusCode
+            
+            if (status != 201) {
+                failure(SignUpError(status: status))
+            } else {
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-            success(userContact!)
+                success(userContact!)}
         }).resume()
 //        URLSession.shared.dataTask(with: getUserRequest) { (data, response, error) in
 //            print("got here task share")

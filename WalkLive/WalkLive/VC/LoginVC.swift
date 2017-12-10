@@ -34,7 +34,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             print(userlogin)
         }, failure: { (error) in
             
-        }, username: "jeesoo")
+        }, username: "admin_michi")
         
         
     }

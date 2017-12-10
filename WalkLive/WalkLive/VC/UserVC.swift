@@ -48,12 +48,9 @@ class UserVC: UIViewController {
         segueToSettingVC()
     }
     
-    @IBAction func onAddFriendButton(_ sender: Any) {
-        segueToSettingVC()
-    }
-    
+
     func segueToSettingVC(){
-        performSegue(withIdentifier: "settingVCSegue", sender: self)
+        self.performSegue(withIdentifier: "settingSegue", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,6 +66,11 @@ class UserVC: UIViewController {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "friendRequestSegue"){
             let backItem = UIBarButtonItem()
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "settingSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
             backItem.tintColor = primaryColor
             navigationItem.backBarButtonItem = backItem
         }

@@ -21,6 +21,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     @IBOutlet weak var contactMessagePanel: UIView!
     
     @IBOutlet weak var contactMessagePanelTextView: UITextView!
+    @IBOutlet weak var emergencyContactLabel: UILabel!
     
     
     
@@ -33,6 +34,12 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentUserInfo)
+        self.initializeView()
+    }
+    
+    /// Private functiosn for general logistics
+    private func initializeView() {
+        self.emergencyContactLabel.text = emerStringBuilder()
         self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
@@ -40,7 +47,13 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         self.hidePanels()
     }
     
-    /// Private functiosn for general logistics
+    private func emerStringBuilder() -> String{
+        if (currentUserInfo?.emergencyNumber == nil) {
+             return "Emer. Contact: None"
+        }
+            return "Emer. Contact: " + (currentUserInfo?.emergencyNumber)!
+    }
+    
     private func setDelegate() {
         self.locationManager.delegate = self
         self.mapView.delegate = self
@@ -265,6 +278,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
         }
     }
 
@@ -294,7 +308,7 @@ extension MainMapVC: RouteDelegate{
         self.tripView.estimatedTimeLabel.text = "Estimated Time: " + String(Int((trip.timeInterval!))/60) + " min(s)"
         
         self.tripView.center = self.startTripPanelView.center
-        
+        self.tripView.emergencyContactLabel.text = self.emergencyContactLabel.text
         self.tripView.routeDelegate = self
         self.startTripPanelView.addSubview(tripView)
     }

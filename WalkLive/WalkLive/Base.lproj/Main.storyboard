@@ -384,6 +384,7 @@
                     <connections>
                         <outlet property="contactMessagePanel" destination="a8T-RS-el0" id="ZD7-xi-2E7"/>
                         <outlet property="contactMessagePanelTextView" destination="L2s-FT-nJU" id="fSp-gz-ULd"/>
+                        <outlet property="emergencyContactLabel" destination="mP7-nI-dUw" id="3ra-0c-6yj"/>
                         <outlet property="mapView" destination="scF-un-XBL" id="6eg-Ng-hge"/>
                         <outlet property="startTripButton" destination="YZb-gS-rh0" id="2OG-Us-5f9"/>
                         <outlet property="startTripDestinationTextLabel" destination="iif-Ti-KoA" id="aFx-aF-Caz"/>
@@ -802,7 +803,7 @@
                         <outlet property="tripRequestButton" destination="6BA-5w-6NK" id="ati-vW-anE"/>
                         <outlet property="userContactLabel" destination="Yr3-nM-foV" id="clI-OF-Buf"/>
                         <outlet property="usernameLabel" destination="eHJ-3O-Xau" id="HHC-Cw-6EY"/>
-                        <segue destination="mhm-es-34Q" kind="show" id="cR3-Ay-sw1"/>
+                        <segue destination="mhm-es-34Q" kind="show" identifier="settingSegue" id="cR3-Ay-sw1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Su-28-Rsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -931,7 +932,7 @@
             </objects>
             <point key="canvasLocation" x="2392.8000000000002" y="879.31034482758628"/>
         </scene>
-        <!--SettingsVC-->
+        <!--Settings-->
         <scene sceneID="mMH-bt-que">
             <objects>
                 <tableViewController id="mhm-es-34Q" customClass="SettingsVC" customModule="WalkLive" customModuleProvider="target" sceneMemberID="viewController">
@@ -1001,7 +1002,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3M-xa-d0x">
                                                     <rect key="frame" x="329" y="120" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Edit"/>
+                                                    <state key="normal" title="Edit">
+                                                        <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1014,6 +1017,22 @@
                             <outlet property="delegate" destination="mhm-es-34Q" id="gji-r4-ihc"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="W2m-YJ-vdQ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="7bQ-cL-T9B">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WyF-K4-F4T">
+                                <rect key="frame" x="276" y="5" width="83" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSaveButton:" destination="mhm-es-34Q" eventType="touchUpInside" id="Kga-ib-ffS"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emergencyContactPhone" destination="GGy-eb-dbe" id="4kw-qN-FgA"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>
