@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import FBSDKLoginKit
+//import FBSDKLoginKit
+//, FBSDKLoginButtonDelegate
 
-class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
+class LoginVC: UIViewController{
 
     
     
@@ -17,7 +18,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
+//    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,18 +41,18 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     }
     
     // these 2 functions are new!!!
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Did log out of facebook")
-    }
-    
-    func loginButton(_ facebookloginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil {
-            print(error)
-            return
-        }
-        
-        print("Successfully logged in with facebook...")
-    }
+//    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+//        print("Did log out of facebook")
+//    }
+//
+//    func loginButton(_ facebookloginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+//        if error != nil {
+//            print(error)
+//            return
+//        }
+//
+//        print("Successfully logged in with facebook...")
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -62,10 +62,6 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdO-p9-UJh" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="60" y="595" width="255" height="30"/>
-                                <state key="normal" title="Facebook login"/>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="prv-Qv-k0q">
                                 <rect key="frame" x="101" y="46" width="174" height="162"/>
                                 <constraints>
@@ -80,14 +76,11 @@
                             <constraint firstItem="t5h-RL-dxX" firstAttribute="top" secondItem="N6B-ke-qQS" secondAttribute="top" constant="206" id="2dz-XY-MfR"/>
                             <constraint firstItem="va8-Y9-4qO" firstAttribute="leading" secondItem="t5h-RL-dxX" secondAttribute="leading" id="2uM-Tx-peW"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CkL-nE-GoL" secondAttribute="leading" constant="20" symbolic="YES" id="GNa-Yn-uqq"/>
-                            <constraint firstItem="N6B-ke-qQS" firstAttribute="trailing" secondItem="TdO-p9-UJh" secondAttribute="trailing" constant="60" id="GW3-Dc-Toz"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="top" secondItem="t5h-RL-dxX" secondAttribute="bottom" constant="97" id="IiA-qQ-zFQ"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="trailing" secondItem="t5h-RL-dxX" secondAttribute="trailing" id="JcI-cm-BZH"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="va8-Y9-4qO" secondAttribute="trailing" constant="20" symbolic="YES" id="MXt-2v-GiD"/>
-                            <constraint firstItem="TdO-p9-UJh" firstAttribute="top" secondItem="Hso-TJ-w8h" secondAttribute="bottom" constant="157" id="P4e-hl-APQ"/>
                             <constraint firstItem="N6B-ke-qQS" firstAttribute="trailing" secondItem="t5h-RL-dxX" secondAttribute="trailing" constant="60" id="SeR-Lr-D6a"/>
                             <constraint firstItem="Hso-TJ-w8h" firstAttribute="centerY" secondItem="va8-Y9-4qO" secondAttribute="centerY" id="fKi-Jp-RuV"/>
-                            <constraint firstItem="TdO-p9-UJh" firstAttribute="leading" secondItem="N6B-ke-qQS" secondAttribute="leading" constant="60" id="inT-kN-4eY"/>
                             <constraint firstItem="prv-Qv-k0q" firstAttribute="centerX" secondItem="CkL-nE-GoL" secondAttribute="centerX" id="kQl-h9-aYd"/>
                             <constraint firstItem="t5h-RL-dxX" firstAttribute="centerX" secondItem="CkL-nE-GoL" secondAttribute="centerX" id="neb-rh-wWZ"/>
                             <constraint firstItem="prv-Qv-k0q" firstAttribute="top" secondItem="N6B-ke-qQS" secondAttribute="top" constant="26" id="tCB-gt-N6V"/>
@@ -95,7 +88,6 @@
                         <viewLayoutGuide key="safeArea" id="N6B-ke-qQS"/>
                     </view>
                     <connections>
-                        <outlet property="facebookLoginButton" destination="TdO-p9-UJh" id="i4T-IA-vB5"/>
                         <outlet property="loginButton" destination="va8-Y9-4qO" id="uFz-Y4-iyP"/>
                         <outlet property="passwordTextField" destination="Lfv-Lm-gz2" id="J6l-aX-y3Y"/>
                         <outlet property="userNameTextField" destination="ak4-U9-afi" id="AKt-vl-VHC"/>
@@ -1232,6 +1224,6 @@
         <image name="Image" width="283" height="258"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u5s-Dw-nrg"/>
+        <segue reference="CWQ-0c-P3r"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -132,11 +132,7 @@ class BackEndClient: NSObject {
         urlComponents.path = self.APICONTEXT + "/users/login"
         var loginAttemptRequest = URLRequest(url: urlComponents.url!)
         loginAttemptRequest.httpMethod = "POST"
-        
-        //        let keys = ["userId", "password"] //userId?
-        //        let values = [userNameTextField.text, passwordTextField.text]
-        //        var userLoginDict = NSDictionary.init(objects: keys, forKeys: values as! [NSCopying])
-        //        let userLogin = User(dictionary: userLoginDict)
+
         let encoder = JSONEncoder()
         do {
             let newUserLoginAsJSON = try encoder.encode(userLogin)
@@ -151,8 +147,6 @@ class BackEndClient: NSObject {
             if error != nil {
                 failure(error!)
             }
-            
-            print(response)
             
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 200) {
