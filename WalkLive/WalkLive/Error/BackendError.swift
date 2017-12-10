@@ -26,3 +26,16 @@ struct SignUpError: Error {
     let status: Int
 }
 
+struct LoginError: Error {
+    //    enum ErrorKind {
+    //        case InvalidUserId
+    //        case InvalidPassword
+    //        case InvalidContact
+    //        case InvalidEmergencyId
+    //        case InvalidEmergencyNumber
+    //    }
+    //
+    //    let kind: ErrorKind
+    let status: Int
+}
+
