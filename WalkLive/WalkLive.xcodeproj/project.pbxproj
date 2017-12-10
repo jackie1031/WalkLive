@@ -36,7 +36,6 @@
 		904B051B1FD689B300EEB523 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05101FD689B300EEB523 /* LoginVC.swift */; };
 		904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05111FD689B300EEB523 /* MainMapVC.swift */; };
 		904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05121FD689B300EEB523 /* SearchVC.swift */; };
-		904B051E1FD689B300EEB523 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05131FD689B300EEB523 /* SettingVC.swift */; };
 		904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05141FD689B300EEB523 /* SignUpVC.swift */; };
 		904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05151FD689B300EEB523 /* TripRequestVC.swift */; };
 		904B05211FD689B300EEB523 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05161FD689B300EEB523 /* UserVC.swift */; };
@@ -113,7 +112,6 @@
 		904B05101FD689B300EEB523 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		904B05111FD689B300EEB523 /* MainMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMapVC.swift; sourceTree = "<group>"; };
 		904B05121FD689B300EEB523 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
-		904B05131FD689B300EEB523 /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		904B05141FD689B300EEB523 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		904B05151FD689B300EEB523 /* TripRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestVC.swift; sourceTree = "<group>"; };
 		904B05161FD689B300EEB523 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 				904B05101FD689B300EEB523 /* LoginVC.swift */,
 				904B05111FD689B300EEB523 /* MainMapVC.swift */,
 				904B05121FD689B300EEB523 /* SearchVC.swift */,
-				904B05131FD689B300EEB523 /* SettingVC.swift */,
 				904B05141FD689B300EEB523 /* SignUpVC.swift */,
 				904B05151FD689B300EEB523 /* TripRequestVC.swift */,
 				904B05161FD689B300EEB523 /* UserVC.swift */,
@@ -620,7 +617,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */,
-				904B051E1FD689B300EEB523 /* SettingVC.swift in Sources */,
 				904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */,
 				904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */,
 				904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */,
