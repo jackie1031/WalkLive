@@ -78,7 +78,7 @@ public class WalkLiveService {
     */
     public User createNew(String body) throws UserServiceException, ParseException, SQLException {
         PreparedStatement ps = null;
-        ResultSet res = null;
+        ResultSet res;
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
@@ -88,9 +88,8 @@ public class WalkLiveService {
         //debugging
         System.out.println("USERNAME:" + username);
 
+        //FIRST, check to see if username already exists in databse
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
-        //if the query != null then username already exists. - set response code to 401 (invalid UserId)
 
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -98,17 +97,16 @@ public class WalkLiveService {
             ps.setString(1, username);
             res = ps.executeQuery();
 
-            while (res.next()) { //if there is something in the response
-                //which means that we should stop the process and throw an error
+            while (res.next()) { //if there is something in the response, means that username is already taken (401)
                 logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
                 throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
-
             }
 
         } catch (SQLException ex) {
             logger.error("WalkLiveService.createNew: Failed to create new entry - query error", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }  finally {
+            //close connections
             if (ps != null) {
                 try {
                     ps.close();
@@ -121,6 +119,7 @@ public class WalkLiveService {
             }
         }
 
+        //SECOND, if username did not exist, then place the information into the database
         sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                 "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
 
@@ -138,6 +137,7 @@ public class WalkLiveService {
             logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
         }  finally {
+            //close connections
             if (ps != null) {
                 try {
                     ps.close();
@@ -191,6 +191,7 @@ public class WalkLiveService {
             logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
             throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
         } finally {
+            //close connections
             if (res != null) {
                 try {
                     res.close();
@@ -208,13 +209,14 @@ public class WalkLiveService {
      * returns emergencyId and emergencyNumber
      */
     public User login(String body) throws UserServiceException, ParseException {
-        ResultSet res = null;
+        ResultSet res;
         PreparedStatement ps = null;
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
         String pw = object.get("password").toString();
 
+        //FIRST, search to see if username exists in database
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
 
         try {
@@ -224,25 +226,40 @@ public class WalkLiveService {
             res = ps.executeQuery();
 
             String contact;
-            String friendId;
-            String createdOn;
+            String nickname;
+            Date createdOn;
+            String emergencyId;
+            String emergencyNumber;
 
             if (res.next()) {
-                //TO CHANGE
-                pw = res.getString(2);
-                contact = res.getString(3);
-                friendId = res.getString(4);
-                createdOn = res.getString(5);
 
-                return new User(username, pw, contact, null, null, null, null);
+                //SECOND, check password
+                String targetPw = res.getString(2);
+                if (!pw.equals(targetPw)) {
+                    logger.error(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
+                    throw new UserServiceException(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
+                }
+
+                //retrieve necessary information to return
+                contact = res.getString(3);
+                nickname = res.getString(4);
+                createdOn = df.parse(res.getString(5));
+                emergencyId = res.getString(6);
+                emergencyNumber = res.getString(7);
+
+                return new User(username, null, contact, null, null, emergencyId, emergencyNumber);
+
             } else {
+                //if the response is empty, aka the username does not exist in database
                 logger.error(String.format("WalkLiveService.login: Failed to find username: %s", username));
                 throw new UserServiceException(String.format("WalkLiveService.login: Failed to find username: %s", username));
             }
+
         } catch (SQLException ex) {
             logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
             throw new UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
         }  finally {
+            //close connections
             if (ps != null) {
                 try {
                     ps.close();
@@ -257,12 +274,13 @@ public class WalkLiveService {
     }
 
     public User getUser(String username) throws UserServiceException, ParseException, java.text.ParseException {
-        ResultSet res = null;
+        ResultSet res;
         PreparedStatement ps = null;
 
+        //find user by username
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
 
-        try { //find user by username
+        try {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);
@@ -295,6 +313,7 @@ public class WalkLiveService {
             logger.error(String.format("WalkLiveService.find: Failed to properly parse date"), ex);
             throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to properly parse date"), ex);
         } finally {
+            //close connections
             if (ps != null) {
                 try {
                     ps.close();
@@ -319,6 +338,8 @@ public class WalkLiveService {
         ResultSet res = null;
 
         JSONObject object = (JSONObject) new JSONParser().parse(body);
+
+        //should be in a try catch block in case that incorrect body is given
         String id = object.get("emergency_id").toString();
         String number = object.get("emergency_number").toString();
 
@@ -339,6 +360,7 @@ public class WalkLiveService {
             logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
             throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
         }  finally {
+            //close connections
             if (ps != null) {
                 try {
                     ps.close();

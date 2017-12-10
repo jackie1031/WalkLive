@@ -197,17 +197,19 @@ public class TestServer {
         Response r1 = request("POST", "/WalkLive/api/users", expected);
         assertEquals("Failed to add new user", 201, r1.httpStatus);
 
-        //Get it back so that we know its ID
+        //log in with those credentials
         Response r2 = request("POST", "/WalkLive/api/users/login", expected);
         assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
 
+        //test for nonexistent user
         User fake = new User("fakenews", "test-1", null);
         Response r3 = request("POST", "/WalkLive/api/users/login", fake);
         assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
 
-//        User incorrect = new User("jeesoo", "incorrectpassword"), null;
-//        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
-//        assertEquals("Failed to detect incorrect password", 401, r3.httpStatus);
+        //test for incorrect password
+        User incorrect = new User("jeesoo", "incorrectpassword", null);
+        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
+        assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
     }
 
     @Test
