@@ -258,6 +258,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     @IBAction func onLogoutButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        currentUserInfo = nil
     }
     
 
