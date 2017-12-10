@@ -598,29 +598,20 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="173"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="7sI-rV-UDo">
-                                        <rect key="frame" x="15" y="8" width="108" height="82"/>
+                                        <rect key="frame" x="20" y="8" width="96" height="96"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="108" id="vBE-Gp-WGJ"/>
+                                            <constraint firstAttribute="height" constant="96" id="Ite-RK-vVA"/>
+                                            <constraint firstAttribute="width" constant="96" id="KsU-4H-6Lw"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHJ-3O-Xau">
-                                        <rect key="frame" x="131" y="8" width="79" height="20.5"/>
+                                        <rect key="frame" x="126" y="8" width="79" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diX-7f-Pu8">
-                                        <rect key="frame" x="15" y="98" width="156" height="55"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Friend Manager: 4 requests  : 4">
-                                            <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="xMF-8H-6rL" kind="show" identifier="friendRequestSegue" id="jM0-De-8ma"/>
-                                        </connections>
-                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbh-35-MrL">
-                                        <rect key="frame" x="131" y="36.5" width="200" height="30"/>
+                                        <rect key="frame" x="126" y="36.5" width="200" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2b-zm-pOv">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -640,7 +631,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSB-rg-gQJ">
-                                        <rect key="frame" x="131" y="66.5" width="217" height="30"/>
+                                        <rect key="frame" x="126" y="66.5" width="217" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d13-aX-aa8">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -659,8 +650,24 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diX-7f-Pu8">
+                                        <rect key="frame" x="20" y="139" width="156" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="4oh-KB-qPD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="Friend Manager: 4 requests  : 4">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="xMF-8H-6rL" kind="show" identifier="friendRequestSegue" id="jM0-De-8ma"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BA-5w-6NK">
-                                        <rect key="frame" x="15" y="130.5" width="142" height="27"/>
+                                        <rect key="frame" x="20" y="112" width="142" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="R9a-y9-1PB"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Trip Manager: 5 requests">
                                             <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -672,22 +679,22 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="diX-7f-Pu8" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="leading" id="7i6-pJ-X7G"/>
                                     <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="eHJ-3O-Xau" secondAttribute="trailing" constant="172" id="CTw-19-LNd"/>
                                     <constraint firstItem="gbh-35-MrL" firstAttribute="leading" secondItem="eHJ-3O-Xau" secondAttribute="leading" id="FAn-Wp-KPQ"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="diX-7f-Pu8" secondAttribute="trailing" constant="20" symbolic="YES" id="PBI-Dx-M4n"/>
-                                    <constraint firstItem="diX-7f-Pu8" firstAttribute="top" secondItem="7sI-rV-UDo" secondAttribute="bottom" constant="8" id="RGa-6o-gyo"/>
+                                    <constraint firstItem="eHJ-3O-Xau" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="trailing" constant="10" id="GXF-4L-w8M"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="diX-7f-Pu8" secondAttribute="trailing" constant="20" symbolic="YES" id="Gzi-Jc-x6P"/>
+                                    <constraint firstItem="7sI-rV-UDo" firstAttribute="leading" secondItem="J29-ca-OZf" secondAttribute="leading" constant="20" id="Mzz-GL-x8j"/>
+                                    <constraint firstItem="6BA-5w-6NK" firstAttribute="top" secondItem="7sI-rV-UDo" secondAttribute="bottom" constant="8" id="SNB-dY-RYy"/>
+                                    <constraint firstItem="diX-7f-Pu8" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="leading" id="Wfz-J8-Kcr"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6BA-5w-6NK" secondAttribute="trailing" constant="20" symbolic="YES" id="Y98-CR-je7"/>
                                     <constraint firstItem="GSB-rg-gQJ" firstAttribute="top" secondItem="gbh-35-MrL" secondAttribute="bottom" constant="0.5" id="ZL5-dB-IYj"/>
+                                    <constraint firstItem="diX-7f-Pu8" firstAttribute="top" secondItem="6BA-5w-6NK" secondAttribute="bottom" id="aYi-jE-LMb"/>
                                     <constraint firstItem="GSB-rg-gQJ" firstAttribute="leading" secondItem="eHJ-3O-Xau" secondAttribute="leading" id="bQL-pM-nup"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6BA-5w-6NK" secondAttribute="trailing" constant="20" symbolic="YES" id="cD3-FA-oaC"/>
-                                    <constraint firstItem="7sI-rV-UDo" firstAttribute="leading" secondItem="J29-ca-OZf" secondAttribute="leading" constant="15" id="jk7-vx-ba8"/>
+                                    <constraint firstItem="7sI-rV-UDo" firstAttribute="top" secondItem="J29-ca-OZf" secondAttribute="top" constant="8" id="hZu-bh-fEq"/>
+                                    <constraint firstItem="6BA-5w-6NK" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="leading" id="mlD-hN-ijg"/>
                                     <constraint firstItem="eHJ-3O-Xau" firstAttribute="top" secondItem="J29-ca-OZf" secondAttribute="top" constant="8" id="pBF-Gr-ExR"/>
-                                    <constraint firstItem="6BA-5w-6NK" firstAttribute="leading" secondItem="diX-7f-Pu8" secondAttribute="leading" id="qj6-kb-Aaq"/>
-                                    <constraint firstItem="7sI-rV-UDo" firstAttribute="top" secondItem="J29-ca-OZf" secondAttribute="top" constant="8" id="re9-Ze-DeD"/>
+                                    <constraint firstItem="diX-7f-Pu8" firstAttribute="leading" secondItem="6BA-5w-6NK" secondAttribute="leading" id="vMV-6q-8XX"/>
                                     <constraint firstItem="gbh-35-MrL" firstAttribute="top" secondItem="eHJ-3O-Xau" secondAttribute="bottom" constant="8" id="x3H-2W-big"/>
-                                    <constraint firstItem="eHJ-3O-Xau" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="trailing" constant="8" id="xUw-Tl-PlQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="diX-7f-Pu8" secondAttribute="bottom" constant="20" id="xzY-Xj-aGB"/>
-                                    <constraint firstItem="6BA-5w-6NK" firstAttribute="top" secondItem="GSB-rg-gQJ" secondAttribute="bottom" constant="34" id="yHN-QQ-UKe"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cw6-so-Nf8">
@@ -801,7 +808,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Su-28-Rsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1502" y="688"/>
+            <point key="canvasLocation" x="1501.5999999999999" y="687.7061469265368"/>
         </scene>
         <!--Friend Requests-->
         <scene sceneID="g7c-JZ-xa8">
@@ -1055,7 +1062,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="emergencyContactPhone" destination="GGy-eb-dbe" id="4kw-qN-FgA"/>
+                        <outlet property="emergencyContactIdTextField" destination="GGy-eb-dbe" id="Mgk-L6-e3X"/>
+                        <outlet property="emergencyContactPhone" destination="SPl-A3-asN" id="Zb6-hR-zUz"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>
                         <segue destination="MJu-oG-pf4" kind="show" identifier="messageSegue" id="mmX-tX-dQX"/>
                     </connections>
@@ -1077,7 +1085,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="QGg-4j-Rzi" customClass="SetFriendTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SetFriendTableViewCell" rowHeight="82" id="QGg-4j-Rzi" customClass="SetFriendTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QGg-4j-Rzi" id="TXx-MR-9GW">

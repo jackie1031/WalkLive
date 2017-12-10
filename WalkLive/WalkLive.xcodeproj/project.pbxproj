@@ -20,6 +20,7 @@
 		9015A2B91FDDC7860080B4D3 /* SetFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B81FDDC7860080B4D3 /* SetFriendVC.swift */; };
 		9015A2BB1FDDC9CD0080B4D3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */; };
 		9015A2BD1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2BC1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift */; };
+		9015A2BF1FDDD11C0080B4D3 /* StringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */; };
 		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
@@ -97,6 +98,7 @@
 		9015A2B81FDDC7860080B4D3 /* SetFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFriendVC.swift; sourceTree = "<group>"; };
 		9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		9015A2BC1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFriendTableViewCell.swift; sourceTree = "<group>"; };
+		9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringBuilder.swift; sourceTree = "<group>"; };
 		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				904B05411FD8916900EEB523 /* EmergencyContact.swift */,
 				8CC299131FDA273C00C9F2A5 /* Message.swift */,
 				9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */,
+				9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */,
 				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
 				8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */,
+				9015A2BF1FDDD11C0080B4D3 /* StringBuilder.swift in Sources */,
 				8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */,
 				904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */,
 				904B052B1FD689D000EEB523 /* TripPanelDelegate.swift in Sources */,

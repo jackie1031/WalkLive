@@ -47,3 +47,4 @@ let backEndClient = BackEndClient()
 let jsonEncoder = JSONEncoder()
 let jsonDecoder = JSONDecoder()
 var currentUserInfo: UserLogin!
+let stringBuilder = StringBuilder()

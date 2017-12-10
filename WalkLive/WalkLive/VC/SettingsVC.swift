@@ -12,6 +12,7 @@ class SettingsVC: UITableViewController {
 
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
+    @IBOutlet weak var emergencyContactIdTextField: UITextField!
     
     var user : User!
     
@@ -20,6 +21,13 @@ class SettingsVC: UITableViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.emergencyContactPhone.text = stringBuilder.emerStringBuilder()
+        self.emergencyContactIdTextField.text = stringBuilder.emerIdStringBuilder()
+    }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -23,6 +23,25 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.currentFriendNameLabel.text = emerIdStringBuilder()
+        self.currentEmergencyNumberLabel.text = emerStringBuilder()
+    }
+    
+    private func emerStringBuilder() -> String{
+        if (currentUserInfo?.emergencyNumber == nil) {
+            return "None"
+        }
+        return (currentUserInfo?.emergencyNumber)!
+    }
+    
+    private func emerIdStringBuilder() -> String{
+            if (currentUserInfo?.emergencyId == nil || currentUserInfo?.emergencyId == "") {
+                return "None"
+            }
+            return (currentUserInfo?.emergencyId)!
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.friends != nil {
             return self.friends.count
@@ -31,7 +50,7 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = requestTable.dequeueReusableCell(withIdentifier: "TripRequestCell", for: indexPath) as! TripRequestTableViewCell
+        let cell = friendListTable.dequeueReusableCell(withIdentifier: "SetFriendTableViewCell", for: indexPath) as! SetFriendTableViewCell
         
         cell.selectionStyle = .none
         return cell
