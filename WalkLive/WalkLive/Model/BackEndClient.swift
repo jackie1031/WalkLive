@@ -246,6 +246,8 @@ class BackEndClient: NSObject {
             if (error != nil) {
                 failure(error!)
             }
+            
+            
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 200) {
                 failure(LoginError(status: status))
@@ -257,13 +259,12 @@ class BackEndClient: NSObject {
     
     func updateEmergencyContact(success: @escaping (EmergencyContact) -> (), failure: @escaping (Error) -> (), emergencyContact: EmergencyContact){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/emergency_info"
         var updateEmergencyContactRequest = URLRequest(url: urlComponents.url!)
         updateEmergencyContactRequest.httpMethod = "PUT"
         
-        let encoder = JSONEncoder()
         do {
-            let encodedJSON = try encoder.encode(emergencyContact)
+            let encodedJSON = try jsonEncoder.encode(emergencyContact)
             updateEmergencyContactRequest.httpBody = encodedJSON
         } catch {
             failure(error)
@@ -273,8 +274,16 @@ class BackEndClient: NSObject {
             if (error != nil) {
                 failure(error!)
             }
-            let updatedEmergencyContact = try? jsonDecoder.decode(EmergencyContact.self, from: data!) as EmergencyContact
-            success(updatedEmergencyContact!)
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(LoginError(status: status))
+            } else {
+                print(status)
+                let returnEmergencyContact = try? jsonDecoder.decode(EmergencyContact.self, from: data!) as EmergencyContact
+                currentUserInfo.emergency_id = returnEmergencyContact?.emergency_id
+                currentUserInfo.emergency_number = returnEmergencyContact?.emergency_number
+                success(returnEmergencyContact!)}
         }).resume()
     }
     

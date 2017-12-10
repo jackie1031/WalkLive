@@ -29,17 +29,17 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     private func emerStringBuilder() -> String{
-        if (currentUserInfo?.emergencyNumber == nil) {
+        if (currentUserInfo?.emergency_number == nil) {
             return "None"
         }
-        return (currentUserInfo?.emergencyNumber)!
+        return (currentUserInfo?.emergency_number)!
     }
     
     private func emerIdStringBuilder() -> String{
-            if (currentUserInfo?.emergencyId == nil || currentUserInfo?.emergencyId == "") {
+            if (currentUserInfo?.emergency_id == nil || currentUserInfo?.emergency_id == "") {
                 return "None"
             }
-            return (currentUserInfo?.emergencyId)!
+            return (currentUserInfo?.emergency_id)!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

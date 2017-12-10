@@ -22,6 +22,23 @@ class SettingsVC: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBAction func onSaveButton(_ sender: Any) {
+        if (emergencyIsDifferent()){
+            let emergencyContact = EmergencyContact(emergency_id: emergencyContactIdTextField.text!, emergency_number: emergencyContactPhone.text!)
+            backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
+                print("updated!")
+            }, failure: { (error) in
+                
+            }, emergencyContact: emergencyContact)
+        }
+    }
+    
+    private func emergencyIsDifferent() -> Bool {
+        return (emergencyContactPhone.text != stringBuilder.emerStringBuilder() ||
+                emergencyContactIdTextField.text != stringBuilder.emerIdStringBuilder())
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.emergencyContactPhone.text = stringBuilder.emerStringBuilder()
         self.emergencyContactIdTextField.text = stringBuilder.emerIdStringBuilder()
@@ -34,16 +51,7 @@ class SettingsVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onSaveButton(_ sender: Any) { //How to get current user?
-        if (!validPhone()) {
-            return
-        }
-        backEndClient.saveAttempt(success: {
-            self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil) //?
-        }, failure: { (error) in
-            print(error)
-        }, phoneNum: userPhone.text!, emergencyContact: emergencyContactPhone.text!)
-    }
+
     
     func validPhone() -> Bool {
         let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"

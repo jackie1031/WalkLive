@@ -10,16 +10,16 @@ import Foundation
 
 class StringBuilder: NSObject {
     func emerStringBuilder() -> String{
-        if (currentUserInfo?.emergencyNumber == nil) {
+        if (currentUserInfo?.emergency_number == nil) {
             return "Emer. Num: None"
         }
-        return (currentUserInfo?.emergencyNumber)!
+        return (currentUserInfo?.emergency_number)!
     }
     
     func emerIdStringBuilder() -> String{
-        if (currentUserInfo?.emergencyId == nil || currentUserInfo?.emergencyId == "") {
+        if (currentUserInfo?.emergency_id == nil || currentUserInfo?.emergency_id == "") {
             return "Emer. Id: None"
         }
-        return (currentUserInfo?.emergencyId)!
+        return (currentUserInfo?.emergency_id)!
     }
 }
