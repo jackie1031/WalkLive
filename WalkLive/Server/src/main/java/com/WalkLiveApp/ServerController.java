@@ -170,26 +170,37 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-//             /**
-//              * ----------------------------------------------------------------------
-//              * Trip part
-//              * ----------------------------------------------------------------------
-//              * */
-//             //Start Trip
-//             post(API_CONTEXT+"/user", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.startTrip(request.body());
-//                 } // InvalidDestination     Code 409
-//                 catch (WalkLiveService.InvalidDestination e) {
-//                     response.status(409);
-//                 }
-//                 catch (WalkLiveService.UserServiceException e) {
-//                     logger.error("Failed to create new User");
-//                     response.status(401);
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             /**
+              * ----------------------------------------------------------------------
+              * Trip part
+              * ----------------------------------------------------------------------
+              * */
+             //Start Trip
+            post(API_CONTEXT+"/users/:username", "application/json", (request, response) -> {
+                try {
+                    response.status(200);
+                    return walkLiveService.startTrip(request.body());
+                } // InvalidDestination     Code 409
+                catch (WalkLiveService.InvalidDestination e) {
+                    response.status(409);
+                }
+
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+
+            // end a trip
+            put(API_CONTEXT+"/users/:username/finishTrip", "application/json", (request, response) -> {
+                try {
+                    response.status(200);
+                    return walkLiveService.endTrip(request.body());
+                } // InvalidDestination     Code 409
+                catch (WalkLiveService.InvalidDestination e) {
+                    response.status(409);
+                }
+
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
 // //            getTrip:
 // //            Method: GET

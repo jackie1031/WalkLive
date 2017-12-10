@@ -18,7 +18,7 @@ public class TravelLog {
     public Trip getTrip(String user, int count, List<Trip> trip) {
 
         //get specific trip
-        Trip temp = new Trip();
+        Trip temp = new Trip(count, user);
         return temp;
     }
 
@@ -29,7 +29,7 @@ public class TravelLog {
 
     public Trip getCurrTrip(){
         //get trip
-        Trip temp = new Trip();
+        Trip temp = new Trip(1,"kasfa");
         return tripList.get(tripList.size()-1);
     }
 }

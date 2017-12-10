@@ -7,16 +7,30 @@ public class Trip {
 
     // still needs timepoint ID?
 
-    private int tripId, timePointId, dangerLevel;
-    private String userName, destination,startTime,endTime;
+    private int timePointId, dangerLevel;
+    private String tripId,userName, destination,startTime,endTime;
     private boolean complete;
     private Coordinate currCoordinate;
 
     //constructor
-    public Trip (){};
+    public Trip (String tripId, String userName){
+
+        this.tripId =  tripId;
+        this.userName =  userName;
+
+    }
+    public Trip (String tripId, String userName, String destination, boolean complete){
+
+        this.tripId =  tripId;
+        this.userName =  userName;
+        this.destination =  destination;
+        this.complete =  complete;
+
+    }
+
 
     // test whether is in danger zone
-    public List<TimePoint> getTimepoint (int trip,String user){
+    public List<TimePoint> getTimepoint (String trip,String user){
         TimePoint now = new TimePoint(timePointId,startTime, endTime, currCoordinate, dangerLevel);
         complete = false;
         while(!complete){
@@ -44,7 +58,7 @@ public class Trip {
         return last;
     }
 
-    public void setTripId(int tripId) {
+    public void setTripId(String tripId) {
         this.tripId = tripId;
     }
 

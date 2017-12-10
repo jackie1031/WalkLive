@@ -15,9 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.util.List;
 import java.util.ArrayList;
-
-import javax.sql.DataSource;
-import org.json.simple.parser.JSONParser;
+import java.util.UUID;
 
 
 public class WalkLiveService {
@@ -34,8 +32,8 @@ public class WalkLiveService {
      */
     public WalkLiveService() throws WalkLiveService.UserServiceException {
         /**
-        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
-        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+         stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips (tripId INT, username TEXT,start_time TEXT, end_time TEXT, danger_zone INT, " +
+         "destination TEXT, coord_long DOUBLE,coord_lat DOUBLE,completed BOOLEAN )");
     */
         Statement stm = null;
 
@@ -43,8 +41,7 @@ public class WalkLiveService {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
             stm.executeUpdate("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, nickname TEXT, friendId TEXT, createdOn TIMESTAMP )");
-            stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips (tripId INT, username TEXT,start_time TEXT, end_time TEXT, danger_zone INT, " +
-                    "destination TEXT, coord_long DOUBLE,coord_lat DOUBLE,completed BOOLEAN )");
+            stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips (tripId TEXT, username TEXT, destination TEXT, completed BOOLEAN )");
             //CREATE TABLE Trips (tripId INT PRIMARY KEY, username VARCHAR(25), start_time VARCHAR(25),end_time VARCHAR(25), danger_zone INT,
                     //destination VARCHAR(25), coord_long DOUBLE(50,4),coord_lat DOUBLE(50,4), completed BOOLEAN);
 
@@ -83,7 +80,6 @@ public class WalkLiveService {
         String username = object.get("username").toString();
         String pw = object.get("password").toString();
         String contact = object.get("contact").toString();
-
         //debugging
         System.out.println("USERNAME:" + username);
 
@@ -400,81 +396,99 @@ public class WalkLiveService {
          return temp;
      }
 
+     //stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips (tripId INT, username TEXT,start_time TEXT, end_time TEXT, danger_zone INT, " +
+     //        "destination TEXT, coord_long DOUBLE,coord_lat DOUBLE,completed BOOLEAN )");
 
-//    public Trip startTrip(String body) throws UserServiceException, ParseException, SQLException {
-//        PreparedStatement ps = null;
-//        ResultSet res = null;
-//
-//        JSONObject object = (JSONObject) new JSONParser().parse(body);
-//        String username = object.get("username").toString();
-//        String pw = object.get("password").toString();
-//        String contact = object.get("contact").toString();
-//
-//        //debugging
-//        System.out.println("USERNAME:" + username);
-//
-//        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-//
-//        //if the query != null then username already exists. - set response code to 401 (invalid UserId)
-//
-//        try {
-//            conn = DriverManager.getConnection(url, user, password);
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, username);
-//            res = ps.executeQuery();
-//
-//            while (res.next()) { //if there is something in the response
-//                //which means that we should stop the process and throw an error
-//                logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
-//                throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
-//
-//            }
-//
-//        } catch (SQLException ex) {
-//            logger.error("WalkLiveService.createNew: Failed to create new entry - query error", ex);
-//            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
-//        }  finally {
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//
-//        sql = "INSERT INTO users (username, password, nickname, friendId, createdOn) " +
-//                "             VALUES (?, ?, ?, NULL, NULL)" ;
-//
-//        try {
-//            conn = DriverManager.getConnection(url, user, password);
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, username);
-//            ps.setString(2, pw);
-//            ps.setString(3, contact);
-//            ps.executeUpdate();
-//
-//            return new User(username, pw, contact, null, null, null, null);
-//
-//        } catch(SQLException ex) {
-//            logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
-//            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
-//        }  finally {
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//    }
+
+    // trip id is hard listed
+    public Trip startTrip(String body) throws InvalidDestination,UserServiceException, ParseException {
+        PreparedStatement ps = null;
+        ResultSet res = null;
+
+        //generate our trip id
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String username = object.get("username").toString();
+        String startTime = object.get("startTime").toString();
+        String destination = object.get("destination").toString();
+
+        Boolean completed = false;
+        String s = UUID.randomUUID().toString();
+        String tripId = s.substring(0,8);
+        //去掉“-”符号
+
+        //debugging
+        System.out.println("USERNAME:" + username);
+        System.out.println("TRIP-ID:" + tripId);
+
+        String sql = "SELECT * FROM Trips WHERE tripID = ? LIMIT 1";
+
+        //String findTripsql = "SELECT COUNT(*) FROM Trips";
+
+
+        //if the query != null then username already exists. - set response code to 401 (invalid UserId)
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            while (res.next()) { //if there is something in the response
+                //which means that we should stop the process and throw an error
+                logger.error("WalkLiveService.startTrip: Failed to create new entry ");
+                throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - duplicate username");
+
+            }
+
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+            throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        // Trips (tripId INT, username TEXT, destination TEXT, completed BOOLEAN )");
+
+        sql = "INSERT INTO Trips (tripId, username, destination,completed) " +
+                "             VALUES (?, ?, ?, 0)" ;
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, tripId);
+            ps.setString(2, username);
+            ps.setString(3, destination);
+            ps.executeUpdate();
+
+            Trip newTrip =  new Trip(tripId, username, destination, completed);
+            return newTrip;
+
+        } catch(SQLException ex) {
+            logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
+            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+    }
 
     /**
      //* **URL:** /WalkLive/api/[userId]
@@ -486,6 +500,17 @@ public class WalkLiveService {
      }
      **/
 
+//    public Trip getTrip(String body) throws UserServiceException,InvalidTargetID, ParseException {
+//        Trip temp = new Trip(100,"liam");
+//        return temp;
+//
+//    }
+
+    public Trip endTrip(String body) throws InvalidDestination,InvalidTargetID, ParseException {
+        Trip temp = new Trip(100,"liam");
+        return temp;
+
+    }
 
 // 	//Content:  `{ tripId: [int], dangerLevel: [int], startTime: [string], endTime: [string], destination: [string], coordinateLongtitude:[double],coordniteLatiture complete: [boolean] }`
 //     public Trip getTrip(String body) throws UserServiceException,InvalidTargetID, ParseException {
