@@ -242,6 +242,7 @@ public class TestServer {
      * Friend Request Handling
      * ================================================================
      */
+    /*
      @Test
      public void testCreateFriendRequest() throws Exception {
          SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -249,14 +250,21 @@ public class TestServer {
          //add a few elements
          FriendRequest[] frs = new FriendRequest[] {
                  new FriendRequest("jeesookim", "michelle", null),
-                 new FriendRequest("michelle", "yangcao1", null)
+                 new FriendRequest("jeesookim", "yangcao1", null)
          };
 
          for (FriendRequest f : frs) {
              Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
              assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
          }
+
+         //check content of friendrequests in database!! list request id and stuff
+         //Get them back
+         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
+         assertEquals("Failed to get user entries", 200, r.httpStatus);
+         List<User> results = getUsers(r);
      }
+     */
 
     @Test
     public void testUpdateEmergencyInfo() throws Exception {
@@ -593,7 +601,9 @@ public class TestServer {
             stm = conn.createStatement();
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            res = stm.executeQuery(setup);
+            String setup2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            stm.executeUpdate(setup);
+            stm.executeUpdate(setup2);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
@@ -603,11 +613,6 @@ public class TestServer {
             stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             stm.executeUpdate(sql4);
-
-            if (res.next()) {
-
-                System.out.println(res.getString(1));
-            }
 
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
@@ -652,7 +657,7 @@ public class TestServer {
             stm.executeUpdate(sql5);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);

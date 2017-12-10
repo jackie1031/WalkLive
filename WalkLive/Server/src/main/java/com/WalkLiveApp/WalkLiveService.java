@@ -1,6 +1,5 @@
 package com.WalkLiveApp;
 
-import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,19 +7,13 @@ import java.sql.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.sql.DataSource;
-import org.json.simple.parser.JSONParser;
-
 
 public class WalkLiveService {
     private String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
@@ -41,13 +34,17 @@ public class WalkLiveService {
         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
     */
         Statement stm = null;
+        Statement stm2 = null; //TEMP GET RID OF THIS
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
+            //stm2 = conn.createStatement();
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+            //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
             stm.executeUpdate(setup);
+            //stm2.executeUpdate(setup2);
 
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
@@ -417,7 +414,7 @@ public class WalkLiveService {
      }
 
      //get my sent friend requests
-     public List<FriendRequest> getOutgoingFriendRequests(String sender) throws WalkLiveService.FriendRequestServiceException {
+     public List<FriendRequest> getOutgoingFriendRequests(String sender) throws FriendRequestServiceException {
          //checks needed
          PreparedStatement ps = null;
          ResultSet res = null;
@@ -430,15 +427,17 @@ public class WalkLiveService {
              ps.setString(1, sender);
              res = ps.executeQuery();
 
+             int request_id;
              String recipient;
              Date sent_on;
 
              ArrayList<FriendRequest> frs = new ArrayList<>();
              while (res.next()) {
-                 recipient = res.getString(2);
-                 sent_on = (Date) res.getObject(3);
+                 request_id = res.getInt(1);
+                 recipient = res.getString(3);
+                 sent_on = (Date) res.getObject(4);
 
-                 FriendRequest fr = new FriendRequest(sender, recipient, sent_on);
+                 FriendRequest fr = new FriendRequest(request_id, sender, recipient, sent_on);
                  frs.add(fr);
              }
              return frs;
@@ -460,7 +459,7 @@ public class WalkLiveService {
      }
 
      //delete select sent friend request (cancel request) - extended feature
-     public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
+     public void deleteFriendRequest(String username, String requestId) throws FriendRequestServiceException {
          //checks needed
 
          PreparedStatement ps = null;
@@ -491,7 +490,7 @@ public class WalkLiveService {
      }
 
      //get my received friend requests
-     public List<FriendRequest> getIncomingFriendRequests(String recipient) throws WalkLiveService.FriendRequestServiceException {
+     public List<FriendRequest> getIncomingFriendRequests(String recipient) throws FriendRequestServiceException {
          //checks needed
          PreparedStatement ps = null;
          ResultSet res = null;
@@ -504,15 +503,17 @@ public class WalkLiveService {
              ps.setString(1, recipient);
              res = ps.executeQuery();
 
+             int request_id;
              String sender;
              Date sent_on;
 
              ArrayList<FriendRequest> frs = new ArrayList<>();
              while (res.next()) {
-                 sender = res.getString(1);
-                 sent_on = (Date) res.getObject(3);
+                 request_id = res.getInt(1);
+                 sender = res.getString(2);
+                 sent_on = (Date) res.getObject(4);
 
-                 FriendRequest fr = new FriendRequest(sender, recipient, sent_on);
+                 FriendRequest fr = new FriendRequest(request_id, sender, recipient, sent_on);
                  frs.add(fr);
              }
              return frs;
@@ -537,7 +538,7 @@ public class WalkLiveService {
 //     //if accept, then add to friends list for both - FIGURE OUT DETAILS
 //     //either way, dealt with friend requests should be deleted
 //     //delete select sent friend request
-     public void respondToFriendRequest(String responder, String requestId, String response) throws WalkLiveService.FriendRequestServiceException {
+     public void respondToFriendRequest(String responder, String requestId, String response) throws FriendRequestServiceException {
          //checks needed
 
          if (response.equals("accept")) {
