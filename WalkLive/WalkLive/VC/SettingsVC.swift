@@ -35,13 +35,13 @@ class SettingsVC: UITableViewController {
     }
     
     private func emergencyIsDifferent() -> Bool {
-        return (emergencyContactPhone.text != stringBuilder.emerStringBuilder() ||
-                emergencyContactIdTextField.text != stringBuilder.emerIdStringBuilder())
+        return (emergencyContactPhone.text != "" ||
+                emergencyContactIdTextField.text != "" )
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.emergencyContactPhone.text = stringBuilder.emerStringBuilder()
-        self.emergencyContactIdTextField.text = stringBuilder.emerIdStringBuilder()
+        self.emergencyContactPhone.placeholder = stringBuilder.emerStringBuilder()
+        self.emergencyContactIdTextField.placeholder = stringBuilder.emerIdStringBuilder()
     }
     
 

@@ -300,10 +300,31 @@ class BackEndClient: NSObject {
             }
             let status = (response as! HTTPURLResponse).statusCode
             
-            if (status != 201) {
+            if (status != 200) {
                 failure(SignUpError(status: status))
             } else {
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
+                success(userContact!)}
+        }).resume()
+    }
+    
+    func getUsers(success: @escaping ([UserLogin]) -> (), failure: @escaping (Error) -> ()){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users"
+        var getUserRequest = URLRequest(url: urlComponents.url!)
+        getUserRequest.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: getUserRequest, completionHandler: { (data, response, error) in
+            if (error != nil) {
+                
+                failure(error!)
+            }
+            let status = (response as! HTTPURLResponse).statusCode
+            
+            if (status != 200) {
+                failure(SignUpError(status: status))
+            } else {
+                let userContact = try? jsonDecoder.decode([UserLogin].self, from: data!) as [UserLogin]
                 success(userContact!)}
         }).resume()
     }

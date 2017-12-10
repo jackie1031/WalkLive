@@ -13,7 +13,16 @@ class WarningSignView: UIView {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var warningContentView: UILabel!
     
+    func loadNib() -> WarningSignView {
+        let bundle = Bundle(for: type(of: self))
+        let nibName = type(of: self).description().components(separatedBy: ".").last!
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        return nib.instantiate(withOwner: self, options: nil).first as! WarningSignView
+    }
     
+    @IBAction func onOkButton(_ sender: Any) {
+        self.removeFromSuperview()
+    }
     
     /*
     // Only override draw() if you perform custom drawing.
