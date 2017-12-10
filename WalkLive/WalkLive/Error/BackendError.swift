@@ -8,6 +8,21 @@
 
 import Foundation
 
-enum BackendError : Error {
-    case urlError(String)
+//InvalidUserId    Code 401
+//InvalidPassword Code 403
+//InvalidContact Code 405
+//InvalidEmergencyId    Code 406
+//InvalidEmergencyNumber    Code 407
+struct SignUpError: Error {
+//    enum ErrorKind {
+//        case InvalidUserId
+//        case InvalidPassword
+//        case InvalidContact
+//        case InvalidEmergencyId
+//        case InvalidEmergencyNumber
+//    }
+//
+//    let kind: ErrorKind
+    let status: Int
 }
+
