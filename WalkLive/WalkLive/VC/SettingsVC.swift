@@ -13,7 +13,8 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
     
-    var user : User!
+//    var user : User!
+    var messages : Message!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,8 @@ class SettingsVC: UITableViewController {
         return (userPhoneResult && emergencyPhoneResult)
     }
     
+    
+    // Pass messages to MessageVC!!!
     @IBAction func onEditButton(_ sender: Any) {
         self.performSegue(withIdentifier: "messageSegue", sender: nil)
     }

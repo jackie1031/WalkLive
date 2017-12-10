@@ -40,6 +40,10 @@ class Message: NSObject, NSCoding {
         self.messages.popLast()
     }
     
+    func getMessages() -> Array<String> {
+        return self.messages
+    }
+    
     func updateMessages(updatedMessages : Array<String>) {
         self.messages = updatedMessages
     }

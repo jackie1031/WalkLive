@@ -24,8 +24,11 @@ class MessageVC: UIViewController {
         return (url!.appendingPathComponent("Data").path)
     }
     
+    
+    @IBOutlet weak var messageEditPanel: UIView!
+    
     @IBOutlet weak var addTextButton: UIButton!
-    @IBOutlet weak var delTexButton: UIButton!
+    @IBOutlet weak var delTextButton: UIButton!
     @IBOutlet weak var message1: UITextField!
     @IBOutlet weak var message2: UITextField!
     @IBOutlet weak var message3: UITextField!
@@ -40,7 +43,9 @@ class MessageVC: UIViewController {
         textFields.append(message2)
         textFields.append(message3)
         textFields.append(message4)
-        self.lastYCoor = 150
+        let yCoor:Int = Int(message4.frame.maxY)
+//        print(yCoor)
+        self.lastYCoor = yCoor
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,18 +54,28 @@ class MessageVC: UIViewController {
     
     @IBAction func onAddTextButton(_ sender: Any) {
         // move add and del buttons down
-        var addButtonFrame : CGRect = addTextButton.frame
-        var delButtonFrame : CGRect = delTexButton.frame
-        addButtonFrame.origin.y = addButtonFrame.origin.y + 40
-        delButtonFrame.origin.y = delButtonFrame.origin.y + 40
+        let frame : CGRect = messageEditPanel.frame
+        messageEditPanel.frame.origin.y = frame.origin.y + 40
+//        let addButtonFrame : CGRect = addTextButton.frame
+//        let delButtonFrame : CGRect = delTextButton.frame
+//        addTextButton.frame.origin.y = addButtonFrame.origin.y + 40
+//        delTextButton.frame.origin.y = delButtonFrame.origin.y + 40
         
         // create new label
         lastYCoor = lastYCoor + 40
-        let newTextField = UITextField(frame: CGRect(x: 10, y: lastYCoor, width: 357, height: 30))
+        let newTextField = UITextField(frame: CGRect(x: 10, y: lastYCoor+30, width: 357, height: 30))
         newTextField.placeholder = "Enter text message here"
+        newTextField.font = UIFont.systemFont(ofSize: 15)
+        newTextField.borderStyle = UITextBorderStyle.roundedRect
+        newTextField.autocorrectionType = UITextAutocorrectionType.no
+        newTextField.keyboardType = UIKeyboardType.default
+        newTextField.returnKeyType = UIReturnKeyType.done
+        newTextField.clearButtonMode = UITextFieldViewMode.whileEditing
+        newTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         self.view.addSubview(newTextField)
         textFields.append(newTextField)
-        
+//        let yCoor:Int = Int(newTextField.frame.maxY)
+//        print(yCoor)
         // add new message to Message object?
         message.addMessage(m: "")
     }
@@ -73,10 +88,12 @@ class MessageVC: UIViewController {
         textFields.removeLast()
         lastYCoor = lastYCoor - 40
         // move add and del buttons up
-        var addButtonFrame : CGRect = addTextButton.frame
-        var delButtonFrame : CGRect = delTexButton.frame
-        addButtonFrame.origin.y = addButtonFrame.origin.y - 40
-        delButtonFrame.origin.y = delButtonFrame.origin.y - 40
+        let frame : CGRect = messageEditPanel.frame
+        messageEditPanel.frame.origin.y = frame.origin.y - 40
+//        let addButtonFrame : CGRect = addTextButton.frame
+//        let delButtonFrame : CGRect = delTextButton.frame
+//        addTextButton.frame.origin.y = addButtonFrame.origin.y - 40
+//        delTextButton.frame.origin.y = delButtonFrame.origin.y - 40
     }
     
     @IBAction func onSaveButton(_ sender: Any) {
@@ -86,6 +103,7 @@ class MessageVC: UIViewController {
         }
         message.updateMessages(updatedMessages: messageSegments)
         saveData()
+        loadData()
     }
     
     private func saveData() {
@@ -99,6 +117,9 @@ class MessageVC: UIViewController {
         //6 - if we can get back our data from our archives (load our data), get our data along our file path and cast it as an array of ShoppingItems
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
             self.message = data
+        }
+        for messageSegment in self.message.getMessages() {
+            print(messageSegment)
         }
     }
     
