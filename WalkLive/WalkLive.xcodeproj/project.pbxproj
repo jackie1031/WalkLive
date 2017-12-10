@@ -17,6 +17,8 @@
 		9015A2B11FDCC35A0080B4D3 /* WarningSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */; };
 		9015A2B31FDCE4140080B4D3 /* FriendTrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B21FDCE4140080B4D3 /* FriendTrackVC.swift */; };
 		9015A2B51FDDBEB00080B4D3 /* FriendTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B41FDDBEB00080B4D3 /* FriendTrackTableViewCell.swift */; };
+		9015A2B91FDDC7860080B4D3 /* SetFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B81FDDC7860080B4D3 /* SetFriendVC.swift */; };
+		9015A2BB1FDDC9CD0080B4D3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */; };
 		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
@@ -91,6 +93,8 @@
 		9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSignView.swift; sourceTree = "<group>"; };
 		9015A2B21FDCE4140080B4D3 /* FriendTrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTrackVC.swift; sourceTree = "<group>"; };
 		9015A2B41FDDBEB00080B4D3 /* FriendTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTrackTableViewCell.swift; sourceTree = "<group>"; };
+		9015A2B81FDDC7860080B4D3 /* SetFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFriendVC.swift; sourceTree = "<group>"; };
+		9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 				8CB2D94B1FD87D3100E659FD /* UserLogin.swift */,
 				904B05411FD8916900EEB523 /* EmergencyContact.swift */,
 				8CC299131FDA273C00C9F2A5 /* Message.swift */,
+				9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				8CC299111FDA244900C9F2A5 /* MessageVC.swift */,
 				8C7637001FDC88DD00276DEE /* SettingsVC.swift */,
 				9015A2B21FDCE4140080B4D3 /* FriendTrackVC.swift */,
+				9015A2B81FDDC7860080B4D3 /* SetFriendVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -647,6 +653,7 @@
 				904B052A1FD689D000EEB523 /* RouteDelegate.swift in Sources */,
 				9015A2B11FDCC35A0080B4D3 /* WarningSignView.swift in Sources */,
 				904B05071FD689A300EEB523 /* TimePoint.swift in Sources */,
+				9015A2B91FDDC7860080B4D3 /* SetFriendVC.swift in Sources */,
 				904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */,
 				904B05021FD689A300EEB523 /* ContactManager.swift in Sources */,
 				9015A2B31FDCE4140080B4D3 /* FriendTrackVC.swift in Sources */,
@@ -666,6 +673,7 @@
 				904B052B1FD689D000EEB523 /* TripPanelDelegate.swift in Sources */,
 				904B053C1FD77A5A00EEB523 /* RequestUpdater.swift in Sources */,
 				904B052F1FD689F500EEB523 /* NSObject+test.m in Sources */,
+				9015A2BB1FDDC9CD0080B4D3 /* Friend.swift in Sources */,
 				904B05011FD689A300EEB523 /* BackEndClient.swift in Sources */,
 				904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */,
 				904B051B1FD689B300EEB523 /* LoginVC.swift in Sources */,
