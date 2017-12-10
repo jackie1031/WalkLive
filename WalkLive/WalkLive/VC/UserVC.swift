@@ -25,6 +25,21 @@ class UserVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.setUserVCInfo()
+    }
+    
+    
+    private func setUserVCInfo() {
+        self.usernameLabel.text = currentUserInfo?.username
+        self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
+        if (currentUserInfo?.emergency_number == nil) {
+            self.emergencyContactLabel.text = "Emer. Contact: None"
+        } else {
+            self.emergencyContactLabel.text = "Emer. Contact: " + (currentUserInfo?.emergency_number)!
+        }
+    }
+    
     @IBAction func onMyContactPencilButton(_ sender: Any) {
         segueToSettingVC()
     }
@@ -33,12 +48,9 @@ class UserVC: UIViewController {
         segueToSettingVC()
     }
     
-    @IBAction func onAddFriendButton(_ sender: Any) {
-        segueToSettingVC()
-    }
-    
+
     func segueToSettingVC(){
-        performSegue(withIdentifier: "settingVCSegue", sender: self)
+        self.performSegue(withIdentifier: "settingSegue", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +66,16 @@ class UserVC: UIViewController {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "friendRequestSegue"){
             let backItem = UIBarButtonItem()
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "settingSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "tripRequestSegue"){
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
             backItem.tintColor = primaryColor
             navigationItem.backBarButtonItem = backItem
         }

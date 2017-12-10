@@ -21,6 +21,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     @IBOutlet weak var contactMessagePanel: UIView!
     
     @IBOutlet weak var contactMessagePanelTextView: UITextView!
+    @IBOutlet weak var emergencyContactLabel: UILabel!
     
     
     
@@ -32,7 +33,13 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(currentUserInfo)
+        self.initializeView()
+    }
+    
+    /// Private functiosn for general logistics
+    private func initializeView() {
+        self.emergencyContactLabel.text = emerStringBuilder()
         self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
@@ -40,7 +47,13 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         self.hidePanels()
     }
     
-    /// Private functiosn for general logistics
+    private func emerStringBuilder() -> String{
+        if (currentUserInfo?.emergency_number == nil) {
+             return "Emer. Contact: None"
+        }
+            return "Emer. Contact: " + (currentUserInfo?.emergency_number)!
+    }
+    
     private func setDelegate() {
         self.locationManager.delegate = self
         self.mapView.delegate = self
@@ -245,8 +258,10 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     @IBAction func onLogoutButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        currentUserInfo = nil
     }
     
+
 
     // MARK: - Navigation
 
@@ -264,13 +279,8 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             backItem.tintColor = primaryColor
+            navigationItem.backBarButtonItem = backItem
         }
-//        } else if (segue.identifier == "logoutSegue"){
-//            User.currentUser = nil
-//        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
 
 }
@@ -299,7 +309,7 @@ extension MainMapVC: RouteDelegate{
         self.tripView.estimatedTimeLabel.text = "Estimated Time: " + String(Int((trip.timeInterval!))/60) + " min(s)"
         
         self.tripView.center = self.startTripPanelView.center
-        
+        self.tripView.emergencyContactLabel.text = self.emergencyContactLabel.text
         self.tripView.routeDelegate = self
         self.startTripPanelView.addSubview(tripView)
     }

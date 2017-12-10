@@ -36,11 +36,14 @@ class SignUpVC: UIViewController {
         if (!isValidSignUp()) {
             return
         }
-        backEndClient.signUpAttempt(success: {
-            self.performSegue(withIdentifier: "signUpToMainMapSegue", sender: nil) //?
+        let userSignUp = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!, contact: phoneNumberTextField.text!)
+        backEndClient.signUpAttempt(success: {(userinfo) in
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "signupSegue", sender: nil)
+            }
         }, failure: { (error) in
             print(error)
-        }, username: userNameTextField.text!, password: passwordTextField.text!, phoneNum: phoneNumberTextField.text!)
+        }, userLogin: userSignUp)
     }
     
     func isValidSignUp() -> Bool {

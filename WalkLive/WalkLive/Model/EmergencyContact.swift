@@ -8,21 +8,21 @@
 
 import Foundation
 class EmergencyContact: NSObject, Codable{
-    var emergencyId: String?
-    var emergencyNumber: String?
+    var emergency_id: String?
+    var emergency_number: String?
     init(dictionary: NSDictionary) {
-        self.emergencyId = dictionary["emergencyId"] as? String
-        self.emergencyNumber = dictionary["emergencyNumber"] as? String
+        self.emergency_id = dictionary["emergencyId"] as? String
+        self.emergency_number = dictionary["emergencyNumber"] as? String
     }
     
     override init(){
-        self.emergencyId = ""
-        self.emergencyNumber = ""
+        self.emergency_id = ""
+        self.emergency_number = ""
     }
     
-    init(emergencyId: String, emergencyNumber: String){
-        self.emergencyId = emergencyId
-        self.emergencyNumber = emergencyNumber
+    init(emergency_id: String, emergency_number: String){
+        self.emergency_id = emergency_id
+        self.emergency_number = emergency_number
     }
     
 }

@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import FBSDKLoginKit
+//import FBSDKLoginKit
+//, FBSDKLoginButtonDelegate
 
-class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
+class LoginVC: UIViewController{
 
     
     
@@ -17,7 +18,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
+//    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +35,24 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             print(userlogin)
         }, failure: { (error) in
             
-        }, username: "michelle")
+        }, username: "admin_michi")
         
         
     }
     
     // these 2 functions are new!!!
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Did log out of facebook")
-    }
-    
-    func loginButton(_ facebookloginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil {
-            print(error)
-            return
-        }
-        
-        print("Successfully logged in with facebook...")
-    }
+//    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+//        print("Did log out of facebook")
+//    }
+//
+//    func loginButton(_ facebookloginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+//        if error != nil {
+//            print(error)
+//            return
+//        }
+//
+//        print("Successfully logged in with facebook...")
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,20 +64,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate  {
             return
         }
         let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
-//        backEndClient.loginAttempt(success: { (userInfo) in
-//            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-//        }, failure: { (error) in
-//            print(error)
-//        }, userLogin: userLogin)
-        
-        backEndClient.loginAttempt(success: {
+        backEndClient.loginAttempt(success: { (userInfo) in
             OperationQueue.main.addOperation {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }, failure: { (error) in
             print(error)
         }, userLogin: userLogin)
-        //self.performSegue(withIdentifier: "loginSegue", sender: nil)
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

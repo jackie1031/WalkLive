@@ -29,33 +29,24 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
-            /** lallaallala
-             * tests
-             */
-            get(API_CONTEXT + "/tests", "application/json", (request, response) -> {
-                try {
-                    return walkLiveService.test();
-                } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to fetch user entries");
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
             /**
              * ================================================================
              * User Setup Handling
              * ================================================================
              */
 
-            //get list of users
-            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
+            //existing user login
+            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.findAllUsers();
+                    return walkLiveService.login(request.body());
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to fetch user entries");
+                    logger.error("Failed to authenticate user.");
+                    response.status(401);
+                    //e.getMessage()
+                    return "{ reason: NONEXISTENT_USER }";
                 }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer()); //get list of users
+                //return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
@@ -65,28 +56,60 @@ public class ServerController {
                     return u;
                 } catch (WalkLiveService.UserServiceException e) {
                     logger.error("Failed to create new User");
-                    response.status(401);
+                    response.status(401); //multiple error codes
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            //existing user login
-            post(API_CONTEXT + "/users/login", "application/json", (request, response) -> {
+            //get users
+            get(API_CONTEXT + "/users", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.login(request.body());
+                    return walkLiveService.findAllUsers();
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to authenticate user.");
-                    response.status(404);
+                    logger.error("Failed to fetch user entries");
+                    response.status(410);
                 }
                 return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
+            }, new JsonTransformer()); //get list of users
+
 
             //get user information
             get(API_CONTEXT + "/users/:username", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.getUser(request.params(":username"));
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed find user.");
+                    logger.error("Failed to find user.");
+                    response.status(404);
+                    return "NONEXISTENT_USER";
+                }
+                //return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+            /**
+             * ================================================================
+             * Emergency Contact PUT
+             * ================================================================
+             */
+
+            /*
+            Method: PUT
+            URL: /WalkLive/api/users/[username]
+            Content: { emergencyId: [string], emergencyNumber: [string] }
+            Failure Response:
+            InvalidEmergencyId	Code 406
+            InvalidEmergencyNumber	Code 407
+            Success Response:	Code 200
+            Content: { emergencyId: [string], emergencyNumber: [string] }
+            */
+
+            //update emergency contact information
+            put(API_CONTEXT + "/users/:username/emergency_info", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.updateEmergencyContact(request.params(":username"), request.body());
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to update emergency info for user:" + request.params(":username"));
+                    response.status(406);
+                    //add 407 response.
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
@@ -111,51 +134,54 @@ public class ServerController {
                  return Collections.EMPTY_MAP;
              }, new JsonTransformer());
 
-//             //get my sent friend requests
-//             get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
-//                 try {
-//                     return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to find list of sent friend requests.");
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //get my sent friend requests
+             get(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
+                 try {
+                     return walkLiveService.getOutgoingFriendRequests(request.params(":username"));
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to find list of sent friend requests.");
+                     response.status(401);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
-//             //delete select sent friend request
-//             delete(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
-//                 try {
-//                     walkLiveService.deleteFriendRequest(request.params(":username"), request.params(":requestid"));
-//                     response.status(200);
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
-//                     response.status(500);
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //delete select sent friend request
+             delete(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
+                 try {
+                     walkLiveService.deleteFriendRequest(request.params(":username"), request.params(":requestid"));
+                     response.status(200);
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to delete friend request with id: %s", request.params(":requestid"));
+                     response.status(404);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
-//             //get my received friend requests
-//             get(API_CONTEXT + "/users/:username/my_requests","application/json", (request, response) -> {
-//                 try {
-//                     return walkLiveService.getIncomingFriendRequests(request.params(":username"));
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to find list of incoming friend requests.");
-//                 }
-//                 return Collections.EMPTY_MAP;
-//             }, new JsonTransformer());
+             //get my received friend requests
+             get(API_CONTEXT + "/users/:username/my_requests","application/json", (request, response) -> {
+                 try {
+                     return walkLiveService.getIncomingFriendRequests(request.params(":username"));
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to find list of incoming friend requests.");
+                     response.status(401);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
-//             //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
-//             //if accept, then add to friends list for both - FIGURE OUT DETAILS
-//             //either way, dealt with friend requests should be deleted
-//             //delete select sent friend request
-//             put(API_CONTEXT + "/users/:username/friend_requests/:requestid", "application/json", (request, response) -> {
-//                 try {
-//                     return walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.body());
-//                 } catch (WalkLiveService.FriendRequestServiceException e) {
-//                     logger.error("Failed to respond to friendRequest with id: %s", request.params(":requestid"));
-//                     response.status(500);
-//                     return Collections.EMPTY_MAP;
-//                 }
-//             }, new JsonTransformer());
+             //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
+             //if accept, then add to friends list for both - FIGURE OUT DETAILS
+             //either way, dealt with friend requests should be deleted
+             //delete select sent friend request
+             delete(API_CONTEXT + "/users/:username/friend_requests/:requestid/:response", "application/json", (request, response) -> {
+                 try {
+                     walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.params(":response"));
+                     response.status(200);
+                 } catch (WalkLiveService.FriendRequestServiceException e) {
+                     logger.error("Failed to respond to friendRequest with id: %s", request.params(":requestid"));
+                     response.status(404);
+                 }
+                 return Collections.EMPTY_MAP;
+             }, new JsonTransformer());
 
             //add new user (signup)
             post(API_CONTEXT + "/users", "application/json", (request, response) -> {
