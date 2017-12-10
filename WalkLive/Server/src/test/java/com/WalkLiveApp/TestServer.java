@@ -114,6 +114,7 @@ public class TestServer {
 
     }
 
+
     @Test
     public void testDuplicateCreation() {
 
@@ -366,7 +367,47 @@ public class TestServer {
 //        }
 //    }
 
-/*
+//
+//    @Test
+//    public void testStartTrip() throws Exception {
+//
+//        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//        Trip[] entries = new Trip[]{
+//                new Trip(1, "A"),
+//                new Trip(2, "B"),
+//                new Trip(3, "C"),
+//                new Trip(4, "D"),
+//
+//        };
+//
+//
+//
+//        for (Trip t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users/:username", t);
+//            //System.out.println("USER: " + t.toString());
+//            assertEquals("Failed to create new trip", 409, rCreateNew.httpStatus);
+//        }
+//
+//        //Get them back
+//        Response r = request("GET", "/WalkLive/api/users", null);
+//        assertEquals("Failed to get user entries", 200, r.httpStatus);
+//
+//
+////        List<Trip> results = getTrip(r);
+//
+//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+////        assertEquals("Number of user entries differ", entries.length, results.size());
+////
+////        for (int i = 0; i < results.size(); i++) {
+////            Trip actual = results.get(i);
+////            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+////            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+////            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+////            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+////        }
+//    }
+
+
     @Test
     public void testCoordinate() throws Exception {
         Coordinate c = new Coordinate(0.6, 0.7);
@@ -443,7 +484,7 @@ public class TestServer {
 
 
     }
-    */
+
 
     /**
      * Test getting getCrimes method within a specific range of coordinates from the
