@@ -45,6 +45,11 @@ class SettingsVC: UITableViewController {
         return (userPhoneResult && emergencyPhoneResult)
     }
     
+    @IBAction func onEditButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "messageSegue", sender: nil)
+    }
+    
+    
 //    @IBAction func onCancelButton(_ sender: Any) {
 //        self.dismiss(animated: false, completion: nil)
 //    }

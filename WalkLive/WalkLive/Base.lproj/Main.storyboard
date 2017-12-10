@@ -991,15 +991,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3M-xa-d0x">
-                                                    <rect key="frame" x="329" y="120" width="30" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-WA-53k">
+                                                    <rect key="frame" x="174" y="120" width="46" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <segue destination="MJu-oG-pf4" kind="show" identifier="messageSegue" id="owi-wt-YfO"/>
+                                                        <action selector="onEditButton:" destination="mhm-es-34Q" eventType="touchUpInside" id="0SG-e3-zbc"/>
                                                     </connections>
-                                                    <state key="normal" title="Edit">
-                                                        <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1031,6 +1029,7 @@
                     <connections>
                         <outlet property="emergencyContactPhone" destination="GGy-eb-dbe" id="4kw-qN-FgA"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>
+                        <segue destination="MJu-oG-pf4" kind="show" identifier="messageSegue" id="mmX-tX-dQX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Gs-Wg-qDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1206,7 +1205,6 @@
                         <outlet property="message2" destination="Oww-Fg-eg7" id="Hfs-7w-jNe"/>
                         <outlet property="message3" destination="Llz-50-YjR" id="ayu-Bt-rf4"/>
                         <outlet property="message4" destination="OLr-TS-HMs" id="3gl-MT-6HY"/>
-                        <outlet property="onSaveButton" destination="8Jk-SG-2Bv" id="kR6-Ys-OOM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qek-hv-B0K" userLabel="First Responder" sceneMemberID="firstResponder"/>
