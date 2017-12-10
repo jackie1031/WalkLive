@@ -13,8 +13,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.sql.DataSource;
 import org.json.simple.parser.JSONParser;
@@ -27,6 +29,7 @@ public class WalkLiveService {
     private Connection conn = null;
 
     private final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
+    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Construct the model with a pre-defined datasource. The current implementation
@@ -151,7 +154,7 @@ public class WalkLiveService {
     /*
      * Finds all users and returns all in user database
      */
-    public List<User> findAllUsers() throws UserServiceException {
+    public List<User> findAllUsers() throws UserServiceException, java.text.ParseException {
         Statement stm = null;
         ResultSet res = null;
         String sql = "SELECT * FROM users";
@@ -164,19 +167,23 @@ public class WalkLiveService {
             String username;
             String pw;
             String contact;
-            String friendId;
-            String createdOn;
+            String nickname;
+            Date createdOn;
+            String emergencyId;
+            String emergencyNumber;
 
             ArrayList<User> users = new ArrayList<>();
             while (res.next()) {
-                 username = res.getString(1);
-                 pw = res.getString(2);
-                 contact = res.getString(3);
-                 friendId = res.getString(4);
-                 createdOn = res.getString(5);
+                username = res.getString(1);
+                pw = res.getString(2);
+                contact = res.getString(3);
+                nickname = res.getString(4);
+                createdOn = df.parse(res.getString(5));
+                emergencyId = res.getString(6);
+                emergencyNumber = res.getString(7);
 
-                 User u = new User(username, pw, contact);
-                 users.add(u);
+                User u = new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
+                users.add(u);
             }
             return users;
 
@@ -229,12 +236,12 @@ public class WalkLiveService {
 
                 return new User(username, pw, contact, null, null, null, null);
             } else {
-                logger.error(String.format("WalkLiveService.find: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.find: Failed to find username: %s", username));
+                logger.error(String.format("WalkLiveService.login: Failed to find username: %s", username));
+                throw new UserServiceException(String.format("WalkLiveService.login: Failed to find username: %s", username));
             }
-        } catch(SQLException ex) {
-            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+        } catch (SQLException ex) {
+            logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
+            throw new UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
         }  finally {
             if (ps != null) {
                 try {
@@ -249,7 +256,7 @@ public class WalkLiveService {
         }
     }
 
-    public User getUser(String username) throws UserServiceException, ParseException {
+    public User getUser(String username) throws UserServiceException, ParseException, java.text.ParseException {
         ResultSet res = null;
         PreparedStatement ps = null;
 
@@ -263,24 +270,31 @@ public class WalkLiveService {
 
             String pw;
             String contact;
-            String friendId;
-            String createdOn;
+            String nickname;
+            Date createdOn;
+            String emergencyId;
+            String emergencyNumber;
 
             if (res.next()) {
                 pw = res.getString(2);
                 contact = res.getString(3);
-                friendId = res.getString(4);
-                createdOn = res.getString(5);
+                nickname = res.getString(4);
+                createdOn = df.parse(res.getString(5));
+                emergencyId = res.getString(6);
+                emergencyNumber = res.getString(7);
 
-                return new User(username, pw, contact);
+                return new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
             } else {
-                logger.error(String.format("WalkLiveService.find: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.find: Failed to find username: %s", username));
+                logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
+                throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
             }
         } catch(SQLException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-        }  finally {
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
+        } catch (java.text.ParseException ex) {
+            logger.error(String.format("WalkLiveService.find: Failed to properly parse date"), ex);
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to properly parse date"), ex);
+        } finally {
             if (ps != null) {
                 try {
                     ps.close();
@@ -308,7 +322,7 @@ public class WalkLiveService {
         String id = object.get("emergency_id").toString();
         String number = object.get("emergency_number").toString();
 
-        String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? " ;
+        String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? LIMIT 1" ;
 
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -352,16 +366,14 @@ public class WalkLiveService {
 
          JSONObject object = (JSONObject) new JSONParser().parse(body);
          String recipient = object.get("recipient").toString();
-         String sent_on = object.get("sent_on").toString();
 
-         String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) VALUES (?, ?, ?)" ;
+         String sql = "INSERT INTO friendRequests (sender, recipient, sent_on) VALUES (?, ?, null)" ;
 
          try {
              conn = DriverManager.getConnection(url, user, password);
              ps = conn.prepareStatement(sql);
              ps.setString(1, sender);
              ps.setString(2, recipient);
-             ps.setString(3, sent_on);
              ps.executeUpdate();
 
              System.out.println("SUCCESSFULLY ADDED.");
@@ -382,59 +394,149 @@ public class WalkLiveService {
          }
      }
 
-//     //get my sent friend requests
-//     public List<FriendRequest> getOutgoingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
-//         //checks needed
+     //get my sent friend requests
+     public List<FriendRequest> getOutgoingFriendRequests(String sender) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+         PreparedStatement ps = null;
+         ResultSet res = null;
 
-//         try (Connection conn = db.open()) {
-//             List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE sender = :sender")
-//                     .addParameter("sender", body)
-//                     .executeAndFetch(FriendRequest.class);
-//             return requests;
-//         } catch (Sql2oException ex) {
-//             logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-//         }
-//     }
+         String sql = "SELECT * FROM friendRequests WHERE sender = ?";
 
-//     //delete select sent friend request (cancel request) - extended feature
-//     public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
-//         //checks needed
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, sender);
+             res = ps.executeQuery();
 
-//         String sql = "DELETE FROM friendRequests WHERE requestId = :requestId" ;
+             String recipient;
+             Date sent_on;
 
-//         try (Connection conn = db.open()) {
-//             conn.createQuery(sql)
-//                     .addParameter("requestId", requestId)
-//                     .executeUpdate();
-//         } catch(Sql2oException ex) {
-//             logger.error("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.deleteFriendRequest: Failed to create new entry", ex);
-//         }
-//     }
+             ArrayList<FriendRequest> frs = new ArrayList<>();
+             while (res.next()) {
+                 recipient = res.getString(2);
+                 sent_on = (Date) res.getObject(3);
 
-//     //get my received friend requests
-//     public List<FriendRequest> getIncomingFriendRequests(String body) throws WalkLiveService.FriendRequestServiceException {
-//         //checks needed
+                 FriendRequest fr = new FriendRequest(sender, recipient, sent_on);
+                 frs.add(fr);
+             }
+             return frs;
+         } catch (SQLException ex) {
+             logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+             throw new FriendRequestServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+         } finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
 
-//         try (Connection conn = db.open()) {
-//             List<FriendRequest> requests = conn.createQuery("SELECT * FROM friendRequests WHERE recipient = :recipient")
-//                     .addParameter("recipient", body)
-//                     .executeAndFetch(FriendRequest.class);
-//             return requests;
-//         } catch (Sql2oException ex) {
-//             logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-//             throw new FriendRequestServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-//         }
-//     }
+     //delete select sent friend request (cancel request) - extended feature
+     public void deleteFriendRequest(String username, String requestId) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+
+         PreparedStatement ps = null;
+
+         String sql = "DELETE FROM friendRequests WHERE requestId = ?" ;
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, requestId);
+             ps.executeUpdate();
+
+         } catch (SQLException ex) {
+             logger.error("WalkLiveService.deleteFriendRequest: Failed to delete request", ex);
+             throw new FriendRequestServiceException("WalkLiveService.deleteFriendRequest: Failed to delete request", ex);
+         } finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
+
+     //get my received friend requests
+     public List<FriendRequest> getIncomingFriendRequests(String recipient) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+         PreparedStatement ps = null;
+         ResultSet res = null;
+
+         String sql = "SELECT * FROM friendRequests WHERE recipient = ?";
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setString(1, recipient);
+             res = ps.executeQuery();
+
+             String sender;
+             Date sent_on;
+
+             ArrayList<FriendRequest> frs = new ArrayList<>();
+             while (res.next()) {
+                 sender = res.getString(1);
+                 sent_on = (Date) res.getObject(3);
+
+                 FriendRequest fr = new FriendRequest(sender, recipient, sent_on);
+                 frs.add(fr);
+             }
+             return frs;
+         } catch (SQLException ex) {
+             logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+             throw new FriendRequestServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+         } finally {
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+     }
 
 //     //respond to a friend request (update - should be a put) - receives in the body either "accept", or "decline"
 //     //if accept, then add to friends list for both - FIGURE OUT DETAILS
 //     //either way, dealt with friend requests should be deleted
 //     //delete select sent friend request
-//     public FriendRequest respondToFriendRequest(String username, String requestId, String body) throws WalkLiveService.FriendRequestServiceException {
-//         return null;
-//     }
+     public void respondToFriendRequest(String responder, String requestId, String response) throws WalkLiveService.FriendRequestServiceException {
+         //checks needed
+
+         if (response.equals("accept")) {
+             //update friends list
+
+         } else if (response.equals("reject")) {
+             //check to see if youre the recipient of the requestId
+
+             //if not, throw error
+
+         } else if (response.equals("cancel")) {
+             //check to see if you're sender of that requestId
+
+             //if not, throw error
+
+         } else {
+             //invalid response message. hoping that we can assume that we always get the correct response types
+         }
+
+         deleteFriendRequest(responder, requestId);
+     }
 
 
 //     /**
