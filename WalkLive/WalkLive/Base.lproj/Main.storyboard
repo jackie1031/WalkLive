@@ -1077,7 +1077,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="QGg-4j-Rzi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="QGg-4j-Rzi" customClass="SetFriendTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QGg-4j-Rzi" id="TXx-MR-9GW">
@@ -1107,6 +1107,10 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendNameLabel" destination="rpD-f9-toQ" id="qDW-nc-GtD"/>
+                                            <outlet property="friendNumberLabel" destination="s3A-rt-1tv" id="b85-zH-SSe"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

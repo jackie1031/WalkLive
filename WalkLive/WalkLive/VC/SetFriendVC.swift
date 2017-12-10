@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetFriendVC: UIViewController {
+class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var currentFriendNameLabel: UILabel!
     @IBOutlet weak var currentEmergencyNumberLabel: UILabel!
@@ -22,6 +22,21 @@ class SetFriendVC: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.friends != nil {
+            return self.friends.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = requestTable.dequeueReusableCell(withIdentifier: "TripRequestCell", for: indexPath) as! TripRequestTableViewCell
+        
+        cell.selectionStyle = .none
+        return cell
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
