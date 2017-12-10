@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="085d284c-0dc5-4f83-bac4-705122e7338d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4451">
-              <caret line="332" column="39" lean-forward="true" selection-start-line="332" selection-start-column="39" selection-end-line="332" selection-end-column="39" />
+            <state relative-caret-position="-422">
+              <caret line="50" column="97" lean-forward="false" selection-start-line="50" selection-start-column="97" selection-end-line="50" selection-end-column="97" />
               <folding>
                 <marker date="1512853197000" expanded="true" signature="1572:1604" ph=" CREATE statement" />
                 <marker date="1512853197000" expanded="true" signature="3525:3563" ph=" SELECT statement (USERS)" />
@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="104" column="41" lean-forward="true" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
+            <state relative-caret-position="303">
+              <caret line="69" column="17" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -69,6 +69,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
       </list>
     </option>
   </component>
@@ -370,18 +371,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="104" column="41" lean-forward="true" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4451">
-          <caret line="332" column="39" lean-forward="true" selection-start-line="332" selection-start-column="39" selection-end-line="332" selection-end-column="39" />
+        <state relative-caret-position="-422">
+          <caret line="50" column="97" lean-forward="false" selection-start-line="50" selection-start-column="97" selection-end-line="50" selection-end-column="97" />
           <folding>
             <marker date="1512853197000" expanded="true" signature="1572:1604" ph=" CREATE statement" />
             <marker date="1512853197000" expanded="true" signature="3525:3563" ph=" SELECT statement (USERS)" />
@@ -393,6 +386,14 @@
             <marker date="1512853197000" expanded="true" signature="11491:11565" ph=" UPDATE statement (USERS)" />
             <marker date="1512853197000" expanded="true" signature="13267:13339" ph=" INSERT statement (FRIENDREQUESTS)" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="69" column="17" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
