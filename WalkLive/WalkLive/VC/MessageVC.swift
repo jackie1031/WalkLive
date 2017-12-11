@@ -30,13 +30,19 @@ class MessageVC: UIViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Need to get message from local!!!
         setUpTextFields()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func onAddTextButton(_ sender: Any) {
+        addTextField(message: "")
+    }
+
+    @IBAction func onDeleteLastTextButton(_ sender: Any) {
+        delTextField()
     }
     
     private func setUpTextFields() {
@@ -52,12 +58,11 @@ class MessageVC: UIViewController {
             textField.removeFromSuperview()
         }
         textFields.removeAll()
-        // reset panel coordination
+        // reset coordinations
+        lastYCoor = 30
         messageEditPanel.frame.origin.y = 30
         noteLabel.frame.origin.y = 30 + 50
-        
         // load last textfields
-        lastYCoor = 30
         let messageSegments = self.unsavedMessages.getMessages()
         for messageSegment in messageSegments {
             print(messageSegment)
@@ -65,16 +70,8 @@ class MessageVC: UIViewController {
         }
     }
     
-    @IBAction func onAddTextButton(_ sender: Any) {
-        addTextField(message: "")
-    }
-
-    @IBAction func onDeleteLastTextButton(_ sender: Any) {
-        delTextField()
-    }
-    
     private func addTextField(message : String) {
-        // move add and del buttons down
+        // move buttons and labels down
         let frame : CGRect = messageEditPanel.frame
         messageEditPanel.frame.origin.y = frame.origin.y + 40
         let labelFrame : CGRect = noteLabel.frame
