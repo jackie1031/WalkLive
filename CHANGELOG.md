@@ -1,9 +1,50 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [5.1.3] - 2017-12-04
+### Added
+- FE:  add route tracking panels and panels show time estimation, time spent, trip details by @mshu1
+- FE:  add timer to keep track of the current trip; implemented cancel trip by @mshu1
+- FE:  add login and signup endpoints
+### Changed
+- FE:  finished first version of message builder by @mshu1
+- FE:  all panels now can be hidden when double click on the corresponding buttons by @mshu1
+- FE:  add login and signup endpoints @yang
+- BE:  added all work from backup branch - added friendrequest endpoints by @jeesoo
+- BE:  added friendRequest tests and minor changes to database table name by @jeesoo
+- BE:  fixed Cherokee problem by @Jackie
+
+## [5.1.2] - 2017-12-02
+### Added
+- FE:  add route choice controller and user now can choose their destinations when seeing multiple options by @mshu1
+### Changed
+- FE:  fix toggle keyboards for all controllers; now users can tap on any view controller to dimiss keyboard @mshu1
+- BE:  update Heroku by @jackie
+
+## [5.1.2] - 2017-12-01
+### Changed
+- FE:  convert route requests to meet network request standard --success/failure blocks @mshu1
+
+## [5.1.1] - 2017-11-30
+### Added
+- FE:  add setting controller, emergency number calls by @mshu1
+### Changed
+- FE:  refactor route planning to a separate object by @mshu1
+
+## [5.1.0] - 2017-11-29
+### Added
+- FE:  once trip start, add trip tracking pannel board by @mshu1
+- FE:  add calling the police button to trip panel and tested by @mshu1
+- BE： pass all tests on travis by @jackie
+### Changed
+- FE:  change the message board and the ways messages are built by @mshu1
 
 ## [5.0.1] - 2017-11-29
 ### Added
+- FE:  once trip start, add trip tracking pannel board by @mshu1
+- FE:  add timer to keep track of the current trip; implemented cancel trip by @mshu1
+- FE:  add calling the police button to trip panel and tested by @mshu1
 - BE： pass all tests on travis by @jackie
+- BE:  deployed on Heroku
 
 ## [4.0.1] - 2017-11-19
 ### Added
