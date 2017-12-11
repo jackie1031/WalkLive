@@ -14,6 +14,7 @@
 		8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299111FDA244900C9F2A5 /* MessageVC.swift */; };
 		8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299131FDA273C00C9F2A5 /* Message.swift */; };
 		900468791FDDFAD3008A896E /* FriendTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900468781FDDFAD3008A896E /* FriendTracker.swift */; };
+		9004687B1FDE1D66008A896E /* WarningSignFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004687A1FDE1D66008A896E /* WarningSignFactory.swift */; };
 		9015A2AF1FDCB88D0080B4D3 /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */; };
 		9015A2B11FDCC35A0080B4D3 /* WarningSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */; };
 		9015A2B31FDCE4140080B4D3 /* FriendTrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2B21FDCE4140080B4D3 /* FriendTrackVC.swift */; };
@@ -93,6 +94,7 @@
 		8CC299111FDA244900C9F2A5 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
 		8CC299131FDA273C00C9F2A5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		900468781FDDFAD3008A896E /* FriendTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTracker.swift; sourceTree = "<group>"; };
+		9004687A1FDE1D66008A896E /* WarningSignFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSignFactory.swift; sourceTree = "<group>"; };
 		9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
 		9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningSignView.swift; sourceTree = "<group>"; };
 		9015A2B21FDCE4140080B4D3 /* FriendTrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTrackVC.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				8C56F6801FD795D600D1017F /* BackendError.swift */,
+				9004687A1FDE1D66008A896E /* WarningSignFactory.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				904B05031FD689A300EEB523 /* Location.swift in Sources */,
 				904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */,
 				904B05091FD689A300EEB523 /* User.swift in Sources */,
+				9004687B1FDE1D66008A896E /* WarningSignFactory.swift in Sources */,
 				904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */,
 				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
 				8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */,

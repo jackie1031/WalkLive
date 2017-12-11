@@ -48,3 +48,4 @@ let jsonEncoder = JSONEncoder()
 let jsonDecoder = JSONDecoder()
 var currentUserInfo: UserLogin!
 let stringBuilder = StringBuilder()
+let warnigSignFactory = WarningSignFactory()
