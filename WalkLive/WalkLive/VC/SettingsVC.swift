@@ -35,7 +35,7 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         
         // fill in phone numbers
         userPhone.text = currentUserInfo.contact
-        if let emergencyContact = currentUserInfo.emergencyNumber {
+        if let emergencyContact = currentUserInfo.emergency_number {
             emergencyContactPhone.text = emergencyContact
         }
         
@@ -110,6 +110,8 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     private func loadData() {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
             messages = data
+        } else {
+            messages = Message()
         }
     }
     
