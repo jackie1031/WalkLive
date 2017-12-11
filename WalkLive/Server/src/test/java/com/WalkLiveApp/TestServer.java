@@ -243,18 +243,30 @@ public class TestServer {
      * Friend Request Handling
      * ================================================================
      */
-    /*
+
      @Test
      public void testCreateFriendRequest() throws Exception {
          SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-         //add a few elements
-         FriendRequest[] frs = new FriendRequest[] {
-                 new FriendRequest("jeesookim", "michelle", null),
-                 new FriendRequest("jeesookim", "yangcao1", null)
+         User[] entries = new User[] {
+                 new User("jeesookim", "123456","4405339063"),
+                 new User("michelle", "0123", "4405339063"),
+                 new User("yangcao1", "121212", "1231231233")
          };
 
-         for (FriendRequest f : frs) {
+         //add to database
+         for (User t : entries) {
+             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+         }
+
+         //add a few elements
+         Relationship[] frs = new Relationship[] {
+                 new Relationship("jeesookim", "michelle", null),
+                 new Relationship("jeesookim", "yangcao1", null)
+         };
+
+         for (Relationship f : frs) {
              Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
              assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
          }
@@ -263,8 +275,220 @@ public class TestServer {
          //Get them back
          Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
          assertEquals("Failed to get user entries", 200, r.httpStatus);
-         List<User> results = getUsers(r);
      }
+
+    @Test
+    public void testGetOutgoingFriendRequests() throws Exception {
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+        //add a few elements
+        Relationship[] frs = new Relationship[] {
+                new Relationship("jeesookim", "michelle", null),
+                new Relationship("jeesookim", "yangcao1", null)
+        };
+
+        for (Relationship f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Relationship[] frs2 = new Relationship[] {
+                new Relationship("michelle", "jeesookim", null),
+                new Relationship("michelle", "yangcao1", null)
+        };
+
+        for (Relationship f : frs2) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Response r = request("GET", "/WalkLive/api/users/jeesookim/sent_friend_requests", null);
+        List<Relationship> results = getRelationships(r);
+
+        assertEquals("Number of user entries differ", frs.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            Relationship actual = results.get(i);
+
+            assertEquals("Not returning the outgoing requests", actual.getSender(), "jeesookim");
+            assertEquals("Mismatch in recipient", frs[i].getRecipient(), actual.getRecipient());
+            assertEquals("Mismatch in relationship", frs[i].getRelationship(), actual.getRelationship());
+        }
+    }
+
+    @Test
+    public void testGetIncomingFriendRequests() throws Exception {
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        Relationship[] frs = new Relationship[] {
+                new Relationship("michelle", "jeesookim", null),
+                new Relationship("yangcao1", "jeesookim", null)
+        };
+
+        Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", frs[0]);
+        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        rCreateFR = request("POST", "/WalkLive/api/users/yangcao1/friend_requests", frs[1]);
+        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+
+        Response r = request("GET", "/WalkLive/api/users/jeesookim/friend_requests", null);
+        List<Relationship> results = getRelationships(r);
+
+        assertEquals("Number of user entries differ", frs.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            Relationship actual = results.get(i);
+            assertEquals("Not returning the incoming requests", actual.getRecipient(), "jeesookim");
+            assertEquals("Mismatch in sender", frs[i].getSender(), actual.getSender());
+            assertEquals("Mismatch in relationship", frs[i].getRelationship(), actual.getRelationship());
+        }
+    }
+
+    @Test
+    public void testGetNewRequestId() throws Exception {
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+        //add a few elements
+        Relationship[] frs = new Relationship[] {
+                new Relationship("jeesookim", "michelle", null),
+                new Relationship("jeesookim", "yangcao1", null)
+        };
+
+        for (Relationship f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Response r = request("GET", "/WalkLive/api/users/jeesookim/sent_friend_requests", null);
+        List<Relationship> results = getRelationships(r);
+
+        assertEquals("Number of user entries differ", frs.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            Relationship actual = results.get(i);
+            assertEquals("Request IDs do not match", actual.getId(), i + 1);
+        }
+    }
+
+    @Test
+    public void testRespondToFriendRequest() throws Exception {
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+        //add a few elements
+        Relationship[] frs = new Relationship[] {
+                new Relationship("jeesookim", "michelle", null),
+                new Relationship("jeesookim", "yangcao1", null),
+        };
+
+        for (Relationship f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Relationship[] frs2 = new Relationship[] {
+                new Relationship("michelle", "jeesookim", null),
+                new Relationship("michelle", "yangcao1", null)
+        };
+
+        for (Relationship f : frs2) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
+        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+
+        //TODO check relationship code - should be updated to 1;
+        //TODO if a response has already been made, dont allow responses yet!!
+
+        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
+        assertEquals("Failed to reject friend request", 200, r2.httpStatus);
+    }
+
+    @Test
+    public void testGetFriendList() throws Exception{
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+        //add a few elements
+        Relationship[] frs = new Relationship[] {
+                new Relationship("jeesookim", "michelle", null),
+                new Relationship("jeesookim", "yangcao1", null),
+        };
+
+        for (Relationship f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Relationship[] frs2 = new Relationship[] {
+                new Relationship("michelle", "jeesookim", null),
+                new Relationship("michelle", "yangcao1", null)
+        };
+
+        for (Relationship f : frs2) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
+        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+
+        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
+        List<User> results = getUsers(rList);
+
+        User actual = results.get(0);
+        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
+    }
+
+    /**
+     * ================================================================
+     * Emergency Contact PUT
+     * ================================================================
      */
 
     @Test
@@ -280,7 +504,6 @@ public class TestServer {
         User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
         Response r2 = request("PUT", "/WalkLive/api/users/jeesoo/emergency_info", contactInfo);
         assertEquals("Failed to get user", 200, r2.httpStatus);
-
     }
 
 //DELETE LATER
@@ -635,16 +858,19 @@ public class TestServer {
 
         Connection conn = null;
         Statement stm = null;
-        ResultSet res = null;
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String setup2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
+            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
+            stm.executeUpdate(setup3);
+            stm.executeUpdate(counterInit);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
@@ -652,12 +878,25 @@ public class TestServer {
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
             stm.executeUpdate(sql3);
-            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
+            String sql4 = "DROP TABLE IF EXISTS friends" ;
             stm.executeUpdate(sql4);
+            String sql5 = "DROP TABLE IF EXISTS counters" ;
+            stm.executeUpdate(sql5);
 
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
         }
     }
 
@@ -665,6 +904,13 @@ public class TestServer {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
         Type type = (new TypeToken<ArrayList<User>>() { }).getType();
+        return r.getContentAsObject(type);
+    }
+
+    private List<Relationship> getRelationships(Response r) {
+        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+        Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
         return r.getContentAsObject(type);
     }
 
@@ -692,17 +938,26 @@ public class TestServer {
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
             stm.executeUpdate(sql3);
-            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
+            String sql4 = "DROP TABLE IF EXISTS friends" ;
             stm.executeUpdate(sql4);
             String sql5 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql5);
+            String sql6 = "DROP TABLE IF EXISTS counters" ;
+            stm.executeUpdate(sql6);
+            String sql7 = "DROP TABLE IF EXISTS friends" ;
+            stm.executeUpdate(sql7);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
             stm.executeUpdate(sqlNew3);
+            stm.executeUpdate(sqlNew4);
+            stm.executeUpdate(counterInit);
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
