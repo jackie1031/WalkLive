@@ -135,7 +135,7 @@ class BackEndClient: NSObject {
     */
     func createFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username)/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/friend_requests"
         var makeFriendRequest = URLRequest(url: urlComponents.url!)
         makeFriendRequest.httpMethod = "POST"
         
@@ -146,13 +146,19 @@ class BackEndClient: NSObject {
         } catch {
             failure(error)
         }
-        
-        URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
-            if (error != nil) {
-                failure(error!)
+        URLSession.shared.dataTask(with: makeFriendRequest, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(SignUpError(status:0))
             }
-            success()
-        }
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 201) {
+                failure(SignUpError(status: status))
+            } else {
+                success()}
+        }).resume()
+        
     }
     
     func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
