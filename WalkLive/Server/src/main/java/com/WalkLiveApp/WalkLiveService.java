@@ -38,10 +38,9 @@ public class WalkLiveService {
         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
     */
         Statement stm = null;
-        ResultSet res = null;
 
         String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
+        //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
         //stm.executeUpdate(setup);
       
         try {
@@ -56,11 +55,6 @@ public class WalkLiveService {
             if (stm != null) {
                 try {
                     stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -81,7 +75,6 @@ public class WalkLiveService {
             //stm.executeUpdate(sql);  //+, completed BOOL
                     //"dangerZone INT ,startLat DOUBLE(16,4),startLong DOUBLE (16,4),curLat DOUBLE PRECISION,curLong DOUBLE PRECISION,endLat DOUBLE PRECISION,endLong DOUBLE PRECISION, emergencyNum Text");
 
-
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
             throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
@@ -90,11 +83,6 @@ public class WalkLiveService {
             if (stm != null) {
                 try {
                     stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
