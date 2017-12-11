@@ -95,7 +95,10 @@ class RoadRequester: NSObject {
             if (response == nil) {
                 failure(error!)
             }
-            success((response?.routes[0])!)
+            if ((response?.routes[0]) == nil) {
+                failure(LoginError(status: 0))
+            } else{
+                success((response?.routes[0])!)}
             }
         }
     
@@ -128,21 +131,6 @@ class RoadRequester: NSObject {
         }
     }
 
-    //  Inefficient algorithm; will not consider to use until talk to the TA.
-//    func searchLandmarkNearCoordiantes(){
-//        let request = MKLocalSearchRequest()
-//        request.region = self.getCurrentDefinedRegion()
-//        request.naturalLanguageQuery = "Forever 21"
-//
-//        let search = MKLocalSearch(request: request)
-//        search.start { (response, error) in
-//            if (error != nil) {
-//                print(error!)
-//                return
-//            }
-//            print(response!)
-//        }
-//    }
     
 }
 

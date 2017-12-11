@@ -1,8 +1,11 @@
 *.xcuserstate
 .DS_Store
-<<<<<<< HEAD:.gitignore
 WalkLive/Server/*.class
-=======
 *.plist
 walklive.db
->>>>>>> BEdatabase:WalkLive/Server/.gitignore
+
+*.xcuserstate
+
+*.xcuserstate
+
+WalkLive/WalkLive.xcworkspace/xcuserdata/michelleshu.xcuserdatad/UserInterfaceState.xcuserstate

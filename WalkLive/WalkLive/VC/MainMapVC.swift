@@ -39,7 +39,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     /// Private functiosn for general logistics
     private func initializeView() {
-        self.emergencyContactLabel.text = emerStringBuilder()
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilder()
         self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
@@ -47,12 +47,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         self.hidePanels()
     }
     
-    private func emerStringBuilder() -> String{
-        if (currentUserInfo?.emergency_number == nil) {
-             return "Emer. Contact: None"
-        }
-            return "Emer. Contact: " + (currentUserInfo?.emergency_number)!
-    }
     
     private func setDelegate() {
         self.locationManager.delegate = self
@@ -191,7 +185,9 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     ///  location: location needed to form this message
     func buildMessage(location: CLLocation) -> String {
         if (self.tripView == nil) {
-            return "I am currently at (latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + " From Admin."
+            return messages.buildMessage()
+            
+//            return "I am currently at (latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + " From Admin."
         }
         
         // Need to split to multiple strings because the logic will be too compicated for xcode to handle. Also, the only way to concatenate strings is "a + b" in Swift. :)
@@ -291,7 +287,13 @@ extension MainMapVC: RouteDelegate{
         self.roadRequester.drawRouteFromCurrentLocation(success: { (trip) in
             self.startTrip(trip: trip)
         }, failure: { (error) in
-            
+            self.roadRequester.removeRoute()
+            self.roadRequester.setCurrentLocation()
+            OperationQueue.main.addOperation {
+               let errorSign = warnigSignFactory.cannotBuildRouteWarningSign()
+                errorSign.center = self.view.center
+                self.view.addSubview(errorSign)
+            }
         }, destinationMapItem: targetItem)
     }
     
