@@ -18,31 +18,7 @@ class BackEndClient: NSObject {
         urlComponents.host = "walklive.herokuapp.com"
         return urlComponents
     }
-    
-    func encoderDecoderTest(){
-        let requestTest = FriendRequest()
-        let requestTestTwo = FriendRequest()
-        let encoder = JSONEncoder()
-        let decoder = JSONDecoder()
-        do {
-            let encodedJSON = try encoder.encode(requestTest)
-            _ = try? decoder.decode(FriendRequest.self, from: encodedJSON) as FriendRequest
-            print(encodedJSON)
-        } catch {
-            print("error")
-        }
-        
-        var requestList = [FriendRequest]()
-        requestList.append(requestTest)
-        requestList.append(requestTestTwo)
-        do {
-            let encodedJSON = try encoder.encode(requestList)
-            let decodedList = try? decoder.decode([FriendRequest].self, from: encodedJSON) as [FriendRequest]
-            print(encodedJSON)
-        } catch {
-            print("error")
-        }
-    }
+
     
     // A testing function to check deployment of Heroku, connecting backend to frontend,
     // Also serves as a gerneral model right now.
@@ -67,49 +43,12 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
-    func makeFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
-        var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.username))/friend_requests"
-        var makeFriendRequest = URLRequest(url: urlComponents.url!)
-        makeFriendRequest.httpMethod = "POST"
-        
-        let encoder = JSONEncoder()
-        do {
-            let encodedJSON = try encoder.encode(friendRequest)
-            makeFriendRequest.httpBody = encodedJSON
-        } catch {
-            failure(error)
-        }
-        
-        URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
-            if (error != nil) {
-                failure(error!)
-            }
-            success()
-        }
-    }
     
-    func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
-        var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.username))/friend_requests"
-        var makeFriendRequest = URLRequest(url: urlComponents.url!)
-        makeFriendRequest.httpMethod = "POST"
-        
-        let encoder = JSONEncoder()
-        do {
-            let encodedJSON = try encoder.encode(friendRequest)
-            makeFriendRequest.httpBody = encodedJSON
-        } catch {
-            failure(error)
-        }
-        
-        URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
-            if (error != nil) {
-                failure(error!)
-            }
-            success()
-        }
-    }
+    /**
+     * ================================================================
+     * Login, SignUp Session
+     * ================================================================
+     */
     
     func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (LoginError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
@@ -171,8 +110,79 @@ class BackEndClient: NSObject {
                 success(userContact!)}
         }).resume()
     }
-    
 
+    
+    /**
+     * ================================================================
+     * Friend Request Section
+     * ================================================================
+     */
+    
+    /*
+     createFriendRequest
+     Method: POST
+     URL: /WalkLive/api/users/[username]/friend_requests
+     Content: { recipient: [string] }
+     Failure Response:
+     InvalidUsername    Code 404
+     Content: { reason: NONEXISTENT_USER }
+     InvalidRecipient    Code 400
+     Content: { reason: NONEXISTENT_RECIPIENT }
+     InvalidDate Code 400
+     Content: { reason: INVALID_DATE_FORMAT }
+     Success Response:    Code 201
+     Content: {}
+    */
+    func createFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/friend_requests"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
+        makeFriendRequest.httpMethod = "POST"
+        
+        let encoder = JSONEncoder()
+        do {
+            let encodedJSON = try encoder.encode(friendRequest)
+            makeFriendRequest.httpBody = encodedJSON
+        } catch {
+            failure(error)
+        }
+        URLSession.shared.dataTask(with: makeFriendRequest, completionHandler: { //?
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(SignUpError(status:0))
+            }
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 201) {
+                failure(SignUpError(status: status))
+            } else {
+                success()}
+        }).resume()
+        
+    }
+    
+    func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(String(describing: User.currentUser?.username))/friend_requests"
+        var makeFriendRequest = URLRequest(url: urlComponents.url!)
+        makeFriendRequest.httpMethod = "POST"
+        
+        let encoder = JSONEncoder()
+        do {
+            let encodedJSON = try encoder.encode(friendRequest)
+            makeFriendRequest.httpBody = encodedJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: makeFriendRequest) { (data, response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            success()
+        }
+    }
+    
     func acceptFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "default")/friend_requests/\(friendRequest.recipient)/accept"
@@ -213,6 +223,44 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     getSentFriendRequests:
+     
+     Method: GET
+     URL: /WalkLive/api/users/[username]/sent_friend_requests
+     Content: {}
+     Failure Response:
+     InvalidUsername    Code 401
+     Content: { reason: NONEXISTENT_USER }
+     Success Response:    Code 200
+     Content: { <friendRequest 1>, <friendRequest 2>, ...}
+     */
+    func getSentFriendRequests(success: @escaping ([FriendRequest]) -> (), failure: @escaping (Error) -> ()){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody" )/sent_friend_requests"
+        var getSentFriendRequests = URLRequest(url: urlComponents.url!)
+        getSentFriendRequests.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: getSentFriendRequests, completionHandler: { (data, response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                failure(LoginError(status: status))
+            } else {
+                let friendRequests = try? jsonDecoder.decode([FriendRequest].self, from: data!) as [FriendRequest]
+                print(friendRequests)
+                success(friendRequests!)
+            }
+        }).resume()
+    }
+    
+    /**
+     * ================================================================
+     * Setting Session
+     * ================================================================
+     */
     func updateEmergencyContact(success: @escaping (EmergencyContact) -> (), failure: @escaping (Error) -> (), emergencyContact: EmergencyContact){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/emergency_info"
@@ -243,6 +291,11 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /**
+     * ================================================================
+     * Users Session
+     * ================================================================
+     */
     func getUser(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), username: String){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(username)"

@@ -25,9 +25,18 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         requestTable.delegate = self
         requestTable.dataSource = self
-        backEndClient.encoderDecoderTest()
         // Do any additional setup after loading the view.
-        self.testFriendRequestTable()
+//        self.testFriendRequestTable()
+    }
+    
+    func updateSentRequests(){
+        backEndClient.getSentFriendRequests(success: { (updatedFriendRequests) in
+            print(updatedFriendRequests)
+            self.sentFriendRequests = updatedFriendRequests
+            self.requestTable.reloadData()
+        }) { (error) in
+            print(error)
+        }
     }
     
     private func testFriendRequestTable(){
@@ -43,6 +52,12 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func switchSegmentControl(_ sender: Any) {
         self.requestTable.reloadData()
+        if (segmentControl.selectedSegmentIndex == RECEIVED){
+        } else if (segmentControl.selectedSegmentIndex == SENT){
+            self.updateSentRequests()
+        }
+        else {
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

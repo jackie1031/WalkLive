@@ -22,8 +22,9 @@ class FriendRequest: NSObject, Codable {
         self.recipient = "teacher"
         self.requestId = "admin"
     }
+    
     func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-        backEndClient.makeFriendRequest(success: {
+        backEndClient.createFriendRequest(success: {
             success()
         }, failure: { (error) in
             failure(error)

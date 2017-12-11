@@ -10,7 +10,7 @@ import Foundation
 
 class StringBuilder: NSObject {
     func emerStringBuilder() -> String{
-        if (currentUserInfo?.emergency_number == nil) {
+        if (currentUserInfo?.emergency_number == nil || currentUserInfo?.emergency_number == "") {
             return "Emer. Num: None"
         }
         return (currentUserInfo?.emergency_number)!

@@ -39,7 +39,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     /// Private functiosn for general logistics
     private func initializeView() {
-        self.emergencyContactLabel.text = emerStringBuilder()
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilder()
         self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
@@ -47,12 +47,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         self.hidePanels()
     }
     
-    private func emerStringBuilder() -> String{
-        if (currentUserInfo?.emergency_number == nil) {
-             return "Emer. Contact: None"
-        }
-            return "Emer. Contact: " + (currentUserInfo?.emergency_number)!
-    }
     
     private func setDelegate() {
         self.locationManager.delegate = self

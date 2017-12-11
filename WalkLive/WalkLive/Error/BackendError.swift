@@ -56,7 +56,7 @@ class LoginError: Error {
     func returnReason() -> String {
         switch status {
         case 401:
-            return "InvalidUserId: the username may be illegal or the username already exists!"
+            return "InvalidUserId: the username may be illegal or the username does not exist!"
         case 403:
             return "InvalidPassword: the password may be illegal or inccorect"
         default:
@@ -64,4 +64,24 @@ class LoginError: Error {
         }
     }
 }
+
+class RouteError: Error {
+    //    InvalidUsername:Code: 401
+    //    IncorrectPassword:Code: 403
+    var status: Int! = 0
+    init(status: Int) {
+        self.status = status
+    }
+    func returnReason() -> String {
+        switch status {
+        case 401:
+            return "InvalidUserId: the username may be illegal or the username does not exist!"
+        case 403:
+            return "InvalidPassword: the password may be illegal or inccorect"
+        default:
+            return "Unknown error" + String(status)
+        }
+    }
+}
+
 

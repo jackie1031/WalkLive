@@ -16,7 +16,19 @@ class AddFriendView: UIView {
     
     
     @IBAction func onSendButton(_ sender: Any) {
-        //Send Here!
+        let friendRequest = FriendRequest()
+        if (friendIdLabel.text == "") {
+            return
+        }
+        friendRequest.recipient = friendIdLabel.text
+        backEndClient.createFriendRequest(success: {
+            OperationQueue.main.addOperation {
+            self.statusLabel.text = "sent successfully to " + self.friendIdLabel.text!
+            self.statusLabel.textColor = primaryColor
+            }
+        }, failure: { (error) in
+            print(error)
+        }, friendRequest: friendRequest)
     }
     
     
