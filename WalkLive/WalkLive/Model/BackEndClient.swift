@@ -143,7 +143,7 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
-    func signUpAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
+    func signUpAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (SignUpError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
         //CHANGE ENDPOINT
         urlComponents.path = self.APICONTEXT + "/users"
@@ -154,13 +154,13 @@ class BackEndClient: NSObject {
             let newUserSignUpAsJSON = try jsonEncoder.encode(userLogin)
             signUpRequest.httpBody = newUserSignUpAsJSON
         } catch {
-            failure(error)
+            failure(SignUpError(status:0))
         }
         URLSession.shared.dataTask(with: signUpRequest, completionHandler: { //?
             (data, response, error) in
             // check for errors
             if error != nil {
-                failure(error!)
+                failure(SignUpError(status:0))
             }
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 201) {
@@ -172,50 +172,6 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
-    func saveAttempt(success: @escaping () -> (), failure: @escaping (Error) -> (), phoneNum: String, emergencyContact: String) {
-//        let endpoint = "."
-//        guard let url = URL(string: endpoint) else {
-//            print("Error: cannot create URL")
-//            let error = BackendError.urlError("Could not construct URL")
-//            failure(error)
-//        }
-        
-        var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody")/friend_requests"
-        var userLoginUrlRequest = URLRequest(url: urlComponents.url!)
-        userLoginUrlRequest.httpMethod = "POST"
-        
-        let keys = ["phoneNum", "emergencyContact"]
-        let values = [phoneNum, emergencyContact]
-        let userDict = NSDictionary.init(objects: keys, forKeys: values as [NSCopying])
-        self.user = User(dictionary: userDict)
-        let encoder = JSONEncoder()
-        do {
-            let newUserLoginAsJSON = try encoder.encode(user)
-            userLoginUrlRequest.httpBody = newUserLoginAsJSON
-        } catch {
-            failure(error)
-        }
-      
-        URLSession.shared.dataTask(with: userLoginUrlRequest, completionHandler: { //?
-            (data, response, error) in
-            // check for errors
-            if error != nil {
-                failure(error!)
-            }
-            if let httpResponse = response as? HTTPURLResponse { //?
-                print("status code: \(httpResponse.statusCode)")
-                failure(error!)
-            }
-            // if success, log in
-            let status = (response as! HTTPURLResponse).statusCode
-            if (status != 200) {
-                failure(LoginError(status: status))
-            } else {
-                success()
-            }
-        }).resume()
-    }
 
     func acceptFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()

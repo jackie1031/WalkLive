@@ -30,7 +30,7 @@ class SignUpError: Error {
     func returnReason() -> String {
         switch status {
         case 401:
-            return "InvalidUserId"
+            return "InvalidUserId: the username may be illegal or the username already exists!"
         case 403:
             return "InvalidPassword"
         case 405:
@@ -39,9 +39,12 @@ class SignUpError: Error {
             return "InvalidEmergencyId"
         case 407:
             return "InvalidEmergencyNumber"
+        default:
+            return "Unknown error"
         }
     }
 }
+
 
 class LoginError: Error {
     //    enum ErrorKind {
