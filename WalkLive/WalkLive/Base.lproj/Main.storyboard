@@ -1102,12 +1102,16 @@
                                                     <state key="normal" title="Select">
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onSelectButton:" destination="Cyy-Sh-Fc9" eventType="touchUpInside" id="k5W-tn-nYz"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="friendNameLabel" destination="rpD-f9-toQ" id="qDW-nc-GtD"/>
                                             <outlet property="friendNumberLabel" destination="s3A-rt-1tv" id="b85-zH-SSe"/>
+                                            <outlet property="selectButton" destination="1Wh-or-hMG" id="bwI-SZ-LFI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1179,6 +1183,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSaveButton:" destination="Cyy-Sh-Fc9" eventType="touchUpInside" id="Kqm-Tf-qLy"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1190,7 +1197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iem-Xj-h7L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1538" y="2471"/>
+            <point key="canvasLocation" x="1536.8" y="2470.6146926536735"/>
         </scene>
         <!--Friend TrackVC-->
         <scene sceneID="Dlw-oJ-i2l">

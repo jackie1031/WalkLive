@@ -58,7 +58,32 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 
-
+    @IBAction func onSelectButton(_ sender: Any) {
+        let button = sender as! UIButton
+        self.currentFriendNameLabel.text = friends[button.tag].username
+        self.currentEmergencyNumberLabel.text = friends[button.tag].contact
+        
+    }
+    
+    @IBAction func onSaveButton(_ sender: Any) {
+        if (self.currentFriendNameLabel.text! == currentUserInfo.emergency_id) {
+            return
+        }
+        let emergencyContact = EmergencyContact(emergency_id: self.currentFriendNameLabel.text!, emergency_number: self.currentEmergencyNumberLabel.text!)
+        backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
+            currentUserInfo.emergency_id = self.currentFriendNameLabel.text!
+            currentUserInfo.emergency_number = self.currentEmergencyNumberLabel.text!
+            OperationQueue.main.addOperation {
+                let successView = warnigSignFactory.makeSaveSettingsSuccessWarningSign()
+                successView.center = self.view.center
+                self.view.addSubview(successView)
+            }
+        }, failure: { (error) in
+            
+        }, emergencyContact: emergencyContact)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
