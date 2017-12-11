@@ -18,7 +18,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WarningSignView" customModule="WalkLive" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="135"/>
+            <rect key="frame" x="0.0" y="0.0" width="200" height="136"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKI-UD-YdX">
@@ -35,19 +35,37 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="text text texttext text texttext text texttext text texttext text text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAC-pe-1YH">
-                    <rect key="frame" x="16" y="35" width="168" height="89"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text text texttext text texttext text texttext text texttext text text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAC-pe-1YH">
+                    <rect key="frame" x="13" y="35.5" width="175" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="gih-t1-mmr"/>
+                        <constraint firstAttribute="width" constant="175" id="oGr-wL-Y73"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQV-iU-FuM">
+                    <rect key="frame" x="85" y="108" width="30" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="OK">
+                        <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onOkButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="8Ww-Tb-Hto"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vEB-LO-ZGE" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="SMb-35-MZ7"/>
+                <constraint firstItem="eAC-pe-1YH" firstAttribute="top" secondItem="vEB-LO-ZGE" secondAttribute="bottom" constant="8" id="X4r-l2-3FD"/>
                 <constraint firstItem="vEB-LO-ZGE" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="dk4-w7-uej"/>
+                <constraint firstItem="eAC-pe-1YH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dve-gm-hy3"/>
+                <constraint firstItem="NQV-iU-FuM" firstAttribute="top" secondItem="eAC-pe-1YH" secondAttribute="bottom" constant="8" id="hYs-yC-hA5"/>
+                <constraint firstItem="NQV-iU-FuM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tIP-Dj-FTG"/>
                 <constraint firstItem="vEB-LO-ZGE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="vAa-Vl-dON"/>
+                <constraint firstItem="vEB-LO-ZGE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wiv-IW-tqx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -55,7 +73,7 @@
                 <outlet property="headerLabel" destination="vEB-LO-ZGE" id="V0R-6Z-iyS"/>
                 <outlet property="warningContentView" destination="eAC-pe-1YH" id="f9g-Rl-Z1C"/>
             </connections>
-            <point key="canvasLocation" x="69" y="22.5"/>
+            <point key="canvasLocation" x="69" y="23"/>
         </view>
     </objects>
 </document>

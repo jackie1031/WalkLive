@@ -7,8 +7,6 @@
 //
 
 import UIKit
-//import FBSDKLoginKit
-//, FBSDKLoginButtonDelegate
 
 class LoginVC: UIViewController{
 
@@ -18,59 +16,46 @@ class LoginVC: UIViewController{
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-//    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboard()
         
-//        backEndClient.getUser(success: {
-//
-//        }, failure: { (error) in
-//
-//        }, username: "michelle")
-//        // Do any additional setup after loading the view.
-        
-        backEndClient.getUser(success: { (userlogin) in
-            print(userlogin)
-        }, failure: { (error) in
-            
-        }, username: "admin_michi")
-        
-        
     }
-    
-    // these 2 functions are new!!!
-//    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-//        print("Did log out of facebook")
-//    }
-//
-//    func loginButton(_ facebookloginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-//        if error != nil {
-//            print(error)
-//            return
-//        }
-//
-//        print("Successfully logged in with facebook...")
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func onLoginButton(_ sender: Any) {
-        if (self.userNameTextField.text == "") {
-            return
-        }
         let userLogin = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!)
         backEndClient.loginAttempt(success: { (userInfo) in
             OperationQueue.main.addOperation {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }, failure: { (error) in
-            print(error)
+            OperationQueue.main.addOperation {
+                let errorSign = warnigSignFactory.makeLoginBackEndWarningSign(loginError: error)
+                errorSign.center = self.view.center
+                self.view.addSubview(errorSign)
+            }
         }, userLogin: userLogin)
+    }
+    
+    private func isValidLogin() -> Bool{
+        if (self.userNameTextField.text == "") {
+            let errorView = warnigSignFactory.makeLoginValidityWarningSign(status: 0)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
+            return false
+        }
+        if (self.passwordTextField.text == ""){
+            let errorView = warnigSignFactory.makeLoginValidityWarningSign(status: 1)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
+            return false
+        }
+        return true
     }
 
     @IBAction func onCancelButton(_ sender: Any) {

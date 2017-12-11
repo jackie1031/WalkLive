@@ -42,21 +42,37 @@ class SignUpVC: UIViewController {
                 self.performSegue(withIdentifier: "signupSegue", sender: nil)
             }
         }, failure: { (error) in
-            print(error)
+            OperationQueue.main.addOperation {
+                let errorView = warnigSignFactory.makeSignUpBackEndWarningSign(signupError: error)
+                errorView.center = self.view.center
+                self.view.addSubview(errorView)
+            }
         }, userLogin: userSignUp)
     }
     
     func isValidSignUp() -> Bool {
         if (self.userNameTextField.text == "") {
+            let errorView = warnigSignFactory.makeSignUpValidityWarningSign(status: 0)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
             return false
         }
         if (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+            let errorView = warnigSignFactory.makeSignUpValidityWarningSign(status: 1)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
             return false
         }
         if (self.passwordTextField.text!.count <= 7) {
+            let errorView = warnigSignFactory.makeSignUpValidityWarningSign(status: 2)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
             return false
         }
         if (!validPhone()) {
+            let errorView = warnigSignFactory.makeSignUpValidityWarningSign(status: 3)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
             return false
         }
         return true

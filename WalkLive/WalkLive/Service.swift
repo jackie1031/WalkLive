@@ -47,4 +47,6 @@ let backEndClient = BackEndClient()
 let jsonEncoder = JSONEncoder()
 let jsonDecoder = JSONDecoder()
 var currentUserInfo: UserLogin!
+var messages = Message()
 let stringBuilder = StringBuilder()
+let warnigSignFactory = WarningSignFactory()

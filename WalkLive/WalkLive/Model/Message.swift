@@ -7,50 +7,73 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Message: NSObject, NSCoding {
     
-    var messages : Array<String>
-    private var _name = ""
+    var messageSegments : Array<String>
 
     struct Keys {
-        static let name = "message"
+        static let messageSegs = "messageSegments"
     }
     
     override init() {
-        self.messages = Array<String>()
+        self.messageSegments = Array<String>()
+        self.messageSegments.append("Hello I'm currently at:")
+        self.messageSegments.append("Coordinate")
+        self.messageSegments.append("Call me at:")
+        self.messageSegments.append("Phone")
+    }
+    
+    init(messageSegments: Array<String>) {
+        self.messageSegments = messageSegments
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(_name, forKey: Keys.name)
+        aCoder.encode(messageSegments, forKey: Keys.messageSegs)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.messages = Array<String>()
-        if let nameObject = aDecoder.decodeObject(forKey: Keys.name) as? String {
-            _name = nameObject
+        self.messageSegments = Array<String>()
+        if let decodedObject = aDecoder.decodeObject(forKey: Keys.messageSegs) as? Array<String> {
+            messageSegments = decodedObject
         }
     }
     
+    func buildMessage() -> String {
+        var text : String = ""
+        for message in messageSegments {
+            var realValue : String
+            if (message == "Phone") {
+                realValue = currentUserInfo.contact!
+            } else if (message == "Coordinate") {
+                let location = CLLocationManager().location?.coordinate
+                let longtitude = String(format: "%.2f", (location?.longitude)!)
+                let latitude = String(format: "%.2f", (location?.latitude)!)
+                realValue = "(" + longtitude + ", " + latitude + ")"
+            } else {
+                realValue = message
+            }
+            text.append(realValue)
+            text.append(" ")
+        }
+        return text
+    }
+    
     func addMessage(m : String) {
-        self.messages.append(m)
+        self.messageSegments.append(m)
     }
     
     func deleteLastMessage() {
-        self.messages.popLast()
+        self.messageSegments.popLast()
+    }
+    
+    func getMessages() -> Array<String> {
+        return self.messageSegments
     }
     
     func updateMessages(updatedMessages : Array<String>) {
-        self.messages = updatedMessages
+        self.messageSegments = updatedMessages
     }
-    
-//    var name: String {
-//        get {
-//            return _name
-//        }
-//        set {
-//            _name = newValue
-//        }
-//    }
     
 }
