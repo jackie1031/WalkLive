@@ -21,7 +21,7 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
         friendListTable.delegate = self
         friendListTable.dataSource = self
-
+        self.updateFriends()
         // Do any additional setup after loading the view.
     }
     
@@ -83,7 +83,7 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }, emergencyContact: emergencyContact)
     }
     
-    func getFriends() {
+    func updateFriends() {
         backEndClient.getFriendList(success: { (friends) in
             OperationQueue.main.addOperation {
             self.friends = friends
