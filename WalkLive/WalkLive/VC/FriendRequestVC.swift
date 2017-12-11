@@ -136,16 +136,6 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.setBackButtons()
-//    }
-//
-//    func setBackButtons(){
-//        let backItem = UIBarButtonItem()
-//        backItem.tintColor = primaryColor
-//        self.navigationItem.backBarButtonItem = backItem
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

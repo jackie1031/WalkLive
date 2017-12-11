@@ -66,4 +66,10 @@ class WarningSignFactory: NSObject{
         successView.warningContentView.text = "Success!👊"
         return successView
     }
+    
+    func cannotBuildRouteWarningSign() -> WarningSignView {
+        let errorView = self.makeGenericWarningSign()
+        errorView.warningContentView.text = "The place you chose is too far to walk to 😢"
+        return errorView
+    }
 }

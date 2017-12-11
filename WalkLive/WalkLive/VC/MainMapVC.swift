@@ -285,7 +285,13 @@ extension MainMapVC: RouteDelegate{
         self.roadRequester.drawRouteFromCurrentLocation(success: { (trip) in
             self.startTrip(trip: trip)
         }, failure: { (error) in
-            
+            self.roadRequester.removeRoute()
+            self.roadRequester.setCurrentLocation()
+            OperationQueue.main.addOperation {
+               let errorSign = warnigSignFactory.cannotBuildRouteWarningSign()
+                errorSign.center = self.view.center
+                self.view.addSubview(errorSign)
+            }
         }, destinationMapItem: targetItem)
     }
     
