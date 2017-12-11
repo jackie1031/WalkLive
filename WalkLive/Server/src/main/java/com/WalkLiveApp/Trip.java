@@ -4,29 +4,195 @@ import java.util.*;
 
 public class Trip {
 
+    private String username, destination, timeSpent, emergencyNum, startTime, shareTo;
+    private double startLat,startLong,curLat,curLong,endLat,endLong;
+    private boolean completed;
+    private Coordinate currCoordinate;
+
+    private int tripId,timePointId, dangerLevel;
+
+
+    //constructor
+    public Trip (int tripId, String username){
+
+        this.tripId =  tripId;
+        this.username =  username;
+
+    }
+    public Trip (int tripId, String username, String destination, boolean completed){
+
+        this.tripId =  tripId;
+        this.username =  username;
+        this.destination =  destination;
+        this.completed =  completed;
+
+    }
+
+    public Trip (String username, String shareTo, String destination, String startTime, boolean completed, double startLat,
+                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
+        this.username =  username;
+        this.shareTo =  shareTo;
+        this.destination =  destination;
+        this.startTime =  startTime;
+        this.completed =  completed;
+        this.startLat =  startLat;
+        this.startLong =  startLong;
+        this.curLat =  curLat;
+        this.curLong =  curLong;
+        this.endLat =  endLat;
+        this.endLong =  endLong;
+        this.emergencyNum =  emergencyNum;
+        this.timeSpent =  timeSpent;
+
+
+    }
+
+    public Trip (int tripId, String username, String shareTo, String destination, String startTime, boolean completed, double startLat,
+                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
+
+        this.tripId =  tripId;
+        this.username =  username;
+        this.shareTo =  shareTo;
+        this.destination =  destination;
+        this.startTime =  startTime;
+        this.completed =  completed;
+        this.startLat =  startLat;
+        this.startLong =  startLong;
+        this.curLat =  curLat;
+        this.curLong =  curLong;
+        this.endLat =  endLat;
+        this.endLong =  endLong;
+        this.emergencyNum =  emergencyNum;
+        this.timeSpent =  timeSpent;
+
+
+    }
 
     // still needs timepoint ID?
 
-    private int timePointId, dangerLevel;
-    private String tripId,userName, destination,startTime,endTime;
-    private boolean complete;
-    private Coordinate currCoordinate;
 
-    //constructor
-    public Trip (String tripId, String userName){
-
-        this.tripId =  tripId;
-        this.userName =  userName;
-
+    public int getTripId() {
+        return tripId;
     }
-    public Trip (String tripId, String userName, String destination, boolean complete){
 
-        this.tripId =  tripId;
-        this.userName =  userName;
-        this.destination =  destination;
-        this.complete =  complete;
 
+    public String getShareTo() {
+        return shareTo;
     }
+
+    public void setShareTo(String shareTo) {
+        this.shareTo = shareTo;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDangerLevel(int dangerLevel) {
+        this.dangerLevel = dangerLevel;
+    }
+
+
+    public int getDangerLevel() {
+        return dangerLevel;
+    }
+
+    public void setDestination(String usedestinationrname) {
+        this.destination = destination;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTimeSpent() {
+        return timeSpent;
+    }
+
+    public void setTimeSpent(String timeSpent) {
+        this.timeSpent = timeSpent;
+    }
+
+    public String getEmergencyNum() {
+        return emergencyNum;
+    }
+
+    public void setEmergencyNum(String emergencyNum) {
+        this.emergencyNum = emergencyNum;
+    }
+
+    public double getStartLat() {
+        return startLat;
+    }
+
+    public void setStartLat(double startLat) {
+        this.startLat = startLat;
+    }
+
+    public double getStartLong() {
+        return startLong;
+    }
+
+    public void setStartLong(double startLong) {
+        this.startLong = startLong;
+    }
+
+
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+
+    public double getCurLat() {
+        return curLat;
+    }
+
+    public void setCurLat(double curLat) {
+        this.curLat = curLat;
+    }
+
+    public double getCurLong() {
+        return curLong;
+    }
+
+    public void setCurLong(double curLong) {
+        this.curLong = curLong;
+    }
+
+    public double getEndLat() {
+        return endLat;
+    }
+
+    public void setEndLat(double endLat) {
+        this.endLat = endLat;
+    }
+
+    public double getEndLong() {
+        return endLong;
+    }
+
+    public void setEndLong(double endLong) {
+        this.endLong = endLong;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
 
 
 
@@ -60,73 +226,7 @@ public class Trip {
 //        return last;
 //    }
 
-    public void setTripId(String tripId) {
-        this.tripId = tripId;
-    }
 
-    public int getTimePointId() {
-        return timePointId;
-    }
-
-    public void setTimePointId(int timePointId) {
-        this.timePointId = timePointId;
-    }
-
-    public int getDangerLevel() {
-        return dangerLevel;
-    }
-
-    public void setDangerLevel(int dangerLevel) {
-        this.dangerLevel = dangerLevel;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public boolean isComplete() {
-        return complete;
-    }
-
-    public void setComplete(boolean complete) {
-        this.complete = complete;
-    }
-
-    public Coordinate getCurrCoordinate() {
-        return currCoordinate;
-    }
-
-    public void setCurrCoordinate(Coordinate currCoordinate) {
-        this.currCoordinate = currCoordinate;
-    }
 
 //    public List<TimePoint> getAllTimePoints() {
 //        return allTimePoints;

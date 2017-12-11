@@ -590,45 +590,58 @@ public class TestServer {
 //        }
 //    }
 
-//
-//    @Test
-//    public void testStartTrip() throws Exception {
-//
-//        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        Trip[] entries = new Trip[]{
-//                new Trip(1, "A"),
-//                new Trip(2, "B"),
-//                new Trip(3, "C"),
-//                new Trip(4, "D"),
-//
-//        };
-//
-//
-//
-//        for (Trip t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users/:username", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new trip", 409, rCreateNew.httpStatus);
-//        }
-//
-//        //Get them back
-//        Response r = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, r.httpStatus);
-//
-//
-////        List<Trip> results = getTrip(r);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-////        assertEquals("Number of user entries differ", entries.length, results.size());
-////
-////        for (int i = 0; i < results.size(); i++) {
-////            Trip actual = results.get(i);
-////            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-////            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-////            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-////            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-////        }
-//    }
+
+
+    @Test
+    public void testEndTrip() throws Exception {
+        WalkLiveService walkLiveService;
+
+        Trip test = new Trip("jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //walkLiveService.startTrip();
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+        assertEquals(test.isCompleted(),false);
+
+        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
+        //assertEquals("Failed update", 200, r2.httpStatus);
+
+        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
+        //assertEqualsx(r3.isCompleted(),false);
+
+    }
+
+    @Test
+    public void testStartTrip() throws Exception {
+
+
+        Trip test = new Trip("jackie","Jeesooo","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","yannnnnng","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/1", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+
+
+    }
+
+
 
 
     @Test
@@ -858,19 +871,21 @@ public class TestServer {
 
         Connection conn = null;
         Statement stm = null;
+        ResultSet res = null;
+
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+            String setup2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
-            stm.executeUpdate(setup3);
-            stm.executeUpdate(counterInit);
+            stm.executeUpdate(sqlNew3);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
@@ -878,9 +893,9 @@ public class TestServer {
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
             stm.executeUpdate(sql3);
-            String sql4 = "DROP TABLE IF EXISTS friends" ;
+            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             stm.executeUpdate(sql4);
-            String sql5 = "DROP TABLE IF EXISTS counters" ;
+            String sql5 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql5);
 
         } catch (SQLException ex) {
@@ -890,6 +905,11 @@ public class TestServer {
             if (stm != null) {
                 try {
                     stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -911,6 +931,13 @@ public class TestServer {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
         Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
+        return r.getContentAsObject(type);
+    }
+
+    private List<Trip> getTrip(Response r) {
+        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
         return r.getContentAsObject(type);
     }
 
@@ -938,26 +965,20 @@ public class TestServer {
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
             stm.executeUpdate(sql3);
-            String sql4 = "DROP TABLE IF EXISTS friends" ;
+            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             stm.executeUpdate(sql4);
             String sql5 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql5);
-            String sql6 = "DROP TABLE IF EXISTS counters" ;
-            stm.executeUpdate(sql6);
-            String sql7 = "DROP TABLE IF EXISTS friends" ;
-            stm.executeUpdate(sql7);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
             stm.executeUpdate(sqlNew3);
-            stm.executeUpdate(sqlNew4);
-            stm.executeUpdate(counterInit);
+
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
@@ -966,6 +987,11 @@ public class TestServer {
             if (stm != null) {
                 try {
                     stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {

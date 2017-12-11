@@ -38,6 +38,8 @@ public class WalkLiveService {
         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
     */
         Statement stm = null;
+        ResultSet res = null;
+
         String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
         //stm.executeUpdate(setup);
@@ -54,6 +56,11 @@ public class WalkLiveService {
             if (stm != null) {
                 try {
                     stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -83,6 +90,11 @@ public class WalkLiveService {
             if (stm != null) {
                 try {
                     stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -171,6 +183,11 @@ public class WalkLiveService {
             if (ps != null) {
                 try {
                     ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -452,6 +469,11 @@ public class WalkLiveService {
             if (ps != null) {
                 try {
                     ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -777,6 +799,7 @@ public class WalkLiveService {
 
     public void updateRelationship(String requestId, int response) throws RelationshipServiceException {
          PreparedStatement ps = null;
+         ResultSet res = null;
 
          String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
 
@@ -796,6 +819,11 @@ public class WalkLiveService {
              if (ps != null) {
                  try {
                      ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (res != null) {
+                 try {
+                     res.close();
                  } catch (SQLException e) { /* ignored */}
              }
              if (conn != null) {
@@ -883,7 +911,7 @@ public class WalkLiveService {
              }
          }
      }
-  
+
     /**
      * For trip part -----------------------
      **/
@@ -897,47 +925,107 @@ public class WalkLiveService {
     //        "destination TEXT, coord_long DOUBLE,coord_lat DOUBLE,completed BOOLEAN )");
 
 
-    // trip id is hard listed
-    public void startTrip(String body) throws InvalidDestination, UserServiceException, ParseException {
+
+    private int countRowDB() throws InvalidDestination{
         PreparedStatement ps = null;
         ResultSet res = null;
+        String sql = "SELECT * FROM Trips";
+
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            res = ps.executeQuery();
+            int size= 0;
+            if (res != null)
+            {
+                res.beforeFirst();
+                res.last();
+                size = res.getRow();
+                logger.info("the size of the table is:"+size);
+                return size;
+            }
+
+        } catch (SQLException ex) {
+            logger.error("omg", ex);
+            throw new InvalidDestination("i don't care", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return -1;
+    }
+
+
+
+
+
+    // trip id is hard listed
+    public void startTrip(String body) throws InvalidDestination, UserServiceException, ParseException {
+
+
+        PreparedStatement ps = null;
+        ResultSet res = null;
+
+        logger.info("the body of start trip"+body);
+
+        int test;
+        //Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, dangerZone INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
 
         //generate our trip id
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
         String startTime = object.get("startTime").toString();
         String destination = object.get("destination").toString();
-        String startLat = object.get("startLat").toString();
-        String startLong = object.get("startLong").toString();
-        String curLat = object.get("curLat").toString();
-        String curLong = object.get("curLong").toString();
-        String endLat = object.get("endLat").toString();
-        String endLong = object.get("endLong").toString();
+        String startLat1 = object.get("startLat").toString();
+        String startLong1 = object.get("startLong").toString();
+        String curLat1 = object.get("curLat").toString();
+        String curLong1 = object.get("curLong").toString();
+        String endLat1 = object.get("endLat").toString();
+        String endLong1 = object.get("endLong").toString();
         String emergencyNum = object.get("emergencyNum").toString();
         String timeSpent = object.get("timeSpent").toString();
+        String shareTo;
 
+
+        double startLat = Double.parseDouble(startLat1);
+        double startLong = Double.parseDouble(startLong1);
+        double curLat = Double.parseDouble(curLat1);
+        double curLong = Double.parseDouble(curLong1);
+        double endLat = Double.parseDouble(endLat1);
+        double endLong = Double.parseDouble(endLong1);
 
         Boolean completed = false;
-        String s = UUID.randomUUID().toString();
-        String tripId = s.substring(0, 8);
-        //去掉“-”符号
 
-        //debugging
-        System.out.println("USERNAME:" + username);
-        System.out.println("TRIP-ID:" + tripId);
+
+
+        int tripId = countRowDB();
+
+        logger.info("the trip id is: " + tripId);
+
 
         String sql = "SELECT * FROM Trips WHERE tripId = ? LIMIT 1";
-
-        //String findTripsql = "SELECT COUNT(*) FROM Trips";
-
-
-        //if the query != null then username already exists. - set response code to 401 (invalid UserId)
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
+            ps.setInt(1, tripId);
             res = ps.executeQuery();
+
+
+
 
             while (res.next()) { //if there is something in the response
                 //which means that we should stop the process and throw an error
@@ -955,6 +1043,11 @@ public class WalkLiveService {
                     ps.close();
                 } catch (SQLException e) { /* ignored */}
             }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
             if (conn != null) {
                 try {
                     conn.close();
@@ -963,29 +1056,28 @@ public class WalkLiveService {
         }
 
         // Trips (tripId INT, username TEXT, destination TEXT, completed BOOLEAN )");
-/**
-        String sql = "CREATE TABLE IF NOT EXISTS Trips (tripId TEXT, username TEXT, shareTo TEXT, destination TEXT,  " +
-                "completed BOOL, dangerZone INT, startLat DOUBLE(16,4),startLong DOUBLE (16,4),curLat DOUBLE (16,4),
-            curLong DOUBLE (16,4), endLat DOUBLE PRECISION, endLong DOUBLE PRECISION, emergencyNum TEXT, timeSpent String)";
-*/
 
 
-        sql = "INSERT INTO Trips (tripId, username, startTime, destination, startLat, startLong, curLat, curLong, endLat, endLong, emergencyNum, timeSpent) " +
-                "             VALUES (?,?, ?,?,?,?,?,?,?,?,?,?)";
+//        executeUpdate("CREATE TABLE IF NOT EXISTS Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, " +
+//                "dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, " +
+//                "curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
+
+
+        sql = "INSERT INTO Trips (tripId, username, shareTo, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent) VALUES (?,?,NULL,?,Null,?,completed,?,?,?,?,?,?,?,?)";
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
-            ps.setString(1, tripId);
+            ps.setInt(1, tripId);
             ps.setString(2, username);
-            ps.setString(3, startTime);
-            ps.setString(4, destination);
-            ps.setString(5, startLat);
-            ps.setString(6, startLong);
-            ps.setString(7, curLat);
-            ps.setString(8, curLong);
-            ps.setString(9, endLat);
-            ps.setString(10, endLong);
+            ps.setString(3, destination);
+            ps.setString(4, startTime);
+            ps.setDouble(5, startLat);
+            ps.setDouble(6, startLong);
+            ps.setDouble(7, curLat);
+            ps.setDouble(8, curLong);
+            ps.setDouble(9, endLat);
+            ps.setDouble(10, endLong);
             ps.setString(11, emergencyNum);
             ps.setString(12, timeSpent);
             ps.executeUpdate();
@@ -1002,6 +1094,11 @@ public class WalkLiveService {
                     ps.close();
                 } catch (SQLException e) { /* ignored */}
             }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
             if (conn != null) {
                 try {
                     conn.close();
@@ -1014,31 +1111,25 @@ public class WalkLiveService {
 
 //    }
 
-    public void endTrip(String body) throws InvalidDestination, InvalidTargetID, ParseException {
+    public void endTrip(String tripIdInStr) throws InvalidDestination, InvalidTargetID, ParseException {
+        //public void endTrip(String body) throws InvalidDestination, InvalidTargetID, ParseException {
         PreparedStatement ps = null;
         ResultSet res = null;
 
-        //generate our trip id
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String tripId = object.get("tripId").toString();
+        int tripId = Integer.parseInt(tripIdInStr);
+
 
         Boolean completed = false;
-//        String s = UUID.randomUUID().toString();
-//        String tripId = s.substring(0, 8);
-        //去掉“-”符号
-
-        //debugging
-        System.out.println("TRIP-ID:" + tripId);
 
         //String sql = "SELECT * FROM Trips WHERE tripId = ? LIMIT 1";
 
-        String sql = "update Trips set completed = 0 where tripId = ?";
+        String sql = "update Trips set completed = 1 where tripId = ?";
 
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
-            ps.setString(1, tripId);
+            ps.setInt(1, tripId);
             res = ps.executeQuery();
 
             while (res.next()) { //if there is something in the response
@@ -1057,13 +1148,18 @@ public class WalkLiveService {
                     ps.close();
                 } catch (SQLException e) { /* ignored */}
             }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) { /* ignored */}
             }
         }
-
 
     }
     /**
@@ -1073,50 +1169,96 @@ public class WalkLiveService {
 
      **/
 
-//    public Trip getTrip(String body) throws UserServiceException,InvalidTargetID, ParseException {
-//        ResultSet res = null;
-//        PreparedStatement ps = null;
-//
-//        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-//
-//        try { //find user by username
-//            conn = DriverManager.getConnection(url, user, password);
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, username);
-//            res = ps.executeQuery();
-//
-//            String pw;
-//            String contact;
-//            String friendId;
-//            String createdOn;
-//
-//            if (res.next()) {
-//                pw = res.getString(2);
-//                contact = res.getString(3);
-//                friendId = res.getString(4);
-//                createdOn = res.getString(5);
-//
-//                return new User(username, pw, contact);
-//            }
-//        } catch(SQLException ex) {
-//            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//            throw new UserServiceException(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-//        }  finally {
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//
-//        return null;
-////
-//    }
+
+    public Trip getTrip(String tripIdInStr) throws UserServiceException, ParseException, InvalidTargetID {
+        ResultSet res = null;
+        PreparedStatement ps = null;
+        //logger.info("in the get trip, the string form "+ tripIdInStr);
+        //logger.info("================================");
+        //logger.info("in the get trip, the int form "+ tripId);
+
+        int tripId = Integer.parseInt(tripIdInStr);
+
+
+        //find user by username
+        String sql = "SELECT * FROM Trips WHERE tripId = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, tripId);
+            res = ps.executeQuery();
+
+            String username;
+            String startTime;
+            String destination;
+            String timeSpent;
+            String emergencyNum;
+            String shareTo = null;
+            double startLong;
+            double startLat;
+            double curLong;
+            double curLat;
+            double endLong;
+            double endLat;
+            boolean completed;
+
+//            String setup = "users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, " +
+//                    "emergency_id TEXT, emergency_number TEXT)" ;
+//            pw = res.getString(2);
+
+//            stm.executeUpdate("(tripId TEXT, username TEXT, shareTo TEXT, " +
+//                  4  "destination TEXT, dangerZone INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, " +
+//                  9  "startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, " +
+//                  14  "emergencyNum TEXT, timeSpent TEXT)");
+
+
+
+            if (res.next()) {
+                username = res.getString(2);
+                destination = res.getString(4);
+                startTime = res.getString(6);
+                completed = res.getBoolean(7);
+                startLat = res.getDouble(8);
+                startLong = res.getDouble(9);
+                curLat = res.getDouble(10);
+                curLong = res.getDouble(11);
+                endLat = res.getDouble(12);
+                endLong = res.getDouble(13);
+                emergencyNum = res.getString(14);
+                timeSpent = res.getString(15);
+
+
+                return new Trip(tripId, shareTo,username, destination, startTime, completed, startLat, startLong, curLat, curLong, endLat, endLong, emergencyNum, timeSpent);
+
+            } else{
+                logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+                throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+            }
+        } catch(SQLException ex){
+            logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", tripId), ex);
+
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", tripId), ex);
+        } finally{
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 
 //     public Trip updateDestination(String body) throws WalkLiveService.UserServiceException {
 //

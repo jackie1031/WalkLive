@@ -207,22 +207,13 @@ public class ServerController {
               * ----------------------------------------------------------------------
               * */
 
-            post(API_CONTEXT + "/users/:username/friend_requests", "application/json", (request, response) -> {
-                try {
-                    walkLiveService.createFriendRequest(request.params(":username"), request.body());
-                    response.status(201);
-                } catch (WalkLiveService.FriendRequestServiceException e) {
-                    logger.error("Failed to create friend request.");
-                    response.status(404);
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
-             //Start Trip
-            post(API_CONTEXT+"/trips/startTrip", "application/json", (request, response) -> {
+            //Start Trip
+            post(API_CONTEXT+"/trips", "application/json", (request, response) -> {
                 try {
 
                     walkLiveService.startTrip( request.body());
+                    logger.error("sth wrong here?");
+
                     response.status(200);
                     //return walkLiveService.startTrip(request.body());
                 } // InvalidDestination     Code 409
@@ -233,41 +224,44 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
+//             getTrip:
+//             Method: GET
+//             URL: /WalkLive/api/<userId>/friendTrips
+//             Content: { targetId: <string> } //find by friend’s username
+//             Failure Response:
+//             InvalidTargetId           Code 402
+//             Success Response:         Code 200
+//             { tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
+
+
+
+            //get(API_CONTEXT + "/user/:username/trips/:tripId", "application/json", (request, response) -> {
+
+            //get Trip
+            get(API_CONTEXT + "/trips/:tripId", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.getTrip(request.params(":tripId"));
+                } catch (WalkLiveService.InvalidTargetID e) {
+                    logger.error("Invalid user id.");
+                    response.status(402);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
             // end a trip
-            put(API_CONTEXT+"/users/:username/endTrip", "application/json", (request, response) -> {
+            put(API_CONTEXT+"/trips/:tripId/endtrip", "application/json", (request, response) -> {
                 try {
                     response.status(200);
                     walkLiveService.endTrip(request.body());
                 } // InvalidDestination     Code 409
-                catch (WalkLiveService.InvalidDestination e) {
-                    response.status(409);
+                catch (WalkLiveService.InvalidTargetID e) {
+                    response.status(402);
                 }
 
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
- //            getTrip:
- //            Method: GET
- //            URL: /WalkLive/api/<userId>/friendTrips
- //            Content: { targetId: <string> } //find by friend’s username
- //            Failure Response:
- //            InvalidTargetId           Code 402
- //            Success Response:         Code 200
- //            { tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
 
-//             //get Trip
-//             get(API_CONTEXT + "/user/friendTrips", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     walkLiveService.getTrip(request.body());
-//                 } catch (WalkLiveService.InvalidTargetID e) {
-//                     logger.error("Invalid user id.");
-//                     response.status(402);
-//                 }
-//                 return Collections.EMPTY_MAP;
-//
-//             }, new JsonTransformer());
 
 
 // //            updateTripDestination:
