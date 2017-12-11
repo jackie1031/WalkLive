@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import CoreLocation
+//import CoreLocation
 
-class SettingsVC: UITableViewController, MessageVCDelegate {
+class SettingsVC: UITableViewController {
+//class SettingsVC: UITableViewController, MessageVCDelegate {
 
     var filePath: String {
         let manager = FileManager.default
@@ -26,12 +27,14 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.setKeyboard()
         
         //load message setting data from local
-        loadData()
+        self.loadData()
         
         // refresh text label
-        refreshTextLabel()
+        self.refreshTextLabel()
         
         // fill in phone numbers
         userPhone.text = currentUserInfo.contact
@@ -50,7 +53,6 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         }
     }
     
-    
     @IBAction func onSaveButton(_ sender: Any) {
         if (emergencyIsDifferent()){
             let emergencyContact = EmergencyContact(emergency_id: emergencyContactIdTextField.text!, emergency_number: emergencyContactPhone.text!)
@@ -61,7 +63,6 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
                 self.view.addSubview(successView)
                 }
             }, failure: { (error) in
-                
             }, emergencyContact: emergencyContact)
         }
     }
@@ -74,10 +75,10 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.emergencyContactPhone.placeholder = stringBuilder.emerStringBuilder()
         self.emergencyContactIdTextField.placeholder = stringBuilder.emerIdStringBuilder()
+        refreshTextLabel()
     }
     
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -90,32 +91,31 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         self.performSegue(withIdentifier: "messageSegue", sender: nil)
     }
     
-    // now MessageVC receives message setting and updates it variable unsavedMessages
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? MessageVC {
-            let passingMessages : Message = Message(messageSegments: messages.getMessages())
-            destinationVC.unsavedMessages = passingMessages
-            destinationVC.delegate = self as MessageVCDelegate
-        }
-    }
+//    // now MessageVC receives message setting and updates it variable unsavedMessages
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destinationVC = segue.destination as? MessageVC {
+//            let passingMessages : Message = Message(messageSegments: messages.getMessages())
+//            destinationVC.unsavedMessages = passingMessages
+//            destinationVC.delegate = self as MessageVCDelegate
+//        }
+//    }
     
-    // updating global variable messages as the newly updated message setting from MessageVC
-    func messagesSaved(unsavedMessages: Message?) {
-        messages = unsavedMessages
-    }
+//    // updating global variable messages as the newly updated message setting from MessageVC
+//    func messagesSaved(unsavedMessages: Message?) {
+//        messages = unsavedMessages!
+//    }
     
-    // save message setting locally
-    private func saveData() {
-        NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
-        refreshTextLabel()
-    }
-    
+//    // save message setting locally
+//    private func saveData() {
+//        NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
+//    }
+//    
     // load message setting from local directory
     private func loadData() {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
             messages = data
-        } else {
-            messages = Message()
+//        } else {
+//            messages = Message()
         }
     }
     
@@ -135,23 +135,27 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     }
     
     private func refreshTextLabel() {
-        var text : String = ""
-        for message in messages.getMessages() {
-            var realValue : String
-            if (message == "Phone") {
-                realValue = currentUserInfo.contact!
-            } else if (message == "Coordinate") {
-                let location = CLLocationManager().location?.coordinate
-                let longtitude = String(format: "%.2f", (location?.longitude)!)
-                let latitude = String(format: "%.2f", (location?.latitude)!)
-                realValue = "(" + longtitude + ", " + latitude + ")"
-            } else {
-                realValue = message
-            }
-            text.append(realValue)
-            text.append(" ")
-        }
-        textLabel.text = text
+        textLabel.text = messages.buildMessage()
+//        var text : String = ""
+////        if messages == nil {
+////            messages = Message()
+////        }
+//        for message in messages.getMessages() {
+//            var realValue : String
+//            if (message == "Phone") {
+//                realValue = currentUserInfo.contact!
+//            } else if (message == "Coordinate") {
+//                let location = CLLocationManager().location?.coordinate
+//                let longtitude = String(format: "%.2f", (location?.longitude)!)
+//                let latitude = String(format: "%.2f", (location?.latitude)!)
+//                realValue = "(" + longtitude + ", " + latitude + ")"
+//            } else {
+//                realValue = message
+//            }
+//            text.append(realValue)
+//            text.append(" ")
+//        }
+//        textLabel.text = text
     }
     
     private func createAlert(title: String, message: String) {
@@ -160,6 +164,17 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
             NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func setKeyboard(){
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+    }
+    
+    @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
 //    @IBAction func onCancelButton(_ sender: Any) {
