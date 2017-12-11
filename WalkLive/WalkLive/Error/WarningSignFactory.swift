@@ -62,10 +62,15 @@ class WarningSignFactory: NSObject{
         if (status == 1) {
             view.warningContentView.text = "There should be at most 8 message segments."
         }
-        if (status == 2) {
-            view.warningContentView.text = "Message Settings Saved!"
-        }
         return view
+    }
+    
+    func makeSaveSuccessSign() -> WarningSignView {
+        var successView = self.makeGenericWarningSign()
+        successView = successView.loadNib()
+        successView.headerLabel.text = "Settings Saved!"
+        successView.warningContentView.text = "You can keep editing or press \"Settings\" to leave."
+        return successView
     }
     
     

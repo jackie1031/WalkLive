@@ -131,22 +131,22 @@ class MessageVC: UIViewController {
         }
         unsavedMessages.updateMessages(updatedMessages: messageSegments)
         delegate?.messagesSaved(unsavedMessages: unsavedMessages)
-//        let view = warnigSignFactory.saveMessageWarningSign(status: 3)
-//        view.center = self.view.center
-//        self.view.addSubview(view)
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
+        let view = warnigSignFactory.makeSaveSuccessSign()
+        view.center = self.view.center
+        self.view.addSubview(view)
+//        if let navController = self.navigationController {
+//            navController.popViewController(animated: true)
+//        }
     }
     
-    private func createAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
+//    private func createAlert(title: String, message: String) {
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+//            NSLog("The \"OK\" alert occured.")
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
+//
     
     /*
     // MARK: - Navigation
