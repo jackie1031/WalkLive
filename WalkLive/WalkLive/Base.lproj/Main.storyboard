@@ -737,6 +737,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W91-6E-KBm">
                                                             <rect key="frame" x="68" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="🗺"/>
+                                                            <connections>
+                                                                <segue destination="F9v-a4-VFp" kind="show" id="QEB-kS-59O"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -803,7 +806,6 @@
                         <outlet property="userContactLabel" destination="Yr3-nM-foV" id="clI-OF-Buf"/>
                         <outlet property="usernameLabel" destination="eHJ-3O-Xau" id="HHC-Cw-6EY"/>
                         <segue destination="mhm-es-34Q" kind="show" identifier="settingSegue" id="cR3-Ay-sw1"/>
-                        <segue destination="F9v-a4-VFp" kind="show" id="x1p-ad-Wp6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Su-28-Rsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1301,7 +1303,7 @@
                                 <rect key="frame" x="0.0" y="382" width="375" height="285"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="76" id="skE-ko-VN0" customClass="FriendTrackTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FriendTrackTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendTrackTableViewCell" rowHeight="76" id="skE-ko-VN0" customClass="FriendTrackTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="skE-ko-VN0" id="IEq-e4-7Ad">
@@ -1398,6 +1400,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QQV-sO-8MY"/>
                     </view>
+                    <connections>
+                        <outlet property="friendTrackTable" destination="xTX-aD-Py8" id="f8L-yt-SmC"/>
+                        <outlet property="mapView" destination="MaB-ta-3Fx" id="o49-nW-UwC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GVR-xD-Nzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

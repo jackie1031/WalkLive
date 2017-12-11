@@ -128,21 +128,6 @@ class RoadRequester: NSObject {
         }
     }
 
-    //  Inefficient algorithm; will not consider to use until talk to the TA.
-//    func searchLandmarkNearCoordiantes(){
-//        let request = MKLocalSearchRequest()
-//        request.region = self.getCurrentDefinedRegion()
-//        request.naturalLanguageQuery = "Forever 21"
-//
-//        let search = MKLocalSearch(request: request)
-//        search.start { (response, error) in
-//            if (error != nil) {
-//                print(error!)
-//                return
-//            }
-//            print(response!)
-//        }
-//    }
     
 }
 
