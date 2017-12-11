@@ -11,7 +11,9 @@ import Foundation
 class FriendRequest: NSObject, Codable {
     var sender: String!
     var recipient: String!
-    var requestId: String!
+    var _id: Int!
+    var relationship: Int!
+    var sent_on: String!
     
     init(dictionary: NSDictionary) {
         self.sender = dictionary["targetId"] as? String
@@ -20,7 +22,7 @@ class FriendRequest: NSObject, Codable {
     override init(){
         self.sender = "admin"
         self.recipient = "teacher"
-        self.requestId = "admin"
+        self._id = 5
     }
     
     func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
