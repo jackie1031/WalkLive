@@ -1067,7 +1067,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-
                         <outlet property="emergencyContactIdTextField" destination="GGy-eb-dbe" id="Mgk-L6-e3X"/>
                         <outlet property="emergencyContactPhone" destination="SPl-A3-asN" id="Zb6-hR-zUz"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>

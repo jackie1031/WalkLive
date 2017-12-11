@@ -18,6 +18,10 @@ class Message: NSObject, NSCoding {
     
     override init() {
         self.messageSegments = Array<String>()
+        self.messageSegments.append("Hello I'm currently at:")
+        self.messageSegments.append("Coordinate")
+        self.messageSegments.append("Call me at:")
+        self.messageSegments.append("Phone")
     }
     
     init(messageSegments: Array<String>) {

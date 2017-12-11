@@ -35,7 +35,7 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         
         // fill in phone numbers
         userPhone.text = currentUserInfo.contact
-        if let emergencyContact = currentUserInfo.emergencyNumber {
+        if let emergencyContact = currentUserInfo.emergency_number {
             emergencyContactPhone.text = emergencyContact
         }
         
