@@ -22,8 +22,10 @@ class AddFriendView: UIView {
         }
         friendRequest.recipient = friendIdLabel.text
         backEndClient.createFriendRequest(success: {
+            OperationQueue.main.addOperation {
             self.statusLabel.text = "sent successfully to " + self.friendIdLabel.text!
             self.statusLabel.textColor = primaryColor
+            }
         }, failure: { (error) in
             print(error)
         }, friendRequest: friendRequest)
