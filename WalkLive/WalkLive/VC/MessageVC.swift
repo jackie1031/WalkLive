@@ -127,9 +127,10 @@ class MessageVC: UIViewController {
         }
         unsavedMessages.updateMessages(updatedMessages: messageSegments)
         delegate?.messagesSaved(unsavedMessages: unsavedMessages)
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
+        createAlert(title: "Message Setting Saved!", message: "You can keep editing or press \"Back\" to leave.")
+//        if let navController = self.navigationController {
+//            navController.popViewController(animated: true)
+//        }
     }
     
     private func createAlert(title: String, message: String) {

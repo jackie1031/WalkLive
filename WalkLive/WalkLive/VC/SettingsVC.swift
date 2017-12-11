@@ -26,12 +26,14 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.setKeyboard()
         
         //load message setting data from local
-        loadData()
+        self.loadData()
         
         // refresh text label
-        refreshTextLabel()
+        self.refreshTextLabel()
         
         // fill in phone numbers
         userPhone.text = currentUserInfo.contact
