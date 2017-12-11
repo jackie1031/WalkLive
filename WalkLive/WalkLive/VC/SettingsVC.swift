@@ -18,14 +18,16 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
-    
-    var fullPath : URL?
+    @IBOutlet weak var textLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //load message setting data from local
         loadData()
+        
+        // refresh text label
+        refreshTextLabel()
         
         // if no local data has been saved, set to default
         if (messages.getMessages().count == 0) {
@@ -102,6 +104,23 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         let userPhoneResult =  phoneTest.evaluate(with: self.userPhone.text)
         let emergencyPhoneResult = phoneTest.evaluate(with: self.emergencyContactPhone.text)
         return (userPhoneResult && emergencyPhoneResult)
+    }
+    
+    private func refreshTextLabel() {
+        var text : String = ""
+        for message in messages.getMessages() {
+            var realValue : String
+            if (message == "Phone") {
+                realValue = currentUserInfo.contact!
+            } else if (message == "Coordinate") {
+                realValue = "(xxx, xxx)"
+            } else {
+                realValue = message
+            }
+            text.append(realValue)
+            text.append(" ")
+        }
+        textLabel.text = text
     }
     
 //    @IBAction func onCancelButton(_ sender: Any) {

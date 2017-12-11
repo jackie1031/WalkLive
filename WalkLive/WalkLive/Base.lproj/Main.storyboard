@@ -1028,6 +1028,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emergencyContactPhone" destination="GGy-eb-dbe" id="4kw-qN-FgA"/>
+                        <outlet property="textLabel" destination="Sgf-zk-nbt" id="eGC-iD-oLP"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>
                         <segue destination="MJu-oG-pf4" kind="show" identifier="messageSegue" id="mmX-tX-dQX"/>
                     </connections>
