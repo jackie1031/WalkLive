@@ -23,12 +23,23 @@ class SignUpError: Error {
 //    }
 //
 //    let kind: ErrorKind
-    var status: Int?? = 0
+    var status: Int! = 0
     init(status: Int) {
         self.status = status
     }
     func returnReason() -> String {
-        return ""
+        switch status {
+        case 401:
+            return "InvalidUserId"
+        case 403:
+            return "InvalidPassword"
+        case 405:
+            return "InvalidContact"
+        case 406:
+            return "InvalidEmergencyId"
+        case 407:
+            return "InvalidEmergencyNumber"
+        }
     }
 }
 
