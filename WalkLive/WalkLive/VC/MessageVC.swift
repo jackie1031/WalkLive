@@ -65,7 +65,6 @@ class MessageVC: UIViewController {
         // load last textfields
         let messageSegments = self.unsavedMessages.getMessages()
         for messageSegment in messageSegments {
-            print(messageSegment)
             addTextField(message: messageSegment)
         }
     }
