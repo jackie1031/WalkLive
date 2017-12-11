@@ -13,7 +13,7 @@ protocol MessageVCDelegate: class {
 }
 
 class MessageVC: UIViewController {
-
+    
     var unsavedMessages : Message!
     var textFields : Array<UITextField>!
     var lastYCoor : Int!
@@ -127,6 +127,9 @@ class MessageVC: UIViewController {
         }
         unsavedMessages.updateMessages(updatedMessages: messageSegments)
         delegate?.messagesSaved(unsavedMessages: unsavedMessages)
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
     
     private func createAlert(title: String, message: String) {

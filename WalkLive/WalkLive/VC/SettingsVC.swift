@@ -50,14 +50,12 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         }
     }
     
-    
     @IBAction func onSaveButton(_ sender: Any) {
         if (emergencyIsDifferent()){
             let emergencyContact = EmergencyContact(emergency_id: emergencyContactIdTextField.text!, emergency_number: emergencyContactPhone.text!)
             backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
                 print("updated!")
             }, failure: { (error) in
-                
             }, emergencyContact: emergencyContact)
         }
     }
@@ -70,10 +68,10 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.emergencyContactPhone.placeholder = stringBuilder.emerStringBuilder()
         self.emergencyContactIdTextField.placeholder = stringBuilder.emerIdStringBuilder()
+        refreshTextLabel()
     }
     
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,7 +101,6 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     // save message setting locally
     private func saveData() {
         NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
-        refreshTextLabel()
     }
     
     // load message setting from local directory
@@ -156,6 +153,17 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
             NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func setKeyboard(){
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+    }
+    
+    @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
 //    @IBAction func onCancelButton(_ sender: Any) {
