@@ -71,6 +71,10 @@ class MessageVC: UIViewController {
     }
     
     private func addTextField(message : String) {
+        if (textFields.count >= 8) {
+            createAlert(title: "Illegal Action", message: "There should be at most 8 message segments.")
+            return
+        }
         // move buttons and labels down
         let frame : CGRect = messageEditPanel.frame
         messageEditPanel.frame.origin.y = frame.origin.y + 40
@@ -97,6 +101,7 @@ class MessageVC: UIViewController {
     
     private func delTextField() {
         if (textFields.count < 5) {
+            createAlert(title: "Illegal Action", message: "There should be at least 4 message segments.")
             return
         }
         // move add and del buttons up
@@ -123,6 +128,14 @@ class MessageVC: UIViewController {
         }
         unsavedMessages.updateMessages(updatedMessages: messageSegments)
         delegate?.messagesSaved(unsavedMessages: unsavedMessages)
+    }
+    
+    private func createAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
