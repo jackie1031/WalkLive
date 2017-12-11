@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import CoreLocation
+//import CoreLocation
 
-class SettingsVC: UITableViewController, MessageVCDelegate {
+class SettingsVC: UITableViewController {
+//class SettingsVC: UITableViewController, MessageVCDelegate {
 
     var filePath: String {
         let manager = FileManager.default
@@ -86,31 +87,31 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         self.performSegue(withIdentifier: "messageSegue", sender: nil)
     }
     
-    // now MessageVC receives message setting and updates it variable unsavedMessages
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? MessageVC {
-            let passingMessages : Message = Message(messageSegments: messages.getMessages())
-            destinationVC.unsavedMessages = passingMessages
-            destinationVC.delegate = self as MessageVCDelegate
-        }
-    }
+//    // now MessageVC receives message setting and updates it variable unsavedMessages
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destinationVC = segue.destination as? MessageVC {
+//            let passingMessages : Message = Message(messageSegments: messages.getMessages())
+//            destinationVC.unsavedMessages = passingMessages
+//            destinationVC.delegate = self as MessageVCDelegate
+//        }
+//    }
     
-    // updating global variable messages as the newly updated message setting from MessageVC
-    func messagesSaved(unsavedMessages: Message?) {
-        messages = unsavedMessages
-    }
+//    // updating global variable messages as the newly updated message setting from MessageVC
+//    func messagesSaved(unsavedMessages: Message?) {
+//        messages = unsavedMessages!
+//    }
     
-    // save message setting locally
-    private func saveData() {
-        NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
-    }
-    
+//    // save message setting locally
+//    private func saveData() {
+//        NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
+//    }
+//    
     // load message setting from local directory
     private func loadData() {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
             messages = data
-        } else {
-            messages = Message()
+//        } else {
+//            messages = Message()
         }
     }
     
@@ -130,23 +131,27 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     }
     
     private func refreshTextLabel() {
-        var text : String = ""
-        for message in messages.getMessages() {
-            var realValue : String
-            if (message == "Phone") {
-                realValue = currentUserInfo.contact!
-            } else if (message == "Coordinate") {
-                let location = CLLocationManager().location?.coordinate
-                let longtitude = String(format: "%.2f", (location?.longitude)!)
-                let latitude = String(format: "%.2f", (location?.latitude)!)
-                realValue = "(" + longtitude + ", " + latitude + ")"
-            } else {
-                realValue = message
-            }
-            text.append(realValue)
-            text.append(" ")
-        }
-        textLabel.text = text
+        textLabel.text = messages.buildMessage()
+//        var text : String = ""
+////        if messages == nil {
+////            messages = Message()
+////        }
+//        for message in messages.getMessages() {
+//            var realValue : String
+//            if (message == "Phone") {
+//                realValue = currentUserInfo.contact!
+//            } else if (message == "Coordinate") {
+//                let location = CLLocationManager().location?.coordinate
+//                let longtitude = String(format: "%.2f", (location?.longitude)!)
+//                let latitude = String(format: "%.2f", (location?.latitude)!)
+//                realValue = "(" + longtitude + ", " + latitude + ")"
+//            } else {
+//                realValue = message
+//            }
+//            text.append(realValue)
+//            text.append(" ")
+//        }
+//        textLabel.text = text
     }
     
     private func createAlert(title: String, message: String) {

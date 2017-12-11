@@ -8,16 +8,22 @@
 
 import UIKit
 
-protocol MessageVCDelegate: class {
-    func messagesSaved(unsavedMessages: Message?)
-}
+//protocol MessageVCDelegate: class {
+//    func messagesSaved(unsavedMessages: Message?)
+//}
 
 class MessageVC: UIViewController {
+    
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        return (url!.appendingPathComponent("Data").path)
+    }
     
     var unsavedMessages : Message!
     var textFields : Array<UITextField>!
     var lastYCoor : Int!
-    weak var delegate: MessageVCDelegate?
+//    weak var delegate: MessageVCDelegate?
     
     @IBOutlet weak var messageEditPanel: UIView!
     @IBOutlet weak var noteLabel: UILabel!
@@ -30,6 +36,7 @@ class MessageVC: UIViewController {
     
     
     override func viewDidLoad() {
+        self.loadData()
         setUpTextFields()
     }
     
@@ -130,13 +137,31 @@ class MessageVC: UIViewController {
             messageSegments.append(textField.text!)
         }
         unsavedMessages.updateMessages(updatedMessages: messageSegments)
-        delegate?.messagesSaved(unsavedMessages: unsavedMessages)
+//        delegate?.messagesSaved(unsavedMessages: unsavedMessages)
+        self.saveData()
         let view = warnigSignFactory.makeSaveSuccessSign()
         view.center = self.view.center
         self.view.addSubview(view)
-//        if let navController = self.navigationController {
-//            navController.popViewController(animated: true)
-//        }
+    }
+    
+    // save message setting locally
+    private func saveData() {
+        NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
+        let temp = Message()
+        temp.updateMessages(updatedMessages: unsavedMessages.getMessages())
+        messages = temp
+    }
+    
+    // load message setting from local directory
+    private func loadData() {
+        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
+            self.unsavedMessages = data
+        } else {
+            let temp = Message()
+            temp.updateMessages(updatedMessages: messages.getMessages())
+            unsavedMessages = temp
+//            unsavedMessages = Message()
+        }
     }
     
 //    private func createAlert(title: String, message: String) {
@@ -146,7 +171,6 @@ class MessageVC: UIViewController {
 //        }))
 //        self.present(alert, animated: true, completion: nil)
 //    }
-//
     
     /*
     // MARK: - Navigation
