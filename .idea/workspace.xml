@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="085d284c-0dc5-4f83-bac4-705122e7338d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive.xcworkspace/xcuserdata/michelleshu.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/WalkLive/WalkLive.xcworkspace/xcuserdata/michelleshu.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/Error/BackendError.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/Error/BackendError.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/Model/BackEndClient.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/Model/BackEndClient.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/VC/FriendRequestVC.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/VC/FriendRequestVC.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/VC/UserVC.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/VC/UserVC.swift" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
