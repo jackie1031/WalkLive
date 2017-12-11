@@ -32,9 +32,9 @@ class SignUpError: Error {
         case 401:
             return "InvalidUserId: the username may be illegal or the username already exists!"
         case 403:
-            return "InvalidPassword"
+            return "InvalidPassword: the password may be illegal"
         case 405:
-            return "InvalidContact"
+            return "InvalidContact: the contact number entered may be illegal"
         case 406:
             return "InvalidEmergencyId"
         case 407:
@@ -47,21 +47,21 @@ class SignUpError: Error {
 
 
 class LoginError: Error {
-    //    enum ErrorKind {
-    //        case InvalidUserId
-    //        case InvalidPassword
-    //        case InvalidContact
-    //        case InvalidEmergencyId
-    //        case InvalidEmergencyNumber
-    //    }
-    //
-    //    let kind: ErrorKind
-    var status: Int?? = 0
+//    InvalidUsername:Code: 401
+//    IncorrectPassword:Code: 403
+    var status: Int! = 0
     init(status: Int) {
         self.status = status
     }
     func returnReason() -> String {
-        return ""
+        switch status {
+        case 401:
+            return "InvalidUserId: the username may be illegal or the username already exists!"
+        case 403:
+            return "InvalidPassword: the password may be illegal or inccorect"
+        default:
+            return "Unknown error" + String(status)
+        }
     }
 }
 

@@ -111,7 +111,7 @@ class BackEndClient: NSObject {
         }
     }
     
-    func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin) {
+    func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (LoginError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/login"
         var loginAttemptRequest = URLRequest(url: urlComponents.url!)
@@ -121,14 +121,14 @@ class BackEndClient: NSObject {
             let newUserLoginAsJSON = try jsonEncoder.encode(userLogin)
             loginAttemptRequest.httpBody = newUserLoginAsJSON
         } catch {
-            failure(error)
+            failure(LoginError(status: 0))
         }
         
         URLSession.shared.dataTask(with: loginAttemptRequest, completionHandler: {
             (data, response, error) in
             // check for errors
             if error != nil {
-                failure(error!)
+                failure(LoginError(status: 0))
             }
             
             let status = (response as! HTTPURLResponse).statusCode

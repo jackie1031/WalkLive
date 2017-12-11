@@ -37,5 +37,22 @@ class WarningSignFactory: NSObject{
         return errorView
     }
     
+    func makeLoginValidityWarningSign(status: Int) -> WarningSignView{
+        let errorView = self.makeGenericWarningSign()
+        if (status == 0) {
+            errorView.warningContentView.text = "Please enter a valid username😮"
+        }
+        if (status == 1){
+            errorView.warningContentView.text = "Please enter a valid password😮"
+        }
+        return errorView
+    }
+    
+    func makeLoginBackEndWarningSign(loginError: LoginError) -> WarningSignView {
+        let errorView = self.makeGenericWarningSign()
+        errorView.warningContentView.text = loginError.returnReason()
+        return errorView
+    }
+    
     
 }
