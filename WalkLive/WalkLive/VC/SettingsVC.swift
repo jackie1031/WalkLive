@@ -110,6 +110,8 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     private func loadData() {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
             messages = data
+        } else {
+            messages = Message()
         }
     }
     
