@@ -1212,6 +1212,7 @@
                         <outlet property="message3" destination="Llz-50-YjR" id="ayu-Bt-rf4"/>
                         <outlet property="message4" destination="OLr-TS-HMs" id="3gl-MT-6HY"/>
                         <outlet property="messageEditPanel" destination="WhI-ak-p8g" id="VzU-0I-VzF"/>
+                        <outlet property="noteLabel" destination="KlX-eG-39C" id="n8a-FI-3po"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qek-hv-B0K" userLabel="First Responder" sceneMemberID="firstResponder"/>

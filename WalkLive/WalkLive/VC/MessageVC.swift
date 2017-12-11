@@ -9,33 +9,24 @@
 import UIKit
 
 protocol MessageVCDelegate: class {
-    func messagesSaved(messages: Message?)
+    func messagesSaved(unsavedMessages: Message?)
 }
 
 class MessageVC: UIViewController {
 
-    var messages : Message!
+    var unsavedMessages : Message!
     var textFields : Array<UITextField>!
     var lastYCoor : Int!
     weak var delegate: MessageVCDelegate?
-//    var filePath: String {
-//        //1 - manager lets you examine contents of a files and folders in your app; creates a directory to where we are saving it
-//        let manager = FileManager.default
-//        //2 - this returns an array of urls from our documentDirectory and we take the first path
-//        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-//        //print("this is the url path in the documentDirectory \(url)")
-//        //3 - creates a new path component and creates a new file called "Data" which is where we will store our Data array.
-//        return (url!.appendingPathComponent("Data").path)
-//    }
     
     @IBOutlet weak var messageEditPanel: UIView!
+    @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var addTextButton: UIButton!
     @IBOutlet weak var delTextButton: UIButton!
     @IBOutlet weak var message1: UITextField!
     @IBOutlet weak var message2: UITextField!
     @IBOutlet weak var message3: UITextField!
     @IBOutlet weak var message4: UITextField!
-    
     
     
     override func viewDidLoad() {
@@ -61,13 +52,13 @@ class MessageVC: UIViewController {
             textField.removeFromSuperview()
         }
         textFields.removeAll()
-        // load data from local
-//        loadData()
         // reset panel coordination
         messageEditPanel.frame.origin.y = 30
+        noteLabel.frame.origin.y = 30 + 50
+        
         // load last textfields
         lastYCoor = 30
-        let messageSegments = self.messages.getMessages()
+        let messageSegments = self.unsavedMessages.getMessages()
         for messageSegment in messageSegments {
             print(messageSegment)
             addTextField(message: messageSegment)
@@ -86,7 +77,8 @@ class MessageVC: UIViewController {
         // move add and del buttons down
         let frame : CGRect = messageEditPanel.frame
         messageEditPanel.frame.origin.y = frame.origin.y + 40
-        
+        let labelFrame : CGRect = noteLabel.frame
+        noteLabel.frame.origin.y = labelFrame.origin.y + 40
         // create new label
         lastYCoor = lastYCoor + 40
         let newTextField = UITextField(frame: CGRect(x: 10, y: lastYCoor+30, width: 357, height: 30))
@@ -104,7 +96,6 @@ class MessageVC: UIViewController {
         newTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         self.view.addSubview(newTextField)
         textFields.append(newTextField)
-        self.messages.addMessage(m: "")
     }
     
     private func delTextField() {
@@ -114,13 +105,15 @@ class MessageVC: UIViewController {
         // move add and del buttons up
         let frame : CGRect = messageEditPanel.frame
         messageEditPanel.frame.origin.y = frame.origin.y - 40
+        let labelFrame : CGRect = noteLabel.frame
+        noteLabel.frame.origin.y = labelFrame.origin.y - 40
         
         // delete last label
         let lastTextField = textFields.last
         lastTextField?.removeFromSuperview()
         if self.textFields.count != 0 {
             self.textFields.removeLast()
-            self.messages.deleteLastMessage()
+            self.unsavedMessages.deleteLastMessage()
         }
         
         lastYCoor = lastYCoor - 40
@@ -131,25 +124,9 @@ class MessageVC: UIViewController {
         for textField in textFields {
             messageSegments.append(textField.text!)
         }
-        self.messages.updateMessages(updatedMessages: messageSegments)
-        delegate?.messagesSaved(messages: self.messages)
-        //save locally
-//        saveData()
+        unsavedMessages.updateMessages(updatedMessages: messageSegments)
+        delegate?.messagesSaved(unsavedMessages: unsavedMessages)
     }
-    
-    private func saveData() {
-        NSKeyedArchiver.archiveRootObject(self.messages, toFile: filePath)
-    }
-    
-    // when do we call this function?
-    private func loadData() {
-        print("hi")
-        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
-            print("local data exists")
-            self.messages = data
-        }
-    }
-    
     
     
     /*
