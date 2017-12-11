@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SettingsVC: UITableViewController, MessageVCDelegate {
 
@@ -29,6 +30,12 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         // refresh text label
         refreshTextLabel()
         
+        // fill in phone numbers
+        userPhone.text = currentUserInfo.contact
+        if let emergencyContact = currentUserInfo.emergencyNumber {
+            emergencyContactPhone.text = emergencyContact
+        }
+        
         // if no local data has been saved, set to default
         if (messages.getMessages().count == 0) {
             var messageSegments = Array<String>()
@@ -47,16 +54,18 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     
     
     @IBAction func onSaveButton(_ sender: Any) {
-        if (!validPhone()) {
-            return
-        }
-        backEndClient.saveAttempt(success: {
-            //save message setting locally
-            self.saveData()
-            self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil)
-        }, failure: { (error) in
-            print(error)
-        }, phoneNum: userPhone.text!, emergencyContact: emergencyContactPhone.text!)
+//        if (!validPhone()) {
+//            createAlert(title: "Cannot Save Info", message: "Please check if phone numbers have correct syntax.")
+//            return
+//        }
+        saveData()
+//        backEndClient.saveAttempt(success: {
+//            //save message setting locally
+//            self.saveData()
+//            self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil)
+//        }, failure: { (error) in
+//            print(error)
+//        }, phoneNum: userPhone.text!, emergencyContact: emergencyContactPhone.text!)
     }
     
     // Pass messages to MessageVC
@@ -80,8 +89,8 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     
     // save message setting locally
     private func saveData() {
-        print("saving data locally")
         NSKeyedArchiver.archiveRootObject(messages, toFile: filePath)
+        refreshTextLabel()
     }
     
     // load message setting from local directory
@@ -113,7 +122,10 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
             if (message == "Phone") {
                 realValue = currentUserInfo.contact!
             } else if (message == "Coordinate") {
-                realValue = "(xxx, xxx)"
+                let location = CLLocationManager().location?.coordinate
+                let longtitude = String(format: "%.2f", (location?.longitude)!)
+                let latitude = String(format: "%.2f", (location?.latitude)!)
+                realValue = "(" + longtitude + ", " + latitude + ")"
             } else {
                 realValue = message
             }
@@ -121,6 +133,14 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
             text.append(" ")
         }
         textLabel.text = text
+    }
+    
+    private func createAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
 //    @IBAction func onCancelButton(_ sender: Any) {
