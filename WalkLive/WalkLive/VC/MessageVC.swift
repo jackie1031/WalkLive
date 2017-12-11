@@ -71,7 +71,9 @@ class MessageVC: UIViewController {
     
     private func addTextField(message : String) {
         if (textFields.count >= 8) {
-            createAlert(title: "Illegal Action", message: "There should be at most 8 message segments.")
+            let errorView = warnigSignFactory.saveMessageWarningSign(status: 1)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
             return
         }
         // move buttons and labels down
@@ -100,7 +102,9 @@ class MessageVC: UIViewController {
     
     private func delTextField() {
         if (textFields.count < 5) {
-            createAlert(title: "Illegal Action", message: "There should be at least 4 message segments.")
+            let errorView = warnigSignFactory.saveMessageWarningSign(status: 0)
+            errorView.center = self.view.center
+            self.view.addSubview(errorView)
             return
         }
         // move add and del buttons up
@@ -127,10 +131,12 @@ class MessageVC: UIViewController {
         }
         unsavedMessages.updateMessages(updatedMessages: messageSegments)
         delegate?.messagesSaved(unsavedMessages: unsavedMessages)
-        createAlert(title: "Message Setting Saved!", message: "You can keep editing or press \"Back\" to leave.")
-//        if let navController = self.navigationController {
-//            navController.popViewController(animated: true)
-//        }
+//        let view = warnigSignFactory.saveMessageWarningSign(status: 3)
+//        view.center = self.view.center
+//        self.view.addSubview(view)
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
     
     private func createAlert(title: String, message: String) {

@@ -54,5 +54,19 @@ class WarningSignFactory: NSObject{
         return errorView
     }
     
+    func saveMessageWarningSign(status: Int) -> WarningSignView {
+        let view = self.makeGenericWarningSign()
+        if (status == 0) {
+            view.warningContentView.text = "There should be at least 4 message segments."
+        }
+        if (status == 1) {
+            view.warningContentView.text = "There should be at most 8 message segments."
+        }
+        if (status == 2) {
+            view.warningContentView.text = "Message Settings Saved!"
+        }
+        return view
+    }
+    
     
 }
