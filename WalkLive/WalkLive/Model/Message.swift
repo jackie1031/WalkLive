@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Message: NSObject, NSCoding {
     
@@ -18,6 +19,10 @@ class Message: NSObject, NSCoding {
     
     override init() {
         self.messageSegments = Array<String>()
+        self.messageSegments.append("Hello I'm currently at:")
+        self.messageSegments.append("Coordinate")
+        self.messageSegments.append("Call me at:")
+        self.messageSegments.append("Phone")
     }
     
     init(messageSegments: Array<String>) {
@@ -33,6 +38,26 @@ class Message: NSObject, NSCoding {
         if let decodedObject = aDecoder.decodeObject(forKey: Keys.messageSegs) as? Array<String> {
             messageSegments = decodedObject
         }
+    }
+    
+    func buildMessage() -> String {
+        var text : String = ""
+        for message in messageSegments {
+            var realValue : String
+            if (message == "Phone") {
+                realValue = currentUserInfo.contact!
+            } else if (message == "Coordinate") {
+                let location = CLLocationManager().location?.coordinate
+                let longtitude = String(format: "%.2f", (location?.longitude)!)
+                let latitude = String(format: "%.2f", (location?.latitude)!)
+                realValue = "(" + longtitude + ", " + latitude + ")"
+            } else {
+                realValue = message
+            }
+            text.append(realValue)
+            text.append(" ")
+        }
+        return text
     }
     
     func addMessage(m : String) {
