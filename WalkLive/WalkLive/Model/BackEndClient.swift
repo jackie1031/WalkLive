@@ -223,6 +223,39 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     getSentFriendRequests:
+     
+     Method: GET
+     URL: /WalkLive/api/users/[username]/sent_friend_requests
+     Content: {}
+     Failure Response:
+     InvalidUsername    Code 401
+     Content: { reason: NONEXISTENT_USER }
+     Success Response:    Code 200
+     Content: { <friendRequest 1>, <friendRequest 2>, ...}
+     */
+    func getSentFriendRequests(success: @escaping ([FriendRequest]) -> (), failure: @escaping (Error) -> ()){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody" )/sent_friend_requests"
+        var getSentFriendRequests = URLRequest(url: urlComponents.url!)
+        getSentFriendRequests.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: getSentFriendRequests, completionHandler: { (data, response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                failure(LoginError(status: status))
+            } else {
+                let friendRequests = try? jsonDecoder.decode([FriendRequest].self, from: data!) as [FriendRequest]
+                print(friendRequests)
+                success(friendRequests!)
+            }
+        }).resume()
+    }
+    
     /**
      * ================================================================
      * Setting Session
