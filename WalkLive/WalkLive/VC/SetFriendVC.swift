@@ -19,6 +19,8 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        friendListTable.delegate = self
+        friendListTable.dataSource = self
 
         // Do any additional setup after loading the view.
     }

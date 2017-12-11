@@ -13,7 +13,7 @@ import Foundation
 //InvalidContact Code 405
 //InvalidEmergencyId    Code 406
 //InvalidEmergencyNumber    Code 407
-struct SignUpError: Error {
+class SignUpError: Error {
 //    enum ErrorKind {
 //        case InvalidUserId
 //        case InvalidPassword
@@ -23,10 +23,16 @@ struct SignUpError: Error {
 //    }
 //
 //    let kind: ErrorKind
-    let status: Int
+    var status: Int?? = 0
+    init(status: Int) {
+        self.status = status
+    }
+    func returnReason() -> String {
+        return ""
+    }
 }
 
-struct LoginError: Error {
+class LoginError: Error {
     //    enum ErrorKind {
     //        case InvalidUserId
     //        case InvalidPassword
@@ -36,6 +42,12 @@ struct LoginError: Error {
     //    }
     //
     //    let kind: ErrorKind
-    let status: Int
+    var status: Int?? = 0
+    init(status: Int) {
+        self.status = status
+    }
+    func returnReason() -> String {
+        return ""
+    }
 }
 
