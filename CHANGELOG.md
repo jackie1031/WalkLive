@@ -1,17 +1,95 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [5.1.3] - 2017-12-04
+## [5.3.2] - 2017-12-10
+### Added
+- FE:  add start trip back end call and its related controllers by @mshu1
+- FE:  add update emergency contact related friend list and its related code by @mshu1
+- FE:  add errors handling and warning signs on sign up, log in, save setting by @mshu1
+- BE:  add respond to friendrequest endpoint by @jeesoo
+- BE:  add request id by @jeesoo
+- BE:  add create trip, update trip, getAllTrips endpoint by @jackie
+### Changed
+- BE:  fix login password return bug by @jeesoo
+- BE:  fix password check by @jeesoo
+- BE:  fix emergency id and number return by @jeesoo
+- FE:  fix constraints for controllers by @mshu1
+### Test
+- FE + BE: thoroughly tested emergencyContactUpdate code for both front end and back end by @mshu1 and @jeesoo 
+- FE + BE: thoroughly tested createFriendRequest code for both front end and back end by @mshu1 and @jeesoo
+- BE:  thoroughly tested createTrip, endTrip, code for back end by @jackie
+
+## [5.3.0] - 2017-12-09
+### Added
+- FE:  add warning signs and logic code by @mshu1
+- FE:  add signUp endpoint and signUp logistics based on endpoints by @mshu1
+- FE:  add stores message to local disk by @yang
+- BE:  add test for emergencycontact update by @jeesoo
+- BE:  add start trip, update trip end points and connect to ClearDB by @jackie
+### Changed
+- BE:  fix login empty string by @jeesoo
+- BE:  fix signup return value by @jeesoo
+- BE:  fix nonexistent user error code by @jeesoo
+- BE:  Update start/get trip, wip by @jackie
+- BE:  fix user model and json field name conventions for emergency contact by @jeesoo
+- FE:  refin implementation for signUp and Login by @mshu1
+- FE:  fix emergency contact showings now that endpoints are connected by @mshu1
+- FE:  fix messageVC by @yang
+### Test
+- FE + BE:  thoroughly test signUp code for both front end and back end by @mshu1 and @jeesoo 
+- FE + BE:  thoroughly test getUser code for both front end and back end by @mshu1 and @jeesoo 
+
+## [5.2.4] - 2017-12-08
+### Added
+- FE:  add login endpoint and login logistics based on endpointsby @mshu1
+- BE:  add cleardb database connection code by @jeesoo
+### Test
+- FE + BE: thoroughly tested login code for both front end and back end by @mshu1 and @jeesoo 
+
+## [5.2.3] - 2017-12-07
+### Added
+- FE:  add friend requests models, friends list table connection, delegate code by @mshu1
+- FE:  add text message logisticis by @yang
+### Changed
+- BE:  update BE heroku & database by @jackie
+- BE:  finish database setting for trips by @jackie
+### Test
+- FE: test decoder, encoder for JSON and wrote testing parsers and endpoints by @mshu1
+
+## [5.2.2] - 2017-12-06
+### Added
+- FE:  add friend request update logistics by @mshu1
+### Changed
+- FE:  refactor friend request, mainmap, delegates by @mshu1
+- FE:  move settings method to backendClient by @yang
+- BE:  fixed tables.sql syntax by @jeesoo
+- BE:  fix Heroku database by @jackie
+### Test
+- FE: test decoder, encoder for JSON and wrote testing parsers and endpoints by @mshu1
+
+## [5.2.1] - 2017-12-05
+### Added
+- FE:  add route tracking panels and panels show time estimation, time spent, trip details by @mshu1
+- FE:  add endpoints for friend requests by @mshu1
+### Changed
+- FE:  fix folder path to combine "WalkLive" and "Walklive" by @mshu1
+- FE:  change launch screen, friend request table logistics @mshu1
+- FE:  refine login signup and settings endpoints by @yang
+- BE:  update dangerzone parsing by @Jackie
+
+## [5.2.0] - 2017-12-04
 ### Added
 - FE:  add route tracking panels and panels show time estimation, time spent, trip details by @mshu1
 - FE:  add timer to keep track of the current trip; implemented cancel trip by @mshu1
-- FE:  add login and signup endpoints
+- FE:  add login and signup endpoints @yang
 ### Changed
 - FE:  finished first version of message builder by @mshu1
 - FE:  all panels now can be hidden when double click on the corresponding buttons by @mshu1
-- FE:  add login and signup endpoints @yang
 - BE:  added all work from backup branch - added friendrequest endpoints by @jeesoo
 - BE:  added friendRequest tests and minor changes to database table name by @jeesoo
 - BE:  fixed Cherokee problem by @Jackie
+### Test
+- FE + BE:  Tested the first Heroku deployed test endpoint by @mshu1 and @jackie
+
 
 ## [5.1.2] - 2017-12-02
 ### Added
