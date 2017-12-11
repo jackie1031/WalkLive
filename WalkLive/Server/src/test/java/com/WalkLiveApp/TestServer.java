@@ -114,6 +114,7 @@ public class TestServer {
 
     }
 
+
     @Test
     public void testDuplicateCreation() {
 
@@ -197,17 +198,19 @@ public class TestServer {
         Response r1 = request("POST", "/WalkLive/api/users", expected);
         assertEquals("Failed to add new user", 201, r1.httpStatus);
 
-        //Get it back so that we know its ID
+        //log in with those credentials
         Response r2 = request("POST", "/WalkLive/api/users/login", expected);
         assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
 
+        //test for nonexistent user
         User fake = new User("fakenews", "test-1", null);
         Response r3 = request("POST", "/WalkLive/api/users/login", fake);
         assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
 
-//        User incorrect = new User("jeesoo", "incorrectpassword"), null;
-//        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
-//        assertEquals("Failed to detect incorrect password", 401, r3.httpStatus);
+        //test for incorrect password
+        User incorrect = new User("jeesoo", "incorrectpassword", null);
+        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
+        assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
     }
 
     @Test
@@ -240,6 +243,7 @@ public class TestServer {
      * Friend Request Handling
      * ================================================================
      */
+    /*
      @Test
      public void testCreateFriendRequest() throws Exception {
          SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -247,14 +251,21 @@ public class TestServer {
          //add a few elements
          FriendRequest[] frs = new FriendRequest[] {
                  new FriendRequest("jeesookim", "michelle", null),
-                 new FriendRequest("michelle", "yangcao1", null)
+                 new FriendRequest("jeesookim", "yangcao1", null)
          };
 
          for (FriendRequest f : frs) {
              Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
              assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
          }
+
+         //check content of friendrequests in database!! list request id and stuff
+         //Get them back
+         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
+         assertEquals("Failed to get user entries", 200, r.httpStatus);
+         List<User> results = getUsers(r);
      }
+     */
 
     @Test
     public void testUpdateEmergencyInfo() throws Exception {
@@ -356,7 +367,47 @@ public class TestServer {
 //        }
 //    }
 
-/*
+//
+//    @Test
+//    public void testStartTrip() throws Exception {
+//
+//        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//        Trip[] entries = new Trip[]{
+//                new Trip(1, "A"),
+//                new Trip(2, "B"),
+//                new Trip(3, "C"),
+//                new Trip(4, "D"),
+//
+//        };
+//
+//
+//
+//        for (Trip t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users/:username", t);
+//            //System.out.println("USER: " + t.toString());
+//            assertEquals("Failed to create new trip", 409, rCreateNew.httpStatus);
+//        }
+//
+//        //Get them back
+//        Response r = request("GET", "/WalkLive/api/users", null);
+//        assertEquals("Failed to get user entries", 200, r.httpStatus);
+//
+//
+////        List<Trip> results = getTrip(r);
+//
+//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+////        assertEquals("Number of user entries differ", entries.length, results.size());
+////
+////        for (int i = 0; i < results.size(); i++) {
+////            Trip actual = results.get(i);
+////            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+////            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+////            assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+////            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+////        }
+//    }
+
+
     @Test
     public void testCoordinate() throws Exception {
         Coordinate c = new Coordinate(0.6, 0.7);
@@ -433,7 +484,7 @@ public class TestServer {
 
 
     }
-    */
+
 
     /**
      * Test getting getCrimes method within a specific range of coordinates from the
@@ -591,7 +642,9 @@ public class TestServer {
             stm = conn.createStatement();
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            res = stm.executeQuery(setup);
+            String setup2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            stm.executeUpdate(setup);
+            stm.executeUpdate(setup2);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
@@ -601,11 +654,6 @@ public class TestServer {
             stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             stm.executeUpdate(sql4);
-
-            if (res.next()) {
-
-                System.out.println(res.getString(1));
-            }
 
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
@@ -650,7 +698,7 @@ public class TestServer {
             stm.executeUpdate(sql5);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips (sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);

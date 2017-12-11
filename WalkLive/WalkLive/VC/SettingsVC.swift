@@ -20,6 +20,9 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var emergencyContactIdTextField: UITextField!
+    
+    var user : User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,26 +50,36 @@ class SettingsVC: UITableViewController, MessageVCDelegate {
         }
     }
     
+    
+    @IBAction func onSaveButton(_ sender: Any) {
+        if (emergencyIsDifferent()){
+            let emergencyContact = EmergencyContact(emergency_id: emergencyContactIdTextField.text!, emergency_number: emergencyContactPhone.text!)
+            backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
+                print("updated!")
+            }, failure: { (error) in
+                
+            }, emergencyContact: emergencyContact)
+        }
+    }
+    
+    private func emergencyIsDifferent() -> Bool {
+        return (emergencyContactPhone.text != "" ||
+                emergencyContactIdTextField.text != "" )
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.emergencyContactPhone.placeholder = stringBuilder.emerStringBuilder()
+        self.emergencyContactIdTextField.placeholder = stringBuilder.emerIdStringBuilder()
+    }
+    
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-    @IBAction func onSaveButton(_ sender: Any) {
-//        if (!validPhone()) {
-//            createAlert(title: "Cannot Save Info", message: "Please check if phone numbers have correct syntax.")
-//            return
-//        }
-        saveData()
-//        backEndClient.saveAttempt(success: {
-//            //save message setting locally
-//            self.saveData()
-//            self.performSegue(withIdentifier: "saveSettingToProfileSegue", sender: nil)
-//        }, failure: { (error) in
-//            print(error)
-//        }, phoneNum: userPhone.text!, emergencyContact: emergencyContactPhone.text!)
-    }
     
     // Pass messages to MessageVC
     @IBAction func onEditButton(_ sender: Any) {

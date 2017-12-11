@@ -16,7 +16,8 @@ class RoadRequester: NSObject {
     var matchingItems = [MKMapItem]()
     var overlay: MKOverlay!
     var destinationAnnotation: MKAnnotation!
-
+    var sourceAnnotation: MKAnnotation!
+    
     func setMapView(mapView: MKMapView){
         self.mapView = mapView
     }
@@ -39,6 +40,14 @@ class RoadRequester: NSObject {
         return MKCoordinateRegionMakeWithDistance(getSourceLocation().coordinate, 50, 50)
     }
     
+    func getcurrentLocationInAnnotation() -> MKPointAnnotation {
+        let currentLocationCLL = self.getSourceLocation()
+        let currentLocationAnnotation = MKPointAnnotation()
+        currentLocationAnnotation.coordinate = currentLocationCLL.coordinate
+        currentLocationAnnotation.title = "Currently Here!"
+        return currentLocationAnnotation
+    }
+    
     func getSearchResults(success: @escaping ([MKMapItem]) -> (), failure: @escaping (Error) -> (), query: String){
         let request = MKLocalSearchRequest()
         print(query)
@@ -58,6 +67,7 @@ class RoadRequester: NSObject {
     }
     
     func drawRouteFromCurrentLocation(success: @escaping (Trip) -> (), failure: @escaping (Error) -> (), destinationMapItem: MKMapItem) {
+        self.setInitialLocation()
         self.setDestinationLocation(destinationMapItem: destinationMapItem)
         self.getRouteFromCurrentLocation(success: { (route) in
             self.overlay = route.polyline
@@ -93,10 +103,16 @@ class RoadRequester: NSObject {
         let destinationAnnotation = MKPointAnnotation()
         destinationAnnotation.title = destinationMapItem.name
         destinationAnnotation.coordinate = destinationMapItem.placemark.coordinate
-    self.mapView.showAnnotations([destinationAnnotation], animated: true )
+        self.mapView.showAnnotations([destinationAnnotation], animated: true )
         self.destinationAnnotation = destinationAnnotation
     }
     
+    func setInitialLocation() {
+        let initialAnnotation = MKPointAnnotation()
+        initialAnnotation.title = "Started Here!"
+        initialAnnotation.coordinate = getSourceLocation().coordinate
+        self.sourceAnnotation = initialAnnotation
+    }
 
     
     func convertCLLocationToMapItem(cllocation: CLLocation) -> MKMapItem {
@@ -112,21 +128,6 @@ class RoadRequester: NSObject {
         }
     }
 
-    //  Inefficient algorithm; will not consider to use until talk to the TA.
-//    func searchLandmarkNearCoordiantes(){
-//        let request = MKLocalSearchRequest()
-//        request.region = self.getCurrentDefinedRegion()
-//        request.naturalLanguageQuery = "Forever 21"
-//
-//        let search = MKLocalSearch(request: request)
-//        search.start { (response, error) in
-//            if (error != nil) {
-//                print(error!)
-//                return
-//            }
-//            print(response!)
-//        }
-//    }
     
 }
 

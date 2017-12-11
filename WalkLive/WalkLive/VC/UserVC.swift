@@ -33,10 +33,10 @@ class UserVC: UIViewController {
     private func setUserVCInfo() {
         self.usernameLabel.text = currentUserInfo?.username
         self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
-        if (currentUserInfo?.emergencyNumber == nil) {
+        if (currentUserInfo?.emergency_number == nil) {
             self.emergencyContactLabel.text = "Emer. Contact: None"
         } else {
-            self.emergencyContactLabel.text = "Emer. Contact: " + (currentUserInfo?.emergencyNumber)!
+            self.emergencyContactLabel.text = "Emer. Contact: " + (currentUserInfo?.emergency_number)!
         }
     }
     
@@ -47,6 +47,8 @@ class UserVC: UIViewController {
     @IBAction func onEmerContactPencilButton(_ sender: Any) {
         segueToSettingVC()
     }
+    
+    
     
 
     func segueToSettingVC(){
@@ -64,15 +66,13 @@ class UserVC: UIViewController {
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        backItem.tintColor = primaryColor
+        navigationItem.backBarButtonItem = backItem
         if (segue.identifier == "friendRequestSegue"){
-            let backItem = UIBarButtonItem()
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
         } else if (segue.identifier == "settingSegue"){
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
+        } else if (segue.identifier == "tripRequestSegue"){
         }
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.

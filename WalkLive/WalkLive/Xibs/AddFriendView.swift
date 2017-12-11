@@ -21,7 +21,7 @@ class AddFriendView: UIView {
     
     
     @IBAction func onClearButton(_ sender: Any) {
-        self.statusLabel.text = ""
+        self.friendIdLabel.text = ""
     }
     
     
