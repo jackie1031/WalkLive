@@ -354,7 +354,6 @@ public class WalkLiveService {
             }
         } catch (SQLException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-
             throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
         } catch (java.text.ParseException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to properly parse date"), ex);

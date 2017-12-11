@@ -22,70 +22,70 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-172">
-              <caret line="228" column="19" lean-forward="false" selection-start-line="228" selection-start-column="19" selection-end-line="228" selection-end-column="19" />
+            <state relative-caret-position="249">
+              <caret line="1389" column="0" lean-forward="true" selection-start-line="1389" selection-start-column="0" selection-end-line="1389" selection-end-column="0" />
               <folding>
-                <marker date="1513029077000" expanded="true" signature="1444:1476" ph=" CREATE statement" />
-                <marker date="1513029077000" expanded="true" signature="2938:2970" ph=" CREATE statement" />
-                <marker date="1513029077000" expanded="true" signature="5307:5345" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="6825:7001" ph=" INSERT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="8372:8391" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="10659:10697" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="13356:13394" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="16335:16373" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="17988:18062" ph=" UPDATE statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="20769:20862" ph=" INSERT statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="22258:22296" ph=" SELECT statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="24167:24208" ph=" SELECT statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="26099:26137" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="26172:26207" ph=" SELECT statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="29334:29397" ph=" UPDATE statement (COUNTERS)" />
-                <marker date="1513029077000" expanded="true" signature="29428:29467" ph=" SELECT statement (COUNTERS)" />
-                <marker date="1513029077000" expanded="true" signature="32054:32103" ph=" UPDATE statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="33446:33484" ph=" SELECT statement (USERS)" />
-                <marker date="1513029077000" expanded="true" signature="33511:33578" ph=" SELECT statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="33605:33672" ph=" SELECT statement (FRIENDS)" />
-                <marker date="1513029077000" expanded="true" signature="36777:36796" ph=" SELECT statement (TRIPS)" />
-                <marker date="1513029077000" expanded="true" signature="39747:39783" ph=" SELECT statement (TRIPS)" />
-                <marker date="1513029077000" expanded="true" signature="41601:41831" ph=" INSERT statement (TRIPS)" />
-                <marker date="1513029077000" expanded="true" signature="43789:43836" ph=" UPDATE statement (TRIPS)" />
-                <marker date="1513029077000" expanded="true" signature="45915:45951" ph=" SELECT statement (TRIPS)" />
+                <marker date="1513029697000" expanded="true" signature="1444:1476" ph=" CREATE statement" />
+                <marker date="1513029697000" expanded="true" signature="2938:2970" ph=" CREATE statement" />
+                <marker date="1513029697000" expanded="true" signature="5307:5345" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="6825:7001" ph=" INSERT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="8372:8391" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="10659:10697" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="13356:13394" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="16334:16372" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="17987:18061" ph=" UPDATE statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="20768:20861" ph=" INSERT statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="22257:22295" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="24166:24207" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="26098:26136" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="26171:26206" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="29333:29396" ph=" UPDATE statement (COUNTERS)" />
+                <marker date="1513029697000" expanded="true" signature="29427:29466" ph=" SELECT statement (COUNTERS)" />
+                <marker date="1513029697000" expanded="true" signature="32053:32102" ph=" UPDATE statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="33445:33483" ph=" SELECT statement (USERS)" />
+                <marker date="1513029697000" expanded="true" signature="33510:33577" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="33604:33671" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513029697000" expanded="true" signature="36776:36795" ph=" SELECT statement (TRIPS)" />
+                <marker date="1513029697000" expanded="true" signature="39746:39782" ph=" SELECT statement (TRIPS)" />
+                <marker date="1513029697000" expanded="true" signature="41600:41830" ph=" INSERT statement (TRIPS)" />
+                <marker date="1513029697000" expanded="true" signature="43788:43835" ph=" UPDATE statement (TRIPS)" />
+                <marker date="1513029697000" expanded="true" signature="45914:45950" ph=" SELECT statement (TRIPS)" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="960" column="13" lean-forward="false" selection-start-line="960" selection-start-column="13" selection-end-line="960" selection-end-column="13" />
+            <state relative-caret-position="45">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
-                <marker date="1513028951000" expanded="true" signature="35268:35300" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="35457:35491" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="35600:35635" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="35707:35759" ph=" INSERT statement (COUNTERS)" />
-                <marker date="1513028951000" expanded="true" signature="35791:35823" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="36293:36306" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="36390:36403" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="36494:36507" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="36588:36601" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="36684:36697" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="36781:36794" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39240:39253" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39337:39350" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39441:39454" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39535:39548" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39631:39644" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39725:39738" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513028951000" expanded="true" signature="39825:39857" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="40015:40049" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="40159:40191" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="40473:40508" ph=" CREATE statement" />
-                <marker date="1513028951000" expanded="true" signature="40580:40632" ph=" INSERT statement (COUNTERS)" />
+                <marker date="1513031764000" expanded="true" signature="35266:35298" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="35455:35489" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="35598:35633" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="35705:35757" ph=" INSERT statement (COUNTERS)" />
+                <marker date="1513031764000" expanded="true" signature="35789:35821" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="36291:36304" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="36388:36401" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="36492:36505" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="36586:36599" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="36682:36695" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="36779:36792" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39238:39251" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39335:39348" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39439:39452" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39533:39546" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39629:39642" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39723:39736" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513031764000" expanded="true" signature="39823:39855" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="40013:40047" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="40157:40189" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="40471:40506" ph=" CREATE statement" />
+                <marker date="1513031764000" expanded="true" signature="40578:40630" ph=" INSERT statement (COUNTERS)" />
               </folding>
             </state>
           </provider>
@@ -113,8 +113,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Trip.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
       </list>
     </option>
   </component>
@@ -260,6 +260,26 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration name="TestServer:CreateNew" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="OOSE-group14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.WalkLiveApp" />
+      <option name="MAIN_CLASS_NAME" value="com.WalkLiveApp.TestServer" />
+      <option name="METHOD_NAME" value="testCreateNew" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -341,9 +361,10 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.Bootstrap" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TestServer" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.TestServer:CreateNew" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Bootstrap" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TestServer" />
     </list>
     <recent_temporary>
       <list size="2">
@@ -366,17 +387,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestServer - 2017.12.11 at 16h 22m 15s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.11 at 16h 25m 49s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestServer - 2017.12.11 at 16h 49m 38s.xml">
       <configuration name="TestServer" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestServer - 2017.12.11 at 16h 51m 40s.xml">
       <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.11 at 16h 55m 45s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.11 at 16h 58m 47s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.11 at 17h 01m 51s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.11 at 17h 10m 05s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.11 at 17h 21m 35s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.11 at 17h 38m 16s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer_CreateNew - 2017.12.11 at 17h 34m 53s.xml">
+      <configuration name="TestServer:CreateNew" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer_CreateNew - 2017.12.11 at 17h 36m 20s.xml">
+      <configuration name="TestServer:CreateNew" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -421,7 +460,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java</url>
+          <line>604</line>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -438,31 +486,31 @@
         <state relative-caret-position="17070">
           <caret line="1154" column="13" lean-forward="true" selection-start-line="1154" selection-start-column="13" selection-end-line="1154" selection-end-column="13" />
           <folding>
-            <marker date="1513029077000" expanded="true" signature="1444:1476" ph=" CREATE statement" />
-            <marker date="1513029077000" expanded="true" signature="2938:2970" ph=" CREATE statement" />
-            <marker date="1513029077000" expanded="true" signature="5307:5345" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="6825:7001" ph=" INSERT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="8372:8391" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="10659:10697" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="13356:13394" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="16335:16373" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="17988:18062" ph=" UPDATE statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="20769:20862" ph=" INSERT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="22258:22296" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="24167:24208" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="26099:26137" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="26172:26207" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="29334:29397" ph=" UPDATE statement (COUNTERS)" />
-            <marker date="1513029077000" expanded="true" signature="29428:29467" ph=" SELECT statement (COUNTERS)" />
-            <marker date="1513029077000" expanded="true" signature="32054:32103" ph=" UPDATE statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="33446:33484" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="33511:33578" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="33605:33672" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="36777:36796" ph=" SELECT statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="39747:39783" ph=" SELECT statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="41601:41831" ph=" INSERT statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="43789:43836" ph=" UPDATE statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="45915:45951" ph=" SELECT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="1444:1476" ph=" CREATE statement" />
+            <marker date="1513029697000" expanded="true" signature="2938:2970" ph=" CREATE statement" />
+            <marker date="1513029697000" expanded="true" signature="5307:5345" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="6825:7001" ph=" INSERT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="8372:8391" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="10659:10697" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="13356:13394" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="16334:16372" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="17987:18061" ph=" UPDATE statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="20768:20861" ph=" INSERT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="22257:22295" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="24166:24207" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="26098:26136" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="26171:26206" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="29333:29396" ph=" UPDATE statement (COUNTERS)" />
+            <marker date="1513029697000" expanded="true" signature="29427:29466" ph=" SELECT statement (COUNTERS)" />
+            <marker date="1513029697000" expanded="true" signature="32053:32102" ph=" UPDATE statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="33445:33483" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="33510:33577" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="33604:33671" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="36776:36795" ph=" SELECT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="39746:39782" ph=" SELECT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="41600:41830" ph=" INSERT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="43788:43835" ph=" UPDATE statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="45914:45950" ph=" SELECT statement (TRIPS)" />
           </folding>
         </state>
       </provider>
@@ -480,28 +528,28 @@
         <state relative-caret-position="14520">
           <caret line="995" column="13" lean-forward="true" selection-start-line="995" selection-start-column="13" selection-end-line="995" selection-end-column="13" />
           <folding>
-            <marker date="1513028951000" expanded="true" signature="35268:35300" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="35457:35491" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="35600:35635" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="35707:35759" ph=" INSERT statement (COUNTERS)" />
-            <marker date="1513028951000" expanded="true" signature="35791:35823" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="36293:36306" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36390:36403" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36494:36507" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36588:36601" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36684:36697" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36781:36794" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39240:39253" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39337:39350" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39441:39454" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39535:39548" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39631:39644" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39725:39738" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39825:39857" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40015:40049" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40159:40191" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40473:40508" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40580:40632" ph=" INSERT statement (COUNTERS)" />
+            <marker date="1513031764000" expanded="true" signature="35266:35298" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="35455:35489" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="35598:35633" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="35705:35757" ph=" INSERT statement (COUNTERS)" />
+            <marker date="1513031764000" expanded="true" signature="35789:35821" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="36291:36304" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36388:36401" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36492:36505" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36586:36599" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36682:36695" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36779:36792" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39238:39251" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39335:39348" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39439:39452" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39533:39546" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39629:39642" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39723:39736" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39823:39855" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40013:40047" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40157:40189" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40471:40506" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40578:40630" ph=" INSERT statement (COUNTERS)" />
           </folding>
         </state>
       </provider>
@@ -553,67 +601,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="960" column="13" lean-forward="false" selection-start-line="960" selection-start-column="13" selection-end-line="960" selection-end-column="13" />
+        <state relative-caret-position="249">
+          <caret line="1389" column="0" lean-forward="true" selection-start-line="1389" selection-start-column="0" selection-end-line="1389" selection-end-column="0" />
           <folding>
-            <marker date="1513028951000" expanded="true" signature="35268:35300" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="35457:35491" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="35600:35635" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="35707:35759" ph=" INSERT statement (COUNTERS)" />
-            <marker date="1513028951000" expanded="true" signature="35791:35823" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="36293:36306" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36390:36403" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36494:36507" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36588:36601" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36684:36697" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="36781:36794" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39240:39253" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39337:39350" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39441:39454" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39535:39548" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39631:39644" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39725:39738" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513028951000" expanded="true" signature="39825:39857" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40015:40049" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40159:40191" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40473:40508" ph=" CREATE statement" />
-            <marker date="1513028951000" expanded="true" signature="40580:40632" ph=" INSERT statement (COUNTERS)" />
+            <marker date="1513029697000" expanded="true" signature="1444:1476" ph=" CREATE statement" />
+            <marker date="1513029697000" expanded="true" signature="2938:2970" ph=" CREATE statement" />
+            <marker date="1513029697000" expanded="true" signature="5307:5345" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="6825:7001" ph=" INSERT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="8372:8391" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="10659:10697" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="13356:13394" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="16334:16372" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="17987:18061" ph=" UPDATE statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="20768:20861" ph=" INSERT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="22257:22295" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="24166:24207" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="26098:26136" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="26171:26206" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="29333:29396" ph=" UPDATE statement (COUNTERS)" />
+            <marker date="1513029697000" expanded="true" signature="29427:29466" ph=" SELECT statement (COUNTERS)" />
+            <marker date="1513029697000" expanded="true" signature="32053:32102" ph=" UPDATE statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="33445:33483" ph=" SELECT statement (USERS)" />
+            <marker date="1513029697000" expanded="true" signature="33510:33577" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="33604:33671" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513029697000" expanded="true" signature="36776:36795" ph=" SELECT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="39746:39782" ph=" SELECT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="41600:41830" ph=" INSERT statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="43788:43835" ph=" UPDATE statement (TRIPS)" />
+            <marker date="1513029697000" expanded="true" signature="45914:45950" ph=" SELECT statement (TRIPS)" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
-          <caret line="228" column="19" lean-forward="false" selection-start-line="228" selection-start-column="19" selection-end-line="228" selection-end-column="19" />
+        <state relative-caret-position="45">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
-            <marker date="1513029077000" expanded="true" signature="1444:1476" ph=" CREATE statement" />
-            <marker date="1513029077000" expanded="true" signature="2938:2970" ph=" CREATE statement" />
-            <marker date="1513029077000" expanded="true" signature="5307:5345" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="6825:7001" ph=" INSERT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="8372:8391" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="10659:10697" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="13356:13394" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="16335:16373" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="17988:18062" ph=" UPDATE statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="20769:20862" ph=" INSERT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="22258:22296" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="24167:24208" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="26099:26137" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="26172:26207" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="29334:29397" ph=" UPDATE statement (COUNTERS)" />
-            <marker date="1513029077000" expanded="true" signature="29428:29467" ph=" SELECT statement (COUNTERS)" />
-            <marker date="1513029077000" expanded="true" signature="32054:32103" ph=" UPDATE statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="33446:33484" ph=" SELECT statement (USERS)" />
-            <marker date="1513029077000" expanded="true" signature="33511:33578" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="33605:33672" ph=" SELECT statement (FRIENDS)" />
-            <marker date="1513029077000" expanded="true" signature="36777:36796" ph=" SELECT statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="39747:39783" ph=" SELECT statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="41601:41831" ph=" INSERT statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="43789:43836" ph=" UPDATE statement (TRIPS)" />
-            <marker date="1513029077000" expanded="true" signature="45915:45951" ph=" SELECT statement (TRIPS)" />
+            <marker date="1513031764000" expanded="true" signature="35266:35298" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="35455:35489" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="35598:35633" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="35705:35757" ph=" INSERT statement (COUNTERS)" />
+            <marker date="1513031764000" expanded="true" signature="35789:35821" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="36291:36304" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36388:36401" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36492:36505" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36586:36599" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36682:36695" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="36779:36792" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39238:39251" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39335:39348" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39439:39452" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39533:39546" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39629:39642" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39723:39736" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513031764000" expanded="true" signature="39823:39855" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40013:40047" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40157:40189" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40471:40506" ph=" CREATE statement" />
+            <marker date="1513031764000" expanded="true" signature="40578:40630" ph=" INSERT statement (COUNTERS)" />
           </folding>
         </state>
       </provider>

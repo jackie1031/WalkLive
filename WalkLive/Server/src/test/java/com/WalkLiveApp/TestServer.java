@@ -69,7 +69,7 @@ public class TestServer {
 
    @After
    public void tearDown() {
-       //clearDB();
+       clearDB();
        //Spark.stop();
    }
 
