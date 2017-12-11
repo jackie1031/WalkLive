@@ -57,7 +57,11 @@ class SettingsVC: UITableViewController {
         if (emergencyIsDifferent()){
             let emergencyContact = EmergencyContact(emergency_id: emergencyContactIdTextField.text!, emergency_number: emergencyContactPhone.text!)
             backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
-                print("updated!")
+                 OperationQueue.main.addOperation {
+                    let successView = warnigSignFactory.makeSaveSettingsSuccessWarningSign()
+                successView.center = self.view.center
+                self.view.addSubview(successView)
+                }
             }, failure: { (error) in
             }, emergencyContact: emergencyContact)
         }

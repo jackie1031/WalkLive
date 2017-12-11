@@ -860,7 +860,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SN2DVCT4SM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
@@ -878,7 +878,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SN2DVCT4SM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;

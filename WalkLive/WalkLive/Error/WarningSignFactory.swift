@@ -14,6 +14,13 @@ class WarningSignFactory: NSObject{
         return errorView.loadNib()
     }
     
+    private func makeGenericSuccessSign() -> WarningSignView {
+        var successView = self.makeGenericWarningSign()
+        successView = successView.loadNib()
+        successView.headerLabel.text = "Yes!"
+        return successView
+    }
+    
     func makeSignUpValidityWarningSign(status: Int) -> WarningSignView{
         let errorView = self.makeGenericWarningSign()
         if (status == 0) {
@@ -73,5 +80,15 @@ class WarningSignFactory: NSObject{
         return successView
     }
     
+    func makeSaveSettingsSuccessWarningSign() -> WarningSignView {
+        let successView = self.makeGenericSuccessSign()
+        successView.warningContentView.text = "Success!👊"
+        return successView
+    }
     
+    func cannotBuildRouteWarningSign() -> WarningSignView {
+        let errorView = self.makeGenericWarningSign()
+        errorView.warningContentView.text = "The place you chose is too far to walk to 😢"
+        return errorView
+    }
 }

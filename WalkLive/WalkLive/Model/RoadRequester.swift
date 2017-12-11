@@ -95,7 +95,10 @@ class RoadRequester: NSObject {
             if (response == nil) {
                 failure(error!)
             }
-            success((response?.routes[0])!)
+            if ((response?.routes[0]) == nil) {
+                failure(LoginError(status: 0))
+            } else{
+                success((response?.routes[0])!)}
             }
         }
     
