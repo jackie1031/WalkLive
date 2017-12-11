@@ -83,6 +83,16 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }, emergencyContact: emergencyContact)
     }
     
+    func getFriends() {
+        backEndClient.getFriendList(success: { (friends) in
+            OperationQueue.main.addOperation {
+            self.friends = friends
+                self.friendListTable.reloadData()
+            }
+        }) { (error) in
+            
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
