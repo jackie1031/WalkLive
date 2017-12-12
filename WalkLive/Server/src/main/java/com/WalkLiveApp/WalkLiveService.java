@@ -63,11 +63,11 @@ public class WalkLiveService {
                     res.close();
                 } catch (SQLException e) { /* ignored */}
             }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
         }
 
 
@@ -75,7 +75,6 @@ public class WalkLiveService {
                 " startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
 //dangerZone INT,
         try {
-            conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
             stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, angerZone INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
             //stm.executeUpdate(sql);  //+, completed BOOL
@@ -97,11 +96,11 @@ public class WalkLiveService {
                     res.close();
                 } catch (SQLException e) { /* ignored */}
             }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
         }
     }
 
@@ -129,7 +128,7 @@ public class WalkLiveService {
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
 
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            //conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             res = ps.executeQuery();
@@ -154,11 +153,11 @@ public class WalkLiveService {
                     res.close();
                 } catch (SQLException e) { /* ignored */}
             }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
         }
 
         //SECOND, if username did not exist, then place the information into the database
@@ -166,7 +165,7 @@ public class WalkLiveService {
                 "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
 
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            //conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             ps.setString(2, pw);
@@ -190,11 +189,11 @@ public class WalkLiveService {
                     res.close();
                 } catch (SQLException e) { /* ignored */}
             }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
         }
     }
 
@@ -207,7 +206,7 @@ public class WalkLiveService {
         String sql = "SELECT * FROM users";
 
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            //conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
             res = stm.executeQuery(sql);
 
@@ -250,11 +249,11 @@ public class WalkLiveService {
                     stm.close();
                 } catch (SQLException e) { /* ignored */}
             }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
         }
     }
 
@@ -273,7 +272,7 @@ public class WalkLiveService {
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
 
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            //conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             res = ps.executeQuery();
