@@ -30,8 +30,8 @@ class UserVC: UIViewController {
     
     
     private func setUserVCInfo() {
-        self.usernameLabel.text = currentUserInfo?.username
-        self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
+        self.usernameLabel.text = currentUserInfo.username
+        self.userContactLabel.text = "My Contact: " + (currentUserInfo.contact)!
         self.emergencyContactLabel.text = stringBuilder.emerStringBuilder()
     }
     
