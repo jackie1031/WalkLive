@@ -33,6 +33,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentUserInfo = UserLogin(username: "blah", password: "blahblah", contact: "111-111-1111")
         print(currentUserInfo)
         self.initializeView()
     }

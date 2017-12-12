@@ -11,38 +11,50 @@ import CoreLocation
 
 class Message: NSObject, NSCoding {
     
-    var messageSegments : Array<String>
+    private var messageSegmentsWithoutTrip : Array<String>
+    private var messageSegmentsWithTrip: Array<String>
 
     struct Keys {
-        static let messageSegs = "messageSegments"
+        static let messageSegsWithoutTrip = "messageSegmentsWithoutTrip"
+        static let messageSegsWithTrip = "messageSegmentWithTrip"
     }
     
     override init() {
-        self.messageSegments = Array<String>()
-        self.messageSegments.append("Hello I'm currently at:")
-        self.messageSegments.append("Coordinate")
-        self.messageSegments.append("Call me at:")
-        self.messageSegments.append("Phone")
+        self.messageSegmentsWithoutTrip = Array<String>()
+        self.messageSegmentsWithoutTrip.append("Hello I'm currently at:")
+        self.messageSegmentsWithoutTrip.append("Coordinate")
+        self.messageSegmentsWithoutTrip.append("Call me at:")
+        self.messageSegmentsWithoutTrip.append("Phone")
+        self.messageSegmentsWithTrip = Array<String>()
+        self.messageSegmentsWithTrip.append("Hello I'm currently at:")
+        self.messageSegmentsWithTrip.append("Coordinate")
+        self.messageSegmentsWithTrip.append("Call me at:")
+        self.messageSegmentsWithTrip.append("Phone")
     }
     
-    init(messageSegments: Array<String>) {
-        self.messageSegments = messageSegments
-    }
+//    init(messageSegments: Array<String>) {
+//        self.messageSegmentsWithoutTrip = messageSegments
+//    }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(messageSegments, forKey: Keys.messageSegs)
+        aCoder.encode(messageSegmentsWithoutTrip, forKey: Keys.messageSegsWithoutTrip)
+        aCoder.encode(messageSegmentsWithTrip, forKey: Keys.messageSegsWithTrip)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.messageSegments = Array<String>()
-        if let decodedObject = aDecoder.decodeObject(forKey: Keys.messageSegs) as? Array<String> {
-            messageSegments = decodedObject
+        self.messageSegmentsWithoutTrip = Array<String>()
+        self.messageSegmentsWithTrip = Array<String>()
+        if let decodedObject1 = aDecoder.decodeObject(forKey: Keys.messageSegsWithoutTrip) as? Array<String> {
+            messageSegmentsWithoutTrip = decodedObject1
+        }
+        if let decodedObject2 = aDecoder.decodeObject(forKey: Keys.messageSegsWithTrip) as? Array<String> {
+            messageSegmentsWithTrip = decodedObject2
         }
     }
     
     func buildMessage() -> String {
         var text : String = ""
-        for message in messageSegments {
+        for message in messageSegmentsWithoutTrip {
             var realValue : String
             if (message == "Phone") {
                 realValue = currentUserInfo.contact!
@@ -60,20 +72,20 @@ class Message: NSObject, NSCoding {
         return text
     }
     
-    func addMessage(m : String) {
-        self.messageSegments.append(m)
+    func getMessagesWithoutTrip() -> Array<String> {
+        return self.messageSegmentsWithoutTrip
     }
     
-    func deleteLastMessage() {
-        self.messageSegments.popLast()
+    func updateMessagesWithoutTrip(updatedMessages : Array<String>) {
+        self.messageSegmentsWithoutTrip = updatedMessages
     }
     
-    func getMessages() -> Array<String> {
-        return self.messageSegments
+    func getMessagesWithTrip() -> Array<String> {
+        return self.messageSegmentsWithTrip
     }
     
-    func updateMessages(updatedMessages : Array<String>) {
-        self.messageSegments = updatedMessages
+    func updateMessagesWithTrip(updatedMessages : Array<String>) {
+        self.messageSegmentsWithTrip = updatedMessages
     }
     
 }
