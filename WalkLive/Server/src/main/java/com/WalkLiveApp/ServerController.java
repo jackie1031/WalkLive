@@ -207,14 +207,28 @@ public class ServerController {
               * ----------------------------------------------------------------------
               * */
 
+
+            //add new user (signup)
+            post(API_CONTEXT + "/users", "application/json", (request, response) -> {
+                try {
+                    User u = walkLiveService.createNew(request.body());
+                    response.status(201);
+                    return u;
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to create new User");
+                    response.status(401); //multiple error codes
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+
+
             //Start Trip
             post(API_CONTEXT+"/trips", "application/json", (request, response) -> {
                 try {
-
-                    walkLiveService.startTrip( request.body());
-                    logger.error("sth wrong here?");
-
+                    Trip t = walkLiveService.startTrip( request.body());
                     response.status(200);
+                    return t;
                     //return walkLiveService.startTrip(request.body());
                 } // InvalidDestination     Code 409
                 catch (WalkLiveService.InvalidDestination e) {
@@ -263,7 +277,6 @@ public class ServerController {
 
 
 //            getAllTrip:
-//
 //            Method: GET
 //            URL: /WalkLive/api/trips/[username]/allTrips
 //            Content: { tripId: [string], userId[string]}
@@ -273,15 +286,15 @@ public class ServerController {
 //            Content: { <trip 1>, <trip 2>, <trip 3>, ... }
 
 
-//            get(API_CONTEXT + "/trips/:username/allTrips", "application/json", (request, response) -> {
-//                try {
-//                    return walkLiveService.getAllTrips(request.params(":username"));
-//                } catch (WalkLiveService.InvalidTargetID e) {
-//                    logger.error("Invalid user id.");
-//                    response.status(402);
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
+            get(API_CONTEXT + "/trips/:username/allTrips", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.getAllTrips(request.params(":username"));
+                } catch (WalkLiveService.InvalidTargetID e) {
+                    logger.error("Invalid user id.");
+                    response.status(402);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
 //            updateTrip:
 //

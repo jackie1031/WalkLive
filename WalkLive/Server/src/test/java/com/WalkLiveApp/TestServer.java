@@ -20,6 +20,7 @@ import java.util.stream.*;
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import static spark.Spark.get;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -64,7 +65,7 @@ public class TestServer {
     @Before
     public void setup() throws Exception {
         //Clear the database
-        clearDB();
+        //clearDB();
 
     }
 
@@ -247,38 +248,39 @@ public class TestServer {
 //     * ================================================================
 //     */
 //
-     @Test
-     public void testCreateFriendRequest() throws Exception {
-         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-         User[] entries = new User[] {
-                 new User("jeesookim", "123456","4405339063"),
-                 new User("michelle", "0123", "4405339063"),
-                 new User("yangcao1", "121212", "1231231233")
-         };
-
-         //add to database
-         for (User t : entries) {
-             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-         }
-
-         //add a few elements
-         Relationship[] frs = new Relationship[] {
-                 new Relationship("jeesookim", "michelle", null),
-                 new Relationship("jeesookim", "yangcao1", null)
-         };
-
-         for (Relationship f : frs) {
-             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-         }
-
-         //check content of friendrequests in database!! list request id and stuff
-         //Get them back
-         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
-         assertEquals("Failed to get user entries", 200, r.httpStatus);
-     }
+//     @Test
+//     public void testCreateFriendRequest() throws Exception {
+//         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//         User[] entries = new User[] {
+//                 new User("jeesookim", "123456","4405339063"),
+//                 new User("michelle", "0123", "4405339063"),
+//                 new User("yangcao1", "121212", "1231231233")
+//         };
+//
+//         //add to database
+//         for (User t : entries) {
+//             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//         }
+//
+//         //add a few elements
+//         Relationship[] frs = new Relationship[] {
+//                 new Relationship("jeesookim", "michelle", null),
+//                 new Relationship("jeesookim", "yangcao1", null)
+//         };
+//
+//         for (Relationship f : frs) {
+//             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+//             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//         }
+//
+//         //check content of friendrequests in database!! list request id and stuff
+//         //Get them back
+//         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
+//         assertEquals("Failed to get user entries", 200, r.httpStatus);
+//     }
 //
 //    @Test
 //    public void testGetOutgoingFriendRequests() throws Exception {
@@ -595,54 +597,179 @@ public class TestServer {
 //
 //
 //
+
+
+//    @Test
+//    public void testEndTrip() throws Exception {
+//        WalkLiveService walkLiveService;
+//
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//        //walkLiveService.startTrip();
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//        assertEquals(test.isCompleted(),false);
+//
+//        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
+//        //assertEqualsx(r3.isCompleted(),false);
+//
+//    }
+//
+//    @Test
+//    public void testStartTrip() throws Exception {
+//
+//
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        //start trip
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//
+//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+//        assertEquals("unidentified destination ", 200, r3.httpStatus);
+//
+//        Response r4 = request("GET", "/WalkLive/api/trips/2", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
+//
+//
+//
+//    }
+
+    //    @Test
+//    public void testGetFriendList() throws Exception{
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456","4405339063"),
+//                new User("michelle", "0123", "4405339063"),
+//                new User("yangcao1", "121212", "1231231233")
+//        };
+//
+//        //add to database
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//        }
+
+//        //add a few elements
+//        Relationship[] frs = new Relationship[] {
+//                new Relationship("jeesookim", "michelle", null),
+//                new Relationship("jeesookim", "yangcao1", null),
+//        };
+//
+//        for (Relationship f : frs) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        }
+//
+//        Relationship[] frs2 = new Relationship[] {
+//                new Relationship("michelle", "jeesookim", null),
+//                new Relationship("michelle", "yangcao1", null)
+//        };
+//
+//        for (Relationship f : frs2) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        }
+//
+//        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
+//        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+//
+//        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
+//        List<User> results = getUsers(rList);
+//
+//        User actual = results.get(0);
+//        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
+//    }
+//need to add trips!
+
+    /**
     @Test
-    public void testEndTrip() throws Exception {
-        WalkLiveService walkLiveService;
+    public void testGetAllTrips() throws Exception {
 
         Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-        //walkLiveService.startTrip();
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-        assertEquals(test.isCompleted(),false);
-
-        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-
-        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
-        //assertEqualsx(r3.isCompleted(),false);
-
-    }
-
-    @Test
-    public void testStartTrip() throws Exception {
-
-
-        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-
-        //start trip
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-
-        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-
-
         Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 
-        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-        assertEquals("unidentified destination ", 200, r3.httpStatus);
 
-        Response r4 = request("GET", "/WalkLive/api/trips/1", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+                //new User("jackie", "666666", "1231231233")
+        };
 
-        assertEquals("Failed to get user", 200, r4.httpStatus);
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //add a few elements
+        //Relationship[] frs = new Relationship[] {
+        Relationship test1 = new Relationship("jeesookim", "michelle", null);
+        Relationship test2 = new Relationship("michelle", "yangcao1", null);
+        //};
+
+        //for (Relationship f : frs) {
+        //send friend request
+        Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", test1);
+        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        Response rCreateFR2 = request("POST", "/WalkLive/api/users/michelle/friend_requests", test2);
+        assertEquals("Failed to create new friend request", 201, rCreateFR2.httpStatus);
+        //}
+
+        //accept friend request
+        Response r = request("PUT", "/WalkLive/api/users/michelle/friend_requests/1/accept", null);
+        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/accept", null);
+        assertEquals("Failed to accept friend request", 200, r2.httpStatus);
+
+        //Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
 
 
 
+        Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
+
+        List<Trip> results = testGetAllTrips(rList);
+
+        //Add a few elements
+        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+
+
+        //Get them back
+        Response r = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, r.httpStatus);
+        List<User> results = getAllTrips(r);
+
+        //Verify that we got the right element back
+        assertEquals("Number of user entries differ", entries.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
+        }
     }
+
+    **/
 
 
 //
@@ -865,6 +992,42 @@ public class TestServer {
 //    // Survival Maps Specific Helper Methods and classes
 //    // ------------------------------------------------------------------------//
 //
+//
+//    private List<User> getUsers(Response r) {
+//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+//        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
+//        return r.getContentAsObject(type);
+//    }
+//
+//    private List<Relationship> getRelationships(Response r) {
+//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+//        Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
+//        return r.getContentAsObject(type);
+//    }
+//
+//    private List<Trip> getTrip(Response r) {
+//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+//        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
+//        return r.getContentAsObject(type);
+//    }
+//
+    //    private List<User> getUsers(Response r) {
+//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+//        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
+//        return r.getContentAsObject(type);
+//    }
+
+    private List<User>  getAllTrips(Response r) {
+        Type type = (new TypeToken<Trip>() { }).getType();
+        return r.getContentAsObject(type);
+    }
+//
+
+
     private static void setupDB() {
 
         String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
@@ -908,7 +1071,6 @@ public class TestServer {
             stm.executeUpdate(sql5);
             String sql6 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql6);
-
             String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
             stm.executeUpdate(sql7);
 
@@ -936,33 +1098,7 @@ public class TestServer {
             }
         }
     }
-//
-//    private List<User> getUsers(Response r) {
-//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-//        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
-//        return r.getContentAsObject(type);
-//    }
-//
-//    private List<Relationship> getRelationships(Response r) {
-//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-//        Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
-//        return r.getContentAsObject(type);
-//    }
-//
-//    private List<Trip> getTrip(Response r) {
-//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-//        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
-//        return r.getContentAsObject(type);
-//    }
-//
-////    private User getUser(Response r) {
-////        Type type = (new TypeToken<User>() { }).getType();
-////        return r.getContentAsObject();
-////    }
-//
+
 //    /**
 //     * Clears the database of all test tables.
 //     * @return the clean database source
