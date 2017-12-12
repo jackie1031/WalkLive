@@ -8,27 +8,11 @@
 
 import Foundation
 
-class FriendRequest: NSObject, Codable {
-    var sender: String!
-    var recipient: String!
-    var requestId: String!
-    
-    init(dictionary: NSDictionary) {
-        self.sender = dictionary["targetId"] as? String
-    }
-    
-    override init(){
-        self.sender = "admin"
-        self.recipient = "teacher"
-        self.requestId = "admin"
-    }
-    
-    func respondFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-        backEndClient.createFriendRequest(success: {
-            success()
-        }, failure: { (error) in
-            failure(error)
-        }, friendRequest: self)
-    }
+struct FriendRequest: Codable {
+    var sender: String?
+    var recipient: String?
+    var _id: Int?
+    var relationship: Int?
+    var sent_on: String?
     
 }

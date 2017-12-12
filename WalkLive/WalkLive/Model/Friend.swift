@@ -8,5 +8,6 @@
 
 import Foundation
 struct Friend: Codable{
-    
+    var username: String
+    var contact: String
 }

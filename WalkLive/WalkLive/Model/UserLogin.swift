@@ -14,6 +14,7 @@ struct UserLogin: Codable {
     var contact: String?
     var emergency_id: String?
     var emergency_number: String?
+    var created_on: String?
     
     init(username : String, password : String) {
         self.username = username

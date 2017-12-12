@@ -15,8 +15,7 @@ class UserVC: UIViewController {
     
     @IBOutlet weak var emergencyContactLabel: UILabel!
     @IBOutlet weak var friendRequestButton: UIButton!
-    @IBOutlet weak var tripRequestButton: UIButton!
-    
+    var receivedFriendRequests: [FriendRequest]!
     
     
     
@@ -51,6 +50,28 @@ class UserVC: UIViewController {
         self.performSegue(withIdentifier: "settingSegue", sender: self)
     }
     
+    func updateFriendRequest(){
+        backEndClient.getReceivedFriendRequests(success: { (receivedFriendRequests) in
+            OperationQueue.main.addOperation {
+            self.updateFriendMangerTitle(receivedFriendRequests: receivedFriendRequests)
+            }
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    private func updateFriendMangerTitle(receivedFriendRequests: [FriendRequest]?){
+        if (receivedFriendRequests == nil || receivedFriendRequests?.count == 0){
+            return
+        } else {
+            self.receivedFriendRequests = receivedFriendRequests!
+            self.friendRequestButton.titleLabel?.text = "Friend Manager: " + String(receivedFriendRequests!.count) + " request(s)"
+            self.friendRequestButton.sizeToFit()
+            
+
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,6 +88,8 @@ class UserVC: UIViewController {
         backItem.tintColor = primaryColor
         navigationItem.backBarButtonItem = backItem
         if (segue.identifier == "friendRequestSegue"){
+            let vc = segue.destination as! FriendRequestVC
+            vc.receivedFriendRequests = self.receivedFriendRequests
         } else if (segue.identifier == "settingSegue"){
         } else if (segue.identifier == "tripRequestSegue"){
         }

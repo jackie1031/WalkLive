@@ -83,5 +83,22 @@ class RouteError: Error {
         }
     }
 }
+    
+    class FriendRequestError: Error{
+        var status: Int! = 0
+        init(status: Int) {
+            self.status = status
+        }
+        func returnReason() -> String {
+            switch status {
+            case 401:
+                return "InvalidUserId: the username may be illegal or the username does not exist!"
+            case 400:
+                return "NonExistent_RequestId: cannot find this friend request or it has already been responded"
+            default:
+                return "Unknown error" + String(status)
+            }
+    }
+}
 
 

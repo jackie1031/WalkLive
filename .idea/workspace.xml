@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8de093a9-e561-4e10-8c6b-9a5ccbc4d4c5" name="Default" comment="">
+    <list default="true" id="085d284c-0dc5-4f83-bac4-705122e7338d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/Error/BackendError.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/Error/BackendError.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/Model/BackEndClient.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/Model/BackEndClient.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/VC/FriendRequestVC.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/VC/FriendRequestVC.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WalkLive/WalkLive/VC/UserVC.swift" afterPath="$PROJECT_DIR$/WalkLive/WalkLive/VC/UserVC.swift" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_1.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_json_simple_json_simple_1_1.xml" afterPath="" />

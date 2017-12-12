@@ -16,7 +16,7 @@ class AddFriendView: UIView {
     
     
     @IBAction func onSendButton(_ sender: Any) {
-        let friendRequest = FriendRequest()
+        var friendRequest = FriendRequest()
         if (friendIdLabel.text == "") {
             return
         }
@@ -27,7 +27,10 @@ class AddFriendView: UIView {
             self.statusLabel.textColor = primaryColor
             }
         }, failure: { (error) in
-            print(error)
+            OperationQueue.main.addOperation {
+                self.statusLabel.text = "Add fail."
+                self.statusLabel.textColor = UIColor.red
+            }
         }, friendRequest: friendRequest)
     }
     

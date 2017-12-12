@@ -47,7 +47,6 @@
 		904B051C1FD689B300EEB523 /* MainMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05111FD689B300EEB523 /* MainMapVC.swift */; };
 		904B051D1FD689B300EEB523 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05121FD689B300EEB523 /* SearchVC.swift */; };
 		904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05141FD689B300EEB523 /* SignUpVC.swift */; };
-		904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05151FD689B300EEB523 /* TripRequestVC.swift */; };
 		904B05211FD689B300EEB523 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05161FD689B300EEB523 /* UserVC.swift */; };
 		904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05231FD689BA00EEB523 /* OnGoingTripView.swift */; };
 		904B05261FD689BA00EEB523 /* OnGoingTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05241FD689BA00EEB523 /* OnGoingTripView.xib */; };
@@ -133,7 +132,6 @@
 		904B05111FD689B300EEB523 /* MainMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMapVC.swift; sourceTree = "<group>"; };
 		904B05121FD689B300EEB523 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		904B05141FD689B300EEB523 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		904B05151FD689B300EEB523 /* TripRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestVC.swift; sourceTree = "<group>"; };
 		904B05161FD689B300EEB523 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		904B05171FD689B300EEB523 /* Walklive-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Walklive-Bridging-Header.h"; sourceTree = "<group>"; };
 		904B05231FD689BA00EEB523 /* OnGoingTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnGoingTripView.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 				904B05111FD689B300EEB523 /* MainMapVC.swift */,
 				904B05121FD689B300EEB523 /* SearchVC.swift */,
 				904B05141FD689B300EEB523 /* SignUpVC.swift */,
-				904B05151FD689B300EEB523 /* TripRequestVC.swift */,
 				904B05161FD689B300EEB523 /* UserVC.swift */,
 				8CC299111FDA244900C9F2A5 /* MessageVC.swift */,
 				8C7637001FDC88DD00276DEE /* SettingsVC.swift */,
@@ -680,7 +677,6 @@
 				904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */,
 				904B05091FD689A300EEB523 /* User.swift in Sources */,
 				9004687B1FDE1D66008A896E /* WarningSignFactory.swift in Sources */,
-				904B05201FD689B300EEB523 /* TripRequestVC.swift in Sources */,
 				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
 				8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */,
 				9015A2BF1FDDD11C0080B4D3 /* StringBuilder.swift in Sources */,

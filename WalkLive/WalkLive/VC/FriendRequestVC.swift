@@ -14,7 +14,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var requestTable: UITableView!
     var receivedFriendRequests: [FriendRequest]!
     var sentFriendRequests: [FriendRequest]!
-    var friends: [FriendRequest]!
+    var friends: [Friend]!
 
     
     let RECEIVED = 0
@@ -25,34 +25,58 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         requestTable.delegate = self
         requestTable.dataSource = self
+        self.updateReceivedRequests()
         // Do any additional setup after loading the view.
 //        self.testFriendRequestTable()
     }
     
     func updateSentRequests(){
         backEndClient.getSentFriendRequests(success: { (updatedFriendRequests) in
-            print(updatedFriendRequests)
+            OperationQueue.main.addOperation {
             self.sentFriendRequests = updatedFriendRequests
             self.requestTable.reloadData()
+            }
         }) { (error) in
             print(error)
         }
     }
     
-    private func testFriendRequestTable(){
-        var list = [FriendRequest]()
-        let fr1 = FriendRequest()
-        let fr2 = FriendRequest()
-        list.append(fr1)
-        list.append(fr2)
-        self.receivedFriendRequests = list
-        self.sentFriendRequests = list
-        self.friends = list
+    func updateReceivedRequests(){
+        backEndClient.getReceivedFriendRequests(success: { (receivedFriendRequests) in
+            OperationQueue.main.addOperation {
+            self.receivedFriendRequests = receivedFriendRequests
+            self.requestTable.reloadData()
+            }
+        }) { (error) in
+            print(error)
+        }
     }
+    
+    func updateFriendList(){
+        backEndClient.getFriendList(success: { (friends) in
+            OperationQueue.main.addOperation {
+                self.friends = friends
+                self.requestTable.reloadData()
+            }
+        }) { (error) in
+            
+        }
+    }
+//    private func testFriendRequestTable(){
+//        var list = [FriendRequest]()
+//        let fr1 = FriendRequest()
+//        let fr2 = FriendRequest()
+//        list.append(fr1)
+//        list.append(fr2)
+//        self.receivedFriendRequests = list
+//        self.sentFriendRequests = list
+//        self.friends = list
+//    }
     
     @IBAction func switchSegmentControl(_ sender: Any) {
         self.requestTable.reloadData()
         if (segmentControl.selectedSegmentIndex == RECEIVED){
+            self.updateReceivedRequests()
         } else if (segmentControl.selectedSegmentIndex == SENT){
             self.updateSentRequests()
         }
@@ -104,7 +128,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         else {
             let friend = self.friends[indexPath.row]
-            cell.usernameLabel.text = friend.sender
+            cell.usernameLabel.text = friend.username
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }
@@ -114,14 +138,26 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @IBAction func onAcceptButton(_ sender: Any) {
         let button = sender as! UIButton
-        self.receivedFriendRequests.remove(at: button.tag)
-        self.requestTable.reloadData()
+        backEndClient.acceptFriendRequest(success: {
+            OperationQueue.main.addOperation {
+            self.receivedFriendRequests.remove(at: button.tag)
+            self.requestTable.reloadData()
+            }
+        }, failure: { (error) in
+            
+        }, friendRequest: receivedFriendRequests[button.tag])
     }
     
     @IBAction func onDeclineButton(_ sender: Any) {
         let button = sender as! UIButton
-        self.receivedFriendRequests.remove(at: button.tag)
-        self.requestTable.reloadData()
+        backEndClient.rejectFriendRequest(success: {
+            OperationQueue.main.addOperation {
+                self.receivedFriendRequests.remove(at: button.tag)
+                self.requestTable.reloadData()
+            }
+        }, failure: { (error) in
+            
+        }, friendRequest: receivedFriendRequests[button.tag])
     }
     
     private func getRequests(){
@@ -133,6 +169,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         fv = fv.loadNib()
         self.view.addSubview(fv)
         fv.center = self.view.center
+        self.updateSentRequests()
     }
     
     

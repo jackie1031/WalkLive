@@ -21,7 +21,7 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
         friendListTable.delegate = self
         friendListTable.dataSource = self
-
+        self.updateFriends()
         // Do any additional setup after loading the view.
     }
     
@@ -53,12 +53,49 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendListTable.dequeueReusableCell(withIdentifier: "SetFriendTableViewCell", for: indexPath) as! SetFriendTableViewCell
-        
+        let friend = friends[indexPath.row]
+        cell.friendNameLabel.text = friend.username
+        cell.friendNumberLabel.text = friend.contact
         cell.selectionStyle = .none
         return cell
     }
 
-
+    @IBAction func onSelectButton(_ sender: Any) {
+        let button = sender as! UIButton
+        self.currentFriendNameLabel.text = friends[button.tag].username
+        self.currentEmergencyNumberLabel.text = friends[button.tag].contact
+        
+    }
+    
+    @IBAction func onSaveButton(_ sender: Any) {
+        if (self.currentFriendNameLabel.text! == currentUserInfo.emergency_id) {
+            return
+        }
+        let emergencyContact = EmergencyContact(emergency_id: self.currentFriendNameLabel.text!, emergency_number: self.currentEmergencyNumberLabel.text!)
+        backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
+            currentUserInfo.emergency_id = self.currentFriendNameLabel.text!
+            currentUserInfo.emergency_number = self.currentEmergencyNumberLabel.text!
+            OperationQueue.main.addOperation {
+                let successView = warnigSignFactory.makeSaveSettingsSuccessWarningSign()
+                successView.center = self.view.center
+                self.view.addSubview(successView)
+            }
+        }, failure: { (error) in
+            
+        }, emergencyContact: emergencyContact)
+    }
+    
+    func updateFriends() {
+        backEndClient.getFriendList(success: { (friends) in
+            OperationQueue.main.addOperation {
+            self.friends = friends
+                self.friendListTable.reloadData()
+            }
+        }) { (error) in
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

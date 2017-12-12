@@ -12,6 +12,9 @@ class SetFriendTableViewCell: UITableViewCell {
 
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var friendNumberLabel: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
