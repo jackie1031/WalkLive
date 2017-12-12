@@ -69,7 +69,7 @@ public class TestServer {
 
    @After
    public void tearDown() {
-       clearDB();
+       //clearDB();
        //Spark.stop();
    }
 
@@ -678,6 +678,7 @@ public class TestServer {
     @Test
     public void testGetDangerZone() throws Exception {
 
+
         double lat = 3.454;
         double lng = 6.929;
         Coordinate c = new Coordinate(lat, lng);
@@ -872,21 +873,19 @@ public class TestServer {
         Statement stm = null;
         ResultSet res = null;
 
+
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
-            String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String setup2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
+
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
 
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
-            stm.executeUpdate(setup3);
-            stm.executeUpdate(counterInit);
-            stm.executeUpdate(setup4);
+            stm.executeUpdate(sqlNew3);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
@@ -894,12 +893,10 @@ public class TestServer {
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
             stm.executeUpdate(sql3);
-            String sql4 = "DROP TABLE IF EXISTS friends" ;
+            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             stm.executeUpdate(sql4);
-            String sql5 = "DROP TABLE IF EXISTS counters" ;
+            String sql5 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql5);
-            String sql6 = "DROP TABLE IF EXISTS Trips" ;
-            stm.executeUpdate(sql6);
 
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
@@ -968,24 +965,19 @@ public class TestServer {
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
             stm.executeUpdate(sql3);
-            String sql4 = "DROP TABLE IF EXISTS friends" ;
+            String sql4 = "DROP TABLE IF EXISTS friendRequests" ;
             stm.executeUpdate(sql4);
             String sql5 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql5);
-            String sql6 = "DROP TABLE IF EXISTS counters" ;
-            stm.executeUpdate(sql6);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friendRequests (request_id INT, sender TEXT, recipient TEXT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
             stm.executeUpdate(sqlNew3);
-            stm.executeUpdate(sqlNew4);
-            stm.executeUpdate(counterInit);
 
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
