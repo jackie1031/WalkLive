@@ -598,7 +598,7 @@ public class WalkLiveService {
         PreparedStatement ps = null;
         ResultSet res = null;
 
-        String sql = "SELECT * FROM friends WHERE recipient = ?";
+        String sql = "SELECT * FROM friends WHERE recipient = ? AND relationship = 0 ";
 
         try {
             conn = DriverManager.getConnection(url, user, password);
