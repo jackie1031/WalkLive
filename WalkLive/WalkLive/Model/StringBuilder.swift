@@ -22,4 +22,18 @@ class StringBuilder: NSObject {
         }
         return (currentUserInfo?.emergency_id)!
     }
+    
+    func emerStringBuilderWithUser() -> String{
+        if (currentUserInfo?.emergency_number == nil || currentUserInfo?.emergency_number == "") {
+            return "Emer. Num: None"
+        }
+        return "Emer. Num: " + (currentUserInfo?.emergency_number)!
+    }
+    
+    func emerIdStringBuilderWithUser() -> String{
+        if (currentUserInfo?.emergency_id == nil || currentUserInfo?.emergency_id == "") {
+            return "Emer. Id: None"
+        }
+        return "Emer. Contact: " + (currentUserInfo?.emergency_id)!
+    }
 }

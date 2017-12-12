@@ -317,7 +317,7 @@ extension MainMapVC: RouteDelegate{
     }
     
     private func createTimeManager(trip: Trip){
-        self.timeManager = TimeManager(timeInterval: trip.timeInterval!)
+        self.timeManager = TimeManager(timeInterval: trip.timeInterval!, roadRequester: self.roadRequester)
         self.timeManager.tripPanelDelegate = self
         self.timeManager.startTimer(timeInterval: 60)
     }

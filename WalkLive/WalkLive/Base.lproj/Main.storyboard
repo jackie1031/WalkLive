@@ -230,10 +230,18 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3a5-Bg-zFz">
-                                        <rect key="frame" x="120" y="545" width="255" height="58"/>
+                                        <rect key="frame" x="67" y="545" width="308" height="58"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-ua-Qdf">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3Q-Zt-Sv7">
                                                 <rect key="frame" x="0.0" y="0.0" width="43" height="58"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                                <state key="normal" title="👥"/>
+                                                <connections>
+                                                    <segue destination="xMF-8H-6rL" kind="show" id="kmc-A4-dva"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-ua-Qdf">
+                                                <rect key="frame" x="53" y="0.0" width="43" height="58"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="🌟"/>
                                                 <connections>
@@ -241,12 +249,15 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCD-Wq-E3X">
-                                                <rect key="frame" x="53" y="0.0" width="43" height="58"/>
+                                                <rect key="frame" x="106" y="0.0" width="43" height="58"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="⚙️"/>
+                                                <connections>
+                                                    <segue destination="mhm-es-34Q" kind="show" id="BDU-6I-cVd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmf-Ia-BIJ">
-                                                <rect key="frame" x="106" y="0.0" width="43" height="58"/>
+                                                <rect key="frame" x="159" y="0.0" width="43" height="58"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="👣"/>
                                                 <connections>
@@ -254,7 +265,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="viq-bB-hy2">
-                                                <rect key="frame" x="159" y="0.0" width="43" height="58"/>
+                                                <rect key="frame" x="212" y="0.0" width="43" height="58"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="💬"/>
                                                 <connections>
@@ -262,7 +273,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nd-Mr-KdA">
-                                                <rect key="frame" x="212" y="0.0" width="43" height="58"/>
+                                                <rect key="frame" x="265" y="0.0" width="43" height="58"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                 <state key="normal" title="🚨"/>
                                                 <connections>
@@ -918,7 +929,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfL-om-0ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2620" y="551"/>
+            <point key="canvasLocation" x="2798" y="699"/>
         </scene>
         <!--Settings-->
         <scene sceneID="mMH-bt-que">
@@ -1060,7 +1071,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Gs-Wg-qDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1501.5999999999999" y="1668.2158920539732"/>
+            <point key="canvasLocation" x="2126" y="1462"/>
         </scene>
         <!--Choose Friend-->
         <scene sceneID="tLp-bw-Jc2">
@@ -1438,5 +1449,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CWQ-0c-P3r"/>
+        <segue reference="BDU-6I-cVd"/>
+        <segue reference="kmc-A4-dva"/>
     </inferredMetricsTieBreakers>
 </document>

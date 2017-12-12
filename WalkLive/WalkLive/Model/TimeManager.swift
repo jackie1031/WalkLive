@@ -17,8 +17,9 @@ class TimeManager: NSObject {
     private var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
     
-    init(timeInterval: TimeInterval) {
+    init(timeInterval: TimeInterval, roadRequester: RoadRequester) {
         self.timeInterval = timeInterval
+        self.roadRequester = roadRequester
     }
     
     func convertTimeIntervalToMin(timeInterval: TimeInterval) -> Int{
@@ -28,6 +29,11 @@ class TimeManager: NSObject {
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
+        backEndClient.startTrip(success: {
+            print("successful")
+        }, failure: { (error) in
+            print("failures!")
+        }, timePoint: self.buildTimePoint()!)
     }
     
     @objc func updateTimeLabel(){
@@ -65,16 +71,17 @@ class TimeManager: NSObject {
         let destinationAnnotation = self.roadRequester?.destinationAnnotation
         let currentAnnotation = self.roadRequester?.getcurrentLocationInAnnotation()
         let timePoint = TimePoint()
-        
+        timePoint.username = currentUserInfo.username
         timePoint.curLat = Double((currentAnnotation?.coordinate.latitude)!)
         timePoint.curLong = Double((currentAnnotation?.coordinate.longitude)!)
         timePoint.startLat = Double((sourceAnnotation?.coordinate.latitude)!)
         timePoint.startLong = Double((sourceAnnotation?.coordinate.longitude)!)
         timePoint.endLat = Double((destinationAnnotation?.coordinate.latitude)!)
         timePoint.endLong = Double((destinationAnnotation?.coordinate.longitude)!)
-        
         timePoint.destination = (destinationAnnotation?.title)!
         timePoint.startTime = getTodayString()
+        timePoint.emergencyNum = "123-123-123"
+        timePoint.timeSpent = self.buildMessageOnCurrentTimer()
         
         return timePoint
     }

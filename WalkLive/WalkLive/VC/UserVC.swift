@@ -32,7 +32,7 @@ class UserVC: UIViewController {
     private func setUserVCInfo() {
         self.usernameLabel.text = currentUserInfo?.username
         self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
-        self.emergencyContactLabel.text = stringBuilder.emerStringBuilder()
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
     }
     
     @IBAction func onMyContactPencilButton(_ sender: Any) {

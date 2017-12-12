@@ -391,11 +391,17 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
-
+    
+    /**
+     * ================================================================
+     * Trip Session
+     * ================================================================
+     */
+    
     
     func startTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/start_trip"
+        urlComponents.path = self.APICONTEXT + "/trips"
         var startTripRequest = URLRequest(url: urlComponents.url!)
         startTripRequest.httpMethod = "POST"
         
@@ -419,10 +425,9 @@ class BackEndClient: NSObject {
                 failure(LoginError(status: status))
             } else {
                 print(status)
-                    success()
+                success()
             }
         }).resume()
     }
-    
 
 }
