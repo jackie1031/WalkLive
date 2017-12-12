@@ -16,7 +16,7 @@ class AddFriendView: UIView {
     
     
     @IBAction func onSendButton(_ sender: Any) {
-        let friendRequest = FriendRequest()
+        var friendRequest = FriendRequest()
         if (friendIdLabel.text == "") {
             return
         }

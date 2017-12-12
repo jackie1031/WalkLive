@@ -19,6 +19,11 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboard()
+        backEndClient.getUsers(success: { (users) in
+            
+        }) { (error) in
+            
+        }
         
         // Do any additional setup after loading the view.
     }

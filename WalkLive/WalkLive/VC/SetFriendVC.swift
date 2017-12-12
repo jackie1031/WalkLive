@@ -53,7 +53,9 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendListTable.dequeueReusableCell(withIdentifier: "SetFriendTableViewCell", for: indexPath) as! SetFriendTableViewCell
-        
+        let friend = friends[indexPath.row]
+        cell.friendNameLabel.text = friend.username
+        cell.friendNumberLabel.text = friend.contact
         cell.selectionStyle = .none
         return cell
     }

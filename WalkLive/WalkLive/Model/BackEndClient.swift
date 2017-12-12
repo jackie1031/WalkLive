@@ -135,7 +135,7 @@ class BackEndClient: NSObject {
     */
     func createFriendRequest(success: @escaping () -> (), failure: @escaping (Error) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username!)/friend_requests"
         var makeFriendRequest = URLRequest(url: urlComponents.url!)
         makeFriendRequest.httpMethod = "POST"
         
@@ -163,9 +163,11 @@ class BackEndClient: NSObject {
     
     func acceptFriendRequest(success: @escaping () -> (), failure: @escaping (FriendRequestError) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "default")/friend_requests/\(friendRequest._id)/accept"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username!)/friend_requests/\(friendRequest._id!)/accept"
         var acceptFriendRequest = URLRequest(url: urlComponents.url!)
         acceptFriendRequest.httpMethod = "PUT"
+        
+        print(urlComponents.path)
         
         URLSession.shared.dataTask(with: acceptFriendRequest, completionHandler: { (data, response, error) in
             if (error != nil) {
@@ -173,8 +175,10 @@ class BackEndClient: NSObject {
             }
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 200) {
+                print(status)
                 failure(FriendRequestError(status: status))
             } else {
+                print(status)
                 success()
             }
         }).resume()
@@ -182,7 +186,9 @@ class BackEndClient: NSObject {
     
     func rejectFriendRequest(success: @escaping () -> (), failure: @escaping (FriendRequestError) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "default")/friend_requests/\(friendRequest._id)/reject"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username!)/friend_requests/\(friendRequest._id!)/reject"
+        
+        print(urlComponents.path)
         var rejectFriendRequest = URLRequest(url: urlComponents.url!)
         rejectFriendRequest.httpMethod = "PUT"
         
@@ -192,8 +198,10 @@ class BackEndClient: NSObject {
             }
             let status = (response as! HTTPURLResponse).statusCode
             if (status != 200) {
+                print(status)
                 failure(FriendRequestError(status: status))
             } else {
+                print(status)
                 success()
             }
         }).resume()
@@ -213,7 +221,7 @@ class BackEndClient: NSObject {
      */
     func getSentFriendRequests(success: @escaping ([FriendRequest]?) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody" )/sent_friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/sent_friend_requests"
         var getSentFriendRequests = URLRequest(url: urlComponents.url!)
         getSentFriendRequests.httpMethod = "GET"
         
@@ -227,6 +235,7 @@ class BackEndClient: NSObject {
                 failure(LoginError(status: status))
             } else {
                 let friendRequests = try? jsonDecoder.decode([FriendRequest].self, from: data!) as [FriendRequest]
+                print(friendRequests)
                 success(friendRequests)
             }
         }).resume()
@@ -245,7 +254,8 @@ class BackEndClient: NSObject {
      */
     func getReceivedFriendRequests(success: @escaping ([FriendRequest]) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody" )/friend_requests"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/friend_requests"
+        print(urlComponents.path)
         var getReceivedFriendRequests = URLRequest(url: urlComponents.url!)
        getReceivedFriendRequests.httpMethod = "GET"
         
@@ -277,7 +287,7 @@ class BackEndClient: NSObject {
      */
     func getFriendList(success: @escaping ([Friend]?) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/users/\(User.currentUser?.username ?? "nobody" )/friends"
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody" )/friends"
         var getFriendList = URLRequest(url: urlComponents.url!)
         getFriendList.httpMethod = "GET"
         
@@ -376,6 +386,7 @@ class BackEndClient: NSObject {
                 failure(SignUpError(status: status))
             } else {
                 let userContact = try? jsonDecoder.decode([UserLogin].self, from: data!) as [UserLogin]
+                print(userContact)
                 success(userContact!)}
         }).resume()
     }

@@ -14,7 +14,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var requestTable: UITableView!
     var receivedFriendRequests: [FriendRequest]!
     var sentFriendRequests: [FriendRequest]!
-    var friends: [FriendRequest]!
+    var friends: [Friend]!
 
     
     let RECEIVED = 0
@@ -25,6 +25,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         requestTable.delegate = self
         requestTable.dataSource = self
+        self.updateReceivedRequests()
         // Do any additional setup after loading the view.
 //        self.testFriendRequestTable()
     }
@@ -51,16 +52,26 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    private func testFriendRequestTable(){
-        var list = [FriendRequest]()
-        let fr1 = FriendRequest()
-        let fr2 = FriendRequest()
-        list.append(fr1)
-        list.append(fr2)
-        self.receivedFriendRequests = list
-        self.sentFriendRequests = list
-        self.friends = list
+    func updateFriendList(){
+        backEndClient.getFriendList(success: { (friends) in
+            OperationQueue.main.addOperation {
+                self.friends = friends
+                self.requestTable.reloadData()
+            }
+        }) { (error) in
+            
+        }
     }
+//    private func testFriendRequestTable(){
+//        var list = [FriendRequest]()
+//        let fr1 = FriendRequest()
+//        let fr2 = FriendRequest()
+//        list.append(fr1)
+//        list.append(fr2)
+//        self.receivedFriendRequests = list
+//        self.sentFriendRequests = list
+//        self.friends = list
+//    }
     
     @IBAction func switchSegmentControl(_ sender: Any) {
         self.requestTable.reloadData()
@@ -117,7 +128,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         else {
             let friend = self.friends[indexPath.row]
-            cell.usernameLabel.text = friend.sender
+            cell.usernameLabel.text = friend.username
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }
