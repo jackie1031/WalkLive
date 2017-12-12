@@ -60,6 +60,7 @@ public class TestServer {
     // Setup
     //------------------------------------------------------------------------//
 
+
 //    @Before
 //    public void setup() throws Exception {
 //        //Clear the database
@@ -113,8 +114,8 @@ public class TestServer {
 //        }
 //
 //    }
-//
-//
+
+
 //    @Test
 //    public void testDuplicateCreation() {
 //
@@ -237,6 +238,8 @@ public class TestServer {
 ////            assertEquals("Mismatch in emergency number", expected.getEmergencyNumber(), actual.getEmergencyNumber());
 //
 //    }
+//
+//
 //
 //    /**
 //     * ================================================================
@@ -484,13 +487,13 @@ public class TestServer {
 //        User actual = results.get(0);
 //        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
 //    }
-//
-//    /**
-//     * ================================================================
-//     * Emergency Contact PUT
-//     * ================================================================
-//     */
-//
+
+    /**
+     * ================================================================
+     * Emergency Contact PUT
+     * ================================================================
+     */
+
 //    @Test
 //    public void testUpdateEmergencyInfo() throws Exception {
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -505,7 +508,7 @@ public class TestServer {
 //        Response r2 = request("PUT", "/WalkLive/api/users/jeesoo/emergency_info", contactInfo);
 //        assertEquals("Failed to get user", 200, r2.httpStatus);
 //    }
-//
+
 ////DELETE LATER
 ////    @Test
 ////    public void testUpdate() throws Exception {
@@ -881,7 +884,12 @@ public class TestServer {
 //            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
 //            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 //            String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+//            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+//            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
 //
+//            stm.executeUpdate(sqlNew3);
+//            stm.executeUpdate(sqlNew4);
+
 //            stm.executeUpdate(setup);
 //            stm.executeUpdate(setup2);
 //            stm.executeUpdate(setup3);
@@ -900,6 +908,12 @@ public class TestServer {
 //            stm.executeUpdate(sql5);
 //            String sql6 = "DROP TABLE IF EXISTS Trips" ;
 //            stm.executeUpdate(sql6);
+
+//            String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
+//            stm.executeUpdate(sql7);
+//
+//            String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
+//            stm.executeUpdate(sql8);
 //
 //        } catch (SQLException ex) {
 //            //logger.error("Failed to create schema at startup", ex);
@@ -974,6 +988,10 @@ public class TestServer {
 //            stm.executeUpdate(sql5);
 //            String sql6 = "DROP TABLE IF EXISTS counters" ;
 //            stm.executeUpdate(sql6);
+//            String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
+//            stm.executeUpdate(sql7);
+//            String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
+//            stm.executeUpdate(sql8);
 //
 //            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
 //            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
@@ -981,6 +999,14 @@ public class TestServer {
 //            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
 //            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 //
+//            String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+//            String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+//
+//
+//
+//            stm.executeUpdate(sqlNew5);
+//            stm.executeUpdate(sqlNew6);
+
 //            stm.executeUpdate(sqlNew);
 //            stm.executeUpdate(sqlNew2);
 //            stm.executeUpdate(sqlNew3);
@@ -1009,4 +1035,5 @@ public class TestServer {
 //            }
 //        }
 //    }
+
 }

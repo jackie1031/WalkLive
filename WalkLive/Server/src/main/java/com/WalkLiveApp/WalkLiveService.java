@@ -38,9 +38,10 @@ public class WalkLiveService {
         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
     */
         Statement stm = null;
+        ResultSet res = null;
 
         String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-        //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
+            //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
         //stm.executeUpdate(setup);
 
         try {
@@ -57,6 +58,11 @@ public class WalkLiveService {
                     stm.close();
                 } catch (SQLException e) { /* ignored */}
             }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
             if (conn != null) {
                 try {
                     conn.close();
@@ -64,16 +70,16 @@ public class WalkLiveService {
             }
         }
 
-
-        String sql = "CREATE TABLE IF NOT EXISTS Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, startTime TEXT, completed BOOL not NULL " +
+        String sql = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId TEXT, username TEXT, destination TEXT, startTime TEXT, completed BOOL not NULL " +
                 " startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
 //dangerZone INT,
         try {
             conn = DriverManager.getConnection(url, user, password);
             stm = conn.createStatement();
-            stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, angerZone INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
+            stm.executeUpdate("CREATE TABLE IF NOT EXISTS ongoingTrips(tripId TEXT, username TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
             //stm.executeUpdate(sql);  //+, completed BOOL
-                    //"dangerZone INT ,startLat DOUBLE(16,4),startLong DOUBLE (16,4),curLat DOUBLE PRECISION,curLong DOUBLE PRECISION,endLat DOUBLE PRECISION,endLong DOUBLE PRECISION, emergencyNum Text");
+            //"dangerZone INT ,startLat DOUBLE(16,4),startLong DOUBLE (16,4),curLat DOUBLE PRECISION,curLong DOUBLE PRECISION,endLat DOUBLE PRECISION,endLong DOUBLE PRECISION, emergencyNum Text");
+
 
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
@@ -85,12 +91,54 @@ public class WalkLiveService {
                     stm.close();
                 } catch (SQLException e) { /* ignored */}
             }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) { /* ignored */}
             }
         }
+
+
+
+        String sql2 = "CREATE TABLE IF NOT EXISTS Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, startTime TEXT, completed BOOL not NULL " +
+                " startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+//dangerZone INT,
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
+            stm.executeUpdate("CREATE TABLE IF NOT EXISTS doneTrips(tripId TEXT, userName TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
+            //stm.executeUpdate(sql);  //+, completed BOOL
+            //"dangerZone INT ,startLat DOUBLE(16,4),startLong DOUBLE (16,4),curLat DOUBLE PRECISION,curLong DOUBLE PRECISION,endLat DOUBLE PRECISION,endLong DOUBLE PRECISION, emergencyNum Text");
+
+
+        } catch (SQLException ex) {
+            logger.error("Failed to create schema at startup", ex);
+            throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+
     }
 
     /*
@@ -354,6 +402,7 @@ public class WalkLiveService {
             }
         } catch (SQLException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
+
             throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
         } catch (java.text.ParseException ex) {
             logger.error(String.format("WalkLiveService.find: Failed to properly parse date"), ex);
@@ -925,10 +974,54 @@ public class WalkLiveService {
 
 
 
-    private int countRowDB() throws InvalidDestination{
+
+    private int countOngoing() throws InvalidDestination{
         PreparedStatement ps = null;
         ResultSet res = null;
-        String sql = "SELECT * FROM Trips";
+        String sql = "SELECT * FROM ongoingTrips";
+
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            res = ps.executeQuery();
+            int size= 0;
+            if (res != null)
+            {
+                res.beforeFirst();
+                res.last();
+                size = res.getRow();
+                logger.info("the size of the table is:"+size);
+                return size;
+            }
+
+        } catch (SQLException ex) {
+            logger.error("omg", ex);
+            throw new InvalidDestination("i don't care", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return -1;
+    }
+
+
+    private int countDone() throws InvalidDestination{
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        String sql = "SELECT * FROM doneTrips";
 
         try{
             conn = DriverManager.getConnection(url, user, password);
@@ -971,7 +1064,6 @@ public class WalkLiveService {
 
 
 
-    // trip id is hard listed
     public void startTrip(String body) throws InvalidDestination, UserServiceException, ParseException {
 
 
@@ -997,6 +1089,7 @@ public class WalkLiveService {
         String emergencyNum = object.get("emergencyNum").toString();
         String timeSpent = object.get("timeSpent").toString();
         String shareTo;
+        int dangerLevel;
 
 
         double startLat = Double.parseDouble(startLat1);
@@ -1010,19 +1103,18 @@ public class WalkLiveService {
 
 
 
-        int tripId = countRowDB();
+        int tripId = countOngoing()+countDone();
 
         logger.info("the trip id is: " + tripId);
 
 
-        String sql = "SELECT * FROM Trips WHERE tripId = ? LIMIT 1";
+        String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
             ps.setInt(1, tripId);
             res = ps.executeQuery();
-
 
 
 
@@ -1062,11 +1154,12 @@ public class WalkLiveService {
 //                "curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
 
 
-        sql = "INSERT INTO Trips (tripId, username, shareTo, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent) VALUES (?,?,NULL,?,Null,?,completed,?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO ongoingTrips (tripId, username, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent)" +
+                " VALUES (?,?,?,Null,?,completed,?,?,?,?,?,?,?,?)";
 
         try {
             conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
+            ps = this.conn.prepareStatement(sql);
             ps.setInt(1, tripId);
             ps.setString(2, username);
             ps.setString(3, destination);
@@ -1122,12 +1215,55 @@ public class WalkLiveService {
 
         //String sql = "SELECT * FROM Trips WHERE tripId = ? LIMIT 1";
 
-        String sql = "update Trips set completed = 1 where tripId = ?";
+        //INSERT INTO persons_table select * from customer_table where person_name = 'tom';
+
+
+
+        String sql = "INSERT INTO doneTrips select * from ongoingTrips where tripId = ?";
 
 
         try {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, tripId);
+            res = ps.executeQuery();
+
+            while (res.next()) { //if there is something in the response
+                //which means that we should stop the process and throw an error
+                logger.error("WalkLiveService.startTrip: Failed to create new entry ");
+                throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - duplicate username");
+
+            }
+
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+            throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        String sql2 = "DELETE FROM ongoingTrips select * from ongoingTrips where tripId = ?";
+        //customer_table where person_name = 'tom';
+
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql2);
             ps.setInt(1, tripId);
             res = ps.executeQuery();
 
@@ -1180,7 +1316,7 @@ public class WalkLiveService {
 
 
         //find user by username
-        String sql = "SELECT * FROM Trips WHERE tripId = ? LIMIT 1";
+        String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
 
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -1202,6 +1338,7 @@ public class WalkLiveService {
             double endLat;
             boolean completed;
 
+
 //            String setup = "users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, " +
 //                    "emergency_id TEXT, emergency_number TEXT)" ;
 //            pw = res.getString(2);
@@ -1215,20 +1352,20 @@ public class WalkLiveService {
 
             if (res.next()) {
                 username = res.getString(2);
-                destination = res.getString(4);
-                startTime = res.getString(6);
-                completed = res.getBoolean(7);
-                startLat = res.getDouble(8);
-                startLong = res.getDouble(9);
-                curLat = res.getDouble(10);
-                curLong = res.getDouble(11);
-                endLat = res.getDouble(12);
-                endLong = res.getDouble(13);
-                emergencyNum = res.getString(14);
-                timeSpent = res.getString(15);
+                destination = res.getString(3);
+                startTime = res.getString(5);
+                completed = res.getBoolean(6);
+                startLat = res.getDouble(7);
+                startLong = res.getDouble(8);
+                curLat = res.getDouble(9);
+                curLong = res.getDouble(10);
+                endLat = res.getDouble(11);
+                endLong = res.getDouble(12);
+                emergencyNum = res.getString(13);
+                timeSpent = res.getString(14);
 
 
-                return new Trip(tripId, shareTo,username, destination, startTime, completed, startLat, startLong, curLat, curLong, endLat, endLong, emergencyNum, timeSpent);
+                return new Trip(tripId,username, destination, startTime, completed, startLat, startLong, curLat, curLong, endLat, endLong, emergencyNum, timeSpent);
 
             } else{
                 logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
@@ -1257,8 +1394,6 @@ public class WalkLiveService {
             }
         }
     }
-
-
 //     public Trip updateDestination(String body) throws WalkLiveService.UserServiceException {
 //
 //         //{ tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }

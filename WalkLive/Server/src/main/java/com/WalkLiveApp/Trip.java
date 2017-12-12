@@ -28,10 +28,9 @@ public class Trip {
 
     }
 
-    public Trip (String username, String shareTo, String destination, String startTime, boolean completed, double startLat,
+    public Trip (String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
         this.username =  username;
-        this.shareTo =  shareTo;
         this.destination =  destination;
         this.startTime =  startTime;
         this.completed =  completed;
@@ -47,12 +46,11 @@ public class Trip {
 
     }
 
-    public Trip (int tripId, String username, String shareTo, String destination, String startTime, boolean completed, double startLat,
+    public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
 
         this.tripId =  tripId;
         this.username =  username;
-        this.shareTo =  shareTo;
         this.destination =  destination;
         this.startTime =  startTime;
         this.completed =  completed;
