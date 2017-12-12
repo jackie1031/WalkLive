@@ -15,7 +15,6 @@ class UserVC: UIViewController {
     
     @IBOutlet weak var emergencyContactLabel: UILabel!
     @IBOutlet weak var friendRequestButton: UIButton!
-    @IBOutlet weak var tripRequestButton: UIButton!
     var receivedFriendRequests: [FriendRequest]!
     
     
@@ -53,7 +52,9 @@ class UserVC: UIViewController {
     
     func updateFriendRequest(){
         backEndClient.getReceivedFriendRequests(success: { (receivedFriendRequests) in
+            OperationQueue.main.addOperation {
             self.updateFriendMangerTitle(receivedFriendRequests: receivedFriendRequests)
+            }
         }) { (error) in
             print(error)
         }
@@ -65,6 +66,9 @@ class UserVC: UIViewController {
         } else {
             self.receivedFriendRequests = receivedFriendRequests!
             self.friendRequestButton.titleLabel?.text = "Friend Manager: " + String(receivedFriendRequests!.count) + " request(s)"
+            self.friendRequestButton.sizeToFit()
+            
+
         }
     }
     

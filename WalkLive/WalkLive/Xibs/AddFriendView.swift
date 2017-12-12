@@ -27,7 +27,10 @@ class AddFriendView: UIView {
             self.statusLabel.textColor = primaryColor
             }
         }, failure: { (error) in
-            print(error)
+            OperationQueue.main.addOperation {
+                self.statusLabel.text = "Add fail."
+                self.statusLabel.textColor = UIColor.red
+            }
         }, friendRequest: friendRequest)
     }
     

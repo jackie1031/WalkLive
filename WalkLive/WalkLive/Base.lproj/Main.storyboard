@@ -653,13 +653,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diX-7f-Pu8">
-                                        <rect key="frame" x="20" y="112" width="156" height="27"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diX-7f-Pu8">
+                                        <rect key="frame" x="20" y="112" width="109" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="4oh-KB-qPD"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Friend Manager: 4 requests  : 4">
+                                        <state key="normal" title="👥 Friend Manager">
                                             <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -673,7 +673,6 @@
                                     <constraint firstItem="diX-7f-Pu8" firstAttribute="top" secondItem="7sI-rV-UDo" secondAttribute="bottom" constant="8" id="Dcy-hQ-Kp4"/>
                                     <constraint firstItem="gbh-35-MrL" firstAttribute="leading" secondItem="eHJ-3O-Xau" secondAttribute="leading" id="FAn-Wp-KPQ"/>
                                     <constraint firstItem="eHJ-3O-Xau" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="trailing" constant="10" id="GXF-4L-w8M"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="diX-7f-Pu8" secondAttribute="trailing" constant="20" symbolic="YES" id="Gzi-Jc-x6P"/>
                                     <constraint firstItem="7sI-rV-UDo" firstAttribute="leading" secondItem="J29-ca-OZf" secondAttribute="leading" constant="20" id="Mzz-GL-x8j"/>
                                     <constraint firstItem="diX-7f-Pu8" firstAttribute="leading" secondItem="7sI-rV-UDo" secondAttribute="leading" id="Wfz-J8-Kcr"/>
                                     <constraint firstItem="GSB-rg-gQJ" firstAttribute="top" secondItem="gbh-35-MrL" secondAttribute="bottom" constant="0.5" id="ZL5-dB-IYj"/>
