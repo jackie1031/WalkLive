@@ -16,7 +16,9 @@ class MessageBuilder: NSObject {
         var text : String = ""
         for message in messageSegments {
             var realValue : String
-            if (message == "Phone") {
+            if (message == "Username") {
+                realValue = currentUserInfo.username!
+            } else if (message == "Phone") {
                 realValue = currentUserInfo.contact!
             } else if (message == "Coordinate") {
                 let location = CLLocationManager().location?.coordinate
@@ -37,7 +39,9 @@ class MessageBuilder: NSObject {
         var text : String = ""
         for message in messageSegments {
             var realValue : String
-            if (message == "Phone") {
+            if (message == "Username") {
+                realValue = currentUserInfo.username!
+            } else if (message == "Phone") {
                 realValue = currentUserInfo.contact!
             } else if (message == "Coordinate") {
                 let location = CLLocationManager().location?.coordinate
@@ -62,7 +66,9 @@ class MessageBuilder: NSObject {
         var text : String = ""
         for message in messageSegments {
             var realValue : String
-            if (message == "Phone") {
+            if (message == "Username") {
+                realValue = currentUserInfo.username!
+            } else if (message == "Phone") {
                 realValue = currentUserInfo.contact!
             } else if (message == "Coordinate") {
                 let location = CLLocationManager().location?.coordinate

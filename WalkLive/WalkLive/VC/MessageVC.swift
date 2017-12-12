@@ -19,8 +19,8 @@ class MessageVC: UIViewController {
     let WITHOUT_TRIP = 0
     let WITH_TRIP = 1
     
-    let LABEL_WITHOUT_TRIP = "Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number."
-    let LABEL_WITH_TRIP = "Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number. Type \"Time\" to plug in time spent. Type \"Destination\" to plug in trip destination."
+    let LABEL_WITHOUT_TRIP = "Type \"Username\" to plug in your username. Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number."
+    let LABEL_WITH_TRIP = "Type \"Username\" to plug in your username. Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number. Type \"Time\" to plug in time spent. Type \"Destination\" to plug in trip destination."
     
     private var unsavedMessages : Message!
     private var textFieldsWithoutTrip : Array<UITextField>!
@@ -169,12 +169,6 @@ class MessageVC: UIViewController {
             currentIndex = 0
         } else {
             currentIndex = 1
-        }
-        if (textFields.count >= 8) {
-            let errorView = warnigSignFactory.saveMessageWarningSign(status: 1)
-            errorView.center = self.view.center
-            self.view.addSubview(errorView)
-            return
         }
         
         // create new text field

@@ -29,10 +29,11 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var textLabel2: UILabel!
     @IBOutlet weak var emergencyContactIdTextField: UITextField!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    var user : User!
+    let WITHOUT_TRIP = 0
+    let WITH_TRIP = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +85,10 @@ class SettingsVC: UITableViewController {
         }
     }
     
+    @IBAction func onSegmentedControl(_ sender: Any) {
+        refreshTextLabel()
+    }
+    
     private func emergencyIsDifferent() -> Bool {
         return (emergencyContactPhone.text != "" ||
                 emergencyContactIdTextField.text != "" )
@@ -118,8 +123,11 @@ class SettingsVC: UITableViewController {
     
     // refresh text preview label
     private func refreshTextLabel() {
-        textLabel.text = messages.buildMessageWithoutTrip()
-        textLabel2.text = messages.buildMessageWithTripPreview()
+        if (segmentedControl.selectedSegmentIndex == WITHOUT_TRIP) {
+            textLabel.text = messages.buildMessageWithoutTrip()
+        } else if (segmentedControl.selectedSegmentIndex == WITH_TRIP) {
+            textLabel.text = messages.buildMessageWithTripPreview()
+        }
     }
     
     private func setKeyboard(){
