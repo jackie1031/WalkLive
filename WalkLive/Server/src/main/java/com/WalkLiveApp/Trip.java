@@ -19,13 +19,12 @@ public class Trip {
         this.username =  username;
 
     }
-    public Trip (int tripId, String username, String destination, boolean completed){
 
+    public Trip (int tripId, String username, String destination, boolean completed){
         this.tripId =  tripId;
         this.username =  username;
         this.destination =  destination;
         this.completed =  completed;
-
     }
 
     public Trip (String username, String destination, String startTime, boolean completed, double startLat,
