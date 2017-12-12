@@ -34,14 +34,14 @@ public class WalkLiveService {
 
     public WalkLiveService() throws UserServiceException {
         /**
-        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
-        String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
-    */
+         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
+         */
         Statement stm = null;
         ResultSet res = null;
 
         String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-            //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
+        //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
         //stm.executeUpdate(setup);
 
         try {
@@ -180,7 +180,7 @@ public class WalkLiveService {
             throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
         }  finally {
             //close connections
-          if (ps != null) {
+            if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException e) { /* ignored */}
@@ -528,246 +528,246 @@ public class WalkLiveService {
      */
 
     //create a new friend request and store in database
-     public void createFriendRequest(String sender, String body) throws UserServiceException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
-         PreparedStatement ps = null;
-         ResultSet res = null;
+    public void createFriendRequest(String sender, String body) throws UserServiceException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
+        PreparedStatement ps = null;
+        ResultSet res = null;
 
-         User sUser = null;
-         User rUser = null;
+        User sUser = null;
+        User rUser = null;
 
-         //first check if the sender exists at all
-         try {
-             sUser = getUser(sender);
-         } catch (UserServiceException e) {
-             logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", sender));
-             throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", sender));
-         }
+        //first check if the sender exists at all
+        try {
+            sUser = getUser(sender);
+        } catch (UserServiceException e) {
+            logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", sender));
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", sender));
+        }
 
-         JSONObject object = (JSONObject) new JSONParser().parse(body);
-         String recipient = object.get("recipient").toString();
-         int request_id = getNewRequestId();
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String recipient = object.get("recipient").toString();
+        int request_id = getNewRequestId();
 
-         //second check if the recipient exists at all
-         try {
-             rUser = getUser(recipient);
-         } catch (UserServiceException e) {
-             logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", recipient));
-             throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", recipient));
-         }
+        //second check if the recipient exists at all
+        try {
+            rUser = getUser(recipient);
+        } catch (UserServiceException e) {
+            logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", recipient));
+            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", recipient));
+        }
 
-         //Third make sure that sender and recipient are not the same
-         if (rUser.getUsername().equals(sender)) {
-             logger.error("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
-             throw new RelationshipServiceException("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
-         }
+        //Third make sure that sender and recipient are not the same
+        if (rUser.getUsername().equals(sender)) {
+            logger.error("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
+            throw new RelationshipServiceException("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
+        }
 
-         //fourth see if there already is a friend request made from either s ro r or r to s already, it shouldnt work.
+        //fourth see if there already is a friend request made from either s ro r or r to s already, it shouldnt work.
 
 
-         String sql = "INSERT INTO friends (_id, sender, recipient, relationship, sent_on) VALUES (?, ?, ?, 0, null)" ;
+        String sql = "INSERT INTO friends (_id, sender, recipient, relationship, sent_on) VALUES (?, ?, ?, 0, null)" ;
 
-         try {
-             conn = DriverManager.getConnection(url, user, password);
-             ps = conn.prepareStatement(sql);
-             ps.setInt(1, request_id);
-             ps.setString(2, sender);
-             ps.setString(3, recipient);
-             ps.executeUpdate();
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, request_id);
+            ps.setString(2, sender);
+            ps.setString(3, recipient);
+            ps.executeUpdate();
 
-             System.out.println("SUCCESSFULLY ADDED.");
-         } catch (SQLException ex) {
-             logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-             throw new RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-         }  finally {
-             if (ps != null) {
-                 try {
-                     ps.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (res != null) {
-                 try {
-                     res.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (conn != null) {
-                 try {
-                     conn.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-         }
-     }
+            System.out.println("SUCCESSFULLY ADDED.");
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+            throw new RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 
-     //get my sent friend requests
-     public List<Relationship> getOutgoingFriendRequests(String sender) throws RelationshipServiceException {
-         //checks needed
-         PreparedStatement ps = null;
-         ResultSet res = null;
+    //get my sent friend requests
+    public List<Relationship> getOutgoingFriendRequests(String sender) throws RelationshipServiceException {
+        //checks needed
+        PreparedStatement ps = null;
+        ResultSet res = null;
 
-         String sql = "SELECT * FROM friends WHERE sender = ?";
+        String sql = "SELECT * FROM friends WHERE sender = ?";
 
-         try {
-             conn = DriverManager.getConnection(url, user, password);
-             ps = conn.prepareStatement(sql);
-             ps.setString(1, sender);
-             res = ps.executeQuery();
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, sender);
+            res = ps.executeQuery();
 
-             int request_id;
-             String recipient;
-             int relationship;
-             Date sent_on;
+            int request_id;
+            String recipient;
+            int relationship;
+            Date sent_on;
 
-             ArrayList<Relationship> rs = new ArrayList<>();
-             while (res.next()) {
-                 request_id = res.getInt(1);
-                 recipient = res.getString(3);
-                 relationship = res.getInt(4);
-                 sent_on = (Date) res.getObject(5);
+            ArrayList<Relationship> rs = new ArrayList<>();
+            while (res.next()) {
+                request_id = res.getInt(1);
+                recipient = res.getString(3);
+                relationship = res.getInt(4);
+                sent_on = (Date) res.getObject(5);
 
-                 Relationship r = new Relationship(request_id, sender, recipient, relationship, sent_on);
-                 rs.add(r);
-             }
-             return rs;
-         } catch (SQLException ex) {
-             logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-             throw new RelationshipServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-         } finally {
-             if (ps != null) {
-                 try {
-                     ps.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (res != null) {
-                 try {
-                     res.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (conn != null) {
-                 try {
-                     conn.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-         }
-     }
+                Relationship r = new Relationship(request_id, sender, recipient, relationship, sent_on);
+                rs.add(r);
+            }
+            return rs;
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+            throw new RelationshipServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 
-     //get my received friend requests
-     public List<Relationship> getIncomingFriendRequests(String recipient) throws RelationshipServiceException {
-         //checks needed
-         PreparedStatement ps = null;
-         ResultSet res = null;
+    //get my received friend requests
+    public List<Relationship> getIncomingFriendRequests(String recipient) throws RelationshipServiceException {
+        //checks needed
+        PreparedStatement ps = null;
+        ResultSet res = null;
 
-         String sql = "SELECT * FROM friends WHERE recipient = ?";
+        String sql = "SELECT * FROM friends WHERE recipient = ?";
 
-         try {
-             conn = DriverManager.getConnection(url, user, password);
-             ps = conn.prepareStatement(sql);
-             ps.setString(1, recipient);
-             res = ps.executeQuery();
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, recipient);
+            res = ps.executeQuery();
 
-             int request_id;
-             String sender;
-             Date sent_on;
-             int relationship;
+            int request_id;
+            String sender;
+            Date sent_on;
+            int relationship;
 
-             ArrayList<Relationship> rs = new ArrayList<>();
-             while (res.next()) {
-                 request_id = res.getInt(1);
-                 sender = res.getString(2);
-                 relationship = res.getInt(4);
-                 sent_on = (Date) res.getObject(5);
+            ArrayList<Relationship> rs = new ArrayList<>();
+            while (res.next()) {
+                request_id = res.getInt(1);
+                sender = res.getString(2);
+                relationship = res.getInt(4);
+                sent_on = (Date) res.getObject(5);
 
-                 Relationship r = new Relationship(request_id, sender, recipient, relationship, sent_on);
-                 rs.add(r);
-             }
-             return rs;
-         } catch (SQLException ex) {
-             logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-             throw new RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-         } finally {
-             if (ps != null) {
-                 try {
-                     ps.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (res != null) {
-                 try {
-                     res.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (conn != null) {
-                 try {
-                     conn.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-         }
-     }
+                Relationship r = new Relationship(request_id, sender, recipient, relationship, sent_on);
+                rs.add(r);
+            }
+            return rs;
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+            throw new RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 
-//     //respond to select sent friend request
-     public void respondToFriendRequest(String responder, String requestId, String response) throws UserServiceException, RelationshipServiceException {
-         PreparedStatement ps = null;
-         ResultSet res = null;
+    //     //respond to select sent friend request
+    public void respondToFriendRequest(String responder, String requestId, String response) throws UserServiceException, RelationshipServiceException {
+        PreparedStatement ps = null;
+        ResultSet res = null;
 
-         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-         String sql2 = "SELECT * FROM friends WHERE _id = ? LIMIT 1";
+        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
+        String sql2 = "SELECT * FROM friends WHERE _id = ? LIMIT 1";
 
-         try {
-             conn = DriverManager.getConnection(url, user, password);
+        try {
+            conn = DriverManager.getConnection(url, user, password);
 
-             //check if username exists
-             ps = conn.prepareStatement(sql);
-             ps.setString(1, responder);
-             res = ps.executeQuery();
+            //check if username exists
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, responder);
+            res = ps.executeQuery();
 
-             if (!res.next()) {
-                 logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", responder));
-                 throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", responder));
-             }
+            if (!res.next()) {
+                logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", responder));
+                throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", responder));
+            }
 
-             //check if the requestid exists, and if the responder is qualified to respond to the request (check if it is the recipient)
-             ps = conn.prepareStatement(sql2);
-             ps.setString(1, requestId);
-             res = ps.executeQuery();
+            //check if the requestid exists, and if the responder is qualified to respond to the request (check if it is the recipient)
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1, requestId);
+            res = ps.executeQuery();
 
-             if (!res.next()) {
-                 logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
-                 throw new RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
-             }
+            if (!res.next()) {
+                logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
+                throw new RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
+            }
 
-             String recipient = res.getString(3);
-             if (!responder.equals(recipient)) {
-                 logger.error(String.format("WalkLiveService.respondToFriendRequest: User %s is unauthorized to respond to request %s", responder, requestId));
-                 throw new RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest:  User %s is unauthorized to respond to request %s", responder, requestId));
-             }
+            String recipient = res.getString(3);
+            if (!responder.equals(recipient)) {
+                logger.error(String.format("WalkLiveService.respondToFriendRequest: User %s is unauthorized to respond to request %s", responder, requestId));
+                throw new RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest:  User %s is unauthorized to respond to request %s", responder, requestId));
+            }
 
-         } catch (SQLException ex) {
-             logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-             throw new RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-         } finally {
-             if (ps != null) {
-                 try {
-                     ps.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (res != null) {
-                 try {
-                     res.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (conn != null) {
-                 try {
-                     conn.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-         }
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+            throw new RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
 
-         //now that all checks are done, update the actual relationship
-         if (response.equals("accept")) {
-             updateRelationship(requestId, 1);
-         } else if (response.equals("reject")) {
-             updateRelationship(requestId, 2);
-         } else {
-             //invalid response message. hoping that we can assume that we always get the correct response types
-         }
-     }
+        //now that all checks are done, update the actual relationship
+        if (response.equals("accept")) {
+            updateRelationship(requestId, 1);
+        } else if (response.equals("reject")) {
+            updateRelationship(requestId, 2);
+        } else {
+            //invalid response message. hoping that we can assume that we always get the correct response types
+        }
+    }
 
     //helper methods
     public int getNewRequestId() throws RelationshipServiceException {
@@ -846,119 +846,119 @@ public class WalkLiveService {
 
 
     public void updateRelationship(String requestId, int response) throws RelationshipServiceException {
-         PreparedStatement ps = null;
-         ResultSet res = null;
+        PreparedStatement ps = null;
+        ResultSet res = null;
 
-         String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
+        String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
 
-         try {
-             conn = DriverManager.getConnection(url, user, password);
+        try {
+            conn = DriverManager.getConnection(url, user, password);
 
-             //check if username exists
-             ps = conn.prepareStatement(sql);
-             ps.setInt(1, response);
-             ps.setString(2, requestId);
-             ps.executeUpdate();
+            //check if username exists
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, response);
+            ps.setString(2, requestId);
+            ps.executeUpdate();
 
-         } catch (SQLException ex) {
-             logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-             throw new RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-         } finally {
-             if (ps != null) {
-                 try {
-                     ps.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (res != null) {
-                 try {
-                     res.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (conn != null) {
-                 try {
-                     conn.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-         }
-     }
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+            throw new RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 
-     public List<User> getFriendList(String username) throws UserServiceException, RelationshipServiceException, ParseException, java.text.ParseException {
-         PreparedStatement ps = null;
-         ResultSet res = null;
+    public List<User> getFriendList(String username) throws UserServiceException, RelationshipServiceException, ParseException, java.text.ParseException {
+        PreparedStatement ps = null;
+        ResultSet res = null;
 
-         String sql = "SELECT * from users WHERE username = ?";
-         String sql2 = "SELECT recipient FROM friends WHERE sender = ? AND relationship = 1";
-         String sql3 = "SELECT sender FROM friends WHERE recipient = ? AND relationship = 1";
+        String sql = "SELECT * from users WHERE username = ?";
+        String sql2 = "SELECT recipient FROM friends WHERE sender = ? AND relationship = 1";
+        String sql3 = "SELECT sender FROM friends WHERE recipient = ? AND relationship = 1";
 
-         try {
-             conn = DriverManager.getConnection(url, user, password);
+        try {
+            conn = DriverManager.getConnection(url, user, password);
 
-             //check if username exists
-             ps = conn.prepareStatement(sql);
-             ps.setString(1, username);
-             res = ps.executeQuery();
+            //check if username exists
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
 
-             if (!res.next()) {
-                 logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-                 throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-             }
+            if (!res.next()) {
+                logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
+                throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
+            }
 
-             String sender;
-             String recipient;
+            String sender;
+            String recipient;
 
-             //query for accepted requests where the user was the sender
-             ps = conn.prepareStatement(sql2);
-             ps.setString(1, username);
-             res = ps.executeQuery();
+            //query for accepted requests where the user was the sender
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1, username);
+            res = ps.executeQuery();
 
-             ArrayList<User> friends = new ArrayList<>();
-             while (res.next()) {
-                 recipient = res.getString(1);
+            ArrayList<User> friends = new ArrayList<>();
+            while (res.next()) {
+                recipient = res.getString(1);
 
-                 User u = getUser(recipient);
-                 String contact = u.getContact();
+                User u = getUser(recipient);
+                String contact = u.getContact();
 
-                 User r = new User(recipient, null, contact, null, null, null, null);
-                 friends.add(r);
-             }
+                User r = new User(recipient, null, contact, null, null, null, null);
+                friends.add(r);
+            }
 
-             //query for responded requests where the user was the recipient
-             ps = conn.prepareStatement(sql3);
-             ps.setString(1, username);
-             res = ps.executeQuery();
+            //query for responded requests where the user was the recipient
+            ps = conn.prepareStatement(sql3);
+            ps.setString(1, username);
+            res = ps.executeQuery();
 
-             while (res.next()) {
-                 sender = res.getString(1);
+            while (res.next()) {
+                sender = res.getString(1);
 
-                 User u = getUser(sender);
-                 String contact = u.getContact();
+                User u = getUser(sender);
+                String contact = u.getContact();
 
-                 User r = new User(sender, null, contact, null, null, null, null);
-                 friends.add(r);
-             }
+                User r = new User(sender, null, contact, null, null, null, null);
+                friends.add(r);
+            }
 
-             return friends;
-         } catch (SQLException ex) {
-             logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
-             throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
-         } finally {
-             if (ps != null) {
-                 try {
-                     ps.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (res != null) {
-                 try {
-                     res.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-             if (conn != null) {
-                 try {
-                     conn.close();
-                 } catch (SQLException e) { /* ignored */}
-             }
-         }
-     }
+            return friends;
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 
     /**
      * For trip part -----------------------
@@ -1226,14 +1226,17 @@ public class WalkLiveService {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql);
             ps.setInt(1, tripId);
-            res = ps.executeQuery();
+            logger.info("pass here in ENDTRIP");
 
-            while (res.next()) { //if there is something in the response
-                //which means that we should stop the process and throw an error
-                logger.error("WalkLiveService.startTrip: Failed to create new entry ");
-                throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - duplicate username");
-
-            }
+            //res = ps.executeQuery();
+            ps.executeUpdate();
+//
+//            while (res.next()) { //if there is something in the response
+//                //which means that we should stop the process and throw an error
+//                logger.error("WalkLiveService.startTrip: Failed to create new entry ");
+//                throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - duplicate username");
+//
+//            }
 
         } catch (SQLException ex) {
             logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
@@ -1257,7 +1260,7 @@ public class WalkLiveService {
             }
         }
 
-        String sql2 = "DELETE FROM ongoingTrips select * from ongoingTrips where tripId = ?";
+        String sql2 = "DELETE FROM ongoingTrips where tripId = ?";
         //customer_table where person_name = 'tom';
 
 
@@ -1265,14 +1268,15 @@ public class WalkLiveService {
             conn = DriverManager.getConnection(url, user, password);
             ps = conn.prepareStatement(sql2);
             ps.setInt(1, tripId);
-            res = ps.executeQuery();
+            ps.executeUpdate();
 
-            while (res.next()) { //if there is something in the response
-                //which means that we should stop the process and throw an error
-                logger.error("WalkLiveService.startTrip: Failed to create new entry ");
-                throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - duplicate username");
 
-            }
+//            while (res.next()) { //if there is something in the response
+//                //which means that we should stop the process and throw an error
+//                logger.error("WalkLiveService.startTrip: Failed to create new entry ");
+//                throw new InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - duplicate username");
+//
+//            }
 
         } catch (SQLException ex) {
             logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
@@ -1301,7 +1305,6 @@ public class WalkLiveService {
      //* **URL:** /WalkLive/api/[userId]
      //        * **Content:** `{ startTime: [string], destination: [string] }`
      public Trip startTrip(String body) throws  InvalidDestination,UserServiceException, ParseException {
-
      **/
 
 

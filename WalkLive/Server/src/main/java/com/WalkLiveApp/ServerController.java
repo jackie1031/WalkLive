@@ -262,28 +262,49 @@ public class ServerController {
             }, new JsonTransformer());
 
 
+//            getAllTrip:
+//
+//            Method: GET
+//            URL: /WalkLive/api/trips/[username]/allTrips
+//            Content: { tripId: [string], userId[string]}
+//            Failure Response:
+//            InvalidTargetId	Code 402
+//            Success Response:	Code 200
+//            Content: { <trip 1>, <trip 2>, <trip 3>, ... }
 
 
-// //            updateTripDestination:
-// //            Method: PUT
-// //            URL: /WalkLive/api/<userId>
-// //                    Content: { destination: <string> }
-// //            Failure Response:
-// //            InvalidDestination        Code 409
-// //            Success Response:         Code 200
-// //            { tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
+//            get(API_CONTEXT + "/trips/:username/allTrips", "application/json", (request, response) -> {
+//                try {
+//                    return walkLiveService.getAllTrips(request.params(":username"));
+//                } catch (WalkLiveService.InvalidTargetID e) {
+//                    logger.error("Invalid user id.");
+//                    response.status(402);
+//                }
+//                return Collections.EMPTY_MAP;
+//            }, new JsonTransformer());
 
-//             //Update trip destination
-//             put(API_CONTEXT+"/user", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.updateDestination(request.params(":destination"));
-//                 } catch (WalkLiveService.UserServiceException e) {
-//                 logger.error("Invalid destination.");
-//                 response.status(409);
-//                 return Collections.EMPTY_MAP;
-//             }
-//             }, new JsonTransformer());
+//            updateTrip:
+//
+//            Method: PUT
+//            URL: /WalkLive/api/trips/:tripId/update
+//            Content: {curLong:[double],curLat:[double],timeSpent:[String]}
+//            Failure Response:
+//            InvalidTargetId	Code 402
+//            Success Response:	Code 200
+//            Content: {}
+
+//            put(API_CONTEXT+"/trips/:tripId/update", "application/json", (request, response) -> {
+//                try {
+//                    response.status(200);
+//                    walkLiveService.updateTrip(request.params(":tripId"),request.body());
+//                } // InvalidDestination     Code 409
+//                catch (WalkLiveService.InvalidTargetID e) {
+//                    response.status(402);
+//                }
+//
+//                return Collections.EMPTY_MAP;
+//            }, new JsonTransformer());
+
 
 // //            shareTrip:
 // //            Method: PUT

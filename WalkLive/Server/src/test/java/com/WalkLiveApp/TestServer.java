@@ -40,39 +40,39 @@ public class TestServer {
     // Setup
     //------------------------------------------------------------------------//
 
-//    @BeforeClass
-//    public static void setupBeforeClass() throws Exception {
-//        //Set up the database
-//        setupDB();
-//
-//
-//        //Start the main server
-//        Bootstrap.main(null);
-//        Spark.awaitInitialization();
-//    }
-//
-//    @AfterClass
-//    public static void tearDownAfterClass() {
-//        //Stop the server
-//        Spark.stop();
-//    }
+    @BeforeClass
+    public static void setupBeforeClass() throws Exception {
+        //Set up the database
+        setupDB();
+
+
+        //Start the main server
+        Bootstrap.main(null);
+        Spark.awaitInitialization();
+    }
+
+    @AfterClass
+    public static void tearDownAfterClass() {
+        //Stop the server
+        Spark.stop();
+    }
     //------------------------------------------------------------------------//
     // Setup
     //------------------------------------------------------------------------//
 
 
-//    @Before
-//    public void setup() throws Exception {
-//        //Clear the database
-//        clearDB();
-//
-//    }
-//
-//   @After
-//   public void tearDown() {
-//       clearDB();
-//       //Spark.stop();
-//   }
+    @Before
+    public void setup() throws Exception {
+        //Clear the database
+        clearDB();
+
+    }
+
+   @After
+   public void tearDown() {
+       //clearDB();
+       //Spark.stop();
+   }
 
     //------------------------------------------------------------------------//
     // Tests
@@ -247,38 +247,38 @@ public class TestServer {
 //     * ================================================================
 //     */
 //
-//     @Test
-//     public void testCreateFriendRequest() throws Exception {
-//         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//         User[] entries = new User[] {
-//                 new User("jeesookim", "123456","4405339063"),
-//                 new User("michelle", "0123", "4405339063"),
-//                 new User("yangcao1", "121212", "1231231233")
-//         };
-//
-//         //add to database
-//         for (User t : entries) {
-//             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//         }
-//
-//         //add a few elements
-//         Relationship[] frs = new Relationship[] {
-//                 new Relationship("jeesookim", "michelle", null),
-//                 new Relationship("jeesookim", "yangcao1", null)
-//         };
-//
-//         for (Relationship f : frs) {
-//             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-//             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-//         }
-//
-//         //check content of friendrequests in database!! list request id and stuff
-//         //Get them back
-//         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
-//         assertEquals("Failed to get user entries", 200, r.httpStatus);
-//     }
+     @Test
+     public void testCreateFriendRequest() throws Exception {
+         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+         User[] entries = new User[] {
+                 new User("jeesookim", "123456","4405339063"),
+                 new User("michelle", "0123", "4405339063"),
+                 new User("yangcao1", "121212", "1231231233")
+         };
+
+         //add to database
+         for (User t : entries) {
+             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+         }
+
+         //add a few elements
+         Relationship[] frs = new Relationship[] {
+                 new Relationship("jeesookim", "michelle", null),
+                 new Relationship("jeesookim", "yangcao1", null)
+         };
+
+         for (Relationship f : frs) {
+             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+         }
+
+         //check content of friendrequests in database!! list request id and stuff
+         //Get them back
+         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
+         assertEquals("Failed to get user entries", 200, r.httpStatus);
+     }
 //
 //    @Test
 //    public void testGetOutgoingFriendRequests() throws Exception {
@@ -595,56 +595,56 @@ public class TestServer {
 //
 //
 //
-//    @Test
-//    public void testEndTrip() throws Exception {
-//        WalkLiveService walkLiveService;
-//
-//        Trip test = new Trip("jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//        //walkLiveService.startTrip();
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//        assertEquals(test.isCompleted(),false);
-//
-//        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
-//        //assertEquals("Failed update", 200, r2.httpStatus);
-//
-//        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
-//        //assertEqualsx(r3.isCompleted(),false);
-//
-//    }
-//
-//    @Test
-//    public void testStartTrip() throws Exception {
-//
-//
-//        Trip test = new Trip("jackie","Jeesooo","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        //start trip
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//
-//        Trip test1 = new Trip("michelle","yannnnnng","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        Response r4 = request("GET", "/WalkLive/api/trips/1", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//
-//
-//
-//    }
-//
-//
+    @Test
+    public void testEndTrip() throws Exception {
+        WalkLiveService walkLiveService;
+
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //walkLiveService.startTrip();
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+        assertEquals(test.isCompleted(),false);
+
+        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
+        //assertEqualsx(r3.isCompleted(),false);
+
+    }
+
+    @Test
+    public void testStartTrip() throws Exception {
+
+
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/1", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+
+
+    }
+
+
 //
 //
 //    @Test
@@ -779,163 +779,163 @@ public class TestServer {
 //    }
 //*/
 //
-//    //------------------------------------------------------------------------//
-//    // Generic Helper Methods and classes
-//    //------------------------------------------------------------------------//
-//
-//    private Response request(String method, String path, Object content) {
-//        try {
-//            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
-//            System.out.println(url);
-//            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-//            http.setRequestMethod(method);
-//            http.setDoInput(true);
-//            if (content != null) {
-//                String contentAsJson = new Gson().toJson(content);
-//                http.setDoOutput(true);
-//                http.setRequestProperty("Content-Type", "application/json");
-//                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
-//                output.write(contentAsJson);
-//                output.flush();
-//                output.close();
-//            }
-//            try {
-//                String responseBody = IOUtils.toString(http.getInputStream());
-//                return new Response(http.getResponseCode(), responseBody);
-//            } catch (IOException e) {
-////                e.printStackTrace();
-////                fail("Sending request failed: " + e.getMessage());
-//                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            fail("Sending request failed: " + e.getMessage());
-//            return null;
-//        }
-//    }
-//
-//    private Response request(String method, String path, String content) {
-//        try {
-//            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
-//            System.out.println(url);
-//            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-//            http.setRequestMethod(method);
-//            http.setDoInput(true);
-//            if (content != null) {
-//                http.setDoOutput(true);
-//                http.setRequestProperty("Content-Type", "application/json");
-//                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
-//                output.write(content);
-//                output.flush();
-//                output.close();
-//            }
-//            try {
-//                String responseBody = IOUtils.toString(http.getInputStream());
-//                return new Response(http.getResponseCode(), responseBody);
-//            } catch (IOException e) {
-////                e.printStackTrace();
-////                fail("Sending request failed: " + e.getMessage());
-//                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            fail("Sending request failed: " + e.getMessage());
-//            return null;
-//        }
-//    }
-//
-//
-//    private static class Response {
-//
-//        public String content;
-//
-//        public int httpStatus;
-//
-//        public Response(int httpStatus, String content) {
-//            this.content = content;
-//            this.httpStatus = httpStatus;
-//        }
-//
-//        public <T> T getContentAsObject(Type type) {
-//            return new Gson().fromJson(content, type);
-//        }
-//    }
+    //------------------------------------------------------------------------//
+    // Generic Helper Methods and classes
+    //------------------------------------------------------------------------//
+
+    private Response request(String method, String path, Object content) {
+        try {
+            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
+            System.out.println(url);
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            http.setRequestMethod(method);
+            http.setDoInput(true);
+            if (content != null) {
+                String contentAsJson = new Gson().toJson(content);
+                http.setDoOutput(true);
+                http.setRequestProperty("Content-Type", "application/json");
+                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
+                output.write(contentAsJson);
+                output.flush();
+                output.close();
+            }
+            try {
+                String responseBody = IOUtils.toString(http.getInputStream());
+                return new Response(http.getResponseCode(), responseBody);
+            } catch (IOException e) {
+//                e.printStackTrace();
+//                fail("Sending request failed: " + e.getMessage());
+                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("Sending request failed: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private Response request(String method, String path, String content) {
+        try {
+            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
+            System.out.println(url);
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            http.setRequestMethod(method);
+            http.setDoInput(true);
+            if (content != null) {
+                http.setDoOutput(true);
+                http.setRequestProperty("Content-Type", "application/json");
+                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
+                output.write(content);
+                output.flush();
+                output.close();
+            }
+            try {
+                String responseBody = IOUtils.toString(http.getInputStream());
+                return new Response(http.getResponseCode(), responseBody);
+            } catch (IOException e) {
+//                e.printStackTrace();
+//                fail("Sending request failed: " + e.getMessage());
+                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("Sending request failed: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+    private static class Response {
+
+        public String content;
+
+        public int httpStatus;
+
+        public Response(int httpStatus, String content) {
+            this.content = content;
+            this.httpStatus = httpStatus;
+        }
+
+        public <T> T getContentAsObject(Type type) {
+            return new Gson().fromJson(content, type);
+        }
+    }
 //
 //    // ------------------------------------------------------------------------//
 //    // Survival Maps Specific Helper Methods and classes
 //    // ------------------------------------------------------------------------//
 //
-//    private static void setupDB() {
-//
-//        String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
-//        String user = "b0a1d19d87f384";
-//        String password = "6d11c74b";
-//
-//        Connection conn = null;
-//        Statement stm = null;
-//        ResultSet res = null;
-//
-//        try {
-//            conn = DriverManager.getConnection(url, user, password);
-//            stm = conn.createStatement();
-//
-//            String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-//            String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-//            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-//            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
-//            String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-//            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-//            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-//
-//            stm.executeUpdate(sqlNew3);
-//            stm.executeUpdate(sqlNew4);
+    private static void setupDB() {
 
-//            stm.executeUpdate(setup);
-//            stm.executeUpdate(setup2);
-//            stm.executeUpdate(setup3);
-//            stm.executeUpdate(counterInit);
-//            stm.executeUpdate(setup4);
-//
-//            String sql = "DROP TABLE IF EXISTS TestCrimes";
-//            stm.executeUpdate(sql);
-//            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-//            stm.executeUpdate(sql2);
-//            String sql3 = "DROP TABLE IF EXISTS users" ;
-//            stm.executeUpdate(sql3);
-//            String sql4 = "DROP TABLE IF EXISTS friends" ;
-//            stm.executeUpdate(sql4);
-//            String sql5 = "DROP TABLE IF EXISTS counters" ;
-//            stm.executeUpdate(sql5);
-//            String sql6 = "DROP TABLE IF EXISTS Trips" ;
-//            stm.executeUpdate(sql6);
+        String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
+        String user = "b0a1d19d87f384";
+        String password = "6d11c74b";
 
-//            String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
-//            stm.executeUpdate(sql7);
-//
-//            String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
-//            stm.executeUpdate(sql8);
-//
-//        } catch (SQLException ex) {
-//            //logger.error("Failed to create schema at startup", ex);
-//            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
-//        } finally {
-//            if (stm != null) {
-//                try {
-//                    stm.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (res != null) {
-//                try {
-//                    res.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//    }
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
+
+            String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+            String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
+            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+            String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+
+            stm.executeUpdate(sqlNew3);
+            stm.executeUpdate(sqlNew4);
+
+            stm.executeUpdate(setup);
+            stm.executeUpdate(setup2);
+            stm.executeUpdate(setup3);
+            stm.executeUpdate(counterInit);
+            stm.executeUpdate(setup4);
+
+            String sql = "DROP TABLE IF EXISTS TestCrimes";
+            stm.executeUpdate(sql);
+            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
+            stm.executeUpdate(sql2);
+            String sql3 = "DROP TABLE IF EXISTS users" ;
+            stm.executeUpdate(sql3);
+            String sql4 = "DROP TABLE IF EXISTS friends" ;
+            stm.executeUpdate(sql4);
+            String sql5 = "DROP TABLE IF EXISTS counters" ;
+            stm.executeUpdate(sql5);
+            String sql6 = "DROP TABLE IF EXISTS Trips" ;
+            stm.executeUpdate(sql6);
+
+            String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
+            stm.executeUpdate(sql7);
+
+            String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
+            stm.executeUpdate(sql8);
+
+        } catch (SQLException ex) {
+            //logger.error("Failed to create schema at startup", ex);
+            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 //
 //    private List<User> getUsers(Response r) {
 //        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
@@ -967,73 +967,73 @@ public class TestServer {
 //     * Clears the database of all test tables.
 //     * @return the clean database source
 //     */
-//    private void clearDB() {
-//        Connection conn = null;
-//        Statement stm = null;
-//        ResultSet res = null;
-//
-//        try {
-//            conn = DriverManager.getConnection(url, user, password);
-//            stm = conn.createStatement();
-//
-//            String sql = "DROP TABLE IF EXISTS TestCrimes";
-//            stm.executeUpdate(sql);
-//            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
-//            stm.executeUpdate(sql2);
-//            String sql3 = "DROP TABLE IF EXISTS users" ;
-//            stm.executeUpdate(sql3);
-//            String sql4 = "DROP TABLE IF EXISTS friends" ;
-//            stm.executeUpdate(sql4);
-//            String sql5 = "DROP TABLE IF EXISTS Trips" ;
-//            stm.executeUpdate(sql5);
-//            String sql6 = "DROP TABLE IF EXISTS counters" ;
-//            stm.executeUpdate(sql6);
-//            String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
-//            stm.executeUpdate(sql7);
-//            String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
-//            stm.executeUpdate(sql8);
-//
-//            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-//            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-//            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-//            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-//            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
-//
-//            String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-//            String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-//
-//
-//
-//            stm.executeUpdate(sqlNew5);
-//            stm.executeUpdate(sqlNew6);
+    private void clearDB() {
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
 
-//            stm.executeUpdate(sqlNew);
-//            stm.executeUpdate(sqlNew2);
-//            stm.executeUpdate(sqlNew3);
-//            stm.executeUpdate(sqlNew4);
-//            stm.executeUpdate(counterInit);
-//
-//        } catch (SQLException ex) {
-//            logger.error("Failed to create schema at startup", ex);
-//            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
-//
-//        } finally {
-//            if (stm != null) {
-//                try {
-//                    stm.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (res != null) {
-//                try {
-//                    res.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//    }
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
+
+            String sql = "DROP TABLE IF EXISTS TestCrimes";
+            stm.executeUpdate(sql);
+            String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
+            stm.executeUpdate(sql2);
+            String sql3 = "DROP TABLE IF EXISTS users" ;
+            stm.executeUpdate(sql3);
+            String sql4 = "DROP TABLE IF EXISTS friends" ;
+            stm.executeUpdate(sql4);
+            String sql5 = "DROP TABLE IF EXISTS Trips" ;
+            stm.executeUpdate(sql5);
+            String sql6 = "DROP TABLE IF EXISTS counters" ;
+            stm.executeUpdate(sql6);
+            String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
+            stm.executeUpdate(sql7);
+            String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
+            stm.executeUpdate(sql8);
+
+            String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+            String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+
+            String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+
+
+
+            stm.executeUpdate(sqlNew5);
+            stm.executeUpdate(sqlNew6);
+
+            stm.executeUpdate(sqlNew);
+            stm.executeUpdate(sqlNew2);
+            stm.executeUpdate(sqlNew3);
+            stm.executeUpdate(sqlNew4);
+            stm.executeUpdate(counterInit);
+
+        } catch (SQLException ex) {
+            logger.error("Failed to create schema at startup", ex);
+            //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
 
 }
