@@ -69,6 +69,44 @@ public class WalkLiveService {
                 } catch (SQLException e) { /* ignored */}
             }
         }
+        String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+        String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
+        String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
+
+
+        //String setup = "CREATE TABLE IF NOT EXISTS counters (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
+        //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
+        //stm.executeUpdate(setup);
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stm = conn.createStatement();
+            stm.executeUpdate(setup2);
+
+            stm.executeUpdate(sqlNew4);
+            stm.executeUpdate(counterInit);
+
+        } catch (SQLException ex) {
+            logger.error("Failed to create schema at startup", ex);
+            throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
 
         String sql = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId TEXT, username TEXT, destination TEXT, startTime TEXT, completed BOOL not NULL " +
                 " startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";

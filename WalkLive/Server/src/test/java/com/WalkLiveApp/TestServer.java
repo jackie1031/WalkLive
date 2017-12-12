@@ -242,12 +242,12 @@ public class TestServer {
 //
 //
 //
-//    /**
-//     * ================================================================
-//     * Friend Request Handling
-//     * ================================================================
-//     */
-//
+    /**
+     * ================================================================
+     * Friend Request Handling
+     * ================================================================
+     */
+
 
 //     @Test
 //     public void testCreateFriendRequest() throws Exception {
@@ -273,6 +273,8 @@ public class TestServer {
 //
 //         for (Relationship f : frs) {
 //             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+//
+//
 //             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
 //         }
 //
@@ -281,7 +283,7 @@ public class TestServer {
 //         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
 //         assertEquals("Failed to get user entries", 200, r.httpStatus);
 //     }
-//
+
 //    @Test
 //    public void testGetOutgoingFriendRequests() throws Exception {
 //        User[] entries = new User[] {
@@ -694,11 +696,11 @@ public class TestServer {
 //    }
 //need to add trips!
 
-    /**
+/**
     @Test
     public void testGetAllTrips() throws Exception {
 
-        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        Trip trip = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
         Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 
 
@@ -737,15 +739,12 @@ public class TestServer {
 
         //Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
 
-
-
         Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
 
         List<Trip> results = testGetAllTrips(rList);
 
         //Add a few elements
         //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
 
 
         //Get them back
@@ -769,8 +768,8 @@ public class TestServer {
         }
     }
 
-    **/
 
+**/
 
 //
 //
@@ -993,38 +992,38 @@ public class TestServer {
 //    // ------------------------------------------------------------------------//
 //
 //
-//    private List<User> getUsers(Response r) {
-//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-//        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
-//        return r.getContentAsObject(type);
-//    }
-//
-//    private List<Relationship> getRelationships(Response r) {
-//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-//        Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
-//        return r.getContentAsObject(type);
-//    }
-//
-//    private List<Trip> getTrip(Response r) {
-//        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
-//        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-//        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
-//        return r.getContentAsObject(type);
-//    }
-//
-    //    private List<User> getUsers(Response r) {
+    private List<User> getUsers(Response r) {
+        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
+        return r.getContentAsObject(type);
+    }
+
+    private List<Relationship> getRelationships(Response r) {
+        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+        Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
+        return r.getContentAsObject(type);
+    }
+
+    private List<Trip> getTrip(Response r) {
+        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
+        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
+        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
+        return r.getContentAsObject(type);
+    }
+
+//   private List<User> getUsers(Response r) {
 //        //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
 //        //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
 //        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
 //        return r.getContentAsObject(type);
 //    }
 
-    private List<User>  getAllTrips(Response r) {
-        Type type = (new TypeToken<Trip>() { }).getType();
-        return r.getContentAsObject(type);
-    }
+//    private List<User>  getAllTrips(Response r) {
+//        Type type = (new TypeToken<Trip>() { }).getType();
+//        return r.getContentAsObject(type);
+//    }
 //
 
 
@@ -1058,6 +1057,7 @@ public class TestServer {
             stm.executeUpdate(setup3);
             stm.executeUpdate(counterInit);
             stm.executeUpdate(setup4);
+            //stm.executeUpdate(setup5);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
             stm.executeUpdate(sql);
