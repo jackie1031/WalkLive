@@ -186,22 +186,10 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     ///  location: location needed to form this message
     func buildMessage(location: CLLocation) -> String {
         if (self.tripView == nil) {
-            return messages.buildMessageWithTrip()
-            
-//            return "I am currently at (latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + " From Admin."
+            return messages.buildMessageWithoutTrip()
         }
         
-        // Need to split to multiple strings because the logic will be too compicated for xcode to handle. Also, the only way to concatenate strings is "a + b" in Swift. :)
-        var message =  "I am currently at (latitude:" +  String(location.coordinate.latitude) +
-            ", longitude: " + String(location.coordinate.longitude)
-        
-        message = message + "), and heading to " + self.tripView.addressLabel.text!
-        
-        message = message + ". " + self.tripView.estimatedTimeLabel.text!
-        
-        message = message + ". " + self.tripView.timeUsedLabel.text! + ". From Admin."
-       
-        return message
+        return messages.buildMessageWithTrip(timeManager: timeManager, roadRequester: roadRequester)
     }
     
     /// request route + location when start button is clicked on start trip panel

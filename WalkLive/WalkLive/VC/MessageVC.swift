@@ -20,7 +20,7 @@ class MessageVC: UIViewController {
     let WITH_TRIP = 1
     
     let LABEL_WITHOUT_TRIP = "Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number."
-    let LABEL_WITH_TRIP = "Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number. Type \"Time\" to plug in time spent. Typey \"Destination\" to plug in trip destination."
+    let LABEL_WITH_TRIP = "Type \"Coordinate\" to plug in current location in the form (Longitude, Latitude). Type \"Phone\" to plug in phone number. Type \"Time\" to plug in time spent. Type \"Destination\" to plug in trip destination."
     
     private var unsavedMessages : Message!
     private var textFieldsWithoutTrip : Array<UITextField>!
@@ -86,10 +86,11 @@ class MessageVC: UIViewController {
         } else {
             textFields = textFieldsWithTrip
         }
-        // TODO: move buttons and labels
         if (textFields.count == 0) {
             messageEditPanel.frame.origin.y = 40
         } else {
+            print(textFields.last!.text)
+            print(textFields.last!.frame.minY)
             let textFieldFrame : CGRect = textFields.last!.frame
             messageEditPanel.frame.origin.y = textFieldFrame.origin.y + 10
         }
@@ -162,6 +163,7 @@ class MessageVC: UIViewController {
     
     // add a new text field
     private func addTextField(textFields : Array<UITextField>, message : String) {
+        print("add " + message)
         var currentIndex : Int
         if textFields == self.textFieldsWithoutTrip {
             currentIndex = 0

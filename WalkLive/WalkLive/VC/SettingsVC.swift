@@ -119,16 +119,8 @@ class SettingsVC: UITableViewController {
     // refresh text preview label
     private func refreshTextLabel() {
         textLabel.text = messages.buildMessageWithoutTrip()
-        textLabel2.text = messages.buildMessageWithTrip()
+        textLabel2.text = messages.buildMessageWithTripPreview()
     }
-    
-//    private func createAlert(title: String, message: String) {
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
-//        self.present(alert, animated: true, completion: nil)
-//    }
     
     private func setKeyboard(){
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))

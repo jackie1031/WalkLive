@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 class Message: NSObject, NSCoding {
     
@@ -53,31 +52,19 @@ class Message: NSObject, NSCoding {
     }
     
     func buildMessageWithoutTrip() -> String {
-        return self.buildMessage(messageSegments: messageSegmentsWithoutTrip)
+        let messageBuilder = MessageBuilder()
+        return messageBuilder.messageWithoutTripBuilder(messageSegments: messageSegmentsWithoutTrip)
+//        return self.buildMessage(messageSegments: messageSegmentsWithoutTrip)
     }
     
-    func buildMessageWithTrip() -> String {
-        return self.buildMessage(messageSegments: messageSegmentsWithTrip)
+    func buildMessageWithTrip(timeManager: TimeManager, roadRequester: RoadRequester) -> String {
+        let messageBuilder = MessageBuilder()
+        return messageBuilder.messageWithTripBuilder(messageSegments: messageSegmentsWithTrip, timeManager: timeManager, roadRequester: roadRequester)
     }
     
-    private func buildMessage(messageSegments : Array<String>) -> String{
-        var text : String = ""
-        for message in messageSegments {
-            var realValue : String
-            if (message == "Phone") {
-                realValue = currentUserInfo.contact!
-            } else if (message == "Coordinate") {
-                let location = CLLocationManager().location?.coordinate
-                let longtitude = String(format: "%.2f", (location?.longitude)!)
-                let latitude = String(format: "%.2f", (location?.latitude)!)
-                realValue = "(" + longtitude + ", " + latitude + ")"
-            } else {
-                realValue = message
-            }
-            text.append(realValue)
-            text.append(" ")
-        }
-        return text
+    func buildMessageWithTripPreview() -> String {
+        let messageBuilder = MessageBuilder()
+        return messageBuilder.messageWithTripPreviewBuilder(messageSegments: messageSegmentsWithTrip)
     }
     
     func getMessagesWithoutTrip() -> Array<String> {
