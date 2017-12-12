@@ -252,7 +252,7 @@ public class ServerController {
             put(API_CONTEXT+"/trips/:tripId/endtrip", "application/json", (request, response) -> {
                 try {
                     response.status(200);
-                    walkLiveService.endTrip(request.body());
+                    walkLiveService.endTrip(request.params(":tripId"));
                 } // InvalidDestination     Code 409
                 catch (WalkLiveService.InvalidTargetID e) {
                     response.status(402);
