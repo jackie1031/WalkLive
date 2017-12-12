@@ -157,15 +157,6 @@ class MessageVC: UIViewController {
         for textFields in textFields {
             textFields.isHidden = false
         }
-        // TODO: move buttons and labels
-//        if (textFields.count == 0) {
-//            messageEditPanel.frame.origin.y = 40
-//        } else {
-//            let textFieldFrame : CGRect = textFields.last!.frame
-//            messageEditPanel.frame.origin.y = textFieldFrame.origin.y - 20
-//        }
-//        let frame : CGRect = messageEditPanel.frame
-//        noteLabel.frame.origin.y = frame.origin.y + 40
         setPanelPosition()
     }
     
@@ -213,16 +204,6 @@ class MessageVC: UIViewController {
         } else {
             self.textFieldsWithTrip.append(newTextField)
         }
-        
-//        // TODO: move buttons and labels down
-//        if (textFields.count == 0) {
-//            messageEditPanel.frame.origin.y = 40
-//        } else {
-//            let textFieldFrame : CGRect = textFields.last!.frame
-//            messageEditPanel.frame.origin.y = textFieldFrame.origin.y + 10
-//        }
-//        let frame : CGRect = messageEditPanel.frame
-//        noteLabel.frame.origin.y = frame.origin.y + 40
         setPanelPosition()
     }
     
@@ -243,22 +224,11 @@ class MessageVC: UIViewController {
         // delete last text field
         let lastTextField = textFields.last
         lastTextField?.removeFromSuperview()
-        let textFieldFrame : CGRect
         if (currentIndex == 0) {
             self.textFieldsWithoutTrip.removeLast()
-            textFieldFrame = self.textFieldsWithoutTrip.last!.frame
         } else {
             self.textFieldsWithTrip.removeLast()
-            textFieldFrame = self.textFieldsWithTrip.last!.frame
         }
-        // TODO: move buttons and labels down
-//        if (textFields.count == 0) {
-//            messageEditPanel.frame.origin.y = 40
-//        } else {
-//            messageEditPanel.frame.origin.y = textFieldFrame.origin.y - 20
-//        }
-//        let frame : CGRect = messageEditPanel.frame
-//        noteLabel.frame.origin.y = frame.origin.y + 40
         setPanelPosition()
     }
     

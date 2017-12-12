@@ -52,9 +52,17 @@ class Message: NSObject, NSCoding {
         }
     }
     
-    func buildMessage() -> String {
+    func buildMessageWithoutTrip() -> String {
+        return self.buildMessage(messageSegments: messageSegmentsWithoutTrip)
+    }
+    
+    func buildMessageWithTrip() -> String {
+        return self.buildMessage(messageSegments: messageSegmentsWithTrip)
+    }
+    
+    private func buildMessage(messageSegments : Array<String>) -> String{
         var text : String = ""
-        for message in messageSegmentsWithoutTrip {
+        for message in messageSegments {
             var realValue : String
             if (message == "Phone") {
                 realValue = currentUserInfo.contact!

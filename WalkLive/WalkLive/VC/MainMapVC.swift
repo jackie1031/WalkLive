@@ -186,7 +186,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     ///  location: location needed to form this message
     func buildMessage(location: CLLocation) -> String {
         if (self.tripView == nil) {
-            return messages.buildMessage()
+            return messages.buildMessageWithTrip()
             
 //            return "I am currently at (latitude:" +  String(location.coordinate.latitude) + ", longitude: " + String(location.coordinate.longitude) + ")." + " From Admin."
         }

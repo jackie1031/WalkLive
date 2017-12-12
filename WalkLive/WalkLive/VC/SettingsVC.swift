@@ -29,6 +29,7 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var userPhone: UITextField!
     @IBOutlet weak var emergencyContactPhone: UITextField!
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var textLabel2: UILabel!
     @IBOutlet weak var emergencyContactIdTextField: UITextField!
     
     var user : User!
@@ -39,6 +40,7 @@ class SettingsVC: UITableViewController {
         
         //load message setting data from local
         self.loadData()
+
         
         // fill in phone numbers
         userPhone.text = currentUserInfo.contact
@@ -53,9 +55,6 @@ class SettingsVC: UITableViewController {
         if (messages.getMessagesWithTrip().count == 0) {
             messages.updateMessagesWithTrip(updatedMessages: defaultMessage)
         }
-        
-        // refresh text label
-        self.refreshTextLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +118,8 @@ class SettingsVC: UITableViewController {
     
     // refresh text preview label
     private func refreshTextLabel() {
-        textLabel.text = messages.buildMessage()
+        textLabel.text = messages.buildMessageWithoutTrip()
+        textLabel2.text = messages.buildMessageWithTrip()
     }
     
 //    private func createAlert(title: String, message: String) {
