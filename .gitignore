@@ -3,9 +3,4 @@
 WalkLive/Server/*.class
 *.plist
 walklive.db
-
-*.xcuserstate
-
-*.xcuserstate
-
 WalkLive/WalkLive.xcworkspace/xcuserdata/michelleshu.xcuserdatad/UserInterfaceState.xcuserstate
