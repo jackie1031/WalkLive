@@ -725,10 +725,16 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Idw-PX-FPB">
                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="📞"/>
+                                                            <connections>
+                                                                <action selector="onPhoneButton:" destination="AZZ-mi-YjQ" eventType="touchUpInside" id="WAK-eq-Rqr"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHU-Iq-W6n">
                                                             <rect key="frame" x="34" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="💬"/>
+                                                            <connections>
+                                                                <action selector="onMessageButton:" destination="AZZ-mi-YjQ" eventType="touchUpInside" id="5IA-7Y-f6Q"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W91-6E-KBm">
                                                             <rect key="frame" x="68" y="0.0" width="30" height="30"/>
@@ -1274,10 +1280,16 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76b-Mk-NP9">
                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="📞"/>
+                                                            <connections>
+                                                                <action selector="onPhoneButton:" destination="F9v-a4-VFp" eventType="touchUpInside" id="pzk-yK-6M0"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sm-Qr-IqV">
                                                             <rect key="frame" x="35" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="💬"/>
+                                                            <connections>
+                                                                <action selector="onMessageButton:" destination="F9v-a4-VFp" eventType="touchUpInside" id="Hso-XL-jkw"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plD-BR-VQP">
                                                             <rect key="frame" x="70" y="0.0" width="30" height="30"/>

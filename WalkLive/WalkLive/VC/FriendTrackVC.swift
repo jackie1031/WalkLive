@@ -8,7 +8,10 @@
 
 import UIKit
 import MapKit
-class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+import MessageUI
+
+
+class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -82,6 +85,35 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell.trackButton.tag = indexPath.row
         cell.selectionStyle = .none
         return cell
+    }
+    
+    @IBAction func onMessageButton(_ sender: UIButton) {
+        let phoneNum = friendTrips![sender.tag].emergencyNum
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Hey! Where are you?" + "From: \(currentUserInfo.username!)"
+            controller.recipients = [phoneNum!]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    
+    @IBAction func onPhoneButton(_ sender: UIButton) {
+        let phoneNum = friendTrips![sender.tag].emergencyNum
+        //Does not work in Simulator
+        if let url = URL(string: "tel://\(phoneNum!)"), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

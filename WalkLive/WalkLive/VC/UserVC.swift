@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 
-class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -31,12 +33,12 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         friendTripTable.delegate = self
         friendTripTable.dataSource = self
         self.updateFriendTrips()
-        self.initializeUpdates()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.setUserVCInfo()
+        self.initializeUpdates()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -135,6 +137,39 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         }
     }
+    
+    @IBAction func onMessageButton(_ sender: UIButton) {
+        let phoneNum = friendsTrip![sender.tag].emergencyNum
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Hey! Where are you?" + "From: \(currentUserInfo.username!)"
+            controller.recipients = [phoneNum!]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+
+    @IBAction func onPhoneButton(_ sender: UIButton) {
+        let phoneNum = friendsTrip![sender.tag].emergencyNum
+        //Does not work in Simulator
+        if let url = URL(string: "tel://\(phoneNum!)"), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
