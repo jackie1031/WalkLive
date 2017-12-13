@@ -114,7 +114,7 @@
                                     <color key="titleColor" red="0.025648478620000002" green="0.028694464480000001" blue="0.02898316062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Bve-na-hFT" kind="popoverPresentation" popoverAnchorView="1eQ-ZP-87f" id="iFQ-iL-tHS">
+                                    <segue destination="Bve-na-hFT" kind="popoverPresentation" popoverAnchorView="1eQ-ZP-87f" id="bgZ-Up-Pf1">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -1009,22 +1009,33 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Text Message" id="dAB-GY-vg3">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="141" id="CzS-Ok-8I9">
-                                        <rect key="frame" x="0.0" y="299.5" width="375" height="141"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="199" id="CzS-Ok-8I9">
+                                        <rect key="frame" x="0.0" y="299.5" width="375" height="199"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CzS-Ok-8I9" id="xbm-UJ-BRn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi I'm currently at (xxx,xxx). If something's up, call me at xxx-xxx-xxxx." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-zk-nbt">
-                                                    <rect key="frame" x="16" y="11" width="343" height="94"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Trip Text Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-zk-nbt">
+                                                    <rect key="frame" x="16" y="46" width="343" height="142"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bu7-Qc-BPK">
+                                                    <rect key="frame" x="127" y="11" width="121" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="First"/>
+                                                        <segment title="Second"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="onSegmentedControl:" destination="mhm-es-34Q" eventType="valueChanged" id="Sbw-22-NZ4"/>
+                                                    </connections>
+                                                </segmentedControl>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-WA-53k">
-                                                    <rect key="frame" x="329" y="100" width="30" height="30"/>
+                                                    <rect key="frame" x="329" y="158" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Edit"/>
                                                     <connections>
@@ -1064,6 +1075,7 @@
                     <connections>
                         <outlet property="emergencyContactIdTextField" destination="GGy-eb-dbe" id="Mgk-L6-e3X"/>
                         <outlet property="emergencyContactPhone" destination="SPl-A3-asN" id="Zb6-hR-zUz"/>
+                        <outlet property="segmentedControl" destination="Bu7-Qc-BPK" id="AA6-jr-HHz"/>
                         <outlet property="textLabel" destination="Sgf-zk-nbt" id="MgY-a5-93g"/>
                         <outlet property="userPhone" destination="AKc-qY-vut" id="HuN-YX-ck5"/>
                         <segue destination="MJu-oG-pf4" kind="show" identifier="messageSegue" id="mmX-tX-dQX"/>
@@ -1343,36 +1355,19 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello, I'm currently at:" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBc-if-Pf4">
-                                        <rect key="frame" x="10" y="30" width="357" height="30"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X5y-a6-wK7">
+                                        <rect key="frame" x="98" y="8" width="181" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Coordinate" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oww-Fg-eg7">
-                                        <rect key="frame" x="10" y="70" width="357" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Call me at:" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Llz-50-YjR">
-                                        <rect key="frame" x="10" y="110" width="357" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Phone" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLr-TS-HMs">
-                                        <rect key="frame" x="10" y="150" width="357" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <segments>
+                                            <segment title="No trip"/>
+                                            <segment title="Ongoing trip"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="onSegmentedControl:" destination="MJu-oG-pf4" eventType="valueChanged" id="OEr-SV-ZL2"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhI-ak-p8g">
-                                        <rect key="frame" x="10" y="188" width="357" height="46"/>
+                                        <rect key="frame" x="11" y="44" width="357" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9h-4w-xRw">
@@ -1402,7 +1397,7 @@
                                         </subviews>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type &quot;Coordinate&quot; to plug in current location in the form (Longitude, Latitude). Type &quot;Phone&quot; to plug in user phone number." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlX-eG-39C">
-                                        <rect key="frame" x="8" y="242" width="359" height="50"/>
+                                        <rect key="frame" x="46" y="98" width="322" height="93"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1417,12 +1412,10 @@
                     <connections>
                         <outlet property="addTextButton" destination="E9h-4w-xRw" id="M6M-uO-pYa"/>
                         <outlet property="delTextButton" destination="uQY-Y6-452" id="6L0-Gk-LVT"/>
-                        <outlet property="message1" destination="aBc-if-Pf4" id="XzF-1e-sCE"/>
-                        <outlet property="message2" destination="Oww-Fg-eg7" id="Hfs-7w-jNe"/>
-                        <outlet property="message3" destination="Llz-50-YjR" id="ayu-Bt-rf4"/>
-                        <outlet property="message4" destination="OLr-TS-HMs" id="3gl-MT-6HY"/>
                         <outlet property="messageEditPanel" destination="WhI-ak-p8g" id="VzU-0I-VzF"/>
                         <outlet property="noteLabel" destination="KlX-eG-39C" id="n8a-FI-3po"/>
+                        <outlet property="scrollView" destination="K3I-eH-WTg" id="OFa-Gw-Z9h"/>
+                        <outlet property="segmentedControl" destination="X5y-a6-wK7" id="cbm-4X-Al2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qek-hv-B0K" userLabel="First Responder" sceneMemberID="firstResponder"/>

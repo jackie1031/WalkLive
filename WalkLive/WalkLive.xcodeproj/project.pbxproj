@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42C0F6617C948D8FCD4A0A63 /* Pods_WalkLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6210114C1D3EF49DD204E57 /* Pods_WalkLiveUITests.framework */; };
 		8C56F6811FD795D600D1017F /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C56F6801FD795D600D1017F /* BackendError.swift */; };
+		8C61A8251FE076060016A74A /* MessageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C61A8241FE076060016A74A /* MessageBuilder.swift */; };
 		8C7637011FDC88DD00276DEE /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7637001FDC88DD00276DEE /* SettingsVC.swift */; };
 		8CB2D94C1FD87D3100E659FD /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2D94B1FD87D3100E659FD /* UserLogin.swift */; };
 		8CC299121FDA244900C9F2A5 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC299111FDA244900C9F2A5 /* MessageVC.swift */; };
@@ -88,6 +89,7 @@
 		4A467C921A08E9F56C416776 /* Pods-WalkLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		61026C572F4BCE2D84566271 /* Pods-WalkLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.debug.xcconfig"; sourceTree = "<group>"; };
 		8C56F6801FD795D600D1017F /* BackendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendError.swift; sourceTree = "<group>"; };
+		8C61A8241FE076060016A74A /* MessageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBuilder.swift; sourceTree = "<group>"; };
 		8C7637001FDC88DD00276DEE /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		8CB2D94B1FD87D3100E659FD /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		8CC299111FDA244900C9F2A5 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */,
 				9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */,
 				900468781FDDFAD3008A896E /* FriendTracker.swift */,
+				8C61A8241FE076060016A74A /* MessageBuilder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				9015A2B31FDCE4140080B4D3 /* FriendTrackVC.swift in Sources */,
 				8C7637011FDC88DD00276DEE /* SettingsVC.swift in Sources */,
 				904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */,
+				8C61A8251FE076060016A74A /* MessageBuilder.swift in Sources */,
 				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
 				904B05421FD8916900EEB523 /* EmergencyContact.swift in Sources */,
 				904B05051FD689A300EEB523 /* Route.swift in Sources */,
@@ -856,7 +860,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SN2DVCT4SM;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
@@ -874,7 +878,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SN2DVCT4SM;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
