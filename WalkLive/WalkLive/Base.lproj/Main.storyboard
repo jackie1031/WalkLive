@@ -708,13 +708,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: Boston" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mz9-Mq-cUC">
-                                                    <rect key="frame" x="164" y="30.5" width="61" height="14.5"/>
+                                                    <rect key="frame" x="164" y="32" width="60.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At: New York" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ivx-YI-aNv">
-                                                    <rect key="frame" x="164" y="11" width="73" height="14.5"/>
+                                                    <rect key="frame" x="164" y="14" width="73" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -734,45 +734,42 @@
                                                             <rect key="frame" x="68" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="🗺"/>
                                                             <connections>
-                                                                <segue destination="F9v-a4-VFp" kind="show" id="QEB-kS-59O"/>
+                                                                <segue destination="F9v-a4-VFp" kind="show" identifier="friendTrackerSegue" id="QEB-kS-59O"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCW-px-Cuj">
-                                                    <rect key="frame" x="14" y="11" width="98" height="20.5"/>
+                                                    <rect key="frame" x="14" y="11" width="97.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Time Spent: 3 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWK-19-pND">
-                                                    <rect key="frame" x="164" y="50" width="103" height="16"/>
+                                                    <rect key="frame" x="164.5" y="49.5" width="103" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="MWK-19-pND" secondAttribute="trailing" constant="93" id="3W0-C8-ShY"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ttn-m3-e1Q" secondAttribute="bottom" constant="10.5" id="6mW-p0-Agf"/>
-                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="mz9-Mq-cUC" secondAttribute="trailing" constant="135.5" id="9py-yx-nib"/>
-                                                <constraint firstItem="MWK-19-pND" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ivx-YI-aNv" secondAttribute="leading" id="ASg-zC-5co"/>
-                                                <constraint firstItem="yCW-px-Cuj" firstAttribute="leading" secondItem="2gG-RK-oyu" secondAttribute="leading" constant="14" id="KQL-dG-ZwM"/>
-                                                <constraint firstItem="Ivx-YI-aNv" firstAttribute="leading" secondItem="yCW-px-Cuj" secondAttribute="trailing" constant="52.5" id="SmW-aH-huF"/>
-                                                <constraint firstItem="MWK-19-pND" firstAttribute="leading" secondItem="Ttn-m3-e1Q" secondAttribute="trailing" constant="52" id="YLI-1x-y4b"/>
-                                                <constraint firstItem="Ivx-YI-aNv" firstAttribute="top" secondItem="yCW-px-Cuj" secondAttribute="top" id="ZE2-ta-WYz"/>
-                                                <constraint firstItem="MWK-19-pND" firstAttribute="top" secondItem="mz9-Mq-cUC" secondAttribute="bottom" constant="5.5" id="b0H-ga-Ifj"/>
-                                                <constraint firstItem="Ttn-m3-e1Q" firstAttribute="leading" secondItem="yCW-px-Cuj" secondAttribute="leading" id="c1l-bF-mpB"/>
-                                                <constraint firstItem="yCW-px-Cuj" firstAttribute="top" secondItem="2gG-RK-oyu" secondAttribute="top" constant="11" id="dCV-zq-qgl"/>
-                                                <constraint firstItem="mz9-Mq-cUC" firstAttribute="leading" secondItem="Ivx-YI-aNv" secondAttribute="leading" id="eNd-mQ-vur"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="MWK-19-pND" secondAttribute="bottom" constant="4.5" id="hRZ-X4-EER"/>
-                                                <constraint firstItem="mz9-Mq-cUC" firstAttribute="top" secondItem="Ivx-YI-aNv" secondAttribute="bottom" constant="5.5" id="riD-oC-Cyc"/>
-                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Ivx-YI-aNv" secondAttribute="trailing" constant="123" id="wDl-mq-PPZ"/>
+                                                <constraint firstItem="MWK-19-pND" firstAttribute="leading" secondItem="Ivx-YI-aNv" secondAttribute="leading" id="739-rh-0Wh"/>
+                                                <constraint firstItem="Ivx-YI-aNv" firstAttribute="centerY" secondItem="yCW-px-Cuj" secondAttribute="centerY" id="Hvc-Nb-7oG"/>
+                                                <constraint firstItem="mz9-Mq-cUC" firstAttribute="leading" secondItem="Ivx-YI-aNv" secondAttribute="leading" id="LL4-TY-0hg"/>
+                                                <constraint firstItem="mz9-Mq-cUC" firstAttribute="leading" secondItem="Ttn-m3-e1Q" secondAttribute="trailing" constant="52" id="Lhz-4O-6mR"/>
+                                                <constraint firstItem="Ttn-m3-e1Q" firstAttribute="leading" secondItem="yCW-px-Cuj" secondAttribute="leading" id="QY3-kC-a39"/>
+                                                <constraint firstItem="yCW-px-Cuj" firstAttribute="top" secondItem="2gG-RK-oyu" secondAttribute="top" constant="11" id="RXn-9t-sy4"/>
+                                                <constraint firstItem="yCW-px-Cuj" firstAttribute="leading" secondItem="2gG-RK-oyu" secondAttribute="leading" constant="14" id="StT-EV-DUM"/>
+                                                <constraint firstItem="MWK-19-pND" firstAttribute="top" secondItem="mz9-Mq-cUC" secondAttribute="bottom" constant="3" id="ZpR-oA-fo6"/>
+                                                <constraint firstItem="mz9-Mq-cUC" firstAttribute="top" secondItem="Ivx-YI-aNv" secondAttribute="bottom" constant="3" id="gI2-iA-zYB"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ttn-m3-e1Q" secondAttribute="bottom" constant="10.5" id="hZ6-eI-vgw"/>
+                                                <constraint firstItem="Ttn-m3-e1Q" firstAttribute="top" secondItem="yCW-px-Cuj" secondAttribute="bottom" constant="8.5" id="iFW-06-hdb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="destinationLabel" destination="mz9-Mq-cUC" id="Vod-1O-mgF"/>
                                             <outlet property="friendNameLabel" destination="yCW-px-Cuj" id="knE-1N-sMf"/>
+                                            <outlet property="mapButton" destination="W91-6E-KBm" id="p1T-Ca-xsK"/>
                                             <outlet property="messageButton" destination="LHU-Iq-W6n" id="bd6-Kk-okN"/>
                                             <outlet property="phoneButton" destination="Idw-PX-FPB" id="hhi-0U-Ufe"/>
                                             <outlet property="sourceLabel" destination="Ivx-YI-aNv" id="99R-db-KaA"/>
@@ -1285,6 +1282,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plD-BR-VQP">
                                                             <rect key="frame" x="70" y="0.0" width="30" height="30"/>
                                                             <state key="normal" title="📍"/>
+                                                            <connections>
+                                                                <action selector="onTrackButton:" destination="F9v-a4-VFp" eventType="touchUpInside" id="Hij-D0-w1S"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -1311,7 +1311,10 @@
                                             <outlet property="currentLocationLabel" destination="1Qy-wC-o3f" id="EB0-8h-ihj"/>
                                             <outlet property="destinationLocationLabel" destination="Izd-Me-vOF" id="se6-cW-Qpr"/>
                                             <outlet property="friendNameLabel" destination="Mvr-jQ-n9m" id="rA2-4E-xve"/>
+                                            <outlet property="messageButton" destination="7Sm-Qr-IqV" id="AtK-on-eni"/>
+                                            <outlet property="phoneButton" destination="76b-Mk-NP9" id="vLa-iC-zJQ"/>
                                             <outlet property="timeSpentLabel" destination="y0g-KC-NFw" id="xcH-OA-G5Z"/>
+                                            <outlet property="trackButton" destination="plD-BR-VQP" id="Oye-Xg-Exw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

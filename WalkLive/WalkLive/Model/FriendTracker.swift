@@ -14,6 +14,9 @@ class FriendTracker: NSObject {
     var locationManager = CLLocationManager()
     var mapView: MKMapView!
     var annotations = [MKAnnotation]()
+    private var timer = Timer()
+    var tripId: Int?
+    
     
     func setMapView(mapView: MKMapView){
         self.mapView = mapView
@@ -52,5 +55,43 @@ class FriendTracker: NSObject {
     
     func removeTimePoint() {
         mapView.removeAnnotations(annotations)
+        self.annotations = []
     }
+    
+    func trackNewTripWithTimer(trip: TimePoint, timeInterval: TimeInterval) {
+        self.endTimer()
+        self.setNewTrip(trip: trip)
+        self.startTimer(timeInterval: timeInterval)
+    }
+    
+    func setNewTrip(trip: TimePoint) {
+        if (!self.annotations.isEmpty){
+            self.removeTimePoint()
+        }
+        self.tripId = trip.tripId
+        self.mapTimePoint(timePoint: trip)
+        print("set successfully!")
+    }
+    
+    func startTimer(timeInterval: TimeInterval) {
+        //update every 60 seconds
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTrip), userInfo: nil, repeats: true);
+    }
+    
+    @objc func updateTrip() {
+        backEndClient.getSingleTrip(success: { (timePoint) in
+            OperationQueue.main.addOperation {
+                self.mapTimePoint(timePoint: timePoint)
+                print("updated successfully")
+            }
+        }, failure: { (error) in
+            print(error)
+        }, tripId: self.tripId!)
+    }
+    
+    func endTimer() {
+        self.timer.invalidate()
+        self.timer = Timer()
+    }
+    
 }

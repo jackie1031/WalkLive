@@ -21,7 +21,7 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     var receivedFriendRequests: [FriendRequest]!
-    var friendsTrip: [TimePoint]!
+    var friendsTrip: [TimePoint]?
     
     
     override func viewDidLoad() {
@@ -39,7 +39,6 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func updateFriendTrips(){
         backEndClient.getAllTrip(success: { (timePoints) in
             OperationQueue.main.addOperation {
-                print(timePoints)
                 self.friendsTrip = timePoints
                 self.friendTripTable.reloadData()
             }
@@ -74,7 +73,7 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.friendsTrip != nil {
             print("reached here")
-            return self.friendsTrip.count
+            return self.friendsTrip!.count
         } else {
             print("reached here for 0 ")
             return 0
@@ -83,12 +82,14 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendTripTable.dequeueReusableCell(withIdentifier: "FriendTripTableViewCell", for: indexPath) as! FriendTripTableViewCell
-        let friendTrip = self.friendsTrip[indexPath.row]
+        let friendTrip = self.friendsTrip![indexPath.row]
         cell.friendNameLabel.text = friendTrip.username
-        cell.destinationLabel.text = "TO: " + friendTrip.destination!
+        cell.destinationLabel.text = "To: " + friendTrip.destination!
         cell.timeSpentLabel.text = friendTrip.timeSpent
         cell.phoneButton.tag = indexPath.row
         cell.messageButton.tag = indexPath.row
+        cell.mapButton.tag = indexPath.row
+       // cell.messageButton.tag = indexPath.row
         cell.selectionStyle = .none
         return cell
     }
@@ -128,7 +129,7 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
-        backItem.title = "Back"
+        backItem.title = currentUserInfo.username
         backItem.tintColor = primaryColor
         navigationItem.backBarButtonItem = backItem
         if (segue.identifier == "friendRequestSegue"){
@@ -136,6 +137,11 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             vc.receivedFriendRequests = self.receivedFriendRequests
         } else if (segue.identifier == "settingSegue"){
         } else if (segue.identifier == "tripRequestSegue"){
+        } else if (segue.identifier == "friendTrackerSegue"){
+            let vc = segue.destination as! FriendTrackVC
+            let button = sender as! UIButton
+            vc.currentFriendTrip = friendsTrip?[button.tag]
+            vc.friendTrips = self.friendsTrip
         }
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.

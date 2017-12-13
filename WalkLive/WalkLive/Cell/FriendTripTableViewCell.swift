@@ -16,7 +16,7 @@ class FriendTripTableViewCell: UITableViewCell {
     @IBOutlet weak var timeSpentLabel: UILabel!
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
-    
+    @IBOutlet weak var mapButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

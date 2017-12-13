@@ -425,7 +425,6 @@ class BackEndClient: NSObject {
                 failure(LoginError(status: status))
             } else {
                 let timePoint = try? jsonDecoder.decode(TimePoint.self, from: data!) as TimePoint
-                print(timePoint)
                 success(timePoint!)}
         }).resume()
     }
@@ -499,7 +498,7 @@ class BackEndClient: NSObject {
         
     }
     
-    func getAllTrip(success: @escaping ([TimePoint]) -> (), failure: @escaping (Error) -> ()){
+    func getAllTrip(success: @escaping ([TimePoint]?) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/trips/\(currentUserInfo.username!)/allTrips"
         var getAllTripRequest = URLRequest(url: urlComponents.url!)
@@ -520,7 +519,32 @@ class BackEndClient: NSObject {
             } else {
                 print(status)
                 let timePoints = try? jsonDecoder.decode([TimePoint].self, from: data!) as [TimePoint]
-                success(timePoints!)}
+                success(timePoints)}
         }).resume()
+    }
+    
+    func getSingleTrip(success: @escaping (TimePoint) -> (), failure: @escaping (Error) -> (), tripId: Int){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/trips/\(tripId)"
+        var getSingleTripRequest = URLRequest(url: urlComponents.url!)
+        getSingleTripRequest.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: getSingleTripRequest, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(TripError(status: status))
+            } else {
+                print(status)
+                let timePoint = try? jsonDecoder.decode(TimePoint.self, from: data!) as TimePoint
+                success(timePoint!)}
+        }).resume()
+        
     }
 }
