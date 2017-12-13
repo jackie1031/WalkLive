@@ -16,7 +16,7 @@ class TimeManager: NSObject {
     private var usedTimeInterval = 0
     private var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
-    
+    var tripId: Int?
     init(timeInterval: TimeInterval, roadRequester: RoadRequester) {
         self.timeInterval = timeInterval
         self.roadRequester = roadRequester
@@ -29,11 +29,14 @@ class TimeManager: NSObject {
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
-        backEndClient.startTrip(success: {
-            print("successful")
+        
+        if (self.roadRequester != nil) {
+        backEndClient.startTrip(success: { (currentTimePoint) in
+            self.tripId = currentTimePoint.tripId
         }, failure: { (error) in
-            print("failures!")
+            print("failure")
         }, timePoint: self.buildTimePoint()!)
+        }
     }
     
     @objc func updateTimeLabel(){
@@ -82,7 +85,9 @@ class TimeManager: NSObject {
         timePoint.startTime = getTodayString()
         timePoint.emergencyNum = "123-123-123"
         timePoint.timeSpent = self.buildMessageOnCurrentTimer()
-        
+        if (self.tripId != nil) {
+            timePoint.tripId = self.tripId
+        }
         return timePoint
     }
     

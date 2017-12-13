@@ -101,4 +101,21 @@ class RouteError: Error {
     }
 }
 
+class TripError: Error{
+    var status: Int! = 0
+    init(status: Int) {
+        self.status = status
+    }
+    func returnReason() -> String {
+        switch status {
+        case 2:
+            return "NonExistentTrip: the trip has already ended."
+        case 402:
+            return "NonExsistentTripId: cannot find this trip."
+        default:
+            return "Unknown error" + String(status)
+        }
+    }
+}
+
 

@@ -263,19 +263,14 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Map"
+        backItem.tintColor = primaryColor
+        navigationItem.backBarButtonItem = backItem
         if (segue.identifier == "routeChoiceSegue"){
             let vc = segue.destination as! SearchVC
             vc.routeDelegate = self
             vc.mapItems = self.mapItems
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
-        } else if (segue.identifier == "userSegue"){
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
         }
     }
 
@@ -325,20 +320,33 @@ extension MainMapVC: RouteDelegate{
     
     func cancelTrip(){
         //FTOB needed here.
-        self.roadRequester.removeRoute()
-        self.timeManager.endTimer()
-        self.timeManager = nil
-        self.tripView = nil
+        backEndClient.endTrip(success: {
+            OperationQueue.main.addOperation {
+            self.roadRequester.removeRoute()
+            self.timeManager.endTimer()
+            self.timeManager = nil
+            self.tripView = nil
+            print("success")
+            }
+        }, failure: { (error) in
+            print("fail to end trip")
+        }, timePoint: timeManager.buildTimePoint()!)
     }
     
     func completeTrip(){
         //FTOB needed here.
-        self.roadRequester.removeRoute()
-        self.timeManager.endTimer()
-        self.timeManager = nil
-        self.tripView = nil
+        backEndClient.endTrip(success: {
+            OperationQueue.main.addOperation {
+            self.roadRequester.removeRoute()
+            self.timeManager.endTimer()
+            self.timeManager = nil
+            self.tripView = nil
+                print("success")
+            }
+        }, failure: { (error) in
+            print("fail to end trip")
+        }, timePoint: timeManager.buildTimePoint()!)
     }
-    
 }
 
 extension MainMapVC: TripPanelDelegate{

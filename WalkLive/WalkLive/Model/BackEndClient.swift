@@ -399,7 +399,7 @@ class BackEndClient: NSObject {
      */
     
     
-    func startTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
+    func startTrip(success: @escaping (TimePoint) -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/trips"
         var startTripRequest = URLRequest(url: urlComponents.url!)
@@ -423,6 +423,40 @@ class BackEndClient: NSObject {
             if (status != 200) {
                 print(status)
                 failure(LoginError(status: status))
+            } else {
+                let timePoint = try? jsonDecoder.decode(TimePoint.self, from: data!) as TimePoint
+                print(timePoint)
+                success(timePoint!)}
+        }).resume()
+    }
+    
+    func endTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
+        if (timePoint.tripId == nil){
+            failure(TripError(status:2))
+        }
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/trips/\(timePoint.tripId!)/endtrip"
+        var endTripRequest = URLRequest(url: urlComponents.url!)
+        endTripRequest.httpMethod = "PUT"
+        
+        do {
+            let startTripJSON = try jsonEncoder.encode(timePoint)
+            endTripRequest.httpBody = startTripJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: endTripRequest, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(TripError(status: status))
             } else {
                 print(status)
                 success()

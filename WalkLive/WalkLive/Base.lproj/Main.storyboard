@@ -1092,23 +1092,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="81.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friend Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpD-f9-toQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpD-f9-toQ">
                                                     <rect key="frame" x="15" y="11" width="98" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123-456-789" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3A-rt-1tv">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123-456-789" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3A-rt-1tv">
                                                     <rect key="frame" x="15" y="40" width="88" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.74367599340000001" green="0.77177784969999996" blue="0.74938622340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wh-or-hMG">
-                                                    <rect key="frame" x="315" y="11" width="44" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wh-or-hMG">
+                                                    <rect key="frame" x="316" y="6.5" width="44" height="30"/>
                                                     <state key="normal" title="Select">
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -1117,6 +1114,15 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1Wh-or-hMG" secondAttribute="trailing" id="ANr-Wq-6pT"/>
+                                                <constraint firstItem="1Wh-or-hMG" firstAttribute="centerY" secondItem="rpD-f9-toQ" secondAttribute="centerY" id="OGH-aQ-phP"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="s3A-rt-1tv" secondAttribute="bottom" constant="8" id="Rtt-dw-4YZ"/>
+                                                <constraint firstItem="s3A-rt-1tv" firstAttribute="leading" secondItem="rpD-f9-toQ" secondAttribute="leading" id="SyW-cb-Pb9"/>
+                                                <constraint firstItem="rpD-f9-toQ" firstAttribute="top" secondItem="TXx-MR-9GW" secondAttribute="topMargin" id="kEK-Ha-AAb"/>
+                                                <constraint firstItem="rpD-f9-toQ" firstAttribute="leading" secondItem="TXx-MR-9GW" secondAttribute="leadingMargin" id="mmc-3p-ko7"/>
+                                                <constraint firstItem="s3A-rt-1tv" firstAttribute="top" secondItem="rpD-f9-toQ" secondAttribute="bottom" constant="8" id="nWo-AS-baJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="friendNameLabel" destination="rpD-f9-toQ" id="qDW-nc-GtD"/>
@@ -1156,17 +1162,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="eek-gl-lob" firstAttribute="leading" secondItem="LWt-kM-ygz" secondAttribute="leading" constant="16" id="0FC-Cg-g1t"/>
-                                    <constraint firstItem="nn6-Tt-s3X" firstAttribute="leading" secondItem="eek-gl-lob" secondAttribute="leading" id="7O2-S5-wpc"/>
-                                    <constraint firstAttribute="bottom" secondItem="vAt-j0-DcD" secondAttribute="bottom" constant="20" id="8RX-xE-1BI"/>
-                                    <constraint firstItem="vAt-j0-DcD" firstAttribute="top" secondItem="nn6-Tt-s3X" secondAttribute="bottom" constant="8" id="CLq-p9-Zpq"/>
-                                    <constraint firstItem="vAt-j0-DcD" firstAttribute="top" secondItem="nn6-Tt-s3X" secondAttribute="bottom" constant="8" id="Dd2-wr-Hin"/>
-                                    <constraint firstItem="nn6-Tt-s3X" firstAttribute="top" secondItem="2C6-dQ-Wnd" secondAttribute="bottom" constant="8" id="QYv-xA-8dI"/>
-                                    <constraint firstItem="2C6-dQ-Wnd" firstAttribute="leading" secondItem="eek-gl-lob" secondAttribute="leading" id="kfF-8s-A37"/>
-                                    <constraint firstItem="eek-gl-lob" firstAttribute="top" secondItem="LWt-kM-ygz" secondAttribute="top" constant="8" id="lFx-oI-8VG"/>
-                                    <constraint firstItem="nn6-Tt-s3X" firstAttribute="top" secondItem="2C6-dQ-Wnd" secondAttribute="bottom" constant="8" id="lJU-Qu-xzQ"/>
-                                    <constraint firstItem="2C6-dQ-Wnd" firstAttribute="top" secondItem="eek-gl-lob" secondAttribute="bottom" constant="8" id="mOR-9t-4lA"/>
-                                    <constraint firstItem="vAt-j0-DcD" firstAttribute="leading" secondItem="eek-gl-lob" secondAttribute="leading" id="sOJ-bN-H8f"/>
+                                    <constraint firstItem="eek-gl-lob" firstAttribute="top" secondItem="LWt-kM-ygz" secondAttribute="top" constant="8" id="JRa-CA-zcg"/>
+                                    <constraint firstItem="eek-gl-lob" firstAttribute="leading" secondItem="LWt-kM-ygz" secondAttribute="leading" constant="16" id="Loz-fA-Zgb"/>
+                                    <constraint firstItem="nn6-Tt-s3X" firstAttribute="top" secondItem="2C6-dQ-Wnd" secondAttribute="bottom" constant="8" id="M0j-LH-e3E"/>
+                                    <constraint firstAttribute="bottom" secondItem="vAt-j0-DcD" secondAttribute="bottom" constant="20" id="SHQ-2R-u7r"/>
+                                    <constraint firstItem="2C6-dQ-Wnd" firstAttribute="leading" secondItem="eek-gl-lob" secondAttribute="leading" id="YgB-Fv-hVT"/>
+                                    <constraint firstItem="2C6-dQ-Wnd" firstAttribute="top" secondItem="eek-gl-lob" secondAttribute="bottom" constant="8" id="cBa-zc-WCy"/>
+                                    <constraint firstItem="nn6-Tt-s3X" firstAttribute="leading" secondItem="eek-gl-lob" secondAttribute="leading" id="ibF-uQ-1ZA"/>
+                                    <constraint firstItem="vAt-j0-DcD" firstAttribute="leading" secondItem="eek-gl-lob" secondAttribute="leading" id="k51-YD-ysW"/>
+                                    <constraint firstItem="vAt-j0-DcD" firstAttribute="top" secondItem="nn6-Tt-s3X" secondAttribute="bottom" constant="8" id="xKT-s0-dTO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1450,6 +1454,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="CWQ-0c-P3r"/>
         <segue reference="BDU-6I-cVd"/>
-        <segue reference="kmc-A4-dva"/>
+        <segue reference="jM0-De-8ma"/>
     </inferredMetricsTieBreakers>
 </document>
