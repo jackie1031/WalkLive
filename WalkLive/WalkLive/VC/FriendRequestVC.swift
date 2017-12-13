@@ -123,7 +123,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         else if (segmentControl.selectedSegmentIndex == SENT){
             let friendRequest = self.sentFriendRequests[indexPath.row]
-            cell.usernameLabel.text = friendRequest.sender
+            cell.usernameLabel.text = friendRequest.recipient
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }
