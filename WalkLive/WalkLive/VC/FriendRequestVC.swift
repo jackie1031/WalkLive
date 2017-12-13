@@ -81,6 +81,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.updateSentRequests()
         }
         else {
+            self.updateFriendList()
         }
     }
     

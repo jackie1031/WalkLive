@@ -520,7 +520,7 @@ class BackEndClient: NSObject {
             } else {
                 print(status)
                 let timePoints = try? jsonDecoder.decode([TimePoint].self, from: data!) as [TimePoint]
-                success(timePoints)}
+                success(timePoints!)}
         }).resume()
     }
 }

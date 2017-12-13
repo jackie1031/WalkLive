@@ -700,7 +700,7 @@
                                     <constraint firstAttribute="height" constant="430" id="qxX-oB-6Rx"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="amU-He-28c" customClass="FriendTripTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendTripTableViewCell" rowHeight="81" id="amU-He-28c" customClass="FriendTripTableViewCell" customModule="WalkLive" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="amU-He-28c" id="2gG-RK-oyu">
@@ -773,6 +773,8 @@
                                         <connections>
                                             <outlet property="destinationLabel" destination="mz9-Mq-cUC" id="Vod-1O-mgF"/>
                                             <outlet property="friendNameLabel" destination="yCW-px-Cuj" id="knE-1N-sMf"/>
+                                            <outlet property="messageButton" destination="LHU-Iq-W6n" id="bd6-Kk-okN"/>
+                                            <outlet property="phoneButton" destination="Idw-PX-FPB" id="hhi-0U-Ufe"/>
                                             <outlet property="sourceLabel" destination="Ivx-YI-aNv" id="99R-db-KaA"/>
                                             <outlet property="timeSpentLabel" destination="MWK-19-pND" id="Ylx-I6-KZk"/>
                                         </connections>
@@ -798,6 +800,7 @@
                     <connections>
                         <outlet property="emergencyContactLabel" destination="kMf-1B-rRQ" id="f1M-h9-8oc"/>
                         <outlet property="friendRequestButton" destination="diX-7f-Pu8" id="6da-8d-c7J"/>
+                        <outlet property="friendTripTable" destination="cw6-so-Nf8" id="TfF-KO-fKh"/>
                         <outlet property="userContactLabel" destination="Yr3-nM-foV" id="clI-OF-Buf"/>
                         <outlet property="usernameLabel" destination="eHJ-3O-Xau" id="HHC-Cw-6EY"/>
                         <segue destination="mhm-es-34Q" kind="show" identifier="settingSegue" id="cR3-Ay-sw1"/>
@@ -1446,7 +1449,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CWQ-0c-P3r"/>
-        <segue reference="BDU-6I-cVd"/>
+        <segue reference="cR3-Ay-sw1"/>
         <segue reference="jM0-De-8ma"/>
     </inferredMetricsTieBreakers>
 </document>

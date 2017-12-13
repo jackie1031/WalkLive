@@ -8,24 +8,44 @@
 
 import UIKit
 
-class UserVC: UIViewController {
+class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var userContactLabel: UILabel!
     
     @IBOutlet weak var emergencyContactLabel: UILabel!
     @IBOutlet weak var friendRequestButton: UIButton!
-    var receivedFriendRequests: [FriendRequest]!
     
+    @IBOutlet weak var friendTripTable: UITableView!
+    
+    
+    var receivedFriendRequests: [FriendRequest]!
+    var friendsTrip: [TimePoint]!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        friendTripTable.delegate = self
+        friendTripTable.dataSource = self
+        self.updateFriendTrips()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.setUserVCInfo()
+    }
+    
+    func updateFriendTrips(){
+        backEndClient.getAllTrip(success: { (timePoints) in
+            OperationQueue.main.addOperation {
+                print(timePoints)
+                self.friendsTrip = timePoints
+                self.friendTripTable.reloadData()
+            }
+        }) { (error) in
+            print("failed to get all friend trips")
+        }
     }
     
     
@@ -49,6 +69,30 @@ class UserVC: UIViewController {
     func segueToSettingVC(){
         self.performSegue(withIdentifier: "settingSegue", sender: self)
     }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.friendsTrip != nil {
+            print("reached here")
+            return self.friendsTrip.count
+        } else {
+            print("reached here for 0 ")
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = friendTripTable.dequeueReusableCell(withIdentifier: "FriendTripTableViewCell", for: indexPath) as! FriendTripTableViewCell
+        let friendTrip = self.friendsTrip[indexPath.row]
+        cell.friendNameLabel.text = friendTrip.username
+        cell.destinationLabel.text = "TO: " + friendTrip.destination!
+        cell.timeSpentLabel.text = friendTrip.timeSpent
+        cell.phoneButton.tag = indexPath.row
+        cell.messageButton.tag = indexPath.row
+        cell.selectionStyle = .none
+        return cell
+    }
+    
     
     func updateFriendRequest(){
         backEndClient.getReceivedFriendRequests(success: { (receivedFriendRequests) in

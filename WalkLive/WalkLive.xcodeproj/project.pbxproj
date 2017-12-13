@@ -57,7 +57,6 @@
 		904B05351FD68D1D00EEB523 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */; };
 		904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05321FD68D1C00EEB523 /* FriendTripTableViewCell.swift */; };
 		904B05371FD68D1D00EEB523 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */; };
-		904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */; };
 		904B053A1FD68D3400EEB523 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05391FD68D3400EEB523 /* Service.swift */; };
 		904B053C1FD77A5A00EEB523 /* RequestUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053B1FD77A5A00EEB523 /* RequestUpdater.swift */; };
 		904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053D1FD77A7B00EEB523 /* FriendRequest.swift */; };
@@ -145,7 +144,6 @@
 		904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		904B05321FD68D1C00EEB523 /* FriendTripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTripTableViewCell.swift; sourceTree = "<group>"; };
 		904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
-		904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRequestTableViewCell.swift; sourceTree = "<group>"; };
 		904B05391FD68D3400EEB523 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		904B053B1FD77A5A00EEB523 /* RequestUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUpdater.swift; sourceTree = "<group>"; };
 		904B053D1FD77A7B00EEB523 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
@@ -344,7 +342,6 @@
 				904B05311FD68D1C00EEB523 /* FriendRequestTableViewCell.swift */,
 				904B05321FD68D1C00EEB523 /* FriendTripTableViewCell.swift */,
 				904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */,
-				904B05341FD68D1C00EEB523 /* TripRequestTableViewCell.swift */,
 				9015A2B41FDDBEB00080B4D3 /* FriendTrackTableViewCell.swift */,
 				9015A2BC1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift */,
 			);
@@ -657,7 +654,6 @@
 				904B05351FD68D1D00EEB523 /* FriendRequestTableViewCell.swift in Sources */,
 				8C56F6811FD795D600D1017F /* BackendError.swift in Sources */,
 				900468791FDDFAD3008A896E /* FriendTracker.swift in Sources */,
-				904B05381FD68D1D00EEB523 /* TripRequestTableViewCell.swift in Sources */,
 				904B05211FD689B300EEB523 /* UserVC.swift in Sources */,
 				904B051F1FD689B300EEB523 /* SignUpVC.swift in Sources */,
 				9015A2B51FDDBEB00080B4D3 /* FriendTrackTableViewCell.swift in Sources */,

@@ -10,4 +10,6 @@ import Foundation
 protocol RouteDelegate: class {
     func updateRoute(index: Int)
     func cancelTrip()
+    func completeTrip()
+
 }
