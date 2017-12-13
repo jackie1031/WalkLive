@@ -25,6 +25,7 @@
 		9015A2BD1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2BC1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift */; };
 		9015A2BF1FDDD11C0080B4D3 /* StringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */; };
 		901C95E71FDA278F0067A346 /* AddFriendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901C95E61FDA278F0067A346 /* AddFriendView.xib */; };
+		9039111B1FE0FA3600A95373 /* TripTableUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9039111A1FE0FA3600A95373 /* TripTableUpdateDelegate.swift */; };
 		904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04C31FD688D700EEB523 /* AppDelegate.swift */; };
 		904B04C91FD688D700EEB523 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 904B04C71FD688D700EEB523 /* Main.storyboard */; };
 		904B04CB1FD688D700EEB523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 904B04CA1FD688D700EEB523 /* Assets.xcassets */; };
@@ -104,6 +105,7 @@
 		9015A2BC1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFriendTableViewCell.swift; sourceTree = "<group>"; };
 		9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringBuilder.swift; sourceTree = "<group>"; };
 		901C95E61FDA278F0067A346 /* AddFriendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFriendView.xib; sourceTree = "<group>"; };
+		9039111A1FE0FA3600A95373 /* TripTableUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableUpdateDelegate.swift; sourceTree = "<group>"; };
 		904B04C01FD688D700EEB523 /* WalkLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		904B04C31FD688D700EEB523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		904B04C81FD688D700EEB523 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			children = (
 				904B05281FD689D000EEB523 /* RouteDelegate.swift */,
 				904B05291FD689D000EEB523 /* TripPanelDelegate.swift */,
+				9039111A1FE0FA3600A95373 /* TripTableUpdateDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
 				904B05421FD8916900EEB523 /* EmergencyContact.swift in Sources */,
 				904B05051FD689A300EEB523 /* Route.swift in Sources */,
+				9039111B1FE0FA3600A95373 /* TripTableUpdateDelegate.swift in Sources */,
 				904B05031FD689A300EEB523 /* Location.swift in Sources */,
 				904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */,
 				904B05091FD689A300EEB523 /* User.swift in Sources */,

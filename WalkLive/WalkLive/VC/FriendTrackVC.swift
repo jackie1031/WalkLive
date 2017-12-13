@@ -18,20 +18,33 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var friendTracker = FriendTracker()
     var currentFriendTrip: TimePoint?
     var timeInterval = TimeInterval(20)
-    
+    var tripUpdater: TripUpdater!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.friendTracker.setMapView(mapView: self.mapView)
         friendTrackTable.delegate = self
         friendTrackTable.dataSource = self
         // Do any additional setup after loading the view.
-        self.friendTracker.mapTimePoint(timePoint: self.currentFriendTrip!)
-        self.friendTracker.trackNewTripWithTimer(trip: self.currentFriendTrip!, timeInterval: self.timeInterval)
+        self.initializeUpdates()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         print("closed successfully")
+        self.endTimers()
+
+    }
+    
+    private func initializeUpdates(){
+        self.friendTracker.mapTimePoint(timePoint: self.currentFriendTrip!)
+        self.friendTracker.trackNewTripWithTimer(trip: self.currentFriendTrip!, timeInterval: self.timeInterval)
+        self.tripUpdater = TripUpdater(tripTableDelegate: self)
+        self.tripUpdater.startTimer(timeInterval: self.timeInterval)
+    }
+    
+    private func endTimers(){
         self.friendTracker.endTimer()
+        self.tripUpdater.endTimer()
     }
     
     @IBAction func onTrackButton(_ sender: UIButton) {
@@ -60,8 +73,10 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendTrackTable.dequeueReusableCell(withIdentifier: "FriendTrackTableViewCell", for: indexPath) as! FriendTrackTableViewCell
-        let trip = friendTrips[indexPath.row]
-        cell.friendNameLabel.text = trip.username
+        let friendTrip = friendTrips[indexPath.row]
+        cell.friendNameLabel.text = friendTrip.username
+        cell.currentLocationLabel.text = "At: (" + String(format: "%.3f", (friendTrip.curLat)!) + ", " + String(format: "%.3f", (friendTrip.curLong)!) + ")"
+        cell.timeSpentLabel.text = friendTrip.timeSpent
         cell.phoneButton.tag = indexPath.row
         cell.messageButton.tag = indexPath.row
         cell.trackButton.tag = indexPath.row
@@ -73,9 +88,6 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
 
     /*
     // MARK: - Navigation
@@ -88,3 +100,19 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     */
 
 }
+
+
+extension FriendTrackVC: TripTableUpdateDelegate{
+    func updateTable() {
+        backEndClient.getAllTrip(success: { (friendTrips) in
+            OperationQueue.main.addOperation {
+                self.friendTrips = friendTrips
+                self.friendTrackTable.reloadData()
+                print("reloaded table!")
+            }
+        }) { (error) in
+            print("failed to update")
+        }
+    }
+}
+

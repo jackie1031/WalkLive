@@ -7,30 +7,25 @@
 //
 
 import Foundation
-
+import UIKit
 class TripUpdater: NSObject {
     private var timer = Timer()
+    private var tripTableDelegate: TripTableUpdateDelegate!
     
-    
+    init(tripTableDelegate: TripTableUpdateDelegate){
+        self.tripTableDelegate = tripTableDelegate
+    }
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
     }
     
     @objc func updateTimeLabel(){
-        self.updatePanel()
-//        backEndClient.updateTrip(success: {
-//            print("updated!")
-//        }, failure: { (error) in
-//            print("update error")
-//        }, timePoint: self.buildTimePoint()!)
+        self.tripTableDelegate.updateTable()
     }
     
     func endTimer() {
         self.timer.invalidate()
     }
     
-    func updatePanel(){
-
-    }
 }

@@ -23,17 +23,35 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var receivedFriendRequests: [FriendRequest]!
     var friendsTrip: [TimePoint]?
     
+    var timeInterval = TimeInterval(20)
+    var tripUpdater: TripUpdater!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         friendTripTable.delegate = self
         friendTripTable.dataSource = self
         self.updateFriendTrips()
+        self.initializeUpdates()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.setUserVCInfo()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("closed successfully")
+        self.endTimers()
+        
+    }
+    
+    private func initializeUpdates(){
+        self.tripUpdater = TripUpdater(tripTableDelegate: self)
+        self.tripUpdater.startTimer(timeInterval: self.timeInterval)
+    }
+    
+    private func endTimers(){
+        self.tripUpdater.endTimer()
     }
     
     func updateFriendTrips(){
@@ -85,6 +103,7 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let friendTrip = self.friendsTrip![indexPath.row]
         cell.friendNameLabel.text = friendTrip.username
         cell.destinationLabel.text = "To: " + friendTrip.destination!
+        cell.sourceLabel.text = "At: (" + String(format: "%.3f", (friendTrip.curLat)!) + ", " + String(format: "%.3f", (friendTrip.curLong)!) + ")"
         cell.timeSpentLabel.text = friendTrip.timeSpent
         cell.phoneButton.tag = indexPath.row
         cell.messageButton.tag = indexPath.row
@@ -147,5 +166,19 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
      // Pass the selected object to the new view controller.
      }
     
+}
+
+extension UserVC: TripTableUpdateDelegate{
+    func updateTable() {
+        backEndClient.getAllTrip(success: { (friendTrips) in
+            OperationQueue.main.addOperation {
+                self.friendsTrip = friendTrips
+                self.friendTripTable.reloadData()
+                print("reloaded table!")
+            }
+        }) { (error) in
+            print("failed to update")
+        }
+    }
 }
 
