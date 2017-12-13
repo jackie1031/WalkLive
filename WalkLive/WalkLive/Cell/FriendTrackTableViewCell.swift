@@ -15,6 +15,10 @@ class FriendTrackTableViewCell: UITableViewCell {
     @IBOutlet weak var destinationLocationLabel: UILabel!
     @IBOutlet weak var timeSpentLabel: UILabel!
     
+    @IBOutlet weak var phoneButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var trackButton: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
