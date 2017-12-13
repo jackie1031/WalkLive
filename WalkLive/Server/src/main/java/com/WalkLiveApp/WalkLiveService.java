@@ -915,14 +915,14 @@ public class WalkLiveService {
         ResultSet res = null;
         String sender;
         String recipient;
+        int tempTripId;
 
         ArrayList<User> friends = new ArrayList<>();
+        ArrayList<Trip> trips = new ArrayList<>();
 
         String sql = "SELECT * from users WHERE username = ?";
         String sql2 = "SELECT recipient FROM friends WHERE sender = ? AND relationship = 1";
 
-
-        // A send to B, B can c A, A can't c B
         String sql3 = "SELECT sender FROM friends WHERE recipient = ? AND relationship = 1";
 
         try {
@@ -969,7 +969,6 @@ public class WalkLiveService {
             res = ps.executeQuery();
 
             while (res.next()) {
-                //recipient = res.getString(1);
                 recipient = res.getString("recipient");
 
                 User u = getUser(recipient);
@@ -1068,13 +1067,13 @@ public class WalkLiveService {
                 res.beforeFirst();
                 res.last();
                 size = res.getRow();
-                logger.info("the size of the table is:"+size);
+                logger.info("the size of the table for ongoing is:"+size);
                 return size;
             }
 
         } catch (SQLException ex) {
-            logger.error("omg", ex);
-            throw new InvalidDestination("i don't care", ex);
+            logger.error("SQL exception", ex);
+            throw new InvalidDestination("SQL exception in counting", ex);
         } finally {
             if (ps != null) {
                 try {
@@ -1111,13 +1110,13 @@ public class WalkLiveService {
                 res.beforeFirst();
                 res.last();
                 size = res.getRow();
-                logger.info("the size of the table is:"+size);
+                logger.info("the size of the table of done is:"+size);
                 return size;
             }
 
         } catch (SQLException ex) {
-            logger.error("omg", ex);
-            throw new InvalidDestination("i don't care", ex);
+            logger.error("SQL exception", ex);
+            throw new InvalidDestination("SQL exception in counting", ex);
         } finally {
             if (ps != null) {
                 try {
@@ -1146,7 +1145,7 @@ public class WalkLiveService {
         PreparedStatement ps = null;
         ResultSet res = null;
 
-        logger.info("the body of start trip"+body);
+        logger.info("the body of start trip"+ body);
 
         int test;
         //Trips(tripId TEXT, username TEXT, shareTo TEXT, destination TEXT, dangerZone INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
@@ -1476,23 +1475,26 @@ public class WalkLiveService {
         }
     }
 
-
-
-    public List<Trip> getAllTrips(String username) throws UserServiceException,InvalidTargetID, java.text.ParseException {
-        Statement stm = null;
-        ResultSet res = null;
+    public List<Trip> getAllTrips(String username) throws  SQLException,UserServiceException, ParseException, InvalidTargetID{
         PreparedStatement ps = null;
+        ResultSet res = null;
+        String sender;
+        String recipient;
+        int tempTripId;
+        String passInUserName;
 
+        ArrayList<User> friends = new ArrayList<>();
+        ArrayList<Trip> trips = new ArrayList<>();
 
         String sql = "SELECT * from users WHERE username = ?";
         String sql2 = "SELECT recipient FROM friends WHERE sender = ? AND relationship = 1";
+
+        // A send to B, B can c A, A can't c B
         String sql3 = "SELECT sender FROM friends WHERE recipient = ? AND relationship = 1";
-        String sql4 = "SELECT * FROM ongoingTrips WHERE username = ?";
+        //String sql4 = "SELECT * FROM ongoingTrips WHERE username = ? ";
 
         try {
             conn = DriverManager.getConnection(url, user, password);
-            ArrayList<Trip> allTrips = new ArrayList<>();
-            ArrayList<String> allFriends = new ArrayList<>();
 
             //check if username exists
             ps = conn.prepareStatement(sql);
@@ -1503,89 +1505,19 @@ public class WalkLiveService {
                 logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
                 throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
             }
-
-            String sender;
-            String recipient;
-            String tripIdString;
-
-            //query for accepted requests where the user was the sender
-            ps = conn.prepareStatement(sql2);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            while (res.next()) {
-                recipient = res.getString(1);
-                //recipient = res.getString;
-                //allFriends.add(recipient);
-
-                ps = conn.prepareStatement(sql4);
-                ps.setString(1, recipient);
-                res = ps.executeQuery();
-                tripIdString = res.getString("tripId");
-                if (!res.next()) {
-                    logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-                    throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-                }
-
-                Trip t = getTrip(tripIdString);
-
-                //User u = getUser(recipient);
-                //String contact = u.getContact();
-
-                //User r = new User(recipient, null, contact, null, null, null, null);
-                allTrips.add(t);
-            }
-
-            //query for responded requests where the user was the recipient
-            ps = conn.prepareStatement(sql3);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            while (res.next()) {
-                sender = res.getString(1);
-
-                //User u = getUser(sender);
-                //String contact = u.getContact();
-
-                ps = conn.prepareStatement(sql4);
-                ps.setString(1, sender);
-                res = ps.executeQuery();
-                tripIdString = res.getString("tripId");
-                if (!res.next()) {
-                    logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-                    throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-                }
-
-                Trip t = getTrip(tripIdString);
-
-                //User u = getUser(recipient);
-                //String contact = u.getContact();
-
-                //User r = new User(recipient, null, contact, null, null, null, null);
-                allTrips.add(t);
-
-                //User r = new User(sender, null, contact, null, null, null, null);
-                //friends.add(r);
-            }
-            return allTrips;
-
         } catch (SQLException ex) {
-            logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-            throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-        } catch (ParseException ex){
-            logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-            throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
+            logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            //throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
         }
         finally {
-            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
             if (res != null) {
                 try {
                     res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (stm != null) {
-                try {
-                    stm.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
@@ -1594,16 +1526,280 @@ public class WalkLiveService {
                 } catch (SQLException e) { /* ignored */}
             }
         }
+
+
+        //query for accepted requests where the user was the sender
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            while (res.next()) {
+                //recipient = res.getString(1);
+                passInUserName = res.getString("recipient");
+                logger.info("the recipient in get friend: " + passInUserName);
+                Trip t = getTripString(passInUserName);
+                trips.add(t);
+                //Trip t = getTrip();
+                //User u = getUser(recipient);
+                //String contact = u.getContact();
+
+                //User r = new User(recipient, null, contact, null, null, null, null);
+                //friends.add(r);
+            }
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            //throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        try{
+            conn = DriverManager.getConnection(url, user, password);
+            //query for responded requests where the user was the recipient
+            ps = conn.prepareStatement(sql3);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            while (res.next()) {
+                //sender = res.getString(1);
+                passInUserName = res.getString("sender");
+                logger.info("the sender in get friend: " + passInUserName);
+                Trip t = getTripString(passInUserName);
+                trips.add(t);
+            }
+
+            return trips;
+        } catch (SQLException ex) {
+            logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            //throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return null;
+    }
+
+    public Trip getTripString(String username) throws SQLException{
+
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        String sender;
+        String recipient;
+        int tempTripId;
+
+
+        //String username;
+        String startTime;
+        String destination;
+        String timeSpent;
+        String emergencyNum;
+        String shareTo = null;
+        double startLong;
+        double startLat;
+        double curLong;
+        double curLat;
+        double endLong;
+        double endLat;
+        boolean completed;
+        int tripId;
+
+
+        String sql4 = "SELECT * FROM ongoingTrips WHERE username = ? ";
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+
+            ps = conn.prepareStatement(sql4);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+//            String setup = "users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, " +
+//                    "emergency_id TEXT, emergency_number TEXT)" ;
+//            pw = res.getString(2);
+
+//            stm.executeUpdate("(tripId TEXT, username TEXT, shareTo TEXT, " +
+//                  4  "destination TEXT, dangerZone INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, " +
+//                  9  "startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, " +
+//                  14  "emergencyNum TEXT, timeSpent TEXT)");
+
+
+            if (res.next()) {
+                tripId = res.getInt("tripId");
+                username = res.getString(2);
+                destination = res.getString(3);
+                startTime = res.getString(5);
+                completed = res.getBoolean(6);
+                startLat = res.getDouble(7);
+                startLong = res.getDouble(8);
+                curLat = res.getDouble(9);
+                curLong = res.getDouble(10);
+                endLat = res.getDouble(11);
+                endLong = res.getDouble(12);
+                emergencyNum = res.getString(13);
+                timeSpent = res.getString(14);
+                return new Trip(tripId, username, destination, startTime, completed, startLat, startLong, curLat, curLong, endLat, endLong, emergencyNum, timeSpent);
+
+            }
+
+        }catch (SQLException ex) {
+            logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            //throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        return null;
+
     }
 
 
-//     public Trip updateDestination(String body) throws WalkLiveService.UserServiceException {
-//
-//         //{ tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
-//         Trip thisTrip = new Trip();
-//
-//         return thisTrip;
-//     }
+     public void updateTrip(String tripIdInStr, String body) throws InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
+
+         PreparedStatement ps = null;
+         ResultSet res = null;
+
+         int tripId = Integer.parseInt(tripIdInStr);
+
+         JSONObject object = (JSONObject) new JSONParser().parse(body);
+
+
+         //Content: {curLong:[double],curLat:[double],timeSpent:[String]}
+
+
+         //should be in a try catch block in case that incorrect body is given
+         String curLongStr = object.get("curLong").toString();
+         String curLatStr = object.get("curLat").toString();
+         String timeSpent = object.get("timeSpent").toString();
+
+         double curLong = Double.parseDouble(curLongStr);
+         double curLat = Double.parseDouble(curLatStr);
+
+
+         //query to see if username given is valid
+         String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setInt(1, tripId);
+             res = ps.executeQuery();
+
+             if (!res.next()) {
+                 logger.error(String.format("WalkLiveService.updateEmergencyContact: Failed to find username: %s", tripId));
+                 throw new UserServiceException(String.format("WalkLiveService.updateEmergencyContact: Failed to find username: %s", tripId));
+             }
+
+//             //autofill the contact information is the username is given )and valid_ but the contact info is not given
+//             if (number.equals("")) {
+//                 number = res.getString("emergency_number");
+//             }
+
+         } catch(SQLException ex) {
+             logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", tripId), ex);
+             throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", tripId), ex);
+         } finally {
+             //close connections
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (res != null) {
+                 try {
+                     res.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+
+//         String timeSpent = object.get("timeSpent").toString();
+//         double curLong = Double.parseDouble(curLongStr);
+//         double curLat = Double.parseDouble(curLatStr);
+
+         sql = "UPDATE ongoingTrips SET curLong = ?, curLat = ?, timeSpent = ?  WHERE tripId = ? LIMIT 1" ;
+
+         try {
+             conn = DriverManager.getConnection(url, user, password);
+             ps = conn.prepareStatement(sql);
+             ps.setDouble(1, curLong);
+             ps.setDouble(2, curLat);
+             ps.setString(3, timeSpent);
+             ps.setInt(4, tripId);
+             ps.executeUpdate();
+
+             System.out.println("SUCCESSFULLY UPDATED.");
+             //return new User(null, null, null, null, null, id, number);
+
+         } catch(SQLException ex) {
+             logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+             throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+         }  finally {
+             //close connections
+             if (ps != null) {
+                 try {
+                     ps.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (res != null) {
+                 try {
+                     res.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+             if (conn != null) {
+                 try {
+                     conn.close();
+                 } catch (SQLException e) { /* ignored */}
+             }
+         }
+
+     }
 //
 //     public String shareTrip(String body) throws WalkLiveService.UserServiceException {
 //         // to another user
