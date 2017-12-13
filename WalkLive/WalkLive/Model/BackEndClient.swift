@@ -463,5 +463,64 @@ class BackEndClient: NSObject {
             }
         }).resume()
     }
-
+    
+    func updateTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
+        if (timePoint.tripId == nil){
+            failure(TripError(status:2))
+        }
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/trips/\(timePoint.tripId!)/update"
+        var endTripRequest = URLRequest(url: urlComponents.url!)
+        endTripRequest.httpMethod = "PUT"
+        
+        do {
+            let startTripJSON = try jsonEncoder.encode(timePoint)
+            endTripRequest.httpBody = startTripJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: endTripRequest, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(TripError(status: status))
+            } else {
+                print(status)
+                success()
+            }
+        }).resume()
+        
+    }
+    
+    func getAllTrip(success: @escaping ([TimePoint]) -> (), failure: @escaping (Error) -> ()){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/trips/\(currentUserInfo.username!)/allTrips"
+        var getAllTripRequest = URLRequest(url: urlComponents.url!)
+        getAllTripRequest.httpMethod = "GET"
+        
+        
+        URLSession.shared.dataTask(with: getAllTripRequest, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(TripError(status: status))
+            } else {
+                print(status)
+                let timePoints = try? jsonDecoder.decode([TimePoint].self, from: data!) as [TimePoint]
+                success(timePoints)}
+        }).resume()
+    }
 }
