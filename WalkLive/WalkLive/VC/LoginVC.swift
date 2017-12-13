@@ -9,13 +9,10 @@
 import UIKit
 
 class LoginVC: UIViewController{
-
-    
     
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,8 +75,7 @@ class LoginVC: UIViewController{
     @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
-    
-    
+
 
     /*
     // MARK: - Navigation

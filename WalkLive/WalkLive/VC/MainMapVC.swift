@@ -14,6 +14,12 @@ import MessageUI
 
 class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,  MFMessageComposeViewControllerDelegate{
 
+    private var userFilePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        return (url!.appendingPathComponent("UserInfo").path)
+    }
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startTripButton: UIButton!
     @IBOutlet weak var startTripPanelView: UIView!
@@ -23,8 +29,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     @IBOutlet weak var contactMessagePanelTextView: UITextView!
     @IBOutlet weak var emergencyContactLabel: UILabel!
     
-    
-    
     var locationManager =  CLLocationManager()
     var roadRequester = RoadRequester()
     var timeManager: TimeManager!
@@ -33,7 +37,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        currentUserInfo = UserLogin(username: "blah", password: "blahblah", contact: "111-111-1111")
         print(currentUserInfo)
         self.initializeView()
     }
@@ -82,6 +85,14 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             locationManager.startUpdatingLocation()
         default:
             break
+        }
+    }
+    
+    private func clearUserData() {
+        do {
+            try FileManager.default.removeItem(atPath: userFilePath)
+        } catch {
+            print("No data found.")
         }
     }
     
@@ -244,6 +255,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     @IBAction func onLogoutButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         currentUserInfo = nil
+        self.clearUserData()
     }
     
 

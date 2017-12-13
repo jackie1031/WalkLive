@@ -158,6 +158,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EIi-v7-wPw"/>
                     </view>
+                    <connections>
+                        <segue destination="VUm-xm-Aye" kind="presentation" id="2fx-La-ta1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-gm-Ot4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1430,6 +1433,6 @@
         <image name="Image" width="283" height="258"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CWQ-0c-P3r"/>
+        <segue reference="2fx-La-ta1"/>
     </inferredMetricsTieBreakers>
 </document>
