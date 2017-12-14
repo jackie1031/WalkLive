@@ -26,7 +26,7 @@ public class WalkLiveService {
     private Connection conn = null;
 
     public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
-    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Construct the model with a pre-defined datasource. The current implementation
@@ -55,133 +55,14 @@ public class WalkLiveService {
      * Finds all users and returns all in user database
      */
     public List<User> findAllUsers() throws UserServiceException, java.text.ParseException {
-        Statement stm = null;
-        ResultSet res = null;
-        String sql = "SELECT * FROM users";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            stm = conn.createStatement();
-            res = stm.executeQuery(sql);
-
-            String username;
-            String pw;
-            String contact;
-            String nickname;
-            Date createdOn;
-            String emergencyId;
-            String emergencyNumber;
-
-            ArrayList<User> users = new ArrayList<>();
-            while (res.next()) {
-                username = res.getString(1);
-                pw = res.getString(2);
-                contact = res.getString(3);
-
-                nickname = res.getString(4);
-                createdOn = df.parse(res.getString(5));
-                emergencyId = res.getString(6);
-                emergencyNumber = res.getString(7);
-
-                User u = new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
-                users.add(u);
-            }
-            return users;
-
-        } catch (SQLException ex) {
-            logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-            throw new UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-        } finally {
-            //close connections
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+        return new UserManager().findAllUsers();
     }
 
     /*
      * returns emergencyId and emergencyNumber
      */
     public User login(String body) throws UserServiceException, ParseException, java.text.ParseException {
-        ResultSet res = null;
-        PreparedStatement ps = null;
-
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String username = object.get("username").toString();
-        String pw = object.get("password").toString();
-
-        //FIRST, search to see if username exists in database
-        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            String contact;
-            String nickname;
-            Date createdOn;
-            String emergencyId;
-            String emergencyNumber;
-
-            if (res.next()) {
-
-                //SECOND, check password
-                String targetPw = res.getString(2);
-                if (!pw.equals(targetPw)) {
-                    logger.error(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
-                    throw new UserServiceException(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
-                }
-
-                //retrieve necessary information to return
-                contact = res.getString(3);
-                nickname = res.getString(4);
-                createdOn = df.parse(res.getString(5));
-                emergencyId = res.getString(6);
-                emergencyNumber = res.getString(7);
-
-                return new User(username, null, contact, null, null, emergencyId, emergencyNumber);
-
-            } else {
-                //if the response is empty, aka the username does not exist in database
-                logger.error(String.format("WalkLiveService.login: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.login: Failed to find username: %s", username));
-            }
-
-        } catch (SQLException ex) {
-            logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
-        }  finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+        return new UserManager().login(body);
     }
 
     public User getUser(String username) throws UserServiceException, ParseException, java.text.ParseException {

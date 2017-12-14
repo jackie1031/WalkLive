@@ -1,4 +1,5 @@
 *.xcuserstate
+workspace.xml
 .DS_Store
 WalkLive/Server/*.class
 *.plist
