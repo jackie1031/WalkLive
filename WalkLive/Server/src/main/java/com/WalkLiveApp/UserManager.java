@@ -38,26 +38,9 @@ public class UserManager {
             stm = conn.createStatement();
             res = stm.executeQuery(sql);
 
-            String username;
-            String pw;
-            String contact;
-            String nickname;
-            Date createdOn;
-            String emergencyId;
-            String emergencyNumber;
-
             ArrayList<User> users = new ArrayList<>();
             while (res.next()) {
-                username = res.getString(1);
-                pw = res.getString(2);
-                contact = res.getString(3);
-
-                nickname = res.getString(4);
-                createdOn = WalkLiveService.df.parse(res.getString(5));
-                emergencyId = res.getString(6);
-                emergencyNumber = res.getString(7);
-
-                User u = new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
+                User u = new User(res.getString(1), res.getString(2), res.getString(3), res.getString(4), WalkLiveService.df.parse(res.getString(5)), res.getString(6), res.getString(7));
                 users.add(u);
             }
             return users;
