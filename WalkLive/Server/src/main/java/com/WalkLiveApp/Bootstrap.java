@@ -39,6 +39,9 @@ public class Bootstrap {
         staticFileLocation("/public");
 
 
+        /****
+         * NEED TO LOAD CRIME INTO TABLE!
+         */
         //Create the model instance and then configure and start the web service
 
         try {
