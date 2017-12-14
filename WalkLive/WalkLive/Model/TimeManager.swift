@@ -42,6 +42,11 @@ class TimeManager: NSObject {
     @objc func updateTimeLabel(){
         self.usedTimeInterval += 1
         self.updatePanel()
+        backEndClient.updateTrip(success: {
+            print("updated!")
+        }, failure: { (error) in
+            print("update error")
+        }, timePoint: self.buildTimePoint()!)
     }
     
     func endTimer() {
@@ -83,7 +88,7 @@ class TimeManager: NSObject {
         timePoint.endLong = Double((destinationAnnotation?.coordinate.longitude)!)
         timePoint.destination = (destinationAnnotation?.title)!
         timePoint.startTime = getTodayString()
-        timePoint.emergencyNum = "123-123-123"
+        timePoint.emergencyNum = currentUserInfo.contact
         timePoint.timeSpent = self.buildMessageOnCurrentTimer()
         if (self.tripId != nil) {
             timePoint.tripId = self.tripId

@@ -55,8 +55,10 @@ class LoginError: Error {
     }
     func returnReason() -> String {
         switch status {
+//        case 401:
+//            return "InvalidUserId: the username may be illegal or the username does not exist!"
         case 401:
-            return "InvalidUserId: the username may be illegal or the username does not exist!"
+            return "The username and password is incorrect!"
         case 403:
             return "InvalidPassword: the password may be illegal or inccorect"
         default:

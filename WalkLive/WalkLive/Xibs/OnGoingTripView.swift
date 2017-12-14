@@ -33,6 +33,10 @@ class OnGoingTripView: UIView {
         self.routeDelegate?.cancelTrip()
     }
     
+    @IBAction func onCompleteTrip(_ sender: Any) {
+        self.removeFromSuperview()
+        self.routeDelegate?.completeTrip()
+    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

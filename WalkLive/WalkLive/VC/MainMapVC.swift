@@ -40,7 +40,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     /// Private functiosn for general logistics
     private func initializeView() {
-        self.emergencyContactLabel.text = stringBuilder.emerStringBuilder()
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
         self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
@@ -170,7 +170,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             controller.body = buildMessage(location: roadRequester.getSourceLocation())
             
             //FTOB needed here.
-            controller.recipients = ["123-456-789"]
+            controller.recipients = [stringBuilder.emerStringBuilder()]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         }
@@ -201,7 +201,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         if (self.startTripDestinationTextLabel.text == "") {
             return
         }
-        print(startTripDestinationTextLabel.text!)
         roadRequester.getSearchResults(success: { (mapItems) in
             self.mapItems = mapItems
             self.performSegue(withIdentifier: "routeChoiceSegue", sender: nil)
@@ -242,6 +241,9 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     
     @IBAction func onLogoutButton(_ sender: Any) {
+        if (self.timeManager != nil) {
+            self.cancelTrip()
+        }
         self.dismiss(animated: true, completion: nil)
         currentUserInfo = nil
     }

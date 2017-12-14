@@ -1,5 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+
 ## [5.3.2] - 2017-12-10
 ### Added
 - FE:  add start trip back end call and its related controllers by @mshu1
@@ -9,6 +10,9 @@ All notable changes to this project will be documented in this file.
 - BE:  add request id by @jeesoo
 - BE:  add create trip, update trip, getAllTrips endpoint by @jackie
 ### Changed
+- BE:  fix friend request bug by @jackie
+- BE:  fix get incoming friend request database by @jackie
+- BE:  fix get friend lists'bug by @jackie
 - BE:  fix login password return bug by @jeesoo
 - BE:  fix password check by @jeesoo
 - BE:  fix emergency id and number return by @jeesoo
