@@ -5,6 +5,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class UserManager {
     public User createNew(String body) throws WalkLiveService.UserServiceException, ParseException, SQLException {
@@ -22,6 +25,90 @@ public class UserManager {
         //SECOND, if username did not exist, then place the information into the database
         return this.createUser(username, pw, contact);
 
+    }
+
+    public List<User> findAllUsers() throws WalkLiveService.UserServiceException, java.text.ParseException {
+        Connection conn = null;
+        Statement stm = null;
+        ResultSet res = null;
+        String sql = "SELECT * FROM users";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            stm = conn.createStatement();
+            res = stm.executeQuery(sql);
+
+            ArrayList<User> users = new ArrayList<>();
+            while (res.next()) {
+                User u = new User(res.getString(1), res.getString(2), res.getString(3), res.getString(4), WalkLiveService.df.parse(res.getString(5)), res.getString(6), res.getString(7));
+                users.add(u);
+            }
+            return users;
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
+        } finally {
+            //close connections
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
+    public User login(String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
+        ResultSet res = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String username = object.get("username").toString();
+        String pw = object.get("password").toString();
+
+        //FIRST, search to see if username exists in database
+        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url,ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            return this.checkCorrectPassword(res, username, pw);
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
+        }  finally {
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
     }
 
     private void checkUniqueness(String username) throws WalkLiveService.UserServiceException, ParseException, SQLException{
@@ -68,6 +155,23 @@ public class UserManager {
 
     }
 
+    private User checkCorrectPassword(ResultSet res, String username, String pw) throws WalkLiveService.UserServiceException, SQLException, ParseException{
+        if (res.next()) {
+            String targetPw = res.getString(2);
+            if (!pw.equals(targetPw)) {
+                WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
+                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
+            }
+
+            return new User(username, null, res.getString(3), null, null, res.getString(6), res.getString(7));
+
+        } else {
+            //if the response is empty, aka the username does not exist in database
+            WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to find username: %s", username));
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to find username: %s", username));
+        }
+    }
+
     private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException, ParseException, SQLException{
         Connection conn = null;
         PreparedStatement ps = null;
@@ -102,4 +206,6 @@ public class UserManager {
             }
         }
     }
+
+
 }
