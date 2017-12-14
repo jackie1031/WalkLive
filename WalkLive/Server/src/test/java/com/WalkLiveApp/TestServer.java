@@ -522,10 +522,13 @@ public class TestServer {
 
         //update emergency contact info
         User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
+        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
         Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
         assertEquals("Failed to get user", 200, r3.httpStatus);
+        assertEquals("Failed to get user", 200, r4.httpStatus);
     }
-    
+
     /**
      * ================================================================
           TRIPs
