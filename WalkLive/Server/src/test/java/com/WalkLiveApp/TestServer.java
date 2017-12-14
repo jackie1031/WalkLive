@@ -250,40 +250,40 @@ public class TestServer {
      */
 
 
-//     @Test
-//     public void testCreateFriendRequest() throws Exception {
-//         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//         User[] entries = new User[] {
-//                 new User("jeesookim", "123456","4405339063"),
-//                 new User("michelle", "0123", "4405339063"),
-//                 new User("yangcao1", "121212", "1231231233")
-//         };
-//
-//         //add to database
-//         for (User t : entries) {
-//             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//         }
-//
-//         //add a few elements
-//         Relationship[] frs = new Relationship[] {
-//                 new Relationship("jeesookim", "michelle", null),
-//                 new Relationship("jeesookim", "yangcao1", null)
-//         };
-//
-//         for (Relationship f : frs) {
-//             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-//
-//
-//             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-//         }
-//
-//         //check content of friendrequests in database!! list request id and stuff
-//         //Get them back
-//         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
-//         assertEquals("Failed to get user entries", 200, r.httpStatus);
-//     }
+     @Test
+     public void testCreateFriendRequest() throws Exception {
+         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+         User[] entries = new User[] {
+                 new User("jeesookim", "123456","4405339063"),
+                 new User("michelle", "0123", "4405339063"),
+                 new User("yangcao1", "121212", "1231231233")
+         };
+
+         //add to database
+         for (User t : entries) {
+             Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+             assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+         }
+
+         //add a few elements
+         Relationship[] frs = new Relationship[] {
+                 new Relationship("jeesookim", "michelle", null),
+                 new Relationship("jeesookim", "yangcao1", null)
+         };
+
+         for (Relationship f : frs) {
+             Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+
+
+             assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+         }
+
+         //check content of friendrequests in database!! list request id and stuff
+         //Get them back
+         Response r = request("GET", "/WalkLive/api/users/jeesookim", null);
+         assertEquals("Failed to get user entries", 200, r.httpStatus);
+     }
 
 //    @Test
 //    public void testGetOutgoingFriendRequests() throws Exception {

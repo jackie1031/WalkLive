@@ -87,72 +87,7 @@ public class WalkLiveService {
 
     //create a new friend request and store in database
     public void createFriendRequest(String sender, String body) throws UserServiceException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
-        User sUser = null;
-        User rUser = null;
-
-        //first check if the sender exists at all
-        try {
-            sUser = getUser(sender);
-        } catch (UserServiceException e) {
-            logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", sender));
-            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", sender));
-        }
-
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String recipient = object.get("recipient").toString();
-        int request_id = getNewRequestId();
-
-        //second check if the recipient exists at all
-        try {
-            rUser = getUser(recipient);
-        } catch (UserServiceException e) {
-            logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", recipient));
-            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", recipient));
-        }
-
-        //Third make sure that sender and recipient are not the same
-        if (rUser.getUsername().equals(sender)) {
-            logger.error("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
-            throw new RelationshipServiceException("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
-        }
-
-        //fourth see if there already is a friend request made from either s ro r or r to s already, it shouldnt work.
-
-
-        String sql = "INSERT INTO friends (_id, sender, recipient, relationship, sent_on) VALUES (?, ?, ?, 0, null)" ;
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, request_id);
-            ps.setString(2, sender);
-            ps.setString(3, recipient);
-            ps.executeUpdate();
-
-            System.out.println("SUCCESSFULLY ADDED.");
-        } catch (SQLException ex) {
-            logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-            throw new RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-        }  finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+        new FriendsManager().createFriendRequest(sender, body);
     }
 
     //get my sent friend requests

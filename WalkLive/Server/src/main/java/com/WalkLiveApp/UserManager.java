@@ -178,6 +178,15 @@ public class UserManager {
         return this.setEmergencyContact(username, id, number);
     }
 
+    public static boolean isValid(String username) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
+        try {
+            new UserManager().getUser(username);
+            return true;
+        } catch (WalkLiveService.UserServiceException e) {
+            WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
+        }
+    }
 
     private User checkCorrectPassword(ResultSet res, String username, String pw) throws WalkLiveService.UserServiceException, SQLException, ParseException{
         if (res.next()) {
