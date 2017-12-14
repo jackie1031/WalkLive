@@ -75,93 +75,9 @@ public class WalkLiveService {
      * ================================================================
      */
 
-    public User updateEmergencyContact(String username, String body) throws UserServiceException, ParseException, SQLException {
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-
-        //should be in a try catch block in case that incorrect body is given
-        String id = object.get("emergency_id").toString();
-        String number = object.get("emergency_number").toString();
-
-        //query to see if username given is valid
-        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            if (!res.next()) {
-                logger.error(String.format("WalkLiveService.updateEmergencyContact: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.updateEmergencyContact: Failed to find username: %s", username));
-            }
-
-            //autofill the contact information is the username is given )and valid_ but the contact info is not given
-            if (number.equals("")) {
-                number = res.getString("emergency_number");
-            }
-
-        } catch(SQLException ex) {
-            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
-        } finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-
-        sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? LIMIT 1" ;
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
-            ps.setString(2, number);
-            ps.setString(3, username);
-            ps.executeUpdate();
-
-            System.out.println("SUCCESSFULLY UPDATED.");
-            return new User(null, null, null, null, null, id, number);
-
-        } catch(SQLException ex) {
-            logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
-            throw new UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
-        }  finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+    public User updateEmergencyContact(String username, String body) throws UserServiceException, ParseException, SQLException, java.text.ParseException {
+        return new UserManager().updateEmergencyContact(username, body);
     }
-
 
     /**
      * ================================================================

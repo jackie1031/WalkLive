@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class UserManager {
+
     public User createNew(String body) throws WalkLiveService.UserServiceException, ParseException, SQLException {
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String username = object.get("username").toString();
@@ -157,13 +158,33 @@ public class UserManager {
         }
     }
 
+    public void updatePassword(String username, String body) throws SQLException, WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String password = object.get("password").toString();
+        this.setPassword(username, password);
+    }
+
+    public User updateEmergencyContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException, SQLException {
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String id = object.get("emergency_id").toString();
+        String number = object.get("emergency_number").toString();
+        User user = null;
+        if (!id.equals("")) {
+            user = this.getUser(id);}
+
+        if (number.equals("")) {
+            number = user.getContact(); }
+
+        return this.setEmergencyContact(username, id, number);
+    }
+
 
     private User checkCorrectPassword(ResultSet res, String username, String pw) throws WalkLiveService.UserServiceException, SQLException, ParseException{
         if (res.next()) {
             String targetPw = res.getString(2);
             if (!pw.equals(targetPw)) {
-                WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
-                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to authenticate - incorrect password"));
+                WalkLiveService.logger.error("WalkLiveService.login: Failed to authenticate - incorrect password");
+                throw new WalkLiveService.UserServiceException("WalkLiveService.login: Failed to authenticate - incorrect password");
             }
 
             return new User(username, null, res.getString(3), null, null, res.getString(6), res.getString(7));
@@ -253,6 +274,73 @@ public class UserManager {
         }
 
     }
+
+    private User setEmergencyContact(String username, String id, String number) throws WalkLiveService.UserServiceException, ParseException, SQLException {
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(2, number);
+            ps.setString(3, username);
+            ps.executeUpdate();
+
+            System.out.println("SUCCESSFULLY UPDATED.");
+            return new User(null, null, null, null, null, id, number);
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+        } finally {
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
+    private void setPassword(String username, String password) throws WalkLiveService.UserServiceException, ParseException, SQLException{
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        String sql = "UPDATE users SET password = ? WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.executeUpdate();
+
+            System.out.println("SUCCESSFULLY UPDATED.");
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+        } finally {
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 
 
 
