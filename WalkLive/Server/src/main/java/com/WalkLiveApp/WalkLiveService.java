@@ -19,12 +19,13 @@ import java.util.UUID;
 import java.util.Date;
 
 public class WalkLiveService {
+    private DataBaseHandler dataBaseHandler = new DataBaseHandler();
     private String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
     private String user = "b0a1d19d87f384";
     private String password = "6d11c74b";
     private Connection conn = null;
 
-    private final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
+    public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
     private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
@@ -33,55 +34,8 @@ public class WalkLiveService {
      */
 
     public WalkLiveService() throws UserServiceException {
-        /**
-         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
-         String createTableSql = "create table testAutoDeriveColumnNames (id_val integer primary key, another_very_exciting_value varchar(20))";
-         */
-        Statement stm = null;
-        ResultSet res = null;
-
-        String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-        String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
-        String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
-        String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-
-
-        //String setup2 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT)";
-        //stm.executeUpdate(setup);
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            stm = conn.createStatement();
-            stm.executeUpdate(setup);
-            stm.executeUpdate(setup2);
-            stm.executeUpdate(sqlNew4);
-            stm.executeUpdate(counterInit);
-            stm.executeUpdate("CREATE TABLE IF NOT EXISTS ongoingTrips(tripId TEXT, username TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
-            stm.executeUpdate("CREATE TABLE IF NOT EXISTS doneTrips(tripId TEXT, userName TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)");
-
-
-        } catch (SQLException ex) {
-            logger.error("Failed to create schema at startup", ex);
-            throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-
-
+        new DataBaseHandler().initializeDataBase();
+//        this.dataBaseHandler.initializeDataBase();
     }
 
     /*
@@ -94,87 +48,7 @@ public class WalkLiveService {
     * logging in, so may have to create a user simple only with the email information
     */
     public User createNew(String body) throws UserServiceException, ParseException, SQLException {
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String username = object.get("username").toString();
-        String pw = object.get("password").toString();
-        String contact = object.get("contact").toString();
-        //debugging
-        System.out.println("USERNAME:" + username);
-
-        //FIRST, check to see if username already exists in databse
-        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            while (res.next()) { //if there is something in the response, means that username is already taken (401)
-                logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
-                throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
-            }
-
-        } catch (SQLException ex) {
-            logger.error("WalkLiveService.createNew: Failed to create new entry - query error", ex);
-            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry - query error", ex);
-        }  finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-
-        //SECOND, if username did not exist, then place the information into the database
-        sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
-                "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, pw);
-            ps.setString(3, contact);
-            ps.executeUpdate();
-
-            return new User(username, pw, contact, null, null, null, null);
-
-        } catch (SQLException ex) {
-            logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
-            throw new UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
-        }  finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+        return new UserManager().createNew(body);
     }
 
     /*
