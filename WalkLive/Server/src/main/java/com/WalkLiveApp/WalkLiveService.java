@@ -66,63 +66,7 @@ public class WalkLiveService {
     }
 
     public User getUser(String username) throws UserServiceException, ParseException, java.text.ParseException {
-        ResultSet res = null;
-        PreparedStatement ps = null;
-
-        //find user by username
-        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            String pw;
-            String contact;
-            String nickname;
-            Date createdOn;
-            String emergencyId;
-            String emergencyNumber;
-
-            if (res.next()) {
-                pw = res.getString(2);
-                contact = res.getString(3);
-                nickname = res.getString(4);
-                createdOn = df.parse(res.getString(5));
-                emergencyId = res.getString(6);
-                emergencyNumber = res.getString(7);
-
-                return new User(username, pw, contact, nickname, createdOn, emergencyId, emergencyNumber);
-            } else {
-                logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
-                throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
-            }
-        } catch (SQLException ex) {
-            logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-
-            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
-        } catch (java.text.ParseException ex) {
-            logger.error(String.format("WalkLiveService.find: Failed to properly parse date"), ex);
-            throw new UserServiceException(String.format("WalkLiveService.getUser: Failed to properly parse date"), ex);
-        } finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+       return new UserManager().getUser(username);
     }
 
     /**
