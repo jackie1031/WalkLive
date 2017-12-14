@@ -1,5 +1,6 @@
 package com.WalkLiveApp;
 
+import com.sun.corba.se.impl.ior.FreezableList;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,54 +93,7 @@ public class WalkLiveService {
 
     //get my sent friend requests
     public List<Relationship> getOutgoingFriendRequests(String sender) throws RelationshipServiceException {
-        //checks needed
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
-        String sql = "SELECT * FROM friends WHERE sender = ?";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, sender);
-            res = ps.executeQuery();
-
-            int request_id;
-            String recipient;
-            int relationship;
-            Date sent_on;
-
-            ArrayList<Relationship> rs = new ArrayList<>();
-            while (res.next()) {
-                request_id = res.getInt(1);
-                recipient = res.getString(3);
-                relationship = res.getInt(4);
-                sent_on = (Date) res.getObject(5);
-
-                Relationship r = new Relationship(request_id, sender, recipient, relationship, sent_on);
-                rs.add(r);
-            }
-            return rs;
-        } catch (SQLException ex) {
-            logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-            throw new RelationshipServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+        return new FriendsManager().getOutgoingFriendRequests(sender);
     }
 
     //get my received friend requests
