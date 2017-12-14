@@ -70,6 +70,47 @@ public class FriendsManager {
         }
     }
 
+    public List<Relationship> getIncomingFriendRequests(String recipient) throws WalkLiveService.RelationshipServiceException {
+        //checks needed
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        Connection conn = null;
+
+        String sql = "SELECT * FROM friends WHERE recipient = ? AND relationship = 0 ";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, recipient);
+            res = ps.executeQuery();
+
+            ArrayList<Relationship> rs = new ArrayList<>();
+            while (res.next()) {
+                rs.add(new Relationship(res.getInt(1), res.getString(2), recipient, res.getInt(4), (Date) res.getObject(5)));
+            }
+            return rs;
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 
     private int getNewRequestId() throws WalkLiveService.RelationshipServiceException {
         ResultSet res = null;

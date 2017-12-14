@@ -15,11 +15,11 @@
       <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-186">
-              <caret line="102" column="29" lean-forward="false" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
+            <state relative-caret-position="192">
+              <caret line="103" column="50" lean-forward="true" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1513275248000" expanded="true" signature="2599:2605" ph="{...}" />
+                <marker date="1513277651000" expanded="true" signature="2599:2605" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -28,8 +28,8 @@
       <file leaf-file-name="FriendsManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="52" column="95" lean-forward="false" selection-start-line="52" selection-start-column="84" selection-end-line="52" selection-end-column="95" />
+            <state relative-caret-position="548">
+              <caret line="111" column="5" lean-forward="false" selection-start-line="111" selection-start-column="5" selection-end-line="111" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,10 +40,10 @@
       <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="309" column="9" lean-forward="true" selection-start-line="309" selection-start-column="9" selection-end-line="309" selection-end-column="9" />
+            <state relative-caret-position="67">
+              <caret line="354" column="45" lean-forward="true" selection-start-line="354" selection-start-column="45" selection-end-line="354" selection-end-column="45" />
               <folding>
-                <marker date="1513275325000" expanded="true" signature="8770:8775" ph="{...}" />
+                <marker date="1513276579000" expanded="true" signature="8770:8775" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -72,7 +72,7 @@
       <file leaf-file-name="UserManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-839">
+            <state relative-caret-position="-448">
               <caret line="170" column="8" lean-forward="false" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -94,8 +94,8 @@
       <file leaf-file-name="ConnectionHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ConnectionHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="5" column="46" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -138,8 +138,8 @@
       <find>emergency</find>
       <find>getUser</find>
       <find>friendreque</find>
-      <find>getNewRe</find>
       <find>getOutgoing</find>
+      <find>getNewRe</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -156,8 +156,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
       </list>
     </option>
   </component>
@@ -421,18 +421,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestServer - 2017.12.13 at 21h 32m 36s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.14 at 10h 58m 05s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.14 at 11h 04m 02s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestServer - 2017.12.14 at 11h 38m 15s.xml">
-      <configuration name="TestServer" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestServer - 2017.12.14 at 11h 43m 53s.xml">
       <configuration name="TestServer" configurationId="JUnit" />
     </history-entry>
@@ -449,6 +437,18 @@
       <configuration name="TestServer" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TestServer - 2017.12.14 at 13h 15m 42s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.14 at 13h 30m 18s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.14 at 13h 35m 45s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.14 at 13h 36m 27s.xml">
+      <configuration name="TestServer" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer - 2017.12.14 at 13h 54m 24s.xml">
       <configuration name="TestServer" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -550,7 +550,7 @@
         <state relative-caret-position="-162">
           <caret line="83" column="37" lean-forward="false" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
           <folding>
-            <marker date="1513275325000" expanded="true" signature="8770:8775" ph="{...}" />
+            <marker date="1513276579000" expanded="true" signature="8770:8775" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -561,7 +561,7 @@
           <caret line="279" column="29" lean-forward="false" selection-start-line="279" selection-start-column="29" selection-end-line="279" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1513275248000" expanded="true" signature="2599:2605" ph="{...}" />
+            <marker date="1513277651000" expanded="true" signature="2599:2605" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -622,7 +622,7 @@
         <state relative-caret-position="810">
           <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding>
-            <marker date="1513275325000" expanded="true" signature="8770:8775" ph="{...}" />
+            <marker date="1513276579000" expanded="true" signature="8770:8775" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -633,7 +633,7 @@
           <caret line="398" column="29" lean-forward="false" selection-start-line="398" selection-start-column="29" selection-end-line="398" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1513275248000" expanded="true" signature="2599:2605" ph="{...}" />
+            <marker date="1513277651000" expanded="true" signature="2599:2605" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -703,7 +703,7 @@
         <state relative-caret-position="840">
           <caret line="83" column="37" lean-forward="false" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
           <folding>
-            <marker date="1513275325000" expanded="true" signature="8770:8775" ph="{...}" />
+            <marker date="1513276579000" expanded="true" signature="8770:8775" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -783,7 +783,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1513275248000" expanded="true" signature="2599:2605" ph="{...}" />
+            <marker date="1513277651000" expanded="true" signature="2599:2605" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -793,7 +793,7 @@
         <state relative-caret-position="15915">
           <caret line="1061" column="25" lean-forward="false" selection-start-line="1061" selection-start-column="25" selection-end-line="1061" selection-end-column="25" />
           <folding>
-            <marker date="1513275325000" expanded="true" signature="8770:8775" ph="{...}" />
+            <marker date="1513276579000" expanded="true" signature="8770:8775" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -885,14 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ConnectionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/Coordinate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -928,7 +920,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-839">
+        <state relative-caret-position="-448">
           <caret line="170" column="8" lean-forward="false" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -936,33 +928,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-186">
-          <caret line="102" column="29" lean-forward="false" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
+        <state relative-caret-position="548">
+          <caret line="111" column="5" lean-forward="false" selection-start-line="111" selection-start-column="5" selection-end-line="111" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1513275248000" expanded="true" signature="2599:2605" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ConnectionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="52" column="95" lean-forward="false" selection-start-line="52" selection-start-column="84" selection-end-line="52" selection-end-column="95" />
+        <state relative-caret-position="75">
+          <caret line="5" column="46" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="103" column="50" lean-forward="true" selection-start-line="103" selection-start-column="50" selection-end-line="103" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1513277651000" expanded="true" signature="2599:2605" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="309" column="9" lean-forward="true" selection-start-line="309" selection-start-column="9" selection-end-line="309" selection-end-column="9" />
+        <state relative-caret-position="67">
+          <caret line="354" column="45" lean-forward="true" selection-start-line="354" selection-start-column="45" selection-end-line="354" selection-end-column="45" />
           <folding>
-            <marker date="1513275325000" expanded="true" signature="8770:8775" ph="{...}" />
+            <marker date="1513276579000" expanded="true" signature="8770:8775" ph="{...}" />
           </folding>
         </state>
       </provider>

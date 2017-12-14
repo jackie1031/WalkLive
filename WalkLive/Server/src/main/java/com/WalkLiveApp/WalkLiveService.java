@@ -98,54 +98,7 @@ public class WalkLiveService {
 
     //get my received friend requests
     public List<Relationship> getIncomingFriendRequests(String recipient) throws RelationshipServiceException {
-        //checks needed
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
-        String sql = "SELECT * FROM friends WHERE recipient = ? AND relationship = 0 ";
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, recipient);
-            res = ps.executeQuery();
-
-            int request_id;
-            String sender;
-            Date sent_on;
-            int relationship;
-
-            ArrayList<Relationship> rs = new ArrayList<>();
-            while (res.next()) {
-                request_id = res.getInt(1);
-                sender = res.getString(2);
-                relationship = res.getInt(4);
-                sent_on = (Date) res.getObject(5);
-
-                Relationship r = new Relationship(request_id, sender, recipient, relationship, sent_on);
-                rs.add(r);
-            }
-            return rs;
-        } catch (SQLException ex) {
-            logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-            throw new RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
+        return new FriendsManager().getIncomingFriendRequests(recipient);
     }
 
     //     //respond to select sent friend request
@@ -328,90 +281,6 @@ public class WalkLiveService {
             }
         }
     }
-
-//    public List<User> getFriendList(String username) throws UserServiceException, RelationshipServiceException, ParseException, java.text.ParseException {
-//        PreparedStatement ps = null;
-//        ResultSet res = null;
-//
-//        String sql = "SELECT * from users WHERE username = ?";
-//        String sql2 = "SELECT recipient FROM friends WHERE sender = ? AND relationship = 1";
-//
-//
-//        // A send to B, B can c A, A can't c B
-//        String sql3 = "SELECT sender FROM friends WHERE recipient = ? AND relationship = 1";
-//
-//        try {
-//            conn = DriverManager.getConnection(url, user, password);
-//
-//            //check if username exists
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, username);
-//            res = ps.executeQuery();
-//
-//            if (!res.next()) {
-//                logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-//                throw new UserServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find responder username: %s", username));
-//            }
-//
-//            String sender;
-//            String recipient;
-//
-//            //query for accepted requests where the user was the sender
-//
-//            ps = conn.prepareStatement(sql2);
-//            ps.setString(1, username);
-//            res = ps.executeQuery();
-//
-//            ArrayList<User> friends = new ArrayList<>();
-//            while (res.next()) {
-//                //recipient = res.getString(1);
-//                recipient = res.getString("recipient");
-//
-//                User u = getUser(recipient);
-//                String contact = u.getContact();
-//
-//                User r = new User(recipient, null, contact, null, null, null, null);
-//                friends.add(r);
-//            }
-//
-//            //query for responded requests where the user was the recipient
-//            ps = conn.prepareStatement(sql3);
-//            ps.setString(1, username);
-//            res = ps.executeQuery();
-//
-//            while (res.next()) {
-//                //sender = res.getString(1);
-//                sender = res.getString("sender");
-//
-//                User u = getUser(sender);
-//                String contact = u.getContact();
-//
-//                User r = new User(sender, null, contact, null, null, null, null);
-//                friends.add(r);
-//            }
-//
-//            return friends;
-//        } catch (SQLException ex) {
-//            logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
-//            throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
-//        } finally {
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (res != null) {
-//                try {
-//                    res.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//    }
 
 
     public List<User> getFriendList(String username) throws UserServiceException, RelationshipServiceException, ParseException, java.text.ParseException {
