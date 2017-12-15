@@ -67,6 +67,7 @@ class FriendTracker: NSObject {
     func setNewTrip(trip: TimePoint) {
         if (!self.annotations.isEmpty){
             self.removeTimePoint()
+            self.annotations = []
         }
         self.tripId = trip.tripId
         self.mapTimePoint(timePoint: trip)
