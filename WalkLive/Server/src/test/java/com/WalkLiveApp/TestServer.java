@@ -405,52 +405,8 @@ public class TestServer {
 //        }
 //    }
 //
-    @Test
-    public void testRespondToFriendRequest() throws Exception {
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063"),
-                new User("yangcao1", "121212", "1231231233")
-        };
-
-        //add to database
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-        //add a few elements
-        Relationship[] frs = new Relationship[] {
-                new Relationship("jeesookim", "michelle", null),
-                new Relationship("jeesookim", "yangcao1", null),
-        };
-
-        for (Relationship f : frs) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-
-        Relationship[] frs2 = new Relationship[] {
-                new Relationship("michelle", "jeesookim", null),
-                new Relationship("michelle", "yangcao1", null)
-        };
-
-        for (Relationship f : frs2) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-
-        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
-        assertEquals("Failed to accept friend request", 200, r.httpStatus);
-
-        //TODO check relationship code - should be updated to 1;
-        //TODO if a response has already been made, dont allow responses yet!!
-
-        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
-        assertEquals("Failed to reject friend request", 200, r2.httpStatus);
-    }
-//
 //    @Test
-//    public void testGetFriendList() throws Exception{
+//    public void testRespondToFriendRequest() throws Exception {
 //        User[] entries = new User[] {
 //                new User("jeesookim", "123456","4405339063"),
 //                new User("michelle", "0123", "4405339063"),
@@ -486,48 +442,92 @@ public class TestServer {
 //        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
 //        assertEquals("Failed to accept friend request", 200, r.httpStatus);
 //
+//        //TODO check relationship code - should be updated to 1;
+//        //TODO if a response has already been made, dont allow responses yet!!
 //
-//        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
-//        List<User> results = getUsers(rList);
-//
-//
-//        Response rList2 = request("GET", "/WalkLive/api/users/michelle/friends", null);
-//        List<User> results2 = getUsers(rList2);
-//
-//
-//        User actual = results.get(0);
-//        User actual2 = results2.get(0);
-//        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
-//        assertEquals("Friend list does not return your friends", "yangcao1", actual2.getUsername());
+//        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
+//        assertEquals("Failed to reject friend request", 200, r2.httpStatus);
 //    }
+//
+    @Test
+    public void testGetFriendList() throws Exception{
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+        //add a few elements
+        Relationship[] frs = new Relationship[] {
+                new Relationship("jeesookim", "michelle", null),
+                new Relationship("jeesookim", "yangcao1", null),
+        };
+
+        for (Relationship f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Relationship[] frs2 = new Relationship[] {
+                new Relationship("michelle", "jeesookim", null),
+                new Relationship("michelle", "yangcao1", null)
+        };
+
+        for (Relationship f : frs2) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
+        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+
+
+        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
+        List<User> results = getUsers(rList);
+
+
+        Response rList2 = request("GET", "/WalkLive/api/users/michelle/friends", null);
+        List<User> results2 = getUsers(rList2);
+
+
+        User actual = results.get(0);
+        User actual2 = results2.get(0);
+        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
+        assertEquals("Friend list does not return your friends", "yangcao1", actual2.getUsername());
+    }
 
     /**
      * ================================================================
      * Emergency Contact PUT
      * ================================================================
      */
-
-    @Test
-    public void testUpdateEmergencyInfo() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        //add single element
-        User expected = new User("jeesoo1", "test-1", "4405339063");
-        Response r1 = request("POST", "/WalkLive/api/users", expected);
-        User expected2 = new User("hello", "test-1", "1231231233");
-        Response r2 = request("POST", "/WalkLive/api/users", expected2);
-        assertEquals("Failed to add new user", 201, r1.httpStatus);
-        assertEquals("Failed to add new user", 201, r2.httpStatus);
-
-
-        //update emergency contact info
-        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
-        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
-        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
-        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
-        assertEquals("Failed to get user", 200, r3.httpStatus);
-        assertEquals("Failed to get user", 200, r4.httpStatus);
-    }
+//
+//    @Test
+//    public void testUpdateEmergencyInfo() throws Exception {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//        //add single element
+//        User expected = new User("jeesoo1", "test-1", "4405339063");
+//        Response r1 = request("POST", "/WalkLive/api/users", expected);
+//        User expected2 = new User("hello", "test-1", "1231231233");
+//        Response r2 = request("POST", "/WalkLive/api/users", expected2);
+//        assertEquals("Failed to add new user", 201, r1.httpStatus);
+//        assertEquals("Failed to add new user", 201, r2.httpStatus);
+//
+//
+//        //update emergency contact info
+//        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
+//        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
+//        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
+//        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
+//        assertEquals("Failed to get user", 200, r3.httpStatus);
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
+//    }
 
     /**
      * ================================================================

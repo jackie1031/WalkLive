@@ -165,6 +165,56 @@ public class FriendsManager {
         }
     }
 
+    public List<User> getFriendList(String username) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, ParseException, java.text.ParseException {
+        ArrayList<User> friends = new ArrayList<>();
+        this.addFriendsToList(username, friends, "recipient");
+        this.addFriendsToList(username, friends, "sender");
+        return friends;
+    }
+
+    private void addFriendsToList(String username, ArrayList<User> friends, String tableType) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, ParseException, java.text.ParseException{
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        Connection conn = null;
+
+        String sql = "SELECT " + tableType + " FROM friends WHERE " + this.getCounter(tableType) + " = ? AND relationship = 1";
+
+        UserManager userManager = new UserManager();
+
+        try{
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            while (res.next()) {
+                String recipient = res.getString(tableType);
+                User r = new User(recipient, null, userManager.getUser(recipient).getContact(), null, null, null, null);
+                friends.add(r);
+            }
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+    }
+
 
     private int getNewRequestId() throws WalkLiveService.RelationshipServiceException {
         ResultSet res = null;
@@ -272,6 +322,13 @@ public class FriendsManager {
                 } catch (SQLException e) { /* ignored */}
             }
         }
+    }
+
+    private String getCounter(String tableType){
+        if (tableType.equals("sender")) {
+            return "recipient";
+        }
+            return "sender";
     }
 
 }
