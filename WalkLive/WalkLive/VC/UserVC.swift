@@ -32,11 +32,11 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         super.viewDidLoad()
         friendTripTable.delegate = self
         friendTripTable.dataSource = self
-        self.updateFriendTrips()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.updateFriendTrips()
         self.setUserVCInfo()
         self.initializeUpdates()
     }

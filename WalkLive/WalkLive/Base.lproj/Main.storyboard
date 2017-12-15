@@ -1394,6 +1394,7 @@
                                             <segment title="No trip"/>
                                             <segment title="Ongoing trip"/>
                                         </segments>
+                                        <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="onSegmentedControl:" destination="MJu-oG-pf4" eventType="valueChanged" id="OEr-SV-ZL2"/>
                                         </connections>
@@ -1405,6 +1406,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9h-4w-xRw">
                                                 <rect key="frame" x="35" y="8" width="61" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Add Text"/>
                                                 <connections>
                                                     <action selector="onAddTextButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="G6U-EQ-6P0"/>
@@ -1413,6 +1415,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQY-Y6-452">
                                                 <rect key="frame" x="135" y="8" width="111" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Delete Last Text"/>
                                                 <connections>
                                                     <action selector="onDeleteLastTextButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="erG-pK-TOe"/>
@@ -1421,6 +1424,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jk-SG-2Bv">
                                                 <rect key="frame" x="285" y="8" width="34" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Save"/>
                                                 <connections>
                                                     <action selector="onSaveButton:" destination="MJu-oG-pf4" eventType="touchUpInside" id="cba-7d-zMJ"/>
