@@ -1022,33 +1022,47 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="198.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Trip Text Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-zk-nbt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Trip Text Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-zk-nbt">
                                                     <rect key="frame" x="16" y="46" width="343" height="142"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="343" id="Fhs-Nx-5Uw"/>
+                                                        <constraint firstAttribute="height" constant="142" id="u2J-p1-bTT"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bu7-Qc-BPK">
-                                                    <rect key="frame" x="127" y="11" width="121" height="28"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bu7-Qc-BPK">
+                                                    <rect key="frame" x="127" y="11" width="121" height="29"/>
                                                     <segments>
                                                         <segment title="First"/>
                                                         <segment title="Second"/>
                                                     </segments>
+                                                    <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="onSegmentedControl:" destination="mhm-es-34Q" eventType="valueChanged" id="Sbw-22-NZ4"/>
                                                     </connections>
                                                 </segmentedControl>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-WA-53k">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-WA-53k">
                                                     <rect key="frame" x="329" y="158" width="30" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Edit"/>
                                                     <connections>
                                                         <action selector="onEditButton:" destination="mhm-es-34Q" eventType="touchUpInside" id="0SG-e3-zbc"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vxd-WA-53k" firstAttribute="trailing" secondItem="xbm-UJ-BRn" secondAttribute="trailingMargin" id="FoC-Tg-9Uf"/>
+                                                <constraint firstItem="Sgf-zk-nbt" firstAttribute="top" secondItem="Bu7-Qc-BPK" secondAttribute="bottom" constant="7" id="VOZ-aC-gxS"/>
+                                                <constraint firstItem="Sgf-zk-nbt" firstAttribute="trailing" secondItem="xbm-UJ-BRn" secondAttribute="trailingMargin" id="XD7-fO-PJp"/>
+                                                <constraint firstItem="vxd-WA-53k" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xbm-UJ-BRn" secondAttribute="leadingMargin" id="duQ-yX-Mrp"/>
+                                                <constraint firstItem="Sgf-zk-nbt" firstAttribute="leading" secondItem="xbm-UJ-BRn" secondAttribute="leadingMargin" id="khR-ru-fKR"/>
+                                                <constraint firstItem="Bu7-Qc-BPK" firstAttribute="top" secondItem="xbm-UJ-BRn" secondAttribute="topMargin" id="pHL-GB-1a4"/>
+                                                <constraint firstItem="vxd-WA-53k" firstAttribute="bottom" secondItem="xbm-UJ-BRn" secondAttribute="bottomMargin" id="qee-lH-YaG"/>
+                                                <constraint firstItem="Sgf-zk-nbt" firstAttribute="bottom" secondItem="xbm-UJ-BRn" secondAttribute="bottomMargin" id="vjZ-c0-r3I"/>
+                                                <constraint firstItem="Bu7-Qc-BPK" firstAttribute="centerX" secondItem="xbm-UJ-BRn" secondAttribute="centerX" id="zJz-aq-5NQ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
