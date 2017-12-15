@@ -111,6 +111,60 @@ public class FriendsManager {
         }
     }
 
+    public void respondToFriendRequest(String responder, String requestId, String response) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException {
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        Connection conn = null;
+        String sql2 = "SELECT * FROM friends WHERE _id = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1, requestId);
+            res = ps.executeQuery();
+
+            if (!res.next()) {
+                WalkLiveService.logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
+                throw new WalkLiveService.RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
+            }
+
+            String recipient = res.getString(3);
+            if (!responder.equals(recipient)) {
+                WalkLiveService.logger.error(String.format("WalkLiveService.respondToFriendRequest: User %s is unauthorized to respond to request %s", responder, requestId));
+                throw new WalkLiveService.RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest:  User %s is unauthorized to respond to request %s", responder, requestId));
+            }
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.getIncomingFriendRequests: Failed to fetch friend requests", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        //now that all checks are done, update the actual relationship
+        if (response.equals("accept")) {
+            updateRelationship(requestId, 1);
+        } else if (response.equals("reject")) {
+            updateRelationship(requestId, 2);
+        } else {
+            //invalid response message. hoping that we can assume that we always get the correct response types
+        }
+    }
+
 
     private int getNewRequestId() throws WalkLiveService.RelationshipServiceException {
         ResultSet res = null;
@@ -187,4 +241,37 @@ public class FriendsManager {
         }
 
     }
+
+    private void updateRelationship(String requestId, int response) throws WalkLiveService.RelationshipServiceException {
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+
+            //check if username exists
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, response);
+            ps.setString(2, requestId);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 }
