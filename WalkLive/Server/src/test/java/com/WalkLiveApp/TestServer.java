@@ -1123,11 +1123,6 @@ public class TestServer {
                     stm.close();
                 } catch (SQLException e) { /* ignored */}
             }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
             if (conn != null) {
                 try {
                     conn.close();
