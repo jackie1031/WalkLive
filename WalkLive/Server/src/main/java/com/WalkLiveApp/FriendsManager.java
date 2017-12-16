@@ -301,7 +301,6 @@ public class FriendsManager {
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-
             //check if username exists
             ps = conn.prepareStatement(sql);
             ps.setInt(1, response);
