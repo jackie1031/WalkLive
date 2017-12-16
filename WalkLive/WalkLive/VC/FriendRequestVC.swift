@@ -117,12 +117,13 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if (segmentControl.selectedSegmentIndex == RECEIVED) {
             let friendRequest = self.receivedFriendRequests[indexPath.row]
             cell.usernameLabel.text = friendRequest.sender
-            
+            cell.dateLabel.text = friendRequest.sent_on
             cell.acceptButton.isHidden = false
             cell.declineButton.isHidden = false
         }
         else if (segmentControl.selectedSegmentIndex == SENT){
             let friendRequest = self.sentFriendRequests[indexPath.row]
+            cell.dateLabel.text = friendRequest.sent_on
             cell.usernameLabel.text = friendRequest.recipient
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
@@ -130,6 +131,7 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         else {
             let friend = self.friends[indexPath.row]
             cell.usernameLabel.text = friend.username
+            cell.dateLabel.text = friend.contact
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }

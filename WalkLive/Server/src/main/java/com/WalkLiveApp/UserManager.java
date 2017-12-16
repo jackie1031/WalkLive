@@ -1,5 +1,7 @@
 package com.WalkLiveApp;
 
+import com.google.gson.Gson;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,6 +18,7 @@ public class UserManager {
         String username = object.get("username").toString();
         String pw = object.get("password").toString();
         String contact = object.get("contact").toString();
+
 
         //debugging
         System.out.println("USERNAME:" + username);

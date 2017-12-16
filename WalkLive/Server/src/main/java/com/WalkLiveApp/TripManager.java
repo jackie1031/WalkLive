@@ -1,8 +1,6 @@
 package com.WalkLiveApp;
 
 import com.google.gson.Gson;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.sql.*;
