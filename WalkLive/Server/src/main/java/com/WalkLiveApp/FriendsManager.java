@@ -259,6 +259,7 @@ public class FriendsManager {
         }
     }
 
+
     private void createNewFriendRequest(String sender, String recipient, int request_id) throws WalkLiveService.RelationshipServiceException{
         PreparedStatement ps = null;
         Connection conn = null;
