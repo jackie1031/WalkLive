@@ -204,7 +204,7 @@ public class UserManager {
                     conn.close();
                 } catch (SQLException e) { /* ignored */}
             }
-        }s
+        }
     }
 
 
