@@ -55,8 +55,10 @@ class LoginError: Error {
     }
     func returnReason() -> String {
         switch status {
+//        case 401:
+//            return "InvalidUserId: the username may be illegal or the username does not exist!"
         case 401:
-            return "InvalidUserId: the username may be illegal or the username does not exist!"
+            return "The username or password is incorrect!"
         case 403:
             return "InvalidPassword: the password may be illegal or inccorect"
         default:
@@ -98,6 +100,23 @@ class RouteError: Error {
             default:
                 return "Unknown error" + String(status)
             }
+    }
+}
+
+class TripError: Error{
+    var status: Int! = 0
+    init(status: Int) {
+        self.status = status
+    }
+    func returnReason() -> String {
+        switch status {
+        case 2:
+            return "NonExistentTrip: the trip has already ended."
+        case 402:
+            return "NonExsistentTripId: cannot find this trip."
+        default:
+            return "Unknown error" + String(status)
+        }
     }
 }
 

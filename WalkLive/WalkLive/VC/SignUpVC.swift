@@ -56,7 +56,7 @@ class SignUpVC: UIViewController {
     }
     
     func isValidSignUp() -> Bool {
-        if (self.userNameTextField.text == "") {
+        if (!validUser()) {
             let errorView = warnigSignFactory.makeSignUpValidityWarningSign(status: 0)
             errorView.center = self.view.center
             self.view.addSubview(errorView)
@@ -87,6 +87,17 @@ class SignUpVC: UIViewController {
         let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
         return phoneTest.evaluate(with: self.phoneNumberTextField.text)
+    }
+    
+    func validUser() -> Bool {
+        if (self.userNameTextField.text == "") {
+            return false
+        }
+        let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+        if self.userNameTextField.text!.rangeOfCharacter(from: characterset.inverted) != nil {
+            return false
+        }
+        return true
     }
     
     private func setKeyboard(){

@@ -306,17 +306,17 @@ public class ServerController {
 //            Success Response:	Code 200
 //            Content: {}
 
-//            put(API_CONTEXT+"/trips/:tripId/update", "application/json", (request, response) -> {
-//                try {
-//                    response.status(200);
-//                    walkLiveService.updateTrip(request.params(":tripId"),request.body());
-//                } // InvalidDestination     Code 409
-//                catch (WalkLiveService.InvalidTargetID e) {
-//                    response.status(402);
-//                }
-//
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
+            put(API_CONTEXT+"/trips/:tripId/update", "application/json", (request, response) -> {
+                try {
+                    response.status(200);
+                    walkLiveService.updateTrip(request.params(":tripId"),request.body());
+                } // InvalidDestination     Code 409
+                catch (WalkLiveService.InvalidTargetID e) {
+                    response.status(402);
+                }
+
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
 
 // //            shareTrip:

@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class FirstViewVC: UIViewController {
+
+class FirstViewVC: UIViewController, CLLocationManagerDelegate {
     
     private var userData : UserLogin?
-    
+    var roadRequester = RoadRequester()
+    var locationManager =  CLLocationManager()  
+  
     private var userFilePath: String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -26,6 +31,7 @@ class FirstViewVC: UIViewController {
 //        } catch {
 //            print("No data found.")
 //        }
+        self.authorizeLocationUpdate()
         if (self.loadUserData()) {
             backEndClient.loginAttempt(success: { (userInfo) in
                 OperationQueue.main.addOperation {
@@ -38,6 +44,18 @@ class FirstViewVC: UIViewController {
                     self.view.addSubview(errorSign)
                 }
             }, userLogin: userData!)
+        }
+    }
+    
+    private func authorizeLocationUpdate() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            break
         }
     }
 

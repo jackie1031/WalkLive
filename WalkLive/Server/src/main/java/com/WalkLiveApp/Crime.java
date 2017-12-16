@@ -5,6 +5,31 @@ package com.WalkLiveApp;
 
 public class Crime {
     private int date, timeOfDay,linkID;
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public void setTimeOfDay(int timeOfDay) {
+        this.timeOfDay = timeOfDay;
+    }
+
+    public void setLinkID(int linkID) {
+        this.linkID = linkID;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
     private String address, type;
     private Coordinate coordinate;
 
@@ -24,6 +49,11 @@ public class Crime {
         this.type = "";
         this.coordinate = coordinate;
         this.linkID = 0;
+    }
+
+
+    public Crime() {
+
     }
 
     /**

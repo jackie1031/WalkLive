@@ -1,5 +1,80 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [6.0.2] - 2017-12-16
+### Added
+- FE:  add special symbol checks to prevent breaking the database @mshu1
+- FE:  fix emergency label bugs and CLLocation check bugs breaking the app @mshu1
+### Changed
+- BE:  fix get all trips function bugs and now the method with multiple trips can be decoded properly @mshu1
+### Tested
+- FE + BE:  tested all refactored functions @mshu1
+- FE + BE:  redeployed server and checked every available functions for both frotend and backend @mshu1
+
+## [6.0.2] - 2017-12-15
+### Added
+- BE:  add change password functions @mshu1
+- BE:  add TripManager class to handle trip related methods and add various private functions to decrease code size @mshu1
+- BE:  add Gson() related methods to effectively handle data classes @mshu1
+### Changed
+- FE:  fix friend tracking bugs and map annotation bugs(does not show titles) and colors on message board @mshu1
+- BE:  fix trip id generation inconsistency in tests @mshu1
+- BE:  fix get all trips function bugs and now the method with multiple trips can be decoded properly @mshu1
+- BE:  improve trip id generation functions @mshu1
+- BE:  refactor backend respond to friend request functions @mshu1
+- BE:  refactor backend get friend list functions @mshu1
+- BE:  refactor backend start trip, end trip, get all trips to relevant classes @mshu1
+### Tested
+- FE+BE:  tested all refactored functions @mshu1
+
+## [6.0.2] - 2017-12-14
+### Added
+- BE:  add change password functions @mshu1
+- BE:  add FriendManager class to handle methods and add various private functions to decrease code size@mshu1
+### Changed
+- BE:  refactor backend user retrivel functions @mshu1
+- BE:  refactor backend update emergency contact functions @mshu1
+- BE:  refactor backend create friend request, get incoming friend request, get outgoing friend request to relevant classes @mshu1
+### Tested
+- FE+BE:  tested all refactored functions @mshu1
+
+## [6.0.1] - 2017-12-13
+### Added
+- FE:  add timer for auto updating friends' information User page @mshu1
+- FE:  add timer and implementation for tracking friend's trips(update table) on tracker page @mshu1
+- FE:  add auto updates on friend tracker page -> set friend to be the auto-update target(single trip) @mshu1
+- FE:  add contact(text + phone) functionalities on User page, friend tracker page. @mshu1
+- BE:  add DataBaseHandler, Connection Handler, UserManager to handle differemt methods and add various private functions to decrease code size @mshu1
+### Changed
+- BE:  refactor backend database set up functions @mshu1
+- BE:  refactor backend sign up(create user) functions to relevant classes @mshu1
+### Tested
+- FE+BE:  tested all refactored functions @mshu1
+
+## [6.0.1] - 2017-12-12
+### Added
+- FE:  add connection and functionality to backend for getting, responding friend request @mshu1
+- FE:  add connection and functionality to backend for start trip, end trip @mshu1
+- BE:  add getAlltrips backend implementation and test by @jackie
+### Changed
+- FE:  fixed various buttons implementations by @mshu1
+- FE:  fixed friend name showing bug, wrong message bug by @mshu1
+- FE:  fixed auto-message preview by @Yang
+- BE:  fix friend request bug by @jackie and @mshu1
+- BE:  fix get incoming friend request database by @jackie and @mshu1
+- BE:  fix get friend lists'bug by @jackie and @mshu1
+### Test
+- FE + BE: tested accept, reject friend, get friend request code for both front end and back end by @mshu1 and @jackie
+- FE + BE: tested start trip, get trip, update trip for both front end and back end by @mshu1 and @jackie
+
+
+## [5.3.3] - 2017-12-11
+### Added
+- FE:  add warnings signs when route is not found and other success, failure blocks by @mshu1
+- FE:  add friend requests front end implementations by @mshu1
+- FE:  add settings save and setting friends as primary contact by @mshu1
+### Changed
+- BE:  fixed clearDB command bugs by @jeesoo
+
 ## [5.3.2] - 2017-12-10
 ### Added
 - FE:  add start trip back end call and its related controllers by @mshu1
@@ -122,7 +197,7 @@ All notable changes to this project will be documented in this file.
 - FE:  add timer to keep track of the current trip; implemented cancel trip by @mshu1
 - FE:  add calling the police button to trip panel and tested by @mshu1
 - BE： pass all tests on travis by @jackie
-- BE:  deployed on Heroku
+- BE:  deployed on Heroku by @jackie
 
 ## [4.0.1] - 2017-11-19
 ### Added

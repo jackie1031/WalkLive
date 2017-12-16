@@ -16,9 +16,10 @@ class TimeManager: NSObject {
     private var usedTimeInterval = 0
     private var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
-    
-    init(timeInterval: TimeInterval) {
+    var tripId: Int?
+    init(timeInterval: TimeInterval, roadRequester: RoadRequester) {
         self.timeInterval = timeInterval
+        self.roadRequester = roadRequester
     }
     
     func convertTimeIntervalToMin(timeInterval: TimeInterval) -> Int{
@@ -28,11 +29,24 @@ class TimeManager: NSObject {
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
+        
+        if (self.roadRequester != nil) {
+        backEndClient.startTrip(success: { (currentTimePoint) in
+            self.tripId = currentTimePoint.tripId
+        }, failure: { (error) in
+            print("failure")
+        }, timePoint: self.buildTimePoint()!)
+        }
     }
     
     @objc func updateTimeLabel(){
         self.usedTimeInterval += 1
         self.updatePanel()
+        backEndClient.updateTrip(success: {
+            print("updated!")
+        }, failure: { (error) in
+            print("update error")
+        }, timePoint: self.buildTimePoint()!)
     }
     
     func endTimer() {
@@ -65,17 +79,20 @@ class TimeManager: NSObject {
         let destinationAnnotation = self.roadRequester?.destinationAnnotation
         let currentAnnotation = self.roadRequester?.getcurrentLocationInAnnotation()
         let timePoint = TimePoint()
-        
+        timePoint.username = currentUserInfo.username
         timePoint.curLat = Double((currentAnnotation?.coordinate.latitude)!)
         timePoint.curLong = Double((currentAnnotation?.coordinate.longitude)!)
         timePoint.startLat = Double((sourceAnnotation?.coordinate.latitude)!)
         timePoint.startLong = Double((sourceAnnotation?.coordinate.longitude)!)
         timePoint.endLat = Double((destinationAnnotation?.coordinate.latitude)!)
         timePoint.endLong = Double((destinationAnnotation?.coordinate.longitude)!)
-        
         timePoint.destination = (destinationAnnotation?.title)!
         timePoint.startTime = getTodayString()
-        
+        timePoint.emergencyNum = currentUserInfo.contact
+        timePoint.timeSpent = self.buildMessageOnCurrentTimer()
+        if (self.tripId != nil) {
+            timePoint.tripId = self.tripId
+        }
         return timePoint
     }
     

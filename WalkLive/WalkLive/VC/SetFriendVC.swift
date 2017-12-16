@@ -73,9 +73,10 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
         let emergencyContact = EmergencyContact(emergency_id: self.currentFriendNameLabel.text!, emergency_number: self.currentEmergencyNumberLabel.text!)
         backEndClient.updateEmergencyContact(success: { (updatedEmergencyContact) in
-            currentUserInfo.emergency_id = self.currentFriendNameLabel.text!
-            currentUserInfo.emergency_number = self.currentEmergencyNumberLabel.text!
+
             OperationQueue.main.addOperation {
+                currentUserInfo.emergency_id = self.currentFriendNameLabel.text!
+                currentUserInfo.emergency_number = self.currentEmergencyNumberLabel.text!
                 let successView = warnigSignFactory.makeSaveSettingsSuccessWarningSign()
                 successView.center = self.view.center
                 self.view.addSubview(successView)

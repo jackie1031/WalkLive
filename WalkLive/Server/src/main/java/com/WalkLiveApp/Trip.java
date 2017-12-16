@@ -65,12 +65,10 @@ public class Trip {
 
     }
 
-    // still needs timepoint ID?
-
-
     public int getTripId() {
         return tripId;
     }
+    public void setTripId(int tripId){ this.tripId = tripId;}
 
 
     public String getShareTo() {
@@ -189,56 +187,5 @@ public class Trip {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-
-
-
-
-
-//    // test whether is in danger zone
-//    public List<TimePoint> getTimepoint (String trip,String user){
-//        TimePoint now = new TimePoint(timePointId,startTime, endTime, currCoordinate, dangerLevel);
-//        complete = false;
-//        while(!complete){
-//            timePointId = 0;
-//            String timeNow = startTime + 5;
-//            ////////
-//            TimePoint current = new TimePoint(timePointId, timeNow, currCoordinate, dangerLevel);
-//            // parameters for TimePoints int TimePointID, String time, double latiture, double longiture;
-//            //add timepoints
-//            allTimePoints.add(current);
-//            timePointId++;
-//            timeNow = startTime;
-//
-////            if() {
-////                complete = true;
-////            }
-//        }
-//
-//        return allTimePoints;
-//
-//    }
-//    public TimePoint getLastTimepoint() {
-//
-//        TimePoint last = allTimePoints.get(allTimePoints.size() - 1);
-//        return last;
-//    }
-
-
-
-//    public List<TimePoint> getAllTimePoints() {
-//        return allTimePoints;
-//    }
-//
-//    public void setAllTimePoints(List<TimePoint> allTimePoints) {
-//        this.allTimePoints = allTimePoints;
-//    }
-//
-//    private List<TimePoint> allTimePoints = new ArrayList<TimePoint>();
-
-
-
-    //content:  `{ tripId: [int], userName:[string], dangerLevel: [int], startTime: [string], endTime: [string], destination: [string], coordinateLongtitude:[double],coordniteLatiture complete: [boolean] }`
-
-
 
 }

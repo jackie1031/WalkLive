@@ -38,13 +38,16 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         print(currentUserInfo)
-        self.initializeView()
+        self.authorizeLocationUpdate()
+            self.initializeView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
     }
     
     /// Private functiosn for general logistics
     private func initializeView() {
-        self.emergencyContactLabel.text = stringBuilder.emerStringBuilder()
-        self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
         self.setKeyboard()
@@ -181,7 +184,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             controller.body = buildMessage(location: roadRequester.getSourceLocation())
             
             //FTOB needed here.
-            controller.recipients = ["123-456-789"]
+            controller.recipients = [stringBuilder.emerStringBuilder()]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         }
@@ -212,7 +215,6 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         if (self.startTripDestinationTextLabel.text == "") {
             return
         }
-        print(startTripDestinationTextLabel.text!)
         roadRequester.getSearchResults(success: { (mapItems) in
             self.mapItems = mapItems
             self.performSegue(withIdentifier: "routeChoiceSegue", sender: nil)
@@ -253,6 +255,9 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     
     @IBAction func onLogoutButton(_ sender: Any) {
+        if (self.timeManager != nil) {
+            self.cancelTrip()
+        }
         self.dismiss(animated: true, completion: nil)
         currentUserInfo = nil
         self.clearUserData()
@@ -264,19 +269,14 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Map"
+        backItem.tintColor = primaryColor
+        navigationItem.backBarButtonItem = backItem
         if (segue.identifier == "routeChoiceSegue"){
             let vc = segue.destination as! SearchVC
             vc.routeDelegate = self
             vc.mapItems = self.mapItems
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
-        } else if (segue.identifier == "userSegue"){
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            backItem.tintColor = primaryColor
-            navigationItem.backBarButtonItem = backItem
         }
     }
 
@@ -318,7 +318,7 @@ extension MainMapVC: RouteDelegate{
     }
     
     private func createTimeManager(trip: Trip){
-        self.timeManager = TimeManager(timeInterval: trip.timeInterval!)
+        self.timeManager = TimeManager(timeInterval: trip.timeInterval!, roadRequester: self.roadRequester)
         self.timeManager.tripPanelDelegate = self
         self.timeManager.startTimer(timeInterval: 60)
     }
@@ -326,20 +326,33 @@ extension MainMapVC: RouteDelegate{
     
     func cancelTrip(){
         //FTOB needed here.
-        self.roadRequester.removeRoute()
-        self.timeManager.endTimer()
-        self.timeManager = nil
-        self.tripView = nil
+        backEndClient.endTrip(success: {
+            OperationQueue.main.addOperation {
+            self.roadRequester.removeRoute()
+            self.timeManager.endTimer()
+            self.timeManager = nil
+            self.tripView = nil
+            print("success")
+            }
+        }, failure: { (error) in
+            print("fail to end trip")
+        }, timePoint: timeManager.buildTimePoint()!)
     }
     
     func completeTrip(){
         //FTOB needed here.
-        self.roadRequester.removeRoute()
-        self.timeManager.endTimer()
-        self.timeManager = nil
-        self.tripView = nil
+        backEndClient.endTrip(success: {
+            OperationQueue.main.addOperation {
+            self.roadRequester.removeRoute()
+            self.timeManager.endTimer()
+            self.timeManager = nil
+            self.tripView = nil
+                print("success")
+            }
+        }, failure: { (error) in
+            print("fail to end trip")
+        }, timePoint: timeManager.buildTimePoint()!)
     }
-    
 }
 
 extension MainMapVC: TripPanelDelegate{

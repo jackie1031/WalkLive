@@ -142,4 +142,11 @@ class SettingsVC: UITableViewController {
     }
 
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Setting"
+        backItem.tintColor = primaryColor
+        navigationItem.backBarButtonItem = backItem
+    }
+
 }
