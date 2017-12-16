@@ -198,8 +198,11 @@ public class TripManager {
             ArrayList<Trip> trips = new ArrayList<>();
             while (res.next()) {
                 Trip temp =  new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
-                trips.add(temp);
-                logger.error("added here");
+                if (temp != null){
+                    trips.add(temp);
+                }
+                //trips.add(temp);
+                //logger.error("added here");
             }
 
             //System.out.println("SUCCESSFULLY UPDATED.");
