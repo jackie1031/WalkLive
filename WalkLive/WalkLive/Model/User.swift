@@ -8,21 +8,19 @@
 
 import Foundation
 
-class User: NSObject{
+class User: NSObject {
+    
     var username: String?
     var selfContact: String?
     var emergencyNumber: String?
     var password: String?
-    var email: String? //how to use facebook API to get their email in AppDelegate
-    //var friendList:
     var dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        password = dictionary["password"] as? String
-        username = dictionary["username"] as? String
-        selfContact = dictionary["phone_number"] as? String
-        //email
+        self.password = dictionary["password"] as? String
+        self.username = dictionary["username"] as? String
+        self.selfContact = dictionary["phone_number"] as? String
     }
     
     static var _currentUser: User?

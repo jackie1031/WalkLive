@@ -158,6 +158,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EIi-v7-wPw"/>
                     </view>
+                    <connections>
+                        <segue destination="VUm-xm-Aye" kind="presentation" identifier="directLoginSegue" id="2fx-La-ta1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvN-gm-Ot4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

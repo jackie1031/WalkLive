@@ -10,7 +10,17 @@ import Foundation
 
 class BackEndClient: NSObject {
     let APICONTEXT = "/WalkLive/api"
-    var user: User!
+    
+    private var userFilePath: String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        return (url!.appendingPathComponent("UserInfo").path)
+    }
+    
+    // save user data if it's a successful login/signup
+    private func saveUserData() {
+        NSKeyedArchiver.archiveRootObject(currentUserInfo, toFile: userFilePath)
+    }
     
     private func buildURLComponents() -> URLComponents{
         var urlComponents = URLComponents()
@@ -18,6 +28,8 @@ class BackEndClient: NSObject {
         urlComponents.host = "walklive.herokuapp.com"
         return urlComponents
     }
+    
+
 
     
     // A testing function to check deployment of Heroku, connecting backend to frontend,
@@ -77,7 +89,9 @@ class BackEndClient: NSObject {
             } else {
                 print(status)
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-            currentUserInfo = userContact
+                currentUserInfo = UserLogin(username: (userContact?.username)!, password: userLogin.password!, contact: (userContact?.contact)!)
+                
+                self.saveUserData()
                 success(userContact!)}
         }).resume()
     }
@@ -105,9 +119,11 @@ class BackEndClient: NSObject {
             if (status != 201) {
                 failure(SignUpError(status: status))
             } else {
-            let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-            currentUserInfo = userContact
-                success(userContact!)}
+                let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
+                currentUserInfo = userLogin
+                self.saveUserData()
+                success(userContact!)
+            }
         }).resume()
     }
 
