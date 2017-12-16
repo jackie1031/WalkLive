@@ -89,7 +89,8 @@ class BackEndClient: NSObject {
             } else {
                 print(status)
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-            currentUserInfo = userContact
+            currentUserInfo = userLogin
+                
                 self.saveUserData()
                 success(userContact!)}
         }).resume()
@@ -119,7 +120,7 @@ class BackEndClient: NSObject {
                 failure(SignUpError(status: status))
             } else {
                 let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-                currentUserInfo = userContact
+                currentUserInfo = userLogin
                 self.saveUserData()
                 success(userContact!)
             }

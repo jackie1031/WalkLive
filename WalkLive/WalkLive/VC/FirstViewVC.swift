@@ -20,17 +20,15 @@ class FirstViewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            try FileManager.default.removeItem(atPath: userFilePath)
-        } catch {
-            print("No data found.")
-        }
-        //Do any additional setup after loading the view, typically from a nib.
+        // clear data for testing
+//        do {
+//            try FileManager.default.removeItem(atPath: userFilePath)
+//        } catch {
+//            print("No data found.")
+//        }
         if (self.loadUserData()) {
             backEndClient.loginAttempt(success: { (userInfo) in
-                print("hiiiii")
                 OperationQueue.main.addOperation {
-                    //TODO
                     self.performSegue(withIdentifier: "directLoginSegue", sender: nil)
                 }
             }, failure: { (error) in
@@ -52,10 +50,7 @@ class FirstViewVC: UIViewController {
     private func loadUserData() -> Bool {
         if let data = NSKeyedUnarchiver.unarchiveObject(withFile: userFilePath) as? UserLogin {
             print("local data found:")
-            print(data.username)
-            print(data.password)
             self.userData = data
-            //self.userData = UserLogin(username: data.username!, password: data.password!)
             return true
         } else {
             return false
