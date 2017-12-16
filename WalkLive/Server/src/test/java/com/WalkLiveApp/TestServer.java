@@ -544,7 +544,7 @@ public class TestServer {
         Response r1 = request("POST", "/WalkLive/api/trips", test);
         assertEquals("unidentified destination ", 200, r1.httpStatus);
 
-        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
+        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
         //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
 
         assertEquals("Failed to get user", 200, r2.httpStatus);
@@ -555,7 +555,7 @@ public class TestServer {
         Response r3 = request("POST", "/WalkLive/api/trips", test1);
         assertEquals("unidentified destination ", 200, r3.httpStatus);
 
-        Response r4 = request("GET", "/WalkLive/api/trips/1", null);
+        Response r4 = request("GET", "/WalkLive/api/trips/2", null);
         //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
 
         assertEquals("Failed to get user", 200, r4.httpStatus);
@@ -1111,7 +1111,7 @@ public class TestServer {
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
