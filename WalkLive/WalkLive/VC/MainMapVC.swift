@@ -38,9 +38,12 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             self.initializeView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
+    }
+    
     /// Private functiosn for general logistics
     private func initializeView() {
-        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
         self.setDelegate()
         self.setupRoadRequester()
         self.setKeyboard()

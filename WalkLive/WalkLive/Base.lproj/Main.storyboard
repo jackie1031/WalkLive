@@ -518,7 +518,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-e4-dQG">
                                 <rect key="frame" x="61" y="214" width="253" height="195"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Uername(no space, special symbol)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwt-Mv-brG">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Uername (letters and numbers only)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwt-Mv-brG">
                                         <rect key="frame" x="0.0" y="0.0" width="253" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1464,7 +1464,7 @@
         <image name="Image" width="283" height="258"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CWQ-0c-P3r"/>
+        <segue reference="u5s-Dw-nrg"/>
         <segue reference="cR3-Ay-sw1"/>
         <segue reference="jM0-De-8ma"/>
     </inferredMetricsTieBreakers>
