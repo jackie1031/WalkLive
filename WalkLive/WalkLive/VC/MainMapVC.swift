@@ -33,15 +33,17 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        currentUserInfo = UserLogin(username: "blah", password: "blahblah", contact: "111-111-1111")
         print(currentUserInfo)
-        self.initializeView()
+        self.authorizeLocationUpdate()
+            self.initializeView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
     }
     
     /// Private functiosn for general logistics
     private func initializeView() {
-        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
-        self.authorizeLocationUpdate()
         self.setDelegate()
         self.setupRoadRequester()
         self.setKeyboard()

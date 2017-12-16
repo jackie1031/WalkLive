@@ -79,6 +79,7 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let friendTrip = friendTrips[indexPath.row]
         cell.friendNameLabel.text = friendTrip.username
         cell.currentLocationLabel.text = "At: (" + String(format: "%.3f", (friendTrip.curLat)!) + ", " + String(format: "%.3f", (friendTrip.curLong)!) + ")"
+        cell.destinationLocationLabel.text = "To: "+friendTrip.destination!
         cell.timeSpentLabel.text = friendTrip.timeSpent
         cell.phoneButton.tag = indexPath.row
         cell.messageButton.tag = indexPath.row

@@ -43,7 +43,7 @@ class LoginVC: UIViewController{
     }
     
     private func isValidLogin() -> Bool{
-        if (self.userNameTextField.text == "") {
+        if (!validUser()) {
             let errorView = warnigSignFactory.makeLoginValidityWarningSign(status: 0)
             errorView.center = self.view.center
             self.view.addSubview(errorView)
@@ -53,6 +53,17 @@ class LoginVC: UIViewController{
             let errorView = warnigSignFactory.makeLoginValidityWarningSign(status: 1)
             errorView.center = self.view.center
             self.view.addSubview(errorView)
+            return false
+        }
+        return true
+    }
+    
+    private func validUser() -> Bool {
+        if (self.userNameTextField.text == "") {
+            return false
+        }
+        let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+        if self.userNameTextField.text!.rangeOfCharacter(from: characterset.inverted) != nil {
             return false
         }
         return true

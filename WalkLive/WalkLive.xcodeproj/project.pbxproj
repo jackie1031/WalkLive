@@ -33,7 +33,6 @@
 		904B04D91FD688D700EEB523 /* WalkLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04D81FD688D700EEB523 /* WalkLiveTests.swift */; };
 		904B04E41FD688D700EEB523 /* WalkLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04E31FD688D700EEB523 /* WalkLiveUITests.swift */; };
 		904B05011FD689A300EEB523 /* BackEndClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F61FD689A300EEB523 /* BackEndClient.swift */; };
-		904B05021FD689A300EEB523 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F71FD689A300EEB523 /* ContactManager.swift */; };
 		904B05031FD689A300EEB523 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F81FD689A300EEB523 /* Location.swift */; };
 		904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04F91FD689A300EEB523 /* RoadRequester.swift */; };
 		904B05051FD689A300EEB523 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FA1FD689A300EEB523 /* Route.swift */; };
@@ -119,7 +118,6 @@
 		904B04E31FD688D700EEB523 /* WalkLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLiveUITests.swift; sourceTree = "<group>"; };
 		904B04E51FD688D700EEB523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		904B04F61FD689A300EEB523 /* BackEndClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackEndClient.swift; sourceTree = "<group>"; };
-		904B04F71FD689A300EEB523 /* ContactManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		904B04F81FD689A300EEB523 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		904B04F91FD689A300EEB523 /* RoadRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoadRequester.swift; sourceTree = "<group>"; };
 		904B04FA1FD689A300EEB523 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				904B04F61FD689A300EEB523 /* BackEndClient.swift */,
-				904B04F71FD689A300EEB523 /* ContactManager.swift */,
 				904B04F81FD689A300EEB523 /* Location.swift */,
 				904B04F91FD689A300EEB523 /* RoadRequester.swift */,
 				904B04FA1FD689A300EEB523 /* Route.swift */,
@@ -668,7 +665,6 @@
 				904B05071FD689A300EEB523 /* TimePoint.swift in Sources */,
 				9015A2B91FDDC7860080B4D3 /* SetFriendVC.swift in Sources */,
 				904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */,
-				904B05021FD689A300EEB523 /* ContactManager.swift in Sources */,
 				9015A2B31FDCE4140080B4D3 /* FriendTrackVC.swift in Sources */,
 				8C7637011FDC88DD00276DEE /* SettingsVC.swift in Sources */,
 				904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */,
@@ -860,10 +856,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SN2DVCT4SM;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive02;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -878,10 +874,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SN2DVCT4SM;
+				DEVELOPMENT_TEAM = 4KDNX7UPEV;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive02;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

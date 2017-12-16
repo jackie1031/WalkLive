@@ -235,7 +235,6 @@ class BackEndClient: NSObject {
                 failure(LoginError(status: status))
             } else {
                 let friendRequests = try? jsonDecoder.decode([FriendRequest].self, from: data!) as [FriendRequest]
-                print(friendRequests)
                 success(friendRequests)
             }
         }).resume()
@@ -268,7 +267,6 @@ class BackEndClient: NSObject {
                 failure(LoginError(status: status))
             } else {
                 let friendRequests = try? jsonDecoder.decode([FriendRequest].self, from: data!) as [FriendRequest]
-                print(friendRequests)
                 success(friendRequests!)
             }
         }).resume()
@@ -300,7 +298,6 @@ class BackEndClient: NSObject {
                 failure(LoginError(status: status))
             } else {
                 let friends = try? jsonDecoder.decode([Friend].self, from: data!) as [Friend]
-                print(friends)
                 success(friends)
             }
         }).resume()
@@ -386,7 +383,6 @@ class BackEndClient: NSObject {
                 failure(SignUpError(status: status))
             } else {
                 let userContact = try? jsonDecoder.decode([UserLogin].self, from: data!) as [UserLogin]
-                print(userContact)
                 success(userContact!)}
         }).resume()
     }

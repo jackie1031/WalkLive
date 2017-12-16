@@ -32,11 +32,11 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         super.viewDidLoad()
         friendTripTable.delegate = self
         friendTripTable.dataSource = self
-        self.updateFriendTrips()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.updateFriendTrips()
         self.setUserVCInfo()
         self.initializeUpdates()
     }
@@ -207,6 +207,7 @@ extension UserVC: TripTableUpdateDelegate{
     func updateTable() {
         backEndClient.getAllTrip(success: { (friendTrips) in
             OperationQueue.main.addOperation {
+                print(friendTrips)
                 self.friendsTrip = friendTrips
                 self.friendTripTable.reloadData()
                 print("reloaded table!")

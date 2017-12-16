@@ -192,29 +192,29 @@ public class TestServer {
 //        }
 //    }
 //
-    @Test
-    public void testLogin() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-
-        //add single element
-        User expected = new User("jeesoo", "test-1", "4405339063");
-        Response r1 = request("POST", "/WalkLive/api/users", expected);
-        assertEquals("Failed to add new user", 201, r1.httpStatus);
-
-        //log in with those credentials
-        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
-        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
-
-        //test for nonexistent user
-        User fake = new User("fakenews", "test-1", null);
-        Response r3 = request("POST", "/WalkLive/api/users/login", fake);
-        assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
-
-        //test for incorrect password
-        User incorrect = new User("jeesoo", "incorrectpassword", null);
-        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
-        assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
-    }
+//    @Test
+//    public void testLogin() throws Exception {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//
+//        //add single element
+//        User expected = new User("jeesoo", "test-1", "4405339063");
+//        Response r1 = request("POST", "/WalkLive/api/users", expected);
+//        assertEquals("Failed to add new user", 201, r1.httpStatus);
+//
+//        //log in with those credentials
+//        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
+//        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
+//
+//        //test for nonexistent user
+//        User fake = new User("fakenews", "test-1", null);
+//        Response r3 = request("POST", "/WalkLive/api/users/login", fake);
+//        assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
+//
+//        //test for incorrect password
+//        User incorrect = new User("jeesoo", "incorrectpassword", null);
+//        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
+//        assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
+//    }
 //
 //    @Test
 //    public void testGetUser() throws Exception {
@@ -248,8 +248,8 @@ public class TestServer {
      * Friend Request Handling
      * ================================================================
      */
-
-
+//
+//
 //     @Test
 //     public void testCreateFriendRequest() throws Exception {
 //         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -332,7 +332,7 @@ public class TestServer {
 //            assertEquals("Mismatch in relationship", frs[i].getRelationship(), actual.getRelationship());
 //        }
 //    }
-//
+
 //    @Test
 //    public void testGetIncomingFriendRequests() throws Exception {
 //        User[] entries = new User[] {
@@ -360,7 +360,7 @@ public class TestServer {
 //        Response r = request("GET", "/WalkLive/api/users/jeesookim/friend_requests", null);
 //        List<Relationship> results = getRelationships(r);
 //
-//        assertEquals("Number of user entries differ", frs.length, results.size());
+//        assertEquals("Number of entries differ", frs.length, results.size());
 //
 //        for (int i = 0; i < results.size(); i++) {
 //            Relationship actual = results.get(i);
@@ -369,7 +369,7 @@ public class TestServer {
 //            assertEquals("Mismatch in relationship", frs[i].getRelationship(), actual.getRelationship());
 //        }
 //    }
-//
+
 //    @Test
 //    public void testGetNewRequestId() throws Exception {
 //        User[] entries = new User[] {
@@ -506,113 +506,35 @@ public class TestServer {
      * Emergency Contact PUT
      * ================================================================
      */
-
+//
 //    @Test
 //    public void testUpdateEmergencyInfo() throws Exception {
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //
 //        //add single element
-//        User expected = new User("jeesoo", "test-1", "4405339063");
+//        User expected = new User("jeesoo1", "test-1", "4405339063");
 //        Response r1 = request("POST", "/WalkLive/api/users", expected);
+//        User expected2 = new User("hello", "test-1", "1231231233");
+//        Response r2 = request("POST", "/WalkLive/api/users", expected2);
 //        assertEquals("Failed to add new user", 201, r1.httpStatus);
+//        assertEquals("Failed to add new user", 201, r2.httpStatus);
+//
 //
 //        //update emergency contact info
 //        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
-//        Response r2 = request("PUT", "/WalkLive/api/users/jeesoo/emergency_info", contactInfo);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
+//        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
+//        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
+//        assertEquals("Failed to get user", 200, r3.httpStatus);
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
 //    }
 
-////DELETE LATER
-////    @Test
-////    public void testUpdate() throws Exception {
-////
-////        //Add a single element
-////        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-////        Todo expected = new Todo(null, "Test-1", false, df.parse("2015-04-23T23:10:15-0700"));
-////        Response r1 = request("POST", "/api/v1/todos", expected);
-////        assertEquals("Failed to add", 201, r1.httpStatus);
-////
-////        //Get it back so that we know its ID
-////        Response r2 = request("GET", "/api/v1/todos", null);
-////        assertEquals("Failed to get todos", 200, r2.httpStatus);
-////        Todo t = getTodos(r2).get(0);
-////
-////        //Send out an update with a changed title and state
-////        Todo updated = new Todo(t.getId(), t.getTitle(), !t.isDone(), t.getCreatedOn());
-////        Response r3 = request("PUT", "/api/v1/todos/" + t.getId(), updated);
-////        assertEquals("Failed to update", 200, r3.httpStatus);
-////
-////        //Get stuff back again
-////        Response r4 = request("GET", "/api/v1/todos", null);
-////        assertEquals("Failed to get todos", 200, r4.httpStatus);
-////        List<Todo> results = getTodos(r4);
-////
-////        //Verify that we got the right element back
-////        assertEquals(1, results.size());
-////
-////        Todo actual = results.get(0);
-////        assertEquals("Mismatch in Id", updated.getId(), actual.getId());
-////        assertEquals("Mismatch in title", updated.getTitle(), actual.getTitle());
-////        assertEquals("Mismatch in creation date", updated.getCreatedOn(), actual.getCreatedOn());
-////        assertEquals("Mismatch in done state", updated.isDone(), actual.isDone());
-////    }
-////
-////    @Test
-////    public void testDelete() throws Exception {
-////
-////        //Add a few elements
-////        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-////        Todo[] entries = new Todo[] {
-////          new Todo(null, "Test-1", false, df.parse("2015-04-23T23:10:15-0700")),
-////          new Todo(null, "Test-2", true, df.parse("2015-03-07T01:10:20-0530")),
-////          new Todo(null, "Test-3", false, df.parse("2010-02-19T13:25:43-0530"))
-////        };
-////
-////        for (Todo t : entries) {
-////            Response radd = request("POST", "/api/v1/todos", t);
-////            assertEquals("Failed to add", 201, radd.httpStatus);
-////        }
-////
-////        //Get them back so that we know our ids
-////        Response r1 = request("GET", "/api/v1/todos", null);
-////        assertEquals("Failed to get todos", 200, r1.httpStatus);
-////        List<Todo> data = getTodos(r1);
-////
-////        //Delete an entry
-////        int indexToDelete = 1;
-////        Response r2 = request("DELETE", "/api/v1/todos/" + data.get(indexToDelete).getId(), null);
-////        assertEquals("Failed to delete todo", 200, r2.httpStatus);
-////
-////        //Get it back again
-////        Response r3 = request("GET", "/api/v1/todos", null);
-////        assertEquals("Failed to get todos", 200, r3.httpStatus);
-////        List<Todo> results = getTodos(r3);
-////
-////        //Verify that we got the right element back
-////        assertEquals("Number of todo entries differ", entries.length - 1, results.size());
-////
-////        //Make a new list of expected Todos with some Java 8 functional foo :)
-////        List<Todo> expected = IntStream.range(0, entries.length)
-////            .filter(i -> i != indexToDelete)
-////            .mapToObj(i -> entries[i])
-////            .collect(Collectors.toList());
-////
-////        //And check
-////        for (int i = 0; i < results.size(); i++) {
-////            Todo actual = results.get(i);
-////            assertEquals(String.format("Index %d: Mismatch in title", i), expected.get(i).getTitle(), actual.getTitle());
-////            assertEquals(String.format("Index %d: Mismatch in creation date", i), expected.get(i).getCreatedOn(), actual.getCreatedOn());
-////            assertEquals(String.format("Index %d: Mismatch in done state", i), expected.get(i).isDone(), actual.isDone());
-////        }
-////    }
-//
-//
     /**
      * ================================================================
           TRIPs
      * ================================================================
      */
-
+//
 //    @Test
 //    public void testStartTrip() throws Exception {
 //        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
@@ -640,7 +562,7 @@ public class TestServer {
 //
 //
 //    }
-
+//
 //    @Test
 //    public void testEndTrip() throws Exception {
 //        WalkLiveService walkLiveService;
@@ -658,7 +580,7 @@ public class TestServer {
 //        //assertEqualsx(r3.isCompleted(),false);
 //
 //    }
-
+//
 
 //    @Test
 //    public void testGetFriendList() throws Exception{
@@ -706,7 +628,7 @@ public class TestServer {
 //    }
 
 
-
+//
 //    @Test
 //    public void testGetAllTrips() throws Exception {
 //
@@ -721,7 +643,7 @@ public class TestServer {
 //        Response r1 = request("POST", "/WalkLive/api/trips", trip);
 //        assertEquals("unidentified destination ", 200, r1.httpStatus);
 //
-//        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
+//        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
 //
 //        assertEquals("Failed to get user", 200, r2.httpStatus);
 //
@@ -799,34 +721,19 @@ public class TestServer {
 //    }
 
 
-//    @Test
-//    public void testUpdateTrip() throws Exception{
-//
-//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//        //Trip trip2 = new Trip("yangcao1","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        //add single element
-////        User expected = new User("jeesoo", "test-1", "4405339063");
-////        Response r1 = request("POST", "/WalkLive/api/users", expected);
-////        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//
-//        //Trip expected = new User("jeesoo", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-////
-////            public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
-////        double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
-//
-//        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours");
-//        //update emergency contact info
-//        //User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
-//
-//        //put(API_CONTEXT+"/trips/:tripId/update", "application/json", (request, response) -> {
-//
-//        Response r2 = request("PUT", "/WalkLive/api/trips/0/update", updateLocation);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//    }
+    @Test
+    public void testUpdateTrip() throws Exception{
+
+        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r1 = request("POST", "/WalkLive/api/trips", trip);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours");
+
+        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+    }
 
 //
 //
@@ -1204,7 +1111,7 @@ public class TestServer {
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
@@ -1229,11 +1136,6 @@ public class TestServer {
             if (stm != null) {
                 try {
                     stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
