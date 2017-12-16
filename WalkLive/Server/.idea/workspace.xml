@@ -30,8 +30,8 @@
       <file leaf-file-name="CrimeDataHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/CrimeDataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="309">
+              <caret line="103" column="104" lean-forward="true" selection-start-line="103" selection-start-column="104" selection-end-line="103" selection-end-column="104" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1513392271000" expanded="true" signature="3389:3421" ph=" CREATE statement" />
@@ -730,8 +730,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/CrimeDataHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state relative-caret-position="309">
+          <caret line="103" column="104" lean-forward="true" selection-start-line="103" selection-start-column="104" selection-end-line="103" selection-end-column="104" />
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1513392271000" expanded="true" signature="3389:3421" ph=" CREATE statement" />
