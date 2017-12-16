@@ -1,6 +1,8 @@
 package com.WalkLiveApp;
 
 import com.google.gson.Gson;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.sql.*;
@@ -121,6 +123,44 @@ public class TripManager {
             trips.add(getTripString(user.getUsername()));
         }
         return trips;
+    }
+
+    public void updateTrip(String tripIdInStr, String body) throws WalkLiveService.InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        int tripId = Integer.parseInt(tripIdInStr);
+
+        Trip trip = new Gson().fromJson(body, Trip.class);
+
+
+        String sql = "UPDATE ongoingTrips SET curLong = ?, curLat = ?, timeSpent = ?  WHERE tripId = ? LIMIT 1" ;
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setDouble(1, trip.getCurLong());
+            ps.setDouble(2, trip.getCurLat());
+            ps.setString(3, trip.getTimeSpent());
+            ps.setInt(4, tripId);
+            ps.executeUpdate();
+
+            System.out.println("SUCCESSFULLY UPDATED.");
+        } catch(SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
     }
 
     private Trip getTripString(String username) throws SQLException{
