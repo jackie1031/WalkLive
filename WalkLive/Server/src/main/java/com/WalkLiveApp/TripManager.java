@@ -1,8 +1,6 @@
 package com.WalkLiveApp;
 
 import com.google.gson.Gson;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.sql.*;
@@ -57,95 +55,8 @@ public class TripManager {
                 } catch (SQLException e) { /* ignored */}
             }
         }
-
     }
 
-    private int countOngoing() throws WalkLiveService.InvalidDestination {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet res = null;
-        String sql = "SELECT * FROM ongoingTrips";
-
-        try{
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            res = ps.executeQuery();
-            int size= 0;
-            if (res != null)
-            {
-                res.beforeFirst();
-                res.last();
-                size = res.getRow();
-                WalkLiveService.logger.info("the size of the table for ongoing is:"+size);
-                return size;
-            }
-
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("SQL exception", ex);
-            throw new WalkLiveService.InvalidDestination("SQL exception in counting", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-        return -1;
-    }
-
-
-    private int countDone() throws WalkLiveService.InvalidDestination {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet res = null;
-        String sql = "SELECT * FROM doneTrips";
-
-        try{
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            res = ps.executeQuery();
-            int size= 0;
-            if (res != null)
-            {
-                res.beforeFirst();
-                res.last();
-                size = res.getRow();
-                WalkLiveService.logger.info("the size of the table of done is:"+size);
-                return size;
-            }
-
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("SQL exception", ex);
-            throw new WalkLiveService.InvalidDestination("SQL exception in counting", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-        return -1;
-    }
 
     private int getNewRequestId() throws WalkLiveService.UserServiceException {
         ResultSet res = null;
