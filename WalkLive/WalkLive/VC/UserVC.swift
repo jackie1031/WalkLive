@@ -207,6 +207,7 @@ extension UserVC: TripTableUpdateDelegate{
     func updateTable() {
         backEndClient.getAllTrip(success: { (friendTrips) in
             OperationQueue.main.addOperation {
+                print(friendTrips)
                 self.friendsTrip = friendTrips
                 self.friendTripTable.reloadData()
                 print("reloaded table!")
