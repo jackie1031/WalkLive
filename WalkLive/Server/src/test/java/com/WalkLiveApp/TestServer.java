@@ -869,6 +869,13 @@ public class TestServer {
 //    }
 //*/
 //
+
+
+//    private void testDB(){
+//
+//
+//    }
+
     //------------------------------------------------------------------------//
     // Generic Helper Methods and classes
     //------------------------------------------------------------------------//
@@ -1012,9 +1019,11 @@ public class TestServer {
             String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
 
             stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
+            stm.executeUpdate(sqlNew7);
 
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
@@ -1041,6 +1050,9 @@ public class TestServer {
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
 
+            String sql9 = "DROP TABLE IF EXISTS Crime" ;
+
+            stm.executeUpdate(sql9);
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
@@ -1092,6 +1104,9 @@ public class TestServer {
             stm.executeUpdate(sql7);
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
+            String sql9 = "DROP TABLE IF EXISTS Crime" ;
+
+            stm.executeUpdate(sql9);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
@@ -1101,17 +1116,17 @@ public class TestServer {
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-
-
-
-            stm.executeUpdate(sqlNew5);
-            stm.executeUpdate(sqlNew6);
+            String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
             stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
             stm.executeUpdate(counterInit);
+            stm.executeUpdate(sqlNew5);
+            stm.executeUpdate(sqlNew6);
+            stm.executeUpdate(sqlNew7);
+
 
         } catch (SQLException ex) {
             logger.error("Failed to create schema at startup", ex);
