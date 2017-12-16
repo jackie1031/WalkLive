@@ -562,25 +562,25 @@ public class TestServer {
 //
 //
 //    }
-
-    @Test
-    public void testEndTrip() throws Exception {
-        WalkLiveService walkLiveService;
-
-        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-        //walkLiveService.startTrip();
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-        assertEquals(test.isCompleted(),false);
-
-        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-
-        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
-        //assertEqualsx(r3.isCompleted(),false);
-
-    }
-
+//
+//    @Test
+//    public void testEndTrip() throws Exception {
+//        WalkLiveService walkLiveService;
+//
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//        //walkLiveService.startTrip();
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//        assertEquals(test.isCompleted(),false);
+//
+//        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
+//        //assertEqualsx(r3.isCompleted(),false);
+//
+//    }
+//
 
 //    @Test
 //    public void testGetFriendList() throws Exception{
@@ -629,96 +629,96 @@ public class TestServer {
 
 
 
-//    @Test
-//    public void testGetAllTrips() throws Exception {
+    @Test
+    public void testGetAllTrips() throws Exception {
+
+        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        Trip trip2 = new Trip("yangcao1","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+
+        ArrayList<Trip> allTrips = new ArrayList<>();
+        allTrips.add(trip);
+        allTrips.add(trip2);
+
+        Response r1 = request("POST", "/WalkLive/api/trips", trip);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+        Response r3 = request("POST", "/WalkLive/api/trips", trip2);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        //Response r4 = request("GET", "/WalkLive/api/trips/2", null);
+
+
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+                //new User("jackie", "666666", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //add a few elements
+        //Relationship[] frs = new Relationship[] {
+        Relationship test1 = new Relationship("jeesookim", "michelle", null);
+        Relationship test2 = new Relationship("michelle", "yangcao1", null);
+        //};
+
+        //for (Relationship f : frs) {
+        //send friend request
+        Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", test1);
+        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        Response rCreateFR2 = request("POST", "/WalkLive/api/users/michelle/friend_requests", test2);
+        assertEquals("Failed to create new friend request", 201, rCreateFR2.httpStatus);
+        //}
+
+        //accept friend request
+        Response rAccept = request("PUT", "/WalkLive/api/users/michelle/friend_requests/1/accept", null);
+        assertEquals("Failed to accept friend request", 200, rAccept.httpStatus);
+        Response rAccept2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/accept", null);
+        assertEquals("Failed to accept friend request", 200, rAccept2.httpStatus);
+
+//        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
+//        List<User> results = getUsers(rList);
+
+        Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
+
+        List<Trip> results = getAllTrip(rList);
+
+        assertEquals("Number of trips entries differ", allTrips.size(), results.size());
+
+//=================================================================================================================================
+
+        //Get them back
+//        Response r = request("GET", "/WalkLive/api/users", null);
+//        assertEquals("Failed to get user entries", 200, r.httpStatus);
+//        List<User> results = getUsers(r);
 //
-//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//        Trip trip2 = new Trip("yangcao1","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//        //Verify that we got the right element back
+//        assertEquals("Number of user entries differ", entries.length, results.size());
 //
+//        for (int i = 0; i < results.size(); i++) {
+//            User actual = results.get(i);
 //
-//        ArrayList<Trip> allTrips = new ArrayList<>();
-//        allTrips.add(trip);
-//        allTrips.add(trip2);
-//
-//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//        Response r2 = request("GET", "/WalkLive/api/trips/0", null);
-//
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", trip2);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        //Response r4 = request("GET", "/WalkLive/api/trips/2", null);
-//
-//
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063"),
-//                new User("yangcao1", "121212", "1231231233")
-//                //new User("jackie", "666666", "1231231233")
-//        };
-//
-//        //add to database
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+//            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+//            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+//            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+//            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+//            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+//            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
 //        }
-//
-//        //add a few elements
-//        //Relationship[] frs = new Relationship[] {
-//        Relationship test1 = new Relationship("jeesookim", "michelle", null);
-//        Relationship test2 = new Relationship("michelle", "yangcao1", null);
-//        //};
-//
-//        //for (Relationship f : frs) {
-//        //send friend request
-//        Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", test1);
-//        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-//        Response rCreateFR2 = request("POST", "/WalkLive/api/users/michelle/friend_requests", test2);
-//        assertEquals("Failed to create new friend request", 201, rCreateFR2.httpStatus);
-//        //}
-//
-//        //accept friend request
-//        Response rAccept = request("PUT", "/WalkLive/api/users/michelle/friend_requests/1/accept", null);
-//        assertEquals("Failed to accept friend request", 200, rAccept.httpStatus);
-//        Response rAccept2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/accept", null);
-//        assertEquals("Failed to accept friend request", 200, rAccept2.httpStatus);
-//
-////        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
-////        List<User> results = getUsers(rList);
-//
-//        Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
-//
-//        List<Trip> results = getAllTrip(rList);
-//
-//        assertEquals("Number of trips entries differ", allTrips.size(), results.size());
-//
-////=================================================================================================================================
-//
-//        //Get them back
-////        Response r = request("GET", "/WalkLive/api/users", null);
-////        assertEquals("Failed to get user entries", 200, r.httpStatus);
-////        List<User> results = getUsers(r);
-////
-////        //Verify that we got the right element back
-////        assertEquals("Number of user entries differ", entries.length, results.size());
-////
-////        for (int i = 0; i < results.size(); i++) {
-////            User actual = results.get(i);
-////
-////            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-////            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-////            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
-////            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-////            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-////            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
-////            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
-////        }
-//
-//
-//    }
+
+
+    }
 
 
 //    @Test

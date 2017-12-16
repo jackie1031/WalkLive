@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripManager {
 
@@ -70,9 +72,6 @@ public class TripManager {
         ResultSet res = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        //logger.info("in the get trip, the string form "+ tripIdInStr);
-        //logger.info("================================");
-        //logger.info("in the get trip, the int form "+ tripId);
 
         int tripId = Integer.parseInt(tripIdInStr);
 
@@ -112,6 +111,58 @@ public class TripManager {
                 } catch (SQLException e) { /* ignored */}
             }
         }
+    }
+
+    public List<Trip> getAllTrips(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
+        List<User> friends = new FriendsManager().getFriendList(username);
+        ArrayList<Trip> trips = new ArrayList<>();
+
+        for(User user: friends) {
+            trips.add(getTripString(user.getUsername()));
+        }
+        return trips;
+    }
+
+    private Trip getTripString(String username) throws SQLException{
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet res = null;
+
+        String sql4 = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+
+            ps = conn.prepareStatement(sql4);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            if (res.next()) {
+                return new Trip(res.getInt("tripId"), res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+
+            }
+
+        }catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
+            //throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+        return null;
     }
 
 
