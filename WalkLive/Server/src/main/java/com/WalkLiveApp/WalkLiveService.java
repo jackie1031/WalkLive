@@ -138,6 +138,9 @@ public class WalkLiveService {
     public List<Trip> getAllTrips(String username) throws  SQLException,UserServiceException, ParseException, InvalidTargetID, RelationshipServiceException, java.text.ParseException{
         return new TripManager().getAllTrips(username);
     }
+    public List<Trip> getTripHistory(String username) throws  SQLException,UserServiceException, ParseException, InvalidTargetID, RelationshipServiceException, java.text.ParseException{
+        return new TripManager().getTripHistory(username);
+    }
 
      public void updateTrip(String tripIdInStr, String body) throws InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
         new TripManager().updateTrip(tripIdInStr, body);

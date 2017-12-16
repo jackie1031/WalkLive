@@ -15,8 +15,8 @@
       <file leaf-file-name="WalkLiveService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="129" column="46" lean-forward="false" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="46" />
+            <state relative-caret-position="218">
+              <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -25,7 +25,7 @@
       <file leaf-file-name="DataBaseHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DataBaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="274">
               <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
@@ -35,18 +35,40 @@
       <file leaf-file-name="TripManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/TripManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+            <state relative-caret-position="140">
+              <caret line="189" column="0" lean-forward="false" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
               <folding>
-                <marker date="1513459729000" expanded="true" signature="704:948" ph=" INSERT statement (ONGOINGTRIPS)" />
-                <marker date="1513459729000" expanded="true" signature="2995:3038" ph=" SELECT statement (ONGOINGTRIPS)" />
-                <marker date="1513459729000" expanded="true" signature="5102:5147" ph=" SELECT statement (ONGOINGTRIPS)" />
-                <marker date="1513459729000" expanded="true" signature="7812:7892" ph=" UPDATE statement (ONGOINGTRIPS)" />
-                <marker date="1513459729000" expanded="true" signature="9204:9249" ph=" SELECT statement (ONGOINGTRIPS)" />
-                <marker date="1513459729000" expanded="true" signature="10909:10952" ph=" UPDATE statement (COUNTERS)" />
-                <marker date="1513459729000" expanded="true" signature="10983:11012" ph=" SELECT statement (COUNTERS)" />
-                <marker date="1513459729000" expanded="true" signature="12471:12536" ph=" INSERT statement (ONGOINGTRIPS, DONETRIPS)" />
-                <marker date="1513459729000" expanded="true" signature="13691:13732" ph=" DELETE statement (ONGOINGTRIPS)" />
+                <element signature="method#endTrip#0;class#TripManager#0" expanded="false" />
+                <element signature="method#getTripById#0;class#TripManager#0" expanded="false" />
+                <marker date="1513466149000" expanded="true" signature="867:1111" ph=" INSERT statement (ONGOINGTRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="3158:3201" ph=" SELECT statement (ONGOINGTRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="5265:5310" ph=" SELECT statement (ONGOINGTRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="8179:8221" ph=" SELECT statement (DONETRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="10195:10275" ph=" UPDATE statement (ONGOINGTRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="11587:11632" ph=" SELECT statement (ONGOINGTRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="13292:13335" ph=" UPDATE statement (COUNTERS)" />
+                <marker date="1513466149000" expanded="true" signature="13366:13395" ph=" SELECT statement (COUNTERS)" />
+                <marker date="1513466149000" expanded="true" signature="14854:14919" ph=" INSERT statement (ONGOINGTRIPS, DONETRIPS)" />
+                <marker date="1513466149000" expanded="true" signature="16076:16117" ph=" DELETE statement (ONGOINGTRIPS)" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FriendsManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="538">
+              <caret line="48" column="13" lean-forward="false" selection-start-line="45" selection-start-column="12" selection-end-line="48" selection-end-column="13" />
+              <folding>
+                <marker date="1513458715000" expanded="true" signature="1679:1717" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513458715000" expanded="true" signature="3326:3388" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513458715000" expanded="true" signature="5036:5071" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513458715000" expanded="true" signature="8161:8264" ph=" SELECT statement (FRIENDS)" />
+                <marker date="1513458715000" expanded="true" signature="9908:9971" ph=" UPDATE statement (COUNTERS)" />
+                <marker date="1513458715000" expanded="true" signature="10002:10041" ph=" SELECT statement (COUNTERS)" />
+                <marker date="1513458715000" expanded="true" signature="11530:11623" ph=" INSERT statement (FRIENDS)" />
+                <marker date="1513458715000" expanded="true" signature="12870:12919" ph=" UPDATE statement (FRIENDS)" />
               </folding>
             </state>
           </provider>
@@ -55,44 +77,54 @@
       <file leaf-file-name="TestServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="592" column="53" lean-forward="false" selection-start-line="592" selection-start-column="53" selection-end-line="592" selection-end-column="53" />
+            <state relative-caret-position="96">
+              <caret line="665" column="0" lean-forward="true" selection-start-line="665" selection-start-column="0" selection-end-line="665" selection-end-column="0" />
               <folding>
-                <marker date="1513460790000" expanded="true" signature="43510:43542" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="43699:43733" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="43842:43877" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="43949:44001" ph=" INSERT statement (COUNTERS)" />
-                <marker date="1513460790000" expanded="true" signature="44033:44065" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="44338:44377" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="44636:44672" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="44931:44963" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="45510:45523" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="45607:45620" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="45711:45724" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="45805:45818" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="45901:45914" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="45998:46011" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="46092:46105" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="46194:46207" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="46293:46306" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="47466:47479" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="47563:47576" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="47667:47680" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="47761:47774" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="47857:47870" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="47951:47964" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="48048:48061" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="48149:48162" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="48247:48260" ph=" DROP TABLE statement (IF)" />
-                <marker date="1513460790000" expanded="true" signature="48345:48377" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="48535:48569" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="48679:48711" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="48993:49028" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="49124:49176" ph=" INSERT statement (COUNTERS)" />
-                <marker date="1513460790000" expanded="true" signature="49210:49249" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="49508:49544" ph=" CREATE statement" />
-                <marker date="1513460790000" expanded="true" signature="49803:49835" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="46603:46635" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="46792:46826" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="46935:46970" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="47042:47094" ph=" INSERT statement (COUNTERS)" />
+                <marker date="1513466065000" expanded="true" signature="47126:47158" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="47431:47470" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="47729:47765" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="48024:48056" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="48603:48616" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="48700:48713" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="48804:48817" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="48898:48911" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="48994:49007" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="49091:49104" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="49185:49198" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="49287:49300" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="49386:49399" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="50559:50572" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="50656:50669" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="50760:50773" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="50854:50867" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="50950:50963" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="51044:51057" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="51141:51154" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="51242:51255" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="51340:51353" ph=" DROP TABLE statement (IF)" />
+                <marker date="1513466065000" expanded="true" signature="51438:51470" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="51628:51662" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="51772:51804" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="52086:52121" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="52217:52269" ph=" INSERT statement (COUNTERS)" />
+                <marker date="1513466065000" expanded="true" signature="52303:52342" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="52601:52637" ph=" CREATE statement" />
+                <marker date="1513466065000" expanded="true" signature="52896:52928" ph=" CREATE statement" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,17 +139,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="266" column="38" lean-forward="false" selection-start-line="266" selection-start-column="38" selection-end-line="266" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getFriend</find>
+      <find>getUser</find>
+      <find>endtrip</find>
+    </findStrings>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -127,11 +156,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/TripManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DataBaseHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/WalkLiveApp/TripManager.java" />
       </list>
     </option>
   </component>
@@ -232,26 +262,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestServer.testgetTripByName">
-    <configuration name="Bootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.WalkLiveApp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.WalkLiveApp.Bootstrap" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="OOSE-group14" />
-      <envs />
-    </configuration>
+  <component name="RunManager" selected="JUnit.TestServer.testTripHistory">
     <configuration name="TestServer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -266,6 +277,56 @@
       <option name="MAIN_CLASS_NAME" value="com.WalkLiveApp.TestServer" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="TestServer.testCreateNew" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.WalkLiveApp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="OOSE-group14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.WalkLiveApp" />
+      <option name="MAIN_CLASS_NAME" value="com.WalkLiveApp.TestServer" />
+      <option name="METHOD_NAME" value="testCreateNew" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="TestServer.testGetAllTrips" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.WalkLiveApp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="OOSE-group14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.WalkLiveApp" />
+      <option name="MAIN_CLASS_NAME" value="com.WalkLiveApp.TestServer" />
+      <option name="METHOD_NAME" value="testGetAllTrips" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -302,7 +363,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="TestServer.testgetTripByName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestServer.testTripHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.WalkLiveApp.*" />
@@ -314,7 +375,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.WalkLiveApp" />
       <option name="MAIN_CLASS_NAME" value="com.WalkLiveApp.TestServer" />
-      <option name="METHOD_NAME" value="testgetTripByName" />
+      <option name="METHOD_NAME" value="testTripHistory" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -408,18 +469,20 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.TestServer.testStartTrip" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TestServer" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Bootstrap" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TestServer.testgetTripByName" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.TestServer.testGetAllTrips" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TestServer.testCreateNew" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TestServer.testTripHistory" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TestServer" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.TestServer.testgetTripByName" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TestServer.testStartTrip" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TestServer" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Bootstrap" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TestServer.testTripHistory" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TestServer" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TestServer.testStartTrip" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TestServer.testCreateNew" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TestServer.testGetAllTrips" />
       </list>
     </recent_temporary>
   </component>
@@ -437,30 +500,40 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestServer - 2017.12.16 at 16h 35m 43s.xml">
+    <history-entry file="TestServer - 2017.12.16 at 17h 58m 22s.xml">
       <configuration name="TestServer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestServer - 2017.12.16 at 16h 38m 08s.xml">
+    <history-entry file="TestServer - 2017.12.16 at 18h 03m 09s.xml">
       <configuration name="TestServer" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestServer_testStartTrip - 2017.12.16 at 16h 35m 12s.xml">
+    <history-entry file="TestServer_testStartTrip - 2017.12.16 at 17h 57m 52s.xml">
       <configuration name="TestServer.testStartTrip" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestServer_testStartTrip - 2017.12.16 at 16h 41m 19s.xml">
-      <configuration name="TestServer.testStartTrip" configurationId="JUnit" />
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 17h 55m 48s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestServer_testgetTripByName - 2017.12.16 at 16h 41m 58s.xml">
-      <configuration name="TestServer.testgetTripByName" configurationId="JUnit" />
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 18h 05m 36s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestServer_testgetTripByName - 2017.12.16 at 16h 44m 31s.xml">
-      <configuration name="TestServer.testgetTripByName" configurationId="JUnit" />
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 18h 05m 56s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestServer_testgetTripByName - 2017.12.16 at 16h 46m 42s.xml">
-      <configuration name="TestServer.testgetTripByName" configurationId="JUnit" />
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 18h 09m 13s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 18h 10m 10s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 18h 14m 38s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestServer_testTripHistory - 2017.12.16 at 18h 16m 06s.xml">
+      <configuration name="TestServer.testTripHistory" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="23" width="1275" height="724" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -476,11 +549,11 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838285" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31518152" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16336633" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -500,7 +573,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -554,85 +629,105 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="129" column="46" lean-forward="false" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="46" />
+        <state relative-caret-position="218">
+          <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/FriendsManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="48" column="13" lean-forward="false" selection-start-line="45" selection-start-column="12" selection-end-line="48" selection-end-column="13" />
+          <folding>
+            <marker date="1513458715000" expanded="true" signature="1679:1717" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513458715000" expanded="true" signature="3326:3388" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513458715000" expanded="true" signature="5036:5071" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513458715000" expanded="true" signature="8161:8264" ph=" SELECT statement (FRIENDS)" />
+            <marker date="1513458715000" expanded="true" signature="9908:9971" ph=" UPDATE statement (COUNTERS)" />
+            <marker date="1513458715000" expanded="true" signature="10002:10041" ph=" SELECT statement (COUNTERS)" />
+            <marker date="1513458715000" expanded="true" signature="11530:11623" ph=" INSERT statement (FRIENDS)" />
+            <marker date="1513458715000" expanded="true" signature="12870:12919" ph=" UPDATE statement (FRIENDS)" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DataBaseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="274">
           <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="266" column="38" lean-forward="false" selection-start-line="266" selection-start-column="38" selection-end-line="266" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/TripManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+        <state relative-caret-position="140">
+          <caret line="189" column="0" lean-forward="false" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
           <folding>
-            <marker date="1513459729000" expanded="true" signature="704:948" ph=" INSERT statement (ONGOINGTRIPS)" />
-            <marker date="1513459729000" expanded="true" signature="2995:3038" ph=" SELECT statement (ONGOINGTRIPS)" />
-            <marker date="1513459729000" expanded="true" signature="5102:5147" ph=" SELECT statement (ONGOINGTRIPS)" />
-            <marker date="1513459729000" expanded="true" signature="7812:7892" ph=" UPDATE statement (ONGOINGTRIPS)" />
-            <marker date="1513459729000" expanded="true" signature="9204:9249" ph=" SELECT statement (ONGOINGTRIPS)" />
-            <marker date="1513459729000" expanded="true" signature="10909:10952" ph=" UPDATE statement (COUNTERS)" />
-            <marker date="1513459729000" expanded="true" signature="10983:11012" ph=" SELECT statement (COUNTERS)" />
-            <marker date="1513459729000" expanded="true" signature="12471:12536" ph=" INSERT statement (ONGOINGTRIPS, DONETRIPS)" />
-            <marker date="1513459729000" expanded="true" signature="13691:13732" ph=" DELETE statement (ONGOINGTRIPS)" />
+            <element signature="method#endTrip#0;class#TripManager#0" expanded="false" />
+            <element signature="method#getTripById#0;class#TripManager#0" expanded="false" />
+            <marker date="1513466149000" expanded="true" signature="867:1111" ph=" INSERT statement (ONGOINGTRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="3158:3201" ph=" SELECT statement (ONGOINGTRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="5265:5310" ph=" SELECT statement (ONGOINGTRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="8179:8221" ph=" SELECT statement (DONETRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="10195:10275" ph=" UPDATE statement (ONGOINGTRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="11587:11632" ph=" SELECT statement (ONGOINGTRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="13292:13335" ph=" UPDATE statement (COUNTERS)" />
+            <marker date="1513466149000" expanded="true" signature="13366:13395" ph=" SELECT statement (COUNTERS)" />
+            <marker date="1513466149000" expanded="true" signature="14854:14919" ph=" INSERT statement (ONGOINGTRIPS, DONETRIPS)" />
+            <marker date="1513466149000" expanded="true" signature="16076:16117" ph=" DELETE statement (ONGOINGTRIPS)" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/WalkLiveApp/TestServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="592" column="53" lean-forward="false" selection-start-line="592" selection-start-column="53" selection-end-line="592" selection-end-column="53" />
+        <state relative-caret-position="96">
+          <caret line="665" column="0" lean-forward="true" selection-start-line="665" selection-start-column="0" selection-end-line="665" selection-end-column="0" />
           <folding>
-            <marker date="1513460790000" expanded="true" signature="43510:43542" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="43699:43733" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="43842:43877" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="43949:44001" ph=" INSERT statement (COUNTERS)" />
-            <marker date="1513460790000" expanded="true" signature="44033:44065" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="44338:44377" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="44636:44672" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="44931:44963" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="45510:45523" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="45607:45620" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="45711:45724" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="45805:45818" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="45901:45914" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="45998:46011" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="46092:46105" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="46194:46207" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="46293:46306" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="47466:47479" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="47563:47576" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="47667:47680" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="47761:47774" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="47857:47870" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="47951:47964" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="48048:48061" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="48149:48162" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="48247:48260" ph=" DROP TABLE statement (IF)" />
-            <marker date="1513460790000" expanded="true" signature="48345:48377" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="48535:48569" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="48679:48711" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="48993:49028" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="49124:49176" ph=" INSERT statement (COUNTERS)" />
-            <marker date="1513460790000" expanded="true" signature="49210:49249" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="49508:49544" ph=" CREATE statement" />
-            <marker date="1513460790000" expanded="true" signature="49803:49835" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="46603:46635" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="46792:46826" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="46935:46970" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="47042:47094" ph=" INSERT statement (COUNTERS)" />
+            <marker date="1513466065000" expanded="true" signature="47126:47158" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="47431:47470" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="47729:47765" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="48024:48056" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="48603:48616" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="48700:48713" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="48804:48817" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="48898:48911" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="48994:49007" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="49091:49104" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="49185:49198" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="49287:49300" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="49386:49399" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="50559:50572" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="50656:50669" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="50760:50773" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="50854:50867" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="50950:50963" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="51044:51057" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="51141:51154" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="51242:51255" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="51340:51353" ph=" DROP TABLE statement (IF)" />
+            <marker date="1513466065000" expanded="true" signature="51438:51470" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="51628:51662" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="51772:51804" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="52086:52121" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="52217:52269" ph=" INSERT statement (COUNTERS)" />
+            <marker date="1513466065000" expanded="true" signature="52303:52342" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="52601:52637" ph=" CREATE statement" />
+            <marker date="1513466065000" expanded="true" signature="52896:52928" ph=" CREATE statement" />
           </folding>
         </state>
       </provider>
