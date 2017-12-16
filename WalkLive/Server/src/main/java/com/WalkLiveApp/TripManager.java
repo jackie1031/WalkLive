@@ -65,7 +65,7 @@ public class TripManager {
         this.removeCompletedTripFromOngoing(tripId);
     }
 
-    public Trip getTrip(String tripIdInStr) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
+    public Trip getTripById(String tripIdInStr) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
         ResultSet res = null;
         PreparedStatement ps = null;
         Connection conn = null;
@@ -109,6 +109,54 @@ public class TripManager {
             }
         }
     }
+
+
+    public Trip getTripByName(String username) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
+        ResultSet res = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        int tripId;
+
+        //int tripId = Integer.parseInt(tripIdInStr);
+
+        String sql = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+            if (res.next()) {
+                return new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+
+            } else{
+                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
+                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
+            }
+        } catch(SQLException ex){
+            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", username), ex);
+
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
+        } finally{
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 
     public List<Trip> getAllTrips(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
         List<User> friends = new FriendsManager().getFriendList(username);

@@ -251,16 +251,29 @@ public class ServerController {
 
             //get(API_CONTEXT + "/user/:username/trips/:tripId", "application/json", (request, response) -> {
 
-            //get Trip
-            get(API_CONTEXT + "/trips/:tripId", "application/json", (request, response) -> {
+            //get Trip by trip id
+            get(API_CONTEXT + "/trips/getById/:tripId", "application/json", (request, response) -> {
                 try {
-                    return walkLiveService.getTrip(request.params(":tripId"));
+                    return walkLiveService.getTripById(request.params(":tripId"));
                 } catch (WalkLiveService.InvalidTargetID e) {
                     logger.error("Invalid user id.");
                     response.status(402);
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
+
+
+            //get Trip by username
+            get(API_CONTEXT + "/trips/getByName/:username", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.getTripByName(request.params(":username"));
+                } catch (WalkLiveService.InvalidTargetID e) {
+                    logger.error("Invalid user id.");
+                    response.status(402);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
 
             // end a trip
             put(API_CONTEXT+"/trips/:tripId/endtrip", "application/json", (request, response) -> {

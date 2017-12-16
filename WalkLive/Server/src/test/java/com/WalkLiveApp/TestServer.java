@@ -72,7 +72,7 @@ public class TestServer {
 
    @After
    public void tearDown() {
-       //clearDB();
+       clearDB();
        //Spark.stop();
    }
 
@@ -531,10 +531,10 @@ public class TestServer {
 
     /**
      * ================================================================
-          TRIPs
+          Trips
      * ================================================================
      */
-//
+
 //    @Test
 //    public void testStartTrip() throws Exception {
 //        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
@@ -544,7 +544,9 @@ public class TestServer {
 //        Response r1 = request("POST", "/WalkLive/api/trips", test);
 //        assertEquals("unidentified destination ", 200, r1.httpStatus);
 //
-//        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
+//
+//        //username
+//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
 //        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
 //
 //        assertEquals("Failed to get user", 200, r2.httpStatus);
@@ -555,14 +557,44 @@ public class TestServer {
 //        Response r3 = request("POST", "/WalkLive/api/trips", test1);
 //        assertEquals("unidentified destination ", 200, r3.httpStatus);
 //
-//        Response r4 = request("GET", "/WalkLive/api/trips/2", null);
+//        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
 //        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
 //
 //        assertEquals("Failed to get user", 200, r4.httpStatus);
 //
 //
 //    }
-//
+
+
+
+    @Test
+    public void testgetTripByName() throws Exception {
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+    }
+
+
 //    @Test
 //    public void testEndTrip() throws Exception {
 //        WalkLiveService walkLiveService;
@@ -721,19 +753,19 @@ public class TestServer {
 //    }
 
 
-    @Test
-    public void testUpdateTrip() throws Exception{
-
-        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-
-        Response r1 = request("POST", "/WalkLive/api/trips", trip);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-
-        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours");
-
-        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-    }
+//    @Test
+//    public void testUpdateTrip() throws Exception{
+//
+//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours");
+//
+//        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//    }
 
 //
 //
