@@ -8,10 +8,13 @@ import javax.sql.DataSource;
 
 import static spark.Spark.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 // import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 // import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
@@ -47,6 +50,8 @@ public class Bootstrap {
         try {
             WalkLiveService model = new WalkLiveService();
             controller = new ServerController(model);
+            //setupCrimeDB();
+
             //model.test();
 
         } catch (WalkLiveService.UserServiceException ex) {
@@ -68,6 +73,19 @@ public class Bootstrap {
         logger.info("listening on: " + PORT);
         return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
+
+//    private static void setupCrimeDB() throws FileNotFoundException,IOException,ParseException {
+//        try{
+//            CrimeDataHandler.updateDB();
+//        } catch (IOException ex){
+//            throw new IOException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+//
+//        } catch (ParseException ex) {
+//            throw new org.json.simple.parser.ParseException(1,ex);
+//
+//        }
+//
+//    }
 
 }
 
