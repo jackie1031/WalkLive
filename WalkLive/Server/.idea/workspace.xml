@@ -16,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="930">
-              <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <marker date="1513455118000" expanded="true" signature="1191:1210" ph=" SELECT statement (USERS)" />
                 <marker date="1513455118000" expanded="true" signature="3091:3129" ph=" SELECT statement (USERS)" />
@@ -27,27 +27,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CrimeDataHandler.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CrimeDataHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/CrimeDataHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+            <state relative-caret-position="313">
+              <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1513392271000" expanded="true" signature="3389:3421" ph=" CREATE statement" />
                 <marker date="1513392271000" expanded="true" signature="3610:3766" ph=" INSERT statement (CRIME)" />
                 <marker date="1513392271000" expanded="true" signature="4144:4189" ph=" SELECT statement (USERS)" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="walkliveCrime.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/walkliveCrime.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-245">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -67,16 +57,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="121">
               <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="5" lean-forward="false" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -141,7 +121,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
-              <caret line="1263" column="91" lean-forward="true" selection-start-line="1263" selection-start-column="91" selection-end-line="1263" selection-end-column="91" />
+              <caret line="1263" column="91" lean-forward="false" selection-start-line="1263" selection-start-column="91" selection-end-line="1263" selection-end-column="91" />
               <folding>
                 <marker date="1513275443000" expanded="true" signature="2794:2832" ph=" SELECT statement (USERS)" />
                 <marker date="1513275443000" expanded="true" signature="5773:5811" ph=" SELECT statement (USERS)" />
@@ -175,11 +155,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataBaseHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataBaseHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DataBaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -675,36 +655,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/walkliveCrime.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-245">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/UserManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="930">
-          <caret line="69" column="0" lean-forward="true" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
             <marker date="1513455118000" expanded="true" signature="1191:1210" ph=" SELECT statement (USERS)" />
             <marker date="1513455118000" expanded="true" signature="3091:3129" ph=" SELECT statement (USERS)" />
             <marker date="1513455118000" expanded="true" signature="4624:4662" ph=" SELECT statement (USERS)" />
             <marker date="1513455118000" expanded="true" signature="7494:7670" ph=" INSERT statement (USERS)" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/CrimeDataHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1513392271000" expanded="true" signature="3389:3421" ph=" CREATE statement" />
-            <marker date="1513392271000" expanded="true" signature="3610:3766" ph=" INSERT statement (CRIME)" />
-            <marker date="1513392271000" expanded="true" signature="4144:4189" ph=" SELECT statement (USERS)" />
           </folding>
         </state>
       </provider>
@@ -720,7 +679,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/WalkLiveService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
-          <caret line="1263" column="91" lean-forward="true" selection-start-line="1263" selection-start-column="91" selection-end-line="1263" selection-end-column="91" />
+          <caret line="1263" column="91" lean-forward="false" selection-start-line="1263" selection-start-column="91" selection-end-line="1263" selection-end-column="91" />
           <folding>
             <marker date="1513275443000" expanded="true" signature="2794:2832" ph=" SELECT statement (USERS)" />
             <marker date="1513275443000" expanded="true" signature="5773:5811" ph=" SELECT statement (USERS)" />
@@ -755,9 +714,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/DataBaseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/walkliveCrime.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/WalkLiveApp/CrimeDataHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1513392271000" expanded="true" signature="3389:3421" ph=" CREATE statement" />
+            <marker date="1513392271000" expanded="true" signature="3610:3766" ph=" INSERT statement (CRIME)" />
+            <marker date="1513392271000" expanded="true" signature="4144:4189" ph=" SELECT statement (USERS)" />
+          </folding>
         </state>
       </provider>
     </entry>
