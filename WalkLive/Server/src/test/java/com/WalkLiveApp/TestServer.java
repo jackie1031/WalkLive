@@ -333,42 +333,42 @@ public class TestServer {
 //        }
 //    }
 
-    @Test
-    public void testGetIncomingFriendRequests() throws Exception {
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063"),
-                new User("yangcao1", "121212", "1231231233")
-        };
-
-        //add to database
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-
-        Relationship[] frs = new Relationship[] {
-                new Relationship("michelle", "jeesookim", null),
-                new Relationship("yangcao1", "jeesookim", null)
-        };
-
-        Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", frs[0]);
-        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        rCreateFR = request("POST", "/WalkLive/api/users/yangcao1/friend_requests", frs[1]);
-        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-
-        Response r = request("GET", "/WalkLive/api/users/jeesookim/friend_requests", null);
-        List<Relationship> results = getRelationships(r);
-
-        assertEquals("Number of entries differ", frs.length, results.size());
-
-        for (int i = 0; i < results.size(); i++) {
-            Relationship actual = results.get(i);
-            assertEquals("Not returning the incoming requests", actual.getRecipient(), "jeesookim");
-            assertEquals("Mismatch in sender", frs[i].getSender(), actual.getSender());
-            assertEquals("Mismatch in relationship", frs[i].getRelationship(), actual.getRelationship());
-        }
-    }
+//    @Test
+//    public void testGetIncomingFriendRequests() throws Exception {
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456","4405339063"),
+//                new User("michelle", "0123", "4405339063"),
+//                new User("yangcao1", "121212", "1231231233")
+//        };
+//
+//        //add to database
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//        }
+//
+//        Relationship[] frs = new Relationship[] {
+//                new Relationship("michelle", "jeesookim", null),
+//                new Relationship("yangcao1", "jeesookim", null)
+//        };
+//
+//        Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", frs[0]);
+//        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        rCreateFR = request("POST", "/WalkLive/api/users/yangcao1/friend_requests", frs[1]);
+//        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//
+//        Response r = request("GET", "/WalkLive/api/users/jeesookim/friend_requests", null);
+//        List<Relationship> results = getRelationships(r);
+//
+//        assertEquals("Number of entries differ", frs.length, results.size());
+//
+//        for (int i = 0; i < results.size(); i++) {
+//            Relationship actual = results.get(i);
+//            assertEquals("Not returning the incoming requests", actual.getRecipient(), "jeesookim");
+//            assertEquals("Mismatch in sender", frs[i].getSender(), actual.getSender());
+//            assertEquals("Mismatch in relationship", frs[i].getRelationship(), actual.getRelationship());
+//        }
+//    }
 
 //    @Test
 //    public void testGetNewRequestId() throws Exception {
@@ -506,28 +506,28 @@ public class TestServer {
      * Emergency Contact PUT
      * ================================================================
      */
-
-    @Test
-    public void testUpdateEmergencyInfo() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        //add single element
-        User expected = new User("jeesoo1", "test-1", "4405339063");
-        Response r1 = request("POST", "/WalkLive/api/users", expected);
-        User expected2 = new User("hello", "test-1", "1231231233");
-        Response r2 = request("POST", "/WalkLive/api/users", expected2);
-        assertEquals("Failed to add new user", 201, r1.httpStatus);
-        assertEquals("Failed to add new user", 201, r2.httpStatus);
-
-
-        //update emergency contact info
-        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
-        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
-        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
-        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
-        assertEquals("Failed to get user", 200, r3.httpStatus);
-        assertEquals("Failed to get user", 200, r4.httpStatus);
-    }
+//
+//    @Test
+//    public void testUpdateEmergencyInfo() throws Exception {
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//        //add single element
+//        User expected = new User("jeesoo1", "test-1", "4405339063");
+//        Response r1 = request("POST", "/WalkLive/api/users", expected);
+//        User expected2 = new User("hello", "test-1", "1231231233");
+//        Response r2 = request("POST", "/WalkLive/api/users", expected2);
+//        assertEquals("Failed to add new user", 201, r1.httpStatus);
+//        assertEquals("Failed to add new user", 201, r2.httpStatus);
+//
+//
+//        //update emergency contact info
+//        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
+//        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
+//        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
+//        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
+//        assertEquals("Failed to get user", 200, r3.httpStatus);
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
+//    }
 
     /**
      * ================================================================
@@ -535,33 +535,33 @@ public class TestServer {
      * ================================================================
      */
 
-//    @Test
-//    public void testStartTrip() throws Exception {
-//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        //start trip
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//
-//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        Response r4 = request("GET", "/WalkLive/api/trips/2", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//
-//
-//    }
+    @Test
+    public void testStartTrip() throws Exception {
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/1", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/2", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+
+    }
 
 //    @Test
 //    public void testEndTrip() throws Exception {
@@ -1111,7 +1111,7 @@ public class TestServer {
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
