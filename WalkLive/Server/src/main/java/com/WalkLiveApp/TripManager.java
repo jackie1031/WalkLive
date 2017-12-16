@@ -62,9 +62,6 @@ public class TripManager {
     }
 
     public void endTrip(String tripIdInStr) throws WalkLiveService.InvalidDestination, WalkLiveService.InvalidTargetID, ParseException {
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
         int tripId = Integer.parseInt(tripIdInStr);
         this.insertTripToFinished(tripId);
         this.removeCompletedTripFromOngoing(tripId);
@@ -120,7 +117,10 @@ public class TripManager {
         ArrayList<Trip> trips = new ArrayList<>();
 
         for(User user: friends) {
-            trips.add(getTripString(user.getUsername()));
+            Trip trip = getTripString(user.getUsername());
+            if (trip != null){
+                trips.add(trip);
+            }
         }
         return trips;
     }
