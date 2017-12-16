@@ -57,6 +57,63 @@ public class TripManager {
         }
     }
 
+    public void endTrip(String tripIdInStr) throws WalkLiveService.InvalidDestination, WalkLiveService.InvalidTargetID, ParseException {
+        PreparedStatement ps = null;
+        ResultSet res = null;
+
+        int tripId = Integer.parseInt(tripIdInStr);
+        this.insertTripToFinished(tripId);
+        this.removeCompletedTripFromOngoing(tripId);
+    }
+
+    public Trip getTrip(String tripIdInStr) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
+        ResultSet res = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        //logger.info("in the get trip, the string form "+ tripIdInStr);
+        //logger.info("================================");
+        //logger.info("in the get trip, the int form "+ tripId);
+
+        int tripId = Integer.parseInt(tripIdInStr);
+
+        String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, tripId);
+            res = ps.executeQuery();
+            if (res.next()) {
+                return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+
+            } else{
+                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+            }
+        } catch(SQLException ex){
+            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", tripId), ex);
+
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", tripId), ex);
+        } finally{
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 
     private int getNewRequestId() throws WalkLiveService.UserServiceException {
         ResultSet res = null;
@@ -91,6 +148,68 @@ public class TripManager {
             if (res != null) {
                 try {
                     res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
+    private void insertTripToFinished(int tripId) throws WalkLiveService.InvalidDestination{
+        PreparedStatement ps = null;
+        ResultSet res = null;
+        Connection conn = null;
+
+        String sql = "INSERT INTO doneTrips select * from ongoingTrips where tripId = ?";
+
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, tripId);
+            WalkLiveService.logger.info("pass here in ENDTRIP");
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+            throw new WalkLiveService.InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
+    private void removeCompletedTripFromOngoing(int tripId) throws WalkLiveService.InvalidDestination{
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+
+        String sql2 = "DELETE FROM ongoingTrips where tripId = ?";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql2);
+            ps.setInt(1, tripId);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+            throw new WalkLiveService.InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
                 } catch (SQLException e) { /* ignored */}
             }
             if (conn != null) {
