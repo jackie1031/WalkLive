@@ -89,7 +89,7 @@ class BackEndClient: NSObject {
             } else {
                 print(status)
             let userContact = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
-            currentUserInfo = userLogin
+                currentUserInfo = UserLogin(username: (userContact?.username)!, password: userLogin.password!, contact: (userContact?.contact)!)
                 
                 self.saveUserData()
                 success(userContact!)}
