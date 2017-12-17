@@ -22,4 +22,5 @@ class TimePoint: NSObject, Codable {
     var timeSpent: String?
     var emergencyNum: String?
     var tripId: Int?
+    var address: String?
 }

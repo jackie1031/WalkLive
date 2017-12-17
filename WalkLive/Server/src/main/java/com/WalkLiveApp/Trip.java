@@ -4,28 +4,12 @@ import java.util.*;
 
 public class Trip {
 
-    private String username, destination, timeSpent, emergencyNum, startTime, shareTo;
+    private String username, destination, timeSpent, emergencyNum, startTime, shareTo, address;
     private double startLat,startLong,curLat,curLong,endLat,endLong;
     private boolean completed;
     //private Coordinate currCoordinate;
 
     private int tripId,timePointId, dangerLevel;
-
-
-    //constructor
-    public Trip (int tripId, String username){
-
-        this.tripId =  tripId;
-        this.username =  username;
-
-    }
-
-    public Trip (int tripId, String username, String destination, boolean completed){
-        this.tripId =  tripId;
-        this.username =  username;
-        this.destination =  destination;
-        this.completed =  completed;
-    }
 
     public Trip (String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
@@ -45,8 +29,48 @@ public class Trip {
 
     }
 
+    public Trip (String username, String destination, String startTime, boolean completed, double startLat,
+                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address){
+        this.username =  username;
+        this.destination =  destination;
+        this.startTime =  startTime;
+        this.completed =  completed;
+        this.startLat =  startLat;
+        this.startLong =  startLong;
+        this.curLat =  curLat;
+        this.curLong =  curLong;
+        this.endLat =  endLat;
+        this.endLong =  endLong;
+        this.emergencyNum =  emergencyNum;
+        this.timeSpent =  timeSpent;
+
+
+    }
+
     public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent){
+
+        this.tripId =  tripId;
+        this.username =  username;
+        this.destination =  destination;
+        this.startTime =  startTime;
+        this.completed =  completed;
+        this.startLat =  startLat;
+        this.startLong =  startLong;
+        this.curLat =  curLat;
+        this.curLong =  curLong;
+        this.endLat =  endLat;
+        this.endLong =  endLong;
+        this.emergencyNum =  emergencyNum;
+        this.timeSpent =  timeSpent;
+
+
+    }
+
+
+
+    public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
+                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address){
 
         this.tripId =  tripId;
         this.username =  username;
@@ -117,6 +141,16 @@ public class Trip {
 
     public double getEndLong() {
         return endLong;
+    }
+
+    public void setTripId(int tripId){ this.tripId = tripId;}
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
 

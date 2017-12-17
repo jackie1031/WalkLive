@@ -34,8 +34,8 @@ public class TripManager {
         WalkLiveService.logger.info("the trip id is: " + tripId);
 
 
-        String sql = "INSERT INTO ongoingTrips (tripId, username, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent)" +
-                " VALUES (?,?,?,Null,?,completed,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ongoingTrips (tripId, username, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent, address)" +
+                " VALUES (?,?,?,Null,?,completed,?,?,?,?,?,?,?,?,?)";
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
@@ -52,6 +52,7 @@ public class TripManager {
             ps.setDouble(10, trip.getEndLong());
             ps.setString(11, trip.getEmergencyNum());
             ps.setString(12, trip.getTimeSpent());
+            ps.setString(13, trip.getAddress());
             ps.executeUpdate();
 
             return trip;
@@ -108,7 +109,7 @@ public class TripManager {
             ps.setInt(1, tripId);
             res = ps.executeQuery();
             if (res.next()) {
-                return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+                return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
 
             } else{
                 WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
@@ -162,7 +163,7 @@ public class TripManager {
             ps.setString(1, username);
             res = ps.executeQuery();
             if (res.next()) {
-                return new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+                return new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
 
             } else{
                 WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
@@ -245,7 +246,7 @@ public class TripManager {
 
             ArrayList<Trip> trips = new ArrayList<>();
             while (res.next()) {
-                Trip temp =  new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+                Trip temp =  new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
                 if (temp != null){
                     trips.add(temp);
                 }
@@ -349,7 +350,7 @@ public class TripManager {
             res = ps.executeQuery();
 
             if (res.next()) {
-                return new Trip(res.getInt("tripId"), res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+                return new Trip(res.getInt("tripId"), res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
 
             }
 
