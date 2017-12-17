@@ -9,6 +9,9 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.SortedSet;
+
+
 import java.util.*;
 import org.apache.commons.math3.exception.ConvergenceException;
 import org.apache.commons.math3.exception.MathIllegalArgumentException;
@@ -31,17 +34,8 @@ public class CrimeDataHandler {
     static ResultSet res = null;
     static Statement stm = null;
 
-
-    //public static void updateDB() throws FileNotFoundException,IOException,ParseException {
     public static void main(String[] args) throws Exception {
 
-        //JSONObject object = (JSONObject) new JSONParser().parse(body);
-
-        //should be in a try catch block in case that incorrect body is given
-//        String id = object.get("emergency_id").toString();
-//        String number = object.get("emergency_number").toString();
-
-        //query to see if username given is valid
 
         JSONParser parser = new JSONParser();
         try{
@@ -83,10 +77,7 @@ public class CrimeDataHandler {
                 //System.out.println("got here!");
 
 
-                /** need to check the range
-                (SELECT sensorNumber, rangeStartTime, rangeEndTime, sensorLow, sensorAverage, sensorHigh
-                FROM rangeData
-                WHERE (rangeStartTime BETWEEN 0 AND 43200) AND (sensorNumber = 3))
+                /** clustering
                  **/
 
                // String sqlSelect = "SELECT * FROM Crime WHERE (latitude between ?) LIMIT 1";
@@ -142,6 +133,11 @@ public class CrimeDataHandler {
 
 
 
+
+
+    }
+
+    private void getCluster(){
 
 
     }

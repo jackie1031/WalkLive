@@ -405,52 +405,52 @@ public class TestServer {
 //        }
 //    }
 //
-    @Test
-    public void testRespondToFriendRequest() throws Exception {
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063"),
-                new User("yangcao1", "121212", "1231231233")
-        };
-
-        //add to database
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-        //add a few elements
-        Relationship[] frs = new Relationship[] {
-                new Relationship("jeesookim", "michelle", null),
-                new Relationship("jeesookim", "yangcao1", null),
-        };
-
-        for (Relationship f : frs) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-
-        Relationship[] frs2 = new Relationship[] {
-                new Relationship("michelle", "yangcao1", null)
-        };
-
-        for (Relationship f : frs2) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-
-        Response response = request("GET", "/WalkLive/api/users/yangcao1/friend_requests", null);
-        List<Relationship> res = getRelationships(response);
-        assertEquals("Request relationship have not all been added", res.size(), 2);
-
-        //test accept
-        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/3/accept", null);
-        assertEquals("Failed to accept friend request", 200, r.httpStatus);
-
-        //test reject
-        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
-        assertEquals("Failed to reject friend request.", 200, r2.httpStatus);
-
-    }
+//    @Test
+//    public void testRespondToFriendRequest() throws Exception {
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456","4405339063"),
+//                new User("michelle", "0123", "4405339063"),
+//                new User("yangcao1", "121212", "1231231233")
+//        };
+//
+//        //add to database
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//        }
+//        //add a few elements
+//        Relationship[] frs = new Relationship[] {
+//                new Relationship("jeesookim", "michelle", null),
+//                new Relationship("jeesookim", "yangcao1", null),
+//        };
+//
+//        for (Relationship f : frs) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        }
+//
+//        Relationship[] frs2 = new Relationship[] {
+//                new Relationship("michelle", "yangcao1", null)
+//        };
+//
+//        for (Relationship f : frs2) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        }
+//
+//        Response response = request("GET", "/WalkLive/api/users/yangcao1/friend_requests", null);
+//        List<Relationship> res = getRelationships(response);
+//        assertEquals("Request relationship have not all been added", res.size(), 2);
+//
+//        //test accept
+//        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/3/accept", null);
+//        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+//
+//        //test reject
+//        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
+//        assertEquals("Failed to reject friend request.", 200, r2.httpStatus);
+//
+//    }
 //
 //    @Test
 //    public void testGetFriendList() throws Exception{
@@ -538,8 +538,38 @@ public class TestServer {
      * ================================================================
      */
 
+    @Test
+    public void testStartTripByID() throws Exception {
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+
+        //username
+        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+
+    }
+
 //    @Test
-//    public void testStartTripByID() throws Exception {
+//    public void testTripDangerLevel() throws Exception {
 //        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 //        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 //
@@ -568,34 +598,32 @@ public class TestServer {
 //
 //    }
 
-
-
-    @Test
-    public void testgetTripByName() throws Exception {
-        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-
-        //start trip
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-
-        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-
-
-        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-
-        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-        assertEquals("unidentified destination ", 200, r3.httpStatus);
-
-        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r4.httpStatus);
-
-    }
+//    @Test
+//    public void testgetTripByName() throws Exception {
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        //start trip
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//
+//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+//        assertEquals("unidentified destination ", 200, r3.httpStatus);
+//
+//        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
+//
+//    }
 
 
 //    @Test
@@ -608,10 +636,10 @@ public class TestServer {
 //        assertEquals("unidentified destination ", 200, r1.httpStatus);
 //        assertEquals(test.isCompleted(),false);
 //
-//        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
+//        Response r2 = request("PUT", "/WalkLive/api/trips/getById/1", null);
 //        assertEquals("Failed to get user", 200, r2.httpStatus);
 //
-//        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
+//        //Response r3 = request("GET", "/WalkLive/api/trips/1", null);
 //        //assertEqualsx(r3.isCompleted(),false);
 //
 //    }
@@ -662,48 +690,48 @@ public class TestServer {
 //        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
 //    }
 
-    @Test
-    public void testTripHistory() throws Exception {
-
-        //WalkLiveService walkLiveService;
-
-        Trip trip = new Trip("yangcao1","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"110110110","3hours");
-        Trip trip2 = new Trip("yangcao1","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"120120120","3hours");
-        //Trip trip3 = new Trip("jackie","malone","18", false,123,123,456,456,789,789,"119119119","3hours");
-
-        Response startT1 = request("POST", "/WalkLive/api/trips", trip);
-        assertEquals("unidentified destination ", 200, startT1.httpStatus);
-        Response endT1 = request("PUT", "/WalkLive/api/trips/1/endtrip", null);
-        assertEquals("Failed to get user", 200, endT1.httpStatus);
-
-        Response startT2 = request("POST", "/WalkLive/api/trips", trip2);
-        assertEquals("unidentified destination ", 200, startT2.httpStatus);
-        Response endT2 = request("PUT", "/WalkLive/api/trips/2/endtrip", null);
-        assertEquals("Failed to get user", 200, endT2.httpStatus);
-
-        Response getHistory = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
-        assertEquals("Failed to get user", 200, getHistory.httpStatus);
-
-        //Response rList = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
-
-        //List<Trip> results = getTripHistory(getHistory);
-
-        //assertEquals("Number of trips entries differ", allTrips.size(), results.size());
-
-
-        ArrayList<Trip> allTrips = new ArrayList<>();
-        allTrips.add(trip);
-        allTrips.add(trip2);
-        //Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
-
-        List<Trip> results = getTrip(getHistory);
-        logger.error("the trip history is:" + getHistory);
-
-        assertEquals("Number of trips entries differ", allTrips.size(), results.size());
-
-
-
-    }
+//    @Test
+//    public void testTripHistory() throws Exception {
+//
+//        //WalkLiveService walkLiveService;
+//
+//        Trip trip = new Trip("yangcao1","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"110110110","3hours");
+//        Trip trip2 = new Trip("yangcao1","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"120120120","3hours");
+//        //Trip trip3 = new Trip("jackie","malone","18", false,123,123,456,456,789,789,"119119119","3hours");
+//
+//        Response startT1 = request("POST", "/WalkLive/api/trips", trip);
+//        assertEquals("unidentified destination ", 200, startT1.httpStatus);
+//        Response endT1 = request("PUT", "/WalkLive/api/trips/1/endtrip", null);
+//        assertEquals("Failed to get user", 200, endT1.httpStatus);
+//
+//        Response startT2 = request("POST", "/WalkLive/api/trips", trip2);
+//        assertEquals("unidentified destination ", 200, startT2.httpStatus);
+//        Response endT2 = request("PUT", "/WalkLive/api/trips/2/endtrip", null);
+//        assertEquals("Failed to get user", 200, endT2.httpStatus);
+//
+//        Response getHistory = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
+//        assertEquals("Failed to get user", 200, getHistory.httpStatus);
+//
+//        //Response rList = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
+//
+//        //List<Trip> results = getTripHistory(getHistory);
+//
+//        //assertEquals("Number of trips entries differ", allTrips.size(), results.size());
+//
+//
+//        ArrayList<Trip> allTrips = new ArrayList<>();
+//        allTrips.add(trip);
+//        allTrips.add(trip2);
+//        //Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
+//
+//        List<Trip> results = getTrip(getHistory);
+//        logger.error("the trip history is:" + getHistory);
+//
+//        assertEquals("Number of trips entries differ", allTrips.size(), results.size());
+//
+//
+//
+//    }
 
 //
 //    @Test
@@ -1071,20 +1099,28 @@ public class TestServer {
             String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
             String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
-            String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            //String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitute DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
+            String sqlInsertClusters = " NSERT INTO dangerZones (tripId, username, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent) " +
+                    "VALUES (?,?,?,Null,?,completed,?,?,?,?,?,?,?,?) ";
+
+
+
 
             stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
             stm.executeUpdate(sqlNew7);
+            stm.executeUpdate(sqlNew8);
+            stm.executeUpdate(sqlInsertClusters);
 
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
             stm.executeUpdate(setup3);
             stm.executeUpdate(counterInit);
-            stm.executeUpdate(setup4);
+            //stm.executeUpdate(setup4);
             //stm.executeUpdate(setup5);
 
             String sql = "DROP TABLE IF EXISTS TestCrimes";
@@ -1097,8 +1133,10 @@ public class TestServer {
             stm.executeUpdate(sql4);
             String sql5 = "DROP TABLE IF EXISTS counters" ;
             stm.executeUpdate(sql5);
-            String sql6 = "DROP TABLE IF EXISTS Trips" ;
-            stm.executeUpdate(sql6);
+
+            //String sql6 = "DROP TABLE IF EXISTS Trips" ;
+            //stm.executeUpdate(sql6);
+
             String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
             stm.executeUpdate(sql7);
 
@@ -1106,8 +1144,11 @@ public class TestServer {
             stm.executeUpdate(sql8);
 
             String sql9 = "DROP TABLE IF EXISTS Crime" ;
-
             stm.executeUpdate(sql9);
+
+            String sql10 = "DROP TABLE IF EXISTS dangerZones" ;
+            stm.executeUpdate(sql10);
+
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
@@ -1151,8 +1192,8 @@ public class TestServer {
             stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friends" ;
             stm.executeUpdate(sql4);
-            String sql5 = "DROP TABLE IF EXISTS Trips" ;
-            stm.executeUpdate(sql5);
+            //String sql5 = "DROP TABLE IF EXISTS Trips" ;
+            //stm.executeUpdate(sql5);
             String sql6 = "DROP TABLE IF EXISTS counters" ;
             stm.executeUpdate(sql6);
             String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
@@ -1165,7 +1206,7 @@ public class TestServer {
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            //String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 
@@ -1175,7 +1216,7 @@ public class TestServer {
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
-            stm.executeUpdate(sqlNew3);
+            //stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
             stm.executeUpdate(counterInit);
             stm.executeUpdate(sqlNew5);

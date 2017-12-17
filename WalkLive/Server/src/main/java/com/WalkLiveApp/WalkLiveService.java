@@ -205,6 +205,20 @@ public class WalkLiveService {
      }
 
 
+    /**
+     *
+     * @param tripIdInStr: the trip id as a string
+     * @param body: contains coordinate, time of day
+     * @return Crime: a crime object with danger level and nearby clusters
+     * @throws SQLException： invalid sql statement
+     * @throws WalkLiveService.UserServiceException: can't find user
+     * @throws ParseException: can't parse into parameters
+     * @throws InvalidTargetID: invalid trip id
+     */
+    public Crime getDangerZone(String tripIdInStr, String body) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+        return new Crime().getDangerLeveLZone(tripIdInStr, body);
+    }
+
     //=====================EXCEPTIONS============================
 
     public static class UserServiceException extends Exception {

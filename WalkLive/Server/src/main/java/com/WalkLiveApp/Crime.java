@@ -1,12 +1,17 @@
 package com.WalkLiveApp;
 
+import com.google.gson.Gson;
 
-//import sun.jvm.hotspot.code.ConstantOopReadValue;
+import java.sql.*;
+import java.util.*;
+
+
 
 public class Crime {
-    private int date, timeOfDay,linkID;
+    private int date, timeOfDay,crimeId, dangerLevel;
     private double longitude, latitude;
     private String address, type;
+    private ArrayList<Cluster> clusters= new ArrayList<Cluster>();
 
 
     public void setDate(int date) {
@@ -17,8 +22,8 @@ public class Crime {
         this.timeOfDay = timeOfDay;
     }
 
-    public void setLinkID(int linkID) {
-        this.linkID = linkID;
+    public void setcrimeId(int crimeId) {
+        this.crimeId = crimeId;
     }
 
     public void setAddress(String address) {
@@ -31,31 +36,30 @@ public class Crime {
 
 
 
-
-
-    public Crime(int date, int timeOfDay, String address, String type, double longitude, double latitude, int linkID) {
+    public Crime(int date, int timeOfDay, String address, String type, double longitude, double latitude, int crimeId) {
         this.date = date;
         this.timeOfDay = timeOfDay;
         this.address = address;
         this.type = type;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.linkID = linkID;
+        this.crimeId = crimeId;
     }
 
     public Crime(int date,double longitude, double latitude) {
         this.date = date;
-        this.address = "";
-        this.type = "";
         this.longitude = longitude;
         this.latitude = latitude;
-        this.linkID = 0;
     }
 
 
-    public Crime() {
+    public Crime(int dangerLevel, ArrayList<Cluster> clusters ) {
+        this.dangerLevel = dangerLevel;
+        this.clusters = clusters;
 
     }
+
+    public Crime(){}
 
     /**
      * Get the date
@@ -84,11 +88,11 @@ public class Crime {
     }
 
     /**
-     * Get the linkId
-     * @return linkId
+     * Get the crimeId
+     * @return crimeId
      */
-    public int getLinkId() {
-        return linkID;
+    public int getcrimeId() {
+        return crimeId;
     }
 
     /**
@@ -101,6 +105,76 @@ public class Crime {
                 + " address: " + address
                 //+ " Coordinate: "+coordinate
                 + " type: " + type
-                + " linkId: " + linkID;
+                + " crimeId: " + crimeId;
     }
+
+
+    //clustering should be done in pre data process
+    public ArrayList<Cluster> findCluster(){
+
+        //go search for cluster in the table
+
+        return clusters;
+    }
+
+    public Crime getDangerLeveLZone(String tripIdInStr, String body) throws WalkLiveService.UserServiceException, SQLException{
+        ResultSet res = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        int tripId = Integer.parseInt(tripIdInStr);
+        Trip trip = new Gson().fromJson(body, Trip.class);
+
+        double longitude = trip.getCurLong();
+        double latitude = trip.getCurLat();
+//
+//        SELECT column_name(s)
+//                FROM table_name
+//        WHERE column_name BETWEEN value1 AND value2;
+
+        //String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
+        String sql = "SELECT * FROM dangerZones (WHERE longitute BETWEEN ? AND ?) AND (WHERE longitute BETWEEN ? AND ?)";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, tripId);
+            res = ps.executeQuery();
+            if (res.next()) {
+                //return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+
+            } else{
+                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+            }
+        } catch(SQLException ex){
+            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", tripId), ex);
+
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", tripId), ex);
+        } finally{
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+        return new Crime(dangerLevel,clusters);
+
+    }
+
+
+
+
 }
