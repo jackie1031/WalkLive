@@ -13,7 +13,7 @@ import CoreLocation
 class TimeManager: NSObject {
     private var timer = Timer()
     private var timeInterval: TimeInterval!
-    private var usedTimeInterval = 0
+    var usedTimeInterval = 0
     private var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
     var tripId: Int?
@@ -29,7 +29,6 @@ class TimeManager: NSObject {
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
-        
         if (self.roadRequester != nil) {
         backEndClient.startTrip(success: { (currentTimePoint) in
             self.tripId = currentTimePoint.tripId

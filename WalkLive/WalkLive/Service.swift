@@ -41,6 +41,14 @@ func getTodayString() -> String{
     
 }
 
+extension String {
+    var westernArabicNumeralsOnly: String {
+        let pattern = UnicodeScalar("0")..."9"
+        return String(unicodeScalars
+            .flatMap { pattern ~= $0 ? Character($0) : nil })
+    }
+}
+
 
 let primaryColor = UIColor(netHex: 0x94CFC9)
 let backEndClient = BackEndClient()

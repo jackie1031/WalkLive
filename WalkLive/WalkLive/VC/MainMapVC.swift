@@ -52,6 +52,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
         self.setupRoadRequester()
         self.setKeyboard()
         self.hidePanels()
+        self.checkOngoingTrip()
     }
     
     
@@ -101,6 +102,25 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     private func hideKeyboard(){
         self.view.endEditing(true)
+    }
+    
+    func checkOngoingTrip(){
+        backEndClient.getOngoingTrip(success: { (timePoint) in
+            self.setOngoingTrip(timePoint: timePoint)
+        }, failure: { (error) in
+            
+        })
+    }
+    
+    func setOngoingTrip(timePoint: TimePoint) {
+        self.roadRequester.drawRouteFromTimePoint(success: { (trip) in
+            OperationQueue.main.addOperation {
+            trip.timeSpentInt = Int((timePoint.timeSpent?.westernArabicNumeralsOnly)!)
+            self.startTrip(trip: trip)
+            }
+        }, failure: { (error) in
+            
+        }, timePoint: timePoint)
     }
     
     //Public functions
@@ -320,6 +340,8 @@ extension MainMapVC: RouteDelegate{
     private func createTimeManager(trip: Trip){
         self.timeManager = TimeManager(timeInterval: trip.timeInterval!, roadRequester: self.roadRequester)
         self.timeManager.tripPanelDelegate = self
+        if (trip.timeSpentInt != nil){
+            self.timeManager.usedTimeInterval = trip.timeSpentInt!}
         self.timeManager.startTimer(timeInterval: 60)
     }
     
