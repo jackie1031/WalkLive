@@ -283,6 +283,28 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
+
+//            getTripHistory:
+//
+//            Method: GET
+//            URL: /WalkLive/api/trips/[username]/tripHistory
+//            Content: {}
+//            Failure Response:
+//            InvalidTargetId	Code 402
+//            Success Response:	Code 200
+//            Content: { <trip 1>, <trip 2>, <trip 3>, ... }
+
+            get(API_CONTEXT + "/trips/:username/tripHistory", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.getTripHistory(request.params(":username"));
+                } catch (WalkLiveService.InvalidTargetID e) {
+                    logger.error("Invalid user id.");
+                    response.status(402);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
+
 //            updateTrip:
 //
 //            Method: PUT

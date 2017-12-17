@@ -2,12 +2,16 @@ package com.WalkLiveApp;
 
 import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TripManager {
+    private final Logger logger = LoggerFactory.getLogger(ServerController.class);
 
     public Trip startTrip(String body) throws WalkLiveService.InvalidDestination, WalkLiveService.UserServiceException, ParseException {
         Connection conn = null;
@@ -171,6 +175,65 @@ public class TripManager {
         return trips;
     }
 
+
+
+
+    public List<Trip> getTripHistory(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
+        //List<User> friends = new FriendsManager().getFriendList(username);
+        //List<Trip> allTrips = new TripManager().getPastTrip(username);
+        //ArrayList<Trip> trips = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet res = null;
+
+        String sql = "SELECT * FROM doneTrips WHERE username = ?";
+
+        try {
+
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            res = ps.executeQuery();
+
+            ArrayList<Trip> trips = new ArrayList<>();
+            while (res.next()) {
+                Trip temp =  new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
+                if (temp != null){
+                    trips.add(temp);
+                }
+                //trips.add(temp);
+                //logger.error("added here");
+            }
+
+            //System.out.println("SUCCESSFULLY UPDATED.");
+            return trips;
+
+        } catch(SQLException ex) {
+
+            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
+
+        }  finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+
+    }
+
+
     public void updateTrip(String tripIdInStr, String body) throws WalkLiveService.InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -307,7 +370,7 @@ public class TripManager {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
             ps = conn.prepareStatement(sql);
             ps.setInt(1, tripId);
-            WalkLiveService.logger.info("pass here in ENDTRIP");
+            //WalkLiveService.logger.info("pass here in ENDTRIP");
             ps.executeUpdate();
 
         } catch (SQLException ex) {
