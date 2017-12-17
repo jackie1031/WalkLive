@@ -79,6 +79,7 @@
     </plugins>
   </reporting>
   <properties>
+    <org.springframework.version>4.3.8.RELEASE</org.springframework.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>

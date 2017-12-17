@@ -6,6 +6,9 @@ import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
 import spark.Spark;
 import spark.utils.IOUtils;
 
@@ -19,6 +22,9 @@ import java.util.*;
 import java.util.stream.*;
 
 import org.junit.*;
+
+import javax.sql.DataSource;
+
 import static org.junit.Assert.*;
 import static spark.Spark.get;
 import static spark.Spark.put;
@@ -66,7 +72,7 @@ public class TestServer {
     @Before
     public void setup() throws Exception {
         //Clear the database
-        clearDB();
+//        clearDB();
 
     }
 
@@ -82,38 +88,45 @@ public class TestServer {
 
     @Test
     public void testCreateNew() throws Exception {
-        //Add a few elements
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063")
-        };
-
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            //System.out.println("USER: " + t.toString());
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-
-        //Get them back
-        Response r = request("GET", "/WalkLive/api/users", null);
-        assertEquals("Failed to get user entries", 200, r.httpStatus);
-        List<User> results = getUsers(r);
-
-        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-        assertEquals("Number of user entries differ", entries.length, results.size());
-
-        for (int i = 0; i < results.size(); i++) {
-            User actual = results.get(i);
-
-            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
-            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
-            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
-        }
+//        //Add a few elements
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456","4405339063"),
+//                new User("michelle", "0123", "4405339063")
+//        };
+//
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            //System.out.println("USER: " + t.toString());
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//        }
+//
+//        //Get them back
+//        Response r = request("GET", "/WalkLive/api/users", null);
+//        assertEquals("Failed to get user entries", 200, r.httpStatus);
+//        List<User> results = getUsers(r);
+//
+//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+//        assertEquals("Number of user entries differ", entries.length, results.size());
+//
+//        for (int i = 0; i < results.size(); i++) {
+//            User actual = results.get(i);
+//
+//            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+//            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+//            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+//            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+//            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+//            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+//            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
+//        }
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUrl(ConnectionHandler.url);
+        dataSource.setUsername(ConnectionHandler.user);
+        dataSource.setPassword(ConnectionHandler.password);
+            JdbcTemplate jdbcTemplateObject = new JdbcTemplate(dataSource);
+            jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
+                    "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
 
     }
 
@@ -405,52 +418,52 @@ public class TestServer {
 //        }
 //    }
 //
-    @Test
-    public void testRespondToFriendRequest() throws Exception {
-        User[] entries = new User[] {
-                new User("jeesookim", "123456","4405339063"),
-                new User("michelle", "0123", "4405339063"),
-                new User("yangcao1", "121212", "1231231233")
-        };
-
-        //add to database
-        for (User t : entries) {
-            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-        }
-        //add a few elements
-        Relationship[] frs = new Relationship[] {
-                new Relationship("jeesookim", "michelle", null),
-                new Relationship("jeesookim", "yangcao1", null),
-        };
-
-        for (Relationship f : frs) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-
-        Relationship[] frs2 = new Relationship[] {
-                new Relationship("michelle", "yangcao1", null)
-        };
-
-        for (Relationship f : frs2) {
-            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
-            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-        }
-
-        Response response = request("GET", "/WalkLive/api/users/yangcao1/friend_requests", null);
-        List<Relationship> res = getRelationships(response);
-        assertEquals("Request relationship have not all been added", res.size(), 2);
-
-        //test accept
-        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/3/accept", null);
-        assertEquals("Failed to accept friend request", 200, r.httpStatus);
-
-        //test reject
-        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
-        assertEquals("Failed to reject friend request.", 200, r2.httpStatus);
-
-    }
+//    @Test
+//    public void testRespondToFriendRequest() throws Exception {
+//        User[] entries = new User[] {
+//                new User("jeesookim", "123456","4405339063"),
+//                new User("michelle", "0123", "4405339063"),
+//                new User("yangcao1", "121212", "1231231233")
+//        };
+//
+//        //add to database
+//        for (User t : entries) {
+//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+//        }
+//        //add a few elements
+//        Relationship[] frs = new Relationship[] {
+//                new Relationship("jeesookim", "michelle", null),
+//                new Relationship("jeesookim", "yangcao1", null),
+//        };
+//
+//        for (Relationship f : frs) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        }
+//
+//        Relationship[] frs2 = new Relationship[] {
+//                new Relationship("michelle", "yangcao1", null)
+//        };
+//
+//        for (Relationship f : frs2) {
+//            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+//        }
+//
+//        Response response = request("GET", "/WalkLive/api/users/yangcao1/friend_requests", null);
+//        List<Relationship> res = getRelationships(response);
+//        assertEquals("Request relationship have not all been added", res.size(), 2);
+//
+//        //test accept
+//        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/3/accept", null);
+//        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+//
+//        //test reject
+//        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
+//        assertEquals("Failed to reject friend request.", 200, r2.httpStatus);
+//
+//    }
 //
 //    @Test
 //    public void testGetFriendList() throws Exception{
@@ -567,36 +580,36 @@ public class TestServer {
 //
 //
 //    }
-
-
-
-    @Test
-    public void testgetTripByName() throws Exception {
-        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-
-        //start trip
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-
-        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-
-
-        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-
-        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-        assertEquals("unidentified destination ", 200, r3.httpStatus);
-
-        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r4.httpStatus);
-
-    }
-
+//
+//
+//
+//    @Test
+//    public void testgetTripByName() throws Exception {
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//
+//        //start trip
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//
+//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//
+//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+//        assertEquals("unidentified destination ", 200, r3.httpStatus);
+//
+//        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
+//
+//    }
+//
 
 //    @Test
 //    public void testEndTrip() throws Exception {
