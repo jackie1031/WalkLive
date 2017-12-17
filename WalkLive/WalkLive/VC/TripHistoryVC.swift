@@ -8,6 +8,9 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+var locationManager =  CLLocationManager()
+
 
 class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var mapView: MKMapView!
@@ -67,6 +70,13 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.tracker.mapTimePoint(timePoint: self.trips![sender.tag])
     }
     
+    /*
+     if (self.tripView == nil) {
+     return messages.buildMessageWithoutTrip()
+     }
+     
+     return messages.buildMessageWithTrip(timeManager: timeManager, roadRequester: roadRequester
+ */
 
     /*
     // MARK: - Navigation

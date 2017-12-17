@@ -39,7 +39,6 @@
 		904B05061FD689A300EEB523 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FB1FD689A300EEB523 /* TimeManager.swift */; };
 		904B05071FD689A300EEB523 /* TimePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FC1FD689A300EEB523 /* TimePoint.swift */; };
 		904B05081FD689A300EEB523 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FD1FD689A300EEB523 /* Trip.swift */; };
-		904B05091FD689A300EEB523 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FE1FD689A300EEB523 /* User.swift */; };
 		904B050B1FD689A300EEB523 /* WarningSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05001FD689A300EEB523 /* WarningSignView.xib */; };
 		904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050D1FD689B300EEB523 /* DefaultVC.swift */; };
 		904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050E1FD689B300EEB523 /* FirstViewVC.swift */; };
@@ -128,7 +127,6 @@
 		904B04FB1FD689A300EEB523 /* TimeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		904B04FC1FD689A300EEB523 /* TimePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePoint.swift; sourceTree = "<group>"; };
 		904B04FD1FD689A300EEB523 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		904B04FE1FD689A300EEB523 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		904B05001FD689A300EEB523 /* WarningSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningSignView.xib; sourceTree = "<group>"; };
 		904B050D1FD689B300EEB523 /* DefaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
 		904B050E1FD689B300EEB523 /* FirstViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
@@ -240,12 +238,12 @@
 		904B04C21FD688D700EEB523 /* WalkLive */ = {
 			isa = PBXGroup;
 			children = (
-				8C56F67F1FD795AB00D1017F /* Error */,
 				904B05271FD689D000EEB523 /* Delegates */,
 				904B05221FD689BA00EEB523 /* Xibs */,
 				904B05301FD68D1C00EEB523 /* Cell */,
 				904B04F51FD689A300EEB523 /* Model */,
 				904B050C1FD689B300EEB523 /* VC */,
+				8C56F67F1FD795AB00D1017F /* Error */,
 				904B04C31FD688D700EEB523 /* AppDelegate.swift */,
 				904B04C71FD688D700EEB523 /* Main.storyboard */,
 				904B04CA1FD688D700EEB523 /* Assets.xcassets */,
@@ -280,26 +278,11 @@
 		904B04F51FD689A300EEB523 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				904B04F61FD689A300EEB523 /* BackEndClient.swift */,
-				904B04F81FD689A300EEB523 /* Location.swift */,
-				904B04F91FD689A300EEB523 /* RoadRequester.swift */,
-				904B04FA1FD689A300EEB523 /* Route.swift */,
-				904B04FB1FD689A300EEB523 /* TimeManager.swift */,
-				904B04FC1FD689A300EEB523 /* TimePoint.swift */,
-				904B04FD1FD689A300EEB523 /* Trip.swift */,
-				904B04FE1FD689A300EEB523 /* User.swift */,
-				904B053B1FD77A5A00EEB523 /* TripUpdater.swift */,
-				904B053D1FD77A7B00EEB523 /* FriendRequest.swift */,
-				904B053F1FD77A8D00EEB523 /* TripRequest.swift */,
-				8CB2D94B1FD87D3100E659FD /* UserLogin.swift */,
-				904B05411FD8916900EEB523 /* EmergencyContact.swift */,
-				8CC299131FDA273C00C9F2A5 /* Message.swift */,
-				9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */,
-				9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */,
-				900468781FDDFAD3008A896E /* FriendTracker.swift */,
-				8C61A8241FE076060016A74A /* MessageBuilder.swift */,
-				905EF6DF1FE66AB000411440 /* HistoryTracker.swift */,
-				905EF6E11FE66AC100411440 /* Tracker.swift */,
+				905EF6E71FE675D900411440 /* Routing */,
+				905EF6E61FE6757900411440 /* Backend Models and Client */,
+				905EF6E51FE6753000411440 /* Message Builders */,
+				905EF6E41FE6750800411440 /* Requests */,
+				905EF6E31FE674C600411440 /* Tracker and Managers */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,10 +312,10 @@
 			children = (
 				904B05231FD689BA00EEB523 /* OnGoingTripView.swift */,
 				904B05241FD689BA00EEB523 /* OnGoingTripView.xib */,
-				904B05001FD689A300EEB523 /* WarningSignView.xib */,
-				901C95E61FDA278F0067A346 /* AddFriendView.xib */,
-				9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */,
 				9015A2B01FDCC35A0080B4D3 /* WarningSignView.swift */,
+				904B05001FD689A300EEB523 /* WarningSignView.xib */,
+				9015A2AE1FDCB88D0080B4D3 /* AddFriendView.swift */,
+				901C95E61FDA278F0067A346 /* AddFriendView.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -358,6 +341,60 @@
 				905EF6DB1FE5E6F700411440 /* TripHistoryTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		905EF6E31FE674C600411440 /* Tracker and Managers */ = {
+			isa = PBXGroup;
+			children = (
+				904B053B1FD77A5A00EEB523 /* TripUpdater.swift */,
+				904B04FB1FD689A300EEB523 /* TimeManager.swift */,
+				905EF6E11FE66AC100411440 /* Tracker.swift */,
+				905EF6DF1FE66AB000411440 /* HistoryTracker.swift */,
+				900468781FDDFAD3008A896E /* FriendTracker.swift */,
+			);
+			path = "Tracker and Managers";
+			sourceTree = "<group>";
+		};
+		905EF6E41FE6750800411440 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				904B053D1FD77A7B00EEB523 /* FriendRequest.swift */,
+				904B053F1FD77A8D00EEB523 /* TripRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		905EF6E51FE6753000411440 /* Message Builders */ = {
+			isa = PBXGroup;
+			children = (
+				8CC299131FDA273C00C9F2A5 /* Message.swift */,
+				8C61A8241FE076060016A74A /* MessageBuilder.swift */,
+				9015A2BE1FDDD11C0080B4D3 /* StringBuilder.swift */,
+			);
+			path = "Message Builders";
+			sourceTree = "<group>";
+		};
+		905EF6E61FE6757900411440 /* Backend Models and Client */ = {
+			isa = PBXGroup;
+			children = (
+				904B04F61FD689A300EEB523 /* BackEndClient.swift */,
+				904B05411FD8916900EEB523 /* EmergencyContact.swift */,
+				8CB2D94B1FD87D3100E659FD /* UserLogin.swift */,
+				904B04F81FD689A300EEB523 /* Location.swift */,
+				9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */,
+				904B04FC1FD689A300EEB523 /* TimePoint.swift */,
+			);
+			path = "Backend Models and Client";
+			sourceTree = "<group>";
+		};
+		905EF6E71FE675D900411440 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				904B04F91FD689A300EEB523 /* RoadRequester.swift */,
+				904B04FA1FD689A300EEB523 /* Route.swift */,
+				904B04FD1FD689A300EEB523 /* Trip.swift */,
+			);
+			path = Routing;
 			sourceTree = "<group>";
 		};
 		A23776061BC8A4301AF5A54D /* Frameworks */ = {
@@ -690,7 +727,6 @@
 				9039111B1FE0FA3600A95373 /* TripTableUpdateDelegate.swift in Sources */,
 				904B05031FD689A300EEB523 /* Location.swift in Sources */,
 				904B05251FD689BA00EEB523 /* OnGoingTripView.swift in Sources */,
-				904B05091FD689A300EEB523 /* User.swift in Sources */,
 				9004687B1FDE1D66008A896E /* WarningSignFactory.swift in Sources */,
 				904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */,
 				8CC299141FDA273C00C9F2A5 /* Message.swift in Sources */,

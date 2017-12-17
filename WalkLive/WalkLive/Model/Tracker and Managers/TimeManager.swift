@@ -14,7 +14,7 @@ class TimeManager: NSObject {
     private var timer = Timer()
     private var timeInterval: TimeInterval!
     var usedTimeInterval = 0
-    private var roadRequester: RoadRequester?
+    var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
     var tripId: Int?
     init(timeInterval: TimeInterval, roadRequester: RoadRequester) {

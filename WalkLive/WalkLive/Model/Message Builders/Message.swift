@@ -57,9 +57,9 @@ class Message: NSObject, NSCoding {
 //        return self.buildMessage(messageSegments: messageSegmentsWithoutTrip)
     }
     
-    func buildMessageWithTrip(timeManager: TimeManager, roadRequester: RoadRequester) -> String {
+    func buildMessageWithTrip(timeManager: TimeManager) -> String {
         let messageBuilder = MessageBuilder()
-        return messageBuilder.messageWithTripBuilder(messageSegments: messageSegmentsWithTrip, timeManager: timeManager, roadRequester: roadRequester)
+        return messageBuilder.messageWithTripBuilder(messageSegments: messageSegmentsWithTrip, timeManager: timeManager)
     }
     
     func buildMessageWithTripPreview() -> String {

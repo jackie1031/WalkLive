@@ -223,7 +223,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             return messages.buildMessageWithoutTrip()
         }
         
-        return messages.buildMessageWithTrip(timeManager: timeManager, roadRequester: roadRequester)
+        return messages.buildMessageWithTrip(timeManager: timeManager)
     }
     
     /// request route + location when start button is clicked on start trip panel
@@ -350,6 +350,7 @@ extension MainMapVC: RouteDelegate{
         self.timeManager.tripPanelDelegate = self
         if (trip.timeSpentInt != nil){
             self.timeManager.usedTimeInterval = trip.timeSpentInt!}
+        overarchTimeManager = self.timeManager
     }
     
     
@@ -361,6 +362,7 @@ extension MainMapVC: RouteDelegate{
             self.timeManager.endTimer()
             self.timeManager = nil
             self.tripView = nil
+            overarchTimeManager = nil
             print("success")
             }
         }, failure: { (error) in
@@ -375,6 +377,7 @@ extension MainMapVC: RouteDelegate{
             self.roadRequester.removeRoute()
             self.timeManager.endTimer()
             self.timeManager = nil
+            overarchTimeManager = nil
             self.tripView = nil
                 print("success")
             }

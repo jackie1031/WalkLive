@@ -58,3 +58,4 @@ var currentUserInfo: UserLogin!
 var messages = Message()
 let stringBuilder = StringBuilder()
 let warnigSignFactory = WarningSignFactory()
+var overarchTimeManager: TimeManager!

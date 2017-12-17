@@ -35,7 +35,7 @@ class MessageBuilder: NSObject {
     }
     
     // builds message with ongoing trip, able to plug in current time spent and trip location
-    func messageWithTripBuilder(messageSegments : Array<String>, timeManager: TimeManager, roadRequester: RoadRequester) -> String {
+    func messageWithTripBuilder(messageSegments : Array<String>, timeManager: TimeManager) -> String {
         var text : String = ""
         for message in messageSegments {
             var realValue : String
@@ -51,7 +51,7 @@ class MessageBuilder: NSObject {
             } else if (message == "Time") {
                 realValue = timeManager.buildMessageOnCurrentTimer()
             } else if (message == "Destination") {
-                realValue = roadRequester.destinationAnnotation.title as! String
+                realValue = timeManager.roadRequester?.destinationAnnotation.title as! String
             } else {
                 realValue = message
             }
