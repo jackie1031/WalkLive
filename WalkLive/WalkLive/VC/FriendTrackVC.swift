@@ -92,7 +92,7 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let phoneNum = friendTrips![sender.tag].emergencyNum
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
-            controller.body = "Hey! Where are you?" + "From: \(currentUserInfo.username!)"
+            controller.body = "Hey! Where are you? " + "From: \(currentUserInfo.username!)"
             controller.recipients = [phoneNum!]
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)

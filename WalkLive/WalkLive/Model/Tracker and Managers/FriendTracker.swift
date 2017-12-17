@@ -10,34 +10,13 @@ import Foundation
 import MapKit
 import CoreLocation
 
-class FriendTracker: NSObject {
-    var locationManager = CLLocationManager()
-    var mapView: MKMapView!
-    var annotations = [MKAnnotation]()
+class FriendTracker: Tracker {
     private var timer = Timer()
-    var tripId: Int?
-    
-    
-    func setMapView(mapView: MKMapView){
-        self.mapView = mapView
-    }
-    
-    func setCurrentLocation(){
-        let sourceLocation = getSourceLocation()
-        centerMapOnLocation(location: sourceLocation)
-    }
-    
-    
-    func getSourceLocation() -> CLLocation {
-        return (self.locationManager.location)!
-    }
-    
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 50, 50)
-        self.mapView.setRegion(coordinateRegion, animated: true)
-    }
     
     func mapTimePoint(timePoint: TimePoint) {
+        if (!self.annotations.isEmpty){
+            removeTimePoint()
+        }
         let initialAnnotation = MKPointAnnotation()
         initialAnnotation.title = "Started Here!"
         initialAnnotation.coordinate = CLLocationCoordinate2D(latitude: timePoint.startLat!, longitude: timePoint.startLong!)
@@ -53,11 +32,6 @@ class FriendTracker: NSObject {
         mapView.showAnnotations(annotations, animated: true)
     }
     
-    func removeTimePoint() {
-        mapView.removeAnnotations(annotations)
-        self.annotations = []
-    }
-    
     func trackNewTripWithTimer(trip: TimePoint, timeInterval: TimeInterval) {
         self.endTimer()
         self.setNewTrip(trip: trip)
@@ -65,10 +39,6 @@ class FriendTracker: NSObject {
     }
     
     func setNewTrip(trip: TimePoint) {
-        if (!self.annotations.isEmpty){
-            self.removeTimePoint()
-            self.annotations = []
-        }
         self.tripId = trip.tripId
         self.mapTimePoint(timePoint: trip)
         print("set successfully!")

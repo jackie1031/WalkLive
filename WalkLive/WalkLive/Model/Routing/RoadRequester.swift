@@ -105,14 +105,17 @@ class RoadRequester: NSObject {
         }
     
     func drawRouteFromTimePoint(success: @escaping (Trip) -> (), failure: @escaping (Error) -> (), timePoint: TimePoint) {
-        self.setInitialLocation(mapItem: timePoint.getStartMapItem())
-        self.setDestinationLocation(destinationMapItem: timePoint.getDestinationMapItem())
         self.getRouteFromTimePoint(success: { (route) in
+            OperationQueue.main.addOperation {
+            self.setInitialLocation(mapItem: timePoint.getStartMapItem())
+            self.setDestinationLocation(destinationMapItem: timePoint.getDestinationMapItem())
+            self.trip = Trip(mapItem: timePoint.getDestinationMapItem(), route: route)
             self.overlay = route.polyline
             self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
             let rect = route.polyline.boundingMapRect
             self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
             success(Trip(mapItem: timePoint.getDestinationMapItem(), route: route))
+            }
         }, failure: { (error) in
             failure(error)
         }, timePoint: timePoint)

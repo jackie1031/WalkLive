@@ -840,11 +840,11 @@
                                 <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendRequestCell" rowHeight="72" id="MuJ-5X-ZkZ" customClass="FriendRequestTableViewCell" customModule="WalkLive" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="72"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendRequestCell" rowHeight="83" id="MuJ-5X-ZkZ" customClass="FriendRequestTableViewCell" customModule="WalkLive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MuJ-5X-ZkZ" id="XMJ-Dx-Djq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU3-cu-iMp">
@@ -855,7 +855,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4n-JL-EZV">
-                                                    <rect key="frame" x="330" y="40" width="30" height="30"/>
+                                                    <rect key="frame" x="330" y="39.5" width="30" height="41.5"/>
                                                     <state key="normal" title="Nuh">
                                                         <color key="titleColor" red="0.74367599342745194" green="0.77177784974093266" blue="0.74938622337635197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -864,19 +864,19 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-02-14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kut-bZ-gmX">
-                                                    <rect key="frame" x="298" y="14.5" width="62" height="14"/>
+                                                    <rect key="frame" x="298" y="14.5" width="62" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00z-D1-vH0">
-                                                    <rect key="frame" x="15" y="11" width="82" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="81.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jW-Ep-VJc">
-                                                    <rect key="frame" x="292" y="40" width="30" height="30"/>
+                                                    <rect key="frame" x="292" y="45.5" width="30" height="30"/>
                                                     <state key="normal" title="Yes">
                                                         <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -884,10 +884,30 @@
                                                         <action selector="onAcceptButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="XTn-Pk-bqy"/>
                                                     </connections>
                                                 </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="paN-3P-vOe">
+                                                    <rect key="frame" x="15" y="45" width="60" height="30"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2b3-wH-6Rm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                            <state key="normal" title="📞"/>
+                                                            <connections>
+                                                                <action selector="onPhoneButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="GtW-Br-qxN"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lwp-Nd-Tbj">
+                                                            <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                                            <state key="normal" title="💬"/>
+                                                            <connections>
+                                                                <action selector="onMessageButton:" destination="xMF-8H-6rL" eventType="touchUpInside" id="ozc-xY-5Pj"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="kut-bZ-gmX" firstAttribute="trailing" secondItem="XMJ-Dx-Djq" secondAttribute="trailingMargin" id="1e7-J1-ZgI"/>
                                                 <constraint firstItem="B4n-JL-EZV" firstAttribute="leading" secondItem="2jW-Ep-VJc" secondAttribute="trailing" constant="8" id="4ih-fA-FLE"/>
+                                                <constraint firstItem="2jW-Ep-VJc" firstAttribute="centerY" secondItem="paN-3P-vOe" secondAttribute="centerY" id="Dro-mB-DvY"/>
                                                 <constraint firstItem="kut-bZ-gmX" firstAttribute="centerY" secondItem="00z-D1-vH0" secondAttribute="centerY" id="Mct-lp-VuN"/>
                                                 <constraint firstItem="00z-D1-vH0" firstAttribute="leading" secondItem="XMJ-Dx-Djq" secondAttribute="leadingMargin" id="O8U-yo-aT0"/>
                                                 <constraint firstItem="B4n-JL-EZV" firstAttribute="trailing" secondItem="kut-bZ-gmX" secondAttribute="trailing" id="XfJ-OA-9zs"/>
@@ -896,6 +916,7 @@
                                                 <constraint firstItem="00z-D1-vH0" firstAttribute="top" secondItem="XMJ-Dx-Djq" secondAttribute="topMargin" id="gy3-SI-UZF"/>
                                                 <constraint firstItem="2jW-Ep-VJc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XMJ-Dx-Djq" secondAttribute="leading" constant="20" symbolic="YES" id="h1s-IP-Vjg"/>
                                                 <constraint firstItem="B4n-JL-EZV" firstAttribute="centerY" secondItem="2jW-Ep-VJc" secondAttribute="centerY" id="k0G-Dg-PFx"/>
+                                                <constraint firstItem="paN-3P-vOe" firstAttribute="leading" secondItem="00z-D1-vH0" secondAttribute="leading" id="l1o-Hy-JCB"/>
                                                 <constraint firstItem="kut-bZ-gmX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XMJ-Dx-Djq" secondAttribute="leading" constant="20" symbolic="YES" id="rJc-7k-0Zc"/>
                                                 <constraint firstItem="B4n-JL-EZV" firstAttribute="top" secondItem="kut-bZ-gmX" secondAttribute="bottom" constant="11.5" id="ryP-t4-iR7"/>
                                             </constraints>
@@ -904,6 +925,8 @@
                                             <outlet property="acceptButton" destination="2jW-Ep-VJc" id="e3N-7c-8Qg"/>
                                             <outlet property="dateLabel" destination="kut-bZ-gmX" id="iks-N5-Y5P"/>
                                             <outlet property="declineButton" destination="B4n-JL-EZV" id="p9O-BP-E1x"/>
+                                            <outlet property="messageButton" destination="Lwp-Nd-Tbj" id="4SP-4G-E12"/>
+                                            <outlet property="phoneButton" destination="2b3-wH-6Rm" id="8bT-7n-Gdc"/>
                                             <outlet property="usernameLabel" destination="00z-D1-vH0" id="sOY-hI-JbD"/>
                                         </connections>
                                     </tableViewCell>
@@ -950,7 +973,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfL-om-0ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2798" y="699"/>
+            <point key="canvasLocation" x="2797.5999999999999" y="698.5007496251875"/>
         </scene>
         <!--Settings-->
         <scene sceneID="mMH-bt-que">
@@ -1507,6 +1530,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wme-fR-G5M">
                                                     <rect key="frame" x="15" y="54" width="30" height="30"/>
                                                     <state key="normal" title="📍"/>
+                                                    <connections>
+                                                        <action selector="onTrackButton:" destination="NB9-Qz-zc5" eventType="touchUpInside" id="VEt-IJ-WeR"/>
+                                                    </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pas-Wb-yAD">
                                                     <rect key="frame" x="195" y="11" width="63" height="73"/>
@@ -1615,7 +1641,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2fx-La-ta1"/>
-        <segue reference="cR3-Ay-sw1"/>
+        <segue reference="BDU-6I-cVd"/>
         <segue reference="jM0-De-8ma"/>
     </inferredMetricsTieBreakers>
 </document>

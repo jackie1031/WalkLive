@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import CoreLocation
+import MessageUI
 
-class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate {
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var requestTable: UITableView!
     var receivedFriendRequests: [FriendRequest]!
     var sentFriendRequests: [FriendRequest]!
     var friends: [Friend]!
-
+    var locationManager = CLLocationManager()
     
     let RECEIVED = 0
     let SENT = 1
@@ -113,18 +115,22 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         cell.acceptButton.tag = indexPath.row
         cell.declineButton.tag = indexPath.row
+        cell.phoneButton.tag = indexPath.row
+        cell.messageButton.tag = indexPath.row
         
         if (segmentControl.selectedSegmentIndex == RECEIVED) {
             let friendRequest = self.receivedFriendRequests[indexPath.row]
             cell.usernameLabel.text = friendRequest.sender
             cell.dateLabel.text = friendRequest.sent_on
-            cell.acceptButton.isHidden = false
-            cell.declineButton.isHidden = false
+            cell.phoneButton.isHidden = false
+            cell.messageButton.isHidden = false
         }
         else if (segmentControl.selectedSegmentIndex == SENT){
             let friendRequest = self.sentFriendRequests[indexPath.row]
             cell.dateLabel.text = friendRequest.sent_on
             cell.usernameLabel.text = friendRequest.recipient
+            cell.phoneButton.isHidden = false
+            cell.messageButton.isHidden = false
             cell.acceptButton.isHidden = true
             cell.declineButton.isHidden = true
         }
@@ -175,7 +181,42 @@ class FriendRequestVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.updateSentRequests()
     }
     
+    @IBAction func onPhoneButton(_ sender: UIButton) {
+        let busPhone = friends[sender.tag].contact
+        //Does not work in Simulator
+        if let url = URL(string: "tel://\(busPhone)"), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
     
+    @IBAction func onMessageButton(_ sender: UIButton) {
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = buildMessage(location: locationManager.location!)
+            
+            //FTOB needed here.
+            controller.recipients = [friends[sender.tag].contact]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func buildMessage(location: CLLocation) -> String {
+        if (overarchTimeManager == nil) {
+            return messages.buildMessageWithoutTrip()
+        }
+        
+        return messages.buildMessageWithTrip(timeManager: overarchTimeManager)
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        self.dismiss(animated: true, completion: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

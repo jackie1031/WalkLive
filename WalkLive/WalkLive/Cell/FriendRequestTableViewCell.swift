@@ -15,6 +15,8 @@ class FriendRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
     
+    @IBOutlet weak var phoneButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
     
     
     override func awakeFromNib() {

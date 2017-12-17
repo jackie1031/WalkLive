@@ -1,30 +1,14 @@
 package com.WalkLiveApp;
-
-import com.sun.corba.se.impl.ior.FreezableList;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.*;
 import java.lang.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.UUID;
-
-import java.util.Date;
 
 public class WalkLiveService {
-    private DataBaseHandler dataBaseHandler = new DataBaseHandler();
-    private String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
-    private String user = "b0a1d19d87f384";
-    private String password = "6d11c74b";
-    private Connection conn = null;
 
     public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
     public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

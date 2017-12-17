@@ -8,13 +8,16 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+var locationManager =  CLLocationManager()
+
 
 class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var tripTable: UITableView!
     var trips: [TimePoint]?
-    var tracker = FriendTracker()
+    var tracker = HistoryTracker()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getTripHistory()
@@ -62,6 +65,18 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Warning signs
         }
     }
+    
+    @IBAction func onTrackButton(_ sender: UIButton) {
+        self.tracker.mapTimePoint(timePoint: self.trips![sender.tag])
+    }
+    
+    /*
+     if (self.tripView == nil) {
+     return messages.buildMessageWithoutTrip()
+     }
+     
+     return messages.buildMessageWithTrip(timeManager: timeManager, roadRequester: roadRequester
+ */
 
     /*
     // MARK: - Navigation

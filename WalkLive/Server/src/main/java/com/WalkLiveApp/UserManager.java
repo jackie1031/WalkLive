@@ -8,7 +8,6 @@ import org.json.simple.parser.ParseException;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserManager {

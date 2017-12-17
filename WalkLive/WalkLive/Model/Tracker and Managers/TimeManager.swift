@@ -14,7 +14,7 @@ class TimeManager: NSObject {
     private var timer = Timer()
     private var timeInterval: TimeInterval!
     var usedTimeInterval = 0
-    private var roadRequester: RoadRequester?
+    var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
     var tripId: Int?
     init(timeInterval: TimeInterval, roadRequester: RoadRequester) {
@@ -36,6 +36,12 @@ class TimeManager: NSObject {
             print("failure")
         }, timePoint: self.buildTimePoint()!)
         }
+    }
+    
+    func continueTimer(timeInterval: TimeInterval) {
+        //update every 60 seconds
+        self.updatePanel()
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
     }
     
     @objc func updateTimeLabel(){
