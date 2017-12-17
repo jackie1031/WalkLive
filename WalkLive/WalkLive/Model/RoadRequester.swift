@@ -104,6 +104,41 @@ class RoadRequester: NSObject {
             }
         }
     
+    func drawRouteFromTimePoint(success: @escaping (Trip) -> (), failure: @escaping (Error) -> (), timePoint: TimePoint) {
+        self.setInitialLocation(mapItem: timePoint.getStartMapItem())
+        self.setDestinationLocation(destinationMapItem: timePoint.getDestinationMapItem())
+        self.getRouteFromTimePoint(success: { (route) in
+            self.overlay = route.polyline
+            self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            success(Trip(mapItem: timePoint.getDestinationMapItem(), route: route))
+        }, failure: { (error) in
+            failure(error)
+        }, timePoint: timePoint)
+    }
+    
+    func getRouteFromTimePoint(success: @escaping (MKRoute) -> (), failure: @escaping(Error) -> (), timePoint: TimePoint) {
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = timePoint.getStartMapItem()
+        directionRequest.destination = timePoint.getDestinationMapItem()
+        directionRequest.transportType = .walking
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { (response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            if (response == nil) {
+                failure(error!)
+            }
+            if ((response?.routes[0]) == nil) {
+                failure(LoginError(status: 0))
+            } else{
+                success((response?.routes[0])!)}
+        }
+    }
+    
     func setDestinationLocation(destinationMapItem: MKMapItem){
         let destinationAnnotation = MKPointAnnotation()
         destinationAnnotation.title = destinationMapItem.name
@@ -116,6 +151,13 @@ class RoadRequester: NSObject {
         let initialAnnotation = MKPointAnnotation()
         initialAnnotation.title = "Started Here!"
         initialAnnotation.coordinate = getSourceLocation().coordinate
+        self.sourceAnnotation = initialAnnotation
+    }
+    
+    func setInitialLocation(mapItem: MKMapItem) {
+        let initialAnnotation = MKPointAnnotation()
+        initialAnnotation.title = "Started Here!"
+        initialAnnotation.coordinate = mapItem.placemark.coordinate
         self.sourceAnnotation = initialAnnotation
     }
 

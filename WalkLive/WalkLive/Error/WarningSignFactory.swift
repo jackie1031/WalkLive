@@ -61,6 +61,12 @@ class WarningSignFactory: NSObject{
         return errorView
     }
     
+    func makeAutoLoginWarningSign(loginError: LoginError) -> WarningSignView {
+        let errorView = self.makeGenericWarningSign()
+        errorView.warningContentView.text = "Auto login failed."
+        return errorView
+    }
+    
     func saveMessageWarningSign(status: Int) -> WarningSignView {
         let view = self.makeGenericWarningSign()
         if (status == 0) {

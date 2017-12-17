@@ -39,7 +39,7 @@ class FirstViewVC: UIViewController, CLLocationManagerDelegate {
                 }
             }, failure: { (error) in
                 OperationQueue.main.addOperation {
-                    let errorSign = warnigSignFactory.makeLoginBackEndWarningSign(loginError: error)
+                    let errorSign = warnigSignFactory.makeAutoLoginWarningSign(loginError: error)
                     errorSign.center = self.view.center
                     self.view.addSubview(errorSign)
                 }
