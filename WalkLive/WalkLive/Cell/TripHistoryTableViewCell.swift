@@ -9,7 +9,13 @@
 import UIKit
 
 class TripHistoryTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var destinationNameLabel: UILabel!
+    @IBOutlet weak var startLocationLabel: UILabel!
+    @IBOutlet weak var endLocationLabel: UILabel!
+    @IBOutlet weak var startTimeLabel: UILabel!
+    @IBOutlet weak var endTimeLabel: UILabel!
+    @IBOutlet weak var trackButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

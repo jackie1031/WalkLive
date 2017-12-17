@@ -537,7 +537,7 @@ class BackEndClient: NSObject {
     
     func getSingleTrip(success: @escaping (TimePoint) -> (), failure: @escaping (Error) -> (), tripId: Int){
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/trips/\(tripId)"
+        urlComponents.path = self.APICONTEXT + "/trips/getById/\(tripId)"
         var getSingleTripRequest = URLRequest(url: urlComponents.url!)
         getSingleTripRequest.httpMethod = "GET"
         
@@ -555,6 +555,31 @@ class BackEndClient: NSObject {
             } else {
                 print(status)
                 let timePoint = try? jsonDecoder.decode(TimePoint.self, from: data!) as TimePoint
+                success(timePoint!)}
+        }).resume()
+        
+    }
+    
+    func getTripHistory(success: @escaping ([TimePoint]) -> (), failure: @escaping (Error) -> ()){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/trips/\(currentUserInfo.username!)/tripHistory"
+        var getSingleTripRequest = URLRequest(url: urlComponents.url!)
+        getSingleTripRequest.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: getSingleTripRequest, completionHandler: {
+            (data, response, error) in
+            // check for errors
+            if error != nil {
+                failure(error!)
+            }
+            
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(TripError(status: status))
+            } else {
+                print(status)
+                let timePoint = try? jsonDecoder.decode([TimePoint].self, from: data!) as [TimePoint]
                 success(timePoint!)}
         }).resume()
         

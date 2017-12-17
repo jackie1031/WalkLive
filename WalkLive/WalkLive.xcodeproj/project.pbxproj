@@ -62,6 +62,8 @@
 		904B053E1FD77A7B00EEB523 /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053D1FD77A7B00EEB523 /* FriendRequest.swift */; };
 		904B05401FD77A8D00EEB523 /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B053F1FD77A8D00EEB523 /* TripRequest.swift */; };
 		904B05421FD8916900EEB523 /* EmergencyContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05411FD8916900EEB523 /* EmergencyContact.swift */; };
+		905EF6DA1FE5E69100411440 /* TripHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EF6D91FE5E69100411440 /* TripHistoryVC.swift */; };
+		905EF6DC1FE5E6F700411440 /* TripHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EF6DB1FE5E6F700411440 /* TripHistoryTableViewCell.swift */; };
 		D2528FA348AAC2A6FFFEEC94 /* Pods_WalkLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */; };
 		FE9DB838C7A82F05EE530D5D /* Pods_WalkLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4C28FF63A53A082F32C325 /* Pods_WalkLive.framework */; };
 /* End PBXBuildFile section */
@@ -149,6 +151,8 @@
 		904B053D1FD77A7B00EEB523 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		904B053F1FD77A8D00EEB523 /* TripRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
 		904B05411FD8916900EEB523 /* EmergencyContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContact.swift; sourceTree = "<group>"; };
+		905EF6D91FE5E69100411440 /* TripHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryVC.swift; sourceTree = "<group>"; };
+		905EF6DB1FE5E6F700411440 /* TripHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		9127724929693C9E22230147 /* Pods-WalkLiveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.release.xcconfig"; sourceTree = "<group>"; };
 		C5D768EC243DDAC103DFBE8B /* Pods-WalkLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 				8C7637001FDC88DD00276DEE /* SettingsVC.swift */,
 				9015A2B21FDCE4140080B4D3 /* FriendTrackVC.swift */,
 				9015A2B81FDDC7860080B4D3 /* SetFriendVC.swift */,
+				905EF6D91FE5E69100411440 /* TripHistoryVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				904B05331FD68D1C00EEB523 /* LocationTableViewCell.swift */,
 				9015A2B41FDDBEB00080B4D3 /* FriendTrackTableViewCell.swift */,
 				9015A2BC1FDDCC7D0080B4D3 /* SetFriendTableViewCell.swift */,
+				905EF6DB1FE5E6F700411440 /* TripHistoryTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -645,6 +651,7 @@
 			files = (
 				9015A2AF1FDCB88D0080B4D3 /* AddFriendView.swift in Sources */,
 				904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */,
+				905EF6DA1FE5E69100411440 /* TripHistoryVC.swift in Sources */,
 				904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */,
 				904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */,
 				904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */,
@@ -671,6 +678,7 @@
 				8C61A8251FE076060016A74A /* MessageBuilder.swift in Sources */,
 				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
 				904B05421FD8916900EEB523 /* EmergencyContact.swift in Sources */,
+				905EF6DC1FE5E6F700411440 /* TripHistoryTableViewCell.swift in Sources */,
 				904B05051FD689A300EEB523 /* Route.swift in Sources */,
 				9039111B1FE0FA3600A95373 /* TripTableUpdateDelegate.swift in Sources */,
 				904B05031FD689A300EEB523 /* Location.swift in Sources */,
