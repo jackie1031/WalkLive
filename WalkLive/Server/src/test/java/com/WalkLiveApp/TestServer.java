@@ -565,7 +565,6 @@ public class TestServer {
 
         assertEquals("Failed to get user", 200, r4.httpStatus);
 
-
     }
 
     @Test
