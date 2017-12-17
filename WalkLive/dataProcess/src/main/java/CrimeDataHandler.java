@@ -1,38 +1,22 @@
 //import org.json.*;
 import java.io.*;
 import java.sql.*;
-import java.util.*;
-import java.io.InputStream;
-//import org.apache.commons.io.IOUtils;
-import java.util.Iterator;
-
-import org.json.simple.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
-//import org.json.JSONObject;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import org.apache.commons.io.IOUtils;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Iterator;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.*;
+import org.apache.commons.math3.exception.ConvergenceException;
+import org.apache.commons.math3.exception.MathIllegalArgumentException;
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
+import org.apache.commons.math3.exception.util.LocalizedFormats;
+import org.apache.commons.math3.stat.descriptive.moment.Variance;
+import org.apache.commons.math3.util.MathUtils;
+
 
 public class CrimeDataHandler {
     //public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
@@ -61,7 +45,7 @@ public class CrimeDataHandler {
 
         JSONParser parser = new JSONParser();
         try{
-            JSONArray a = (JSONArray) parser.parse(new FileReader("test.json"));
+            JSONArray a = (JSONArray) parser.parse(new FileReader("partCrime.json"));
             //System.out.println(a);
 
             for (Object o : a)
@@ -69,34 +53,34 @@ public class CrimeDataHandler {
                 JSONObject crime = (JSONObject) o;
 
                 long hour_of_day = (long) crime.get("hour_of_day");
-                System.out.println("hour_of_day: "+hour_of_day);
+                //System.out.println("hour_of_day: "+hour_of_day);
 //
                 long incident_id = (long) crime.get("incident_id");
-                System.out.println("incident_id is: "+incident_id);
+                //System.out.println("incident_id is: "+incident_id);
 
                 String address_1 = (String) crime.get("address_1");
-                System.out.println("address_1: "+address_1);
+                //System.out.println("address_1: "+address_1);
 
                 String address_2 = (String) crime.get("address_2");
-                System.out.println("address_2: "+address_2);
+                //System.out.println("address_2: "+address_2);
 
                 double latitude = (double) crime.get("latitude");
-                System.out.println("latitude is: "+latitude);
+                //System.out.println("latitude is: "+latitude);
 
                 double longitude = (double) crime.get("longitude");
-                System.out.println("longitude is: "+longitude);
+                //System.out.println("longitude is: "+longitude);
 
 
                 String incident_description = (String) crime.get("incident_description");
-                System.out.println("incident_description is: "+incident_description);
+                //System.out.println("incident_description is: "+incident_description);
 
                 String parent_incident_type = (String) crime.get("parent_incident_type");
-                System.out.println("parent_incident_type is: "+parent_incident_type);
+                //System.out.println("parent_incident_type is: "+parent_incident_type);
 
                 String sqlSetUp = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
 
                 String sql = "INSERT INTO Crime (incident_id, address_1, address_2, latitude, longitude,hour_of_day,incident_description,parent_incident_type) VALUES (?, ?, ?, ?,?,?,?,?)" ;
-                System.out.println("got here!");
+                //System.out.println("got here!");
 
 
                 /** need to check the range
@@ -156,48 +140,9 @@ public class CrimeDataHandler {
 
         }
 
-        //commandTable[6] = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT,
-        // latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
 
 
 
-
-        //commandTable[6] = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-
-
-
-
-        //JSONArray a = (JSONArray) parser.parse(new FileReader("/Users/lintianyi/Desktop/2017-group-14/WalkLive/Server/test.json "));
-        //Object obj = parser.parse(new FileReader("/Users/lintianyi/Desktop/2017-group-14/WalkLive/Server/test.json "));
-
-//        JSONObject jsonObject = (JSONObject) obj;
-//        JSONArray array = obj.getJSONArray("/Users/lintianyi/Desktop/2017-group-14/WalkLive/Server/test.json ");
-
-
-        //System.out.println(obj);
-        //System.out.println( new File("test.json").getAbsoluteFile());
-
-
-//        for (Object o : a)
-//        {
-//            JSONObject person = (JSONObject) o;
-//
-//            String name = (String) person.get("name");
-//            System.out.println(name);
-//
-//            String city = (String) person.get("city");
-//            System.out.println(city);
-//
-//            String job = (String) person.get("job");
-//            System.out.println(job);
-//
-//            JSONArray cars = (JSONArray) person.get("cars");
-//
-//            for (Object c : cars)
-//            {
-//                System.out.println(c+"");
-//            }
-//        }
 
     }
 
