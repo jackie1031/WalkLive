@@ -13,6 +13,15 @@ import java.util.List;
 public class TripManager {
     private final Logger logger = LoggerFactory.getLogger(ServerController.class);
 
+
+    /**
+     *
+     * @param body pass in by the front end
+     * @return a started trip
+     * @throws WalkLiveService.InvalidDestination: the destination is invalid
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     * @throws ParseException: can't parse the given string into gson
+     */
     public Trip startTrip(String body) throws WalkLiveService.InvalidDestination, WalkLiveService.UserServiceException, ParseException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -63,12 +72,27 @@ public class TripManager {
         }
     }
 
+    /**
+     *
+     * @param tripIdInStr
+     * @throws WalkLiveService.InvalidDestination: the destination is invalid
+     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
+     * @throws ParseException: can't parse the given string into gson
+     */
     public void endTrip(String tripIdInStr) throws WalkLiveService.InvalidDestination, WalkLiveService.InvalidTargetID, ParseException {
         int tripId = Integer.parseInt(tripIdInStr);
         this.insertTripToFinished(tripId);
         this.removeCompletedTripFromOngoing(tripId);
     }
 
+    /**
+     *
+     * @param tripIdInStr
+     * @return ongoing trip with the given id
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     * @throws ParseException: can't parse the given string into gson
+     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
+     */
     public Trip getTripById(String tripIdInStr) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
         ResultSet res = null;
         PreparedStatement ps = null;
@@ -114,7 +138,14 @@ public class TripManager {
         }
     }
 
-
+    /**
+     *
+     * @param username
+     * @returnongoing trip with the given user name
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     * @throws ParseException: can't parse the given string into gson
+     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
+     */
     public Trip getTripByName(String username) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
         ResultSet res = null;
         PreparedStatement ps = null;
@@ -161,7 +192,17 @@ public class TripManager {
         }
     }
 
-
+    /**
+     *
+     * @param username
+     * @return list of trips that are shared to this user
+     * @throws SQLException: exception in sql statement or database
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     * @throws ParseException: can't parse the given string into gson
+     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
+     * @throws WalkLiveService.RelationshipServiceException:the relationship of the users is invalid
+     * @throws java.text.ParseException: can't parse the given string into gson
+     */
     public List<Trip> getAllTrips(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
         List<User> friends = new FriendsManager().getFriendList(username);
         ArrayList<Trip> trips = new ArrayList<>();
@@ -176,12 +217,19 @@ public class TripManager {
     }
 
 
-
-
+    /**
+     *
+     * @param username
+     * @return list of trips indicating the travel hstory of this user
+     * @throws SQLException: exception in sql statement or database
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     * @throws ParseException: can't parse the given string into gson
+     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
+     * @throws WalkLiveService.RelationshipServiceException: the relationship of the users is invalid
+     * @throws java.text.ParseException: can't parse the given string into gson
+     */
     public List<Trip> getTripHistory(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
-        //List<User> friends = new FriendsManager().getFriendList(username);
-        //List<Trip> allTrips = new TripManager().getPastTrip(username);
-        //ArrayList<Trip> trips = new ArrayList<>();
+
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet res = null;
@@ -234,6 +282,14 @@ public class TripManager {
     }
 
 
+    /**
+     *
+     * @param tripIdInStr the trip id
+     * @param body the current coordinate and the time spent
+     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     * @throws ParseException: can't parse the given string into gson
+     */
     public void updateTrip(String tripIdInStr, String body) throws WalkLiveService.InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -272,6 +328,12 @@ public class TripManager {
         }
     }
 
+    /**
+     *
+     * @param username
+     * @return the trip given the username
+     * @throws SQLException: exception in sql statement or database
+     */
     private Trip getTripString(String username) throws SQLException{
         Connection conn = null;
         PreparedStatement ps = null;
@@ -314,7 +376,11 @@ public class TripManager {
         return null;
     }
 
-
+    /**
+     *
+     * @return get the trip id
+     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
+     */
     private int getNewRequestId() throws WalkLiveService.UserServiceException {
         ResultSet res = null;
         Statement stm = null;
@@ -358,6 +424,11 @@ public class TripManager {
         }
     }
 
+    /**
+     *
+     * @param tripId to indicate the trip
+     * @throws WalkLiveService.InvalidDestination: the destination is invalid
+     */
     private void insertTripToFinished(int tripId) throws WalkLiveService.InvalidDestination{
         PreparedStatement ps = null;
         ResultSet res = null;
@@ -390,6 +461,11 @@ public class TripManager {
         }
     }
 
+    /**
+     *
+     * @param tripId to indicate the trip
+     * @throws WalkLiveService.InvalidDestination: the destination is invalid
+     */
     private void removeCompletedTripFromOngoing(int tripId) throws WalkLiveService.InvalidDestination{
         PreparedStatement ps = null;
         Connection conn = null;
