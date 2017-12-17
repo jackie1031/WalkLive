@@ -16,6 +16,7 @@ class Trip: NSObject {
     var phoneNumber: String?
     var timeInterval: TimeInterval?
     var timeSpentInt: Int?
+    var tripId: Int?
     
     init(mapItem: MKMapItem, route: MKRoute) {
         self.destinationName = mapItem.name

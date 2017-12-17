@@ -1507,6 +1507,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wme-fR-G5M">
                                                     <rect key="frame" x="15" y="54" width="30" height="30"/>
                                                     <state key="normal" title="📍"/>
+                                                    <connections>
+                                                        <action selector="onTrackButton:" destination="NB9-Qz-zc5" eventType="touchUpInside" id="VEt-IJ-WeR"/>
+                                                    </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pas-Wb-yAD">
                                                     <rect key="frame" x="195" y="11" width="63" height="73"/>

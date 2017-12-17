@@ -14,7 +14,7 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet weak var tripTable: UITableView!
     var trips: [TimePoint]?
-    var tracker = FriendTracker()
+    var tracker = HistoryTracker()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getTripHistory()
@@ -62,6 +62,11 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // Warning signs
         }
     }
+    
+    @IBAction func onTrackButton(_ sender: UIButton) {
+        self.tracker.mapTimePoint(timePoint: self.trips![sender.tag])
+    }
+    
 
     /*
     // MARK: - Navigation

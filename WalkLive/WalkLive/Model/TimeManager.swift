@@ -38,6 +38,12 @@ class TimeManager: NSObject {
         }
     }
     
+    func continueTimer(timeInterval: TimeInterval) {
+        //update every 60 seconds
+        self.updatePanel()
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
+    }
+    
     @objc func updateTimeLabel(){
         self.usedTimeInterval += 1
         self.updatePanel()

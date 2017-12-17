@@ -32,8 +32,10 @@ class TimePoint: NSObject, Codable {
     }
     
     func getDestinationMapItem() -> MKMapItem{
-        var pl = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.endLat!, longitude: self.endLong!), addressDictionary: nil)
-        return MKMapItem(placemark: pl)
+        let pl = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.endLat!, longitude: self.endLong!), addressDictionary: nil)
+        let mp = MKMapItem(placemark: pl)
+        mp.name = self.destination
+        return mp
     }
     
 }

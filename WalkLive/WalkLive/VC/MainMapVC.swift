@@ -114,10 +114,10 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     func setOngoingTrip(timePoint: TimePoint) {
         self.roadRequester.drawRouteFromTimePoint(success: { (trip) in
-            OperationQueue.main.addOperation {
             trip.timeSpentInt = Int((timePoint.timeSpent?.westernArabicNumeralsOnly)!)
-            self.startTrip(trip: trip)
-            }
+            trip.tripId = timePoint.tripId
+            trip.address = timePoint.address
+            self.continueTrip(trip: trip)
         }, failure: { (error) in
             
         }, timePoint: timePoint)
@@ -276,7 +276,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     @IBAction func onLogoutButton(_ sender: Any) {
         if (self.timeManager != nil) {
-            self.cancelTrip()
+            self.timeManager.endTimer()
         }
         self.dismiss(animated: true, completion: nil)
         currentUserInfo = nil
@@ -320,8 +320,17 @@ extension MainMapVC: RouteDelegate{
     
     private func startTrip(trip: Trip){
         //FTOB needed here.
+        self.createTimeManager(trip: trip)
+        self.createTripView(trip: trip)
+        self.timeManager.startTimer(timeInterval: 60)
+    }
+    
+    private func continueTrip(trip: Trip){
         self.createTripView(trip: trip)
         self.createTimeManager(trip: trip)
+        self.timeManager.tripId = trip.tripId
+        self.timeManager.usedTimeInterval = trip.timeSpentInt!
+        self.timeManager.continueTimer(timeInterval: 60)
     }
     
     private func createTripView(trip: Trip){
@@ -330,7 +339,6 @@ extension MainMapVC: RouteDelegate{
         self.tripView.destinationLabel.text = trip.destinationName
         self.tripView.addressLabel.text = trip.address
         self.tripView.estimatedTimeLabel.text = "Estimated Time: " + String(Int((trip.timeInterval!))/60) + " min(s)"
-        
         self.tripView.center = self.startTripPanelView.center
         self.tripView.emergencyContactLabel.text = self.emergencyContactLabel.text
         self.tripView.routeDelegate = self
@@ -342,7 +350,6 @@ extension MainMapVC: RouteDelegate{
         self.timeManager.tripPanelDelegate = self
         if (trip.timeSpentInt != nil){
             self.timeManager.usedTimeInterval = trip.timeSpentInt!}
-        self.timeManager.startTimer(timeInterval: 60)
     }
     
     
