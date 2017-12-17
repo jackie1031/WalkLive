@@ -87,7 +87,7 @@ public class WalkLiveService {
      */
 
     //create a new friend request and store in database
-    public void createFriendRequest(String sender, String body) throws UserServiceException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
+    public void createFriendRequest(String sender, String body) throws UserServiceException, DuplicateException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
         new FriendsManager().createFriendRequest(sender, body);
     }
 
@@ -115,36 +115,98 @@ public class WalkLiveService {
      * For trip part -----------------------
      **/
 
-    //stm.executeUpdate("CREATE TABLE IF NOT EXISTS Trips (tripId INT, username TEXT,start_time TEXT, end_time TEXT, danger_zone INT, " +
-    //        "destination TEXT, coord_long DOUBLE,coord_lat DOUBLE,completed BOOLEAN )");
-
+    /**
+     * @param body: the body being passed in
+     * @return trip
+     * @throws InvalidDestination: the destination is invalid
+     * @throws UserServiceException: invalid user
+     * @throws ParseException : invalid parsing
+     */
     public Trip startTrip(String body) throws InvalidDestination, UserServiceException, ParseException {
             return new TripManager().startTrip(body);
     }
 
-
+    /**
+     *
+     * @param tripIdInStr： the trip id in string form
+     * @throws InvalidDestination: the destination is invalid
+     * @throws InvalidTargetID：the id of the trip is invalid
+     * @throws ParseException: invalid parsing
+     */
     public void endTrip(String tripIdInStr) throws InvalidDestination, InvalidTargetID, ParseException {
             new TripManager().endTrip(tripIdInStr);
     }
+
+    /**
+     *
+     * @param tripIdInStr： the trip id in string form
+     * @return a new trip with the given id
+     * @throws UserServiceException: invalid user
+     * @throws ParseException: invalid parsing
+     * @throws InvalidTargetID：the id of the trip is invalid
+     */
 
     public Trip getTripById(String tripIdInStr) throws UserServiceException, ParseException, InvalidTargetID {
         return new TripManager().getTripById(tripIdInStr);
     }
 
+    /**
+     *
+     * @param username
+     * @return a new trip with the given user name
+     * @throws UserServiceException: invalid user
+     * @throws ParseException: invalid parsing
+     * @throws InvalidTargetID：the id of the trip is invalid
+     */
     public Trip getTripByName(String username) throws UserServiceException, ParseException, InvalidTargetID {
         return new TripManager().getTripByName(username);
     }
 
+    /**
+     *
+     * @param username
+     * @return list of trips that this user can see
+     * @throws SQLException: sql statement/database exception
+     * @throws UserServiceException: invalid user
+     * @throws ParseException: invalid parsing
+     * @throws InvalidTargetID：the id of the trip is invalid
+     * @throws RelationshipServiceException: the relationship of the users is invalid
+     * @throws java.text.ParseException: invalid object to parse
+     */
     public List<Trip> getAllTrips(String username) throws  SQLException,UserServiceException, ParseException, InvalidTargetID, RelationshipServiceException, java.text.ParseException{
         return new TripManager().getAllTrips(username);
     }
 
+    /**
+     *
+     * @param username
+     * @return this user's travel history
+     * @throws SQLException: sql statement/database exception
+     * @throws UserServiceException: invalid user
+     * @throws ParseException: invalid parsing
+     * @throws InvalidTargetID：the id of the trip is invalid
+     * @throws RelationshipServiceException: the relationship of the users is invalid
+     * @throws java.text.ParseException: invalid object to parse
+     */
+    public List<Trip> getTripHistory(String username) throws  SQLException,UserServiceException, ParseException, InvalidTargetID, RelationshipServiceException, java.text.ParseException{
+        return new TripManager().getTripHistory(username);
+    }
+
+    /**
+     *
+     * @param tripIdInStr： the trip id in string form
+     * @param body: the body being passed in
+     * @throws InvalidTargetID：the id of the trip is invalid
+     * @throws WalkLiveService.UserServiceException: invalid user in the database
+     * @throws ParseException: invalid parsing
+     */
      public void updateTrip(String tripIdInStr, String body) throws InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
         new TripManager().updateTrip(tripIdInStr, body);
      }
 
 
     //=====================EXCEPTIONS============================
+
     public static class UserServiceException extends Exception {
         public UserServiceException(String message, Throwable cause) {
             super(message, cause);
@@ -161,6 +223,16 @@ public class WalkLiveService {
         }
 
         public RelationshipServiceException(String message) {
+            super(message);
+        }
+    }
+
+    public static class DuplicateException extends Exception {
+        public DuplicateException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public DuplicateException(String message) {
             super(message);
         }
     }

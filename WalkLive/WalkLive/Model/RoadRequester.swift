@@ -17,6 +17,7 @@ class RoadRequester: NSObject {
     var overlay: MKOverlay!
     var destinationAnnotation: MKAnnotation!
     var sourceAnnotation: MKAnnotation!
+    var trip: Trip!
     
     func setMapView(mapView: MKMapView){
         self.mapView = mapView
@@ -74,7 +75,8 @@ class RoadRequester: NSObject {
             self.mapView.add(route.polyline, level: MKOverlayLevel.aboveRoads)
             let rect = route.polyline.boundingMapRect
             self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
-            success(Trip(mapItem: destinationMapItem, route: route))
+            self.trip = Trip(mapItem: destinationMapItem, route: route)
+            success(self.trip)
         }, failure: { (error) in
             failure(error)
         }, destinationMapItem: destinationMapItem)

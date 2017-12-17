@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class FriendsManager {
-    public void createFriendRequest(String sender, String body) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
+    public void createFriendRequest(String sender, String body) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, WalkLiveService.DuplicateException, ParseException, SQLException, java.text.ParseException {
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String recipient = object.get("recipient").toString();
         int request_id = getNewRequestId();
@@ -25,7 +25,7 @@ public class FriendsManager {
         }
 
         //fourth see if there already is a friend request made from either s ro r or r to s already, it shouldnt work.
-        //THIS IS NOT IMPLEMENTED YET
+        checkDuplicateRequest(sender, recipient);
 
         this.createNewFriendRequest(sender, recipient, request_id);
     }
@@ -124,8 +124,8 @@ public class FriendsManager {
             res = ps.executeQuery();
 
             if (!res.next()) {
-                WalkLiveService.logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
-                throw new WalkLiveService.RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %d", requestId));
+                WalkLiveService.logger.error(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %s", requestId));
+                throw new WalkLiveService.RelationshipServiceException(String.format("WalkLiveService.respondToFriendRequest: Failed to find relationship id: %s", requestId));
             }
 
             String recipient = res.getString(3);
@@ -157,9 +157,9 @@ public class FriendsManager {
 
         //now that all checks are done, update the actual relationship
         if (response.equals("accept")) {
-            updateRelationship(requestId, 1);
+            updateRelationship(requestId);
         } else if (response.equals("reject")) {
-            updateRelationship(requestId, 2);
+            deleteRelationship(requestId);
         } else {
             //invalid response message. hoping that we can assume that we always get the correct response types
         }
@@ -293,7 +293,7 @@ public class FriendsManager {
 
     }
 
-    private void updateRelationship(String requestId, int response) throws WalkLiveService.RelationshipServiceException {
+    private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
         PreparedStatement ps = null;
         Connection conn = null;
 
@@ -303,8 +303,38 @@ public class FriendsManager {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
             //check if username exists
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, response);
+            ps.setInt(1, 1);
             ps.setString(2, requestId);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
+    private void deleteRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        String sql = "DELETE FROM friends WHERE _id = ?";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            //check if username exists
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, requestId);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -329,6 +359,50 @@ public class FriendsManager {
             return "recipient";
         }
             return "sender";
+    }
+
+    private void checkDuplicateRequest(String sender, String recipient) throws WalkLiveService.RelationshipServiceException, WalkLiveService.DuplicateException {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet res = null;
+
+        String sql = "SELECT * FROM friends WHERE (sender = ? AND recipient = ?) OR (sender = ? AND recipient = ?)";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            //check if username exists
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, sender);
+            ps.setString(2, recipient);
+            ps.setString(3, recipient);
+            ps.setString(4, sender);
+            res = ps.executeQuery();
+
+            if (res.next()) {
+                WalkLiveService.logger.error("WalkLiveService.createFriendRequest: Request already exists.");
+                throw new WalkLiveService.DuplicateException("WalkLiveService.createFriendRequest: Request already exists.");
+            }
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (res != null) {
+                try {
+                    res.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
     }
 
 }

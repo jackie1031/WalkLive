@@ -24,6 +24,7 @@ class TimePoint: NSObject, Codable {
     var timeSpent: String?
     var emergencyNum: String?
     var tripId: Int?
+    var address: String?
     
     func getStartMapItem() -> MKMapItem{
         let pl = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.startLat!, longitude: self.startLong!), addressDictionary: nil)

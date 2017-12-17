@@ -89,6 +89,7 @@ class TimeManager: NSObject {
         timePoint.startTime = getTodayString()
         timePoint.emergencyNum = currentUserInfo.contact
         timePoint.timeSpent = self.buildMessageOnCurrentTimer()
+        timePoint.address = self.roadRequester?.trip.address
         if (self.tripId != nil) {
             timePoint.tripId = self.tripId
         }
