@@ -4,10 +4,32 @@ import java.util.*;
 
 public class Trip {
 
+<<<<<<< HEAD
     private String username, destination, timeSpent, emergencyNum, startTime, shareTo, address;
+=======
+    private String username;
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    private String destination;
+    private String timeSpent;
+    private String emergencyNum;
+    private String startTime;
+    private String shareTo;
+>>>>>>> crimeData
     private double startLat,startLong,curLat,curLong,endLat,endLong;
     private boolean completed;
     //private Coordinate currCoordinate;
+
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
+    }
 
     private int tripId,timePointId, dangerLevel;
 
