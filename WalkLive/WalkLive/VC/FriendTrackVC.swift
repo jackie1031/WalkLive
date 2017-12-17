@@ -37,7 +37,14 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.endTimers()
 
     }
+
     
+    // Private functions
+    
+    
+    /*
+     Initializes friend tracker and trip updater.
+     */
     private func initializeUpdates(){
         self.friendTracker.mapTimePoint(timePoint: self.currentFriendTrip!)
         self.friendTracker.trackNewTripWithTimer(trip: self.currentFriendTrip!, timeInterval: self.timeInterval)
@@ -45,17 +52,29 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         self.tripUpdater.startTimer(timeInterval: self.timeInterval)
     }
     
+    /*
+     Stops tracking and trip updates
+     */
     private func endTimers(){
         self.friendTracker.endTimer()
         self.tripUpdater.endTimer()
     }
     
+    
+    // Public functions
+    
+    
+    /*
+     Track a friend's trip
+     */
     @IBAction func onTrackButton(_ sender: UIButton) {
         let trip = friendTrips[sender.tag]
         self.friendTracker.trackNewTripWithTimer(trip: trip, timeInterval: self.timeInterval)
     }
     
-    
+    /*
+     Gets all friend trips.
+     */
     func updateAllTimePoints(){
         backEndClient.getAllTrip(success: { (timePoints) in
             OperationQueue.main.addOperation {
@@ -67,6 +86,13 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    /*
+     Refreshes table view
+     - Parameters:
+       - tableView : UITableView showing friends trips
+       - section: number of rows
+     - Returns: number of friend trips
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.friendTrips != nil) {
             return self.friendTrips!.count
@@ -74,6 +100,13 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return 0
     }
     
+    /*
+     Sets up a single cell showing a friend trip
+     - Parameters:
+       - tableView : UITableView showing friends trips
+       - section: number of rows
+     - Returns: a single UITableViewCell
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendTrackTable.dequeueReusableCell(withIdentifier: "FriendTrackTableViewCell", for: indexPath) as! FriendTrackTableViewCell
         let friendTrip = friendTrips[indexPath.row]
@@ -88,6 +121,9 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    /*
+     Sets up message to send to a friend
+     */
     @IBAction func onMessageButton(_ sender: UIButton) {
         let phoneNum = friendTrips![sender.tag].emergencyNum
         if (MFMessageComposeViewController.canSendText()) {
@@ -99,7 +135,9 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    
+    /*
+     Calls friend
+     */
     @IBAction func onPhoneButton(_ sender: UIButton) {
         let phoneNum = friendTrips![sender.tag].emergencyNum
         //Does not work in Simulator
@@ -112,6 +150,12 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    /*
+     Sets up view controller for editing and sending text messages
+     - Parameters:
+       - controller: MFMessageComposeViewController for handling text messages
+       - result: MessageComposeResult
+     */
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         //... handle sms screen actions
         self.dismiss(animated: true, completion: nil)
@@ -136,6 +180,9 @@ class FriendTrackVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
 
 extension FriendTrackVC: TripTableUpdateDelegate{
+    /*
+     Updates table view that shows friend trips
+     */
     func updateTable() {
         backEndClient.getAllTrip(success: { (friendTrips) in
             OperationQueue.main.addOperation {

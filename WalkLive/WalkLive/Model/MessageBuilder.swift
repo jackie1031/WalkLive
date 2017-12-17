@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 
+// A string builder that builds text messages
 class MessageBuilder: NSObject {
     
     /*

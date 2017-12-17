@@ -30,6 +30,14 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         self.currentEmergencyNumberLabel.text = emerStringBuilder()
     }
     
+    
+    // Private Functions
+    
+    
+    /*
+     Builds emergency contact number.
+     Returns: emergency contact number
+     */
     private func emerStringBuilder() -> String{
         if (currentUserInfo?.emergency_number == nil) {
             return "None"
@@ -37,6 +45,10 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return (currentUserInfo?.emergency_number)!
     }
     
+    /*
+     Buils emergency contact name
+     Returns: emergency contact name
+     */
     private func emerIdStringBuilder() -> String{
             if (currentUserInfo?.emergency_id == nil || currentUserInfo?.emergency_id == "") {
                 return "None"
@@ -44,6 +56,31 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             return (currentUserInfo?.emergency_id)!
     }
     
+    /*
+     Updates friend list
+     */
+    private func updateFriends() {
+        backEndClient.getFriendList(success: { (friends) in
+            OperationQueue.main.addOperation {
+                self.friends = friends
+                self.friendListTable.reloadData()
+            }
+        }) { (error) in
+            
+        }
+    }
+    
+    
+    // Public functions
+    
+    
+    /*
+     Refreshes table view showing friends
+     - Parameters:
+       - tableView: UITableView that shows friends
+       - section: number of rows
+     - Returns: number of rows
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.friends != nil {
             return self.friends.count
@@ -51,6 +88,13 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return 0
     }
     
+    /*
+     Sets up a single table cell containing friend info
+     - Parameters:
+       - tableView: UITableView that shows friends
+       - indexPath: index of cell in table
+     - Returns: a single UITableViewCell object
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendListTable.dequeueReusableCell(withIdentifier: "SetFriendTableViewCell", for: indexPath) as! SetFriendTableViewCell
         let friend = friends[indexPath.row]
@@ -60,6 +104,9 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 
+    /*
+     Selects friend as emergency contact
+     */
     @IBAction func onSelectButton(_ sender: Any) {
         let button = sender as! UIButton
         self.currentFriendNameLabel.text = friends[button.tag].username
@@ -67,6 +114,9 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
     }
     
+    /*
+     Saves settings
+     */
     @IBAction func onSaveButton(_ sender: Any) {
         if (self.currentFriendNameLabel.text! == currentUserInfo.emergency_id) {
             return
@@ -84,17 +134,6 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }, failure: { (error) in
             
         }, emergencyContact: emergencyContact)
-    }
-    
-    func updateFriends() {
-        backEndClient.getFriendList(success: { (friends) in
-            OperationQueue.main.addOperation {
-            self.friends = friends
-                self.friendListTable.reloadData()
-            }
-        }) { (error) in
-            
-        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -69,8 +69,77 @@ class SettingsVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // this will save phone number settings, but not message setting, since message setting is
-    // already saved in MessageVC
+    
+    // Private functions
+
+
+    /*
+     Checks if emergency contact info is empty
+     Returns: boolean indicating whether emergency contact info is empty
+     */
+    private func emergencyIsDifferent() -> Bool {
+        return (emergencyContactPhone.text != "" ||
+            emergencyContactIdTextField.text != "" )
+    }
+    
+    /*
+     Loads message setting from local directory
+     */
+    private func loadData() {
+        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
+            messages = data
+        }
+    }
+    
+    /*
+     Path for locally saved message setting
+     */
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    /*
+     Checks if phone number/syntax is correct
+     - Returns: boolean indicating whether phone number format is valid
+     */
+    private func validPhone() -> Bool {
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let userPhoneResult =  phoneTest.evaluate(with: self.userPhone.text)
+        let emergencyPhoneResult = phoneTest.evaluate(with: self.emergencyContactPhone.text)
+        return (userPhoneResult && emergencyPhoneResult)
+    }
+    
+    /*
+     Refreshes text preview label
+     */
+    private func refreshTextLabel() {
+        if (segmentedControl.selectedSegmentIndex == WITHOUT_TRIP) {
+            textLabel.text = messages.buildMessageWithoutTrip()
+        } else if (segmentedControl.selectedSegmentIndex == WITH_TRIP) {
+            textLabel.text = messages.buildMessageWithTripPreview()
+        }
+    }
+    
+    /*
+     Sets keyboard
+     */
+    private func setKeyboard(){
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+    }
+    
+    
+    // Public functions
+    
+    
+    /*
+     This will save phone number settings, but not message setting, since message setting is
+     already saved in MessageVC
+     */
     @IBAction func onSaveButton(_ sender: Any) {
         if (emergencyIsDifferent()){
             let emergencyContact = EmergencyContact(emergency_id: emergencyContactIdTextField.text!, emergency_number: emergencyContactPhone.text!)
@@ -85,63 +154,30 @@ class SettingsVC: UITableViewController {
         }
     }
     
+    /*
+     Refreshes label when user selects a message to view
+     */
     @IBAction func onSegmentedControl(_ sender: Any) {
         refreshTextLabel()
     }
     
-    private func emergencyIsDifferent() -> Bool {
-        return (emergencyContactPhone.text != "" ||
-                emergencyContactIdTextField.text != "" )
-    }
-    
-    // Pass messages to MessageVC
+    /*
+     Passes messages to MessageVC
+     */
     @IBAction func onEditButton(_ sender: Any) {
         self.performSegue(withIdentifier: "messageSegue", sender: nil)
     }
     
-    // load message setting from local directory
-    private func loadData() {
-        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
-            messages = data
-        }
-    }
-    
-    // path for locally saved message setting
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-    
-    // check if phone number/syntax is correct
-    private func validPhone() -> Bool {
-        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
-        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
-        let userPhoneResult =  phoneTest.evaluate(with: self.userPhone.text)
-        let emergencyPhoneResult = phoneTest.evaluate(with: self.emergencyContactPhone.text)
-        return (userPhoneResult && emergencyPhoneResult)
-    }
-    
-    // refresh text preview label
-    private func refreshTextLabel() {
-        if (segmentedControl.selectedSegmentIndex == WITHOUT_TRIP) {
-            textLabel.text = messages.buildMessageWithoutTrip()
-        } else if (segmentedControl.selectedSegmentIndex == WITH_TRIP) {
-            textLabel.text = messages.buildMessageWithTripPreview()
-        }
-    }
-    
-    private func setKeyboard(){
-        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
-        hideTap.numberOfTapsRequired = 1
-        self.view.isUserInteractionEnabled = true
-        self.view.addGestureRecognizer(hideTap)
-    }
-    
+    /*
+     Hides keyboard
+     */
     @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
-
-
+    
+    /*
+     Sets bar button.
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Setting"

@@ -10,6 +10,7 @@ import UIKit
 
 class MessageVC: UIViewController {
     
+    // For locally store and fetch message data
     private var filePath: String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -47,38 +48,12 @@ class MessageVC: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func onAddTextButton(_ sender: Any) {
-        if (index == WITHOUT_TRIP) {
-            self.addTextField(textFields: self.textFieldsWithoutTrip, message: "")
-        } else {
-            self.addTextField(textFields: self.textFieldsWithTrip, message: "")
-        }
-        setPanelPosition()
-    }
-
-    @IBAction func onDeleteLastTextButton(_ sender: Any) {
-        if (index == WITHOUT_TRIP) {
-            self.delTextField(textFields: self.textFieldsWithoutTrip)
-        } else {
-            self.delTextField(textFields: self.textFieldsWithTrip)
-        }
-        setPanelPosition()
-    }
     
-    // Determine which page the user is on
-    @IBAction func onSegmentedControl(_ sender: Any) {
-        if (segmentedControl.selectedSegmentIndex == WITHOUT_TRIP) {
-            self.index = WITHOUT_TRIP
-            self.switchSegmentedControl()
-        } else if (segmentedControl.selectedSegmentIndex == WITH_TRIP) {
-            self.index = WITH_TRIP
-            self.switchSegmentedControl()
-        } else {
-            print("Error.")
-            return
-        }
-    }
+    // Private functions
     
+    /*
+     Determine panel position according to the lowest text field box
+     */
     private func setPanelPosition() {
         var textFields : Array<UITextField>
         if index == 0 {
@@ -98,7 +73,9 @@ class MessageVC: UIViewController {
         noteLabel.frame.origin.y = frame.origin.y + 40
     }
     
-    // reload saved texts
+    /*
+     Reload saved texts from locally saved messages
+     */
     private func setUpTextFields() {
         // clean both text field arrays
         if textFieldsWithoutTrip != nil {
@@ -127,6 +104,7 @@ class MessageVC: UIViewController {
             print("Error.")
             return
         }
+        
         // load saved messages and update text field arrays
         for messageSegment in self.unsavedMessages.getMessagesWithoutTrip() {
             addTextField(textFields: self.textFieldsWithoutTrip, message: messageSegment)
@@ -137,6 +115,9 @@ class MessageVC: UIViewController {
         
     }
     
+    /*
+     Refresh view according to which page the user selects.
+     */
     private func switchSegmentedControl() {
         var textFields : Array<UITextField>
         var otherTextFields : Array<UITextField>
@@ -161,7 +142,12 @@ class MessageVC: UIViewController {
         setPanelPosition()
     }
     
-    // add a new text field
+    /*
+     Adds a new text field.
+     - Parameters:
+       - textFields: indicates the type of message being edited
+       - message: new text segment
+    */
     private func addTextField(textFields : Array<UITextField>, message : String) {
         print("add " + message)
         var currentIndex : Int
@@ -203,7 +189,11 @@ class MessageVC: UIViewController {
         setPanelPosition()
     }
     
-    // delete a text field
+    /*
+     Deletes a text field.
+     - Parameters:
+     - textFields: indicate the message being edited
+    */
     private func delTextField(textFields : Array<UITextField>) {
         var currentIndex : Int
         if textFields == self.textFieldsWithoutTrip {
@@ -228,7 +218,101 @@ class MessageVC: UIViewController {
         setPanelPosition()
     }
     
-    // save both messages
+    /*
+     Saves message setting locally
+     */
+    private func saveData() {
+        NSKeyedArchiver.archiveRootObject(self.unsavedMessages, toFile: filePath)
+        messages.updateMessagesWithoutTrip(updatedMessages: unsavedMessages.getMessagesWithoutTrip())
+        messages.updateMessagesWithTrip(updatedMessages: unsavedMessages.getMessagesWithTrip())
+    }
+    
+    /*
+     Loads message setting from local directory.
+     */
+    private func loadData() {
+        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
+            self.unsavedMessages = data
+        } else {
+            unsavedMessages = loadMessageInfo()
+        }
+        // if local data is empty
+        if (unsavedMessages.getMessagesWithoutTrip().count == 0) {
+            unsavedMessages = loadMessageInfo()
+        }
+    }
+    
+    /*
+     Loads message setting from message object, if no local data exists.
+     */
+    private func loadMessageInfo() -> Message {
+        let temp = Message()
+        temp.updateMessagesWithoutTrip(updatedMessages: messages.getMessagesWithoutTrip())
+        temp.updateMessagesWithTrip(updatedMessages: messages.getMessagesWithTrip())
+        return temp
+    }
+    
+    /*
+     Sets keyboard.
+     */
+    private func setKeyboard(){
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
+    }
+    
+    
+    // Public functions
+    
+    
+    /*
+     Add a new text field
+     */
+    @IBAction func onAddTextButton(_ sender: Any) {
+        if (index == WITHOUT_TRIP) {
+            self.addTextField(textFields: self.textFieldsWithoutTrip, message: "")
+        } else {
+            self.addTextField(textFields: self.textFieldsWithTrip, message: "")
+        }
+        setPanelPosition()
+    }
+
+    
+    // Public functions
+    
+    
+    /*
+     Deletes the last text field
+     */
+    @IBAction func onDeleteLastTextButton(_ sender: Any) {
+        if (index == WITHOUT_TRIP) {
+            self.delTextField(textFields: self.textFieldsWithoutTrip)
+        } else {
+            self.delTextField(textFields: self.textFieldsWithTrip)
+        }
+        setPanelPosition()
+    }
+    
+    /*
+     Determines which page the user is on
+     */
+    @IBAction func onSegmentedControl(_ sender: Any) {
+        if (segmentedControl.selectedSegmentIndex == WITHOUT_TRIP) {
+            self.index = WITHOUT_TRIP
+            self.switchSegmentedControl()
+        } else if (segmentedControl.selectedSegmentIndex == WITH_TRIP) {
+            self.index = WITH_TRIP
+            self.switchSegmentedControl()
+        } else {
+            print("Error.")
+            return
+        }
+    }
+    
+    /*
+     Saves both messages
+     */
     @IBAction func onSaveButton(_ sender: Any) {
         var messageSegments1 = Array<String>()
         for textField in textFieldsWithoutTrip {
@@ -246,40 +330,9 @@ class MessageVC: UIViewController {
         self.view.addSubview(view)
     }
     
-    // save message setting locally
-    private func saveData() {
-        NSKeyedArchiver.archiveRootObject(self.unsavedMessages, toFile: filePath)
-        messages.updateMessagesWithoutTrip(updatedMessages: unsavedMessages.getMessagesWithoutTrip())
-        messages.updateMessagesWithTrip(updatedMessages: unsavedMessages.getMessagesWithTrip())
-    }
-    
-    // load message setting from local directory
-    private func loadData() {
-        if let data = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Message {
-            self.unsavedMessages = data
-        } else {
-            unsavedMessages = loadMessageInfo()
-        }
-        // if local data is empty
-        if (unsavedMessages.getMessagesWithoutTrip().count == 0) {
-            unsavedMessages = loadMessageInfo()
-        }
-    }
-    
-    private func loadMessageInfo() -> Message {
-        let temp = Message()
-        temp.updateMessagesWithoutTrip(updatedMessages: messages.getMessagesWithoutTrip())
-        temp.updateMessagesWithTrip(updatedMessages: messages.getMessagesWithTrip())
-        return temp
-    }
-    
-    private func setKeyboard(){
-        let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
-        hideTap.numberOfTapsRequired = 1
-        self.view.isUserInteractionEnabled = true
-        self.view.addGestureRecognizer(hideTap)
-    }
-    
+    /*
+     Hides keyboard
+     */
     @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }

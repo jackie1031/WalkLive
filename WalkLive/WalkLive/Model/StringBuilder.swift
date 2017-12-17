@@ -8,6 +8,7 @@
 
 import Foundation
 
+// A string builder that sets up info about emergency contact name and number
 class StringBuilder: NSObject {
     func emerStringBuilder() -> String{
         if (currentUserInfo?.emergency_number == nil || currentUserInfo?.emergency_number == "") {
