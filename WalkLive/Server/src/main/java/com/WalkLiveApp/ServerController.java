@@ -130,6 +130,9 @@ public class ServerController {
                  } catch (WalkLiveService.RelationshipServiceException e) {
                      logger.error("Failed to create friend request.");
                      response.status(410);
+                 } catch (WalkLiveService.DuplicateException e) {
+                     logger.error("Request already exists.");
+                     response.status(402);
                  } catch (WalkLiveService.UserServiceException e) {
                      logger.error("Invalid username - does not exist.");
                      response.status(404);
@@ -188,40 +191,11 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer()); //get list of users
 
-            //add new user (signup)
-            post(API_CONTEXT + "/users", "application/json", (request, response) -> {
-                try {
-                    User u = walkLiveService.createNew(request.body());
-                    response.status(201);
-                    return u;
-                } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to create new User");
-                    response.status(401);
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
              /**
               * ----------------------------------------------------------------------
               * Trip part
               * ----------------------------------------------------------------------
               * */
-
-
-            //add new user (signup)
-            post(API_CONTEXT + "/users", "application/json", (request, response) -> {
-                try {
-                    User u = walkLiveService.createNew(request.body());
-                    response.status(201);
-                    return u;
-                } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to create new User");
-                    response.status(401); //multiple error codes
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
-
-
 
             //Start Trip
             post(API_CONTEXT+"/trips", "application/json", (request, response) -> {

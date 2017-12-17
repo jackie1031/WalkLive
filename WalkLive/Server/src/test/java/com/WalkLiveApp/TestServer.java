@@ -405,49 +405,52 @@ public class TestServer {
 //        }
 //    }
 //
-//    @Test
-//    public void testRespondToFriendRequest() throws Exception {
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063"),
-//                new User("yangcao1", "121212", "1231231233")
-//        };
-//
-//        //add to database
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//        //add a few elements
-//        Relationship[] frs = new Relationship[] {
-//                new Relationship("jeesookim", "michelle", null),
-//                new Relationship("jeesookim", "yangcao1", null),
-//        };
-//
-//        for (Relationship f : frs) {
-//            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
-//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-//        }
-//
-//        Relationship[] frs2 = new Relationship[] {
-//                new Relationship("michelle", "jeesookim", null),
-//                new Relationship("michelle", "yangcao1", null)
-//        };
-//
-//        for (Relationship f : frs2) {
-//            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
-//            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-//        }
-//
-//        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/4/accept", null);
-//        assertEquals("Failed to accept friend request", 200, r.httpStatus);
-//
-//        //TODO check relationship code - should be updated to 1;
-//        //TODO if a response has already been made, dont allow responses yet!!
-//
-//        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
-//        assertEquals("Failed to reject friend request", 200, r2.httpStatus);
-//    }
+    @Test
+    public void testRespondToFriendRequest() throws Exception {
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "121212", "1231231233")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+        //add a few elements
+        Relationship[] frs = new Relationship[] {
+                new Relationship("jeesookim", "michelle", null),
+                new Relationship("jeesookim", "yangcao1", null),
+        };
+
+        for (Relationship f : frs) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Relationship[] frs2 = new Relationship[] {
+                new Relationship("michelle", "yangcao1", null)
+        };
+
+        for (Relationship f : frs2) {
+            Response rCreateFR = request("POST", "/WalkLive/api/users/michelle/friend_requests", f);
+            assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
+        }
+
+        Response response = request("GET", "/WalkLive/api/users/yangcao1/friend_requests", null);
+        List<Relationship> res = getRelationships(response);
+        assertEquals("Request relationship have not all been added", res.size(), 2);
+
+        //test accept
+        Response r = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/3/accept", null);
+        assertEquals("Failed to accept friend request", 200, r.httpStatus);
+
+        //test reject
+        Response r2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/reject", null);
+        assertEquals("Failed to reject friend request.", 200, r2.httpStatus);
+
+    }
 //
 //    @Test
 //    public void testGetFriendList() throws Exception{

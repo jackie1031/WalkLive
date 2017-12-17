@@ -87,7 +87,7 @@ public class WalkLiveService {
      */
 
     //create a new friend request and store in database
-    public void createFriendRequest(String sender, String body) throws UserServiceException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
+    public void createFriendRequest(String sender, String body) throws UserServiceException, DuplicateException, RelationshipServiceException, ParseException, SQLException, java.text.ParseException {
         new FriendsManager().createFriendRequest(sender, body);
     }
 
@@ -161,6 +161,16 @@ public class WalkLiveService {
         }
 
         public RelationshipServiceException(String message) {
+            super(message);
+        }
+    }
+
+    public static class DuplicateException extends Exception {
+        public DuplicateException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public DuplicateException(String message) {
             super(message);
         }
     }
