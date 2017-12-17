@@ -199,9 +199,9 @@ public class WalkLiveService {
      * @throws ParseException: can't parse into parameters
      * @throws InvalidTargetID: invalid trip id
      */
-    public Crime getDangerZone(String tripIdInStr, String body) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
-        return new Crime().getDangerLeveLZone(tripIdInStr, body);
-    }
+//    public Crime getDangerZone(String tripIdInStr, String body) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+//        return new Crime().getDangerLeveLZone(tripIdInStr, body);
+//    }
 
     //=====================EXCEPTIONS============================
 

@@ -298,15 +298,16 @@ public class ServerController {
              * ----------------------------------------------------------------------
              * */
 
-            get(API_CONTEXT + "/crime/:tripId", "application/json", (request, response) -> {
-                try {
-                    return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
-                } catch (WalkLiveService.InvalidTargetID e) {
-                    logger.error("Invalid user id.");
-                    response.status(402);
-                }
-                return Collections.EMPTY_MAP;
-            }, new JsonTransformer());
+//            get(API_CONTEXT + "/crime/:tripId", "application/json", (request, response) -> {
+//                try {
+//                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
+//                    return walkLiveService.getDangerZone(request.body() );
+//                } catch (WalkLiveService.InvalidTargetID e) {
+//                    logger.error("Invalid user id.");
+//                    response.status(402);
+//                }
+//                return Collections.EMPTY_MAP;
+//            }, new JsonTransformer());
 
 
         }
