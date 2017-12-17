@@ -18,6 +18,10 @@ You should do UI sketches again as they're not really clear right now and you ne
 
 (-2 Points)
 
+**Regrade**
+
+(-1 Points)
+
 ### Use Cases
 (Are all important multi-step actions not clear from the UI sketches presented in use-cases?)
 Since UI's are hand drawn, it doesn't reflect the extent of how it's really going to look becasuse I can see things that might not even be possible in iOS but otherwise usecases are clear.
@@ -29,8 +33,13 @@ You didn't add the tech stack or the architecture diagram that you plan to use i
 
 (-5 Points)
 
+**Regrade**
+
+(-2.5 Points)
+
+
 ### General Remarks
 
 The idea is really great and I would love to see this turning into a live project on the App Store. You just need to start planning a bit on how you would go about doing it.
 
-** Grade: 93/100 **
+** Grade: 96.5/100 **

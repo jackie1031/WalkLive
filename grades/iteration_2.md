@@ -9,6 +9,11 @@ Really impressed by the changes you've made in this past week. Great work on the
 
 (-5 points)
 
+**Regrade**
+
+(-2.5 Points)
+
+
 ### UI sketches
 (Improved as either needed or required based on iteration 1 feedback?)
 
@@ -42,5 +47,5 @@ Seems like everyone commited
 
 Great progress but you need to prototype atleast some of the UI by the next lab to see if it's actually feasible.
 
-**Grade: 95/100**
+**Grade: 97.5/100**
 
