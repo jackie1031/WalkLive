@@ -568,35 +568,35 @@ public class TestServer {
 
     }
 
-//    @Test
-//    public void testTripDangerLevel() throws Exception {
-//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        //start trip
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//
-//        //username
-//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//
-//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//
-//
-//    }
+    @Test
+    public void testTripDangerLevel() throws Exception {
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+
+        //username
+        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+
+    }
 
 //    @Test
 //    public void testgetTripByName() throws Exception {
@@ -1100,21 +1100,23 @@ public class TestServer {
             String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
             //String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
+            //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
             String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitute DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
-            String sqlInsertClusters = " NSERT INTO dangerZones (tripId, username, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent) " +
-                    "VALUES (?,?,?,Null,?,completed,?,?,?,?,?,?,?,?) ";
-
-
+            String sqlInsertClusters = " INSERT INTO dangerZones (cluster_id, longitute, latitude, radius, hour_of_day) " +
+                    "VALUES (1,38.9846371,-76.9661682,0.018,12) ";
+            String sqlInsertClusters1 = " INSERT INTO dangerZones (cluster_id, longitute, latitude, radius, hour_of_day) " +
+                    "VALUES (2,38.9846379,-76.9661688,0.018,21) ";
+            //dangerZones(cluster_id TEXT, longitute DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
 
 
             stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
-            stm.executeUpdate(sqlNew7);
+            //stm.executeUpdate(sqlNew7);
             stm.executeUpdate(sqlNew8);
             stm.executeUpdate(sqlInsertClusters);
+            stm.executeUpdate(sqlInsertClusters1);
 
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
@@ -1143,11 +1145,11 @@ public class TestServer {
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
 
-            String sql9 = "DROP TABLE IF EXISTS Crime" ;
-            stm.executeUpdate(sql9);
+            //String sql9 = "DROP TABLE IF EXISTS Crime" ;
+            //stm.executeUpdate(sql9);
 
-            String sql10 = "DROP TABLE IF EXISTS dangerZones" ;
-            stm.executeUpdate(sql10);
+            //String sql10 = "DROP TABLE IF EXISTS dangerZones" ;
+            //stm.executeUpdate(sql10);
 
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
@@ -1200,9 +1202,8 @@ public class TestServer {
             stm.executeUpdate(sql7);
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
-            String sql9 = "DROP TABLE IF EXISTS Crime" ;
-
-            stm.executeUpdate(sql9);
+            //String sql9 = "DROP TABLE IF EXISTS Crime" ;
+            //stm.executeUpdate(sql9);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
@@ -1212,7 +1213,7 @@ public class TestServer {
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
@@ -1221,7 +1222,7 @@ public class TestServer {
             stm.executeUpdate(counterInit);
             stm.executeUpdate(sqlNew5);
             stm.executeUpdate(sqlNew6);
-            stm.executeUpdate(sqlNew7);
+            //stm.executeUpdate(sqlNew7);
 
 
         } catch (SQLException ex) {

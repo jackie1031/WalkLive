@@ -1,6 +1,8 @@
 package com.WalkLiveApp;
 
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.*;
@@ -12,6 +14,8 @@ public class Crime {
     private double longitude, latitude;
     private String address, type;
     private ArrayList<Cluster> clusters= new ArrayList<Cluster>();
+    private final Logger logger = LoggerFactory.getLogger(Crime.class);
+
 
 
     public void setDate(int date) {
@@ -127,22 +131,27 @@ public class Crime {
 
         double longitude = trip.getCurLong();
         double latitude = trip.getCurLat();
+        double tempRadius = 0.018;
 //
 //        SELECT column_name(s)
 //                FROM table_name
 //        WHERE column_name BETWEEN value1 AND value2;
 
         //String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
-        String sql = "SELECT * FROM dangerZones (WHERE longitute BETWEEN ? AND ?) AND (WHERE longitute BETWEEN ? AND ?)";
+        String sql = "SELECT * FROM dangerZones (WHERE longitute BETWEEN ? AND ?) AND (WHERE latitude BETWEEN ? AND ?)";
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, tripId);
+            ps.setDouble(1, longitude+tempRadius);
+            ps.setDouble(2, longitude-tempRadius);
+            ps.setDouble(3, latitude+tempRadius);
+            ps.setDouble(4, latitude-tempRadius);
             res = ps.executeQuery();
+            logger.error("get the range");
+
             if (res.next()) {
                 //return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
-
             } else{
                 WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
                 throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
