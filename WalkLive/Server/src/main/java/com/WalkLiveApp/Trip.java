@@ -43,8 +43,7 @@ public class Trip {
         this.endLong =  endLong;
         this.emergencyNum =  emergencyNum;
         this.timeSpent =  timeSpent;
-
-
+        this.address = address;
     }
 
     public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
@@ -85,6 +84,7 @@ public class Trip {
         this.endLong =  endLong;
         this.emergencyNum =  emergencyNum;
         this.timeSpent =  timeSpent;
+        this.address = address;
 
 
     }
