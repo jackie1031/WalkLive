@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Sign up view
 class SignUpVC: UIViewController {
     
     @IBOutlet weak var userNameTextField: UITextField!
@@ -19,13 +20,11 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setKeyboard()
-        backEndClient.getUsers(success: { (users) in
-            
-        }) { (error) in
-            
-        }
-        
-        // Do any additional setup after loading the view.
+//        backEndClient.getUsers(success: { (users) in
+//
+//        }) { (error) in
+//
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,29 +32,16 @@ class SignUpVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onCancelButton(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
     
-    @IBAction func onSignUpButton(_ sender: Any) {
-        if (!isValidSignUp()) {
-            return
-        }
-        let userSignUp = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!, contact: phoneNumberTextField.text!)
-        backEndClient.signUpAttempt(success: {(userinfo) in
-            OperationQueue.main.addOperation {
-                self.performSegue(withIdentifier: "signupSegue", sender: nil)
-            }
-        }, failure: { (error) in
-            OperationQueue.main.addOperation {
-                let errorView = warnigSignFactory.makeSignUpBackEndWarningSign(signupError: error)
-                errorView.center = self.view.center
-                self.view.addSubview(errorView)
-            }
-        }, userLogin: userSignUp)
-    }
+    // Private functions
     
-    func isValidSignUp() -> Bool {
+    
+    /*
+     Checks if username is valid, if passwords match, if password is valid, and if phone
+     number is valid.
+     - Return: Bool indicating whether sign up info is valid
+     */
+    private func isValidSignUp() -> Bool {
         if (!validUser()) {
             let errorView = warnigSignFactory.makeSignUpValidityWarningSign(status: 0)
             errorView.center = self.view.center
@@ -83,13 +69,21 @@ class SignUpVC: UIViewController {
         return true
     }
     
-    func validPhone() -> Bool {
+    /*
+     Checks if phone number is valid.
+     - Returns: bool indicating if phone number format is valid
+     */
+    private func validPhone() -> Bool {
         let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
         return phoneTest.evaluate(with: self.phoneNumberTextField.text)
     }
     
-    func validUser() -> Bool {
+    /*
+     Checks if username is empty or contain illegal characters
+     - Returns: bool indicating if username format is valid
+     */
+    private func validUser() -> Bool {
         if (self.userNameTextField.text == "") {
             return false
         }
@@ -100,6 +94,9 @@ class SignUpVC: UIViewController {
         return true
     }
     
+    /*
+     Sets keyboard
+     */
     private func setKeyboard(){
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(MainMapVC.hideKeyboardTap(_:)))
         hideTap.numberOfTapsRequired = 1
@@ -107,12 +104,43 @@ class SignUpVC: UIViewController {
         self.view.addGestureRecognizer(hideTap)
     }
     
+    
     //Public functions
     
-    /// hides keyboard when user finish editing and tap on other places on the screen
-    ///
-    /// - Parameters:
-    ///   - recoginizer: object to recognize motion when user tap on the screen
+    
+    /*
+     If user cancels signup, brings the user back to login/signup view
+     */
+    @IBAction func onCancelButton(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    /*
+     Create new account for the user if user info is valid.
+     */
+    @IBAction func onSignUpButton(_ sender: Any) {
+        if (!isValidSignUp()) {
+            return
+        }
+        let userSignUp = UserLogin(username: userNameTextField.text!, password: passwordTextField.text!, contact: phoneNumberTextField.text!)
+        backEndClient.signUpAttempt(success: {(userinfo) in
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "signupSegue", sender: nil)
+            }
+        }, failure: { (error) in
+            OperationQueue.main.addOperation {
+                let errorView = warnigSignFactory.makeSignUpBackEndWarningSign(signupError: error)
+                errorView.center = self.view.center
+                self.view.addSubview(errorView)
+            }
+        }, userLogin: userSignUp)
+    }
+    
+    /*
+     hides keyboard when user finish editing and tap on other places on the screen
+     - Parameters:
+       - recoginizer: object to recognize motion when user tap on the screen
+     */
     @objc func hideKeyboardTap(_ recoginizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }

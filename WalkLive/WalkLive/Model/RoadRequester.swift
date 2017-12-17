@@ -10,6 +10,9 @@ import UIKit
 import MapKit
 import CoreLocation
 
+// RoadRequester model basically keeps track of the source location and destination of a trip request,
+// the user's current location, and thus searches for corresponding locations near the user, and once
+// destination is set, a route will be drawn
 class RoadRequester: NSObject {
     var locationManager = CLLocationManager()
     var mapView: MKMapView!

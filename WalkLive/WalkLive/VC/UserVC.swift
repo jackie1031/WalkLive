@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-
+// User profile view
 class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate {
     
     @IBOutlet weak var usernameLabel: UILabel!
@@ -47,16 +47,60 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         
     }
     
+    
+    // Private functions
+    
+    
+    /*
+     Initializes an updator for the current trip (TripUpdater object)
+     */
     private func initializeUpdates(){
         self.tripUpdater = TripUpdater(tripTableDelegate: self)
         self.tripUpdater.startTimer(timeInterval: self.timeInterval)
     }
     
+    /*
+     Stops timer (in tripUpdater).
+     */
     private func endTimers(){
         self.tripUpdater.endTimer()
     }
     
-    func updateFriendTrips(){
+    /*
+     Refreshes user profile, such as username, phone number, and emergency contact
+     */
+    private func setUserVCInfo() {
+        self.usernameLabel.text = currentUserInfo?.username
+        self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
+        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
+    }
+    
+    /*
+     Updates number of friend request
+     */
+    private func updateFriendMangerTitle(receivedFriendRequests: [FriendRequest]?){
+        if (receivedFriendRequests == nil || receivedFriendRequests?.count == 0){
+            return
+        } else {
+            self.receivedFriendRequests = receivedFriendRequests!
+            self.friendRequestButton.titleLabel?.text = "Friend Manager: " + String(receivedFriendRequests!.count) + " request(s)"
+            self.friendRequestButton.sizeToFit()
+            
+            
+        }
+    }
+    
+    /*
+     Performs segue to settingsVC
+     */
+    private func segueToSettingVC(){
+        self.performSegue(withIdentifier: "settingSegue", sender: self)
+    }
+    
+    /*
+     Updates friend trips.
+     */
+    private func updateFriendTrips(){
         backEndClient.getAllTrip(success: { (timePoints) in
             OperationQueue.main.addOperation {
                 self.friendsTrip = timePoints
@@ -67,29 +111,43 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         }
     }
     
-    
-    private func setUserVCInfo() {
-        self.usernameLabel.text = currentUserInfo?.username
-        self.userContactLabel.text = "My Contact: " + (currentUserInfo?.contact)!
-        self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
+    /*
+     Updates friend requests and the number of them.
+     */
+    private func updateFriendRequest(){
+        backEndClient.getReceivedFriendRequests(success: { (receivedFriendRequests) in
+            OperationQueue.main.addOperation {
+                self.updateFriendMangerTitle(receivedFriendRequests: receivedFriendRequests)
+            }
+        }) { (error) in
+            print(error)
+        }
     }
     
+    
+    // Public functions
+    
+    
+    /*
+     Brings to settingsVC
+     */
     @IBAction func onMyContactPencilButton(_ sender: Any) {
         segueToSettingVC()
     }
     
+    /*
+     Brings to settingsVC
+     */
     @IBAction func onEmerContactPencilButton(_ sender: Any) {
         segueToSettingVC()
     }
     
-    
-    
-
-    func segueToSettingVC(){
-        self.performSegue(withIdentifier: "settingSegue", sender: self)
-    }
-    
-    
+    /*
+     Shows table view for friends.
+     - Parameters:
+       - tableView: UITableView showing friends
+       - section: number of rows
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.friendsTrip != nil {
             print("reached here")
@@ -100,6 +158,14 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         }
     }
     
+    /*
+     Sets up a single cell showing friend info
+     - Parameters:
+       - tableView: UITableView that shows friend list
+       - indexPath: index of this cell
+     - Returns:
+       - a UITableViewCell containing friend info
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendTripTable.dequeueReusableCell(withIdentifier: "FriendTripTableViewCell", for: indexPath) as! FriendTripTableViewCell
         let friendTrip = self.friendsTrip![indexPath.row]
@@ -115,29 +181,9 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         return cell
     }
     
-    
-    func updateFriendRequest(){
-        backEndClient.getReceivedFriendRequests(success: { (receivedFriendRequests) in
-            OperationQueue.main.addOperation {
-            self.updateFriendMangerTitle(receivedFriendRequests: receivedFriendRequests)
-            }
-        }) { (error) in
-            print(error)
-        }
-    }
-    
-    private func updateFriendMangerTitle(receivedFriendRequests: [FriendRequest]?){
-        if (receivedFriendRequests == nil || receivedFriendRequests?.count == 0){
-            return
-        } else {
-            self.receivedFriendRequests = receivedFriendRequests!
-            self.friendRequestButton.titleLabel?.text = "Friend Manager: " + String(receivedFriendRequests!.count) + " request(s)"
-            self.friendRequestButton.sizeToFit()
-            
-
-        }
-    }
-    
+    /*
+     Send text message to a friend.
+     */
     @IBAction func onMessageButton(_ sender: UIButton) {
         let phoneNum = friendsTrip![sender.tag].emergencyNum
         if (MFMessageComposeViewController.canSendText()) {
@@ -149,7 +195,9 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         }
     }
     
-
+    /*
+     Call a friend.
+     */
     @IBAction func onPhoneButton(_ sender: UIButton) {
         let phoneNum = friendsTrip![sender.tag].emergencyNum
         //Does not work in Simulator
@@ -162,26 +210,24 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
         }
     }
     
-    
+    /*
+     Show message compose view controller for user to edit and send message.
+     */
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         //... handle sms screen actions
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
 
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    /*
+     MARK: - Navigation
+     Prepare for different segues differently.
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = currentUserInfo.username
         backItem.tintColor = primaryColor
@@ -197,13 +243,16 @@ class UserVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMe
             vc.currentFriendTrip = friendsTrip?[button.tag]
             vc.friendTrips = self.friendsTrip
         }
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    }
     
 }
 
 extension UserVC: TripTableUpdateDelegate{
+    /*
+     Updates table that shows all friends' trips
+     */
     func updateTable() {
         backEndClient.getAllTrip(success: { (friendTrips) in
             OperationQueue.main.addOperation {

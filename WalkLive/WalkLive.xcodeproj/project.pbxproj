@@ -41,7 +41,6 @@
 		904B05081FD689A300EEB523 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FD1FD689A300EEB523 /* Trip.swift */; };
 		904B05091FD689A300EEB523 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B04FE1FD689A300EEB523 /* User.swift */; };
 		904B050B1FD689A300EEB523 /* WarningSignView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 904B05001FD689A300EEB523 /* WarningSignView.xib */; };
-		904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050D1FD689B300EEB523 /* DefaultVC.swift */; };
 		904B05191FD689B300EEB523 /* FirstViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050E1FD689B300EEB523 /* FirstViewVC.swift */; };
 		904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B050F1FD689B300EEB523 /* FriendRequestVC.swift */; };
 		904B051B1FD689B300EEB523 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B05101FD689B300EEB523 /* LoginVC.swift */; };
@@ -126,7 +125,6 @@
 		904B04FD1FD689A300EEB523 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		904B04FE1FD689A300EEB523 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		904B05001FD689A300EEB523 /* WarningSignView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningSignView.xib; sourceTree = "<group>"; };
-		904B050D1FD689B300EEB523 /* DefaultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVC.swift; sourceTree = "<group>"; };
 		904B050E1FD689B300EEB523 /* FirstViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewVC.swift; sourceTree = "<group>"; };
 		904B050F1FD689B300EEB523 /* FriendRequestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestVC.swift; sourceTree = "<group>"; };
 		904B05101FD689B300EEB523 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 		904B050C1FD689B300EEB523 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				904B050D1FD689B300EEB523 /* DefaultVC.swift */,
 				904B050E1FD689B300EEB523 /* FirstViewVC.swift */,
 				904B050F1FD689B300EEB523 /* FriendRequestVC.swift */,
 				904B05101FD689B300EEB523 /* LoginVC.swift */,
@@ -644,7 +641,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9015A2AF1FDCB88D0080B4D3 /* AddFriendView.swift in Sources */,
-				904B05181FD689B300EEB523 /* DefaultVC.swift in Sources */,
 				904B04C41FD688D700EEB523 /* AppDelegate.swift in Sources */,
 				904B05361FD68D1D00EEB523 /* FriendTripTableViewCell.swift in Sources */,
 				904B05041FD689A300EEB523 /* RoadRequester.swift in Sources */,
@@ -856,10 +852,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDNX7UPEV;
+				DEVELOPMENT_TEAM = SN2DVCT4SM;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive02;
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -874,10 +870,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4KDNX7UPEV;
+				DEVELOPMENT_TEAM = SN2DVCT4SM;
 				INFOPLIST_FILE = WalkLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WalkLive02;
+				PRODUCT_BUNDLE_IDENTIFIER = WalkLive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WalkLive/WalkLive-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

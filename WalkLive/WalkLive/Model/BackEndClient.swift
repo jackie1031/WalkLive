@@ -11,29 +11,38 @@ import Foundation
 class BackEndClient: NSObject {
     let APICONTEXT = "/WalkLive/api"
     
+    // This is the path where user data is stored locally
     private var userFilePath: String {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
         return (url!.appendingPathComponent("UserInfo").path)
     }
     
-    // save user data if it's a successful login/signup
+    /*
+     Saves user data if it's a successful login/signup.
+     This ensures that if the user hasn't logged out, then the app will automatically
+     log the user in by using the stored data.
+    */
     private func saveUserData() {
         NSKeyedArchiver.archiveRootObject(currentUserInfo, toFile: userFilePath)
     }
     
+    /*
+     Builds URL.
+    */
     private func buildURLComponents() -> URLComponents{
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "walklive.herokuapp.com"
         return urlComponents
     }
-    
 
 
     
-    // A testing function to check deployment of Heroku, connecting backend to frontend,
-    // Also serves as a gerneral model right now.
+    /*
+     A testing function to check deployment of Heroku, connecting backend to frontend,
+     Also serves as a gerneral model right now.
+    */
     func testEndPoint(success: @escaping () -> (), failure: @escaping () -> ()) {
         let endpoint = "https://walklive.herokuapp.com/WalkLive/api/tests"
         let url = URL(string: endpoint)
@@ -62,6 +71,17 @@ class BackEndClient: NSObject {
      * ================================================================
      */
     
+    /*
+     loginAttempt
+     Method: POST
+     URL: /WalkLive/api/users/login
+     Content: { userLogin: [string] }
+     Failure Response:
+     InvalidUsername/InvalidPassword    Code 404
+     Content: { reason: NONEXISTENT_USER }
+     Success Response:                  Code 201
+     Content: { userContact: [string] }
+    */
     func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (LoginError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/login"
@@ -96,6 +116,17 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     signUpAttempt
+     Method: POST
+     URL: /WalkLive/api/users
+     Content: { userLogin: [string] }
+     Failure Response:
+     InvalidUsername/InvalidPassword/FailedToCreateNewUser    Code 401
+     Content: { reason: Failed to create new user }
+     Success Response:                                        Code 201
+     Content: { userLogin: [string] }
+     */
     func signUpAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (SignUpError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
         //CHANGE ENDPOINT
@@ -177,6 +208,22 @@ class BackEndClient: NSObject {
         
     }
     
+    /*
+     TODO
+     acceptFriendRequest
+     Method: PUT
+     URL: /WalkLive/api/users/[username]/friend_requests/[requestId]/accept
+     Content: { sender: [string] }
+     Failure Response:
+     InvalidUsername    Code 404
+     Content: { reason: NONEXISTENT_USER }
+     InvalidRecipient    Code 400
+     Content: { reason: NONEXISTENT_RECIPIENT }
+     InvalidDate Code 400
+     Content: { reason: INVALID_DATE_FORMAT }
+     Success Response:    Code 201
+     Content: {}
+     */
     func acceptFriendRequest(success: @escaping () -> (), failure: @escaping (FriendRequestError) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username!)/friend_requests/\(friendRequest._id!)/accept"
@@ -200,6 +247,22 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     TODO
+     rejectFriendRequest
+     Method: PUT
+     URL: /WalkLive/api/users/[username]/friend_requests/[requestId]/accept
+     Content: { sender: [string] }
+     Failure Response:
+     InvalidUsername    Code 404
+     Content: { reason: NONEXISTENT_USER }
+     InvalidRecipient    Code 400
+     Content: { reason: NONEXISTENT_RECIPIENT }
+     InvalidDate Code 400
+     Content: { reason: INVALID_DATE_FORMAT }
+     Success Response:    Code 201
+     Content: {}
+     */
     func rejectFriendRequest(success: @escaping () -> (), failure: @escaping (FriendRequestError) -> (), friendRequest: FriendRequest){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username!)/friend_requests/\(friendRequest._id!)/reject"
@@ -326,6 +389,19 @@ class BackEndClient: NSObject {
      * Setting Session
      * ================================================================
      */
+    
+    /*
+     TODO
+     updateEmergencyContact
+     Method: GET
+     URL: /WalkLive/api/users/[username]/emergency_info
+     Content: {emergencyContact : EmergencyContact}
+     Failure Response:
+     InvalidUsername    Code 401
+     Content: { reason: NONEXISTENT_USER }
+     Success Response:    Code 200
+     Content: { <{ username: [string], contact: [string] }>, <user 2>, ...}
+     */
     func updateEmergencyContact(success: @escaping (EmergencyContact) -> (), failure: @escaping (Error) -> (), emergencyContact: EmergencyContact){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/emergency_info"
@@ -361,6 +437,19 @@ class BackEndClient: NSObject {
      * Users Session
      * ================================================================
      */
+    
+    
+    /*
+     getUser
+     Method: GET
+     URL: /WalkLive/api/users/[username]
+     Content: {}
+     Failure Response:
+     NonexistentUser    Code 404
+     Content: { reason: NONEXISTENT_USER }
+     Success Response:
+     Content: { username: [string], contact: [string] }
+     */
     func getUser(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), username: String){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users/\(username)"
@@ -382,6 +471,17 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     getUsers
+     Method: GET
+     URL: /WalkLive/api/users
+     Content: {}
+     Failure Response:
+     FailedToFetchUsers    Code 410
+     Content: { reason: NONEXISTENT_USER }
+     Success Response:    Code 200
+     Content: { <{ username: [string], contact: [string] }>, <user 2>, ...}
+     */
     func getUsers(success: @escaping ([UserLogin]) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/users"
@@ -410,7 +510,18 @@ class BackEndClient: NSObject {
      * ================================================================
      */
     
-    
+    /*
+     TODO
+     startTrip
+     Method: GET
+     URL: /WalkLive/api/trips
+     Content: {timePoint : TimePoint}
+     Failure Response:
+     InvalidDestination    Code 409
+     Content: { reason: INVALID_DESTINATION }
+     Success Response:    Code 200
+     Content: { username: [string], destination: [string], timeSpent: [string], startLat: [double], ...}
+     */
     func startTrip(success: @escaping (TimePoint) -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/trips"
@@ -441,6 +552,18 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     TODO
+     endTrip
+     Method: PUT
+     URL: /WalkLive/api/trips/[tripId]/endtrip
+     Content: {timePoint : [string]}
+     Failure Response:
+     InvalidTargetID    Code 402
+     Content: { reason: INVALID_DESTINATION }
+     Success Response:    Code 200
+     Content: {}
+     */
     func endTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
         if (timePoint.tripId == nil){
             failure(TripError(status:2))
@@ -475,6 +598,18 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    
+    /*
+     updateTrip
+     Method: PUT
+     URL: /WalkLive/api/trips/[tripId]/update
+     Content: {curLong:[double],curLat:[double],timeSpent:[String]}
+     Failure Response:
+     InvalidTargetID    Code 402
+     Content: { reason: INVALID_TARGETID }
+     Success Response:    Code 200
+     Content: {}
+     */
     func updateTrip(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
         if (timePoint.tripId == nil){
             failure(TripError(status:2))
@@ -510,6 +645,17 @@ class BackEndClient: NSObject {
         
     }
     
+    /*
+     getAllTrip
+     Method: GET
+     URL: /WalkLive/api/trips/[username]/allTrips
+     Content: {curLong:[double],curLat:[double],timeSpent:[String]}
+     Failure Response:
+     InvalidTargetID    Code 402
+     Content: { reason: INVALID_TARGETID }
+     Success Response:    Code 200
+     Content: {<trip 1>, <trip 2>, <trip 3>, ...}
+     */
     func getAllTrip(success: @escaping ([TimePoint]?) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/trips/\(currentUserInfo.username!)/allTrips"
@@ -535,6 +681,18 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*
+     TODO
+     getSingleTrip
+     Method: GET
+     URL: /WalkLive/api/trips/[tripId]
+     Content: {}
+     Failure Response:
+     InvalidTripID    Code 402
+     Content: { reason: INVALID_TRIPID }
+     Success Response:    Code 200
+     Content: {<timePoint>}
+     */
     func getSingleTrip(success: @escaping (TimePoint) -> (), failure: @escaping (Error) -> (), tripId: Int){
         var urlComponents = self.buildURLComponents()
         urlComponents.path = self.APICONTEXT + "/trips/\(tripId)"
