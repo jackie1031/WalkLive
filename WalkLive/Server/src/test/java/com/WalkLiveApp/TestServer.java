@@ -125,9 +125,19 @@ public class TestServer {
         dataSource.setUsername(ConnectionHandler.user);
         dataSource.setPassword(ConnectionHandler.password);
             JdbcTemplate jdbcTemplateObject = new JdbcTemplate(dataSource);
+
             jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                     "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
+            String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
+            String username = "testuser2";
+            User userTest = new User("testuser", "1234", "contacto");
 
+//            User user = (User) jdbcTemplateObject.query(sql,  new Object[] { username }, User.class);
+//            System.out.print(user);
+
+        Map<String,Object> results =
+                jdbcTemplateObject.queryForMap(sql, username);
+        WalkLiveService.logger.info((String) results.get("password"));
     }
 
 
