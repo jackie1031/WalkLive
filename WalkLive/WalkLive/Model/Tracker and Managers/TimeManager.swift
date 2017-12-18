@@ -2,6 +2,8 @@
 //  TimeManager.swift
 //  Walklive
 //
+//  Keeps track of time and other trip info through a RoadRequester
+//
 //  Created by Michelle Shu on 12/4/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
@@ -17,15 +19,29 @@ class TimeManager: NSObject {
     var roadRequester: RoadRequester?
     var tripPanelDelegate: TripPanelDelegate?
     var tripId: Int?
+    
+    // Initializes TimeManager object
     init(timeInterval: TimeInterval, roadRequester: RoadRequester) {
         self.timeInterval = timeInterval
         self.roadRequester = roadRequester
     }
     
+    /*
+     Converts time interval object to minutes
+     - Parameters:
+     - timeInterval: TimeInterval object
+     - Returns:
+     - number of minutes
+     */
     func convertTimeIntervalToMin(timeInterval: TimeInterval) -> Int{
         return Int(timeInterval/60)
     }
     
+    /*
+     Starts timer to count time.
+     - Parameters:
+     - timeInterval: TimeInterval object
+     */
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
@@ -38,12 +54,18 @@ class TimeManager: NSObject {
         }
     }
     
+    /*
+     Continues counting time.
+     */
     func continueTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         self.updatePanel()
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
     }
     
+    /*
+     Updates time label.
+     */
     @objc func updateTimeLabel(){
         self.usedTimeInterval += 1
         self.updatePanel()
@@ -54,14 +76,24 @@ class TimeManager: NSObject {
         }, timePoint: self.buildTimePoint()!)
     }
     
+    /*
+     Stops counting time.
+     */
     func endTimer() {
         self.timer.invalidate()
     }
     
+    /*
+     Updates trip panel info
+     */
     func updatePanel(){
         self.tripPanelDelegate?.updateTripPanel(timeInfo: self.buildMessageOnCurrentTimer())
     }
     
+    /*
+     Builds message about time spent and whether it's overtime.
+     - Returns: message string about time
+     */
     func buildMessageOnCurrentTimer() -> String{
         if (self.isOverTime() > 0) {
             return "Time Used (overtime): " + String(self.usedTimeInterval) + " min(s)"
@@ -69,6 +101,10 @@ class TimeManager: NSObject {
         return "Time Used: " + String(self.usedTimeInterval) + " min(s)"
     }
     
+    /*
+     Checks if it's overtime
+     - Returns: number of minutes over
+     */
     func isOverTime() -> Int {
         if (self.usedTimeInterval > Int(self.timeInterval/60)) {
             return (self.usedTimeInterval - Int(self.timeInterval/60))
@@ -76,6 +112,10 @@ class TimeManager: NSObject {
         return 0
     }
     
+    /*
+     builds a TimePoint object
+     - Returns: a TimePoint object with location, time, destination and other info
+     */
     func buildTimePoint() -> TimePoint?{
         if (self.roadRequester == nil) {
             return nil

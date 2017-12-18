@@ -9,9 +9,12 @@
 import Foundation
 import CoreLocation
 
+// A string builder that builds text messages
 class MessageBuilder: NSObject {
     
-    // builds message without ongoing trip
+    /*
+     builds message without ongoing trip
+     */
     func messageWithoutTripBuilder(messageSegments : Array<String>) -> String {
         var text : String = ""
         for message in messageSegments {
@@ -34,7 +37,9 @@ class MessageBuilder: NSObject {
         return text
     }
     
-    // builds message with ongoing trip, able to plug in current time spent and trip location
+    /*
+     builds message with ongoing trip, able to plug in current time spent and trip location
+     */
     func messageWithTripBuilder(messageSegments : Array<String>, timeManager: TimeManager) -> String {
         var text : String = ""
         for message in messageSegments {
@@ -61,7 +66,9 @@ class MessageBuilder: NSObject {
         return text
     }
     
-    // builds message model with ongoing trip in SettingsVC
+    /*
+     builds message model with ongoing trip in SettingsVC
+     */
     func messageWithTripPreviewBuilder(messageSegments: Array<String>) -> String {
         var text : String = ""
         for message in messageSegments {
