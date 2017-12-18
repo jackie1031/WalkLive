@@ -536,6 +536,32 @@ public class TestServer {
 
     /**
      * ================================================================
+     * User Contact PUT
+     * ================================================================
+     */
+
+    @Test
+    public void testUpdateUserContact() throws Exception {
+        //add single element
+        User expected = new User("jeesoo1", "test-1", "440-533-9063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        User expected2 = new User("hello", "test-2", "123-123-1233");
+        Response r2 = request("POST", "/WalkLive/api/users", expected2);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+        assertEquals("Failed to add new user", 201, r2.httpStatus);
+
+
+        //update emergency contact info
+        User contactInfo = new User(null, null, "440-533-9063", null, null, null, null);
+        User contactInfo2 = new User(null, null, "440-123-1111", null, null, null, null);
+        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/contact_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/hello/contact_info", contactInfo2);
+        assertEquals("Failed to update user contact", 200, r3.httpStatus);
+        assertEquals("Failed to update user contact second time", 200, r4.httpStatus);
+    }
+
+    /**
+     * ================================================================
      * Trips
      * ================================================================
      */

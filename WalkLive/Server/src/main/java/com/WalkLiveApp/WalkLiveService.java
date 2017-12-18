@@ -67,6 +67,17 @@ public class WalkLiveService {
 
     /**
      * ================================================================
+     * User Contact PUT
+     * ================================================================
+     */
+
+    public User updateUserContact(String username, String body) throws UserServiceException, ParseException, SQLException, java.text.ParseException {
+        return new UserManager().updateUserContact(username, body);
+    }
+
+
+    /**
+     * ================================================================
      * Friend Request Handling
      * ================================================================
      */

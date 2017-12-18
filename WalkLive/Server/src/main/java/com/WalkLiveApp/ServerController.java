@@ -114,6 +114,24 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
+            /**
+             * ================================================================
+             * Update User Contact PUT
+             * ================================================================
+             */
+
+            //update user contact information
+            put(API_CONTEXT + "/users/:username/contact_info", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.updateUserContact(request.params(":username"), request.body());
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to update emergency info for user:" + request.params(":username"));
+                    response.status(406);
+                    //add 407 response.
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
 
             /**
              * ================================================================
