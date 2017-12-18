@@ -1,5 +1,5 @@
 //
-//  DangerInformation.swift
+//  DangerCluster.swift
 //  WalkLive
 //
 //  Created by Michelle Shu on 12/18/17.
@@ -7,7 +7,10 @@
 //
 
 import Foundation
-class DangerInformation: NSObject, Codable {
+class DangerCluster: NSObject, Codable {
+    var latitude: Double?
+    var longitude: Double?
+    var radius: Double?
     var dangerLevel: Int?
-    var dangerClusters: [DangerCluster]?
+    var isDay: Int?
 }
