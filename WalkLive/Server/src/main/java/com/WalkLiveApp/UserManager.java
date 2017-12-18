@@ -342,7 +342,7 @@ public class UserManager {
             ps.executeUpdate();
 
             System.out.println("SUCCESSFULLY UPDATED.");
-            return new User(username, null, null, null, null, null, number);
+            return new User(username, null, number, null, null, null, null);
 
         } catch (SQLException ex) {
             WalkLiveService.logger.error("WalkLiveService.updateUserContact: Failed to update user contact information", ex);
