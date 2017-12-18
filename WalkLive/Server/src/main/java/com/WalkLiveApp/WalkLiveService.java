@@ -6,6 +6,7 @@ import java.sql.*;
 import java.lang.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WalkLiveService {
@@ -191,17 +192,17 @@ public class WalkLiveService {
 
     /**
      *
-     * @param tripIdInStr: the trip id as a string
-     * @param body: contains coordinate, time of day
+     * @param latitude: latitude of current position
+     * @param longitude: longitude of current position
      * @return Crime: a crime object with danger level and nearby clusters
      * @throws SQLException： invalid sql statement
      * @throws WalkLiveService.UserServiceException: can't find user
      * @throws ParseException: can't parse into parameters
      * @throws InvalidTargetID: invalid trip id
      */
-//    public Crime getDangerZone(String tripIdInStr, String body) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
-//        return new Crime().getDangerLeveLZone(tripIdInStr, body);
-//    }
+    public ArrayList<Cluster> getDangerZone(String latitude, String longitude) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+        return new Crime().getDangerLeveLZone(latitude, longitude);
+    }
 
     //=====================EXCEPTIONS============================
 

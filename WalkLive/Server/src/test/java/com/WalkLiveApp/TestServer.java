@@ -71,7 +71,7 @@ public class TestServer {
 
     @After
     public void tearDown() {
-        clearDB();
+        //clearDB();
         //Spark.stop();
     }
 
@@ -537,34 +537,34 @@ public class TestServer {
      * ================================================================
      */
 
-    @Test
-    public void testStartTripByID() throws Exception {
-        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-
-        //start trip
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-
-
-        //username
-        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r2.httpStatus);
-
-
-        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-
-        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-        assertEquals("unidentified destination ", 200, r3.httpStatus);
-
-        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-
-        assertEquals("Failed to get user", 200, r4.httpStatus);
-
-    }
+//    @Test
+//    public void testStartTripByID() throws Exception {
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//
+//        //start trip
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//
+//        //username
+//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//
+//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//
+//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+//        assertEquals("unidentified destination ", 200, r3.httpStatus);
+//
+//        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
+//
+//    }
 
 
 //    @Test
@@ -597,34 +597,45 @@ public class TestServer {
 //    }
 //
 
-    /**
+//    @Test
+//    public void testUpdateTrip() throws Exception{
+//
+//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//
+//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours","address");
+//
+//        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//    }
+
     @Test
     public void testTripDangerLevel() throws Exception {
-        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, , -76.9661682, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
+        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.9846379, -76.9661682, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
         //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 
-
         //1,38.9846371,-76.9661682,0.018,12
-
 
         //start trip
         Response r1 = request("POST", "/WalkLive/api/trips", test);
         assertEquals("unidentified destination ", 200, r1.httpStatus);
 
-
         //by id
         Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-        assertEquals("Failed to get user", 200, r2.httpStatus);
+        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+        //assertEquals("Failed to get user", 200, r2.httpStatus);
 
-
-        //get(API_CONTEXT + "/crime/:tripId", "application/json", (request, response) ;
-
-        Response r3 = request("GET", "/WalkLive/api//crime/1", null);
+        Trip update = new Trip(1,null, null, null, false, 0, 0, 38.9846379, -76.9661682, 0, 0, "18611345670", "3hours", "3501 St Paul");
+        
+        Response r3 = request("GET", "/WalkLive/api/crime", update);
+        //logger.info("lallal "+r3);
+        assertEquals("Failed to get user", 200, r3.httpStatus);
 
     }
 
-    **/
+
 //
 //    @Test
 //    public void testgetTripByName() throws Exception {
@@ -851,19 +862,7 @@ public class TestServer {
 //    }
 
 
-//    @Test
-//    public void testUpdateTrip() throws Exception{
-//
-//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//
-//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours","address");
-//
-//        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//    }
+
 
 //
 //
@@ -1153,7 +1152,7 @@ private static class Response {
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0,trip_ids INT DEFAULT 0,crimes_id INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
             //String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
@@ -1264,7 +1263,7 @@ private static class Response {
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
             //String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0, crimes_id INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";

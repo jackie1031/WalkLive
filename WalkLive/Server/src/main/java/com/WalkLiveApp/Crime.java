@@ -63,6 +63,11 @@ public class Crime {
 
     }
 
+    public Crime(ArrayList<Cluster> clusters ) {
+        this.clusters = clusters;
+
+    }
+
     public Crime(){}
 
     /**
@@ -113,58 +118,48 @@ public class Crime {
     }
 
 
-    //clustering should be done in pre data process
-    public ArrayList<Cluster> findCluster(){
 
-        //go search for cluster in the table
-
-        return clusters;
-    }
-
-    /**
-    public Crime getDangerLeveLZone(String body) throws WalkLiveService.UserServiceException, SQLException{
+    public ArrayList<Cluster> getDangerLeveLZone(String latitudeStr, String longitudeStr) throws WalkLiveService.UserServiceException, SQLException{
         ResultSet res = null;
         PreparedStatement ps = null;
         Connection conn = null;
 
         //int dangerZoneId = Integer.parseInt(tripIdInStr);
-        Trip trip = new Gson().fromJson(body, Trip.class);
+        //Trip trip = new Gson().fromJson(body, Trip.class);
 
-        double longitude = trip.getCurLong();
-        double latitude = trip.getCurLat();
+        //int clusterIdInt = this.getNewRequestId();
+        //String clusterId = String.valueOf(clusterIdInt);
+        ArrayList<Cluster> clusters = new ArrayList<>();
+
+        double longitude = Double.parseDouble(longitudeStr);
+        double latitude = Double.parseDouble(latitudeStr);
         double tempRadius = 0.018;
         int dangerLevel = 1;
-//
-//        SELECT column_name(s)
-//                FROM table_name
-//        WHERE column_name BETWEEN value1 AND value2;
 
         String sql = "SELECT * FROM dangerZones (WHERE longitute BETWEEN ? AND ?) AND (WHERE latitude BETWEEN ? AND ?)";
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
             ps = conn.prepareStatement(sql);
+
             ps.setDouble(1, longitude+tempRadius);
             ps.setDouble(2, longitude-tempRadius);
             ps.setDouble(3, latitude+tempRadius);
             ps.setDouble(4, latitude-tempRadius);
             res = ps.executeQuery();
-            logger.error("get the range");
 
-            if (res.next()) {
+            while (res.next()) {
                 //CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitute DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
 
-                Cluster cluster = new Cluster(res.getInt(1), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
-
-                //return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14));
-            } else{
-                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
-                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+                Cluster cluster = new Cluster(res.getDouble(2), res.getDouble(3), res.getDouble(4));
+                clusters.add(cluster);
             }
-        } catch(SQLException ex){
-            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", tripId), ex);
+            return clusters;
 
-            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", tripId), ex);
+        } catch(SQLException ex){
+            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for get danger level"), ex);
+
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for get danger level"), ex);
         } finally{
             //close connections
             if (ps != null) {
@@ -184,10 +179,8 @@ public class Crime {
             }
         }
 
-        return new Crime(dangerLevel,clusters);
-
     }
-    **/
+
 
     /**
      *
@@ -199,8 +192,8 @@ public class Crime {
         Statement stm = null;
         Connection conn = null;
         //find user by username counters (friend_request_ids INT)
-        String sql = "UPDATE counters SET trip_ids = trip_ids + 1 ";
-        String getValue = "SELECT trip_ids FROM counters";
+        String sql = "UPDATE counters SET crimes_id = crimes_id + 1 ";
+        String getValue = "SELECT crimes_id FROM counters";
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);

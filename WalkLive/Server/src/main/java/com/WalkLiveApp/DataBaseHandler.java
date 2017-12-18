@@ -45,8 +45,9 @@ public class DataBaseHandler {
 
     private String[] getCreateTableStrings() {
         String[] commandTable = new String[7];
+
         commandTable[0] = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
-        commandTable[1] = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
+        commandTable[1] = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0,crimes_id INT DEFAULT 0)";
         commandTable[2] = "INSERT INTO counters (friend_request_ids) VALUES (0)";
         commandTable[3] = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)";
         commandTable[4] = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId TEXT, username TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";

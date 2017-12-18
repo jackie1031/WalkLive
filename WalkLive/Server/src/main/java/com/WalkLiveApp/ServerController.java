@@ -284,7 +284,6 @@ public class ServerController {
                 catch (WalkLiveService.InvalidTargetID e) {
                     response.status(402);
                 }
-
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
@@ -295,19 +294,21 @@ public class ServerController {
              * easier to pass in username or trip id?
              * FE ever store tripid?
              * do we even need trip id?
+             *  walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.params(":response"));
+
              * ----------------------------------------------------------------------
              * */
 
-//            get(API_CONTEXT + "/crime/:tripId", "application/json", (request, response) -> {
-//                try {
-//                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
-//                    return walkLiveService.getDangerZone(request.body() );
-//                } catch (WalkLiveService.InvalidTargetID e) {
-//                    logger.error("Invalid user id.");
-//                    response.status(402);
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
+            get(API_CONTEXT + "/crime/:curLat/:curLong/:", "application/json", (request, response) -> {
+                try {
+                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
+                    return walkLiveService.getDangerZone(request.params(":curLat"), request.params(":curLong"));
+                } catch (WalkLiveService.InvalidTargetID e) {
+                    logger.error("Invalid user id.");
+                    response.status(402);
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
 
         }

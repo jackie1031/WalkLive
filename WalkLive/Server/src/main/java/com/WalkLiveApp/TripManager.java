@@ -26,7 +26,7 @@ public class TripManager {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        WalkLiveService.logger.info("the body of start trip"+ body);
+        //WalkLiveService.logger.info("the body of start trip"+ body);
         Trip trip = new Gson().fromJson(body, Trip.class);
 
         int tripId = this.getNewRequestId();
