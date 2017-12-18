@@ -53,7 +53,7 @@ public class DataBaseHandler {
         commandTable[4] = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId TEXT, username TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
         commandTable[5] = "CREATE TABLE IF NOT EXISTS doneTrips(tripId TEXT, userName TEXT, destination TEXT, dangerLevel INT,startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
         commandTable[6] = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
-        commandTable[6] = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
+        commandTable[6] = "CREATE TABLE IF NOT EXISTS dangerZonesNight(longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
 
         return commandTable;
     }

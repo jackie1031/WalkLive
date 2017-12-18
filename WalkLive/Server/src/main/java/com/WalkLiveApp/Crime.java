@@ -140,9 +140,7 @@ public class Crime {
    //public ArrayList<Cluster> getDangerLeveLZone(String latitudeStr, String longitudeStr) throws WalkLiveService.UserServiceException, SQLException{
         public Crime getDangerLeveLZone(String latitudeStr, String longitudeStr, String isDaystr) throws WalkLiveService.UserServiceException, SQLException{
         ResultSet res = null;
-        ResultSet res2 = null;
         PreparedStatement ps = null;
-        PreparedStatement ps2 = null;
         Connection conn = null;
 
         //int dangerZoneId = Integer.parseInt(tripIdInStr);
@@ -193,7 +191,7 @@ public class Crime {
                 accumuDangerLevel = accumuDangerLevel+ res.getInt("dangerLevel");
                 logger.info("the accumu danger level is: "+ accumuDangerLevel);
 
-                Cluster cluster = new Cluster(res.getDouble(2), res.getDouble(3), res.getDouble(4), res.getInt("dangerLevel"));
+                Cluster cluster = new Cluster(res.getDouble(1), res.getDouble(2), res.getDouble(3), res.getInt("dangerLevel"));
                 clusters.add(cluster);
                 logger.info("the final cluster is: "+ cluster.toString());
 

@@ -128,7 +128,6 @@ public class CrimeDataHandler {
 //        }
 
 
-
     }
 
     private static void addDB(String fileName) throws IOException, ParseException{
@@ -178,18 +177,18 @@ public class CrimeDataHandler {
 
                 double longitude = (double) crime.get("longitude");
 
-                String sqlSetUp = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
-                String sqlSetUp2 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
+                String sqlSetUp = "CREATE TABLE IF NOT EXISTS dangerZonesDay(longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
+                String sqlSetUp2 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
 
                 String checkDay = "Day";
                 String checkNight = "Night";
                 String sqlInsertClusters = null;
                 if(fileName.toLowerCase().contains(checkDay.toLowerCase())){
-                    sqlInsertClusters = " INSERT INTO dangerZonesDay(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
-                        "VALUES (1,?,?,?,?,?,'check') ";
+                    sqlInsertClusters = " INSERT INTO dangerZonesDay(longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+                        "VALUES (?,?,?,?,?,'check') ";
                 } else if (fileName.toLowerCase().contains(checkNight.toLowerCase())){
-                    sqlInsertClusters = " INSERT INTO dangerZonesNight(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
-                            "VALUES (1,?,?,?,?,?,'check') ";
+                    sqlInsertClusters = " INSERT INTO dangerZonesNight(longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+                            "VALUES (?,?,?,?,?,'check') ";
                 } else {
                     System.out.println("not valid datasets to put in database");
                 }

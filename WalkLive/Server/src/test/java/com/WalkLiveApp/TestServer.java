@@ -1186,9 +1186,9 @@ private static class Response {
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
-            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight( longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
 
 //            String sqlInsertClusters = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
@@ -1313,8 +1313,8 @@ private static class Response {
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
-            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(c longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight( longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
