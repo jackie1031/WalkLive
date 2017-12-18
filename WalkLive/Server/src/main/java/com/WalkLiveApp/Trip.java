@@ -12,7 +12,7 @@ public class Trip {
     private String shareTo;
     private double startLat,startLong,curLat,curLong,endLat,endLong;
     private boolean completed;
-    private int tripId,timePointId, dangerLevel;
+    private int tripId,dangerLevel;
 
 
     public void setDestination(String destination) {

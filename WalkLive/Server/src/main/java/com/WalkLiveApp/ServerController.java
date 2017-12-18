@@ -308,9 +308,6 @@ public class ServerController {
             /**
              * ----------------------------------------------------------------------
              * Crime data part
-             * better if do it in updateTrip?
-             * easier to pass in username or trip id?
-             * FE ever store tripid?
              * do we even need trip id?
              *  walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.params(":response"));
 
@@ -327,6 +324,18 @@ public class ServerController {
                 }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
+
+
+//            get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
+//                try {
+//                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
+//                    return walkLiveService.getDangerZoneOnly(request.params(":curLat"), request.params(":curLong"),request.params(":isDay"));
+//                } catch (WalkLiveService.InvalidTargetID e) {
+//                    logger.error("Invalid user id.");
+//                    response.status(402);
+//                }
+//                return Collections.EMPTY_MAP;
+//            }, new JsonTransformer());
 
 
         }

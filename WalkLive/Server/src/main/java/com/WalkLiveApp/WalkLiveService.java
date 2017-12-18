@@ -216,6 +216,11 @@ public class WalkLiveService {
         return new Crime().getDangerLeveLZone(latitude, longitude,isDay);
     }
 
+//    public ArrayList<Cluster> getDangerZoneOnly(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+//        return new Crime().getDangerLeveLZoneOnly(latitude, longitude,isDay);
+//    }
+
+
     //=====================EXCEPTIONS============================
 
     public static class UserServiceException extends Exception {

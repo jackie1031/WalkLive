@@ -664,6 +664,28 @@ public class TestServer {
     }
 
 
+    @Test
+    public void testTripDangerLevelOnly() throws Exception {
+        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //1,38.9846371,-76.9661682,0.018,12
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        //by id
+        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+        //assertEquals("Failed to get user", 200, r2.httpStatus);
+//        get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
+        //Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
+        Response r3 = request("GET", "/WalkLive/api/crime/clusterOnly/38.982012186658675/-76.94064758017299/0", null);
+        assertEquals("Failed to get user", 200, r3.httpStatus);
+
+    }
+
 //
 //    @Test
 //    public void testgetTripByName() throws Exception {
