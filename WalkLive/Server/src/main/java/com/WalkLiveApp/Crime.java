@@ -133,10 +133,12 @@ public class Crime {
 
         double longitude = Double.parseDouble(longitudeStr);
         double latitude = Double.parseDouble(latitudeStr);
+        logger.info("long: "+longitude +"lat: "+ latitude);
+
         double tempRadius = 0.018;
         int dangerLevel = 1;
 
-        String sql = "SELECT * FROM dangerZones (WHERE longitute BETWEEN ? AND ?) AND (WHERE latitude BETWEEN ? AND ?)";
+        String sql = "SELECT * FROM dangerZones WHERE (longitude BETWEEN ? AND ?) AND (latitude BETWEEN ? AND ?)";
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);

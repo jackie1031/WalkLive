@@ -299,7 +299,7 @@ public class ServerController {
              * ----------------------------------------------------------------------
              * */
 
-            get(API_CONTEXT + "/crime/:curLat/:curLong/:", "application/json", (request, response) -> {
+            get(API_CONTEXT + "/crime/:curLat/:curLong", "application/json", (request, response) -> {
                 try {
                     //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
                     return walkLiveService.getDangerZone(request.params(":curLat"), request.params(":curLong"));
