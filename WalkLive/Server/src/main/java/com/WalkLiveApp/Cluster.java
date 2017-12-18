@@ -4,6 +4,16 @@ public class Cluster {
 
     private double centerLong,centerLat, radius;
 
+    @Override
+    public String toString() {
+        return "Cluster{" +
+                "centerLong=" + centerLong +
+                ", centerLat=" + centerLat +
+                ", radius=" + radius +
+                '}';
+    }
+
+
 
 
     public Cluster(double centerLong, double centerLat, double radius) {

@@ -252,8 +252,7 @@ public class TripManager {
                 if (temp != null){
                     trips.add(temp);
                 }
-                //trips.add(temp);
-                //logger.error("added here");
+
             }
 
             //System.out.println("SUCCESSFULLY UPDATED.");

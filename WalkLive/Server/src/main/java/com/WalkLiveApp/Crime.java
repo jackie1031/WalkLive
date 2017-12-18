@@ -129,33 +129,42 @@ public class Crime {
 
         //int clusterIdInt = this.getNewRequestId();
         //String clusterId = String.valueOf(clusterIdInt);
-        ArrayList<Cluster> clusters = new ArrayList<>();
 
         double longitude = Double.parseDouble(longitudeStr);
         double latitude = Double.parseDouble(latitudeStr);
-        logger.info("long: "+longitude +"lat: "+ latitude);
+        logger.info("long: "+longitude +" lat: "+ latitude);
 
-        double tempRadius = 0.018;
+        double longRadius = 0.018;
+        double latRadius = 0.14449;
         int dangerLevel = 1;
 
-        String sql = "SELECT * FROM dangerZones WHERE (longitude BETWEEN ? AND ?) AND (latitude BETWEEN ? AND ?)";
+        //String sql = "SELECT * FROM dangerZones WHERE (longitude BETWEEN ? AND ?) AND (latitude BETWEEN ? AND ?)";
+        String sql = "SELECT * FROM dangerZones WHERE (longitude < ? AND longitude > ?) AND (latitude < ? AND latitude > ?)";
+        //String sql2 = "SELECT * FROM dangerZones WHERE (latitude < ? AND longitude > ?)";
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
             ps = conn.prepareStatement(sql);
-
-            ps.setDouble(1, longitude+tempRadius);
-            ps.setDouble(2, longitude-tempRadius);
-            ps.setDouble(3, latitude+tempRadius);
-            ps.setDouble(4, latitude-tempRadius);
+            ps.setDouble(1, longitude+longRadius);
+            ps.setDouble(2, longitude-longRadius);
+            ps.setDouble(3, latitude+latRadius);
+            ps.setDouble(4, latitude-latRadius);
             res = ps.executeQuery();
 
+            ArrayList<Cluster> clusters = new ArrayList<>();
+
             while (res.next()) {
+                //logger.info("got here");
+
                 //CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitute DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
 
                 Cluster cluster = new Cluster(res.getDouble(2), res.getDouble(3), res.getDouble(4));
                 clusters.add(cluster);
+                logger.info("the final cluster is: "+ cluster.toString());
+
             }
+            //logger.info("the final cluster is: "+ clusters);
+
             return clusters;
 
         } catch(SQLException ex){
@@ -184,52 +193,5 @@ public class Crime {
     }
 
 
-    /**
-     *
-     * @return get the trip id
-     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
-     */
-    private int getNewRequestId() throws WalkLiveService.UserServiceException {
-        ResultSet res = null;
-        Statement stm = null;
-        Connection conn = null;
-        //find user by username counters (friend_request_ids INT)
-        String sql = "UPDATE counters SET crimes_id = crimes_id + 1 ";
-        String getValue = "SELECT crimes_id FROM counters";
-
-        try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            stm = conn.createStatement();
-            stm.executeUpdate(sql);
-            res = stm.executeQuery(getValue);
-
-            if (res.next()) {
-                return res.getInt(1);
-            } else {
-                //backup default
-                return 0;
-            }
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error(("WalkLiveService.find: Failed to query database for count"), ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.getUser: Failed to query database for count", ex);
-        } finally {
-            //close connections
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-    }
 
 }
