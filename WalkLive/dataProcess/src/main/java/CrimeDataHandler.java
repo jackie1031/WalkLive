@@ -128,6 +128,7 @@ public class CrimeDataHandler {
 //        }
 
 
+
     }
 
     private static void addDB(String fileName) throws IOException, ParseException{
@@ -185,10 +186,10 @@ public class CrimeDataHandler {
                 String sqlInsertClusters = null;
                 if(fileName.toLowerCase().contains(checkDay.toLowerCase())){
                     sqlInsertClusters = " INSERT INTO dangerZonesDay(longitude, latitude, radius, count,dangerLevel, day_or_night) " +
-                        "VALUES (?,?,?,?,?,'check') ";
+                        "VALUES (?,?,?,?,?,'day') ";
                 } else if (fileName.toLowerCase().contains(checkNight.toLowerCase())){
                     sqlInsertClusters = " INSERT INTO dangerZonesNight(longitude, latitude, radius, count,dangerLevel, day_or_night) " +
-                            "VALUES (?,?,?,?,?,'check') ";
+                            "VALUES (?,?,?,?,?,'night') ";
                 } else {
                     System.out.println("not valid datasets to put in database");
                 }
