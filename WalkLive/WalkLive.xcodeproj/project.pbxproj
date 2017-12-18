@@ -67,6 +67,7 @@
 		905EF6E21FE66AC100411440 /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EF6E11FE66AC100411440 /* Tracker.swift */; };
 		905EF6E91FE7AEBD00411440 /* DangerInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EF6E81FE7AEBD00411440 /* DangerInformation.swift */; };
 		905EF6EB1FE8206300411440 /* DangerCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EF6EA1FE8206200411440 /* DangerCluster.swift */; };
+		905EF6EE1FE837E100411440 /* DangerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EF6ED1FE837E100411440 /* DangerRequest.swift */; };
 		D2528FA348AAC2A6FFFEEC94 /* Pods_WalkLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D55D3F1621F9094360A5851 /* Pods_WalkLiveTests.framework */; };
 		FE9DB838C7A82F05EE530D5D /* Pods_WalkLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4C28FF63A53A082F32C325 /* Pods_WalkLive.framework */; };
 /* End PBXBuildFile section */
@@ -159,6 +160,7 @@
 		905EF6E11FE66AC100411440 /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		905EF6E81FE7AEBD00411440 /* DangerInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerInformation.swift; sourceTree = "<group>"; };
 		905EF6EA1FE8206200411440 /* DangerCluster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerCluster.swift; sourceTree = "<group>"; };
+		905EF6ED1FE837E100411440 /* DangerRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerRequest.swift; sourceTree = "<group>"; };
 		9127724929693C9E22230147 /* Pods-WalkLiveUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveUITests/Pods-WalkLiveUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C3C7D19D604FC6ACF258E3ED /* Pods-WalkLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLive/Pods-WalkLive.release.xcconfig"; sourceTree = "<group>"; };
 		C5D768EC243DDAC103DFBE8B /* Pods-WalkLiveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalkLiveTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalkLiveTests/Pods-WalkLiveTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		904B04F51FD689A300EEB523 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				905EF6EC1FE837CE00411440 /* DangerZone */,
 				905EF6E71FE675D900411440 /* Routing */,
 				905EF6E61FE6757900411440 /* Backend Models and Client */,
 				905EF6E51FE6753000411440 /* Message Builders */,
@@ -387,8 +390,6 @@
 				904B04F81FD689A300EEB523 /* Location.swift */,
 				9015A2BA1FDDC9CC0080B4D3 /* Friend.swift */,
 				904B04FC1FD689A300EEB523 /* TimePoint.swift */,
-				905EF6E81FE7AEBD00411440 /* DangerInformation.swift */,
-				905EF6EA1FE8206200411440 /* DangerCluster.swift */,
 			);
 			path = "Backend Models and Client";
 			sourceTree = "<group>";
@@ -401,6 +402,16 @@
 				904B04FD1FD689A300EEB523 /* Trip.swift */,
 			);
 			path = Routing;
+			sourceTree = "<group>";
+		};
+		905EF6EC1FE837CE00411440 /* DangerZone */ = {
+			isa = PBXGroup;
+			children = (
+				905EF6EA1FE8206200411440 /* DangerCluster.swift */,
+				905EF6E81FE7AEBD00411440 /* DangerInformation.swift */,
+				905EF6ED1FE837E100411440 /* DangerRequest.swift */,
+			);
+			path = DangerZone;
 			sourceTree = "<group>";
 		};
 		A23776061BC8A4301AF5A54D /* Frameworks */ = {
@@ -726,6 +737,7 @@
 				8C7637011FDC88DD00276DEE /* SettingsVC.swift in Sources */,
 				904B051A1FD689B300EEB523 /* FriendRequestVC.swift in Sources */,
 				8C61A8251FE076060016A74A /* MessageBuilder.swift in Sources */,
+				905EF6EE1FE837E100411440 /* DangerRequest.swift in Sources */,
 				904B053A1FD68D3400EEB523 /* Service.swift in Sources */,
 				904B05421FD8916900EEB523 /* EmergencyContact.swift in Sources */,
 				905EF6EB1FE8206300411440 /* DangerCluster.swift in Sources */,

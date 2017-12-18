@@ -38,6 +38,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     var timeManager: TimeManager!
     var tripView: OnGoingTripView!
     var mapItems: [MKMapItem]!
+    var dangerColor = UIColor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,22 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             self.initializeView()
     }
     
+    func test(){
+        let dangerRequest = DangerRequest(curLat: 38.98191763, curLong: -76.929194, isDay: isDay())
+        backEndClient.getDangerLevel(success: { (dangerInformation) in
+            OperationQueue.main.addOperation {
+                self.roadRequester.drawDangerZones(clusters:dangerInformation.clusters!)
+            }
+        }, failure: { (error) in
+        }, dangerRequest: dangerRequest)
+    }
+    
+    
+    
+    
+    @IBAction func onTestbutton(_ sender: Any) {
+        self.test()
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
     }
@@ -310,11 +327,20 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
      - Returns: MKOverlayRenderer
      */
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = primaryColor
-        renderer.lineWidth = 3.0
         
-        return renderer
+        if let polylineOverlay = overlay as? MKPolyline{
+            let renderer = MKPolylineRenderer(overlay: polylineOverlay)
+            renderer.strokeColor = primaryColor
+            renderer.lineWidth = 3.0
+            return renderer
+        }
+        else if let circleOverlay = overlay as? MKCircle {
+                let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
+                circleRenderer.fillColor = self.roadRequester.CURRENTCOLOR
+                circleRenderer.alpha = 0.1
+                return circleRenderer
+        }
+        return MKOverlayRenderer()
     }
     
     
