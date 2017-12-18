@@ -21,28 +21,50 @@ class RoadRequester: NSObject {
     var destinationAnnotation: MKAnnotation!
     var sourceAnnotation: MKAnnotation!
     
+    /*
+     Sets map view.
+     */
     func setMapView(mapView: MKMapView){
         self.mapView = mapView
     }
     
+    /*
+     Gets current location and sets map view region to that location.
+     */
     func setCurrentLocation(){
         let sourceLocation = getSourceLocation()
         centerMapOnLocation(location: sourceLocation)
     }
     
+    /*
+     Gets source location
+     Returns: source location
+     */
     func getSourceLocation() -> CLLocation {
         return (self.locationManager.location)!
     }
     
+    /*
+     Centers map on a location.
+     - Parameters:
+       - location: a CLLocation object
+     */
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 50, 50)
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    /*
+     Gets current region and sets the distance.
+     */
     func getCurrentDefinedRegion() -> MKCoordinateRegion {
         return MKCoordinateRegionMakeWithDistance(getSourceLocation().coordinate, 50, 50)
     }
     
+    /*
+     Gets current location in custom annotation
+     - Returns: MKPointAnnotation with custom annotation
+     */
     func getcurrentLocationInAnnotation() -> MKPointAnnotation {
         let currentLocationCLL = self.getSourceLocation()
         let currentLocationAnnotation = MKPointAnnotation()
@@ -51,6 +73,13 @@ class RoadRequester: NSObject {
         return currentLocationAnnotation
     }
     
+    /*
+     Gets search results.
+     - Parameters:
+       - success: if success, return a list of MKMapItems
+       - failure: if failure, show error
+       - query: the search entry the user enters
+     */
     func getSearchResults(success: @escaping ([MKMapItem]) -> (), failure: @escaping (Error) -> (), query: String){
         let request = MKLocalSearchRequest()
         print(query)
@@ -65,10 +94,21 @@ class RoadRequester: NSObject {
         }
     }
     
-    func getMatchingItems() -> [MKMapItem] {
+    /*
+     Gets matchingItems.
+     - Returns: a list of MKMapItems
+     */
+    private func getMatchingItems() -> [MKMapItem] {
         return self.matchingItems
     }
     
+    /*
+     Draws route from current location to destination
+     - Parameters:
+       - success: creates trip if success
+       - failure: show error if failure
+       - destinationMapItem: destination MapItem object
+     */
     func drawRouteFromCurrentLocation(success: @escaping (Trip) -> (), failure: @escaping (Error) -> (), destinationMapItem: MKMapItem) {
         self.setInitialLocation()
         self.setDestinationLocation(destinationMapItem: destinationMapItem)
@@ -83,6 +123,13 @@ class RoadRequester: NSObject {
         }, destinationMapItem: destinationMapItem)
     }
     
+    /*
+     Gets route from current location to destination
+     - Parameters:
+     - success: creates trip if success
+     - failure: show error if failure
+     - destinationMapItem: destination MapItem object
+     */
     func getRouteFromCurrentLocation(success: @escaping (MKRoute) -> (), failure: @escaping(Error) -> (), destinationMapItem: MKMapItem) {
         let sourceMapItem = convertCLLocationToMapItem(cllocation: self.getSourceLocation())
         let directionRequest = MKDirectionsRequest()
@@ -105,6 +152,11 @@ class RoadRequester: NSObject {
             }
         }
     
+    /*
+     Sets destination location
+     - Parameters:
+     - destinationMapItem: contains destination info
+     */
     func setDestinationLocation(destinationMapItem: MKMapItem){
         let destinationAnnotation = MKPointAnnotation()
         destinationAnnotation.title = destinationMapItem.name
@@ -113,6 +165,9 @@ class RoadRequester: NSObject {
         self.destinationAnnotation = destinationAnnotation
     }
     
+    /*
+     Sets inital location with annotation
+     */
     func setInitialLocation() {
         let initialAnnotation = MKPointAnnotation()
         initialAnnotation.title = "Started Here!"
@@ -120,12 +175,20 @@ class RoadRequester: NSObject {
         self.sourceAnnotation = initialAnnotation
     }
 
-    
+    /*
+     Converts CLLocation object to MapItem object
+     - Parameters:
+       - cllocation: CLLocation object
+     Returns: MKMapItem object
+     */
     func convertCLLocationToMapItem(cllocation: CLLocation) -> MKMapItem {
         let placemark = MKPlacemark(coordinate: cllocation.coordinate, addressDictionary: nil)
         return MKMapItem(placemark: placemark)
     }
     
+    /*
+     Removes route.
+     */
     func removeRoute(){
         if (self.overlay != nil) {
             self.mapView.remove(self.overlay)}

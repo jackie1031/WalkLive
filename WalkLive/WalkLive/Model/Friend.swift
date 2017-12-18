@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+// Like EmergencyContact model, Friend model also has username and phone number
 struct Friend: Codable{
     var username: String
     var contact: String

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// User object that stores username, contact, emergency contact, etc.
 class UserLogin: NSObject, Codable, NSCoding {
     
     var username: String?

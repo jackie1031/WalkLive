@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+
+// Updates trip and labels
 class TripUpdater: NSObject {
     private var timer = Timer()
     private var tripTableDelegate: TripTableUpdateDelegate!
@@ -15,15 +17,27 @@ class TripUpdater: NSObject {
     init(tripTableDelegate: TripTableUpdateDelegate){
         self.tripTableDelegate = tripTableDelegate
     }
+    
+    /*
+     Starts to count time
+     - Parameters:
+       - timeInterval: TimeInterval object
+     */
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true);
     }
     
+    /*
+     Updates time label.
+     */
     @objc func updateTimeLabel(){
         self.tripTableDelegate.updateTable()
     }
     
+    /*
+     Stops counting time.
+     */
     func endTimer() {
         self.timer.invalidate()
     }

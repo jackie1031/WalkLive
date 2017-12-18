@@ -75,12 +75,14 @@ class BackEndClient: NSObject {
      loginAttempt
      Method: POST
      URL: /WalkLive/api/users/login
-     Content: { userLogin: [string] }
+     Content: { username: [string], password: [string] }
      Failure Response:
-     InvalidUsername/InvalidPassword    Code 404
+     InvalidUsername                    Code 401
      Content: { reason: NONEXISTENT_USER }
+     InvalidPassword                    Code 401
+     Content: { reason: INCORRECT_PASSWORD}
      Success Response:                  Code 201
-     Content: { userContact: [string] }
+     Content: { username: [string], contact: [string], emergency_id: [string], emergency_number: [string] }
     */
     func loginAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (LoginError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
@@ -122,10 +124,14 @@ class BackEndClient: NSObject {
      URL: /WalkLive/api/users
      Content: { userLogin: [string] }
      Failure Response:
-     InvalidUsername/InvalidPassword/FailedToCreateNewUser    Code 401
-     Content: { reason: Failed to create new user }
-     Success Response:                                        Code 201
-     Content: { userLogin: [string] }
+     InvalidUsername            Code 401
+     Content: { reason: NONEXISTENT_USER }
+     InvalidPassword            Code 401
+     Content: { reason: INCORRECT_PASSWORD }
+     InvalidContact             Code 400
+     Content: { reason: INVALID_CONTACT_NUMBER }
+     Success Response:         Code 201
+     Content: { username: [string], contact:[string] }
      */
     func signUpAttempt(success: @escaping (UserLogin) -> (), failure: @escaping (SignUpError) -> (), userLogin: UserLogin) {
         var urlComponents = self.buildURLComponents()
@@ -209,19 +215,16 @@ class BackEndClient: NSObject {
     }
     
     /*
-     TODO
      acceptFriendRequest
      Method: PUT
      URL: /WalkLive/api/users/[username]/friend_requests/[requestId]/accept
-     Content: { sender: [string] }
+     Content: {}
      Failure Response:
-     InvalidUsername    Code 404
+     InvalidUsername    Code 401
      Content: { reason: NONEXISTENT_USER }
-     InvalidRecipient    Code 400
+     InvalidRequestId   Code 400
      Content: { reason: NONEXISTENT_RECIPIENT }
-     InvalidDate Code 400
-     Content: { reason: INVALID_DATE_FORMAT }
-     Success Response:    Code 201
+     Success Response:  Code 200
      Content: {}
      */
     func acceptFriendRequest(success: @escaping () -> (), failure: @escaping (FriendRequestError) -> (), friendRequest: FriendRequest){
@@ -248,19 +251,16 @@ class BackEndClient: NSObject {
     }
     
     /*
-     TODO
      rejectFriendRequest
      Method: PUT
-     URL: /WalkLive/api/users/[username]/friend_requests/[requestId]/accept
-     Content: { sender: [string] }
+     URL: /WalkLive/api/users/[username]/friend_requests/[requestId]/reject
+     Content: {}
      Failure Response:
-     InvalidUsername    Code 404
+     InvalidUsername    Code 401
      Content: { reason: NONEXISTENT_USER }
-     InvalidRecipient    Code 400
+     InvalidRequestId   Code 400
      Content: { reason: NONEXISTENT_RECIPIENT }
-     InvalidDate Code 400
-     Content: { reason: INVALID_DATE_FORMAT }
-     Success Response:    Code 201
+     Success Response:  Code 200
      Content: {}
      */
     func rejectFriendRequest(success: @escaping () -> (), failure: @escaping (FriendRequestError) -> (), friendRequest: FriendRequest){
@@ -288,7 +288,6 @@ class BackEndClient: NSObject {
     
     /*
      getSentFriendRequests:
-     
      Method: GET
      URL: /WalkLive/api/users/[username]/sent_friend_requests
      Content: {}
@@ -325,7 +324,7 @@ class BackEndClient: NSObject {
      URL: /WalkLive/api/users/[username]/friend_requests
      Content: {}
      Failure Response:
-     InvalidUsername    Code 401
+     InvalidUsername      Code 401
      Content: { reason: NONEXISTENT_USER }
      Success Response:    Code 200
      Content: { <friendRequest 1>, <friendRequest 2>, ...}
@@ -391,16 +390,19 @@ class BackEndClient: NSObject {
      */
     
     /*
-     TODO
      updateEmergencyContact
-     Method: GET
+     Method: PUT
      URL: /WalkLive/api/users/[username]/emergency_info
-     Content: {emergencyContact : EmergencyContact}
+     Content: { emergency_id: [string], emergency_number: [string] }
      Failure Response:
-     InvalidUsername    Code 401
+     InvalidUsername            Code 401
      Content: { reason: NONEXISTENT_USER }
-     Success Response:    Code 200
-     Content: { <{ username: [string], contact: [string] }>, <user 2>, ...}
+     InvalidEmergencyId         Code 400
+     Content: { reason: NONEXISTENT_USER }
+     InvalidEmergencyNumber     code 400
+     Content: { reason: INVALID_CONTACT_NUMBER }
+     Success Response:          Code 200
+     Content: { emergency_id: [string], emergency_number: [string] }
      */
     func updateEmergencyContact(success: @escaping (EmergencyContact) -> (), failure: @escaping (Error) -> (), emergencyContact: EmergencyContact){
         var urlComponents = self.buildURLComponents()
@@ -445,10 +447,11 @@ class BackEndClient: NSObject {
      URL: /WalkLive/api/users/[username]
      Content: {}
      Failure Response:
-     NonexistentUser    Code 404
+     InvalidUsername    Code 404
      Content: { reason: NONEXISTENT_USER }
-     Success Response:
-     Content: { username: [string], contact: [string] }
+     Success Response:  Code 200
+     Content: { username: [string], contact: [string], emergency_id: [string], emergency_number: [string] }
+
      */
     func getUser(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), username: String){
         var urlComponents = self.buildURLComponents()
@@ -477,10 +480,10 @@ class BackEndClient: NSObject {
      URL: /WalkLive/api/users
      Content: {}
      Failure Response:
-     FailedToFetchUsers    Code 410
+     Internal Error       Code 410
      Content: { reason: NONEXISTENT_USER }
      Success Response:    Code 200
-     Content: { <{ username: [string], contact: [string] }>, <user 2>, ...}
+     Content: { <user 1>, <user 2>, ...}
      */
     func getUsers(success: @escaping ([UserLogin]) -> (), failure: @escaping (Error) -> ()){
         var urlComponents = self.buildURLComponents()
@@ -511,16 +514,15 @@ class BackEndClient: NSObject {
      */
     
     /*
-     TODO
      startTrip
-     Method: GET
+     Method: POST
      URL: /WalkLive/api/trips
      Content: {timePoint : TimePoint}
      Failure Response:
      InvalidDestination    Code 409
      Content: { reason: INVALID_DESTINATION }
      Success Response:    Code 200
-     Content: { username: [string], destination: [string], timeSpent: [string], startLat: [double], ...}
+     Content: {}
      */
     func startTrip(success: @escaping (TimePoint) -> (), failure: @escaping (Error) -> (), timePoint: TimePoint){
         var urlComponents = self.buildURLComponents()
@@ -553,7 +555,6 @@ class BackEndClient: NSObject {
     }
     
     /*
-     TODO
      endTrip
      Method: PUT
      URL: /WalkLive/api/trips/[tripId]/endtrip
@@ -649,9 +650,9 @@ class BackEndClient: NSObject {
      getAllTrip
      Method: GET
      URL: /WalkLive/api/trips/[username]/allTrips
-     Content: {curLong:[double],curLat:[double],timeSpent:[String]}
+     Content: {}
      Failure Response:
-     InvalidTargetID    Code 402
+     InvalidTargetId    Code 402
      Content: { reason: INVALID_TARGETID }
      Success Response:    Code 200
      Content: {<trip 1>, <trip 2>, <trip 3>, ...}
@@ -682,7 +683,6 @@ class BackEndClient: NSObject {
     }
     
     /*
-     TODO
      getSingleTrip
      Method: GET
      URL: /WalkLive/api/trips/[tripId]

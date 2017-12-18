@@ -9,6 +9,7 @@
 import Foundation
 
 struct FriendRequest: Codable {
+    
     var sender: String?
     var recipient: String?
     var _id: Int?

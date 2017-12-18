@@ -9,6 +9,7 @@
 import Foundation
 
 class TripRequest: NSObject, Codable {
+    
     var sender: String!
     var recipient: String!
     var requestId: String!

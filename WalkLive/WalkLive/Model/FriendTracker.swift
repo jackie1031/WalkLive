@@ -17,21 +17,33 @@ class FriendTracker: NSObject {
     private var timer = Timer()
     var tripId: Int?
     
-    
+    /*
+     Sets map view
+     */
     func setMapView(mapView: MKMapView){
         self.mapView = mapView
     }
     
+    /*
+     Sets user current location
+     */
     func setCurrentLocation(){
         let sourceLocation = getSourceLocation()
         centerMapOnLocation(location: sourceLocation)
     }
     
-    
+    /*
+     Gets source location
+     */
     func getSourceLocation() -> CLLocation {
         return (self.locationManager.location)!
     }
     
+    /*
+     Sets map view region at certain location.
+     - Parameters:
+      - location: CLLocation 
+     */
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 50, 50)
         self.mapView.setRegion(coordinateRegion, animated: true)
