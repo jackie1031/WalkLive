@@ -113,6 +113,23 @@ class TimeManager: NSObject {
     }
     
     /*
+     Stops counting time.
+     */
+    func mapDangerZones(){
+        let timePoint = self.buildTimePoint()
+        let dangerRequest = DangerRequest(curLat: (timePoint?.curLat)!, curLong: (timePoint?.curLong)!, isDay: isDay())
+        backEndClient.getDangerLevel(success: { (dangerInformation) in
+            OperationQueue.main.addOperation {
+            if (dangerInformation.clusters != nil){
+                self.roadRequester?.drawDangerZones(clusters: dangerInformation.clusters!)
+            }
+            }
+        }, failure: { (error) in
+            
+        }, dangerRequest: dangerRequest)
+    }
+    
+    /*
      builds a TimePoint object
      - Returns: a TimePoint object with location, time, destination and other info
      */

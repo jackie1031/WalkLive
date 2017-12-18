@@ -793,18 +793,13 @@ class BackEndClient: NSObject {
      * Danger Mapping Session
      * ================================================================
      */
-    func getDangerLevel(success: @escaping () -> (), failure: @escaping (Error) -> (), timePoint: TimePoint) {
+    func getDangerLevel(success: @escaping (DangerInformation) -> (), failure: @escaping (Error) -> (), dangerRequest: DangerRequest) {
         var urlComponents = self.buildURLComponents()
-        urlComponents.path = self.APICONTEXT + "/crime/\(timePoint.tripId ?? 0)"
+        urlComponents.path = self.APICONTEXT + "/crime/\(dangerRequest.curLat!)/\(dangerRequest.curLong!)/\(dangerRequest.isDay!)"
+        print(urlComponents.path)
         var getDangerLevelRequest = URLRequest(url: urlComponents.url!)
         getDangerLevelRequest.httpMethod = "GET"
         
-        do {
-            let getDangerLevelJSON = try jsonEncoder.encode(timePoint)
-            getDangerLevelRequest.httpBody = getDangerLevelJSON
-        } catch {
-            failure(error)
-        }
         URLSession.shared.dataTask(with: getDangerLevelRequest, completionHandler: {
             (data, response, error) in
             // check for errors
@@ -818,9 +813,8 @@ class BackEndClient: NSObject {
                 failure(TripError(status: status))
             } else {
                 print(status)
-                let timePoint = try? jsonDecoder.decode(TimePoint.self, from: data!) as TimePoint
-                success()}
+                let dangerInformation = try? jsonDecoder.decode(DangerInformation.self, from: data!) as DangerInformation
+                success(dangerInformation!)}
         }).resume()
-        
     }
 }

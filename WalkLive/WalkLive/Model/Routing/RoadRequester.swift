@@ -18,10 +18,11 @@ class RoadRequester: NSObject {
     var mapView: MKMapView!
     var matchingItems = [MKMapItem]()
     var overlay: MKOverlay!
+    var dangerOverlay: [MKOverlay]!
     var destinationAnnotation: MKAnnotation!
     var sourceAnnotation: MKAnnotation!
     var trip: Trip!
-    
+    var CURRENTCOLOR = UIColor.red
     /*
      Sets map view.
      */
@@ -51,7 +52,7 @@ class RoadRequester: NSObject {
      - location: a CLLocation object
      */
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 50, 50)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
@@ -178,6 +179,8 @@ class RoadRequester: NSObject {
         }, timePoint: timePoint)
     }
     
+    
+    
     /*
      Gets route from a timepoint to destination
      - Parameters:
@@ -204,6 +207,27 @@ class RoadRequester: NSObject {
             } else{
                 success((response?.routes[0])!)}
         }
+    }
+    
+    func drawDangerZones(clusters: [DangerCluster]){
+        for (_, cluster) in clusters.enumerated() {
+            self.CURRENTCOLOR = cluster.getDangerColor()
+            self.mapView.add(cluster.getOverlay())
+            
+        }
+//        self.mapView.addOverlays(dangerOverlay)
+    }
+    
+    func removeDangerZones(){
+        self.mapView.removeOverlays(self.dangerOverlay)
+    }
+    
+    func getDangerZone(clusters: [DangerCluster]) -> [MKOverlay]{
+        var dangerOverlay = [MKOverlay]()
+        for (_, cluster) in clusters.enumerated() {
+            dangerOverlay.append(cluster.getOverlay())
+        }
+        return dangerOverlay
     }
     
     /*
@@ -262,6 +286,11 @@ class RoadRequester: NSObject {
         if (self.destinationAnnotation != nil) {
             self.mapView.removeAnnotation(self.destinationAnnotation)
         }
+    }
+    
+    func drawSingleCluster(cluster: DangerCluster) {
+        self.mapView.add(cluster.getOverlay())
+
     }
 
     
