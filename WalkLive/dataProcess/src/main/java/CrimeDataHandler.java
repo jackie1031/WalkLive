@@ -1,136 +1,105 @@
-<<<<<<< HEAD:WalkLive/Server/src/main/java/com/WalkLiveApp/CrimeDataHandler.java
-//package com.WalkLiveApp;
-////import org.json.*;
-//import java.io.*;
-//import java.sql.*;
-//import java.util.*;
-//import java.io.InputStream;
-////import org.apache.commons.io.IOUtils;
-//import java.util.Iterator;
-//
-//import org.json.simple.*;
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-//
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.InputStream;
-//
-////import org.json.JSONObject;
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.InputStream;
-//import org.apache.commons.io.IOUtils;
-//
-//import java.io.FileNotFoundException;
-//import java.io.FileReader;
-//import java.io.IOException;
-//import java.util.Iterator;
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//
-//public class CrimeDataHandler {
-//    public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
-//
-//    static Connection conn = null;
-//    static String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
-//    static String user = "b0a1d19d87f384";
-//    static String password = "6d11c74b";
-//
-//
-//    static PreparedStatement ps = null;
-//    static ResultSet res = null;
-//    static Statement stm = null;
-//
-//
-//    //public static void updateDB() throws FileNotFoundException,IOException,ParseException {
-//    public static void main(String[] args) throws Exception {
-//
-//        //JSONObject object = (JSONObject) new JSONParser().parse(body);
-//
-//        //should be in a try catch block in case that incorrect body is given
-////        String id = object.get("emergency_id").toString();
-////        String number = object.get("emergency_number").toString();
-//
-//        //query to see if username given is valid
+//import org.json.*;
+import java.io.*;
+import java.sql.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CrimeDataHandler {
+    //public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
+
+    static Connection conn = null;
+    public static String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
+    public static String user = "b0a1d19d87f384";
+    public static String password = "6d11c74b";
+
+
+
+    static PreparedStatement ps = null;
+    static ResultSet res = null;
+    static Statement stm = null;
+
+    public static void main(String[] args) throws Exception {
+
+        addDB("crimeSampleDay.json");
+        addDB("crimeSampleNight.json");
+
+
+//        int dangerLevel;
 //
 //        JSONParser parser = new JSONParser();
+//
 //        try{
-//            JSONArray a = (JSONArray) parser.parse(new FileReader("test.json"));
+//            JSONArray a = (JSONArray) parser.parse(new FileReader("crimeSampleDay.json"));
 //            //System.out.println(a);
 //
 //            for (Object o : a)
 //            {
 //                JSONObject crime = (JSONObject) o;
 //
-//                long hour_of_day = (long) crime.get("hour_of_day");
-//                System.out.println("hour_of_day: "+hour_of_day);
-////
-//                long incident_id = (long) crime.get("incident_id");
-//                System.out.println("incident_id is: "+incident_id);
 //
-//                String address_1 = (String) crime.get("address_1");
-//                System.out.println("address_1: "+address_1);
+//                double radius = (double) crime.get("radius");
+//                long count = (long) crime.get("count");
+//                String day_or_night = (String)crime.get("time");
 //
-//                String address_2 = (String) crime.get("address_2");
-//                System.out.println("address_2: "+address_2);
+//
+//                //600,900,1200,1500
+//                if(count < 100){
+//                     dangerLevel = 0;
+//                } else if (count < 600){
+//                    dangerLevel = 1;
+//
+//                } else if (count < 900){
+//                    dangerLevel = 2;
+//
+//                } else if (count < 1200){
+//                    dangerLevel = 3;
+//
+//                } else {
+//                    dangerLevel = 4;
+//
+//                }
+//
+//                //System.out.println("DANGER LEVEL is: "+dangerLevel);
 //
 //                double latitude = (double) crime.get("latitude");
-//                System.out.println("latitude is: "+latitude);
 //
 //                double longitude = (double) crime.get("longitude");
-//                System.out.println("longitude is: "+longitude);
 //
+//                String sqlSetUp = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
 //
-//                String incident_description = (String) crime.get("incident_description");
-//                System.out.println("incident_description is: "+incident_description);
-//
-//                String parent_incident_type = (String) crime.get("parent_incident_type");
-//                System.out.println("parent_incident_type is: "+parent_incident_type);
-//
-//                String sqlSetUp = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-//
-//                String sql = "INSERT INTO Crime (incident_id, address_1, address_2, latitude, longitude,hour_of_day,incident_description,parent_incident_type) VALUES (?, ?, ?, ?,?,?,?,?)" ;
-//                System.out.println("got here!");
-//
-//
-//                /** need to check the range
-//                (SELECT sensorNumber, rangeStartTime, rangeEndTime, sensorLow, sensorAverage, sensorHigh
-//                FROM rangeData
-//                WHERE (rangeStartTime BETWEEN 0 AND 43200) AND (sensorNumber = 3))
-//                 **/
-//
-//               // String sqlSelect = "SELECT * FROM Crime WHERE (latitude between ?) LIMIT 1";
-//
+//                String sqlInsertClusters = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+//                        "VALUES (1,?,?,?,?,?,?) ";
 //
 //
 //                try {
 //                    conn = DriverManager.getConnection(url, user, password);
 //                    stm = conn.createStatement();
-//
-//                    ps = conn.prepareStatement(sql);
 //                    stm.executeUpdate(sqlSetUp);
 //
-//                    ps.setLong(1, incident_id);
-//                    ps.setString(2, address_1);
-//                    ps.setString(3, address_2);
-//                    ps.setDouble(4, latitude);
-//                    ps.setDouble(5, longitude);
-//                    ps.setLong(6, hour_of_day);
-//                    ps.setString(7, incident_description);
-//                    ps.setString(8, parent_incident_type);
-//                    ps.executeUpdate();
+//                    ps = conn.prepareStatement(sqlInsertClusters);
+//                    //stm.executeUpdate(sqlNew8);
 //
-//                    System.out.println("SUCCESSFULLY ADDED.");
+//                    System.out.println("got here!");
+//
+//                    //ps.setLong(1, incident_id);
+//                    ps.setDouble(1, longitude);
+//                    ps.setDouble(2, latitude);
+//                    ps.setDouble(3, radius);
+//                    ps.setLong(4, count);
+//                    ps.setLong(5, dangerLevel);
+//                    ps.setString(6, day_or_night);
+//                    ps.executeUpdate();
+//                    //System.out.println("SUCCESSFULLY ADDED.");
+//
 //                } catch (SQLException ex) {
-//                    logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+//                    //logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
 //                    //throw new WalkLiveService.RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
 //                }  finally {
 //                    if (ps != null) {
@@ -157,158 +126,96 @@
 //            throw new ParseException(1,ex);
 //
 //        }
-//
-//        //commandTable[6] = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT,
-//        // latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-//
-//
-//
-//
-//        //commandTable[6] = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-//
-//
-//
-//
-//        //JSONArray a = (JSONArray) parser.parse(new FileReader("/Users/lintianyi/Desktop/2017-group-14/WalkLive/Server/test.json "));
-//        //Object obj = parser.parse(new FileReader("/Users/lintianyi/Desktop/2017-group-14/WalkLive/Server/test.json "));
-//
-////        JSONObject jsonObject = (JSONObject) obj;
-////        JSONArray array = obj.getJSONArray("/Users/lintianyi/Desktop/2017-group-14/WalkLive/Server/test.json ");
-//
-//
-//        //System.out.println(obj);
-//        //System.out.println( new File("test.json").getAbsoluteFile());
-//
-//
-////        for (Object o : a)
-////        {
-////            JSONObject person = (JSONObject) o;
-////
-////            String name = (String) person.get("name");
-////            System.out.println(name);
-////
-////            String city = (String) person.get("city");
-////            System.out.println(city);
-////
-////            String job = (String) person.get("job");
-////            System.out.println(job);
-////
-////            JSONArray cars = (JSONArray) person.get("cars");
-////
-////            for (Object c : cars)
-////            {
-////                System.out.println(c+"");
-////            }
-////        }
-//
-//    }
-//
-//}
-=======
-//import org.json.*;
-import java.io.*;
-import java.sql.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.SortedSet;
 
 
-import java.util.*;
-import org.apache.commons.math3.exception.ConvergenceException;
-import org.apache.commons.math3.exception.MathIllegalArgumentException;
-import org.apache.commons.math3.exception.NumberIsTooSmallException;
-import org.apache.commons.math3.exception.util.LocalizedFormats;
-import org.apache.commons.math3.stat.descriptive.moment.Variance;
-import org.apache.commons.math3.util.MathUtils;
 
+    }
 
-public class CrimeDataHandler {
-    //public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
-
-    static Connection conn = null;
-    static String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
-    static String user = "b0a1d19d87f384";
-    static String password = "6d11c74b";
-
-
-    static PreparedStatement ps = null;
-    static ResultSet res = null;
-    static Statement stm = null;
-
-    public static void main(String[] args) throws Exception {
-
+    private static void addDB(String fileName) throws IOException, ParseException{
+        int dangerLevel;
 
         JSONParser parser = new JSONParser();
+
+        System.out.println("the data is" +fileName);
+
+
         try{
-            JSONArray a = (JSONArray) parser.parse(new FileReader("partCrime.json"));
+            JSONArray a = (JSONArray) parser.parse(new FileReader(fileName));
             //System.out.println(a);
 
             for (Object o : a)
             {
                 JSONObject crime = (JSONObject) o;
 
-                long hour_of_day = (long) crime.get("hour_of_day");
-                //System.out.println("hour_of_day: "+hour_of_day);
-//
-                long incident_id = (long) crime.get("incident_id");
-                //System.out.println("incident_id is: "+incident_id);
 
-                String address_1 = (String) crime.get("address_1");
-                //System.out.println("address_1: "+address_1);
+                double radius = (double) crime.get("radius");
+                long count = (long) crime.get("count");
+                String day_or_night = (String)crime.get("time");
 
-                String address_2 = (String) crime.get("address_2");
-                //System.out.println("address_2: "+address_2);
+
+                //600,900,1200,1500
+                if(count < 100){
+                    dangerLevel = 0;
+                } else if (count < 600){
+                    dangerLevel = 1;
+
+                } else if (count < 900){
+                    dangerLevel = 2;
+
+                } else if (count < 1200){
+                    dangerLevel = 3;
+
+                } else if(count < 1600){
+                    dangerLevel = 4;
+                } else {
+                    dangerLevel = 5;
+
+                }
+
+                //System.out.println("DANGER LEVEL is: "+dangerLevel);
 
                 double latitude = (double) crime.get("latitude");
-                //System.out.println("latitude is: "+latitude);
 
                 double longitude = (double) crime.get("longitude");
-                //System.out.println("longitude is: "+longitude);
 
+                String sqlSetUp = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
+                String sqlSetUp2 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
 
-                String incident_description = (String) crime.get("incident_description");
-                //System.out.println("incident_description is: "+incident_description);
-
-                String parent_incident_type = (String) crime.get("parent_incident_type");
-                //System.out.println("parent_incident_type is: "+parent_incident_type);
-
-                String sqlSetUp = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-
-                String sql = "INSERT INTO Crime (incident_id, address_1, address_2, latitude, longitude,hour_of_day,incident_description,parent_incident_type) VALUES (?, ?, ?, ?,?,?,?,?)" ;
-                //System.out.println("got here!");
-
-
-                /** clustering
-                 **/
-
-               // String sqlSelect = "SELECT * FROM Crime WHERE (latitude between ?) LIMIT 1";
-
+                String checkDay = "Day";
+                String checkNight = "Night";
+                String sqlInsertClusters = null;
+                if(fileName.toLowerCase().contains(checkDay.toLowerCase())){
+                    sqlInsertClusters = " INSERT INTO dangerZonesDay(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+                        "VALUES (1,?,?,?,?,?,'check') ";
+                } else if (fileName.toLowerCase().contains(checkNight.toLowerCase())){
+                    sqlInsertClusters = " INSERT INTO dangerZonesNight(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+                            "VALUES (1,?,?,?,?,?,'check') ";
+                } else {
+                    System.out.println("not valid datasets to put in database");
+                }
 
 
                 try {
                     conn = DriverManager.getConnection(url, user, password);
                     stm = conn.createStatement();
-
-                    ps = conn.prepareStatement(sql);
                     stm.executeUpdate(sqlSetUp);
+                    stm.executeUpdate(sqlSetUp2);
 
-                    ps.setLong(1, incident_id);
-                    ps.setString(2, address_1);
-                    ps.setString(3, address_2);
-                    ps.setDouble(4, latitude);
-                    ps.setDouble(5, longitude);
-                    ps.setLong(6, hour_of_day);
-                    ps.setString(7, incident_description);
-                    ps.setString(8, parent_incident_type);
+                    ps = conn.prepareStatement(sqlInsertClusters);
+                    //stm.executeUpdate(sqlNew8);
+
+                    System.out.println("got here!");
+
+                    //ps.setLong(1, incident_id);
+                    ps.setDouble(1, longitude);
+                    ps.setDouble(2, latitude);
+                    ps.setDouble(3, radius);
+                    ps.setLong(4, count);
+                    ps.setLong(5, dangerLevel);
+                    //ps.setString(6, day_or_night);
                     ps.executeUpdate();
-
                     System.out.println("SUCCESSFULLY ADDED.");
+
                 } catch (SQLException ex) {
                     //logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
                     //throw new WalkLiveService.RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
@@ -339,15 +246,8 @@ public class CrimeDataHandler {
         }
 
 
-
-
-
     }
 
-    private void getCluster(){
 
-
-    }
 
 }
->>>>>>> crimeData:WalkLive/dataProcess/src/main/java/CrimeDataHandler.java

@@ -317,10 +317,10 @@ public class ServerController {
              * ----------------------------------------------------------------------
              * */
 
-            get(API_CONTEXT + "/crime/:curLat/:curLong", "application/json", (request, response) -> {
+            get(API_CONTEXT + "/crime/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
                 try {
                     //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
-                    return walkLiveService.getDangerZone(request.params(":curLat"), request.params(":curLong"));
+                    return walkLiveService.getDangerZone(request.params(":curLat"), request.params(":curLong"),request.params(":isDay"));
                 } catch (WalkLiveService.InvalidTargetID e) {
                     logger.error("Invalid user id.");
                     response.status(402);

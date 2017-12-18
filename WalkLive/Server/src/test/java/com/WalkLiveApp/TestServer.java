@@ -52,7 +52,7 @@ public class TestServer {
         Spark.awaitInitialization();
     }
 
-//
+
 //    @Before
 //    public void setup() throws Exception {
 //        //Clear the database
@@ -74,7 +74,7 @@ public class TestServer {
 
     @After
     public void tearDown() {
-        clearDB();
+        //clearDB();
         //Spark.stop();
     }
 
@@ -642,7 +642,7 @@ public class TestServer {
 
     @Test
     public void testTripDangerLevel() throws Exception {
-        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.9846379, -76.9661682, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
+        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
         //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 
         //1,38.9846371,-76.9661682,0.018,12
@@ -658,7 +658,7 @@ public class TestServer {
 
         //Trip update = new Trip(1,null, null, null, false, 0, 0, 38.9846379, -76.9661682, 0, 0, "18611345670", "3hours", "3501 St Paul");
 
-        Response r3 = request("GET", "/WalkLive/api/crime/38.9846379/-76.9661682", null);
+        Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
         assertEquals("Failed to get user", 200, r3.httpStatus);
 
     }
@@ -1186,24 +1186,32 @@ private static class Response {
             String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
-            String sqlInsertClusters = " INSERT INTO dangerZones (cluster_id, longitude, latitude, radius, hour_of_day) " +
-                    "VALUES (1,-76.9541682,38.99,0.018,12) ";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
-            String sqlInsertClusters1 = " INSERT INTO dangerZones (cluster_id, longitude, latitude, radius, hour_of_day) " +
-                    "VALUES (2,-76.9561688,38.9846379,0.018,21) ";
+            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
-            String sqlInsertClusters2 = " INSERT INTO dangerZones (cluster_id, longitude, latitude, radius, hour_of_day) " +
-                    "VALUES (2,-76.9561688,39.9846379,0.018,21) ";
 
+//            String sqlInsertClusters = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+//                    "VALUES (1,-76.9541682,38.99,0.01,671,1,'day') ";
+//
+//            String sqlInsertClusters1 = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius,count, dangerLevel,day_or_night) " +
+//                    "VALUES (2,-76.9561688,38.9846379,0.02,1827,2,'day') ";
+//
+//            String sqlInsertClusters2 = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius,count, dangerLevel,day_or_night) " +
+//                    "VALUES (3,-76.9561688,39.9846379,0.03,994,3,'day') ";
+//
+//            String sqlInsertClusters3 = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius,count, dangerLevel,day_or_night) " +
+//                    "VALUES (4,-76.9561688,39.9846379,0.04,994,4,'night') ";
 
             stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
             //stm.executeUpdate(sqlNew7);
             stm.executeUpdate(sqlNew8);
-            stm.executeUpdate(sqlInsertClusters);
-            stm.executeUpdate(sqlInsertClusters1);
-            stm.executeUpdate(sqlInsertClusters2);
+            stm.executeUpdate(sqlNew9);
+//            stm.executeUpdate(sqlInsertClusters);
+//            stm.executeUpdate(sqlInsertClusters1);
+//            stm.executeUpdate(sqlInsertClusters2);
+//            stm.executeUpdate(sqlInsertClusters3);
 
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
@@ -1232,8 +1240,12 @@ private static class Response {
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
 
-//            String sql10 = "DROP TABLE IF EXISTS dangerZones" ;
+//            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
+//            stm.executeUpdate(sql9);
+//
+//            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
 //            stm.executeUpdate(sql10);
+
 
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
@@ -1286,8 +1298,11 @@ private static class Response {
             stm.executeUpdate(sql7);
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
-//            String sql9 = "DROP TABLE IF EXISTS dangerZones" ;
-//            stm.executeUpdate(sql9);
+            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
+            stm.executeUpdate(sql9);
+
+            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
+            stm.executeUpdate(sql10);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
@@ -1298,7 +1313,8 @@ private static class Response {
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
@@ -1308,6 +1324,7 @@ private static class Response {
             stm.executeUpdate(sqlNew5);
             stm.executeUpdate(sqlNew6);
             stm.executeUpdate(sqlNew8);
+            stm.executeUpdate(sqlNew9);
 
 
         } catch (SQLException ex) {

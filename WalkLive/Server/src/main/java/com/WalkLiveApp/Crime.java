@@ -10,7 +10,13 @@ import java.util.*;
 
 
 public class Crime {
-    private int date, timeOfDay,crimeId, dangerLevel;
+
+
+    public void setDangerLevel(int dangerLevel) {
+        this.dangerLevel = dangerLevel;
+    }
+
+    private int dangerLevel;
     private double longitude, latitude;
     private String address, type;
     private ArrayList<Cluster> clusters= new ArrayList<Cluster>();
@@ -56,13 +62,22 @@ public class Crime {
 //        this.latitude = latitude;
 //    }
 
-
+    /**
+     * constructor
+     * @param dangerLevel: process danger level
+     * @param clusters: array of clusters
+     */
     public Crime(int dangerLevel, ArrayList<Cluster> clusters ) {
         this.dangerLevel = dangerLevel;
         this.clusters = clusters;
 
     }
 
+
+    /**
+     * constructor
+     * @param clusters : only have clusters
+     */
     public Crime(ArrayList<Cluster> clusters ) {
         this.clusters = clusters;
 
@@ -74,12 +89,12 @@ public class Crime {
      * Get the date
      * @return date
      */
-    public int getDate() {
-        return date;
-    }
-    public int getTimeOfDay() {
-        return timeOfDay;
-    }
+//    public int getDate() {
+//        return date;
+//    }
+//    public int getTimeOfDay() {
+//        return timeOfDay;
+//    }
     /**
      * Get the address
      * @return address
@@ -100,28 +115,34 @@ public class Crime {
      * Get the crimeId
      * @return crimeId
      */
-    public int getcrimeId() {
-        return crimeId;
-    }
+//    public int getcrimeId() {
+//        return crimeId;
+//    }
 
     /**
      * Convert Crime to string.
      * @return Crime in the form of a string
      */
     public String toString() {
-        return "date: " + date
-                + "time of the day: "+ timeOfDay
-                + " address: " + address
-                //+ " Coordinate: "+coordinate
-                + " type: " + type
-                + " crimeId: " + crimeId;
+        return "danger level: " + dangerLevel
+                + " list of clusters "+ clusters;
     }
 
 
-
-    public ArrayList<Cluster> getDangerLeveLZone(String latitudeStr, String longitudeStr) throws WalkLiveService.UserServiceException, SQLException{
+    /**
+     * function to find the cluster around the given coordinate
+     * @param latitudeStr
+     * @param longitudeStr
+     * @return arraylist of clusters
+     * @throws WalkLiveService.UserServiceException: invalid
+     * @throws SQLException: invalid sql statement
+     */
+   //public ArrayList<Cluster> getDangerLeveLZone(String latitudeStr, String longitudeStr) throws WalkLiveService.UserServiceException, SQLException{
+        public Crime getDangerLeveLZone(String latitudeStr, String longitudeStr, String isDaystr) throws WalkLiveService.UserServiceException, SQLException{
         ResultSet res = null;
+        ResultSet res2 = null;
         PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
         Connection conn = null;
 
         //int dangerZoneId = Integer.parseInt(tripIdInStr);
@@ -131,16 +152,22 @@ public class Crime {
         //String clusterId = String.valueOf(clusterIdInt);
 
         double longitude = Double.parseDouble(longitudeStr);
-        double latitude = Double.parseDouble(latitudeStr);
+            double latitude = Double.parseDouble(latitudeStr);
+            int isDay = Integer.parseInt(isDaystr);
         logger.info("long: "+longitude +" lat: "+ latitude);
 
         double longRadius = 0.018;
         double latRadius = 0.14449;
         int dangerLevel = 1;
 
-        //String sql = "SELECT * FROM dangerZones WHERE (longitude BETWEEN ? AND ?) AND (latitude BETWEEN ? AND ?)";
-        String sql = "SELECT * FROM dangerZones WHERE (longitude < ? AND longitude > ?) AND (latitude < ? AND latitude > ?)";
-        //String sql2 = "SELECT * FROM dangerZones WHERE (latitude < ? AND longitude > ?)";
+        String sql;
+        if(isDay==1){
+            sql = "SELECT * FROM dangerZonesDay WHERE (longitude < ? AND longitude > ?) AND (latitude < ? AND latitude > ?)";
+
+        } else{
+            sql = "SELECT * FROM dangerZonesNight WHERE (longitude < ? AND longitude > ?) AND (latitude < ? AND latitude > ?)";
+
+        }
 
         try {
             conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
@@ -151,21 +178,32 @@ public class Crime {
             ps.setDouble(4, latitude-latRadius);
             res = ps.executeQuery();
 
+//            ps2 = conn.prepareStatement(sql2);
+//            res2 = ps2.executeQuery();
+            //int count = res2.getInt(1);
+            //logger.info("the avg count is: "+ count);
+            //logger.info("the avg count is: ");
+
             ArrayList<Cluster> clusters = new ArrayList<>();
+            int accumuDangerLevel=0;
 
             while (res.next()) {
-                //logger.info("got here");
 
                 //CREATE TABLE IF NOT EXISTS dangerZones(cluster_id TEXT, longitute DOUBLE, latitude DOUBLE, radius DOUBLE, hour_of_day INT)";
+                accumuDangerLevel = accumuDangerLevel+ res.getInt("dangerLevel");
+                logger.info("the accumu danger level is: "+ accumuDangerLevel);
 
-                Cluster cluster = new Cluster(res.getDouble(2), res.getDouble(3), res.getDouble(4));
+                Cluster cluster = new Cluster(res.getDouble(2), res.getDouble(3), res.getDouble(4), res.getInt("dangerLevel"));
                 clusters.add(cluster);
                 logger.info("the final cluster is: "+ cluster.toString());
 
             }
-            //logger.info("the final cluster is: "+ clusters);
 
-            return clusters;
+            int dangerLevelLocation = accumuDangerLevel/(clusters.size());
+            Crime crime = new Crime(dangerLevelLocation,clusters);
+
+            logger.info("the final crime instance is: "+crime);
+            return crime;
 
         } catch(SQLException ex){
             WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for get danger level"), ex);

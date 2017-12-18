@@ -211,8 +211,9 @@ public class WalkLiveService {
      * @throws ParseException: can't parse into parameters
      * @throws InvalidTargetID: invalid trip id
      */
-    public ArrayList<Cluster> getDangerZone(String latitude, String longitude) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
-        return new Crime().getDangerLeveLZone(latitude, longitude);
+    //public ArrayList<Cluster> getDangerZone(String latitude, String longitude) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+        public Crime getDangerZone(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+        return new Crime().getDangerLeveLZone(latitude, longitude,isDay);
     }
 
     //=====================EXCEPTIONS============================
