@@ -6,6 +6,7 @@
 - run 'open WalkLive.xcworkspace'
 - click 'Build' button in Xcode to run the APP
 
+
 ## BackEnd Install:
 - run 'cd WalkLive/Server'
 - run 'mvn package'
@@ -13,6 +14,11 @@
 
 * assume maven is already installed on the computer.If not, please set up maven following this tutorial: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 * our app is currently using a clearDB database with $9.99 plan. It only allows a maximum of 15 connections and 18000 requires per hour. Running tests repeatedly may used up the maximum amount of queries allowed per hour. 
+
+## Set up Crime database table
+- run 'cd WalkLive/Server/dataProcess'
+
+
 
 ## Deploy App
 - run 'cd WalkLive/Server'
