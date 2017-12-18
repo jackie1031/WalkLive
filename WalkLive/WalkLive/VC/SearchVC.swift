@@ -2,6 +2,8 @@
 //  SearchVC.swift
 //  Walklive
 //
+//  Searching for destination location view
+//
 //  Created by Michelle Shu on 11/19/17.
 //  Copyright © 2017 OOSE-TEAM14. All rights reserved.
 //
@@ -25,6 +27,13 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
+    /*
+     Gets number of rows needed to show search results
+     - Parameters:
+     - tableView: UITableView that shows search results
+     - section: number of rows
+     - Returns: number of search results
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.mapItems != nil {
             return self.mapItems.count
@@ -33,6 +42,13 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    /*
+     Sets up a single table view cell about a specific location
+     - Parameters:
+     - tableView: UITableView that shows search results
+     - indexPath: index the cell is at
+     - Returns: single table view cell
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchLocationTable.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationTableViewCell
         let mapItem = self.mapItems[indexPath.row]
@@ -47,6 +63,9 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    /*
+     Draws searched locations on the map
+     */
     func drawLocation() {
         var count = 0
         var listAnnotation = [MKPointAnnotation]()
@@ -60,13 +79,15 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.mapView.showAnnotations(listAnnotation, animated: true)
     }
     
+    /*
+     When user sets destination, route delegate (MainMapVC) updates the trip.
+     */
     @IBAction func onGoButton(_ sender: Any) {
         let button = sender as! UIButton
         self.routeDelegate?.updateRoute(index: button.tag)
         self.navigationController?.popViewController(animated: true)
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

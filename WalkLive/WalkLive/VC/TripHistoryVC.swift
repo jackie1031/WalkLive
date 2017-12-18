@@ -26,10 +26,28 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Do any additional setup after loading the view.
     }
     
+    
+    /// Private functions
+    
+    /*
+     Sets itself as the delegate of trip table
+     */
     private func setDelegate(){
         self.tripTable.delegate = self
         self.tripTable.dataSource = self
     }
+    
+    
+    /// Public functions
+    
+    
+    /*
+     Creates a single table view cell that contains trip info
+     - Parameters:
+     - tableView: UITableView that contains trip info
+     - indexPath: index of cell
+     - Returns: UITableViewCell object containing trip info
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tripTable.dequeueReusableCell(withIdentifier: "TripHistoryTableViewCell", for: indexPath) as! TripHistoryTableViewCell
         let trip = self.trips![indexPath.row]
@@ -42,6 +60,13 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    /*
+     Sets up table view that shows trip history
+     - Parameters:
+     - tableView: UITableView that shows trip history
+     - sections: number of rows
+     - Returns: number of rows needed
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.trips != nil) {
             return self.trips!.count
@@ -55,6 +80,9 @@ class TripHistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Dispose of any resources that can be recreated.
     }
     
+    /*
+     Gets trip history.
+     */
     func getTripHistory(){
         backEndClient.getTripHistory(success: { (timepoints) in
             OperationQueue.main.addOperation {

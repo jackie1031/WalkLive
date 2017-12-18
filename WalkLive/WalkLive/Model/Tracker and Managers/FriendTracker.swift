@@ -11,8 +11,14 @@ import MapKit
 import CoreLocation
 
 class FriendTracker: Tracker {
+    
     private var timer = Timer()
     
+    /*
+     Map time point, start location, and destination
+     - Parameters:
+     - timePoint: TimePoint object about a location, usually between start and end locations
+     */
     func mapTimePoint(timePoint: TimePoint) {
         if (!self.annotations.isEmpty){
             removeTimePoint()
@@ -32,23 +38,40 @@ class FriendTracker: Tracker {
         mapView.showAnnotations(annotations, animated: true)
     }
     
+    /*
+     Tracks new trip.
+     - Parameters:
+     - trip: TimePoint object that indicates starting location
+     - timeInterval: keeps track of time spent
+     */
     func trackNewTripWithTimer(trip: TimePoint, timeInterval: TimeInterval) {
         self.endTimer()
         self.setNewTrip(trip: trip)
         self.startTimer(timeInterval: timeInterval)
     }
     
+    /*
+     Sets new trip.
+     - Parameters:
+     - trip: a TimePoint object that indicates starting location
+     */
     func setNewTrip(trip: TimePoint) {
         self.tripId = trip.tripId
         self.mapTimePoint(timePoint: trip)
         print("set successfully!")
     }
     
+    /*
+     Starts counting time.
+     */
     func startTimer(timeInterval: TimeInterval) {
         //update every 60 seconds
         timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(updateTrip), userInfo: nil, repeats: true);
     }
     
+    /*
+     Updates trip.
+     */
     @objc func updateTrip() {
         backEndClient.getSingleTrip(success: { (timePoint) in
             OperationQueue.main.addOperation {
@@ -60,6 +83,9 @@ class FriendTracker: Tracker {
         }, tripId: self.tripId!)
     }
     
+    /*
+     Stops counting time.
+     */
     func endTimer() {
         self.timer.invalidate()
         self.timer = Timer()

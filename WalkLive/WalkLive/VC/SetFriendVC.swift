@@ -30,6 +30,13 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         self.currentEmergencyNumberLabel.text = emerStringBuilder()
     }
     
+    
+    /// Private functions
+    
+    /*
+     Builds emergency contact number info
+     - Returns: string containing emergency contact number
+     */
     private func emerStringBuilder() -> String{
         if (currentUserInfo?.emergency_number == nil) {
             return "None"
@@ -37,6 +44,10 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return (currentUserInfo?.emergency_number)!
     }
     
+    /*
+     Builds emergency contact name info
+     - Returns: string containing emergency contact name
+     */
     private func emerIdStringBuilder() -> String{
             if (currentUserInfo?.emergency_id == nil || currentUserInfo?.emergency_id == "") {
                 return "None"
@@ -44,6 +55,17 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             return (currentUserInfo?.emergency_id)!
     }
     
+    
+    /// Public functions
+    
+    
+    /*
+     Sets up table view showing friends
+     - Parameters:
+     - tableView: UITableView that shows friends
+     - sections: number of rows
+     - Returns: number of rows needed
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.friends != nil {
             return self.friends.count
@@ -51,6 +73,13 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return 0
     }
     
+    /*
+     Creates a single table view cell that contains friend name and number
+     - Parameters:
+     - tableView: UITableView that shows friends
+     - indexPath: index of cell
+     - Returns: UITableViewCell object containing friend name number
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendListTable.dequeueReusableCell(withIdentifier: "SetFriendTableViewCell", for: indexPath) as! SetFriendTableViewCell
         let friend = friends[indexPath.row]
@@ -60,6 +89,9 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 
+    /*
+     Selects a friend as emergency contact
+     */
     @IBAction func onSelectButton(_ sender: Any) {
         let button = sender as! UIButton
         self.currentFriendNameLabel.text = friends[button.tag].username
@@ -67,6 +99,9 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
     }
     
+    /*
+     Saves the friend as emergency contact
+     */
     @IBAction func onSaveButton(_ sender: Any) {
         if (self.currentFriendNameLabel.text! == currentUserInfo.emergency_id) {
             return
@@ -86,6 +121,9 @@ class SetFriendVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }, emergencyContact: emergencyContact)
     }
     
+    /*
+     Update friend list
+     */
     func updateFriends() {
         backEndClient.getFriendList(success: { (friends) in
             OperationQueue.main.addOperation {

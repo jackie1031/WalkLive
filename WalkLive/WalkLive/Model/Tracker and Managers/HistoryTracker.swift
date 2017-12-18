@@ -14,6 +14,10 @@ import MessageUI
 
 class HistoryTracker: Tracker {
 
+    /*
+     Given a timepoint, sets up annotations and coordinates about start,
+     current, and end locations.
+     */
     func mapTimePoint(timePoint: TimePoint) {
         if (!self.annotations.isEmpty){
             removeTimePoint()

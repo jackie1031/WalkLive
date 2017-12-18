@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+// Location model stores the destination name and address, and user phone number
 class Location: NSObject {
     var mapItem: MKMapItem
     var destinationName: String?

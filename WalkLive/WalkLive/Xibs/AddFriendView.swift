@@ -14,7 +14,9 @@ class AddFriendView: UIView {
     
     @IBOutlet weak var friendIdLabel: UITextField!
     
-    
+    /*
+     Sends friend request
+     */
     @IBAction func onSendButton(_ sender: Any) {
         var friendRequest = FriendRequest()
         if (friendIdLabel.text == "") {
@@ -34,16 +36,23 @@ class AddFriendView: UIView {
         }, friendRequest: friendRequest)
     }
     
-    
+    /*
+     Clears label
+     */
     @IBAction func onClearButton(_ sender: Any) {
         self.friendIdLabel.text = ""
     }
     
-    
+    /*
+     Cancels friend request
+     */
     @IBAction func onCancelButton(_ sender: Any) {
         self.removeFromSuperview()
     }
     
+    /*
+     Loads nib
+     */
     func loadNib() -> AddFriendView {
         let bundle = Bundle(for: type(of: self))
         let nibName = type(of: self).description().components(separatedBy: ".").last!

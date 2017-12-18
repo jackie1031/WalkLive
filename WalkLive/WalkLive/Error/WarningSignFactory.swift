@@ -9,11 +9,17 @@
 import Foundation
 class WarningSignFactory: NSObject{
     
+    /*
+     Makes generic warning sign
+     */
     private func makeGenericWarningSign() -> WarningSignView {
         let errorView = WarningSignView()
         return errorView.loadNib()
     }
     
+    /*
+     Makes generic success sign
+     */
     private func makeGenericSuccessSign() -> WarningSignView {
         var successView = self.makeGenericWarningSign()
         successView = successView.loadNib()
@@ -21,6 +27,9 @@ class WarningSignFactory: NSObject{
         return successView
     }
     
+    /*
+     Makes Signup input warning sign
+     */
     func makeSignUpValidityWarningSign(status: Int) -> WarningSignView{
         let errorView = self.makeGenericWarningSign()
         if (status == 0) {
@@ -38,12 +47,18 @@ class WarningSignFactory: NSObject{
         return errorView
     }
     
+    /*
+     Makes signup backend warning sign
+     */
     func makeSignUpBackEndWarningSign(signupError: SignUpError) -> WarningSignView {
         let errorView = self.makeGenericWarningSign()
         errorView.warningContentView.text = signupError.returnReason()
         return errorView
     }
     
+    /*
+     Makes login input warning sign
+     */
     func makeLoginValidityWarningSign(status: Int) -> WarningSignView{
         let errorView = self.makeGenericWarningSign()
         if (status == 0) {
@@ -55,18 +70,27 @@ class WarningSignFactory: NSObject{
         return errorView
     }
     
+    /*
+     Makes login backend warning sign
+     */
     func makeLoginBackEndWarningSign(loginError: LoginError) -> WarningSignView {
         let errorView = self.makeGenericWarningSign()
         errorView.warningContentView.text = loginError.returnReason()
         return errorView
     }
     
+    /*
+     Makes auto login warning sign
+     */
     func makeAutoLoginWarningSign(loginError: LoginError) -> WarningSignView {
         let errorView = self.makeGenericWarningSign()
         errorView.warningContentView.text = "Auto login failed."
         return errorView
     }
     
+    /*
+     Makes save message warning sign
+     */
     func saveMessageWarningSign(status: Int) -> WarningSignView {
         let view = self.makeGenericWarningSign()
         if (status == 0) {
@@ -78,6 +102,9 @@ class WarningSignFactory: NSObject{
         return view
     }
     
+    /*
+     Makes save success sign
+     */
     func makeSaveSuccessSign() -> WarningSignView {
         var successView = self.makeGenericWarningSign()
         successView = successView.loadNib()
@@ -86,12 +113,18 @@ class WarningSignFactory: NSObject{
         return successView
     }
     
+    /*
+     Makes save settings warning sign
+     */
     func makeSaveSettingsSuccessWarningSign() -> WarningSignView {
         let successView = self.makeGenericSuccessSign()
         successView.warningContentView.text = "Success!👊"
         return successView
     }
     
+    /*
+     Makes build route warning sign
+     */
     func cannotBuildRouteWarningSign() -> WarningSignView {
         let errorView = self.makeGenericWarningSign()
         errorView.warningContentView.text = "The place you chose is too far to walk to 😢"

@@ -26,11 +26,19 @@ class TimePoint: NSObject, Codable {
     var tripId: Int?
     var address: String?
     
+    /*
+     Gets map item object that indicates start location of a trip
+     - Returns: MKMapItem object that indicates start location of a trip
+     */
     func getStartMapItem() -> MKMapItem{
         let pl = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.startLat!, longitude: self.startLong!), addressDictionary: nil)
         return MKMapItem(placemark: pl)
     }
     
+    /*
+     Gets map item object that indicates destination location of a trip
+     - Returns: MKMapItem object that indicates destination location of a trip
+     */
     func getDestinationMapItem() -> MKMapItem{
         let pl = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.endLat!, longitude: self.endLong!), addressDictionary: nil)
         let mp = MKMapItem(placemark: pl)

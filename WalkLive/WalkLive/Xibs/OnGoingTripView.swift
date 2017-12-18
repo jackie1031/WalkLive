@@ -21,6 +21,9 @@ class OnGoingTripView: UIView {
         super.awakeFromNib()
     }
     
+    /*
+     Loads nib
+     */
     func loadNib() -> OnGoingTripView {
         let bundle = Bundle(for: type(of: self))
         let nibName = type(of: self).description().components(separatedBy: ".").last!
@@ -28,11 +31,17 @@ class OnGoingTripView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as! OnGoingTripView
     }
     
+    /*
+     Removes view when trip gets canceled
+     */
     @IBAction func onCancelTrip(_ sender: Any) {
         self.removeFromSuperview()
         self.routeDelegate?.cancelTrip()
     }
     
+    /*
+     removes view when trip is completed
+     */
     @IBAction func onCompleteTrip(_ sender: Any) {
         self.removeFromSuperview()
         self.routeDelegate?.completeTrip()
