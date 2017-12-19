@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,64 +17,71 @@ public class UserManager {
     private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
 
 
-    public User createNew(String body) throws WalkLiveService.UserServiceException, ParseException, SQLException {
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String username = object.get("username").toString();
-        String pw = object.get("password").toString();
-        String contact = object.get("contact").toString();
+    public User createNew(String body) throws WalkLiveService.UserServiceException, ParseException{
+        User user = new Gson().fromJson(body, User.class);
 
-
-        //debugging
-        System.out.println("USERNAME:" + username);
-
-        //FIRST, check to see if username already exists in databse
-        this.checkUniqueness(username);
-
-        //SECOND, if username did not exist, then place the information into the database
-        return this.createUser(username, pw, contact);
-
+        System.out.println("USERNAME:" + user.getUsername());
+        this.checkUniqueness(user.getUsername());
+        return this.createUser(user.getUsername(), user.getPassword(), user.getContact());
     }
+
+//    public List<User> findAllUsers() throws WalkLiveService.UserServiceException, java.text.ParseException {
+//        Connection conn = null;
+//        Statement stm = null;
+//        ResultSet res = null;
+//        String sql = "SELECT * FROM users";
+//
+//        try {
+//            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+//            stm = conn.createStatement();
+//            res = stm.executeQuery(sql);
+//
+//            ArrayList<User> users = new ArrayList<>();
+//            while (res.next()) {
+//                User u = new User(res.getString(1), res.getString(2), res.getString(3), res.getString(4), WalkLiveService.df.parse(res.getString(5)), res.getString(6), res.getString(7));
+//                users.add(u);
+//            }
+//            return users;
+//
+//        } catch (SQLException ex) {
+//            WalkLiveService.logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
+//            throw new WalkLiveService.UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
+//        } finally {
+//            //close connections
+//            if (res != null) {
+//                try {
+//                    res.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//            if (stm != null) {
+//                try {
+//                    stm.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//        }
+//    }
 
     public List<User> findAllUsers() throws WalkLiveService.UserServiceException, java.text.ParseException {
-        Connection conn = null;
-        Statement stm = null;
-        ResultSet res = null;
+        ArrayList<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
-
-        try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            stm = conn.createStatement();
-            res = stm.executeQuery(sql);
-
-            ArrayList<User> users = new ArrayList<>();
-            while (res.next()) {
-                User u = new User(res.getString(1), res.getString(2), res.getString(3), res.getString(4), WalkLiveService.df.parse(res.getString(5)), res.getString(6), res.getString(7));
-                users.add(u);
-            }
-            return users;
-
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-        } finally {
-            //close connections
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+        List<Map<String, Object>> rows = jdbcTemplateObject.queryForList(sql);
+        for(Map<String, Object> row : rows){
+            users.add(new User(row.get("username").toString(),
+                    row.get("password").toString(),
+                    row.get("contact").toString(),
+                    row.get("nickname").toString(),
+                    WalkLiveService.df.parse(row.get("created_on").toString()),
+                    row.get("emergency_id").toString(),
+                    row.get("emergency_number").toString()));
         }
+        return users;
     }
+
 
     public User login(String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
         ResultSet res = null;
@@ -218,41 +226,6 @@ public class UserManager {
         }
     }
 
-//    private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException, ParseException, SQLException{
-//        Connection conn = null;
-//        PreparedStatement ps = null;
-//
-//        String sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
-//                "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
-//
-//        try {
-//            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-//            ps = conn.prepareStatement(sql);
-//            ps.setString(1, username);
-//            ps.setString(2, password);
-//            ps.setString(3, contact);
-//            ps.executeUpdate();
-//
-//            return new User(username, password, contact, null, null, null, null);
-//
-//        } catch (SQLException ex) {
-//            WalkLiveService.logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
-//            throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
-//        }  finally {
-//            //close connections
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//    }
-
         private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException{
         String sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                 "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
@@ -267,13 +240,13 @@ public class UserManager {
     }
 
 
-    private void checkUniqueness(String username) throws WalkLiveService.UserServiceException, ParseException, SQLException{
+    private void checkUniqueness(String username) throws WalkLiveService.UserServiceException{
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
         try {
             this.jdbcTemplateObject.queryForMap(sql, username);
             WalkLiveService.logger.error("WalkLiveService.createNew: Failed to create new entry - duplicate username");
             throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry - duplicate username");
-        } catch (Exception e) {
+        } catch (EmptyResultDataAccessException e) {
             /* ignored */
         }
     }

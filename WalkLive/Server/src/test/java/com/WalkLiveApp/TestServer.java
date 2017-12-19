@@ -115,9 +115,9 @@ public class TestServer {
             jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                     "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
             String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-            String username = "testuser2";
+            String username = "testuser1";
 
-            User userTest = new User("testuser", "1234", "contacto");
+            User userTest = new User("testuser1", "1234", "contacto");
 
         Map<String,Object> results =
                 jdbcTemplateObject.queryForMap(sql, username);
@@ -165,42 +165,42 @@ public class TestServer {
     }
 
 
-//    @Test
-//    public void testDuplicateCreation() {
-//
-//        //Add a few elements
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063")
-//        };
-//
-//        //add to database
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //check if duplications are caught
-//        User u = new User("jeesookim", "1234567", "4405339063");
-//
-//        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
-//
-//        //try another user duplication
-//        User u2 = new User("michelle", "123456", "4405339063");
-//        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
-//
-//        //Get them back
-//        Response s = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, s.httpStatus);
-//        List<User> results = getUsers(s);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-//        assertEquals("Number of user entries differ", entries.length, results.size());
-//    }
+    @Test
+    public void testDuplicateCreation() {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            //System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //check if duplications are caught
+        User u = new User("jeesookim", "1234567", "4405339063");
+
+        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
+
+        //try another user duplication
+        User u2 = new User("michelle", "123456", "4405339063");
+        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
+
+        //Get them back
+        Response s = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, s.httpStatus);
+        List<User> results = getUsers(s);
+
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
+    }
 //
 //    @Test
 //    public void testFindAll() throws Exception {
