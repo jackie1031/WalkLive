@@ -1,7 +1,6 @@
 package com.WalkLiveApp;
 
 import com.google.gson.Gson;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -9,9 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class UserManager {
     private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
@@ -25,104 +22,24 @@ public class UserManager {
         return this.createUser(user.getUsername(), user.getPassword(), user.getContact());
     }
 
-//    public List<User> findAllUsers() throws WalkLiveService.UserServiceException, java.text.ParseException {
-//        Connection conn = null;
-//        Statement stm = null;
-//        ResultSet res = null;
-//        String sql = "SELECT * FROM users";
-//
-//        try {
-//            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-//            stm = conn.createStatement();
-//            res = stm.executeQuery(sql);
-//
-//            ArrayList<User> users = new ArrayList<>();
-//            while (res.next()) {
-//                User u = new User(res.getString(1), res.getString(2), res.getString(3), res.getString(4), WalkLiveService.df.parse(res.getString(5)), res.getString(6), res.getString(7));
-//                users.add(u);
-//            }
-//            return users;
-//
-//        } catch (SQLException ex) {
-//            WalkLiveService.logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-//            throw new WalkLiveService.UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", ex);
-//        } finally {
-//            //close connections
-//            if (res != null) {
-//                try {
-//                    res.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (stm != null) {
-//                try {
-//                    stm.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) { /* ignored */}
-//            }
-//        }
-//    }
-
     public List<User> findAllUsers() throws WalkLiveService.UserServiceException, java.text.ParseException {
-        ArrayList<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
-        List<Map<String, Object>> rows = jdbcTemplateObject.queryForList(sql);
-        for(Map<String, Object> row : rows){
-            users.add(new User(row.get("username").toString(),
-                    row.get("password").toString(),
-                    row.get("contact").toString(),
-                    null,
-                    WalkLiveService.df.parse(row.get("created_on").toString()),
-                    (String) row.get("emergency_id"),
-                    (String) row.get("emergency_number")));
+        try {
+            return RowMapper.decodeAllUsers(jdbcTemplateObject.queryForList(sql));
+        } catch (Exception e){
+            WalkLiveService.logger.error("WalkLiveService.findAllUsers: Failed to fetch user entries", e);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.findAllUsers: Failed to fetch user entries", e);
         }
-        return users;
     }
 
-
-    public User login(String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
-        ResultSet res = null;
-        PreparedStatement ps = null;
-        Connection conn = null;
-
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String username = object.get("username").toString();
-        String pw = object.get("password").toString();
-
-        //FIRST, search to see if username exists in database
-        String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
-        try {
-            conn = DriverManager.getConnection(ConnectionHandler.url,ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            return this.checkCorrectPassword(res, username, pw);
-
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
-            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", username), ex);
-        }  finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+    public User login(String body) throws WalkLiveService.UserServiceException, java.text.ParseException {
+        User user = new Gson().fromJson(body, User.class);
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ? LIMIT 1";
+        try{
+        return RowMapper.decodeUser(jdbcTemplateObject.queryForMap(sql, user.getUsername(), user.getPassword()));}
+        catch (Exception e){
+            WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to query database for username: %s", user.getUsername()), e);
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to query database for username: %s", user.getUsername()), e);
         }
     }
 
