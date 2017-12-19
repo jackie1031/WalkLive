@@ -114,6 +114,24 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
+            /**
+             * ================================================================
+             * Update User Contact PUT
+             * ================================================================
+             */
+
+            //update user contact information
+            put(API_CONTEXT + "/users/:username/contact_info", "application/json", (request, response) -> {
+                try {
+                    return walkLiveService.updateUserContact(request.params(":username"), request.body());
+                } catch (WalkLiveService.UserServiceException e) {
+                    logger.error("Failed to update emergency info for user:" + request.params(":username"));
+                    response.status(406);
+                    //add 407 response.
+                }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
+
 
             /**
              * ================================================================
@@ -200,7 +218,7 @@ public class ServerController {
             //Start Trip
             post(API_CONTEXT+"/trips", "application/json", (request, response) -> {
                 try {
-                    Trip t = walkLiveService.startTrip( request.body());
+                    Trip t = walkLiveService.startTrip(request.body());
                     response.status(200);
                     return t;
                     //return walkLiveService.startTrip(request.body());
@@ -212,18 +230,6 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-//             getTrip:
-//             Method: GET
-//             URL: /WalkLive/api/<userId>/friendTrips
-//             Content: { targetId: <string> } //find by friend’s username
-//             Failure Response:
-//             InvalidTargetId           Code 402
-//             Success Response:         Code 200
-//             { tripId: <string>, startTime: <string>, endTime: <string>, destination: <string>, complete: <boolean> }
-
-
-
-            //get(API_CONTEXT + "/user/:username/trips/:tripId", "application/json", (request, response) -> {
 
             //get Trip by trip id
             get(API_CONTEXT + "/trips/getById/:tripId", "application/json", (request, response) -> {
@@ -263,16 +269,7 @@ public class ServerController {
             }, new JsonTransformer());
 
 
-//            getAllTrip:
-//            Method: GET
-//            URL: /WalkLive/api/trips/[username]/allTrips
-//            Content: { tripId: [string], userId[string]}
-//            Failure Response:
-//            InvalidTargetId	Code 402
-//            Success Response:	Code 200
-//            Content: { <trip 1>, <trip 2>, <trip 3>, ... }
-
-
+            //getAllTrip:
             get(API_CONTEXT + "/trips/:username/allTrips", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.getAllTrips(request.params(":username"));
@@ -283,17 +280,7 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-
-//            getTripHistory:
-//
-//            Method: GET
-//            URL: /WalkLive/api/trips/[username]/tripHistory
-//            Content: {}
-//            Failure Response:
-//            InvalidTargetId	Code 402
-//            Success Response:	Code 200
-//            Content: { <trip 1>, <trip 2>, <trip 3>, ... }
-
+            //getTripHistory:
             get(API_CONTEXT + "/trips/:username/tripHistory", "application/json", (request, response) -> {
                 try {
                     return walkLiveService.getTripHistory(request.params(":username"));
@@ -305,16 +292,8 @@ public class ServerController {
             }, new JsonTransformer());
 
 
-//            updateTrip:
-//
-//            Method: PUT
-//            URL: /WalkLive/api/trips/:tripId/update
-//            Content: {curLong:[double],curLat:[double],timeSpent:[String]}
-//            Failure Response:
-//            InvalidTargetId	Code 402
-//            Success Response:	Code 200
-//            Content: {}
 
+            //updateTrip:
             put(API_CONTEXT+"/trips/:tripId/update", "application/json", (request, response) -> {
                 try {
                     response.status(200);
@@ -323,191 +302,41 @@ public class ServerController {
                 catch (WalkLiveService.InvalidTargetID e) {
                     response.status(402);
                 }
+                return Collections.EMPTY_MAP;
+            }, new JsonTransformer());
 
+            /**
+             * ----------------------------------------------------------------------
+             * Crime data part
+             * do we even need trip id?
+             *  walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.params(":response"));
+
+             * ----------------------------------------------------------------------
+             * */
+
+            get(API_CONTEXT + "/crime/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
+                try {
+                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
+                    return walkLiveService.getDangerZone(request.params(":curLat"), request.params(":curLong"),request.params(":isDay"));
+                } catch (WalkLiveService.InvalidTargetID e) {
+                    logger.error("Invalid user id.");
+                    response.status(402);
+                }
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
 
-// //            shareTrip:
-// //            Method: PUT
-// //            URL: /WalkLive/api/<userId>
-// //                    Content: { targetId: <string>, shareTime: <string> }
-// //            Failure Response:
-// //            InvalidTargetId           Code 402
-// //            Success Response:         Code 200
-// //            { }
-//             put(API_CONTEXT+"/user", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.shareTrip(request.body());
-//                 } catch (WalkLiveService.UserServiceException e) {
-//                     logger.error("Invalid target id.");
-//                     response.status(402);
-//                     return Collections.EMPTY_MAP;
-//                 }
-//             }, new JsonTransformer());
+//            get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
+//                try {
+//                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
+//                    return walkLiveService.getDangerZoneOnly(request.params(":curLat"), request.params(":curLong"),request.params(":isDay"));
+//                } catch (WalkLiveService.InvalidTargetID e) {
+//                    logger.error("Invalid user id.");
+//                    response.status(402);
+//                }
+//                return Collections.EMPTY_MAP;
+//            }, new JsonTransformer());
 
-
-// //            respondTripRequest:
-// //            Method: PUT
-// //            URL: /WalkLive/api/<userId>/shareRequests
-// //            Content: { sourceId: <string>, response: <boolean> }
-// //            Failure Response:
-// //            InvalidTargetId           Code 402
-// //            InvalidResponse       Code 408
-// //            ResponseNotFound      Code 411
-// //            Success Response:         Code 200
-// //            { }
-//             put(API_CONTEXT+"/user", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.respondTripRequest(request.body());
-//                 } catch (WalkLiveService.UserServiceException e) {
-//                     logger.error("Invalid target id.");
-//                     response.status(402);
-//                     return Collections.EMPTY_MAP;
-//                 }
-// //                //more exceptions
-// //                catch (UserServiceExceptionInvalidResponse e) {
-// //                    logger.error("Invalid response.");
-// //                    response.status(408);
-// //                    return Collections.EMPTY_MAP;
-// //                } catch (UserServiceException e) {
-// //                    logger.error("Response not found.");
-// //                    response.status(411);
-// //                    return Collections.EMPTY_MAP;
-// //                }
-//             }, new JsonTransformer());
-
-//                 /**
-// //            addTimePoint:
-// //            Method: POST
-// //            URL: /WalkLive/api/<userId>/timepoints
-// //            Content: { tripId: <int>, time: <string>, location: <string>, coordinates: <float> }
-// //            Failure Response:
-// //            InvalidTripId                     Code 412
-// //            InvalidUserId                     Code 402
-// //            MismatchedLocationAndCoordinates          Code 420
-// //            Success Response:                     Code 200
-// //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
-//             //addTimePoint
-//             post(API_CONTEXT+"/user/timepoints", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.addTimePoint(request.body());
-//                 } // InvalidDestination     Code 409
-//                 catch (WalkLiveService.UserServiceException e) {
-//                     logger.error("Invalid trip id.");
-//                     response.status(412);
-//                     return Collections.EMPTY_MAP;
-//                 }
-// //                catch (UserServiceException e) {
-// //                    logger.error("Invalid user id.");
-// //                    response.status(402);
-// //                    return Collections.EMPTY_MAP;
-// //                }
-// //                catch (UserServiceException e) {
-// //                    logger.error("Mismatched Location And Coordinates.");
-// //                    response.status(420);
-// //                    return Collections.EMPTY_MAP;
-// //                }
-
-//             }, new JsonTransformer());
-//             **/
-
-// //            getTimePoint:
-// //            Method: GET
-// //            URL: /WalkLive/api/<userId>/timepoints
-// //            Content: { tripId: <string>, timepointId: <string> }
-// //            Failure Response:
-// //            InvalidTripId                     Code 412
-// //            InvalidTimePointId                    Code 413
-// //            Success Response:                     Code 200
-// //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
-//             get(API_CONTEXT+"/user/timepoints", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.getTimePoint(request.body());
-//                 } // InvalidDestination     Code 409
-//                 catch (WalkLiveService.UserServiceException e) {
-//                     logger.error("Invalid trip id.");
-//                     response.status(412);
-//                     return Collections.EMPTY_MAP;
-//                 }
-// //                catch (UserServiceException e) {
-// //                    logger.error("Invalid time point id.");
-// //                    response.status(413);
-// //                    return Collections.EMPTY_MAP;
-// //                }
-//             }, new JsonTransformer());
-
-// //            getLatestTimePoint:
-// //            Method: GET
-// //            URL: /WalkLive/api/<userId>/timepoints
-// //            Content: { tripId: <string> }
-// //            Failure Response:
-// //            NoTripFound                       Code 414
-// //            NoTimePointFound                  Code 415
-// //            Success Response:                     Code 200
-// //            Content: { tripId: <string>, userId: <string>, timepointId: <string>, location: <string>, coordinates: <float> }
-
-//             get(API_CONTEXT+"/user/timepoints", "application/json", (request, response) -> {
-//                 try {
-//                     response.status(200);
-//                     return walkLiveService.getLatestTimePoint(request.body());
-//                 } // InvalidDestination     Code 409
-//                 catch (WalkLiveService.UserServiceException e) {
-//                     logger.error("No trip found.");
-//                     response.status(414);
-//                     return Collections.EMPTY_MAP;
-//                 }
-// //                catch (UserServiceException e) {
-// //                    logger.error("No Time Point Found.");
-// //                    response.status(415);
-// //                    return Collections.EMPTY_MAP;
-// //                }
-//             }, new JsonTransformer());
-
-//              // get linkIDs to Avoid
-//             get(API_CONTEXT + "/getdangerzone", "application/json", (request, response) -> {
-//                 try {
-//                     double fromLat = Double.parseDouble(request.queryParams("fromLat"));
-//                     double fromLng = Double.parseDouble(request.queryParams("fromLng"));
-//                     double toLat = Double.parseDouble(request.queryParams("toLat"));
-//                     double toLng = Double.parseDouble(request.queryParams("toLng"));
-//                     int timeOfDay = Integer.parseInt(request.queryParams("timeOfDay"));
-//                     Coordinate from = new Coordinate(fromLat, fromLng);
-//                     Coordinate to = new Coordinate(toLat, toLng);
-//                     Coordinate.sortAndExpand(from, to);
-//                     response.status(200);
-//                     return walkLiveService.getDangerZone(from, to, "Table");
-//                 } catch (Exception e) {
-//                     logger.info("Invalid request", e);
-//                     response.status(400);
-//                     return Collections.EMPTY_MAP;
-//                 }
-//             }, new JsonTransformer());
-
-
-//             //CANCEL TRIP
-//             get(API_CONTEXT + "/cancel", "application/json", (request, response) -> {
-//                 try {
-//                     double fromLat = Double.parseDouble(request.queryParams("fromLat"));
-//                     double fromLng = Double.parseDouble(request.queryParams("fromLng"));
-//                     double toLat = Double.parseDouble(request.queryParams("toLat"));
-//                     double toLng = Double.parseDouble(request.queryParams("toLng"));
-//                     int timeOfDay = Integer.parseInt(request.queryParams("timeOfDay"));
-//                     Coordinate from = new Coordinate(fromLat, fromLng);
-//                     Coordinate to = new Coordinate(toLat, toLng);
-//                     Coordinate.sortAndExpand(from, to);
-//                     response.status(200);
-//                     return walkLiveService.getDangerZone(from, to, "Table");
-//                 } catch (Exception e) {
-//                     logger.info("Invalid request", e);
-//                     response.status(400);
-//                     return Collections.EMPTY_MAP;
-//                 }
-//             }, new JsonTransformer());
 
         }
 }

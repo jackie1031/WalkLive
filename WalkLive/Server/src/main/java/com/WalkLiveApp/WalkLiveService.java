@@ -13,6 +13,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 
 import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WalkLiveService {
@@ -88,6 +89,17 @@ public class WalkLiveService {
     public User updateEmergencyContact(String username, String body) throws UserServiceException, ParseException, SQLException, java.text.ParseException {
         return new UserManager().updateEmergencyContact(username, body);
     }
+
+    /**
+     * ================================================================
+     * User Contact PUT
+     * ================================================================
+     */
+
+    public User updateUserContact(String username, String body) throws UserServiceException, ParseException, SQLException, java.text.ParseException {
+        return new UserManager().updateUserContact(username, body);
+    }
+
 
     /**
      * ================================================================
@@ -212,6 +224,26 @@ public class WalkLiveService {
      public void updateTrip(String tripIdInStr, String body) throws InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
         new TripManager().updateTrip(tripIdInStr, body);
      }
+
+
+    /**
+     *
+     * @param latitude: latitude of current position
+     * @param longitude: longitude of current position
+     * @return Crime: a crime object with danger level and nearby clusters
+     * @throws SQLException： invalid sql statement
+     * @throws WalkLiveService.UserServiceException: can't find user
+     * @throws ParseException: can't parse into parameters
+     * @throws InvalidTargetID: invalid trip id
+     */
+    //public ArrayList<Cluster> getDangerZone(String latitude, String longitude) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+        public Crime getDangerZone(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+        return new Crime().getDangerLeveLZone(latitude, longitude,isDay);
+    }
+
+//    public ArrayList<Cluster> getDangerZoneOnly(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
+//        return new Crime().getDangerLeveLZoneOnly(latitude, longitude,isDay);
+//    }
 
 
     //=====================EXCEPTIONS============================

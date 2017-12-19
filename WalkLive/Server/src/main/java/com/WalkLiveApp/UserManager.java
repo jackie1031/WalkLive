@@ -180,6 +180,13 @@ public class UserManager {
         return this.setEmergencyContact(username, id, number);
     }
 
+    public User updateUserContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException, SQLException {
+        JSONObject object = (JSONObject) new JSONParser().parse(body);
+        String contact = object.get("contact").toString();
+
+        return this.setUserContact(username, contact);
+    }
+
     public static boolean isValid(String username) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
         try {
             new UserManager().getUser(username);
@@ -320,6 +327,42 @@ public class UserManager {
             }
         }
     }
+
+    private User setUserContact(String username, String number) throws WalkLiveService.UserServiceException, ParseException, SQLException {
+        PreparedStatement ps = null;
+        Connection conn = null;
+
+        String sql = "UPDATE users SET contact = ? WHERE username = ? LIMIT 1";
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, number);
+            ps.setString(2, username);
+            ps.executeUpdate();
+
+            System.out.println("SUCCESSFULLY UPDATED.");
+            return new User(username, null, number, null, null, null, null);
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.updateUserContact: Failed to update user contact information", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.updateUserContact: Failed to user contact information", ex);
+        } finally {
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
+
 
     private void setPassword(String username, String password) throws WalkLiveService.UserServiceException, ParseException, SQLException{
         PreparedStatement ps = null;

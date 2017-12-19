@@ -41,6 +41,11 @@ I could not get the server to work after following your README instructions. It 
 
 (-8 Points)
 
+**Regrade**
+
+(-4 Points)
+
+
 #### Top-level file CHANGELOG.md present in your repo and describes progress in this iteration well
 
 All good here!
@@ -53,4 +58,4 @@ Looks good!
 ### Other Remarks
 
 
-**Grade: 92/100**
+**Grade: 96/100**

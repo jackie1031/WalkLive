@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+// Emergency Contact contains both name and phone number
 class EmergencyContact: NSObject, Codable{
     var emergency_id: String?
     var emergency_number: String?

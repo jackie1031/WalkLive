@@ -27,18 +27,26 @@ func getTodayString() -> String{
     let date = Date()
     let calender = Calendar.current
     let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
-    
-    let year = components.year
-    let month = components.month
-    let day = components.day
-    let hour = components.hour
-    let minute = components.minute
-    let second = components.second
-    
-    let today_string = String(year!) + "-" + String(month!) + "-" + String(day!) + " " + String(hour!)  + ":" + String(minute!) + ":" +  String(second!)
+
+    let today_string = String(components.year!) + "-" + String(components.month!) + "-" + String(components.day!) + " " + String(components.hour!)  + ":" + String(components.minute!) + ":" +  String(components.second!)
     
     return today_string
-    
+}
+
+func isDay() -> Int{
+    let date = Date()
+    let calender = Calendar.current
+    let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+    let hour = components.hour!
+    if (hour >= 9 && hour <= 21) {
+        return 1
+    }
+    return 0
+
+}
+
+func convertDegreeToMeters(degree: Double) -> Double {
+   return 1000 * degree
 }
 
 extension String {
@@ -51,6 +59,14 @@ extension String {
 
 
 let primaryColor = UIColor(netHex: 0x94CFC9)
+
+let level0Color = UIColor(netHex: 0x8df265)
+let level1Color = UIColor(netHex: 0xfffb72)
+let level2Color = UIColor(netHex: 0xffb200)
+let level3Color = UIColor(netHex: 0xff9400)
+let level4Color = UIColor(netHex: 0xff7700)
+let level5Color = UIColor(netHex: 0xFF0000)
+
 let backEndClient = BackEndClient()
 let jsonEncoder = JSONEncoder()
 let jsonDecoder = JSONDecoder()

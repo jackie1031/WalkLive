@@ -13,6 +13,9 @@ class WarningSignView: UIView {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var warningContentView: UILabel!
     
+    /*
+     Loads nib
+     */
     func loadNib() -> WarningSignView {
         let bundle = Bundle(for: type(of: self))
         let nibName = type(of: self).description().components(separatedBy: ".").last!
@@ -20,6 +23,9 @@ class WarningSignView: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as! WarningSignView
     }
     
+    /*
+     Removes warning view
+     */
     @IBAction func onOkButton(_ sender: Any) {
         self.removeFromSuperview()
     }

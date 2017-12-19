@@ -53,15 +53,24 @@ public class TestServer {
         //Set up the database
         setupDB();
 
-
         //Start the main server
         Bootstrap.main(null);
         Spark.awaitInitialization();
     }
 
+
+//    @Before
+//    public void setup() throws Exception {
+//        //Clear the database
+//        clearDB();
+//
+//    }
+
+
     @AfterClass
     public static void tearDownAfterClass() {
         //Stop the server
+
         Spark.stop();
     }
     //------------------------------------------------------------------------//
@@ -69,18 +78,11 @@ public class TestServer {
     //------------------------------------------------------------------------//
 
 
-    @Before
-    public void setup() throws Exception {
-        //Clear the database
-//        clearDB();
-
+    @After
+    public void tearDown() {
+        //clearDB();
+        //Spark.stop();
     }
-
-   @After
-   public void tearDown() {
-       //clearDB();
-       //Spark.stop();
-   }
 
     //------------------------------------------------------------------------//
     // Tests
@@ -557,7 +559,33 @@ public class TestServer {
 
     /**
      * ================================================================
-          Trips
+     * User Contact PUT
+     * ================================================================
+     */
+
+    @Test
+    public void testUpdateUserContact() throws Exception {
+        //add single element
+        User expected = new User("jeesoo1", "test-1", "440-533-9063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        User expected2 = new User("hello", "test-2", "123-123-1233");
+        Response r2 = request("POST", "/WalkLive/api/users", expected2);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+        assertEquals("Failed to add new user", 201, r2.httpStatus);
+
+
+        //update emergency contact info
+        User contactInfo = new User(null, null, "440-533-9063", null, null, null, null);
+        User contactInfo2 = new User(null, null, "440-123-1111", null, null, null, null);
+        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/contact_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/hello/contact_info", contactInfo2);
+        assertEquals("Failed to update user contact", 200, r3.httpStatus);
+        assertEquals("Failed to update user contact second time", 200, r4.httpStatus);
+    }
+
+    /**
+     * ================================================================
+     * Trips
      * ================================================================
      */
 
@@ -588,15 +616,134 @@ public class TestServer {
 //
 //        assertEquals("Failed to get user", 200, r4.httpStatus);
 //
+//    }
+
+
+//    @Test
+//    public void testStartTripByID() throws Exception {
+//        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "3501 ST PAUL");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        //start trip
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//
+//        //username
+//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//
+//
+//        Trip test1 = new Trip("michelle", "xyz", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours","jhu beach");
+//
+//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+//        assertEquals("unidentified destination ", 200, r3.httpStatus);
+//
+//        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
+//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//
+//        assertEquals("Failed to get user", 200, r4.httpStatus);
 //
 //    }
 //
+//    @Test
+//    public void testUpdateTrip() throws Exception{
 //
+//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//
+//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours","address");
+//
+//        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
+//        assertEquals("Failed to get user", 200, r2.httpStatus);
+//    }
+
+    @Test
+    public void testTripDangerLevel() throws Exception {
+        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+
+        //1,38.9846371,-76.9661682,0.018,12
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        //by id
+        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+        //assertEquals("Failed to get user", 200, r2.httpStatus);
+
+        //Trip update = new Trip(1,null, null, null, false, 0, 0, 38.9846379, -76.9661682, 0, 0, "18611345670", "3hours", "3501 St Paul");
+
+        Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
+        assertEquals("Failed to get user", 200, r3.httpStatus);
+
+    }
+
 //
 //    @Test
+//    public void testTripDangerLevelOnly() throws Exception {
+//        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        //1,38.9846371,-76.9661682,0.018,12
+//
+//        //start trip
+//        Response r1 = request("POST", "/WalkLive/api/trips", test);
+//        assertEquals("unidentified destination ", 200, r1.httpStatus);
+//
+//        //by id
+//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+//        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//        //assertEquals("Failed to get user", 200, r2.httpStatus);
+////        get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
+//        //Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
+//        Response r3 = request("GET", "/WalkLive/api/crime/clusterOnly/38.982012186658675/-76.94064758017299/0", null);
+//        assertEquals("Failed to get user", 200, r3.httpStatus);
+//
+//    }
+
+
+    @Test
+    public void testgetTripByid() throws Exception {
+        Trip test = new Trip(1,"jackie", "JHU", "12", false ,11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip(2,"michelle", "xyz", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
+
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
+
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+    assertEquals("Failed to get user",200,r4.httpStatus);
+
+}
+
+
+
+//    @Test
 //    public void testgetTripByName() throws Exception {
-//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 //
 //        //start trip
 //        Response r1 = request("POST", "/WalkLive/api/trips", test);
@@ -608,7 +755,7 @@ public class TestServer {
 //        assertEquals("Failed to get user", 200, r2.httpStatus);
 //
 //
-//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
 //
 //        Response r3 = request("POST", "/WalkLive/api/trips", test1);
 //        assertEquals("unidentified destination ", 200, r3.httpStatus);
@@ -619,7 +766,6 @@ public class TestServer {
 //        assertEquals("Failed to get user", 200, r4.httpStatus);
 //
 //    }
-//
 
 //    @Test
 //    public void testEndTrip() throws Exception {
@@ -631,10 +777,10 @@ public class TestServer {
 //        assertEquals("unidentified destination ", 200, r1.httpStatus);
 //        assertEquals(test.isCompleted(),false);
 //
-//        Response r2 = request("PUT", "/WalkLive/api/trips/0/endtrip", null);
+//        Response r2 = request("PUT", "/WalkLive/api/trips/getById/1", null);
 //        assertEquals("Failed to get user", 200, r2.httpStatus);
 //
-//        //Response r3 = request("GET", "/WalkLive/api/trips/0", null);
+//        //Response r3 = request("GET", "/WalkLive/api/trips/1", null);
 //        //assertEqualsx(r3.isCompleted(),false);
 //
 //    }
@@ -684,6 +830,7 @@ public class TestServer {
 //        User actual = results.get(0);
 //        assertEquals("Friend list does not return your friends", "michelle", actual.getUsername());
 //    }
+
 //
 //    @Test
 //    public void testTripHistory() throws Exception {
@@ -714,74 +861,6 @@ public class TestServer {
 //        //assertEquals("Number of trips entries differ", allTrips.size(), results.size());
 //
 //
-//        ArrayList<Trip> allTrips = new ArrayList<>();
-//        allTrips.add(trip);
-//        allTrips.add(trip2);
-//        //Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
-//
-//        List<Trip> results = getTrip(getHistory);
-//        logger.error("the trip history is:" + getHistory);
-//
-//        assertEquals("Number of trips entries differ", allTrips.size(), results.size());
-//
-//
-////        Response r1 = request("POST", "/WalkLive/api/trips", trip);
-////        assertEquals("unidentified destination ", 200, r1.httpStatus);
-////
-////        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-////
-////        assertEquals("Failed to get user", 200, r2.httpStatus);
-////
-////        Response r3 = request("POST", "/WalkLive/api/trips", trip2);
-////        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        //Response r4 = request("GET", "/WalkLive/api/trips/2", null);
-//
-//
-////        User[] entries = new User[] {
-////                new User("jeesookim", "123456","4405339063"),
-////                new User("michelle", "0123", "4405339063"),
-////                new User("yangcao1", "121212", "1231231233")
-////                //new User("jackie", "666666", "1231231233")
-////        };
-////
-////        //add to database
-////        for (User t : entries) {
-////            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-////            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-////        }
-////
-////        //add a few elements
-////        //Relationship[] frs = new Relationship[] {
-////        //Relationship test1 = new Relationship("jeesookim", "michelle", null);
-////        //Relationship test2 = new Relationship("michelle", "yangcao1", null);
-////        //};
-////
-////        //for (Relationship f : frs) {
-////        //send friend request
-////        Response rCreateFR = request("POST", "/WalkLive/api/users/jeesookim/friend_requests", test1);
-////        assertEquals("Failed to create new friend request", 201, rCreateFR.httpStatus);
-////        Response rCreateFR2 = request("POST", "/WalkLive/api/users/michelle/friend_requests", test2);
-////        assertEquals("Failed to create new friend request", 201, rCreateFR2.httpStatus);
-////        //}
-////
-////        //accept friend request
-////        Response rAccept = request("PUT", "/WalkLive/api/users/michelle/friend_requests/1/accept", null);
-////        assertEquals("Failed to accept friend request", 200, rAccept.httpStatus);
-////        Response rAccept2 = request("PUT", "/WalkLive/api/users/yangcao1/friend_requests/2/accept", null);
-////        assertEquals("Failed to accept friend request", 200, rAccept2.httpStatus);
-////
-//////        Response rList = request("GET", "/WalkLive/api/users/yangcao1/friends", null);
-//////        List<User> results = getUsers(rList);
-////
-////        Response rList = request("GET", "/WalkLive/api/trips/michelle/allTrips", null);
-////
-////        List<Trip> results = getAllTrip(rList);
-////
-////        assertEquals("Number of trips entries differ", allTrips.size(), results.size());
-//
-//
-//    }
 
 //
 //    @Test
@@ -854,51 +933,7 @@ public class TestServer {
 //    }
 
 
-//    @Test
-//    public void testUpdateTrip() throws Exception{
-//
-//        Trip trip = new Trip("jeesookim","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//
-//        Response r1 = request("POST", "/WalkLive/api/trips", trip);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//        Trip updateLocation = new Trip(23,null,null,null,false,1.1,2.2,123.123,456.456,1.1,1.1,null,"8hours","address");
-//
-//        Response r2 = request("PUT", "/WalkLive/api/trips/1/update", updateLocation);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//    }
 
-//
-//
-//    @Test
-//    public void testCoordinate() throws Exception {
-//        Coordinate c = new Coordinate(0.6, 0.7);
-//        assertEquals(0.6, c.getLatitude(), 0);
-//        assertEquals(0.7, c.getLongitude(), 0);
-//    }
-//
-//
-//    @Test
-//    public void testSortAndExpand() throws Exception {
-//        //c1 < c2
-//        Coordinate c1 = new Coordinate(0.5, 0.7);
-//        Coordinate c2 = new Coordinate(0.9, 1.1);
-//        Coordinate.sortAndExpand(c1, c2);
-//        assertEquals(0.49, c1.getLatitude(), 0);
-//        assertEquals(0.6886, c1.getLongitude(), 0.01);
-//        assertEquals(0.91, c2.getLatitude(), 0);
-//        assertEquals(1.11608, c2.getLongitude(), 0.01);
-//
-//        //c3 > c4
-//        Coordinate c3 = new Coordinate(0.9, 1.1);
-//        Coordinate c4 = new Coordinate(0.5, 0.7);
-//        Coordinate.sortAndExpand(c3, c4);
-//        assertEquals(0.49, c3.getLatitude(), 0);
-//        assertEquals(0.6886, c3.getLongitude(), 0.01);
-//        assertEquals(0.91, c4.getLatitude(), 0);
-//        assertEquals(1.11608, c4.getLongitude(), 0.01);
-//
-//    }
 //
 //
 //    @Test
@@ -945,152 +980,96 @@ public class TestServer {
 //
 //
 //    }
-//
-//
-//    /**
-//     * Test getting getCrimes method within a specific range of coordinates from the
-//     * database.
-//     */ /*
-//    @Test
-//    public void testGetCrimes() throws Exception {
-//
-//        List<Crime> crimeList = new LinkedList<>();
-//
-//        double lat = 3.454;
-//        double lng = 6.929;
-//        Coordinate c = new Coordinate(lat, lng);
-//
-//        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 1));
-//        crimeList.add(new Crime(1026, 12, "brody", "theft", c, 2));
-//        crimeList.add(new Crime(1027, 13, "", "Robbery", c, 3));
-//        crimeList.add(new Crime(1028, 5, "", "theft", c, 4));
-//
-//        double fromLng = 200;
-//        double toLng = 400;
-//
-//        double fromLat = 200;
-//        double toLat = 400;
-//
-//        Coordinate c1 = new Coordinate(fromLat, fromLng);
-//        Coordinate c2 = new Coordinate(toLat, toLng);
-//
-//        int fromDate = 20;
-//        int toDate = 40;
-//        int timeOfDay = 18;
-//
-//        Crime from = new Crime(fromDate, c1);
-//        Crime to = new Crime(toDate, c2);
-//        int count = 1;
-//        for(Crime t: crimeList){
-//            assertEquals(count, t.getLinkId());
-//            count++;
-//
-//        }
-//
-//    }
-//*/
-//
-///*
-//    @Test
-//    public void testAddTimePoints() throws Exception {
-//        double lat = 3.454;
-//        double lng = 6.929;
-//        Coordinate c = new Coordinate(lat, lng);
-//
-//        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
-//        TimePoint temp = new TimePoint(12,"13",c,1);
-//    }
-//*/
-//
 
 
-//    private void testDB(){
-//
-//
-//    }
+//------------------------------------------------------------------------//
+// Generic Helper Methods and classes
+//------------------------------------------------------------------------//
 
-    //------------------------------------------------------------------------//
-    // Generic Helper Methods and classes
-    //------------------------------------------------------------------------//
+//------------------------------------------------------------------------//
+// Generic Helper Methods and classes
+//------------------------------------------------------------------------//
 
-    private Response request(String method, String path, Object content) {
-        try {
-            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
-            System.out.println(url);
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            http.setRequestMethod(method);
-            http.setDoInput(true);
-            if (content != null) {
-                String contentAsJson = new Gson().toJson(content);
-                http.setDoOutput(true);
-                http.setRequestProperty("Content-Type", "application/json");
-                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
-                output.write(contentAsJson);
-                output.flush();
-                output.close();
-            }
-            try {
-                String responseBody = IOUtils.toString(http.getInputStream());
-                return new Response(http.getResponseCode(), responseBody);
-            } catch (IOException e) {
+private Response request(String method,String path,Object content){
+    try{
+        URL url=new URL("http",Bootstrap.IP_ADDRESS,Bootstrap.PORT,path);
+        System.out.println(url);
+        HttpURLConnection http=(HttpURLConnection)url.openConnection();
+        http.setRequestMethod(method);
+        http.setDoInput(true);
+        if(content!=null){
+        String contentAsJson=new Gson().toJson(content);
+        http.setDoOutput(true);
+        http.setRequestProperty("Content-Type","application/json");
+        OutputStreamWriter output=new OutputStreamWriter(http.getOutputStream());
+        output.write(contentAsJson);
+        output.flush();
+        output.close();
+        }
+        try{
+        String responseBody=IOUtils.toString(http.getInputStream());
+        return new Response(http.getResponseCode(),responseBody);
+        }catch(IOException e){
 //                e.printStackTrace();
 //                fail("Sending request failed: " + e.getMessage());
-                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            fail("Sending request failed: " + e.getMessage());
-            return null;
+        return new Response(http.getResponseCode(),"ERROR"); //still return the http status code for testing sake
         }
+    }catch(IOException e){
+        e.printStackTrace();
+        fail("Sending request failed: "+e.getMessage());
+        return null;
     }
+}
 
-    private Response request(String method, String path, String content) {
-        try {
-            URL url = new URL("http", Bootstrap.IP_ADDRESS, Bootstrap.PORT, path);
-            System.out.println(url);
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            http.setRequestMethod(method);
-            http.setDoInput(true);
-            if (content != null) {
-                http.setDoOutput(true);
-                http.setRequestProperty("Content-Type", "application/json");
-                OutputStreamWriter output = new OutputStreamWriter(http.getOutputStream());
-                output.write(content);
-                output.flush();
-                output.close();
-            }
-            try {
-                String responseBody = IOUtils.toString(http.getInputStream());
-                return new Response(http.getResponseCode(), responseBody);
-            } catch (IOException e) {
+private Response request(String method,String path,String content){
+    try{
+        URL url=new URL("http",Bootstrap.IP_ADDRESS,Bootstrap.PORT,path);
+        System.out.println(url);
+        HttpURLConnection http=(HttpURLConnection)url.openConnection();
+        http.setRequestMethod(method);
+        http.setDoInput(true);
+        if(content!=null){
+        http.setDoOutput(true);
+        http.setRequestProperty("Content-Type","application/json");
+        OutputStreamWriter output=new OutputStreamWriter(http.getOutputStream());
+        output.write(content);
+        output.flush();
+        output.close();
+        }
+        try{
+        String responseBody=IOUtils.toString(http.getInputStream());
+        return new Response(http.getResponseCode(),responseBody);
+        }catch(IOException e){
 //                e.printStackTrace();
 //                fail("Sending request failed: " + e.getMessage());
-                return new Response(http.getResponseCode(), "ERROR"); //still return the http status code for testing sake
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            fail("Sending request failed: " + e.getMessage());
-            return null;
+        return new Response(http.getResponseCode(),"ERROR"); //still return the http status code for testing sake
         }
+    }catch(IOException e){
+        e.printStackTrace();
+        fail("Sending request failed: "+e.getMessage());
+        return null;
+    }
+}
+
+
+private static class Response {
+
+    public String content;
+
+    public int httpStatus;
+
+    public Response(int httpStatus, String content) {
+        this.content = content;
+        this.httpStatus = httpStatus;
     }
 
-
-    private static class Response {
-
-        public String content;
-
-        public int httpStatus;
-
-        public Response(int httpStatus, String content) {
-            this.content = content;
-            this.httpStatus = httpStatus;
-        }
-
-        public <T> T getContentAsObject(Type type) {
-            return new Gson().fromJson(content, type);
-        }
+    public <T> T getContentAsObject(Type type) {
+        return new Gson().fromJson(content, type);
     }
-//
+
+}
+
+    //
 //    // ------------------------------------------------------------------------//
 //    // Survival Maps Specific Helper Methods and classes
 //    // ------------------------------------------------------------------------//
@@ -1099,21 +1078,24 @@ public class TestServer {
     private List<User> getUsers(Response r) {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-        Type type = (new TypeToken<ArrayList<User>>() { }).getType();
+        Type type = (new TypeToken<ArrayList<User>>() {
+        }).getType();
         return r.getContentAsObject(type);
     }
 
     private List<Relationship> getRelationships(Response r) {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-        Type type = (new TypeToken<ArrayList<Relationship>>() { }).getType();
+        Type type = (new TypeToken<ArrayList<Relationship>>() {
+        }).getType();
         return r.getContentAsObject(type);
     }
 
     private List<Trip> getTrip(Response r) {
         //Getting a useful Type instance for a *generic* container is tricky given Java's type erasure.
         //The technique below is documented in the documentation of com.google.gson.reflect.TypeToken.
-        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
+        Type type = (new TypeToken<ArrayList<Trip>>() {
+        }).getType();
         return r.getContentAsObject(type);
     }
 
@@ -1124,11 +1106,11 @@ public class TestServer {
 //        return r.getContentAsObject(type);
 //    }
 
-    private List<Trip>  getAllTrip(Response r) {
-        Type type = (new TypeToken<ArrayList<Trip>>() { }).getType();
+    private List<Trip> getAllTrip(Response r) {
+        Type type = (new TypeToken<ArrayList<Trip>>() {
+        }).getType();
         return r.getContentAsObject(type);
     }
-
 
 
     private static void setupDB() {
@@ -1147,26 +1129,48 @@ public class TestServer {
 
             String setup = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String setup2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0)";
+            String setup3 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0,trip_ids INT DEFAULT 0,crimes_id INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
-            String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            //String setup4 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew3 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
+            //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+
+            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+
+
+//            String sqlInsertClusters = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius, count,dangerLevel, day_or_night) " +
+//                    "VALUES (1,-76.9541682,38.99,0.01,671,1,'day') ";
+//
+//            String sqlInsertClusters1 = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius,count, dangerLevel,day_or_night) " +
+//                    "VALUES (2,-76.9561688,38.9846379,0.02,1827,2,'day') ";
+//
+//            String sqlInsertClusters2 = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius,count, dangerLevel,day_or_night) " +
+//                    "VALUES (3,-76.9561688,39.9846379,0.03,994,3,'day') ";
+//
+//            String sqlInsertClusters3 = " INSERT INTO dangerZones(cluster_id, longitude, latitude, radius,count, dangerLevel,day_or_night) " +
+//                    "VALUES (4,-76.9561688,39.9846379,0.04,994,4,'night') ";
 
             stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
-            stm.executeUpdate(sqlNew7);
+            //stm.executeUpdate(sqlNew7);
+            stm.executeUpdate(sqlNew8);
+            stm.executeUpdate(sqlNew9);
+//            stm.executeUpdate(sqlInsertClusters);
+//            stm.executeUpdate(sqlInsertClusters1);
+//            stm.executeUpdate(sqlInsertClusters2);
+//            stm.executeUpdate(sqlInsertClusters3);
 
             stm.executeUpdate(setup);
             stm.executeUpdate(setup2);
             stm.executeUpdate(setup3);
             stm.executeUpdate(counterInit);
-            stm.executeUpdate(setup4);
+            //stm.executeUpdate(setup4);
             //stm.executeUpdate(setup5);
-
-            String sql = "DROP TABLE IF EXISTS TestCrimes";
-            stm.executeUpdate(sql);
+//
+//            String sql = "DROP TABLE IF EXISTS TestCrimes";
+//            stm.executeUpdate(sql);
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;
@@ -1175,17 +1179,23 @@ public class TestServer {
             stm.executeUpdate(sql4);
             String sql5 = "DROP TABLE IF EXISTS counters" ;
             stm.executeUpdate(sql5);
+
             String sql6 = "DROP TABLE IF EXISTS Trips" ;
             stm.executeUpdate(sql6);
+
             String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
             stm.executeUpdate(sql7);
 
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
 
-            String sql9 = "DROP TABLE IF EXISTS Crime" ;
+//            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
+//            stm.executeUpdate(sql9);
+//
+//            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
+//            stm.executeUpdate(sql10);
 
-            stm.executeUpdate(sql9);
+
         } catch (SQLException ex) {
             //logger.error("Failed to create schema at startup", ex);
             //throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
@@ -1208,7 +1218,7 @@ public class TestServer {
         }
     }
 
-//    /**
+    //    /**
 //     * Clears the database of all test tables.
 //     * @return the clean database source
 //     */
@@ -1229,36 +1239,41 @@ public class TestServer {
             stm.executeUpdate(sql3);
             String sql4 = "DROP TABLE IF EXISTS friends" ;
             stm.executeUpdate(sql4);
-            String sql5 = "DROP TABLE IF EXISTS Trips" ;
-            stm.executeUpdate(sql5);
+            //String sql5 = "DROP TABLE IF EXISTS Trips" ;
+            //stm.executeUpdate(sql5);
             String sql6 = "DROP TABLE IF EXISTS counters" ;
             stm.executeUpdate(sql6);
             String sql7 = "DROP TABLE IF EXISTS ongoingTrips" ;
             stm.executeUpdate(sql7);
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
-            String sql9 = "DROP TABLE IF EXISTS Crime" ;
-
+            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
             stm.executeUpdate(sql9);
+
+            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
+            stm.executeUpdate(sql10);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
-            String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
-            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0)";
+            //String sqlNew3 = "CREATE TABLE IF NOT EXISTS Trips(tripId INT, username TEXT, shareTo TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL not NULL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT)";
+            String sqlNew4 = "CREATE TABLE IF NOT EXISTS counters (friend_request_ids INT DEFAULT 0, trip_ids INT DEFAULT 0, crimes_id INT DEFAULT 0)";
             String counterInit = "INSERT INTO counters (friend_request_ids) VALUES (0)";
 
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
-            String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
+            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
-            stm.executeUpdate(sqlNew3);
+            //stm.executeUpdate(sqlNew3);
             stm.executeUpdate(sqlNew4);
             stm.executeUpdate(counterInit);
             stm.executeUpdate(sqlNew5);
             stm.executeUpdate(sqlNew6);
-            stm.executeUpdate(sqlNew7);
+            stm.executeUpdate(sqlNew8);
+            stm.executeUpdate(sqlNew9);
 
 
         } catch (SQLException ex) {
@@ -1280,3 +1295,5 @@ public class TestServer {
     }
 
 }
+
+
