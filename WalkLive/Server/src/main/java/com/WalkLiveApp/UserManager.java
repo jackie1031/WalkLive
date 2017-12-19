@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserManager {
-    private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.getDataSource());
+    private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
 
 
     public User createNew(String body) throws WalkLiveService.UserServiceException, ParseException, SQLException {
@@ -252,6 +252,42 @@ public class UserManager {
 //            }
 //        }
 //    }
+
+        private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException, ParseException, SQLException{
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
+                "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
+
+        try {
+            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, contact);
+            ps.executeUpdate();
+
+            return new User(username, password, contact, null, null, null, null);
+
+        } catch (SQLException ex) {
+            WalkLiveService.logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
+        }  finally {
+            //close connections
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+        }
+    }
+
 
     private void checkUniqueness(String username) throws WalkLiveService.UserServiceException, ParseException, SQLException{
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";

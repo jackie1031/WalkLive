@@ -12,7 +12,7 @@ public class ConnectionHandler {
     public static String user = "b0a1d19d87f384";
     public static String password = "6d11c74b";
     private JdbcTemplate jdbcTemplateObject;
-
+    public static BasicDataSource dataSource = ConnectionHandler.getDataSource();
     public static BasicDataSource getDataSource(){
         BasicDataSource dbcp = new BasicDataSource();
         dbcp.setDriverClassName("com.mysql.jdbc.Driver");
