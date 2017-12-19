@@ -253,38 +253,16 @@ public class UserManager {
 //        }
 //    }
 
-        private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException, ParseException, SQLException{
-        Connection conn = null;
-        PreparedStatement ps = null;
-
+        private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException{
         String sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                 "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ps.setString(3, contact);
-            ps.executeUpdate();
-
+            jdbcTemplateObject.update(sql, username, password, contact);
             return new User(username, password, contact, null, null, null, null);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
             throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
-        }  finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
