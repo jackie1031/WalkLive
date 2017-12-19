@@ -74,10 +74,10 @@ public class UserManager {
             users.add(new User(row.get("username").toString(),
                     row.get("password").toString(),
                     row.get("contact").toString(),
-                    row.get("nickname").toString(),
+                    null,
                     WalkLiveService.df.parse(row.get("created_on").toString()),
-                    row.get("emergency_id").toString(),
-                    row.get("emergency_number").toString()));
+                    (String) row.get("emergency_id"),
+                    (String) row.get("emergency_number")));
         }
         return users;
     }
