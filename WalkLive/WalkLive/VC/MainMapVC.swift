@@ -422,7 +422,7 @@ extension MainMapVC: RouteDelegate{
         //FTOB needed here.
         self.createTimeManager(trip: trip)
         self.createTripView(trip: trip)
-        self.timeManager.startTimer(timeInterval: 60)
+        self.timeManager.startTimer(timeInterval: 15)
     }
     
     /*

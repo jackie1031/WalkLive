@@ -529,7 +529,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-e4-dQG">
                                 <rect key="frame" x="61" y="214" width="253" height="195"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Uername (letters and numbers only)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwt-Mv-brG">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username (letters and numbers only)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwt-Mv-brG">
                                         <rect key="frame" x="0.0" y="0.0" width="253" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1122,10 +1122,10 @@
                     <navigationItem key="navigationItem" title="Settings" id="W2m-YJ-vdQ">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="7bQ-cL-T9B">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WyF-K4-F4T">
-                                <rect key="frame" x="276" y="5" width="83" height="34"/>
+                                <rect key="frame" x="225" y="5" width="134" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Save">
+                                <state key="normal" title="UpdateEmerCon">
                                     <color key="titleColor" red="0.58039215690000001" green="0.81176470590000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1648,8 +1648,8 @@
         <image name="Image" width="283" height="258"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2fx-La-ta1"/>
-        <segue reference="BDU-6I-cVd"/>
-        <segue reference="kmc-A4-dva"/>
+        <segue reference="u5s-Dw-nrg"/>
+        <segue reference="cR3-Ay-sw1"/>
+        <segue reference="jM0-De-8ma"/>
     </inferredMetricsTieBreakers>
 </document>
