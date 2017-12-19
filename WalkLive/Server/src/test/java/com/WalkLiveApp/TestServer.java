@@ -7,6 +7,7 @@ import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -108,14 +109,14 @@ public class TestServer {
     }
 
     @Test
-    public void testCreateNew() throws Exception {
+    public void testTemplateObject() throws Exception {
 
             JdbcTemplate jdbcTemplateObject = new JdbcTemplate(new ConnectionHandler().getDataSource());
-
             jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                     "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
             String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-            String username = "testuser";
+            String username = "testuser2";
+
             User userTest = new User("testuser", "1234", "contacto");
 
         Map<String,Object> results =
@@ -125,7 +126,42 @@ public class TestServer {
             assertEquals("Mismatch in username", "testuser", results.get("username"));
             assertEquals("Mismatch in password", "1234", results.get("password"));
             assertEquals("Mismatch in contact", "contacto",results.get("contact"));
+    }
 
+    @Test
+    public void testCreateNew() throws Exception {
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063")
+        };
+
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            //System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //Get them back
+        Response r = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, r.httpStatus);
+        List<User> results = getUsers(r);
+
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
+        }
     }
 
 
