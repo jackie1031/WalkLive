@@ -663,58 +663,58 @@ public class TestServer {
 
     }
 
-
-    @Test
-    public void testTripDangerLevelOnly() throws Exception {
-        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
-        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-
-        //1,38.9846371,-76.9661682,0.018,12
-
-        //start trip
-        Response r1 = request("POST", "/WalkLive/api/trips", test);
-        assertEquals("unidentified destination ", 200, r1.httpStatus);
-
-        //by id
-        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-        //assertEquals("Failed to get user", 200, r2.httpStatus);
-//        get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
-        //Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
-        Response r3 = request("GET", "/WalkLive/api/crime/clusterOnly/38.982012186658675/-76.94064758017299/0", null);
-        assertEquals("Failed to get user", 200, r3.httpStatus);
-
-    }
-
 //
 //    @Test
-//    public void testgetTripByName() throws Exception {
-//        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+//    public void testTripDangerLevelOnly() throws Exception {
+//        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
+//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
+//
+//        //1,38.9846371,-76.9661682,0.018,12
 //
 //        //start trip
 //        Response r1 = request("POST", "/WalkLive/api/trips", test);
 //        assertEquals("unidentified destination ", 200, r1.httpStatus);
 //
-//        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//        //by id
+//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+//        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+//        //assertEquals("Failed to get user", 200, r2.httpStatus);
+////        get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
+//        //Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
+//        Response r3 = request("GET", "/WalkLive/api/crime/clusterOnly/38.982012186658675/-76.94064758017299/0", null);
+//        assertEquals("Failed to get user", 200, r3.httpStatus);
 //
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//
-//        Trip test1 = new Trip("michelle", "xyz", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
-//
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
-//
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//    assertEquals("Failed to get user",200,r4.httpStatus);
-//
-//}
+//    }
+
+
+    @Test
+    public void testgetTripByid() throws Exception {
+        Trip test = new Trip(1,"jackie", "JHU", "12", false ,11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/getByName/jackie", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip(2,"michelle", "xyz", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
+
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/getByName/michelle", null);
+
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+    assertEquals("Failed to get user",200,r4.httpStatus);
+
+}
 
 
 
@@ -913,38 +913,6 @@ public class TestServer {
 
 
 
-
-//
-//
-//    @Test
-//    public void testCoordinate() throws Exception {
-//        Coordinate c = new Coordinate(0.6, 0.7);
-//        assertEquals(0.6, c.getLatitude(), 0);
-//        assertEquals(0.7, c.getLongitude(), 0);
-//    }
-//
-//
-//    @Test
-//    public void testSortAndExpand() throws Exception {
-//        //c1 < c2
-//        Coordinate c1 = new Coordinate(0.5, 0.7);
-//        Coordinate c2 = new Coordinate(0.9, 1.1);
-//        Coordinate.sortAndExpand(c1, c2);
-//        assertEquals(0.49, c1.getLatitude(), 0);
-//        assertEquals(0.6886, c1.getLongitude(), 0.01);
-//        assertEquals(0.91, c2.getLatitude(), 0);
-//        assertEquals(1.11608, c2.getLongitude(), 0.01);
-//
-//        //c3 > c4
-//        Coordinate c3 = new Coordinate(0.9, 1.1);
-//        Coordinate c4 = new Coordinate(0.5, 0.7);
-//        Coordinate.sortAndExpand(c3, c4);
-//        assertEquals(0.49, c3.getLatitude(), 0);
-//        assertEquals(0.6886, c3.getLongitude(), 0.01);
-//        assertEquals(0.91, c4.getLatitude(), 0);
-//        assertEquals(1.11608, c4.getLongitude(), 0.01);
-//
-//    }
 //
 //
 //    @Test
@@ -991,69 +959,7 @@ public class TestServer {
 //
 //
 //    }
-//
-//
-//    /**
-//     * Test getting getCrimes method within a specific range of coordinates from the
-//     * database.
-//     */ /*
-//    @Test
-//    public void testGetCrimes() throws Exception {
-//
-//        List<Crime> crimeList = new LinkedList<>();
-//
-//        double lat = 3.454;
-//        double lng = 6.929;
-//        Coordinate c = new Coordinate(lat, lng);
-//
-//        crimeList.add(new Crime(1025, 18, "JHU malone", "Robbery", c, 1));
-//        crimeList.add(new Crime(1026, 12, "brody", "theft", c, 2));
-//        crimeList.add(new Crime(1027, 13, "", "Robbery", c, 3));
-//        crimeList.add(new Crime(1028, 5, "", "theft", c, 4));
-//
-//        double fromLng = 200;
-//        double toLng = 400;
-//
-//        double fromLat = 200;
-//        double toLat = 400;
-//
-//        Coordinate c1 = new Coordinate(fromLat, fromLng);
-//        Coordinate c2 = new Coordinate(toLat, toLng);
-//
-//        int fromDate = 20;
-//        int toDate = 40;
-//        int timeOfDay = 18;
-//
-//        Crime from = new Crime(fromDate, c1);
-//        Crime to = new Crime(toDate, c2);
-//        int count = 1;
-//        for(Crime t: crimeList){
-//            assertEquals(count, t.getLinkId());
-//            count++;
-//
-//        }
-//
-//    }
-//*/
-//
-///*
-//    @Test
-//    public void testAddTimePoints() throws Exception {
-//        double lat = 3.454;
-//        double lng = 6.929;
-//        Coordinate c = new Coordinate(lat, lng);
-//
-//        //public TimePoint(int TimePointID, String "12", Coordinate c, int 1)
-//        TimePoint temp = new TimePoint(12,"13",c,1);
-//    }
-//*/
-//
 
-
-//    private void testDB(){
-//
-//
-//    }
 
 //------------------------------------------------------------------------//
 // Generic Helper Methods and classes
@@ -1241,9 +1147,9 @@ private static class Response {
             stm.executeUpdate(counterInit);
             //stm.executeUpdate(setup4);
             //stm.executeUpdate(setup5);
-
-            String sql = "DROP TABLE IF EXISTS TestCrimes";
-            stm.executeUpdate(sql);
+//
+//            String sql = "DROP TABLE IF EXISTS TestCrimes";
+//            stm.executeUpdate(sql);
             String sql2 = "DROP TABLE IF EXISTS TestSafetyRating";
             stm.executeUpdate(sql2);
             String sql3 = "DROP TABLE IF EXISTS users" ;

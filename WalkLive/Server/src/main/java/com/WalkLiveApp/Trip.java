@@ -20,32 +20,6 @@ public class Trip {
     }
 
 
-
-//
-//    public void setTripId(int tripId) {
-//        this.tripId = tripId;
-//    }
-
-//
-//    public Trip (String username, String destination, String startTime, boolean completed, double startLat,
-//                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent,String address){
-//        this.username =  username;
-//        this.destination =  destination;
-//        this.startTime =  startTime;
-//        this.completed =  completed;
-//        this.startLat =  startLat;
-//        this.startLong =  startLong;
-//        this.curLat =  curLat;
-//        this.curLong =  curLong;
-//        this.endLat =  endLat;
-//        this.endLong =  endLong;
-//        this.emergencyNum =  emergencyNum;
-//        this.timeSpent =  timeSpent;
-//        this.address =  address;
-//
-//
-//    }
-
     public Trip (String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address){
         this.username =  username;
@@ -82,6 +56,29 @@ public class Trip {
         this.emergencyNum =  emergencyNum;
         this.timeSpent =  timeSpent;
         this.address = address;
+
+
+    }
+
+
+    public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
+                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address, int dangerLevel){
+
+        this.tripId =  tripId;
+        this.username =  username;
+        this.destination =  destination;
+        this.startTime =  startTime;
+        this.completed =  completed;
+        this.startLat =  startLat;
+        this.startLong =  startLong;
+        this.curLat =  curLat;
+        this.curLong =  curLong;
+        this.endLat =  endLat;
+        this.endLong =  endLong;
+        this.emergencyNum =  emergencyNum;
+        this.timeSpent =  timeSpent;
+        this.address = address;
+        this.dangerLevel = dangerLevel;
 
 
     }

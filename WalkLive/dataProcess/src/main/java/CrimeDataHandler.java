@@ -19,8 +19,6 @@ public class CrimeDataHandler {
     public static String user = "b0a1d19d87f384";
     public static String password = "6d11c74b";
 
-
-
     static PreparedStatement ps = null;
     static ResultSet res = null;
     static Statement stm = null;
@@ -31,32 +29,31 @@ public class CrimeDataHandler {
         addDB("crimeSampleNight.json");
 
 
-
     }
 
+    /**
+     * Add the json content to our database
+     * @param fileName
+     * @throws IOException
+     * @throws ParseException
+     */
     private static void addDB(String fileName) throws IOException, ParseException{
         int dangerLevel;
 
         JSONParser parser = new JSONParser();
 
-        System.out.println("the data is" +fileName);
-
+        String checkDay = "Day";
+        String checkNight = "Night";
 
         try{
             JSONArray a = (JSONArray) parser.parse(new FileReader(fileName));
-            //System.out.println(a);
 
             for (Object o : a)
             {
                 JSONObject crime = (JSONObject) o;
-
-
                 double radius = (double) crime.get("radius");
                 long count = (long) crime.get("count");
-                String day_or_night = (String)crime.get("time");
 
-
-                //600,900,1200,1500
                 if(count < 100){
                     dangerLevel = 0;
                 } else if (count < 600){
@@ -75,8 +72,6 @@ public class CrimeDataHandler {
 
                 }
 
-                //System.out.println("DANGER LEVEL is: "+dangerLevel);
-
                 double latitude = (double) crime.get("latitude");
 
                 double longitude = (double) crime.get("longitude");
@@ -84,8 +79,7 @@ public class CrimeDataHandler {
                 String sqlSetUp = "CREATE TABLE IF NOT EXISTS dangerZonesDay(longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
                 String sqlSetUp2 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT,day_or_night TEXT)";
 
-                String checkDay = "Day";
-                String checkNight = "Night";
+
                 String sqlInsertClusters = null;
                 if(fileName.toLowerCase().contains(checkDay.toLowerCase())){
                     sqlInsertClusters = " INSERT INTO dangerZonesDay(longitude, latitude, radius, count,dangerLevel, day_or_night) " +

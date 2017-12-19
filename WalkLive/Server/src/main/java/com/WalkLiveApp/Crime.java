@@ -22,46 +22,6 @@ public class Crime {
     private ArrayList<Cluster> clusters= new ArrayList<Cluster>();
     private final Logger logger = LoggerFactory.getLogger(Crime.class);
 
-//
-//
-//    public void setDate(int date) {
-//        this.date = date;
-//    }
-//
-//    public void setTimeOfDay(int timeOfDay) {
-//        this.timeOfDay = timeOfDay;
-//    }
-//
-//    public void setcrimeId(int crimeId) {
-//        this.crimeId = crimeId;
-//    }
-//
-//    public void setAddress(String address) {
-//        this.address = address;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-
-
-
-//    public Crime(int date, int timeOfDay, String address, String type, double longitude, double latitude, int crimeId) {
-//        this.date = date;
-//        this.timeOfDay = timeOfDay;
-//        this.address = address;
-//        this.type = type;
-//        this.longitude = longitude;
-//        this.latitude = latitude;
-//        this.crimeId = crimeId;
-//    }
-
-//    public Crime(int date,double longitude, double latitude) {
-//        this.date = date;
-//        this.longitude = longitude;
-//        this.latitude = latitude;
-//    }
-
     /**
      * constructor
      * @param dangerLevel: process danger level
@@ -143,15 +103,10 @@ public class Crime {
         PreparedStatement ps = null;
         Connection conn = null;
 
-        //int dangerZoneId = Integer.parseInt(tripIdInStr);
-        //Trip trip = new Gson().fromJson(body, Trip.class);
-
-        //int clusterIdInt = this.getNewRequestId();
-        //String clusterId = String.valueOf(clusterIdInt);
 
         double longitude = Double.parseDouble(longitudeStr);
-            double latitude = Double.parseDouble(latitudeStr);
-            int isDay = Integer.parseInt(isDaystr);
+        double latitude = Double.parseDouble(latitudeStr);
+        int isDay = Integer.parseInt(isDaystr);
         logger.info("long: "+longitude +" lat: "+ latitude);
 
         double longRadius = 0.018;
@@ -175,12 +130,6 @@ public class Crime {
             ps.setDouble(3, latitude+latRadius);
             ps.setDouble(4, latitude-latRadius);
             res = ps.executeQuery();
-
-//            ps2 = conn.prepareStatement(sql2);
-//            res2 = ps2.executeQuery();
-            //int count = res2.getInt(1);
-            //logger.info("the avg count is: "+ count);
-            //logger.info("the avg count is: ");
 
             ArrayList<Cluster> clusters = new ArrayList<>();
             int accumuDangerLevel=0;
