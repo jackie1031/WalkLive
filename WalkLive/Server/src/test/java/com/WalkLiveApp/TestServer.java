@@ -2,6 +2,7 @@ package com.WalkLiveApp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
@@ -89,57 +90,42 @@ public class TestServer {
     //------------------------------------------------------------------------//
 
     @Test
+    public void testDataSource() throws Exception{
+            WalkLiveService.logger.info("org.apache.commons.dbcp2.BasicDataSource found "
+                    + Thread.currentThread()
+                    .getContextClassLoader()
+                    .loadClass(
+                            "org.apache.commons.dbcp2.BasicDataSource")
+                    .getProtectionDomain().getCodeSource()
+                    .getLocation());
+            WalkLiveService.logger.info("org.apache.commons.pool2.impl.GenericObjectPool found "
+                    + Thread.currentThread()
+                    .getContextClassLoader()
+                    .loadClass(
+                            "org.apache.commons.pool2.impl.GenericObjectPool")
+                    .getProtectionDomain().getCodeSource()
+                    .getLocation());
+    }
+
+    @Test
     public void testCreateNew() throws Exception {
-//        //Add a few elements
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063")
-//        };
-//
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //Get them back
-//        Response r = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, r.httpStatus);
-//        List<User> results = getUsers(r);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-//        assertEquals("Number of user entries differ", entries.length, results.size());
-//
-//        for (int i = 0; i < results.size(); i++) {
-//            User actual = results.get(i);
-//
-//            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-//            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-//            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
-//            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-//            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-//            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
-//            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
-//        }
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(ConnectionHandler.url);
-        dataSource.setUsername(ConnectionHandler.user);
-        dataSource.setPassword(ConnectionHandler.password);
-            JdbcTemplate jdbcTemplateObject = new JdbcTemplate(dataSource);
+
+            JdbcTemplate jdbcTemplateObject = new JdbcTemplate(new ConnectionHandler().getDataSource());
 
             jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                     "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
             String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-            String username = "testuser2";
+            String username = "testuser";
             User userTest = new User("testuser", "1234", "contacto");
-
-//            User user = (User) jdbcTemplateObject.query(sql,  new Object[] { username }, User.class);
-//            System.out.print(user);
 
         Map<String,Object> results =
                 jdbcTemplateObject.queryForMap(sql, username);
         WalkLiveService.logger.info((String) results.get("password"));
+
+            assertEquals("Mismatch in username", "testuser", results.get("username"));
+            assertEquals("Mismatch in password", "1234", results.get("password"));
+            assertEquals("Mismatch in contact", "contacto",results.get("contact"));
+
     }
 
 
@@ -1247,11 +1233,11 @@ private static class Response {
             stm.executeUpdate(sql7);
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
-            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
-            stm.executeUpdate(sql9);
-
-            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
-            stm.executeUpdate(sql10);
+//            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
+//            stm.executeUpdate(sql9);
+//
+//            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
+//            stm.executeUpdate(sql10);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
@@ -1262,8 +1248,8 @@ private static class Response {
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
-            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+//            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+//            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
@@ -1272,8 +1258,8 @@ private static class Response {
             stm.executeUpdate(counterInit);
             stm.executeUpdate(sqlNew5);
             stm.executeUpdate(sqlNew6);
-            stm.executeUpdate(sqlNew8);
-            stm.executeUpdate(sqlNew9);
+//            stm.executeUpdate(sqlNew8);
+//            stm.executeUpdate(sqlNew9);
 
 
         } catch (SQLException ex) {

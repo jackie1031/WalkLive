@@ -28,27 +28,9 @@ public class WalkLiveService {
 
     public WalkLiveService() throws UserServiceException {
         new DataBaseHandler().initializeDataBase();
-        try{
-            this.connectionPool();
-        } catch(Exception e){
-            System.out.print("error");
-        }
         // 1. Register the Driver to the jbdc.driver java property
-
     }
 
-    private void connectionPool() throws ClassNotFoundException{
-        PoolConnectionFactory
-                .registerJDBCDriver(PoolConnectionFactory.MYSQL_DRIVER);
-        ConnectionFactory connectionFactory = PoolConnectionFactory
-                .getConnFactory(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-        PoolableConnectionFactory poolfactory = new PoolableConnectionFactory(
-                connectionFactory, null);
-        ObjectPool connectionPool = new GenericObjectPool(poolfactory);
-        poolfactory.setPool(connectionPool);
-        PoolingDriver dbcpDriver = PoolConnectionFactory.getDBCPDriver();
-        dbcpDriver.registerPool("walklive-pool", connectionPool);
-    }
     /*
     * Create a new User and add to database.
     * Should check database if already exists or not, and then if it doesnt exist then create and push into
