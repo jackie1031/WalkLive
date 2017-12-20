@@ -14,6 +14,14 @@ public class RowMapper {
         return users;
     }
 
+    public static List<Trip> decodeAllTrips(List<Map<String, Object>> rows) throws java.text.ParseException{
+        ArrayList<Trip> trips = new ArrayList<>();
+        for(Map<String, Object> row : rows){
+            trips.add(RowMapper.decodeTrip(row));
+        }
+        return trips;
+    }
+
     public static User decodeUser(Map<String, Object> row) throws java.text.ParseException{
             return new User(row.get("username").toString(),
                     row.get("password").toString(),

@@ -794,35 +794,29 @@ public class TestServer {
 //    }
 
 //
-//    @Test
-//    public void testTripHistory() throws Exception {
-//
-//        //WalkLiveService walkLiveService;
-//
-//        Trip trip = new Trip("yangcao1","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"110110110","3hours", "address");
-//        Trip trip2 = new Trip("yangcao1","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"120120120","3hours","address");
-//        //Trip trip3 = new Trip("jackie","malone","18", false,123,123,456,456,789,789,"119119119","3hours");
-//
-//        Response startT1 = request("POST", "/WalkLive/api/trips", trip);
-//        assertEquals("unidentified destination ", 200, startT1.httpStatus);
-//        Response endT1 = request("PUT", "/WalkLive/api/trips/1/endtrip", null);
-//        assertEquals("Failed to get user", 200, endT1.httpStatus);
-//
-//        Response startT2 = request("POST", "/WalkLive/api/trips", trip2);
-//        assertEquals("unidentified destination ", 200, startT2.httpStatus);
-//        Response endT2 = request("PUT", "/WalkLive/api/trips/2/endtrip", null);
-//        assertEquals("Failed to get user", 200, endT2.httpStatus);
-//
-//        Response getHistory = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
-//        assertEquals("Failed to get user", 200, getHistory.httpStatus);
-//
-//        //Response rList = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
-//
-//        //List<Trip> results = getTripHistory(getHistory);
-//
-//        //assertEquals("Number of trips entries differ", allTrips.size(), results.size());
-//
-//
+    @Test
+    public void testTripHistory() throws Exception {
+
+        //WalkLiveService walkLiveService;
+
+        Trip trip = new Trip("yangcao1", "JHU", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "110110110", "3hours", "address");
+        Trip trip2 = new Trip("yangcao1", "xyz", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "120120120", "3hours", "address");
+        //Trip trip3 = new Trip("jackie","malone","18", false,123,123,456,456,789,789,"119119119","3hours");
+
+        Response startT1 = request("POST", "/WalkLive/api/trips", trip);
+        assertEquals("unidentified destination ", 200, startT1.httpStatus);
+        Response endT1 = request("PUT", "/WalkLive/api/trips/1/endtrip", null);
+        assertEquals("Failed to get user", 200, endT1.httpStatus);
+
+        Response startT2 = request("POST", "/WalkLive/api/trips", trip2);
+        assertEquals("unidentified destination ", 200, startT2.httpStatus);
+        Response endT2 = request("PUT", "/WalkLive/api/trips/2/endtrip", null);
+        assertEquals("Failed to get user", 200, endT2.httpStatus);
+
+        Response getHistory = request("GET", "/WalkLive/api/trips/yangcao1/tripHistory", null);
+        assertEquals("Failed to get user", 200, getHistory.httpStatus);
+    }
+
 
 //
 //    @Test

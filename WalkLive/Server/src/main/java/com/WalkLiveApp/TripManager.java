@@ -4,13 +4,12 @@ import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 public class TripManager {
@@ -87,7 +86,7 @@ public class TripManager {
      * @throws ParseException: can't parse the given string into gson
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
-    public Trip getTripByName(String username) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
+    public Trip getTripByName(String username) throws WalkLiveService.InvalidTargetID {
         String sql = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
         try {
             return (RowMapper.decodeTrip(this.jdbcTemplateObject.queryForMap(sql, username)));
@@ -134,56 +133,13 @@ public class TripManager {
      * @throws WalkLiveService.RelationshipServiceException: the relationship of the users is invalid
      * @throws java.text.ParseException: can't parse the given string into gson
      */
-    public List<Trip> getTripHistory(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
-
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet res = null;
-
+    public List<Trip> getTripHistory(String username) throws  WalkLiveService.UserServiceException, java.text.ParseException {
         String sql = "SELECT * FROM doneTrips WHERE username = ?";
-
         try {
-
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            ArrayList<Trip> trips = new ArrayList<>();
-            while (res.next()) {
-                Trip temp =  new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
-                if (temp != null){
-                    trips.add(temp);
-                }
-
-            }
-
-            //System.out.println("SUCCESSFULLY UPDATED.");
-            return trips;
-
-        } catch(SQLException ex) {
-
-            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
-
-        }  finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+            return RowMapper.decodeAllTrips(jdbcTemplateObject.queryForList(sql, username));
+        } catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
         }
-
     }
 
 
