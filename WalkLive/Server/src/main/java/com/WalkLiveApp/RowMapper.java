@@ -67,4 +67,22 @@ public class RowMapper {
         }
         return relationships;
     }
+
+    public static List<Relationship> decodeAllFriendship(List<Map<String, Object>> rows) throws java.text.ParseException{
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        for (Map<String, Object> row : rows) {
+            relationships.add(RowMapper.decodeFriendship(row));
+        }
+        return relationships;
+    }
+
+    public static Relationship decodeFriendship(Map<String, Object> row) throws java.text.ParseException {
+        return new Relationship(0,
+                (String) row.get("sender"),
+                (String) row.get("recipient"),
+                1,
+                null);
+    }
+
+
 }
