@@ -15,11 +15,6 @@ public class Trip {
     private int tripId,dangerLevel;
 
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-
     public Trip (String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address){
         this.username =  username;
@@ -36,8 +31,6 @@ public class Trip {
         this.timeSpent =  timeSpent;
         this.address = address;
     }
-
-
 
     public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
                  double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address){

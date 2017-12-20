@@ -1,10 +1,17 @@
 package com.WalkLiveApp;
+import com.mysql.jdbc.Driver;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.*;
 import java.lang.*;
+import org.apache.commons.dbcp2.ConnectionFactory;
+import org.apache.commons.dbcp2.PoolableConnectionFactory;
+import org.apache.commons.dbcp2.PoolingDriver;
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
 
+import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +28,7 @@ public class WalkLiveService {
 
     public WalkLiveService() throws UserServiceException {
         new DataBaseHandler().initializeDataBase();
-//        this.dataBaseHandler.initializeDataBase();
+        // 1. Register the Driver to the jbdc.driver java property
     }
 
     /*

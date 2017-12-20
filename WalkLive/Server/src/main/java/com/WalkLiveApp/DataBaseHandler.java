@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-
+import org.apache.commons.dbcp2.BasicDataSource;
 public class DataBaseHandler {
     private final Logger logger = WalkLiveService.logger;
 
@@ -39,6 +39,9 @@ public class DataBaseHandler {
         }
 
     }
+
+
+
 
     private String[] getCreateTableStrings() {
         String[] commandTable = new String[7];

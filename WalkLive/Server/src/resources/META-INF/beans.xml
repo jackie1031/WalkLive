@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!--<bean id="dataSource"-->
+          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
+        <!--<property name="url" value="jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb" />-->
+        <!--<property name="username" value="b0a1d19d87f384" />-->
+        <!--<property name="password" value="6d11c74b" />-->
+    <!--</bean>-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb" />
+    <property name="username" value="b0a1d19d87f384" />
+    <property name="password" value="6d11c74b" />
+    </bean>
+
+</beans>
