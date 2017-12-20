@@ -1,5 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [6.2.0] - 2017-12-20
+- BE: clean and comment models by @jackie
+
 ## [6.2.0] - 2017-12-19
 ### Added
 - BE:  add BasicDataSource Configuration for Connection Pool creation by @mshu1
@@ -11,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - BE:  refactor all methods related to trip (in TripManager) and now Trip Manager is 35% size of the original version @mshu1.
 - BE:  refactor all methods related to friend (in FriendManager) and now Friend Manager is 40% size of the original version by @mshu1.
 - BE:  refactor all methods related to user (in FriendManager) and now Friend Manager is 40% size of the original version by @mshu1.
+
 ### Tested
 - FE + BE:  tested all refactored methods after redeployment by @mshu1
 
