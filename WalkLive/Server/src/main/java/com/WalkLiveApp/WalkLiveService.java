@@ -238,9 +238,6 @@ public class WalkLiveService {
     }
 
     public static class DuplicateException extends Exception {
-        public DuplicateException(String message, Throwable cause) {
-            super(message, cause);
-        }
 
         public DuplicateException(String message) {
             super(message);
@@ -252,15 +249,9 @@ public class WalkLiveService {
             super(message, cause);
         }
 
-        public InvalidDestination(String message) {
-            super(message);
-        }
     }
 
     public static class InvalidTargetID extends Exception {
-        public InvalidTargetID(String message, Throwable cause) {
-            super(message, cause);
-        }
 
         public InvalidTargetID(String message) {
             super(message);
