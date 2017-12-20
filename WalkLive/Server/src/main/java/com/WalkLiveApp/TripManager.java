@@ -4,14 +4,18 @@ import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 
 public class TripManager {
     private final Logger logger = LoggerFactory.getLogger(ServerController.class);
+    private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
 
 
     /**
@@ -22,54 +26,21 @@ public class TripManager {
      * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
      * @throws ParseException: can't parse the given string into gson
      */
+
     public Trip startTrip(String body) throws WalkLiveService.InvalidDestination, WalkLiveService.UserServiceException, ParseException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        //WalkLiveService.logger.info("the body of start trip"+ body);
         Trip trip = new Gson().fromJson(body, Trip.class);
-
         int tripId = this.getNewRequestId();
         trip.setTripId(tripId);
         WalkLiveService.logger.info("the trip id is: " + tripId);
 
-
         String sql = "INSERT INTO ongoingTrips (tripId, username, destination, dangerLevel, startTime, completed, startLat , startLong , curLat ,curLong , endLat , endLong, emergencyNum, timeSpent, address)" +
                 " VALUES (?,?,?,Null,?,completed,?,?,?,?,?,?,?,?,?)";
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, tripId);
-            ps.setString(2, trip.getUsername());
-            ps.setString(3, trip.getDestination());
-            ps.setString(4, trip.getStartTime());
-            ps.setDouble(5, trip.getStartLat());
-            ps.setDouble(6, trip.getStartLong());
-            ps.setDouble(7, trip.getCurLat());
-            ps.setDouble(8, trip.getCurLong());
-            ps.setDouble(9, trip.getEndLat());
-            ps.setDouble(10, trip.getEndLong());
-            ps.setString(11, trip.getEmergencyNum());
-            ps.setString(12, trip.getTimeSpent());
-            ps.setString(13, trip.getAddress());
-            ps.executeUpdate();
-
+            jdbcTemplateObject.update(sql, tripId, trip.getUsername(), trip.getDestination(), trip.getStartTime(), trip.getStartLat(), trip.getStartLong(), trip.getCurLat(), trip.getCurLong(), trip.getEndLat(), trip.getEndLong(), trip.getEmergencyNum(), trip.getTimeSpent(), trip.getAddress());
             return trip;
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.createNew: Failed to create new entry", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+        } catch (Exception e) {
+            WalkLiveService.logger.error("WalkLiveService.createNew: Failed to create new entry", e);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.createNew: Failed to create new entry", e);
         }
     }
 
@@ -94,51 +65,19 @@ public class TripManager {
      * @throws ParseException: can't parse the given string into gson
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
-    public Trip getTripById(String tripIdInStr) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
-        ResultSet res = null;
-        PreparedStatement ps = null;
-        Connection conn = null;
-
+    public Trip getTripById(String tripIdInStr) throws WalkLiveService.InvalidTargetID {
         int tripId = Integer.parseInt(tripIdInStr);
 
         String sql = "SELECT * FROM ongoingTrips WHERE tripId = ? LIMIT 1";
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, tripId);
-            res = ps.executeQuery();
-            if (res.next()) {
-             return new Trip(tripId,res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
-
-
-            } else{
-                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
-                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
-            }
-        } catch(SQLException ex){
-            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", tripId), ex);
-
-            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", tripId), ex);
-        } finally{
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+        return (RowMapper.decodeTrip(this.jdbcTemplateObject.queryForMap(sql, tripId)));
+        }
+        catch (Exception e){
+            WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
+            throw new WalkLiveService.InvalidTargetID(String.format("WalkLiveService.getUser: Failed to find tripid: %s", tripId));
         }
     }
+
 
     /**
      *
@@ -149,49 +88,13 @@ public class TripManager {
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
     public Trip getTripByName(String username) throws WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID {
-        ResultSet res = null;
-        PreparedStatement ps = null;
-        Connection conn = null;
-        int tripId;
-
-        //int tripId = Integer.parseInt(tripIdInStr);
-
         String sql = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-            if (res.next()) {
-                WalkLiveService.logger.info(res.getString(15));
-                return new Trip(res.getInt(1),username, res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
-
-            } else{
-                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
-                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
-            }
-        } catch(SQLException ex){
-            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for tripId: %s", username), ex);
-
-            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
-        } finally{
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+            return (RowMapper.decodeTrip(this.jdbcTemplateObject.queryForMap(sql, username)));
+        }
+        catch (Exception e){
+            WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
+            throw new WalkLiveService.InvalidTargetID(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
         }
     }
 

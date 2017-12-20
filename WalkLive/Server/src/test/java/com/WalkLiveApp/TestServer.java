@@ -580,64 +580,35 @@ public class TestServer {
      * ================================================================
      */
 
-//    @Test
-//    public void testStartTripByID() throws Exception {
-//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//
-//        //start trip
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//
-//        //username
-//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//
-//        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//
-//    }
+    @Test
+    public void testStartTripByID() throws Exception {
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+
+        //start trip
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
 
 
-//    @Test
-//    public void testStartTripByID() throws Exception {
-//        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "3501 ST PAUL");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        //start trip
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//
-//        //username
-//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//
-//        Trip test1 = new Trip("michelle", "xyz", "12", false, 11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours","jhu beach");
-//
-//        Response r3 = request("POST", "/WalkLive/api/trips", test1);
-//        assertEquals("unidentified destination ", 200, r3.httpStatus);
-//
-//        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
-//        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//
-//    }
+        //username
+        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get trip", 200, r2.httpStatus);
+
+
+        Trip test1 = new Trip("michelle","xyz","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+
+        Response r3 = request("POST", "/WalkLive/api/trips", test1);
+        assertEquals("unidentified destination ", 200, r3.httpStatus);
+
+        Response r4 = request("GET", "/WalkLive/api/trips/getById/2", null);
+        //assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
+
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+
+    }
+
 //
 //    @Test
 //    public void testUpdateTrip() throws Exception{
@@ -701,7 +672,7 @@ public class TestServer {
 
 
     @Test
-    public void testgetTripByid() throws Exception {
+    public void testgetTripByName() throws Exception {
         Trip test = new Trip(1,"jackie", "JHU", "12", false ,11.11, 22.22, 11.11, 22.22, 77.77, 88.88, "18611345670", "3hours", "address");
         //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
 
