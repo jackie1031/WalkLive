@@ -729,24 +729,25 @@ public class TestServer {
 //
 //    }
 
-//    @Test
-//    public void testEndTrip() throws Exception {
-//        WalkLiveService walkLiveService;
-//
-//        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
-//        //walkLiveService.startTrip();
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//        assertEquals(test.isCompleted(),false);
-//
-//        Response r2 = request("PUT", "/WalkLive/api/trips/getById/1", null);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-//        //Response r3 = request("GET", "/WalkLive/api/trips/1", null);
-//        //assertEqualsx(r3.isCompleted(),false);
-//
-//    }
-//
+    @Test
+    public void testEndTrip() throws Exception {
+        WalkLiveService walkLiveService;
+
+        Trip test = new Trip("jackie","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours", "address");
+        //walkLiveService.startTrip();
+        Response r1 = request("POST", "/WalkLive/api/trips", test);
+        assertEquals("unidentified destination ", 200, r1.httpStatus);
+
+        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+
+        //Response r3 = request("GET", "/WalkLive/api/trips/1", null);
+        //assertEqualsx(r3.isCompleted(),false);
+        Response endT2 = request("PUT", "/WalkLive/api/trips/1/endtrip", null);
+        assertEquals("Failed to end trip", 200, endT2.httpStatus);
+
+    }
+
 
 //    @Test
 //    public void testGetFriendList() throws Exception{

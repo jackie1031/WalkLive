@@ -40,6 +40,7 @@ public class TripManager {
         }
     }
 
+
     /**
      *
      * @param tripIdInStr
@@ -52,6 +53,7 @@ public class TripManager {
         this.insertTripToFinished(tripId);
         this.removeCompletedTripFromOngoing(tripId);
     }
+
 
     /**
      *
@@ -89,6 +91,7 @@ public class TripManager {
             throw new WalkLiveService.InvalidTargetID(String.format("WalkLiveService.getUser: Failed to find tripid: %s", username));
         }
     }
+
 
     /**
      *
@@ -165,10 +168,6 @@ public class TripManager {
         }
     }
 
-    /**
-     *
-     * @return get the trip id
-     */
     private int getNewRequestId() {
         String sql = "UPDATE counters SET trip_ids = trip_ids + 1 ";
         String getValue = "SELECT trip_ids FROM counters";
@@ -181,75 +180,25 @@ public class TripManager {
         }
     }
 
-    /**
-     *
-     * @param tripId to indicate the trip
-     * @throws WalkLiveService.InvalidDestination: the destination is invalid
-     */
     private void insertTripToFinished(int tripId) throws WalkLiveService.InvalidDestination{
-        PreparedStatement ps = null;
-        ResultSet res = null;
-        Connection conn = null;
-
         String sql = "INSERT INTO doneTrips select * from ongoingTrips where tripId = ?";
-
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, tripId);
-            //WalkLiveService.logger.info("pass here in ENDTRIP");
-            ps.executeUpdate();
+            jdbcTemplateObject.update(sql, tripId);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
             throw new WalkLiveService.InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
-    /**
-     *
-     * @param tripId to indicate the trip
-     * @throws WalkLiveService.InvalidDestination: the destination is invalid
-     */
+
     private void removeCompletedTripFromOngoing(int tripId) throws WalkLiveService.InvalidDestination{
-        PreparedStatement ps = null;
-        Connection conn = null;
-
-
-        String sql2 = "DELETE FROM ongoingTrips where tripId = ?";
-
+        String sql = "DELETE FROM ongoingTrips where tripId = ?";
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql2);
-            ps.setInt(1, tripId);
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
+            jdbcTemplateObject.update(sql, tripId);
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
             throw new WalkLiveService.InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 }
