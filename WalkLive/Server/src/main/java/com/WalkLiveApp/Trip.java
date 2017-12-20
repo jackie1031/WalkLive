@@ -1,7 +1,5 @@
 package com.WalkLiveApp;
 
-import java.util.*;
-
 public class Trip {
 
     private String username, address;
@@ -50,31 +48,8 @@ public class Trip {
         this.timeSpent =  timeSpent;
         this.address = address;
 
-
     }
 
-
-    public Trip (int tripId, String username, String destination, String startTime, boolean completed, double startLat,
-                 double startLong, double curLat, double curLong, double endLat, double endLong, String emergencyNum, String timeSpent, String address, int dangerLevel){
-
-        this.tripId =  tripId;
-        this.username =  username;
-        this.destination =  destination;
-        this.startTime =  startTime;
-        this.completed =  completed;
-        this.startLat =  startLat;
-        this.startLong =  startLong;
-        this.curLat =  curLat;
-        this.curLong =  curLong;
-        this.endLat =  endLat;
-        this.endLong =  endLong;
-        this.emergencyNum =  emergencyNum;
-        this.timeSpent =  timeSpent;
-        this.address = address;
-        this.dangerLevel = dangerLevel;
-
-
-    }
 
     public int getTripId() {
         return tripId;

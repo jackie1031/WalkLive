@@ -30,5 +30,9 @@ public class Cluster {
                 '}';
     }
 
+    public int getDangerLevel() {
+        return this.dangerLevel;
+    }
+
 
 }

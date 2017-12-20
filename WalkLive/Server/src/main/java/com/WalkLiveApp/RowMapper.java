@@ -23,6 +23,30 @@ public class RowMapper {
         return trips;
     }
 
+    public static List<Cluster> decodeAllClusters(List<Map<String, Object>> rows) throws java.text.ParseException{
+        ArrayList<Cluster> clusters = new ArrayList<>();
+        for (Map<String, Object> row : rows) {
+            clusters.add(RowMapper.decodeCluster(row));
+        }
+        return clusters;
+    }
+
+    public static List<Relationship> decodeAllRequests(List<Map<String, Object>> rows) throws java.text.ParseException {
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        for (Map<String, Object> row : rows) {
+            relationships.add(RowMapper.decodeRequest(row));
+        }
+        return relationships;
+    }
+
+    public static List<Relationship> decodeAllFriendship(List<Map<String, Object>> rows) throws java.text.ParseException{
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        for (Map<String, Object> row : rows) {
+            relationships.add(RowMapper.decodeFriendship(row));
+        }
+        return relationships;
+    }
+
     public static User decodeUser(Map<String, Object> row) throws java.text.ParseException {
         return new User(row.get("username").toString(),
                 row.get("password").toString(),
@@ -59,22 +83,7 @@ public class RowMapper {
                 (int) row.get("relationship"),
                 (Date) row.get("sent_on"));
     }
-
-    public static List<Relationship> decodeAllRequests(List<Map<String, Object>> rows) throws java.text.ParseException {
-        ArrayList<Relationship> relationships = new ArrayList<>();
-        for (Map<String, Object> row : rows) {
-            relationships.add(RowMapper.decodeRequest(row));
-        }
-        return relationships;
-    }
-
-    public static List<Relationship> decodeAllFriendship(List<Map<String, Object>> rows) throws java.text.ParseException{
-        ArrayList<Relationship> relationships = new ArrayList<>();
-        for (Map<String, Object> row : rows) {
-            relationships.add(RowMapper.decodeFriendship(row));
-        }
-        return relationships;
-    }
+//                Cluster cluster = new Cluster(res.getDouble(1), res.getDouble(2), res.getDouble(3), res.getInt("dangerLevel"));
 
     public static Relationship decodeFriendship(Map<String, Object> row) throws java.text.ParseException {
         return new Relationship(0,
@@ -82,6 +91,15 @@ public class RowMapper {
                 (String) row.get("recipient"),
                 1,
                 null);
+    }
+
+    public static Cluster decodeCluster(Map<String, Object> row) throws java.text.ParseException {
+        return new Cluster(
+                (Double) row.get("longitude"),
+                (Double) row.get("latitude"),
+                (Double) row.get("radius"),
+                (int) row.get("dangerLevel")
+        );
     }
 
 

@@ -219,13 +219,9 @@ public class WalkLiveService {
      * @throws InvalidTargetID: invalid trip id
      */
     //public ArrayList<Cluster> getDangerZone(String latitude, String longitude) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
-        public Crime getDangerZone(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
-        return new Crime().getDangerLeveLZone(latitude, longitude,isDay);
+        public Crime getDangerZone(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID, java.text.ParseException {
+        return new CrimeCalculator().getDangerLeveLZone(latitude, longitude,isDay);
     }
-
-//    public ArrayList<Cluster> getDangerZoneOnly(String latitude, String longitude, String isDay) throws SQLException,WalkLiveService.UserServiceException,ParseException,InvalidTargetID {
-//        return new Crime().getDangerLeveLZoneOnly(latitude, longitude,isDay);
-//    }
 
 
     //=====================EXCEPTIONS============================

@@ -1,10 +1,6 @@
 package com.WalkLiveApp;
 
-import javax.sql.DataSource;
-import javax.xml.crypto.Data;
-
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 
 public class ConnectionHandler {

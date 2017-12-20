@@ -645,28 +645,6 @@ public class TestServer {
 
     }
 
-//
-//    @Test
-//    public void testTripDangerLevelOnly() throws Exception {
-//        Trip test = new Trip("jackie", "JHU", "12", false, 11.11, 22.22, 38.982012186658675, -76.94064758017299, 77.77, 88.88, "18611345670", "3hours", "3501 St Paul");
-//        //Trip tryit = new Trip(1,"jackie","liam","JHU","12", false,11.11,22.22,11.11,22.22,77.77,88.88,"18611345670","3hours");
-//
-//        //1,38.9846371,-76.9661682,0.018,12
-//
-//        //start trip
-//        Response r1 = request("POST", "/WalkLive/api/trips", test);
-//        assertEquals("unidentified destination ", 200, r1.httpStatus);
-//
-//        //by id
-//        Response r2 = request("GET", "/WalkLive/api/trips/getById/1", null);
-//        assertEquals("TEST THE TRIP ID", 200, r2.httpStatus);
-//        //assertEquals("Failed to get user", 200, r2.httpStatus);
-////        get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
-//        //Response r3 = request("GET", "/WalkLive/api/crime/38.982012186658675/-76.94064758017299/0", null);
-//        Response r3 = request("GET", "/WalkLive/api/crime/clusterOnly/38.982012186658675/-76.94064758017299/0", null);
-//        assertEquals("Failed to get user", 200, r3.httpStatus);
-//
-//    }
 
 
     @Test
@@ -812,55 +790,6 @@ public class TestServer {
 
 
     }
-
-
-
-//
-//
-//    @Test
-//    public void testGetDangerZone() throws Exception {
-//
-//        double lat = 3.454;
-//        double lng = 6.929;
-//        Coordinate c = new Coordinate(lat, lng);
-//
-//        Crime[] z1 = new Crime[]{
-//                new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523),
-//                new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339),
-//        };
-//        Crime[] z2 = new Crime[]{
-//
-//                new Crime(1126, 18, "JHU brody", "Sexual", c, 24124124),
-//                new Crime(1127, 18, "JHU shaffer", "Sexual", c, 24124224)
-//        };
-//
-//        Crime[] z3 = z2;
-//
-//        DangerZone testDanger = new DangerZone(z1,z2,z3);
-//
-//        Crime testZ1 = new Crime(1025, 18, "JHU malone", "Robbery", c, 23523523);
-//        Crime testZ2 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-//        Crime testZ3 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-//        Crime testZ4 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-//        Crime testZ5 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-//        Crime testZ6 = new Crime(1128, 18, "JHU levering", "Sexual", c, 4405339);
-//        Crime[] testForZone1 = {testZ1,testZ2,testZ3,testZ4,testZ5,testZ6};
-//
-//        assertEquals("Number of user entries differ", testDanger.size(), testForZone1.length);
-//
-//
-//        //assertEquals();
-//
-//
-//        for (Crime t : z1) {
-//            Response rCreateNew = request("GET", "/WalkLive/api/getdangerzone", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 404, rCreateNew.httpStatus);
-//        }
-//
-//
-//
-//    }
 
 
 //------------------------------------------------------------------------//
