@@ -22,55 +22,65 @@ public class FriendsManager {
         UserManager.isValid(sender);
         User rUser = new UserManager().getUser(recipient);
 
-        //Third make sure that sender and recipient are not the same
         if (rUser.getUsername().equals(sender)) {
             WalkLiveService.logger.error("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.createFriendRequest: Unable to create a friend request to yourself.");
         }
 
-        //fourth see if there already is a friend request made from either s ro r or r to s already, it shouldnt work.
         this.checkDuplicateRequest(sender, recipient);
-
         this.createNewFriendRequest(sender, recipient, request_id);
     }
 
-    public List<Relationship> getOutgoingFriendRequests(String sender) throws WalkLiveService.RelationshipServiceException {
-        //checks needed
-        PreparedStatement ps = null;
-        ResultSet res = null;
-        Connection conn = null;
+//    public List<Relationship> getOutgoingFriendRequests(String sender) throws WalkLiveService.RelationshipServiceException {
+//        //checks needed
+//        PreparedStatement ps = null;
+//        ResultSet res = null;
+//        Connection conn = null;
+//        String sql = "SELECT * FROM friends WHERE sender = ?";
+//
+//        try {
+//            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+//            ps = conn.prepareStatement(sql);
+//            ps.setString(1, sender);
+//            res = ps.executeQuery();
+//
+//            ArrayList<Relationship> rs = new ArrayList<>();
+//            while (res.next()) {
+//                rs.add(new Relationship(res.getInt(1), sender, res.getString(3), res.getInt(4), (Date) res.getObject(5)));
+//            }
+//            return rs;
+//        } catch (SQLException ex) {
+//            WalkLiveService.logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+//            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
+//        } finally {
+//            if (ps != null) {
+//                try {
+//                    ps.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//            if (res != null) {
+//                try {
+//                    res.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//        }
+//    }
+
+    public List<Relationship> getOutgoingFriendRequests(String sender) throws WalkLiveService.RelationshipServiceException{
         String sql = "SELECT * FROM friends WHERE sender = ?";
 
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, sender);
-            res = ps.executeQuery();
-
-            ArrayList<Relationship> rs = new ArrayList<>();
-            while (res.next()) {
-                rs.add(new Relationship(res.getInt(1), sender, res.getString(3), res.getInt(4), (Date) res.getObject(5)));
-            }
-            return rs;
-        } catch (SQLException ex) {
+            return RowMapper.decodeAllRequests(jdbcTemplateObject.queryForList(sql, sender));
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.getOutgoingFriendRequests: Failed to fetch friend requests", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
