@@ -60,8 +60,6 @@ public class TripManager {
      *
      * @param tripIdInStr
      * @return ongoing trip with the given id
-     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
-     * @throws ParseException: can't parse the given string into gson
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
     public Trip getTripById(String tripIdInStr) throws WalkLiveService.InvalidTargetID {
@@ -81,9 +79,7 @@ public class TripManager {
     /**
      *
      * @param username
-     * @returnongoing trip with the given user name
-     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
-     * @throws ParseException: can't parse the given string into gson
+     * @return ongoing trip with the given user name
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
     public Trip getTripByName(String username) throws WalkLiveService.InvalidTargetID {
@@ -126,11 +122,7 @@ public class TripManager {
      *
      * @param username
      * @return list of trips indicating the travel hstory of this user
-     * @throws SQLException: exception in sql statement or database
      * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
-     * @throws ParseException: can't parse the given string into gson
-     * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
-     * @throws WalkLiveService.RelationshipServiceException: the relationship of the users is invalid
      * @throws java.text.ParseException: can't parse the given string into gson
      */
     public List<Trip> getTripHistory(String username) throws  WalkLiveService.UserServiceException, java.text.ParseException {
@@ -148,97 +140,34 @@ public class TripManager {
      * @param tripIdInStr the trip id
      * @param body the current coordinate and the time spent
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
-     * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
      * @throws ParseException: can't parse the given string into gson
      */
-    public void updateTrip(String tripIdInStr, String body) throws WalkLiveService.InvalidTargetID,WalkLiveService.UserServiceException,ParseException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
+    public void updateTrip(String tripIdInStr, String body) throws WalkLiveService.InvalidTargetID, ParseException {
         int tripId = Integer.parseInt(tripIdInStr);
-
         Trip trip = new Gson().fromJson(body, Trip.class);
-
-
         String sql = "UPDATE ongoingTrips SET curLong = ?, curLat = ?, timeSpent = ?  WHERE tripId = ? LIMIT 1" ;
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setDouble(1, trip.getCurLong());
-            ps.setDouble(2, trip.getCurLat());
-            ps.setString(3, trip.getTimeSpent());
-            ps.setInt(4, tripId);
-            ps.executeUpdate();
-
-            System.out.println("SUCCESSFULLY UPDATED.");
-        } catch(SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
-        }  finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+           jdbcTemplateObject.update(sql, trip.getCurLong(), trip.getCurLat(), trip.getTimeSpent(), tripId);
+        } catch(Exception e) {
+            WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find trip: %s", tripId));
+            throw new WalkLiveService.InvalidTargetID(String.format("WalkLiveService.getTrip: Failed to find tripid: %s", tripId));
         }
     }
 
-    /**
-     *
-     * @param username
-     * @return the trip given the username
-     * @throws SQLException: exception in sql statement or database
+
+
+
+    /*
+        Helper Functions
      */
-    private Trip getTripString(String username) throws SQLException{
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet res = null;
 
-        String sql4 = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
-
+    private Trip getTripString(String username){
+        String sql = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-
-            ps = conn.prepareStatement(sql4);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            if (res.next()) {
-                //return new Trip(res.getInt("tripId"), res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15));
-                Trip trip = new Trip(res.getInt("tripId"), res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15),res.getInt(4));
-                logger.info("the data now is: "+ trip.getDangerLevel());
-                return trip;
-                //return new Trip(res.getInt("tripId"), res.getString(2), res.getString(3), res.getString(5), res.getBoolean(6), res.getDouble(7), res.getDouble(8), res.getDouble(9), res.getDouble(10), res.getDouble(11), res.getDouble(12), res.getString(13), res.getString(14), res.getString(15),res.getInt(4));
-
-            }
-
-        }catch (SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
-            //throw new RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+            return RowMapper.decodeTrip(jdbcTemplateObject.queryForMap(sql, username));
+            } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 
     /**
