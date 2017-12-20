@@ -6,10 +6,18 @@ import spark.ResponseTransformer;
 
 import java.util.HashMap;
 
+/**
+ * json transformer class
+ */
 public class JsonTransformer implements ResponseTransformer {
 
     private Gson gson = new Gson();
 
+    /**
+     * render json to hashmap
+     * @param model: object
+     * @return: string
+     */
     @Override
     public String render(Object model) {
         if (model instanceof Response) {

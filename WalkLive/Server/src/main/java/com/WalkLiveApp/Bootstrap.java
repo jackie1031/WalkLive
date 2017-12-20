@@ -16,12 +16,6 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-// import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
-// import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-
-// import java.io.*;
-// import java.util.*;
-// import java.sql.*;
 
 
 public class Bootstrap {
@@ -32,7 +26,11 @@ public class Bootstrap {
 
     private static ServerController controller = null;
 
-
+    /**
+     * Main class, set up heroku
+     * @param args series of arguments
+     * @throws Exception general exception
+     */
     public static void main(String[] args) throws Exception {
         // //Check if the database file exists in the current directory. Abort if not
 
@@ -63,6 +61,10 @@ public class Bootstrap {
     }
 
 
+    /**
+     * heroku deployment
+     * @return post number
+     */
     static int getPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
@@ -74,18 +76,6 @@ public class Bootstrap {
         return 5000; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
-//    private static void setupCrimeDB() throws FileNotFoundException,IOException,ParseException {
-//        try{
-//            CrimeDataHandler.updateDB();
-//        } catch (IOException ex){
-//            throw new IOException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-//
-//        } catch (ParseException ex) {
-//            throw new org.json.simple.parser.ParseException(1,ex);
-//
-//        }
-//
-//    }
 
 }
 

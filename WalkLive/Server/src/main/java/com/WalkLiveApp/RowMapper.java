@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * get data from map and decode into objects
+ */
 public class RowMapper {
 
     public static List<User> decodeAllUsers(List<Map<String, Object>> rows) throws java.text.ParseException {

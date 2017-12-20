@@ -11,24 +11,23 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CrimeDataHandler {
-    //public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class CrimeDataHandler {
     static Connection conn = null;
     public static String url = "jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_6107fd12485edcb";
     public static String user = "b0a1d19d87f384";
     public static String password = "6d11c74b";
+    public static final Logger logger = LoggerFactory.getLogger(CrimeDataHandler.class);
 
     static PreparedStatement ps = null;
     static ResultSet res = null;
     static Statement stm = null;
 
     public static void main(String[] args) throws Exception {
-
         addDB("crimeSampleDay.json");
         addDB("crimeSampleNight.json");
-
-
     }
 
     /**
@@ -37,7 +36,7 @@ public class CrimeDataHandler {
      * @throws IOException
      * @throws ParseException
      */
-    private static void addDB(String fileName) throws IOException, ParseException{
+    private static void addDB(String fileName) throws IOException, ParseException, SQLException{
         int dangerLevel;
 
         JSONParser parser = new JSONParser();
@@ -99,23 +98,18 @@ public class CrimeDataHandler {
                     stm.executeUpdate(sqlSetUp2);
 
                     ps = conn.prepareStatement(sqlInsertClusters);
-                    //stm.executeUpdate(sqlNew8);
+                    //System.out.println("got here!");
 
-                    System.out.println("got here!");
-
-                    //ps.setLong(1, incident_id);
                     ps.setDouble(1, longitude);
                     ps.setDouble(2, latitude);
                     ps.setDouble(3, radius);
                     ps.setLong(4, count);
                     ps.setLong(5, dangerLevel);
-                    //ps.setString(6, day_or_night);
                     ps.executeUpdate();
-                    System.out.println("SUCCESSFULLY ADDED.");
+                    //System.out.println("SUCCESSFULLY ADDED.");
 
                 } catch (SQLException ex) {
-                    //logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-                    //throw new WalkLiveService.RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
+                    logger.error("SQLException: Failed to create new entry", ex);
                 }  finally {
                     if (ps != null) {
                         try {

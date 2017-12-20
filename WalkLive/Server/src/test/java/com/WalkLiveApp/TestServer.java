@@ -37,6 +37,9 @@ import java.util.List;
 
 import java.sql.*;
 
+/**
+ * test the service actions
+ */
 public class TestServer {
 
     private final String TESTCRIMES = "TestCrimes";

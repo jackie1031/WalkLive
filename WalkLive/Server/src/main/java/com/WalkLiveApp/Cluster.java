@@ -1,9 +1,13 @@
 package com.WalkLiveApp;
 
+
+//cluster model which stores the center long & lat, radius, and danger level
+
 public class Cluster {
 
     private double centerLong,centerLat, radius;
     private int dangerLevel;
+
     /**
      * constructor
      * @param centerLong: the longitude of the cluster center
@@ -19,7 +23,10 @@ public class Cluster {
     }
 
 
-
+    /**
+     * override tostring
+     * @return string
+     */
     @Override
     public String toString() {
         return "Cluster{" +
@@ -30,6 +37,10 @@ public class Cluster {
                 '}';
     }
 
+    /**
+     * get the danger level
+     * @return int danger level
+     */
     public int getDangerLevel() {
         return this.dangerLevel;
     }

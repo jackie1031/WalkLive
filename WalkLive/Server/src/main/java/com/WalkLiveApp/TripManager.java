@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * manage trip-related actions
+ */
 public class TripManager {
     private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
 
@@ -151,10 +153,11 @@ public class TripManager {
     }
 
 
-    /*
-        Helper Functions
+    /**
+     * get trip
+     * @param username: user's name
+     * @return trip
      */
-
     private Trip getTripString(String username){
         String sql = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
         try {
@@ -164,6 +167,10 @@ public class TripManager {
         }
     }
 
+    /**
+     * find & update trip id
+     * @return trip id
+     */
     private int getNewRequestId() {
         String sql = "UPDATE counters SET trip_ids = trip_ids + 1 ";
         String getValue = "SELECT trip_ids FROM counters";
@@ -176,6 +183,11 @@ public class TripManager {
         }
     }
 
+    /**
+     * insert Trip To Finished trip db
+     * @param tripId: pass in trip id
+     * @throws WalkLiveService.InvalidDestination: invalid Invalid Destination
+     */
     private void insertTripToFinished(int tripId) throws WalkLiveService.InvalidDestination{
         String sql = "INSERT INTO doneTrips select * from ongoingTrips where tripId = ?";
         try {
@@ -187,7 +199,11 @@ public class TripManager {
         }
     }
 
-
+    /**
+     * remove Completed Trip From Ongoing
+     * @param tripId: pass in trip id
+     * @throws WalkLiveService.InvalidDestination: invalid Invalid Destination
+     */
     private void removeCompletedTripFromOngoing(int tripId) throws WalkLiveService.InvalidDestination{
         String sql = "DELETE FROM ongoingTrips where tripId = ?";
         try {

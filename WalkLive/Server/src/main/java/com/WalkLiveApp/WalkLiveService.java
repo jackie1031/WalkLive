@@ -7,6 +7,9 @@ import java.lang.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * service class
+ */
 public class WalkLiveService {
 
     public static final Logger logger = LoggerFactory.getLogger(WalkLiveService.class);
@@ -16,7 +19,6 @@ public class WalkLiveService {
      * Construct the model with a pre-defined datasource. The current implementation
      * also ensures that the DB schema is created if necessary.
      */
-
     public WalkLiveService() throws UserServiceException {
         new DataBaseHandler().initializeDataBase();
         // 1. Register the Driver to the jbdc.driver java property
@@ -106,7 +108,7 @@ public class WalkLiveService {
 
 
     /**
-     * For trip part -----------------------
+     *  trip part -----------------------
      **/
 
     /**
@@ -121,7 +123,7 @@ public class WalkLiveService {
     }
 
     /**
-     *
+     * end trip
      * @param tripIdInStr： the trip id in string form
      * @throws InvalidDestination: the destination is invalid
      * @throws InvalidTargetID：the id of the trip is invalid
@@ -132,7 +134,7 @@ public class WalkLiveService {
     }
 
     /**
-     *
+     * get trip by its id
      * @param tripIdInStr： the trip id in string form
      * @return a new trip with the given id
      * @throws UserServiceException: invalid user
@@ -145,7 +147,7 @@ public class WalkLiveService {
     }
 
     /**
-     *
+     * get trip by its user name
      * @param username
      * @return a new trip with the given user name
      * @throws UserServiceException: invalid user
@@ -157,7 +159,7 @@ public class WalkLiveService {
     }
 
     /**
-     *
+     * get all trips
      * @param username
      * @return list of trips that this user can see
      * @throws SQLException: sql statement/database exception
@@ -172,7 +174,7 @@ public class WalkLiveService {
     }
 
     /**
-     *
+     * get trip history
      * @param username
      * @return this user's travel history
      * @throws SQLException: sql statement/database exception
@@ -187,7 +189,7 @@ public class WalkLiveService {
     }
 
     /**
-     *
+     * update trips
      * @param tripIdInStr： the trip id in string form
      * @param body: the body being passed in
      * @throws InvalidTargetID：the id of the trip is invalid
@@ -200,7 +202,7 @@ public class WalkLiveService {
 
 
     /**
-     *
+     * get danger zone
      * @param latitude: latitude of current position
      * @param longitude: longitude of current position
      * @return Crime: a crime object with danger level and nearby clusters

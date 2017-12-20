@@ -3,10 +3,17 @@ package com.WalkLiveApp;
 import org.slf4j.Logger;
 
 import java.sql.*;
+
+/**
+ * set up the database
+ */
 public class DataBaseHandler {
     private final Logger logger = WalkLiveService.logger;
 
-
+    /**
+     * initialize the DB
+     * @throws WalkLiveService.UserServiceException
+     */
     public void initializeDataBase() throws WalkLiveService.UserServiceException {
 
         Connection conn = null;
@@ -39,8 +46,10 @@ public class DataBaseHandler {
     }
 
 
-
-
+    /**
+     * generate sql string to set up the table
+     * @return return list of statements
+     */
     private String[] getCreateTableStrings() {
         String[] commandTable = new String[7];
 

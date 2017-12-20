@@ -1,8 +1,7 @@
 package com.WalkLiveApp;
 import java.util.*;
 
-
-
+//Crime model which includes list of clusters and the danger level.
 public class Crime {
     private int dangerLevel;
     private List<Cluster> clusters= new ArrayList<Cluster>();
