@@ -97,14 +97,13 @@ public class TripManager {
      *
      * @param username
      * @return list of trips that are shared to this user
-     * @throws SQLException: exception in sql statement or database
      * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
      * @throws ParseException: can't parse the given string into gson
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      * @throws WalkLiveService.RelationshipServiceException:the relationship of the users is invalid
      * @throws java.text.ParseException: can't parse the given string into gson
      */
-    public List<Trip> getAllTrips(String username) throws  SQLException,WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
+    public List<Trip> getAllTrips(String username) throws  WalkLiveService.UserServiceException, ParseException, WalkLiveService.InvalidTargetID, WalkLiveService.RelationshipServiceException, java.text.ParseException {
         List<User> friends = new FriendsManager().getFriendList(username);
         ArrayList<Trip> trips = new ArrayList<>();
 
@@ -197,8 +196,8 @@ public class TripManager {
         try {
             jdbcTemplateObject.update(sql, tripId);
         } catch (Exception ex) {
-            WalkLiveService.logger.error("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
-            throw new WalkLiveService.InvalidDestination("WalkLiveService.startTrip: Failed to create new entry - query error", ex);
+            WalkLiveService.logger.error("WalkLiveService.startTrip: Failed to delete entry - query error", ex);
+            throw new WalkLiveService.InvalidDestination("WalkLiveService.completeTrip: Failed to delete new entry - query error", ex);
         }
     }
 }
