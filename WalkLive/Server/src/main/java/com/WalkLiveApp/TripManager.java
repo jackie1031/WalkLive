@@ -4,15 +4,12 @@ import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TripManager {
     private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
-
 
     /**
      *

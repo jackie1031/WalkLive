@@ -3,6 +3,8 @@ package com.WalkLiveApp;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 public class FriendsManager {
+    private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
+
     public void createFriendRequest(String sender, String body) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, WalkLiveService.DuplicateException, ParseException, SQLException, java.text.ParseException {
         JSONObject object = (JSONObject) new JSONParser().parse(body);
         String recipient = object.get("recipient").toString();
@@ -25,7 +29,7 @@ public class FriendsManager {
         }
 
         //fourth see if there already is a friend request made from either s ro r or r to s already, it shouldnt work.
-        checkDuplicateRequest(sender, recipient);
+        this.checkDuplicateRequest(sender, recipient);
 
         this.createNewFriendRequest(sender, recipient, request_id);
     }
@@ -215,82 +219,27 @@ public class FriendsManager {
 
     }
 
-
-    private int getNewRequestId() throws WalkLiveService.RelationshipServiceException {
-        ResultSet res = null;
-        Statement stm = null;
-        Connection conn = null;
-        //find user by username counters (friend_request_ids INT)
+    private int getNewRequestId() {
         String sql = "UPDATE counters SET friend_request_ids = friend_request_ids + 1 ";
         String getValue = "SELECT friend_request_ids FROM counters";
-
-        try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            stm = conn.createStatement();
-            stm.executeUpdate(sql);
-            res = stm.executeQuery(getValue);
-
-            if (res.next()) {
-                return res.getInt(1);
-            } else {
-                //backup default
-                return 0;
-            }
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error(("WalkLiveService.find: Failed to query database for count"), ex);
-            throw new WalkLiveService.RelationshipServiceException(("WalkLiveService.getUser: Failed to query database for count"), ex);
-        } finally {
-            //close connections
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+        try{
+            jdbcTemplateObject.update(sql);
+            return (int) (jdbcTemplateObject.queryForMap(getValue).get("friend_request_ids"));
+        } catch (Exception e) {
+            return 0;
         }
     }
 
 
     private void createNewFriendRequest(String sender, String recipient, int request_id) throws WalkLiveService.RelationshipServiceException{
-        PreparedStatement ps = null;
-        Connection conn = null;
-
         String sql = "INSERT INTO friends (_id, sender, recipient, relationship, sent_on) VALUES (?, ?, ?, 0, null)" ;
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, request_id);
-            ps.setString(2, sender);
-            ps.setString(3, recipient);
-            ps.executeUpdate();
-
+            jdbcTemplateObject.update(sql, request_id, sender, recipient);
             System.out.println("SUCCESSFULLY ADDED.");
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.createFriendRequest: Failed to create new entry", ex);
-        }  finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
-
     }
 
     private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
@@ -362,47 +311,14 @@ public class FriendsManager {
     }
 
     private void checkDuplicateRequest(String sender, String recipient) throws WalkLiveService.RelationshipServiceException, WalkLiveService.DuplicateException {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        ResultSet res = null;
-
         String sql = "SELECT * FROM friends WHERE (sender = ? AND recipient = ?) OR (sender = ? AND recipient = ?)";
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            //check if username exists
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, sender);
-            ps.setString(2, recipient);
-            ps.setString(3, recipient);
-            ps.setString(4, sender);
-            res = ps.executeQuery();
+            jdbcTemplateObject.queryForMap(sql, sender, recipient, recipient, sender);
+            WalkLiveService.logger.error("WalkLiveService.createFriendRequest: Request already exists.");
+            throw new WalkLiveService.DuplicateException("WalkLiveService.createFriendRequest: Request already exists.");
 
-            if (res.next()) {
-                WalkLiveService.logger.error("WalkLiveService.createFriendRequest: Request already exists.");
-                throw new WalkLiveService.DuplicateException("WalkLiveService.createFriendRequest: Request already exists.");
-            }
-
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+        } catch (EmptyResultDataAccessException e) {
+            /* ignored */
         }
     }
-
 }
