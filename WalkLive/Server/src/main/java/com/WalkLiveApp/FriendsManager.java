@@ -155,64 +155,58 @@ public class FriendsManager {
         }
     }
 
-    private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
-        PreparedStatement ps = null;
-        Connection conn = null;
+//    private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
+//        PreparedStatement ps = null;
+//        Connection conn = null;
+//
+//        String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
+//
+//        try {
+//            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
+//            //check if username exists
+//            ps = conn.prepareStatement(sql);
+//            ps.setInt(1, 1);
+//            ps.setString(2, requestId);
+//            ps.executeUpdate();
+//
+//        } catch (SQLException ex) {
+//            WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+//            throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
+//        } finally {
+//            if (ps != null) {
+//                try {
+//                    ps.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) { /* ignored */}
+//            }
+//        }
+//    }
 
+    private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
         String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
 
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            //check if username exists
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, 1);
-            ps.setString(2, requestId);
-            ps.executeUpdate();
+           jdbcTemplateObject.update(sql, 1, requestId);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
     private void deleteRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
-        PreparedStatement ps = null;
-        Connection conn = null;
-
         String sql = "DELETE FROM friends WHERE _id = ?";
 
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            //check if username exists
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, requestId);
-            ps.executeUpdate();
+            jdbcTemplateObject.update(sql, requestId);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
