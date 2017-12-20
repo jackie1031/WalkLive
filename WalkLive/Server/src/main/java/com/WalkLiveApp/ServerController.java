@@ -326,17 +326,6 @@ public class ServerController {
             }, new JsonTransformer());
 
 
-//            get(API_CONTEXT + "/crime/clusterOnly/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
-//                try {
-//                    //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );
-//                    return walkLiveService.getDangerZoneOnly(request.params(":curLat"), request.params(":curLong"),request.params(":isDay"));
-//                } catch (WalkLiveService.InvalidTargetID e) {
-//                    logger.error("Invalid user id.");
-//                    response.status(402);
-//                }
-//                return Collections.EMPTY_MAP;
-//            }, new JsonTransformer());
-
 
         }
 }

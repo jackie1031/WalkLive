@@ -29,12 +29,6 @@ public class Relationship {
         this.relationship = relationship;
     }
 
-    public int getId() { return this._id; }
-
-    public Date getRequestTime() {
-        return this.sent_on;
-    }
-
     public String getSender() {
         return this.sender;
     }
@@ -62,15 +56,6 @@ public class Relationship {
     }
 
     public String toString() {
-        String str = "ID: " + this._id + " FROM: " + this.sender + " TO: " + this.recipient + " RELATION: " + this.relationship + " SENT AT: " + this.sent_on;
-
-        return str;
-    }
-
-    public String getCounter(String tableType) {
-        if (tableType.equals("recipient")){
-            return this.sender;
-        }
-            return this.recipient;
+        return "ID: " + this._id + " FROM: " + this.sender + " TO: " + this.recipient + " RELATION: " + this.relationship + " SENT AT: " + this.sent_on;
     }
 }

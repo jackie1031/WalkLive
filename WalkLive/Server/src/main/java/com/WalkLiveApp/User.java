@@ -60,29 +60,6 @@ public class User {
         return this.emergency_number;
     }
 
-//    public List<String> getLog() {
-//        return null;
-//    }
-//
-//    public void manageLog() {
-//
-//    }
-//
-//    public int initiateTrip() {
-//        return 0;
-//    }
-//
-//    public int modifyContact() {
-//        return 0;
-//    }
-//
-//    public int sendTrackRequest() {
-//        return 0;
-//    }
-//
-//    public int sendFriendRequest() {
-//        return 0;
-//    }
 
     @Override
     public boolean equals(Object o) {
@@ -91,9 +68,9 @@ public class User {
 
         User user = (User) o;
 
-        if (username != user.username) return false;
-        if (password != user.password) return false;
-        if (contact != user.contact) return false;
+        if (!username.equals(user.username)) return false;
+        if (!password.equals(user.password)) return false;
+        if (!contact.equals(user.contact)) return false;
         if (nickname != null ? !nickname.equals(user.nickname) : user.nickname != null) return false;
         if (created_on != null ? !created_on.equals(user.created_on) : user.created_on != null) return false;
         if (emergency_id != null ? !emergency_id.equals(user.emergency_id) : user.emergency_id != null) return false;
@@ -104,9 +81,7 @@ public class User {
 
     public String toString() {
 
-        String str = this.username + " " + this.password + " " + this.contact;
-
-        return str;
+       return this.username + " " + this.password + " " + this.contact;
     }
 
 }
