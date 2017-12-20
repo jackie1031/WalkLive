@@ -9,7 +9,7 @@
 ## Set up Crime database table (before running any tests)
 - run 'cd WalkLive/Server/dataProcess'
 - run 'mvn package'
-do not have jar file!!! check
+- run 'java -jar target/crime-walklive-1.0-SNAPSHOT.jar'
 
 ## BackEnd Install:
 - run 'cd WalkLive/Server'
