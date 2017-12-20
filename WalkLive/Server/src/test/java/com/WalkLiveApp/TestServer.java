@@ -2,10 +2,12 @@ package com.WalkLiveApp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -59,12 +61,12 @@ public class TestServer {
     }
 
 
-//    @Before
-//    public void setup() throws Exception {
-//        //Clear the database
-//        clearDB();
-//
-//    }
+    @Before
+    public void setup() throws Exception {
+        //Clear the database
+        clearDB();
+
+    }
 
 
     @AfterClass
@@ -78,195 +80,184 @@ public class TestServer {
     //------------------------------------------------------------------------//
 
 
-    @After
-    public void tearDown() {
-        //clearDB();
-        //Spark.stop();
-    }
+//    @After
+//    public void tearDown() {
+//        clearDB();
+//        Spark.stop();
+//    }
 
     //------------------------------------------------------------------------//
     // Tests
     //------------------------------------------------------------------------//
 
     @Test
-    public void testCreateNew() throws Exception {
-//        //Add a few elements
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063")
-//        };
-//
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //Get them back
-//        Response r = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, r.httpStatus);
-//        List<User> results = getUsers(r);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-//        assertEquals("Number of user entries differ", entries.length, results.size());
-//
-//        for (int i = 0; i < results.size(); i++) {
-//            User actual = results.get(i);
-//
-//            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-//            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-//            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
-//            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-//            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-//            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
-//            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
-//        }
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(ConnectionHandler.url);
-        dataSource.setUsername(ConnectionHandler.user);
-        dataSource.setPassword(ConnectionHandler.password);
-            JdbcTemplate jdbcTemplateObject = new JdbcTemplate(dataSource);
-
-            jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
-                    "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
-            String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-            String username = "testuser2";
-            User userTest = new User("testuser", "1234", "contacto");
-
-//            User user = (User) jdbcTemplateObject.query(sql,  new Object[] { username }, User.class);
-//            System.out.print(user);
-
-        Map<String,Object> results =
-                jdbcTemplateObject.queryForMap(sql, username);
-        WalkLiveService.logger.info((String) results.get("password"));
+    public void testDataSource() throws Exception{
+            WalkLiveService.logger.info("org.apache.commons.dbcp2.BasicDataSource found "
+                    + Thread.currentThread()
+                    .getContextClassLoader()
+                    .loadClass(
+                            "org.apache.commons.dbcp2.BasicDataSource")
+                    .getProtectionDomain().getCodeSource()
+                    .getLocation());
+            WalkLiveService.logger.info("org.apache.commons.pool2.impl.GenericObjectPool found "
+                    + Thread.currentThread()
+                    .getContextClassLoader()
+                    .loadClass(
+                            "org.apache.commons.pool2.impl.GenericObjectPool")
+                    .getProtectionDomain().getCodeSource()
+                    .getLocation());
     }
 
 
-//    @Test
-//    public void testDuplicateCreation() {
-//
-//        //Add a few elements
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456","4405339063"),
-//                new User("michelle", "0123", "4405339063")
-//        };
-//
-//        //add to database
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            //System.out.println("USER: " + t.toString());
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //check if duplications are caught
-//        User u = new User("jeesookim", "1234567", "4405339063");
-//
-//        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
-//
-//        //try another user duplication
-//        User u2 = new User("michelle", "123456", "4405339063");
-//        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
-//        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
-//
-//        //Get them back
-//        Response s = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, s.httpStatus);
-//        List<User> results = getUsers(s);
-//
-//        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
-//        assertEquals("Number of user entries differ", entries.length, results.size());
-//    }
-//
-//    @Test
-//    public void testFindAll() throws Exception {
-//
-//        //Add a few elements
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//        User[] entries = new User[] {
-//                new User("jeesookim", "123456", "4405339063"),
-//                new User("michelle", "0123", "4405339063"),
-//                new User("yangcao1", "1111","4405339063"),
-//        };
-//
-//        for (User t : entries) {
-//            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
-//            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
-//        }
-//
-//        //Get them back
-//        Response r = request("GET", "/WalkLive/api/users", null);
-//        assertEquals("Failed to get user entries", 200, r.httpStatus);
-//        List<User> results = getUsers(r);
-//
-//        //Verify that we got the right element back
-//        assertEquals("Number of user entries differ", entries.length, results.size());
-//
-//        for (int i = 0; i < results.size(); i++) {
-//            User actual = results.get(i);
-//
-//            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
-//            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
-//            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
-//            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-//            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
-//            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
-//            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
-//        }
-//    }
-//
-//    @Test
-//    public void testLogin() throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//
-//        //add single element
-//        User expected = new User("jeesoo", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/users", expected);
-//        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//
-//        //log in with those credentials
-//        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
-//        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
-//
-//        //test for nonexistent user
-//        User fake = new User("fakenews", "test-1", null);
-//        Response r3 = request("POST", "/WalkLive/api/users/login", fake);
-//        assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
-//
-//        //test for incorrect password
-//        User incorrect = new User("jeesoo", "incorrectpassword", null);
-//        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
-//        assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
-//    }
-//
-//    @Test
-//    public void testGetUser() throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//
-//        //add single element
-//        User expected = new User("jeesoo", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/users", expected);
-//        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//
-//        //Get it back so that we know its ID
-//        Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-////        User actual = getUser(r2);
-////
-////            assertEquals("Mismatch in username", expected.getUsername(), actual.getUsername());
-////            assertEquals("Mismatch in password", expected.getPassword(), actual.getPassword());
-////            assertEquals("Mismatch in contact", expected.getContact(), actual.getContact());
-////            assertEquals("Mismatch in nickname", expected.getNickname(), actual.getNickname());
-////            assertEquals("Mismatch in creation date", expected.getCreatedOn(), actual.getCreatedOn());
-////            assertEquals("Mismatch in emergency id", expected.getEmergencyId(), actual.getEmergencyId());
-////            assertEquals("Mismatch in emergency number", expected.getEmergencyNumber(), actual.getEmergencyNumber());
-//
-//    }
-//
-//
+    @Test
+    public void testCreateNew() throws Exception {
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063")
+        };
+
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            //System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //Get them back
+        Response r = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, r.httpStatus);
+        List<User> results = getUsers(r);
+
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
+            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
+        }
+    }
+
+
+    @Test
+    public void testDuplicateCreation() {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456","4405339063"),
+                new User("michelle", "0123", "4405339063")
+        };
+
+        //add to database
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            //System.out.println("USER: " + t.toString());
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //check if duplications are caught
+        User u = new User("jeesookim", "1234567", "4405339063");
+
+        Response rCreateDuplicate = request("POST", "/WalkLive/api/users", u);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate.httpStatus);
+
+        //try another user duplication
+        User u2 = new User("michelle", "123456", "4405339063");
+        Response rCreateDuplicate2 = request("POST", "/WalkLive/api/users", u2);
+        assertEquals("Failed to detect duplicate username", 401, rCreateDuplicate2.httpStatus);
+
+        //Get them back
+        Response s = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, s.httpStatus);
+        List<User> results = getUsers(s);
+
+        //Verify that we got the right element back - should be two users in entries, and the results should be size 2
+        assertEquals("Number of user entries differ", entries.length, results.size());
+    }
+
+    @Test
+    public void testFindAll() throws Exception {
+
+        //Add a few elements
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        User[] entries = new User[] {
+                new User("jeesookim", "123456", "4405339063"),
+                new User("michelle", "0123", "4405339063"),
+                new User("yangcao1", "1111","4405339063"),
+        };
+
+        for (User t : entries) {
+            Response rCreateNew = request("POST", "/WalkLive/api/users", t);
+            assertEquals("Failed to create new User", 201, rCreateNew.httpStatus);
+        }
+
+        //Get them back
+        Response r = request("GET", "/WalkLive/api/users", null);
+        assertEquals("Failed to get user entries", 200, r.httpStatus);
+        List<User> results = getUsers(r);
+
+        //Verify that we got the right element back
+        assertEquals("Number of user entries differ", entries.length, results.size());
+
+        for (int i = 0; i < results.size(); i++) {
+            User actual = results.get(i);
+
+            assertEquals("Mismatch in username", entries[i].getUsername(), actual.getUsername());
+            assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
+            assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
+            assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
+            assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
+            assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
+        }
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //log in with those credentials
+        Response r2 = request("POST", "/WalkLive/api/users/login", expected);
+        assertEquals("Failed to post and authenticate login request", 200, r2.httpStatus);
+
+        //test for nonexistent user
+        User fake = new User("fakenews", "test-1", null);
+        Response r3 = request("POST", "/WalkLive/api/users/login", fake);
+        assertEquals("Failed to detect nonexistent user", 401, r3.httpStatus);
+
+        //test for incorrect password
+        User incorrect = new User("jeesoo", "incorrectpassword", null);
+        Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
+        assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
+    }
+
+    @Test
+    public void testGetUser() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //Get it back so that we know its ID
+        Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+    }
+
+
 //
     /**
      * ================================================================
@@ -534,28 +525,28 @@ public class TestServer {
      * Emergency Contact PUT
      * ================================================================
      */
-//
-//    @Test
-//    public void testUpdateEmergencyInfo() throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        //add single element
-//        User expected = new User("jeesoo1", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/users", expected);
-//        User expected2 = new User("hello", "test-1", "1231231233");
-//        Response r2 = request("POST", "/WalkLive/api/users", expected2);
-//        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//        assertEquals("Failed to add new user", 201, r2.httpStatus);
-//
-//
-//        //update emergency contact info
-//        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
-//        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
-//        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
-//        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
-//        assertEquals("Failed to get user", 200, r3.httpStatus);
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//    }
+
+    @Test
+    public void testUpdateEmergencyInfo() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        //add single element
+        User expected = new User("bubu", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        User expected2 = new User("kuku", "test-1", "1231231233");
+        Response r2 = request("POST", "/WalkLive/api/users", expected2);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+        assertEquals("Failed to add new user", 201, r2.httpStatus);
+
+
+        //update emergency contact info
+        User contactInfo = new User(null, null, null, null, null, "kuku", "1231231233");
+        User contactInfo2 = new User(null, null, null, null, null, "kuku", "");
+        Response r3 = request("PUT", "/WalkLive/api/users/bubu/emergency_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/bubu/emergency_info", contactInfo2);
+        assertEquals("Failed to get user", 200, r3.httpStatus);
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+    }
 
     /**
      * ================================================================
@@ -566,9 +557,9 @@ public class TestServer {
     @Test
     public void testUpdateUserContact() throws Exception {
         //add single element
-        User expected = new User("jeesoo1", "test-1", "440-533-9063");
+        User expected = new User("jaja", "test-1", "440-533-9063");
         Response r1 = request("POST", "/WalkLive/api/users", expected);
-        User expected2 = new User("hello", "test-2", "123-123-1233");
+        User expected2 = new User("hehe", "test-2", "123-123-1233");
         Response r2 = request("POST", "/WalkLive/api/users", expected2);
         assertEquals("Failed to add new user", 201, r1.httpStatus);
         assertEquals("Failed to add new user", 201, r2.httpStatus);
@@ -577,8 +568,8 @@ public class TestServer {
         //update emergency contact info
         User contactInfo = new User(null, null, "440-533-9063", null, null, null, null);
         User contactInfo2 = new User(null, null, "440-123-1111", null, null, null, null);
-        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/contact_info", contactInfo);
-        Response r4 = request("PUT", "/WalkLive/api/users/hello/contact_info", contactInfo2);
+        Response r3 = request("PUT", "/WalkLive/api/users/jaja/contact_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/hehe/contact_info", contactInfo2);
         assertEquals("Failed to update user contact", 200, r3.httpStatus);
         assertEquals("Failed to update user contact second time", 200, r4.httpStatus);
     }
@@ -1247,11 +1238,11 @@ private static class Response {
             stm.executeUpdate(sql7);
             String sql8 = "DROP TABLE IF EXISTS doneTrips" ;
             stm.executeUpdate(sql8);
-            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
-            stm.executeUpdate(sql9);
-
-            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
-            stm.executeUpdate(sql10);
+//            String sql9 = "DROP TABLE IF EXISTS dangerZonesDay" ;
+//            stm.executeUpdate(sql9);
+//
+//            String sql10 = "DROP TABLE IF EXISTS dangerZonesNight" ;
+//            stm.executeUpdate(sql10);
 
             String sqlNew = "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT, contact TEXT, nickname TEXT, created_on TIMESTAMP, emergency_id TEXT, emergency_number TEXT)" ;
             String sqlNew2 = "CREATE TABLE IF NOT EXISTS friends (_id INT, sender TEXT, recipient TEXT, relationship INT, sent_on TIMESTAMP)" ;
@@ -1262,8 +1253,8 @@ private static class Response {
             String sqlNew5 = "CREATE TABLE IF NOT EXISTS ongoingTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             String sqlNew6 = "CREATE TABLE IF NOT EXISTS doneTrips(tripId INT, username TEXT, destination TEXT, dangerLevel INT, startTime TEXT, completed BOOL, startLat DOUBLE, startLong DOUBLE, curLat DOUBLE, curLong DOUBLE, endLat DOUBLE, endLong DOUBLE, emergencyNum TEXT, timeSpent TEXT, address TEXT)";
             //String sqlNew7 = "CREATE TABLE IF NOT EXISTS Crime(incident_id TEXT, address_1 TEXT, address_2 TEXT, latitude DOUBLE, longitude DOUBLE, hour_of_day INT,incident_description TEXT, parent_incident_type TEXT)";
-            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
-            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+//            String sqlNew8 = "CREATE TABLE IF NOT EXISTS dangerZonesDay(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
+//            String sqlNew9 = "CREATE TABLE IF NOT EXISTS dangerZonesNight(cluster_id TEXT, longitude DOUBLE, latitude DOUBLE, radius DOUBLE, count INT, dangerLevel INT, day_or_night TEXT)";
 
             stm.executeUpdate(sqlNew);
             stm.executeUpdate(sqlNew2);
@@ -1272,8 +1263,8 @@ private static class Response {
             stm.executeUpdate(counterInit);
             stm.executeUpdate(sqlNew5);
             stm.executeUpdate(sqlNew6);
-            stm.executeUpdate(sqlNew8);
-            stm.executeUpdate(sqlNew9);
+//            stm.executeUpdate(sqlNew8);
+//            stm.executeUpdate(sqlNew9);
 
 
         } catch (SQLException ex) {
