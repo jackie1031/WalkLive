@@ -1,8 +1,5 @@
 package com.WalkLiveApp;
-
 import com.google.gson.Gson;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,63 +40,22 @@ public class UserManager {
         }
     }
 
-    public User getUser(String username) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
-        ResultSet res = null;
-        PreparedStatement ps = null;
-        Connection conn = null;
-        //find user by username
+    public User getUser(String username) throws WalkLiveService.UserServiceException, java.text.ParseException{
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            if (res.next()) {
-                return new User(username, res.getString(2), res.getString(3), res.getString(4), WalkLiveService.df.parse(res.getString(5)), res.getString(6), res.getString(7));
-            } else {
-                WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
-                throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
-            }
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), ex);
-
-            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), ex);
-        } catch (java.text.ParseException ex) {
-            WalkLiveService.logger.error("WalkLiveService.find: Failed to properly parse date", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.getUser: Failed to properly parse date", ex);
-        } finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+            return RowMapper.decodeUser(jdbcTemplateObject.queryForMap(sql, username));
+        }catch (Exception e){
+            WalkLiveService.logger.error(String.format("WalkLiveService.find: Failed to query database for username: %s", username), e);
+            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to query database for username: %s", username), e);
         }
     }
 
-    public void updatePassword(String username, String body) throws SQLException, WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String password = object.get("password").toString();
-        this.setPassword(username, password);
-    }
-
     public User updateEmergencyContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException, SQLException {
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String id = object.get("emergency_id").toString();
-        String number = object.get("emergency_number").toString();
+        User tempt = new Gson().fromJson(body, User.class);
+        String id = tempt.getEmergencyId();
+        String number = tempt.getEmergencyNumber();
         User user = null;
+
         if (!id.equals("")) {
             user = this.getUser(id);}
 
@@ -110,8 +66,8 @@ public class UserManager {
     }
 
     public User updateUserContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException, SQLException {
-        JSONObject object = (JSONObject) new JSONParser().parse(body);
-        String contact = object.get("contact").toString();
+        User user = new Gson().fromJson(body, User.class);
+        String contact = user.getContact();
 
         return this.setUserContact(username, contact);
     }
@@ -123,23 +79,6 @@ public class UserManager {
         } catch (WalkLiveService.UserServiceException e) {
             WalkLiveService.logger.error(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
             throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.getUser: Failed to find username: %s", username));
-        }
-    }
-
-    private User checkCorrectPassword(ResultSet res, String username, String pw) throws WalkLiveService.UserServiceException, SQLException, ParseException{
-        if (res.next()) {
-            String targetPw = res.getString(2);
-            if (!pw.equals(targetPw)) {
-                WalkLiveService.logger.error("WalkLiveService.login: Failed to authenticate - incorrect password");
-                throw new WalkLiveService.UserServiceException("WalkLiveService.login: Failed to authenticate - incorrect password");
-            }
-
-            return new User(username, null, res.getString(3), null, null, res.getString(6), res.getString(7));
-
-        } else {
-            //if the response is empty, aka the username does not exist in database
-            WalkLiveService.logger.error(String.format("WalkLiveService.login: Failed to find username: %s", username));
-            throw new WalkLiveService.UserServiceException(String.format("WalkLiveService.login: Failed to find username: %s", username));
         }
     }
 
@@ -169,110 +108,27 @@ public class UserManager {
     }
 
     private User setEmergencyContact(String username, String id, String number) throws WalkLiveService.UserServiceException, ParseException, SQLException {
-        PreparedStatement ps = null;
-        Connection conn = null;
-
         String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? LIMIT 1";
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
-            ps.setString(2, number);
-            ps.setString(3, username);
-            ps.executeUpdate();
-
-            System.out.println("SUCCESSFULLY UPDATED.");
+            jdbcTemplateObject.update(sql, id, number, username);
             return new User(null, null, null, null, null, id, number);
 
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
-        } finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
+        } catch (Exception e){
+            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", e);
+            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", e);
         }
     }
 
     private User setUserContact(String username, String number) throws WalkLiveService.UserServiceException, ParseException, SQLException {
-        PreparedStatement ps = null;
-        Connection conn = null;
-
         String sql = "UPDATE users SET contact = ? WHERE username = ? LIMIT 1";
 
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, number);
-            ps.setString(2, username);
-            ps.executeUpdate();
-
-            System.out.println("SUCCESSFULLY UPDATED.");
+            jdbcTemplateObject.update(sql, number, username);
             return new User(username, null, number, null, null, null, null);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.updateUserContact: Failed to update user contact information", ex);
             throw new WalkLiveService.UserServiceException("WalkLiveService.updateUserContact: Failed to user contact information", ex);
-        } finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
-
-
-
-    private void setPassword(String username, String password) throws WalkLiveService.UserServiceException, ParseException, SQLException{
-        PreparedStatement ps = null;
-        Connection conn = null;
-
-        String sql = "UPDATE users SET password = ? WHERE username = ? LIMIT 1";
-
-        try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, password);
-            ps.executeUpdate();
-
-            System.out.println("SUCCESSFULLY UPDATED.");
-        } catch (SQLException ex) {
-            WalkLiveService.logger.error("WalkLiveService.updateEmergencyContact: Failed to update emergency information", ex);
-            throw new WalkLiveService.UserServiceException("WalkLiveService.updateEmergencyContact: Failed to emergency information", ex);
-        } finally {
-            //close connections
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-        }
-    }
-
-
-
-
-
-
 }

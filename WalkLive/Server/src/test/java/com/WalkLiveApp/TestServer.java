@@ -61,12 +61,12 @@ public class TestServer {
     }
 
 
-//    @Before
-//    public void setup() throws Exception {
-//        //Clear the database
-//        clearDB();
-//
-//    }
+    @Before
+    public void setup() throws Exception {
+        //Clear the database
+        clearDB();
+
+    }
 
 
     @AfterClass
@@ -80,11 +80,11 @@ public class TestServer {
     //------------------------------------------------------------------------//
 
 
-    @After
-    public void tearDown() {
-        //clearDB();
-        //Spark.stop();
-    }
+//    @After
+//    public void tearDown() {
+//        clearDB();
+//        Spark.stop();
+//    }
 
     //------------------------------------------------------------------------//
     // Tests
@@ -108,25 +108,6 @@ public class TestServer {
                     .getLocation());
     }
 
-    @Test
-    public void testTemplateObject() throws Exception {
-
-            JdbcTemplate jdbcTemplateObject = new JdbcTemplate(new ConnectionHandler().getDataSource());
-            jdbcTemplateObject.update("INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
-                    "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)", "testuser","1234", "contacto");
-            String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-            String username = "testuser1";
-
-            User userTest = new User("testuser1", "1234", "contacto");
-
-        Map<String,Object> results =
-                jdbcTemplateObject.queryForMap(sql, username);
-        WalkLiveService.logger.info((String) results.get("password"));
-
-            assertEquals("Mismatch in username", "testuser", results.get("username"));
-            assertEquals("Mismatch in password", "1234", results.get("password"));
-            assertEquals("Mismatch in contact", "contacto",results.get("contact"));
-    }
 
     @Test
     public void testCreateNew() throws Exception {
@@ -233,7 +214,6 @@ public class TestServer {
             assertEquals("Mismatch in password", entries[i].getPassword(), actual.getPassword());
             assertEquals("Mismatch in contact", entries[i].getContact(), actual.getContact());
             assertEquals("Mismatch in nickname", entries[i].getNickname(), actual.getNickname());
-            //assertEquals("Mismatch in creation date", entries[i].getCreatedOn(), actual.getCreatedOn());
             assertEquals("Mismatch in emergency id", entries[i].getEmergencyId(), actual.getEmergencyId());
             assertEquals("Mismatch in emergency number", entries[i].getEmergencyNumber(), actual.getEmergencyNumber());
         }
@@ -262,33 +242,22 @@ public class TestServer {
         Response r4 = request("POST", "/WalkLive/api/users/login", incorrect);
         assertEquals("Failed to detect incorrect password", 401, r4.httpStatus);
     }
-//
-//    @Test
-//    public void testGetUser() throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-//
-//        //add single element
-//        User expected = new User("jeesoo", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/users", expected);
-//        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//
-//        //Get it back so that we know its ID
-//        Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
-//        assertEquals("Failed to get user", 200, r2.httpStatus);
-//
-////        User actual = getUser(r2);
-////
-////            assertEquals("Mismatch in username", expected.getUsername(), actual.getUsername());
-////            assertEquals("Mismatch in password", expected.getPassword(), actual.getPassword());
-////            assertEquals("Mismatch in contact", expected.getContact(), actual.getContact());
-////            assertEquals("Mismatch in nickname", expected.getNickname(), actual.getNickname());
-////            assertEquals("Mismatch in creation date", expected.getCreatedOn(), actual.getCreatedOn());
-////            assertEquals("Mismatch in emergency id", expected.getEmergencyId(), actual.getEmergencyId());
-////            assertEquals("Mismatch in emergency number", expected.getEmergencyNumber(), actual.getEmergencyNumber());
-//
-//    }
-//
-//
+
+    @Test
+    public void testGetUser() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        //add single element
+        User expected = new User("jeesoo", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+
+        //Get it back so that we know its ID
+        Response r2 = request("GET", "/WalkLive/api/users/jeesoo", null);
+        assertEquals("Failed to get user", 200, r2.httpStatus);
+    }
+
+
 //
     /**
      * ================================================================
@@ -556,28 +525,28 @@ public class TestServer {
      * Emergency Contact PUT
      * ================================================================
      */
-//
-//    @Test
-//    public void testUpdateEmergencyInfo() throws Exception {
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        //add single element
-//        User expected = new User("jeesoo1", "test-1", "4405339063");
-//        Response r1 = request("POST", "/WalkLive/api/users", expected);
-//        User expected2 = new User("hello", "test-1", "1231231233");
-//        Response r2 = request("POST", "/WalkLive/api/users", expected2);
-//        assertEquals("Failed to add new user", 201, r1.httpStatus);
-//        assertEquals("Failed to add new user", 201, r2.httpStatus);
-//
-//
-//        //update emergency contact info
-//        User contactInfo = new User(null, null, null, null, null, "hello", "1231231233");
-//        User contactInfo2 = new User(null, null, null, null, null, "hello", "");
-//        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo);
-//        Response r4 = request("PUT", "/WalkLive/api/users/jeesoo1/emergency_info", contactInfo2);
-//        assertEquals("Failed to get user", 200, r3.httpStatus);
-//        assertEquals("Failed to get user", 200, r4.httpStatus);
-//    }
+
+    @Test
+    public void testUpdateEmergencyInfo() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        //add single element
+        User expected = new User("bubu", "test-1", "4405339063");
+        Response r1 = request("POST", "/WalkLive/api/users", expected);
+        User expected2 = new User("kuku", "test-1", "1231231233");
+        Response r2 = request("POST", "/WalkLive/api/users", expected2);
+        assertEquals("Failed to add new user", 201, r1.httpStatus);
+        assertEquals("Failed to add new user", 201, r2.httpStatus);
+
+
+        //update emergency contact info
+        User contactInfo = new User(null, null, null, null, null, "kuku", "1231231233");
+        User contactInfo2 = new User(null, null, null, null, null, "kuku", "");
+        Response r3 = request("PUT", "/WalkLive/api/users/bubu/emergency_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/bubu/emergency_info", contactInfo2);
+        assertEquals("Failed to get user", 200, r3.httpStatus);
+        assertEquals("Failed to get user", 200, r4.httpStatus);
+    }
 
     /**
      * ================================================================
@@ -588,9 +557,9 @@ public class TestServer {
     @Test
     public void testUpdateUserContact() throws Exception {
         //add single element
-        User expected = new User("jeesoo1", "test-1", "440-533-9063");
+        User expected = new User("jaja", "test-1", "440-533-9063");
         Response r1 = request("POST", "/WalkLive/api/users", expected);
-        User expected2 = new User("hello", "test-2", "123-123-1233");
+        User expected2 = new User("hehe", "test-2", "123-123-1233");
         Response r2 = request("POST", "/WalkLive/api/users", expected2);
         assertEquals("Failed to add new user", 201, r1.httpStatus);
         assertEquals("Failed to add new user", 201, r2.httpStatus);
@@ -599,8 +568,8 @@ public class TestServer {
         //update emergency contact info
         User contactInfo = new User(null, null, "440-533-9063", null, null, null, null);
         User contactInfo2 = new User(null, null, "440-123-1111", null, null, null, null);
-        Response r3 = request("PUT", "/WalkLive/api/users/jeesoo1/contact_info", contactInfo);
-        Response r4 = request("PUT", "/WalkLive/api/users/hello/contact_info", contactInfo2);
+        Response r3 = request("PUT", "/WalkLive/api/users/jaja/contact_info", contactInfo);
+        Response r4 = request("PUT", "/WalkLive/api/users/hehe/contact_info", contactInfo2);
         assertEquals("Failed to update user contact", 200, r3.httpStatus);
         assertEquals("Failed to update user contact second time", 200, r4.httpStatus);
     }
