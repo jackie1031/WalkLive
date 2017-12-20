@@ -1,16 +1,66 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [6.0.2] - 2017-12-16
+## [6.2.0] - 2017-12-19
+### Added
+- BE:  add BasicDataSource Configuration for Connection Pool creation by @mshu1
+- BE:  add jdbcTemplates to Managers for Connection Pool + Refactoring by @mshu1
+- BE:  add RowDecoder to handle jdbc RowMapper class and methods to decode jdbc query results by @mshu1
+### Changed
+- BE:  change connections and datasource to Connection Pooling to speed up connection to database by @mshu1
+- BE:  change sql statements to to conform to jdbcTemplate statements standards by @mshu1
+- BE:  refactor all methods related to trip (in TripManager) and now Trip Manager is 35% size of the original version @mshu1.
+- BE:  refactor all methods related to friend (in FriendManager) and now Friend Manager is 40% size of the original version by @mshu1.
+- BE:  refactor all methods related to user (in FriendManager) and now Friend Manager is 40% size of the original version by @mshu1.
+### Tested
+- FE + BE:  tested all refactored methods after redeployment by @mshu1
+
+## [6.2.0] - 2017-12-18
+### Added
+- BE:  add endpoint to update usercontact by @jeesoo
+- FE:  add comments to front end methods by @yang
+- BE:  add get day and night danger zone endpoint by @jackie
+- BE + FE: complete python scripts for danger zone clustering algorithm by @mshu1
+- BE + FE: add covariance matrix calculations and Counter to python script for cluster radius calculation, count by @mshu1
+- FE:  add front end UML diagram by @mshu1
+- FE:  add get danger zone method for frontend by @mshu1
+- FE:  add auto-update danger zone methods to ongoing trip tracker by @mshu1
+- FE:  add overlay renderer aid functions so now overlays can be shown on map with color depending on its danger level by @mshu1
+### Changed
+- BE:  delete cluster id implementation and clean crime, trip models by @jackie
+- BE:  add icon to app by @yang
+- BE:  update data model by @jeesoo
+### Tested
+- FE + BE:  tested mark danger zone for both front and back end by @jackie and @mshu1
+
+## [6.2.0] - 2017-12-17
+### Added
+- FE:  add ongoing trip and now users can get trip, route, time to continue after logging in by @mshu1
+- FE:  add contact and message building button-- now auto-built message can be sent to friends by @mshu1
+- BE:  add spring packages, jdbc template to backend for future refactroing by @mshu1
+- BE:  add danger zone class and get danger level method by @jackie
+### Changed
+- BE:  fix danger zone sql bugs @jackie
+- BE:  fix ongoing trip main map stack showing issue by @mshu1
+### Tested
+- FE + BE:  tested ongoing trip both front and back end by @jackie and @mshu1
+
+## [6.1.1] - 2017-12-16
 ### Added
 - FE:  add special symbol checks to prevent breaking the database @mshu1
-- FE:  fix emergency label bugs and CLLocation check bugs breaking the app @mshu1
+- FE:  add trip history front end table implementation @mshu1
+- FE:  add trip history tacker and maps so user can now locate trip history on maps by @mshu1
+- BE:  add get trip history back end endpoint by @jackie
+- BE:  add get ongoing trip endpoint, now ongoing trip and completed trip in two separate tables by @jackie
+- FE:  add automatic sign-in if user exists by @yang
 ### Changed
 - BE:  fix get all trips function bugs and now the method with multiple trips can be decoded properly @mshu1
+- FE:  fix emergency label bugs and CLLocation check bugs breaking the app @mshu1
+- FE:  fix auto log in warning message of the app @mshu1
+- BE:  fix friend request bug: friend request can no longer be sent twice by @jeesoo
 ### Tested
-- FE + BE:  tested all refactored functions @mshu1
-- FE + BE:  redeployed server and checked every available functions for both frotend and backend @mshu1
+- FE + BE:  tested trip history both front and back end by @jackie and @mshu1
 
-## [6.0.2] - 2017-12-15
+## [6.1.0] - 2017-12-15
 ### Added
 - BE:  add change password functions @mshu1
 - BE:  add TripManager class to handle trip related methods and add various private functions to decrease code size @mshu1
@@ -36,35 +86,6 @@ All notable changes to this project will be documented in this file.
 - BE:  refactor backend create friend request, get incoming friend request, get outgoing friend request to relevant classes @mshu1
 ### Tested
 - FE+BE:  tested all refactored functions @mshu1
-
-## [6.0.1] - 2017-12-13
-### Added
-- FE:  add timer for auto updating friends' information User page @mshu1
-- FE:  add timer and implementation for tracking friend's trips(update table) on tracker page @mshu1
-- FE:  add auto updates on friend tracker page -> set friend to be the auto-update target(single trip) @mshu1
-- FE:  add contact(text + phone) functionalities on User page, friend tracker page. @mshu1
-- BE:  add DataBaseHandler, Connection Handler, UserManager to handle differemt methods and add various private functions to decrease code size @mshu1
-### Changed
-- BE:  refactor backend database set up functions @mshu1
-- BE:  refactor backend sign up(create user) functions to relevant classes @mshu1
-### Tested
-- FE+BE:  tested all refactored functions @mshu1
-
-## [6.0.1] - 2017-12-12
-### Added
-- FE:  add connection and functionality to backend for getting, responding friend request @mshu1
-- FE:  add connection and functionality to backend for start trip, end trip @mshu1
-- BE:  add getAlltrips backend implementation and test by @jackie
-### Changed
-- FE:  fixed various buttons implementations by @mshu1
-- FE:  fixed friend name showing bug, wrong message bug by @mshu1
-- FE:  fixed auto-message preview by @Yang
-- BE:  fix friend request bug by @jackie and @mshu1
-- BE:  fix get incoming friend request database by @jackie and @mshu1
-- BE:  fix get friend lists'bug by @jackie and @mshu1
-### Test
-- FE + BE: tested accept, reject friend, get friend request code for both front end and back end by @mshu1 and @jackie
-- FE + BE: tested start trip, get trip, update trip for both front end and back end by @mshu1 and @jackie
 
 
 ## [5.3.3] - 2017-12-11
