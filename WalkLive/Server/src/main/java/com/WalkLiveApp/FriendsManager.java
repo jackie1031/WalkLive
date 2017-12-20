@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FriendsManager {
@@ -90,46 +89,20 @@ public class FriendsManager {
     }
 
     private void addFriendsToList(String username, ArrayList<User> friends, String tableType) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, ParseException, java.text.ParseException{
-        PreparedStatement ps = null;
-        ResultSet res = null;
-        Connection conn = null;
-
         String sql = "SELECT " + tableType + " FROM friends WHERE " + this.getCounter(tableType) + " = ? AND relationship = 1";
-
         UserManager userManager = new UserManager();
-
-        try{
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, username);
-            res = ps.executeQuery();
-
-            while (res.next()) {
-                String recipient = res.getString(tableType);
-                User r = new User(recipient, null, userManager.getUser(recipient).getContact(), null, null, null, null);
-                friends.add(r);
+        try {
+            List<Relationship> relationships = RowMapper.decodeAllFriendship(jdbcTemplateObject.queryForList(sql, username));
+            for (Relationship rel : relationships) {
+                String recipient = this.getRecipient(rel, tableType);
+                friends.add(new User(recipient, null, userManager.getUser(recipient).getContact(), null, null, null, null));
             }
-        } catch (SQLException ex) {
+        } catch (EmptyResultDataAccessException e) {
+            /* ignored */
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.getFriendList: Failed to fetch friend list", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.getIncomingFriendList: Failed to fetch friend list", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (res != null) {
-                try {
-                    res.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
-
     }
 
     private int getNewRequestId() {
@@ -155,64 +128,28 @@ public class FriendsManager {
         }
     }
 
-    private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
-        PreparedStatement ps = null;
-        Connection conn = null;
 
+    private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
         String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
 
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            //check if username exists
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, 1);
-            ps.setString(2, requestId);
-            ps.executeUpdate();
+           jdbcTemplateObject.update(sql, 1, requestId);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
     private void deleteRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
-        PreparedStatement ps = null;
-        Connection conn = null;
-
         String sql = "DELETE FROM friends WHERE _id = ?";
 
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            //check if username exists
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, requestId);
-            ps.executeUpdate();
+            jdbcTemplateObject.update(sql, requestId);
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             WalkLiveService.logger.error("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
             throw new WalkLiveService.RelationshipServiceException("WalkLiveService.updateRelationship: Failed to update relationship status", ex);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
     }
 
@@ -221,6 +158,14 @@ public class FriendsManager {
             return "recipient";
         }
             return "sender";
+    }
+
+    private String getRecipient(Relationship rel, String tableType){
+        if (tableType.equals("sender")){
+            return rel.getSender();
+        } else {
+            return rel.getRecipient();
+        }
     }
 
     private void checkDuplicateRequest(String sender, String recipient) throws WalkLiveService.RelationshipServiceException, WalkLiveService.DuplicateException {

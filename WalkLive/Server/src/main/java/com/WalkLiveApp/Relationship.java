@@ -66,4 +66,11 @@ public class Relationship {
 
         return str;
     }
+
+    public String getCounter(String tableType) {
+        if (tableType.equals("recipient")){
+            return this.sender;
+        }
+            return this.recipient;
+    }
 }
