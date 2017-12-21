@@ -41,13 +41,12 @@ class SettingsVC: UITableViewController {
         
         //load message setting data from local
         self.loadData()
-
-        
+        self.setUpMessage()
+    }
+    
+    func setUpMessage() {
         // fill in phone numbers
         userPhone.text = currentUserInfo.contact
-        if let emergencyContact = currentUserInfo.emergency_number {
-            emergencyContactPhone.text = emergencyContact
-        }
         
         // if no local data has been saved, set to default
         if (messages.getMessagesWithoutTrip().count == 0) {
@@ -79,7 +78,11 @@ class SettingsVC: UITableViewController {
      */
     private func emergencyIsDifferent() -> Bool {
         return (emergencyContactPhone.text != "" ||
-            emergencyContactIdTextField.text != "" )
+            emergencyContactIdTextField.text != "")
+    }
+    
+    private func contactIsDifferent() -> Bool {
+        return (userPhone.text != "" && userPhone.text != currentUserInfo.contact)
     }
     
     /*

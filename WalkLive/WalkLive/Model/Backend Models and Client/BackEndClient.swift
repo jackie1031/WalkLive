@@ -436,6 +436,37 @@ class BackEndClient: NSObject {
         }).resume()
     }
     
+    /*/users/:username/contact_info
+     */
+    func updateUserContact(success: @escaping (UserLogin) -> (), failure: @escaping (Error) -> (), userLogin: UserLogin){
+        var urlComponents = self.buildURLComponents()
+        urlComponents.path = self.APICONTEXT + "/users/\(currentUserInfo.username ?? "nobody")/contact_info"
+        var updateEmergencyContactRequest = URLRequest(url: urlComponents.url!)
+        updateEmergencyContactRequest.httpMethod = "PUT"
+        
+        do {
+            let encodedJSON = try jsonEncoder.encode(userLogin)
+            updateEmergencyContactRequest.httpBody = encodedJSON
+        } catch {
+            failure(error)
+        }
+        
+        URLSession.shared.dataTask(with: updateEmergencyContactRequest, completionHandler: { (data, response, error) in
+            if (error != nil) {
+                failure(error!)
+            }
+            let status = (response as! HTTPURLResponse).statusCode
+            if (status != 200) {
+                print(status)
+                failure(LoginError(status: status))
+            } else {
+                print(status)
+                let returnUser = try? jsonDecoder.decode(UserLogin.self, from: data!) as UserLogin
+                currentUserInfo.contact = returnUser?.contact
+                success(returnUser!)}
+        }).resume()
+    }
+    
     
     /**
      * ================================================================

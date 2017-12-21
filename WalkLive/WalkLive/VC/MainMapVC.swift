@@ -47,7 +47,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
             self.initializeView()
     }
     
-    func test(){
+    func markDangerZone(){
         let dangerRequest = DangerRequest(curLat: 38.98191763, curLong: -76.929194, isDay: isDay())
         backEndClient.getDangerLevel(success: { (dangerInformation) in
             OperationQueue.main.addOperation {
@@ -61,7 +61,7 @@ class MainMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate,
     
     
     @IBAction func onTestbutton(_ sender: Any) {
-        self.test()
+        self.markDangerZone()
     }
     override func viewWillAppear(_ animated: Bool) {
         self.emergencyContactLabel.text = stringBuilder.emerStringBuilderWithUser()
