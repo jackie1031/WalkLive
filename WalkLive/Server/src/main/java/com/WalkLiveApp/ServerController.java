@@ -115,7 +115,7 @@ public class ServerController {
                 try {
                     return walkLiveService.updateUserContact(request.params(":username"), request.body());
                 } catch (WalkLiveService.UserServiceException e) {
-                    logger.error("Failed to update emergency info for user:" + request.params(":username"));
+                    logger.error("Failed to update contact info for user:" + request.params(":username"));
                     response.status(406);
                     //add 407 response.
                 }
