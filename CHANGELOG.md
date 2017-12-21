@@ -1,9 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [6.2.0] - 2017-12-20
-- BE: clean and comment models by @jackie
+## [6.3.2] - 2017-12-20
+### Added
+- BE: clean trip manager, danger zone manager and comment models by @jackie
+- BE: clean friend manager, row mapper, usermanager and comment models by @mshu1
+- BE: add CrimeCalculator so now crimes are being generated in appropriate refactored classes by @mshu1
+### Changed
+- BE:  refactor all methods and delete useless methods in Crime and now it is 20% of its original size by @mshu1
+- BE:  delete all unnecessary methods and tests and check coverage by @mshu1
+- BE:  fix old tests that no longer works, now all tests are working properly by @mshu1
 
-## [6.2.0] - 2017-12-19
+## [6.3.1] - 2017-12-19
 ### Added
 - BE:  add BasicDataSource Configuration for Connection Pool creation by @mshu1
 - BE:  add jdbcTemplates to Managers for Connection Pool + Refactoring by @mshu1
@@ -18,7 +25,7 @@ All notable changes to this project will be documented in this file.
 ### Tested
 - FE + BE:  tested all refactored methods after redeployment by @mshu1
 
-## [6.2.0] - 2017-12-18
+## [6.3.0] - 2017-12-18
 ### Added
 - BE:  add endpoint to update usercontact by @jeesoo
 - FE:  add comments to front end methods by @yang
