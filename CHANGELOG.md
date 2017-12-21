@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - BE: add CrimeCalculator so now crimes are being generated in appropriate refactored classes by @mshu1
 ### Changed
 - BE:  refactor all methods and delete useless methods in Crime and now it is 20% of its original size by @mshu1
+- FE:  fix bugs in front end, refactor functions by @mshu1
 - BE:  delete all unnecessary methods and tests and check coverage by @mshu1
 - BE:  fix old tests that no longer works, now all tests are working properly by @mshu1
 
