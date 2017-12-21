@@ -65,7 +65,6 @@ class MessageVC: UIViewController {
         if (textFields.count == 0) {
             messageEditPanel.frame.origin.y = 40
         } else {
-            print(textFields.last!.text)
             print(textFields.last!.frame.minY)
             let textFieldFrame : CGRect = textFields.last!.frame
             messageEditPanel.frame.origin.y = textFieldFrame.origin.y + 10
