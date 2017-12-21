@@ -19,6 +19,7 @@
 - run 'java -jar target/OOSE-group14-1.0-SNAPSHOT.jar' 
 
 * assume maven is already installed on the computer.If not, please set up maven following this tutorial: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+* when running tests, please ensure that your internet connection is stable. Unstable internet will cause failure to establish instances in our database, and thereby failing the tests.
 * our app is currently using a clearDB database with $9.99 plan. It only allows a maximum of 15 connections and 18000 requires per hour. Running tests repeatedly may used up the maximum amount of queries allowed per hour. 
 
 
