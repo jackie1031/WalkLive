@@ -10,7 +10,13 @@ import java.util.List;
 public class UserManager {
     private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
 
-
+    /**
+     * Create new user
+     * @param body information passed in for user registration
+     * @return new User object
+     * @throws WalkLiveService.UserServiceException cannot create user
+     * @throws ParseException cannot parse information
+     */
     public User createNew(String body) throws WalkLiveService.UserServiceException, ParseException{
         User user = new Gson().fromJson(body, User.class);
 
@@ -19,6 +25,12 @@ public class UserManager {
         return this.createUser(user.getUsername(), user.getPassword(), user.getContact());
     }
 
+    /**
+     * find all users
+     * @return User with appropriate information
+     * @throws WalkLiveService.UserServiceException cannot update/find information
+     * @throws java.text.ParseException cannot parse information
+     */
     public List<User> findAllUsers() throws WalkLiveService.UserServiceException, java.text.ParseException {
         String sql = "SELECT * FROM users";
         try {
@@ -29,6 +41,13 @@ public class UserManager {
         }
     }
 
+    /**
+     * login with user information
+     * @param body  information passed in for user lgoin
+     * @return User with appropriate information
+     * @throws WalkLiveService.UserServiceException cannot update/find information
+     * @throws java.text.ParseException cannot parse information
+     */
     public User login(String body) throws WalkLiveService.UserServiceException, java.text.ParseException {
         User user = new Gson().fromJson(body, User.class);
         String sql = "SELECT * FROM users WHERE username = ? AND password = ? LIMIT 1";
@@ -40,6 +59,13 @@ public class UserManager {
         }
     }
 
+    /**
+     *
+     * @param username  information passed in for user
+     * @return User with appropriate information
+     * @throws WalkLiveService.UserServiceException cannot update/find information
+     * @throws java.text.ParseException cannot parse information
+     */
     public User getUser(String username) throws WalkLiveService.UserServiceException, java.text.ParseException{
         String sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
         try {
@@ -50,7 +76,16 @@ public class UserManager {
         }
     }
 
-    public User updateEmergencyContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException, SQLException {
+    /**
+     *
+     * @param username  information passed in for user update
+     * @param body  information passed in for user update
+     * @return User with appropriate information
+     * @throws WalkLiveService.UserServiceException cannot update/find information
+     * @throws ParseException cannot parse information
+     * @throws java.text.ParseException cannot parse information
+     */
+    public User updateEmergencyContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException{
         User tempt = new Gson().fromJson(body, User.class);
         String id = tempt.getEmergencyId();
         String number = tempt.getEmergencyNumber();
@@ -65,6 +100,15 @@ public class UserManager {
         return this.setEmergencyContact(username, id, number);
     }
 
+    /**
+     *
+     * @param username  information passed in for user update
+     * @param body  information passed in for user update
+     * @return User with appropriate information
+     * @throws WalkLiveService.UserServiceException cannot update/find information
+     * @throws ParseException cannot parse information
+     * @throws java.text.ParseException cannot parse information
+     */
     public User updateUserContact(String username, String body) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException, SQLException {
         User user = new Gson().fromJson(body, User.class);
         String contact = user.getContact();
@@ -72,6 +116,14 @@ public class UserManager {
         return this.setUserContact(username, contact);
     }
 
+    /**
+     *
+     * @param username  information passed in for user check
+     * @return boolean of whether user exists
+     * @throws WalkLiveService.UserServiceException cannot update/find information
+     * @throws ParseException cannot parse information
+     * @throws java.text.ParseException cannot parse information
+     */
     public static boolean isValid(String username) throws WalkLiveService.UserServiceException, ParseException, java.text.ParseException {
         try {
             new UserManager().getUser(username);
@@ -82,6 +134,9 @@ public class UserManager {
         }
     }
 
+    /*
+        Helper Methods
+     */
         private User createUser(String username, String password, String contact) throws WalkLiveService.UserServiceException{
         String sql = "INSERT INTO users (username, password, contact, nickname, created_on, emergency_id, emergency_number) " +
                 "             VALUES (?, ?, ?, NULL, NULL, NULL, NULL)" ;
@@ -107,7 +162,7 @@ public class UserManager {
         }
     }
 
-    private User setEmergencyContact(String username, String id, String number) throws WalkLiveService.UserServiceException, ParseException, SQLException {
+    private User setEmergencyContact(String username, String id, String number) throws WalkLiveService.UserServiceException, ParseException {
         String sql = "UPDATE users SET emergency_id = ?, emergency_number = ? WHERE username = ? LIMIT 1";
         try {
             jdbcTemplateObject.update(sql, id, number, username);

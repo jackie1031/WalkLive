@@ -1,9 +1,5 @@
 package com.WalkLiveApp;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.*;
 import java.util.Date;
 
 public class Relationship {
@@ -29,14 +25,26 @@ public class Relationship {
         this.relationship = relationship;
     }
 
+    /**
+     * get Sender of this request
+     * @return sender
+     */
     public String getSender() {
         return this.sender;
     }
 
+    /**
+     * get recipient of this request
+     * @return recipient
+     */
     public String getRecipient() {
         return this.recipient;
     }
 
+    /**
+     * get relationship status for this object
+     * @return relationship
+     */
     public int getRelationship() { return this.relationship; }
 
     @Override
@@ -54,6 +62,11 @@ public class Relationship {
 
         return true;
     }
+
+    /**
+     * convert object to string
+     * @return convert object to string
+     */
 
     public String toString() {
         return "ID: " + this._id + " FROM: " + this.sender + " TO: " + this.recipient + " RELATION: " + this.relationship + " SENT AT: " + this.sent_on;

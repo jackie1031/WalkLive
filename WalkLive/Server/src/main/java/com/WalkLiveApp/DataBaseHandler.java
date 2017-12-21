@@ -1,6 +1,7 @@
 package com.WalkLiveApp;
 
 import org.slf4j.Logger;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 
@@ -9,42 +10,26 @@ import java.sql.*;
  */
 public class DataBaseHandler {
     private final Logger logger = WalkLiveService.logger;
+    private JdbcTemplate jdbcTemplateObject = new JdbcTemplate(ConnectionHandler.dataSource);
+
 
     /**
      * initialize the DB
-     * @throws WalkLiveService.UserServiceException
+     * @throws WalkLiveService.UserServiceException throws User exception if not created
      */
     public void initializeDataBase() throws WalkLiveService.UserServiceException {
 
-        Connection conn = null;
-        Statement stm = null;
-
         try {
-            conn = DriverManager.getConnection(ConnectionHandler.url, ConnectionHandler.user, ConnectionHandler.password);
-            stm = conn.createStatement();
             String[] tableCommands = this.getCreateTableStrings();
             for (String command: tableCommands) {
-                stm.executeUpdate(command);
+                jdbcTemplateObject.update(command);
 
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             logger.error("Failed to create schema at startup", ex);
             throw new WalkLiveService.UserServiceException("Failed to create schema at startup");
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) { /* ignored */}
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) { /* ignored */}
-            }
         }
-
     }
-
 
     /**
      * generate sql string to set up the table

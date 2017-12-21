@@ -29,7 +29,7 @@ public class ServerController {
                 response.header("Access-Control-Allow-Origin", "*");
             });
 
-            /**
+            /*
              * ================================================================
              * User Setup Handling
              * ================================================================
@@ -85,22 +85,12 @@ public class ServerController {
                 //return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            /**
+            /*
              * ================================================================
              * Emergency Contact PUT
              * ================================================================
              */
 
-            /*
-            Method: PUT
-            URL: /WalkLive/api/users/[username]
-            Content: { emergencyId: [string], emergencyNumber: [string] }
-            Failure Response:
-            InvalidEmergencyId	Code 406
-            InvalidEmergencyNumber	Code 407
-            Success Response:	Code 200
-            Content: { emergencyId: [string], emergencyNumber: [string] }
-            */
 
             //update emergency contact information
             put(API_CONTEXT + "/users/:username/emergency_info", "application/json", (request, response) -> {
@@ -114,7 +104,7 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            /**
+            /*
              * ================================================================
              * Update User Contact PUT
              * ================================================================
@@ -133,7 +123,7 @@ public class ServerController {
             }, new JsonTransformer());
 
 
-            /**
+            /*
              * ================================================================
              * Friend Request Handling
              * ================================================================
@@ -209,11 +199,11 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer()); //get list of users
 
-             /**
-              * ----------------------------------------------------------------------
-              * Trip part
-              * ----------------------------------------------------------------------
-              * */
+            /*
+             * ================================================================
+             * Trip Part
+             * ================================================================
+             */
 
             //Start Trip
             post(API_CONTEXT+"/trips", "application/json", (request, response) -> {
@@ -305,15 +295,11 @@ public class ServerController {
                 return Collections.EMPTY_MAP;
             }, new JsonTransformer());
 
-            /**
-             * ----------------------------------------------------------------------
-             * Crime data part
-             * do we even need trip id?
-             *  walkLiveService.respondToFriendRequest(request.params(":username"), request.params(":requestid"), request.params(":response"));
-
-             * ----------------------------------------------------------------------
-             * */
-
+            /*
+             * ================================================================
+             * Crime part
+             * ================================================================
+             */
             get(API_CONTEXT + "/crime/:curLat/:curLong/:isDay", "application/json", (request, response) -> {
                 try {
                     //return walkLiveService.getDangerZone(request.params(":tripId"),request.body() );

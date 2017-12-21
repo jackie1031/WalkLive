@@ -42,7 +42,7 @@ public class TripManager {
 
     /**
      *
-     * @param tripIdInStr
+     * @param tripIdInStr trip id returned in String
      * @throws WalkLiveService.InvalidDestination: the destination is invalid
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      * @throws ParseException: can't parse the given string into gson
@@ -56,7 +56,7 @@ public class TripManager {
 
     /**
      *
-     * @param tripIdInStr
+     * @param tripIdInStr trip id returned in String
      * @return ongoing trip with the given id
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
@@ -76,7 +76,7 @@ public class TripManager {
 
     /**
      *
-     * @param username
+     * @param username user which requests the trip
      * @return ongoing trip with the given user name
      * @throws WalkLiveService.InvalidTargetID: invalid user or trip id
      */
@@ -94,7 +94,7 @@ public class TripManager {
 
     /**
      *
-     * @param username
+     * @param username user which requests the trip
      * @return list of trips that are shared to this user
      * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
      * @throws ParseException: can't parse the given string into gson
@@ -118,7 +118,7 @@ public class TripManager {
 
     /**
      *
-     * @param username
+     * @param username user which requests the history
      * @return list of trips indicating the travel hstory of this user
      * @throws WalkLiveService.UserServiceException: invalid user (not in the database)
      * @throws java.text.ParseException: can't parse the given string into gson
@@ -153,11 +153,10 @@ public class TripManager {
     }
 
 
-    /**
-     * get trip
-     * @param username: user's name
-     * @return trip
+    /*
+         Helper Methods
      */
+
     private Trip getTripString(String username){
         String sql = "SELECT * FROM ongoingTrips WHERE username = ? LIMIT 1";
         try {
@@ -167,10 +166,6 @@ public class TripManager {
         }
     }
 
-    /**
-     * find & update trip id
-     * @return trip id
-     */
     private int getNewRequestId() {
         String sql = "UPDATE counters SET trip_ids = trip_ids + 1 ";
         String getValue = "SELECT trip_ids FROM counters";
@@ -183,11 +178,6 @@ public class TripManager {
         }
     }
 
-    /**
-     * insert Trip To Finished trip db
-     * @param tripId: pass in trip id
-     * @throws WalkLiveService.InvalidDestination: invalid Invalid Destination
-     */
     private void insertTripToFinished(int tripId) throws WalkLiveService.InvalidDestination{
         String sql = "INSERT INTO doneTrips select * from ongoingTrips where tripId = ?";
         try {
@@ -199,11 +189,6 @@ public class TripManager {
         }
     }
 
-    /**
-     * remove Completed Trip From Ongoing
-     * @param tripId: pass in trip id
-     * @throws WalkLiveService.InvalidDestination: invalid Invalid Destination
-     */
     private void removeCompletedTripFromOngoing(int tripId) throws WalkLiveService.InvalidDestination{
         String sql = "DELETE FROM ongoingTrips where tripId = ?";
         try {

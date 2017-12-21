@@ -45,9 +45,9 @@ public class FriendsManager {
     }
 
     /**
-     * @param sender: the one sending the request
-     * @return
-     * @throws WalkLiveService.RelationshipServiceException
+     * @param sender: the one sending the requests
+     * @return List of outgoing friend request
+     * @throws WalkLiveService.RelationshipServiceException invalid relationsip
      */
     public List<Relationship> getOutgoingFriendRequests(String sender) throws WalkLiveService.RelationshipServiceException{
         String sql = "SELECT * FROM friends WHERE sender = ?";
@@ -64,9 +64,9 @@ public class FriendsManager {
 
     /**
      *
-     * @param recipient
-     * @return
-     * @throws WalkLiveService.RelationshipServiceException
+     * @param recipient: user that receives the requests
+     * @return list of incoming friend request
+     * @throws WalkLiveService.RelationshipServiceException invalid relationsip
      */
     public List<Relationship> getIncomingFriendRequests(String recipient) throws WalkLiveService.RelationshipServiceException {
         String sql = "SELECT * FROM friends WHERE recipient = ? AND relationship = 0 ";
@@ -83,11 +83,11 @@ public class FriendsManager {
 
     /**
      *
-     * @param responder
-     * @param requestId
-     * @param response
-     * @throws WalkLiveService.UserServiceException
-     * @throws WalkLiveService.RelationshipServiceException
+     * @param responder the responder to friend request
+     * @param requestId request id
+     * @param response accept or reject
+     * @throws WalkLiveService.UserServiceException invalid user
+     * @throws WalkLiveService.RelationshipServiceException invalid relationsip
      */
     public void respondToFriendRequest(String responder, String requestId, String response) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException {
         String sql = "SELECT * FROM friends WHERE _id = ? LIMIT 1";
@@ -115,12 +115,12 @@ public class FriendsManager {
 
     /**
      *
-     * @param username
-     * @return
-     * @throws WalkLiveService.UserServiceException
-     * @throws WalkLiveService.RelationshipServiceException
-     * @throws ParseException
-     * @throws java.text.ParseException
+     * @param username user that requests the friendlist
+     * @return a list of friends
+     * @throws WalkLiveService.UserServiceException invalid user
+     * @throws WalkLiveService.RelationshipServiceException invalid relationship
+     * @throws ParseException cannot parse the data retrieved from the table
+     * @throws java.text.ParseException cannot parse the data to its corresponding object
      */
     public List<User> getFriendList(String username) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, ParseException, java.text.ParseException {
         ArrayList<User> friends = new ArrayList<>();
@@ -129,16 +129,10 @@ public class FriendsManager {
         return friends;
     }
 
-    /**
-     *
-     * @param username
-     * @param friends
-     * @param tableType
-     * @throws WalkLiveService.UserServiceException
-     * @throws WalkLiveService.RelationshipServiceException
-     * @throws ParseException
-     * @throws java.text.ParseException
+    /*
+         Helper Methods
      */
+
     private void addFriendsToList(String username, ArrayList<User> friends, String tableType) throws WalkLiveService.UserServiceException, WalkLiveService.RelationshipServiceException, ParseException, java.text.ParseException{
         String sql = "SELECT " + tableType + " FROM friends WHERE " + this.getCounter(tableType) + " = ? AND relationship = 1";
         UserManager userManager = new UserManager();
@@ -156,10 +150,6 @@ public class FriendsManager {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     private int getNewRequestId() {
         String sql = "UPDATE counters SET friend_request_ids = friend_request_ids + 1 ";
         String getValue = "SELECT friend_request_ids FROM counters";
@@ -171,13 +161,6 @@ public class FriendsManager {
         }
     }
 
-    /**
-
-     * @param sender
-     * @param recipient
-     * @param request_id
-     * @throws WalkLiveService.RelationshipServiceException
-     */
     private void createNewFriendRequest(String sender, String recipient, int request_id) throws WalkLiveService.RelationshipServiceException{
         String sql = "INSERT INTO friends (_id, sender, recipient, relationship, sent_on) VALUES (?, ?, ?, 0, null)" ;
         try {
@@ -189,11 +172,7 @@ public class FriendsManager {
         }
     }
 
-    /**
-     *
-     * @param requestId
-     * @throws WalkLiveService.RelationshipServiceException
-     */
+
     private void updateRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
         String sql = "UPDATE friends SET relationship = ? WHERE _id = ?";
 
@@ -206,11 +185,7 @@ public class FriendsManager {
         }
     }
 
-    /**
-     *
-     * @param requestId
-     * @throws WalkLiveService.RelationshipServiceException
-     */
+
     private void deleteRelationship(String requestId) throws WalkLiveService.RelationshipServiceException {
         String sql = "DELETE FROM friends WHERE _id = ?";
 
@@ -223,11 +198,6 @@ public class FriendsManager {
         }
     }
 
-    /**
-     *
-     * @param tableType
-     * @return
-     */
     private String getCounter(String tableType){
         if (tableType.equals("sender")) {
             return "recipient";
@@ -235,12 +205,6 @@ public class FriendsManager {
             return "sender";
     }
 
-    /**
-     *
-     * @param rel
-     * @param tableType
-     * @return
-     */
     private String getRecipient(Relationship rel, String tableType){
         if (tableType.equals("sender")){
             return rel.getSender();
@@ -249,13 +213,6 @@ public class FriendsManager {
         }
     }
 
-    /**
-     *
-     * @param sender
-     * @param recipient
-     * @throws WalkLiveService.RelationshipServiceException
-     * @throws WalkLiveService.DuplicateException
-     */
     private void checkDuplicateRequest(String sender, String recipient) throws WalkLiveService.RelationshipServiceException, WalkLiveService.DuplicateException {
         String sql = "SELECT * FROM friends WHERE (sender = ? AND recipient = ?) OR (sender = ? AND recipient = ?)";
         try {

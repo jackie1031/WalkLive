@@ -16,7 +16,7 @@ public class JsonTransformer implements ResponseTransformer {
     /**
      * render json to hashmap
      * @param model: object
-     * @return: string
+     * @return string
      */
     @Override
     public String render(Object model) {

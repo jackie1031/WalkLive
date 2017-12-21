@@ -167,7 +167,6 @@ public class Trip {
 
     /**
      * set tripId
-     * @return int tripId
      */
     public void setTripId(int tripId){ this.tripId = tripId;}
 
