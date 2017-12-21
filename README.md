@@ -6,10 +6,12 @@
 - run 'open WalkLive.xcworkspace'
 - click 'Build' button in Xcode to run the APP
 
-## Set up Crime database table (data is already stored in our online database! Please do not run this unless you are already reusing our project for another database)
+## Set up Crime database table (PLEASE READ THE INSTRUCTION)
 - run 'cd WalkLive/Server/dataProcess'
 - run 'mvn package'
 - run 'java -jar target/crime-walklive-1.0-SNAPSHOT.jar'
+
+* data is already stored in our online database! Please do not run this part unless you are reusing our project for another database
 
 ## BackEnd Install:
 - run 'cd WalkLive/Server'
