@@ -18,6 +18,10 @@ All good here!
 You should consider adding teardown methods as well that restore the state of the environments. 
 (-2 points)
 
+**Edit**
+
+(-1 points)
+
 #### Test coverage
 [10 points] Good coverage with tests?
 
@@ -41,12 +45,20 @@ This needs to be fixed ASAP.
 
 (-5 points)
 
+**Edit**
+
+(-2.5 points)
+
 ### Advanced Git usage
 [10 points] (Still being good about regular commits, pull requests, etc?  Additionally, development primarily taking place on feature branches, no personal-named branches, good git workflow overall?)
 
 You should consider using branches to add new features and then make pull requests to merge them to master. Everything else looks good.
 
 (-5 Points)
+
+**Edit**
+
+(-2.5 points)
 
 ### Iteration submission and reporting
 
@@ -61,5 +73,5 @@ All good here!
 
 Great going! Just some minor things you need to fix
 
-**Grade: 88/100**
+**Grade: 94/100**
 
